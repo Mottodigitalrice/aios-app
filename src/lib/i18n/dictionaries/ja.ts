@@ -232,7 +232,7 @@ const ja = {
       payInFullCta: "一括払いで¥200,000節約",
       bestValue: "ベストバリュー",
       launchNote:
-        "先着3社限定のローンチ価格。通常価格: ¥350,000/月。",
+        "先着3社限定のローンチ価格。",
       ceoNote: "CEO・経営陣向け。",
     },
     faq: {

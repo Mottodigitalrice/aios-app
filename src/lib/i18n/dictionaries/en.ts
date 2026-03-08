@@ -237,7 +237,7 @@ const en = {
       payInFullCta: "Pay in Full & Save \u00A5200,000",
       bestValue: "Best Value",
       launchNote:
-        "Launch pricing for the first 3 clients only. Standard rate: \u00A5350,000/month.",
+        "Launch pricing \u2014 first 3 clients only.",
       ceoNote: "Designed for CEOs and executive leadership teams.",
     },
     faq: {
