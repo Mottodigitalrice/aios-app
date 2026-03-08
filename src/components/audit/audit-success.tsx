@@ -330,7 +330,7 @@ export function AuditSuccess() {
               {t.success.bookDescription}
             </p>
             <Link
-              href="https://tidycal.com/mottodigital/ai-audit"
+              href="https://tidycal.com/rice/ai"
               target="_blank"
               rel="noopener noreferrer"
             >

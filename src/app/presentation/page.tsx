@@ -916,7 +916,7 @@ export default function PresentationPage() {
 
                 {/* Book a Call */}
                 <a
-                  href="https://tidycal.com/mottodigital/ai-audit"
+                  href="https://tidycal.com/rice/ai"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}

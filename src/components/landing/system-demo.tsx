@@ -13,7 +13,7 @@ const demoSequence = [
   {
     type: "result" as const,
     lines: [
-      "  1. Client proposal (Palemo) — 2 days overdue",
+      "  1. Client proposal (Tanaka Corp) — 2 days overdue",
       "  2. Invoice follow-up (EDF) — 1 day overdue",
       "  3. Weekly report (internal) — due today",
     ],
@@ -27,7 +27,7 @@ const demoSequence = [
   },
   {
     type: "status" as const,
-    text: "Claude is drafting the Palemo proposal...",
+    text: "Claude is drafting the Tanaka Corp proposal...",
     delay: 50,
   },
   {
