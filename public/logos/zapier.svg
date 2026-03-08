@@ -1,0 +1,6 @@
+<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <!-- Orange rounded square -->
+  <rect fill="#FF4A00" width="48" height="48" rx="10"/>
+  <!-- Bold Z shape -->
+  <path fill="#FFFFFF" d="M13 13h22v4.5H19.5L35 33.5V37H13v-4.5h15.5L13 16.5z"/>
+</svg>

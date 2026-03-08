@@ -1,0 +1,14 @@
+<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="genspark-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF8C42"/>
+      <stop offset="100%" stop-color="#FF5500"/>
+    </linearGradient>
+  </defs>
+  <!-- Spark/lightning bolt shape -->
+  <path fill="url(#genspark-grad)" d="M28 2L12 26h10L18 46l18-26H26L32 6z"/>
+  <!-- Small spark accents -->
+  <circle fill="#FF6B35" cx="36" cy="10" r="2.5"/>
+  <circle fill="#FF6B35" cx="10" cy="36" r="2"/>
+  <circle fill="#FF6B35" cx="40" cy="22" r="1.5"/>
+</svg>

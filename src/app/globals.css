@@ -1,0 +1,563 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection highlight */
+::selection {
+  background: rgba(99, 102, 241, 0.3);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: oklch(0.145 0 0);
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.269 0 0);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.37 0 0);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #818cf8 0%, #6366f1 50%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow effect */
+.glow {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.15), 0 0 40px rgba(99, 102, 241, 0.05);
+}
+
+/* Grid pattern background */
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Radial gradient overlay */
+.radial-glow {
+  background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+}
+
+/* Animation */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animation-delay-100 { animation-delay: 100ms; }
+.animation-delay-200 { animation-delay: 200ms; }
+.animation-delay-300 { animation-delay: 300ms; }
+.animation-delay-400 { animation-delay: 400ms; }
+
+/* Slide transitions for wizard steps */
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.3s ease-out forwards;
+}
+
+/* Confetti particle animation */
+@keyframes confetti-fall {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100vh) rotate(720deg) scale(0.3);
+  }
+}
+
+.confetti-particle {
+  animation: confetti-fall 3s ease-in forwards;
+}
+
+/* Sparkle pulse */
+@keyframes sparkle-pulse {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.sparkle-pulse {
+  animation: sparkle-pulse 4s ease-in-out infinite;
+}
+
+/* Success checkmark pulse */
+@keyframes success-check-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(16, 185, 129, 0);
+  }
+}
+
+.success-check-pulse {
+  animation: success-check-pulse 2s ease-in-out 3;
+}
+
+/* Encouragement text fade */
+@keyframes encourage-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-encourage {
+  animation: encourage-fade 0.4s ease-out forwards;
+}
+
+/* Step complete checkmark */
+@keyframes check-pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-check-pop {
+  animation: check-pop 0.4s ease-out forwards;
+}
+
+/* ── Presentation Background Animations ── */
+
+/* Floating gradient orbs for title slide */
+@keyframes pres-float-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.1); }
+  66% { transform: translate(-20px, 15px) scale(0.95); }
+}
+@keyframes pres-float-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-25px, 25px) scale(1.05); }
+  66% { transform: translate(35px, -10px) scale(0.9); }
+}
+@keyframes pres-float-3 {
+  0%, 100% { transform: translate(0, 0) scale(0.95); }
+  50% { transform: translate(15px, -30px) scale(1.1); }
+}
+
+.pres-orbs {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.pres-orbs::before,
+.pres-orbs::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+}
+.pres-orbs::before {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #6366f1, transparent 70%);
+  top: 10%;
+  left: 15%;
+  animation: pres-float-1 12s ease-in-out infinite;
+}
+.pres-orbs::after {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, #8b5cf6, transparent 70%);
+  bottom: 15%;
+  right: 10%;
+  animation: pres-float-2 15s ease-in-out infinite;
+}
+.pres-orbs-extra::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.1;
+  background: radial-gradient(circle, #a78bfa, transparent 70%);
+  top: 50%;
+  left: 60%;
+  animation: pres-float-3 10s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Problem slide pulsing red glow */
+@keyframes pres-pulse-red {
+  0%, 100% { opacity: 0.08; }
+  50% { opacity: 0.15; }
+}
+.pres-problem-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(239, 68, 68, 0.12), transparent 70%);
+  animation: pres-pulse-red 4s ease-in-out infinite;
+}
+
+/* Floating dots pattern for tech slides */
+@keyframes pres-drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.pres-dots {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(circle 1px, rgba(99, 102, 241, 0.12) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: pres-drift 8s ease-in-out infinite;
+}
+
+/* Shield pattern for ownership slide */
+.pres-shield-pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    radial-gradient(circle 2px at 25% 25%, rgba(99, 102, 241, 0.08) 1px, transparent 1px),
+    radial-gradient(circle 2px at 75% 75%, rgba(99, 102, 241, 0.06) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+.pres-shield-pattern::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(99, 102, 241, 0.06), transparent 70%);
+}
+
+/* Intensified closing glow */
+@keyframes pres-glow-pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+.pres-closing-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 30%, rgba(99, 102, 241, 0.18) 0%, transparent 70%),
+              radial-gradient(ellipse 40% 40% at 50% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 60%);
+  animation: pres-glow-pulse 5s ease-in-out infinite;
+}
+
+/* CTA glow border animation */
+@keyframes pres-cta-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.3), 0 0 40px rgba(99, 102, 241, 0.1); }
+  50% { box-shadow: 0 0 30px rgba(99, 102, 241, 0.5), 0 0 60px rgba(99, 102, 241, 0.2); }
+}
+.pres-cta-glow {
+  animation: pres-cta-glow 3s ease-in-out infinite;
+}
+
+/* ── Slide Transition Animations ── */
+
+/* Fade + scale for title/closing */
+@keyframes pres-fade-scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes pres-fade-scale-out {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(1.02); }
+}
+
+/* Slide from right (forward navigation) */
+@keyframes pres-slide-right-in {
+  from { opacity: 0; transform: translateX(60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes pres-slide-right-out {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(-60px); }
+}
+
+/* Slide from left (backward navigation) */
+@keyframes pres-slide-left-in {
+  from { opacity: 0; transform: translateX(-60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes pres-slide-left-out {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(60px); }
+}
+
+/* Staggered fade for diagram slides */
+@keyframes pres-stagger-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pres-enter-scale {
+  animation: pres-fade-scale-in 450ms ease-out both;
+}
+.pres-exit-scale {
+  animation: pres-fade-scale-out 300ms ease-in both;
+}
+.pres-enter-right {
+  animation: pres-slide-right-in 400ms ease-out both;
+}
+.pres-exit-right {
+  animation: pres-slide-right-out 300ms ease-in both;
+}
+.pres-enter-left {
+  animation: pres-slide-left-in 400ms ease-out both;
+}
+.pres-exit-left {
+  animation: pres-slide-left-out 300ms ease-in both;
+}
+.pres-enter-stagger {
+  animation: pres-stagger-in 500ms ease-out both;
+}
+
+/* Presenter notes panel */
+.pres-notes-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  max-height: 35vh;
+  overflow-y: auto;
+  background: rgba(9, 9, 11, 0.95);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(63, 63, 70, 0.5);
+  transition: transform 300ms ease-out, opacity 300ms ease-out;
+}
+.pres-notes-panel.pres-notes-hidden {
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+.pres-notes-panel.pres-notes-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ── Landing Page Mobile Responsiveness ── */
+@media (max-width: 640px) {
+  /* Ensure no horizontal overflow */
+  .grid-pattern {
+    overflow-x: hidden;
+  }
+
+  /* Improve touch targets */
+  nav a, nav button, footer a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Better pricing card stacking */
+  .glow {
+    transform: none !important;
+  }
+}
+
+/* Typing animation for hero terminal */
+@keyframes typing-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typing-animation {
+  border-right: 2px solid rgba(99, 102, 241, 0.5);
+  animation: typing-blink 1s step-end infinite;
+  padding-right: 2px;
+}

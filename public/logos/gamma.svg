@@ -1,0 +1,14 @@
+<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gamma-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+  </defs>
+  <!-- Purple rounded square background -->
+  <rect fill="url(#gamma-grad)" x="4" y="4" width="40" height="40" rx="10"/>
+  <!-- Stylized "G" / gamma mark as overlapping cards -->
+  <rect fill="#FFFFFF" opacity="0.4" x="10" y="10" width="18" height="24" rx="3"/>
+  <rect fill="#FFFFFF" opacity="0.7" x="16" y="12" width="18" height="24" rx="3"/>
+  <rect fill="#FFFFFF" x="20" y="14" width="18" height="24" rx="3"/>
+</svg>
