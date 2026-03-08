@@ -3,19 +3,9 @@
 import { StepLayout } from "../shared/step-layout";
 import { MultiSelectChips } from "../shared/multi-select-chips";
 import type { AuditFormData } from "@/hooks/use-audit-form";
+import { useAuditLocale } from "../audit-locale-context";
 
-const CHALLENGES = [
-  "Manual data entry / repetitive tasks",
-  "Information scattered across tools",
-  "Slow internal communication",
-  "No clear AI strategy",
-  "Team resistance to new tools",
-  "Security / compliance concerns",
-  "Too many disconnected SaaS subscriptions",
-  "Difficulty scaling operations",
-];
-
-interface Step5Props {
+interface Step6Props {
   formData: AuditFormData;
   updateField: <K extends keyof AuditFormData>(
     field: K,
@@ -27,25 +17,28 @@ interface Step5Props {
   error: string | null;
 }
 
-export function Step5Challenges({
+export function Step6Challenges({
   formData,
   updateField,
   onNext,
   onBack,
   isLoading,
   error,
-}: Step5Props) {
+}: Step6Props) {
+  const { t } = useAuditLocale();
+  const step = t.steps[6];
+
   return (
     <StepLayout
-      question="What are your biggest operational challenges?"
-      description="Select all that apply."
+      question={step.question}
+      description={step.description}
       onNext={onNext}
       onBack={onBack}
       isLoading={isLoading}
       error={error}
     >
       <MultiSelectChips
-        options={CHALLENGES}
+        options={[...step.challenges]}
         selected={formData.challenge}
         onChange={(selected) => updateField("challenge", selected)}
         otherValue={formData.challengeOther}

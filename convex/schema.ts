@@ -1,0 +1,83 @@
+import { defineSchema, defineTable } from "convex/server";
+import { v } from "convex/values";
+
+export default defineSchema({
+  auditLeads: defineTable({
+    email: v.string(),
+    privacyConsent: v.optional(v.boolean()),
+    consentDate: v.optional(v.number()),
+    name: v.optional(v.string()),
+    role: v.optional(v.string()),
+    company: v.optional(v.string()),
+    website: v.optional(v.string()),
+    employees: v.optional(v.string()),
+    tools: v.optional(v.array(v.string())),
+    challenge: v.optional(v.array(v.string())),
+    challengeOther: v.optional(v.string()),
+    aiExperience: v.optional(v.string()),
+    sixMonthVision: v.optional(v.array(v.string())),
+    sixMonthVisionOther: v.optional(v.string()),
+    source: v.optional(v.string()),
+    preferredTime: v.optional(v.string()),
+    status: v.string(),
+    webhookSent: v.optional(v.boolean()),
+    currentStep: v.optional(v.number()),
+    createdAt: v.optional(v.number()),
+    updatedAt: v.optional(v.number()),
+  })
+    .index("by_email", ["email"])
+    .index("by_created", ["createdAt"])
+    .index("by_status", ["status"]),
+
+  auditReports: defineTable({
+    leadId: v.id("auditLeads"),
+    clientName: v.string(),
+    contactName: v.string(),
+    contactRole: v.string(),
+    reportDate: v.string(),
+    score: v.number(),
+    maxScore: v.number(),
+    verdict: v.string(),
+    summary: v.string(),
+    tools: v.array(
+      v.object({
+        name: v.string(),
+        status: v.union(
+          v.literal("active"),
+          v.literal("risk"),
+          v.literal("none")
+        ),
+        notes: v.string(),
+      })
+    ),
+    strengths: v.array(v.string()),
+    gaps: v.array(v.string()),
+    opportunities: v.array(
+      v.object({
+        area: v.string(),
+        impact: v.string(),
+        effort: v.string(),
+        timeSaved: v.string(),
+        description: v.string(),
+      })
+    ),
+    roadmap: v.array(
+      v.object({
+        phase: v.string(),
+        months: v.string(),
+        items: v.array(v.string()),
+      })
+    ),
+    status: v.optional(v.string()),
+    createdAt: v.optional(v.number()),
+    updatedAt: v.optional(v.number()),
+  }).index("by_lead", ["leadId"]),
+
+  users: defineTable({
+    clerkId: v.string(),
+    email: v.string(),
+    name: v.optional(v.string()),
+    imageUrl: v.optional(v.string()),
+    createdAt: v.optional(v.number()),
+  }).index("by_clerk_id", ["clerkId"]),
+});

@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, Loader2, Sparkles } from "lucide-react";
+import { useAuditLocale } from "../audit-locale-context";
 
 interface StepLayoutProps {
   question: string;
@@ -30,6 +31,8 @@ export function StepLayout({
   error,
   fieldErrors: _fieldErrors,
 }: StepLayoutProps) {
+  const { t } = useAuditLocale();
+
   return (
     <div className="w-full max-w-xl mx-auto">
       <div className="mb-8">
@@ -58,7 +61,7 @@ export function StepLayout({
             className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 gap-2"
           >
             <ArrowLeft className="size-4" />
-            Back
+            {t.common.back}
           </Button>
         )}
         <Button
@@ -70,16 +73,16 @@ export function StepLayout({
           {isLoading ? (
             <>
               <Loader2 className="size-4 animate-spin" />
-              Saving...
+              {t.common.saving}
             </>
           ) : isLast ? (
             <>
               <Sparkles className="size-4" />
-              Submit
+              {t.common.submit}
             </>
           ) : (
             <>
-              Continue
+              {t.common.continue}
               <ArrowRight className="size-4" />
             </>
           )}

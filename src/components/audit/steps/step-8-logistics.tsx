@@ -5,23 +5,10 @@ import { Label } from "@/components/ui/label";
 import { StepLayout } from "../shared/step-layout";
 import { SelectCard } from "../shared/select-card";
 import type { AuditFormData } from "@/hooks/use-audit-form";
+import { useAuditLocale } from "../audit-locale-context";
 import { useState } from "react";
 
-const SOURCE_OPTIONS = [
-  "LinkedIn",
-  "Referral",
-  "Google Search",
-  "Social Media",
-  "Event",
-];
-
-const TIME_OPTIONS = [
-  "Morning (9-12 JST)",
-  "Afternoon (13-17 JST)",
-  "Evening (18-21 JST)",
-];
-
-interface Step7Props {
+interface Step8Props {
   formData: AuditFormData;
   updateField: <K extends keyof AuditFormData>(
     field: K,
@@ -33,20 +20,23 @@ interface Step7Props {
   error: string | null;
 }
 
-export function Step7Logistics({
+export function Step8Logistics({
   formData,
   updateField,
   onSubmit,
   onBack,
   isLoading,
   error,
-}: Step7Props) {
+}: Step8Props) {
+  const { t } = useAuditLocale();
+  const step = t.steps[8];
+
   const [showOtherSource, setShowOtherSource] = useState(
-    formData.source !== "" && !SOURCE_OPTIONS.includes(formData.source)
+    formData.source !== "" && !(step.sourceOptions as readonly string[]).includes(formData.source)
   );
 
   const handleSourceSelect = (source: string) => {
-    if (source === "Other") {
+    if (source === t.common.other) {
       setShowOtherSource(true);
       updateField("source", "");
     } else {
@@ -57,7 +47,7 @@ export function Step7Logistics({
 
   return (
     <StepLayout
-      question="Almost done — just a few logistics"
+      question={step.question}
       onNext={onSubmit}
       onBack={onBack}
       isLast
@@ -66,9 +56,9 @@ export function Step7Logistics({
     >
       <div className="space-y-8">
         <div className="space-y-3">
-          <Label className="text-zinc-300">How did you find us?</Label>
+          <Label className="text-zinc-300">{step.sourceLabel}</Label>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-            {SOURCE_OPTIONS.map((source) => (
+            {step.sourceOptions.map((source) => (
               <SelectCard
                 key={source}
                 label={source}
@@ -77,16 +67,16 @@ export function Step7Logistics({
               />
             ))}
             <SelectCard
-              label="Other"
+              label={t.common.other}
               selected={showOtherSource}
-              onClick={() => handleSourceSelect("Other")}
+              onClick={() => handleSourceSelect(t.common.other)}
             />
           </div>
           {showOtherSource && (
             <Input
               value={formData.source}
               onChange={(e) => updateField("source", e.target.value)}
-              placeholder="How did you find us?"
+              placeholder={t.common.otherPlaceholder}
               className="bg-zinc-950/50 border-zinc-700/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20"
               autoFocus
             />
@@ -95,10 +85,10 @@ export function Step7Logistics({
 
         <div className="space-y-3">
           <Label className="text-zinc-300">
-            When&apos;s a good time for a call?
+            {step.timeLabel}
           </Label>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-            {TIME_OPTIONS.map((time) => (
+            {step.timeOptions.map((time) => (
               <SelectCard
                 key={time}
                 label={time}
@@ -111,13 +101,13 @@ export function Step7Logistics({
 
         <div className="space-y-2">
           <Label htmlFor="website" className="text-zinc-300">
-            Got a website? <span className="text-zinc-500">(optional)</span>
+            {step.websiteLabel} <span className="text-zinc-500">({t.common.optional})</span>
           </Label>
           <Input
             id="website"
             value={formData.website}
             onChange={(e) => updateField("website", e.target.value)}
-            placeholder="https://example.com"
+            placeholder={step.websitePlaceholder}
             className="bg-zinc-950/50 border-zinc-700/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20 h-12 text-base"
           />
         </div>

@@ -2,236 +2,315 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import {
-  ChevronDown,
-  HelpCircle,
-  Clock,
-  Globe,
-  Users,
-  Shield,
-  Wrench,
-  DollarSign,
-  BarChart3,
-  FileText,
-  ArrowRight,
-  Rocket,
-  Building2,
-} from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { ChevronDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const categories = ["All", "Getting Started", "Fit", "Program", "Results", "Security"] as const;
-type Category = (typeof categories)[number];
+// ---------------------------------------------------------------------------
+// Category definitions
+// ---------------------------------------------------------------------------
 
-const faqs = [
+type Category = "Getting Started" | "Ownership & Technical" | "Commercial" | "After the Program";
+
+const categories: Category[] = [
+  "Getting Started",
+  "Ownership & Technical",
+  "Commercial",
+  "After the Program",
+];
+
+const categoryLabels: Record<string, Record<Category, string>> = {
+  en: {
+    "Getting Started": "Getting Started",
+    "Ownership & Technical": "Ownership & Technical",
+    "Commercial": "Commercial",
+    "After the Program": "After the Program",
+  },
+  ja: {
+    "Getting Started": "はじめに",
+    "Ownership & Technical": "所有権・技術面",
+    "Commercial": "費用・契約",
+    "After the Program": "プログラム終了後",
+  },
+};
+
+// ---------------------------------------------------------------------------
+// FAQ content — EN
+// ---------------------------------------------------------------------------
+
+interface FAQItem {
+  question: string;
+  answer: string;
+  category: Category;
+}
+
+const faqsEN: FAQItem[] = [
   {
-    question: "How much does the free audit actually cost?",
+    question: "My team isn't technical at all. Can we still do this?",
     answer:
-      "Nothing. Zero. The audit is 100% free with no strings attached. Lewis personally reviews your answers, prepares a custom AI readiness report, and walks you through it on a video call. You keep the full report regardless of whether you decide to work with us.",
-    icon: DollarSign,
-    category: "Getting Started" as Category,
+      "Yes — this is specifically designed for non-technical teams. Every system we build gets documented in plain language, with video walkthroughs your team can reference. We train your people to use and maintain the system, not to become developers. If your team can use LINE and Excel, they can operate an AIOS.",
+    category: "Getting Started",
   },
   {
-    question: "What size company is this for?",
+    question: "What if AI doesn't work for our specific business?",
     answer:
-      "AIOS is designed for SMBs with 10 to 500 employees. Whether you're a 15-person startup trying to punch above your weight, or a 200-person company drowning in disconnected tools, the system scales to your needs. The sweet spot is companies large enough to feel the pain of fragmented operations but agile enough to implement change.",
-    icon: Users,
-    category: "Fit" as Category,
+      "That's exactly what the free audit is for. Before we take any money, we analyze your business, your tools, and your workflows. If AI isn't going to deliver real value for you, I'll tell you that clearly — and you keep the audit report either way. I don't take on engagements I don't believe in.",
+    category: "Getting Started",
   },
   {
-    question: "Do I need technical skills to use the system?",
+    question: "What if we want to start with just one department?",
     answer:
-      'No. The system is designed for executives, not engineers. You interact with it in plain language \u2014 "what\'s overdue?", "mark it done", "move to tomorrow." Your team gets trained on everything during the program, and full documentation means anyone can maintain it.',
-    icon: Wrench,
-    category: "Getting Started" as Category,
+      "Completely fine. Most engagements start with the highest-impact area — often operations or sales — and expand from there. AIOS is designed to grow incrementally. You don't need to transform the whole company at once.",
+    category: "Getting Started",
   },
   {
-    question: "Do you work with companies outside Japan?",
+    question: "Can I see this in action before committing?",
     answer:
-      "Yes. While we're based in Tokyo and many of our clients are Japan-based, we work with companies globally. Lewis operates in both English and Japanese, and the system itself is language-agnostic. We've built implementations that handle bilingual operations seamlessly.",
-    icon: Globe,
-    category: "Fit" as Category,
+      "The free AI Audit is the right first step. You'll see how I think, how I analyze a business, and whether my approach fits your situation. That 30-minute call is the demo.",
+    category: "Getting Started",
   },
   {
-    question: "What's the ROI timeline?",
+    question: "How is this different from hiring an AI consultant?",
     answer:
-      "Most clients see measurable results within 60 days. Your first automation goes live in Week 1, so you'll start saving time immediately. By Month 2, you typically have 3+ workflows automated, saving 10-20 hours per week. By Month 6, the system is usually paying for itself through operational efficiency alone.",
-    icon: BarChart3,
-    category: "Results" as Category,
+      "Most consultants deliver a strategy document and leave. We build a working system with you — and train your team to run it independently. By the end, you don't need us. That's the whole point. The Ownership Guarantee makes it contractual.",
+    category: "Ownership & Technical",
+  },
+  {
+    question: "What do we actually own at the end?",
+    answer:
+      "Everything. Your data stays in your systems. Your agents run on your infrastructure. Your workflows run on your automation platform (n8n, self-hosted). Your documentation lives wherever you store files. You could end the engagement tomorrow and everything keeps running.",
+    category: "Ownership & Technical",
+  },
+  {
+    question: "Will this work with the tools we already use?",
+    answer:
+      "Yes. We start from where you are — Kintone, Freee, Chatwork, Google Workspace, LINE, whatever your team uses. We don't ask you to replace your stack. We connect it.",
+    category: "Ownership & Technical",
+  },
+  {
+    question:
+      "We've been burned by IT projects that went over budget and over time. How is this different?",
+    answer:
+      "Fixed scope, fixed price, fixed timeline. ¥200,000/month × 6 months. No scope creep because we work together weekly — if something needs to change, we talk about it openly. The Ownership Guarantee means I'm personally committed to delivery.",
+    category: "Commercial",
+  },
+  {
+    question:
+      "¥1,200,000 is a significant investment. How do I justify it internally?",
+    answer:
+      "Think about what the problem costs. If one senior team member spends 3 hours a day on tasks that should be automated, that's 15+ hours a week of high-salary time on repetitive work. Over 6 months, that easily exceeds what you invest in AIOS — before accounting for errors, delays, or missed opportunities. AIOS pays for itself when it works. And the free audit will tell you honestly whether it will.",
+    category: "Commercial",
   },
   {
     question: "What happens after the 6 months?",
     answer:
-      "You own everything. The system runs on your infrastructure, your accounts, your servers. It keeps working whether we continue together or not. Plus you get 90 days of post-handoff support (6 months if you pay in full) for any questions or issues.",
-    icon: Clock,
-    category: "Program" as Category,
-  },
-  {
-    question: "How is this different from hiring an AI consultancy?",
-    answer:
-      "Most consultancies deliver a strategy deck or a proof-of-concept, then leave. We build a complete, working system alongside your team \u2014 and teach them to run it. By month 6, you don't need us. That's the point.",
-    icon: HelpCircle,
-    category: "Program" as Category,
-  },
-  {
-    question: "Can I see a sample audit report?",
-    answer:
-      "Yes \u2014 we can share anonymized examples from previous audits during your free consultation call. Each audit is custom-built based on your specific tools, team, and challenges, so no two reports look the same. Book a call and Lewis will walk you through what to expect.",
-    icon: FileText,
-    category: "Getting Started" as Category,
-  },
-  {
-    question: "What if AI models change? Won't this become outdated?",
-    answer:
-      "The architecture is model-agnostic by design. When a better model comes out (and they will), you swap it in \u2014 your data, agents, and workflows stay intact. That's the whole point of owning the infrastructure layer.",
-    icon: Wrench,
-    category: "Program" as Category,
-  },
-  {
-    question: "Is our company data safe?",
-    answer:
-      "Yes. Your data stays on infrastructure you control. We don't store your business data on our systems. Every implementation includes a security audit and protocol documentation. You decide what the AI can access and what it can't.",
-    icon: Shield,
-    category: "Security" as Category,
-  },
-  {
-    question: "What industries does this work for?",
-    answer:
-      "Any industry with operational complexity. We've designed systems for consulting firms, real estate companies, social welfare organizations, and tech startups. The AIOS architecture adapts to your workflows \u2014 if your business runs on processes and data, it works.",
-    icon: Building2,
-    category: "Fit" as Category,
-  },
-  {
-    question: "How fast can we get started?",
-    answer:
-      "After the free audit call, onboarding typically starts within 1\u20132 weeks. Your first live automation deploys in Week 1 of the program. By the end of Month 1, you'll have a full architecture plan and multiple systems connected.",
-    icon: Rocket,
-    category: "Getting Started" as Category,
-  },
-  {
-    question: "What does 'you own everything' actually mean?",
-    answer:
-      "It means every piece of the system \u2014 the code, the data, the automations, the agent configurations \u2014 runs on YOUR accounts and YOUR servers. If we part ways tomorrow, nothing breaks. There's no proprietary platform to keep paying for. You have full source access and documentation to maintain it independently.",
-    icon: Shield,
-    category: "Results" as Category,
+      "You own a fully documented, running AI operating system. Your team can operate and extend it independently. If you want ongoing strategic guidance, we offer an AI Koumon (Advisor) service starting at ¥50,000/month — but there's no pressure and no automatic renewal.",
+    category: "After the Program",
   },
 ];
 
-export function FAQSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [activeCategory, setActiveCategory] = useState<Category>("All");
+// ---------------------------------------------------------------------------
+// FAQ content — JP
+// ---------------------------------------------------------------------------
 
-  const filteredFaqs =
-    activeCategory === "All"
-      ? faqs
-      : faqs.filter((faq) => faq.category === activeCategory);
+const faqsJA: FAQItem[] = [
+  {
+    question: "私のチームは技術的な知識がほとんどありません。それでも大丈夫ですか？",
+    answer:
+      "はい、このプログラムは技術的な知識を持たないチームのために設計されています。構築するすべてのシステムには、平易な言葉で書かれたドキュメントと動画マニュアルが付属します。開発者になっていただく必要はありません。LINEやExcelが使えるなら、AIOSを運用できます。",
+    category: "Getting Started",
+  },
+  {
+    question: "AIが私たちの業種・業態に合わない場合はどうなりますか？",
+    answer:
+      "それを確認するのが、無料のAIオーディットです。費用をいただく前に、あなたのビジネス、ツール、業務フローを分析します。AIが実際の価値をもたらせないと判断した場合は、正直にお伝えします——オーディットレポートはどちらにせよお持ち帰りいただけます。確信の持てないエンゲージメントはお引き受けしません。",
+    category: "Getting Started",
+  },
+  {
+    question: "まずは一部門だけから始めることはできますか？",
+    answer:
+      "まったく問題ありません。多くのエンゲージメントは、影響が最も大きい領域——多くの場合、オペレーションや営業——から始まり、そこから拡大します。AIOSは段階的に成長するよう設計されています。会社全体を一度に変革する必要はありません。",
+    category: "Getting Started",
+  },
+  {
+    question: "コミットする前に実際の動きを見ることはできますか？",
+    answer:
+      "無料のAIオーディットが最初のステップです。私がどのように考え、ビジネスを分析し、アプローチが合うかどうかを確認できます。その30分の通話が、実質的なデモになります。",
+    category: "Getting Started",
+  },
+  {
+    question: "AIコンサルタントを雇うことと、何が違うのですか？",
+    answer:
+      "多くのコンサルタントは戦略資料を渡して終わりです。私たちはあなたと一緒に動くシステムを構築し、あなたのチームがそれを独立して運用できるようにトレーニングします。エンゲージメントが終わるころには、私たちは不要になっています。それが目標です。オーナーシップ保証がそれを契約上で保証します。",
+    category: "Ownership & Technical",
+  },
+  {
+    question: "最終的に、私たちは何を「所有」することになりますか？",
+    answer:
+      "すべてです。データはあなたのシステムに残ります。エージェントはあなたのインフラで動きます。ワークフローはあなたの自動化プラットフォーム（n8n、自己ホスト）で動きます。ドキュメントはあなたのファイルストレージに保存されます。明日エンゲージメントを終了しても、すべてがそのまま動き続けます。",
+    category: "Ownership & Technical",
+  },
+  {
+    question: "今使っているツールと連携できますか？",
+    answer:
+      "はい。Kintone、Freee、Chatwork、Google Workspace、LINE——現在お使いのツールからスタートします。ツールスタックを入れ替える必要はありません。つなぐことが私たちの仕事です。",
+    category: "Ownership & Technical",
+  },
+  {
+    question:
+      "ITプロジェクトで予算超過・納期遅延を経験してきました。何が違うのですか？",
+    answer:
+      "固定スコープ、固定価格、固定期間です。月額¥200,000×6ヶ月。毎週一緒に作業しているため、スコープクリープが起きにくく、変更が必要な場合はオープンに話し合います。オーナーシップ保証は、私自身が納品にコミットしていることを意味します。",
+    category: "Commercial",
+  },
+  {
+    question: "¥1,200,000は大きな投資です。社内でどう説明すればよいですか？",
+    answer:
+      "問題のコストを考えてみてください。シニアスタッフが一日3時間を自動化すべき作業に費やしているなら、週15時間以上の高給人材の時間が繰り返し作業に消えています。6ヶ月で、AIOS投資額を容易に超える人件費になります——ミス、遅延、機会損失は別として。AIOSは機能すれば元が取れます。無料オーディットが、その可能性を正直に教えてくれます。",
+    category: "Commercial",
+  },
+  {
+    question: "6ヶ月後はどうなりますか？",
+    answer:
+      "完全にドキュメント化され、稼働中のAIオペレーティングシステムを所有することになります。チームが自力で運用・拡張できます。継続的な戦略支援を希望される場合は、月額¥50,000からのAI顧問サービスをご用意しています——ただし、プレッシャーはなく、自動更新もありません。",
+    category: "After the Program",
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Bilingual section labels
+// ---------------------------------------------------------------------------
+
+const sectionLabels = {
+  en: {
+    badge: "Common Questions",
+    title: "Frequently asked questions.",
+    subtitle: "10 questions answered — click any to expand",
+    ctaText: "Still have questions?",
+    ctaButton: "Book a free call",
+  },
+  ja: {
+    badge: "よくあるご質問",
+    title: "よくいただくご質問",
+    subtitle: "10のご質問にお答えします — クリックで展開",
+    ctaText: "まだ質問がありますか？",
+    ctaButton: "無料通話を予約する",
+  },
+};
+
+// ---------------------------------------------------------------------------
+// Component
+// ---------------------------------------------------------------------------
+
+interface FAQSectionProps {
+  locale?: "en" | "ja";
+}
+
+export function FAQSection({ locale = "en" }: FAQSectionProps) {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const faqs = locale === "ja" ? faqsJA : faqsEN;
+  const labels = sectionLabels[locale];
+  const catLabels = categoryLabels[locale];
+
+  // Group FAQs by category (preserving category order)
+  const grouped = categories
+    .map((cat) => ({
+      category: cat,
+      label: catLabels[cat],
+      items: faqs.filter((faq) => faq.category === cat),
+    }))
+    .filter((g) => g.items.length > 0);
+
+  // Build a flat index for the accordion (one open at a time across all groups)
+  let globalIndex = 0;
 
   return (
     <section className="py-20 sm:py-28 border-t border-zinc-800/50">
       <div className="mx-auto max-w-3xl px-6">
-        <div className="text-center mb-10">
-          <Badge
-            variant="outline"
-            className="mb-4 border-zinc-700 text-zinc-400 bg-zinc-800/50"
-          >
-            Common Questions
-          </Badge>
+        {/* Header */}
+        <div className="text-center mb-12">
+          <span className="inline-block mb-4 px-3 py-1 rounded-full border border-zinc-700 text-zinc-400 bg-zinc-800/50 text-xs font-medium">
+            {labels.badge}
+          </span>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-            Frequently asked questions
+            {labels.title}
           </h2>
-          <p className="mt-3 text-zinc-500 text-sm">
-            {faqs.length} questions answered — click any to expand
-          </p>
+          <p className="mt-3 text-zinc-500 text-sm">{labels.subtitle}</p>
         </div>
 
-        {/* Category filter tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
-          {categories.map((cat) => {
-            const count =
-              cat === "All"
-                ? faqs.length
-                : faqs.filter((f) => f.category === cat).length;
-            const isActive = activeCategory === cat;
-            return (
-              <button
-                key={cat}
-                onClick={() => {
-                  setActiveCategory(cat);
-                  setOpenIndex(null);
-                }}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                  isActive
-                    ? "bg-indigo-500/20 text-indigo-300 border border-indigo-500/30"
-                    : "bg-zinc-800/50 text-zinc-500 border border-zinc-800/50 hover:text-zinc-300 hover:border-zinc-700/50"
-                }`}
-              >
-                {cat}
-                <span className="ml-1.5 text-[10px] opacity-60">{count}</span>
-              </button>
-            );
-          })}
-        </div>
+        {/* Grouped FAQ accordion */}
+        <div className="space-y-8">
+          {grouped.map((group) => {
+            const startIndex = globalIndex;
 
-        <div className="space-y-3">
-          {filteredFaqs.map((faq, index) => {
-            const isOpen = openIndex === index;
-            const Icon = faq.icon;
-            return (
-              <div
-                key={faq.question}
-                className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 overflow-hidden"
-              >
-                <button
-                  onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="w-full flex items-center gap-3 p-5 text-left hover:bg-zinc-800/30 transition-colors"
-                >
-                  <div className="flex size-8 items-center justify-center rounded-lg bg-zinc-800/50 border border-zinc-700/50 shrink-0">
-                    <Icon className="size-4 text-indigo-400" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <span className="text-sm font-semibold text-zinc-200 block pr-2">
-                      {faq.question}
-                    </span>
-                    <span className="text-[10px] text-zinc-600 mt-0.5 block">
-                      {faq.category}
-                    </span>
-                  </div>
-                  <ChevronDown
-                    className={`size-5 text-zinc-500 shrink-0 transition-transform duration-300 ${
-                      isOpen ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-                <div
-                  className="grid transition-all duration-300 ease-in-out"
-                  style={{
-                    gridTemplateRows: isOpen ? "1fr" : "0fr",
-                  }}
-                >
-                  <div className="overflow-hidden">
-                    <div className="px-5 pb-5 pl-16">
-                      <p className="text-sm text-zinc-400 leading-relaxed">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  </div>
+            // Render group
+            const rendered = (
+              <div key={group.category}>
+                {/* Category label */}
+                <p className="text-xs text-zinc-500 uppercase tracking-wider mb-3 pl-1">
+                  {group.label}
+                </p>
+
+                <div className="space-y-3">
+                  {group.items.map((faq, i) => {
+                    const idx = startIndex + i;
+                    const isOpen = openIndex === idx;
+
+                    return (
+                      <div
+                        key={faq.question}
+                        className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 overflow-hidden"
+                      >
+                        <button
+                          onClick={() => setOpenIndex(isOpen ? null : idx)}
+                          className="w-full flex items-center gap-3 p-5 text-left hover:bg-zinc-800/30 transition-colors"
+                        >
+                          <div className="flex-1 min-w-0">
+                            <span className="text-sm font-semibold text-zinc-200 block pr-2">
+                              {faq.question}
+                            </span>
+                          </div>
+                          <ChevronDown
+                            className={`size-5 text-zinc-500 shrink-0 transition-transform duration-300 ${
+                              isOpen ? "rotate-180" : ""
+                            }`}
+                          />
+                        </button>
+                        <div
+                          className="grid transition-all duration-300 ease-in-out"
+                          style={{
+                            gridTemplateRows: isOpen ? "1fr" : "0fr",
+                          }}
+                        >
+                          <div className="overflow-hidden">
+                            <div className="px-5 pb-5">
+                              <p className="text-sm text-zinc-400 leading-relaxed">
+                                {faq.answer}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             );
+
+            globalIndex += group.items.length;
+            return rendered;
           })}
         </div>
 
         {/* CTA at bottom of FAQ */}
         <div className="mt-10 text-center rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6">
-          <p className="text-zinc-400 mb-4">
-            Still have questions?
-          </p>
+          <p className="text-zinc-400 mb-4">{labels.ctaText}</p>
           <Link href="/audit">
             <Button
               variant="outline"
               className="border-indigo-500/30 text-indigo-300 hover:bg-indigo-500/10 hover:text-indigo-200 gap-2"
             >
-              Book a free call
+              {labels.ctaButton}
               <ArrowRight className="size-4" />
             </Button>
           </Link>

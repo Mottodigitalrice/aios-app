@@ -189,13 +189,13 @@ const PRESENTER_NOTES: Record<number, { timing: string; en: string[]; jp: string
     en: [
       "The question isn't 'should we use AI' — everyone knows the answer.",
       "The question is 'do we have the infrastructure to run it?'",
-      "Call to action: Book a free AI audit — we'll analyze your current systems.",
+      "Three ways to take the next step: Get your free AI audit, download this presentation, or book a call directly.",
       "Thank you for your time. Questions?",
     ],
     jp: [
       "問いは「AIを使うべきか？」ではありません。",
       "「AIを動かすインフラがあるか？」です。",
-      "無料AIオーディットを予約して、現在のシステムを分析しましょう。",
+      "次のステップは3つ：無料AI監査を受ける、プレゼン資料をダウンロード、または直接通話を予約。",
       "ご清聴ありがとうございました。ご質問はどうぞ。",
     ],
   },
@@ -303,7 +303,7 @@ export default function PresentationPage() {
             <div className="pres-orbs-extra" />
             <div className="relative z-10 flex flex-col items-center">
               <div className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-sm">
-                パレモ・ホールディングス × MOTTO Digital
+                MOTTO Digital — AI Infrastructure
               </div>
               <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-center leading-tight">
                 The <span className="gradient-text">AI Paradigm Shift</span>
@@ -874,24 +874,64 @@ export default function PresentationPage() {
                 <p className="text-lg text-indigo-400 text-center mt-1">「AIを動かすインフラがあるか？」</p>
               </div>
 
-              {/* CTA Section */}
-              <div className="mt-10 w-full max-w-2xl">
+              {/* CTA Cards */}
+              <div className="mt-10 w-full max-w-3xl grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {/* Get Your Free AI Audit */}
                 <a
-                  href="https://tidycal.com/mottodigital/aios-audit"
+                  href="/audit"
+                  onClick={(e) => e.stopPropagation()}
+                  className="block pres-cta-glow rounded-2xl border-2 border-indigo-500/40 bg-gradient-to-br from-indigo-950/40 via-indigo-900/20 to-violet-950/40 p-6 text-center transition-all duration-300 hover:border-indigo-400/60 hover:scale-[1.02] group"
+                >
+                  <Sparkles className="size-7 text-indigo-400 mx-auto mb-3" />
+                  <p className="text-lg font-bold text-indigo-200 group-hover:text-indigo-100 transition-colors">
+                    Get Your Free AI Audit
+                  </p>
+                  <p className="text-sm text-zinc-500 mt-1">
+                    無料AI監査を受ける
+                  </p>
+                  <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-600 text-white font-semibold text-sm group-hover:bg-indigo-500 transition-colors">
+                    <ArrowRight className="size-4" />
+                    Start Now
+                  </div>
+                </a>
+
+                {/* Download This Presentation */}
+                <a
+                  href="/presentation"
+                  onClick={(e) => e.stopPropagation()}
+                  className="block rounded-2xl border-2 border-zinc-700/50 bg-zinc-900/30 p-6 text-center transition-all duration-300 hover:border-zinc-600/60 hover:scale-[1.02] group"
+                >
+                  <Monitor className="size-7 text-zinc-400 mx-auto mb-3 group-hover:text-zinc-300 transition-colors" />
+                  <p className="text-lg font-bold text-zinc-300 group-hover:text-zinc-100 transition-colors">
+                    Download Presentation
+                  </p>
+                  <p className="text-sm text-zinc-500 mt-1">
+                    プレゼン資料をダウンロード
+                  </p>
+                  <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-700 text-zinc-300 font-semibold text-sm group-hover:border-zinc-600 transition-colors">
+                    <ExternalLink className="size-4" />
+                    View PDF
+                  </div>
+                </a>
+
+                {/* Book a Call */}
+                <a
+                  href="https://tidycal.com/mottodigital/ai-audit"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="block w-full pres-cta-glow rounded-2xl border-2 border-indigo-500/40 bg-gradient-to-br from-indigo-950/40 via-indigo-900/20 to-violet-950/40 p-8 text-center transition-all duration-300 hover:border-indigo-400/60 hover:scale-[1.02] group"
+                  className="block rounded-2xl border-2 border-emerald-500/30 bg-emerald-950/10 p-6 text-center transition-all duration-300 hover:border-emerald-400/50 hover:scale-[1.02] group"
                 >
-                  <p className="text-2xl sm:text-3xl font-bold text-indigo-200 group-hover:text-indigo-100 transition-colors">
-                    Book Your Free AI Audit
+                  <Clock className="size-7 text-emerald-400 mx-auto mb-3" />
+                  <p className="text-lg font-bold text-emerald-200 group-hover:text-emerald-100 transition-colors">
+                    Book a Call
                   </p>
-                  <p className="text-lg text-zinc-400 mt-2">
-                    無料AIオーディットを予約する
+                  <p className="text-sm text-zinc-500 mt-1">
+                    通話を予約する
                   </p>
-                  <div className="mt-5 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-indigo-600 text-white font-semibold text-lg group-hover:bg-indigo-500 transition-colors">
-                    <ExternalLink className="size-5" />
-                    Schedule Now / 今すぐ予約
+                  <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-600 text-white font-semibold text-sm group-hover:bg-emerald-500 transition-colors">
+                    <ExternalLink className="size-4" />
+                    Schedule Now
                   </div>
                 </a>
               </div>

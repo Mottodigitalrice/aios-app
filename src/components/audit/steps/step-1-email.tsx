@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { StepLayout } from "../shared/step-layout";
 import type { AuditFormData, FieldErrors } from "@/hooks/use-audit-form";
+import { useAuditLocale } from "../audit-locale-context";
 import Link from "next/link";
 
 interface Step1Props {
@@ -28,12 +29,14 @@ export function Step1Email({
   error,
   fieldErrors,
 }: Step1Props) {
+  const { t } = useAuditLocale();
+  const step = t.steps[1];
   const canContinue = formData.email.length > 0 && formData.privacyConsent;
 
   return (
     <StepLayout
-      question="Let's start with your email"
-      description="We'll use this to send you the audit report. No spam, ever."
+      question={step.question}
+      description={step.description}
       onNext={onNext}
       isFirst
       isLoading={isLoading}
@@ -43,7 +46,7 @@ export function Step1Email({
       <div className="space-y-6">
         <div className="space-y-2">
           <Label htmlFor="email" className="text-zinc-300">
-            Work email
+            {step.emailLabel}
           </Label>
           <Input
             id="email"
@@ -51,7 +54,7 @@ export function Step1Email({
             value={formData.email}
             onChange={(e) => updateField("email", e.target.value)}
             onBlur={() => formData.email && validateField("email")}
-            placeholder="you@company.com"
+            placeholder={step.emailPlaceholder}
             className={`bg-zinc-950/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20 h-12 text-base ${
               fieldErrors.email
                 ? "border-red-500/70 focus-visible:border-red-500/70 focus-visible:ring-red-500/20"
@@ -81,13 +84,13 @@ export function Step1Email({
               }`}
             />
             <span className="text-sm text-zinc-400 group-hover:text-zinc-300 transition-colors">
-              I agree to the{" "}
+              {step.consentLabel}{" "}
               <Link
                 href="/privacy"
                 target="_blank"
                 className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2"
               >
-                privacy policy
+                {step.consentLink}
               </Link>
             </span>
           </label>

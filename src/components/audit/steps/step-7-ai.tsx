@@ -5,25 +5,9 @@ import { StepLayout } from "../shared/step-layout";
 import { SelectCard } from "../shared/select-card";
 import { MultiSelectChips } from "../shared/multi-select-chips";
 import type { AuditFormData } from "@/hooks/use-audit-form";
+import { useAuditLocale } from "../audit-locale-context";
 
-const EXPERIENCE_OPTIONS = [
-  "None yet",
-  "Experimenting",
-  "Using regularly",
-  "Advanced",
-];
-
-const VISION_OPTIONS = [
-  "Automate repetitive tasks",
-  "Connect existing tools",
-  "Improve customer communication",
-  "Generate reports / analytics",
-  "Reduce costs",
-  "Train team on AI",
-  "Build custom AI agents",
-];
-
-interface Step6Props {
+interface Step7Props {
   formData: AuditFormData;
   updateField: <K extends keyof AuditFormData>(
     field: K,
@@ -35,17 +19,20 @@ interface Step6Props {
   error: string | null;
 }
 
-export function Step6AI({
+export function Step7AI({
   formData,
   updateField,
   onNext,
   onBack,
   isLoading,
   error,
-}: Step6Props) {
+}: Step7Props) {
+  const { t } = useAuditLocale();
+  const step = t.steps[7];
+
   return (
     <StepLayout
-      question="AI experience & vision"
+      question={step.question}
       onNext={onNext}
       onBack={onBack}
       isLoading={isLoading}
@@ -54,10 +41,10 @@ export function Step6AI({
       <div className="space-y-8">
         <div className="space-y-3">
           <Label className="text-zinc-300">
-            How much AI experience does your team have?
+            {step.experienceLabel}
           </Label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {EXPERIENCE_OPTIONS.map((option) => (
+            {step.experienceOptions.map((option) => (
               <SelectCard
                 key={option}
                 label={option}
@@ -70,10 +57,10 @@ export function Step6AI({
 
         <div className="space-y-3">
           <Label className="text-zinc-300">
-            What would you want AI to do in 6 months?
+            {step.visionLabel}
           </Label>
           <MultiSelectChips
-            options={VISION_OPTIONS}
+            options={[...step.visionOptions]}
             selected={formData.sixMonthVision}
             onChange={(selected) => updateField("sixMonthVision", selected)}
             otherValue={formData.sixMonthVisionOther}
@@ -81,6 +68,22 @@ export function Step6AI({
               updateField("sixMonthVisionOther", value)
             }
           />
+        </div>
+
+        <div className="space-y-3">
+          <Label className="text-zinc-300">
+            {step.budgetLabel}
+          </Label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {step.budgetOptions.map((option) => (
+              <SelectCard
+                key={option}
+                label={option}
+                selected={formData.aiBudget === option}
+                onClick={() => updateField("aiBudget", option)}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </StepLayout>

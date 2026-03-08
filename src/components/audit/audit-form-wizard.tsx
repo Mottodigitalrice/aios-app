@@ -2,15 +2,18 @@
 
 import { useRef, useState, useEffect } from "react";
 import { useAuditForm } from "@/hooks/use-audit-form";
+import { AuditLocaleProvider, useAuditLocale } from "./audit-locale-context";
+import { LanguageToggle } from "@/components/landing/language-toggle";
 import { ProgressBar } from "./shared/progress-bar";
 import { AuditSuccess } from "./audit-success";
 import { Step1Email } from "./steps/step-1-email";
 import { Step2AboutYou } from "./steps/step-2-about-you";
 import { Step3Company } from "./steps/step-3-company";
-import { Step4Tools } from "./steps/step-4-tools";
-import { Step5Challenges } from "./steps/step-5-challenges";
-import { Step6AI } from "./steps/step-6-ai";
-import { Step7Logistics } from "./steps/step-7-logistics";
+import { Step4Data } from "./steps/step-4-data";
+import { Step5Tools } from "./steps/step-5-tools";
+import { Step6Challenges } from "./steps/step-6-challenges";
+import { Step7AI } from "./steps/step-7-ai";
+import { Step8Logistics } from "./steps/step-8-logistics";
 import { Badge } from "@/components/ui/badge";
 import {
   Layers,
@@ -23,132 +26,70 @@ import {
   TrendingUp,
   CheckCircle2,
   Zap,
+  Database,
 } from "lucide-react";
 import Link from "next/link";
 
-const FEATURE_CHIPS = [
-  { icon: FileText, label: "Custom report" },
-  { icon: Clock, label: "Live walkthrough call" },
-  { icon: Sparkles, label: "Yours to keep, free" },
-];
-
 // ---------------------------------------------------------------------------
-// Sidebar content per step
+// Sidebar content per step (now locale-driven)
 // ---------------------------------------------------------------------------
-
-interface SidebarContent {
-  title: string;
-  items: { icon: React.ElementType; text: string }[];
-  highlight?: string;
-  testimonial?: { quote: string; author: string; role: string };
-}
-
-const SIDEBAR_CONTENT: Record<number, SidebarContent> = {
-  0: {
-    title: "What you'll get",
-    items: [
-      { icon: FileText, text: "Custom AI readiness report tailored to your business" },
-      { icon: Clock, text: "30-min live walkthrough call with Lewis" },
-      { icon: Sparkles, text: "Actionable recommendations you can implement immediately" },
-      { icon: Shield, text: "100% free, no strings attached" },
-    ],
-  },
-  1: {
-    title: "You're in good company",
-    items: [
-      { icon: Users, text: "50+ companies have taken the audit" },
-      { icon: TrendingUp, text: "Average 40% efficiency gain after implementation" },
-    ],
-    testimonial: {
-      quote: "The audit opened our eyes to automation opportunities we never considered. Highly recommended.",
-      author: "Takeshi M.",
-      role: "CEO, Tech Startup",
-    },
-  },
-  2: {
-    title: "Why we ask this",
-    items: [
-      { icon: Users, text: "Company size determines the right AI strategy" },
-      { icon: TrendingUp, text: "We tailor recommendations to your team's scale" },
-    ],
-    testimonial: {
-      quote: "Lewis understood our company's unique challenges from the start. The report was spot-on.",
-      author: "Yuki S.",
-      role: "COO, Manufacturing",
-    },
-  },
-  3: {
-    title: "Making progress!",
-    items: [
-      { icon: Zap, text: "Your tool stack helps us identify quick wins" },
-      { icon: CheckCircle2, text: "We'll map integration opportunities across your tools" },
-    ],
-    highlight: "Most companies have 3-5 automation opportunities hiding in their current stack.",
-  },
-  4: {
-    title: "Great insights!",
-    items: [
-      { icon: Zap, text: "Understanding your pain points helps us prioritize" },
-      { icon: CheckCircle2, text: "Each challenge maps to a specific AI solution" },
-    ],
-    highlight: "Companies typically save 15-20 hours per week after addressing their top 3 challenges.",
-  },
-  5: {
-    title: "Almost there!",
-    items: [
-      { icon: TrendingUp, text: "Your vision shapes our roadmap recommendations" },
-      { icon: Sparkles, text: "We'll match your ambitions with realistic timelines" },
-    ],
-    highlight: "85% of audit recipients start implementing within the first month.",
-  },
-  6: {
-    title: "One click away!",
-    items: [
-      { icon: CheckCircle2, text: "Your custom audit report will be ready within 48 hours" },
-      { icon: Shield, text: "No sales pressure, no obligations" },
-      { icon: Sparkles, text: "The full report is yours to keep forever" },
-    ],
-  },
-};
 
 function AuditSidebar({ step }: { step: number }) {
-  const content = SIDEBAR_CONTENT[step];
-  if (!content) return null;
+  const { t } = useAuditLocale();
+  const sidebarStep = t.sidebar.steps[step as keyof typeof t.sidebar.steps];
+  if (!sidebarStep) return null;
+
+  const ICONS = [
+    [FileText, Clock, Sparkles, Shield],
+    [Users, TrendingUp],
+    [Users, TrendingUp],
+    [Database, CheckCircle2],
+    [Zap, CheckCircle2],
+    [Zap, CheckCircle2],
+    [TrendingUp, Sparkles],
+    [TrendingUp, Sparkles],
+    [CheckCircle2, Shield, Sparkles],
+  ];
+
+  const stepIcons = ICONS[step] || [Sparkles];
 
   return (
     <div className="hidden lg:block w-80 shrink-0">
       <div className="sticky top-28 space-y-6">
         <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/30 p-6">
           <h3 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider mb-4">
-            {content.title}
+            {sidebarStep.title}
           </h3>
           <div className="space-y-3">
-            {content.items.map((item, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <item.icon className="size-4 text-indigo-400 mt-0.5 shrink-0" />
-                <p className="text-sm text-zinc-300 leading-relaxed">{item.text}</p>
-              </div>
-            ))}
+            {sidebarStep.items.map((item, i) => {
+              const Icon = stepIcons[i % stepIcons.length];
+              return (
+                <div key={i} className="flex items-start gap-3">
+                  <Icon className="size-4 text-indigo-400 mt-0.5 shrink-0" />
+                  <p className="text-sm text-zinc-300 leading-relaxed">{item}</p>
+                </div>
+              );
+            })}
           </div>
 
-          {content.highlight && (
+          {"highlight" in sidebarStep && sidebarStep.highlight && (
             <div className="mt-5 rounded-lg bg-indigo-500/10 border border-indigo-500/20 p-4">
               <p className="text-xs text-indigo-300 leading-relaxed">
-                {content.highlight}
+                {sidebarStep.highlight}
               </p>
             </div>
           )}
 
-          {content.testimonial && (
+          {"testimonial" in sidebarStep && sidebarStep.testimonial && (
             <div className="mt-5 pt-5 border-t border-zinc-800/50">
               <p className="text-sm text-zinc-400 italic leading-relaxed mb-3">
-                &ldquo;{content.testimonial.quote}&rdquo;
+                &ldquo;{sidebarStep.testimonial.quote}&rdquo;
               </p>
               <div>
                 <p className="text-sm font-medium text-zinc-300">
-                  {content.testimonial.author}
+                  {sidebarStep.testimonial.author}
                 </p>
-                <p className="text-xs text-zinc-500">{content.testimonial.role}</p>
+                <p className="text-xs text-zinc-500">{sidebarStep.testimonial.role}</p>
               </div>
             </div>
           )}
@@ -158,7 +99,7 @@ function AuditSidebar({ step }: { step: number }) {
         <div className="flex items-center gap-2 px-2">
           <Shield className="size-4 text-emerald-400" />
           <p className="text-xs text-zinc-500">
-            Your data is encrypted and never shared with third parties.
+            {t.sidebar.trustBadge}
           </p>
         </div>
       </div>
@@ -166,7 +107,11 @@ function AuditSidebar({ step }: { step: number }) {
   );
 }
 
-export function AuditFormWizard() {
+// ---------------------------------------------------------------------------
+// Inner wizard (needs locale context)
+// ---------------------------------------------------------------------------
+
+function AuditFormWizardInner() {
   const {
     currentStep,
     totalSteps,
@@ -182,6 +127,8 @@ export function AuditFormWizard() {
     submitFinal,
     setError,
   } = useAuditForm();
+
+  const { locale, setLocale, t } = useAuditLocale();
 
   const [direction, setDirection] = useState<"forward" | "backward">("forward");
   const [animating, setAnimating] = useState(false);
@@ -236,6 +183,8 @@ export function AuditFormWizard() {
       : "animate-slide-in-left"
     : "";
 
+  const FEATURE_CHIPS_ICONS = [FileText, Clock, Sparkles];
+
   const renderStep = () => {
     switch (currentStep) {
       case 0:
@@ -278,7 +227,7 @@ export function AuditFormWizard() {
         );
       case 3:
         return (
-          <Step4Tools
+          <Step4Data
             formData={formData}
             updateField={updateField}
             onNext={handleNext}
@@ -289,7 +238,7 @@ export function AuditFormWizard() {
         );
       case 4:
         return (
-          <Step5Challenges
+          <Step5Tools
             formData={formData}
             updateField={updateField}
             onNext={handleNext}
@@ -300,7 +249,7 @@ export function AuditFormWizard() {
         );
       case 5:
         return (
-          <Step6AI
+          <Step6Challenges
             formData={formData}
             updateField={updateField}
             onNext={handleNext}
@@ -311,7 +260,18 @@ export function AuditFormWizard() {
         );
       case 6:
         return (
-          <Step7Logistics
+          <Step7AI
+            formData={formData}
+            updateField={updateField}
+            onNext={handleNext}
+            onBack={handleBack}
+            isLoading={isLoading}
+            error={error}
+          />
+        );
+      case 7:
+        return (
+          <Step8Logistics
             formData={formData}
             updateField={updateField}
             onSubmit={handleSubmit}
@@ -337,13 +297,16 @@ export function AuditFormWizard() {
             <Layers className="size-6 text-indigo-400" />
             <span>MOTTO Digital</span>
           </Link>
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-100 transition-colors"
-          >
-            <ArrowLeft className="size-4" />
-            <span className="hidden sm:inline">Back to Home</span>
-          </Link>
+          <div className="flex items-center gap-4">
+            <LanguageToggle locale={locale} onToggle={setLocale} />
+            <Link
+              href="/"
+              className="flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-100 transition-colors"
+            >
+              <ArrowLeft className="size-4" />
+              <span className="hidden sm:inline">{t.nav.backToHome}</span>
+            </Link>
+          </div>
         </div>
       </nav>
 
@@ -356,28 +319,29 @@ export function AuditFormWizard() {
                 variant="outline"
                 className="mb-6 border-emerald-500/30 text-emerald-300 bg-emerald-500/10"
               >
-                Free &middot; No Obligation
+                {t.badge}
               </Badge>
             </div>
             <h1 className="animate-fade-in-up animation-delay-100 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.1]">
-              Get Your Free{" "}
-              <span className="gradient-text">AI Audit</span>
+              {t.title}{" "}
+              <span className="gradient-text">{t.titleHighlight}</span>
             </h1>
             <p className="animate-fade-in-up animation-delay-200 mt-4 text-lg text-zinc-400 max-w-xl mx-auto leading-relaxed">
-              Answer a few quick questions and Lewis will personally put together
-              a custom AI readiness audit &mdash; then walk you through it on a
-              call. The full report is yours to keep, completely free.
+              {t.subtitle}
             </p>
             <div className="animate-fade-in-up animation-delay-300 mt-6 flex flex-wrap items-center justify-center gap-3">
-              {FEATURE_CHIPS.map((chip) => (
-                <div
-                  key={chip.label}
-                  className="flex items-center gap-2 rounded-full border border-zinc-800/50 bg-zinc-900/50 px-4 py-2 text-sm text-zinc-300"
-                >
-                  <chip.icon className="size-4 text-indigo-400" />
-                  <span>{chip.label}</span>
-                </div>
-              ))}
+              {t.chips.map((chip, i) => {
+                const Icon = FEATURE_CHIPS_ICONS[i] || Sparkles;
+                return (
+                  <div
+                    key={chip}
+                    className="flex items-center gap-2 rounded-full border border-zinc-800/50 bg-zinc-900/50 px-4 py-2 text-sm text-zinc-300"
+                  >
+                    <Icon className="size-4 text-indigo-400" />
+                    <span>{chip}</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -433,5 +397,17 @@ export function AuditFormWizard() {
         </div>
       </footer>
     </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Exported wrapper with locale provider
+// ---------------------------------------------------------------------------
+
+export function AuditFormWizard() {
+  return (
+    <AuditLocaleProvider>
+      <AuditFormWizardInner />
+    </AuditLocaleProvider>
   );
 }

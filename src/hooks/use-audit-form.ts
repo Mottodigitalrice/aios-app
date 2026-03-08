@@ -20,16 +20,20 @@ export interface AuditFormData {
   // Step 3
   company: string;
   employees: string;
-  // Step 4
-  tools: string[];
+  // Step 4 (NEW: Data Maturity)
+  dataMaturity: string;
+  dataLocation: string[];
   // Step 5
+  tools: string[];
+  // Step 6
   challenge: string[];
   challengeOther: string;
-  // Step 6
+  // Step 7 (expanded with budget)
   aiExperience: string;
   sixMonthVision: string[];
   sixMonthVisionOther: string;
-  // Step 7
+  aiBudget: string;
+  // Step 8
   source: string;
   preferredTime: string;
   website: string;
@@ -42,18 +46,21 @@ const INITIAL_DATA: AuditFormData = {
   role: "",
   company: "",
   employees: "",
+  dataMaturity: "",
+  dataLocation: [],
   tools: [],
   challenge: [],
   challengeOther: "",
   aiExperience: "",
   sixMonthVision: [],
   sixMonthVisionOther: "",
+  aiBudget: "",
   source: "",
   preferredTime: "",
   website: "",
 };
 
-const TOTAL_STEPS = 7;
+const TOTAL_STEPS = 8;
 const STORAGE_KEY = "aios-audit-lead";
 
 // ---------------------------------------------------------------------------
@@ -75,10 +82,11 @@ const stepSchemas: Record<number, z.ZodType> = {
   2: z.object({
     company: z.string().min(1, "Company name is required"),
   }),
-  3: z.object({}), // tools — optional
-  4: z.object({}), // challenges — optional
-  5: z.object({}), // AI experience — optional
-  6: z.object({}), // logistics — optional
+  3: z.object({}), // data maturity — optional
+  4: z.object({}), // tools — optional
+  5: z.object({}), // challenges — optional
+  6: z.object({}), // AI experience & readiness — optional
+  7: z.object({}), // logistics — optional
 };
 
 // ---------------------------------------------------------------------------
@@ -238,22 +246,28 @@ export function useAuditForm() {
             if (formData.employees) updatePayload.employees = formData.employees;
             break;
           case 3:
+            if (formData.dataMaturity) updatePayload.dataMaturity = formData.dataMaturity;
+            if (formData.dataLocation.length > 0) updatePayload.dataLocation = formData.dataLocation;
+            break;
+          case 4:
             if (formData.tools.length > 0)
               updatePayload.tools = formData.tools;
             break;
-          case 4:
+          case 5:
             if (formData.challenge.length > 0)
               updatePayload.challenge = formData.challenge;
             if (formData.challengeOther)
               updatePayload.challengeOther = formData.challengeOther;
             break;
-          case 5:
+          case 6:
             if (formData.aiExperience)
               updatePayload.aiExperience = formData.aiExperience;
             if (formData.sixMonthVision.length > 0)
               updatePayload.sixMonthVision = formData.sixMonthVision;
             if (formData.sixMonthVisionOther)
               updatePayload.sixMonthVisionOther = formData.sixMonthVisionOther;
+            if (formData.aiBudget)
+              updatePayload.aiBudget = formData.aiBudget;
             break;
         }
 

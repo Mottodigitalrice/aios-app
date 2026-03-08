@@ -4,22 +4,7 @@ import Image from "next/image";
 import { StepLayout } from "../shared/step-layout";
 import { MultiSelectChips } from "../shared/multi-select-chips";
 import type { AuditFormData } from "@/hooks/use-audit-form";
-
-const TOOLS = [
-  "Slack",
-  "Notion",
-  "Google Workspace",
-  "HubSpot",
-  "Salesforce",
-  "Chatwork",
-  "Kintone",
-  "Freee",
-  "LINE",
-  "Microsoft 365",
-  "Zoom",
-  "Asana",
-  "Jira",
-];
+import { useAuditLocale } from "../audit-locale-context";
 
 // Map tool names to SVG filenames in public/logos/
 const TOOL_LOGOS: Record<string, string> = {
@@ -35,7 +20,7 @@ const TOOL_LOGOS: Record<string, string> = {
   Zoom: "zoom.svg",
 };
 
-interface Step4Props {
+interface Step5Props {
   formData: AuditFormData;
   updateField: <K extends keyof AuditFormData>(
     field: K,
@@ -47,14 +32,17 @@ interface Step4Props {
   error: string | null;
 }
 
-export function Step4Tools({
+export function Step5Tools({
   formData,
   updateField,
   onNext,
   onBack,
   isLoading,
   error,
-}: Step4Props) {
+}: Step5Props) {
+  const { t } = useAuditLocale();
+  const step = t.steps[5];
+
   const renderIcon = (option: string) => {
     const logo = TOOL_LOGOS[option];
     if (!logo) return null;
@@ -71,15 +59,15 @@ export function Step4Tools({
 
   return (
     <StepLayout
-      question="What tools does your team use?"
-      description="Select all that apply — this helps us understand your current stack."
+      question={step.question}
+      description={step.description}
       onNext={onNext}
       onBack={onBack}
       isLoading={isLoading}
       error={error}
     >
       <MultiSelectChips
-        options={TOOLS}
+        options={[...step.tools]}
         selected={formData.tools}
         onChange={(selected) => updateField("tools", selected)}
         renderIcon={renderIcon}

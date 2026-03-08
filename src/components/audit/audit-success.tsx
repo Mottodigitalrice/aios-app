@@ -15,44 +15,7 @@ import {
   Mail,
 } from "lucide-react";
 import Link from "next/link";
-
-// ---------------------------------------------------------------------------
-// Timeline data
-// ---------------------------------------------------------------------------
-
-const TIMELINE_STEPS = [
-  {
-    icon: Check,
-    title: "Submission received",
-    description: "Your answers are in. You're already ahead of 90% of companies.",
-    status: "complete" as const,
-    color: "emerald",
-  },
-  {
-    icon: FileText,
-    title: "Lewis reviews your answers",
-    description:
-      "He'll go through your tools, challenges, and vision to prepare a personalized AI readiness audit.",
-    status: "active" as const,
-    color: "indigo",
-  },
-  {
-    icon: CalendarCheck,
-    title: "Walk-through call",
-    description:
-      "Lewis shares the full audit report on a video call, explains every recommendation, and answers your questions.",
-    status: "upcoming" as const,
-    color: "indigo",
-  },
-  {
-    icon: Sparkles,
-    title: "Report is yours to keep",
-    description:
-      "After the call, the complete audit report is yours. No obligations, completely free.",
-    status: "upcoming" as const,
-    color: "indigo",
-  },
-];
+import { useAuditLocale } from "./audit-locale-context";
 
 // ---------------------------------------------------------------------------
 // Confetti particle component (CSS-only)
@@ -150,9 +113,9 @@ function SparkleBackground() {
 // ---------------------------------------------------------------------------
 
 function ShareSection() {
+  const { t } = useAuditLocale();
   const [copied, setCopied] = useState(false);
   const shareUrl = typeof window !== "undefined" ? `${window.location.origin}/audit` : "";
-  const shareText = "I just signed up for a free AI readiness audit from MOTTO Digital. Check it out!";
 
   const handleCopy = async () => {
     try {
@@ -166,7 +129,7 @@ function ShareSection() {
 
   return (
     <div className="flex flex-col items-center gap-3">
-      <p className="text-sm text-zinc-500">Know someone who would benefit?</p>
+      <p className="text-sm text-zinc-500">{t.success.sharePrompt}</p>
       <div className="flex items-center gap-2">
         <Button
           variant="outline"
@@ -175,7 +138,7 @@ function ShareSection() {
           className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 gap-2"
         >
           {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
-          {copied ? "Copied!" : "Copy link"}
+          {copied ? t.success.copied : t.success.copyLink}
         </Button>
         <Link
           href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
@@ -191,7 +154,7 @@ function ShareSection() {
           </Button>
         </Link>
         <Link
-          href={`mailto:?subject=${encodeURIComponent("Free AI Readiness Audit")}&body=${encodeURIComponent(`${shareText}\n\n${shareUrl}`)}`}
+          href={`mailto:?subject=${encodeURIComponent(t.success.shareEmailSubject)}&body=${encodeURIComponent(`${t.success.shareText}\n\n${shareUrl}`)}`}
         >
           <Button
             variant="outline"
@@ -207,11 +170,48 @@ function ShareSection() {
 }
 
 // ---------------------------------------------------------------------------
+// Timeline data builder
+// ---------------------------------------------------------------------------
+
+function useTimelineSteps() {
+  const { t } = useAuditLocale();
+  return [
+    {
+      icon: Check,
+      title: t.success.timeline.submitted.title,
+      description: t.success.timeline.submitted.description,
+      status: "complete" as const,
+    },
+    {
+      icon: FileText,
+      title: t.success.timeline.review.title,
+      description: t.success.timeline.review.description,
+      status: "active" as const,
+      statusLabel: t.success.timeline.review.statusLabel,
+    },
+    {
+      icon: CalendarCheck,
+      title: t.success.timeline.call.title,
+      description: t.success.timeline.call.description,
+      status: "upcoming" as const,
+    },
+    {
+      icon: Sparkles,
+      title: t.success.timeline.report.title,
+      description: t.success.timeline.report.description,
+      status: "upcoming" as const,
+    },
+  ];
+}
+
+// ---------------------------------------------------------------------------
 // Main component
 // ---------------------------------------------------------------------------
 
 export function AuditSuccess() {
+  const { t } = useAuditLocale();
   const [showConfetti, setShowConfetti] = useState(true);
+  const timelineSteps = useTimelineSteps();
 
   useEffect(() => {
     const timer = setTimeout(() => setShowConfetti(false), 4000);
@@ -245,26 +245,25 @@ export function AuditSuccess() {
           </div>
 
           <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3 animate-fade-in-up animation-delay-100">
-            You&apos;re In &mdash; Thank You
+            {t.success.title}
           </h1>
 
           <p className="text-zinc-400 text-lg mb-3 leading-relaxed animate-fade-in-up animation-delay-200">
-            Lewis will personally review your answers and put together a custom
-            audit report for your business.
+            {t.success.subtitle}
           </p>
 
           {/* Estimated timeline */}
           <p className="text-sm text-indigo-400 mb-10 animate-fade-in-up animation-delay-200">
-            Lewis will reach out within 48 hours.
+            {t.success.reachOut}
           </p>
 
           {/* Timeline stepper */}
           <div className="text-left mb-8 animate-fade-in-up animation-delay-300">
             <h3 className="text-sm font-semibold text-zinc-500 uppercase tracking-wider mb-4">
-              What happens next
+              {t.success.timelineTitle}
             </h3>
             <div className="relative">
-              {TIMELINE_STEPS.map((step, index) => (
+              {timelineSteps.map((step, index) => (
                 <div key={step.title} className="flex gap-4 pb-6 last:pb-0">
                   {/* Vertical line + dot */}
                   <div className="flex flex-col items-center">
@@ -287,7 +286,7 @@ export function AuditSuccess() {
                         }`}
                       />
                     </div>
-                    {index < TIMELINE_STEPS.length - 1 && (
+                    {index < timelineSteps.length - 1 && (
                       <div
                         className={`w-0.5 flex-1 my-1 ${
                           step.status === "complete"
@@ -310,9 +309,9 @@ export function AuditSuccess() {
                       }`}
                     >
                       {step.title}
-                      {step.status === "active" && (
+                      {step.status === "active" && "statusLabel" in step && (
                         <span className="ml-2 text-xs text-indigo-400 font-normal">
-                          In progress
+                          {step.statusLabel}
                         </span>
                       )}
                     </p>
@@ -328,11 +327,10 @@ export function AuditSuccess() {
           {/* Book Meeting CTA */}
           <div className="rounded-xl border border-indigo-500/30 bg-indigo-500/5 p-6 mb-8 animate-fade-in-up animation-delay-400">
             <p className="text-zinc-300 text-sm mb-4 leading-relaxed">
-              Go ahead and pick a time that works for you. Lewis will have your
-              audit ready by the call.
+              {t.success.bookDescription}
             </p>
             <Link
-              href="https://tidycal.com/mottodigital/aios-audit"
+              href="https://tidycal.com/mottodigital/ai-audit"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -341,11 +339,11 @@ export function AuditSuccess() {
                 className="w-full bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow"
               >
                 <CalendarCheck className="size-5" />
-                Book Your Free Audit Call
+                {t.success.bookCta}
               </Button>
             </Link>
             <p className="mt-3 text-xs text-zinc-500">
-              30 minutes &middot; Video call &middot; No sales pressure
+              {t.success.bookSubtext}
             </p>
           </div>
 
@@ -360,7 +358,7 @@ export function AuditSuccess() {
               className="border-zinc-700 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100 gap-2"
             >
               <ArrowLeft className="size-4" />
-              Back to Home
+              {t.success.backHome}
             </Button>
           </Link>
         </div>

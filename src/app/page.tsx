@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -16,8 +17,6 @@ import {
   ArrowRight,
   Calendar,
   ShieldCheck,
-  Unlock,
-  GraduationCap,
   User,
   Mail,
   Linkedin,
@@ -26,9 +25,6 @@ import {
   Clock,
   Users,
   FileText,
-  HeadphonesIcon,
-  BarChart3,
-  Video,
   X,
   Timer,
 } from "lucide-react";
@@ -41,6 +37,9 @@ import { HeroVisual } from "@/components/landing/hero-visual";
 import { LanguageToggle } from "@/components/landing/language-toggle";
 import { AnimateInView, CountUp } from "@/components/landing/animate-in-view";
 import { SystemDemo } from "@/components/landing/system-demo";
+import { BrainBodySection } from "@/components/landing/brain-body-section";
+import { AgentOrgChart } from "@/components/landing/agent-org-chart";
+import { ShiryoDialog } from "@/components/landing/shiryo-dialog";
 
 import en from "@/lib/i18n/dictionaries/en";
 import ja from "@/lib/i18n/dictionaries/ja";
@@ -85,7 +84,7 @@ export default function HomePage() {
       </nav>
 
       {/* ===============================================
-          HERO -- Dream Outcome, Not the Vehicle
+          SECTION 1: HERO -- Dream Outcome, Not the Vehicle
           =============================================== */}
       <section className="relative pt-32 pb-20 sm:pt-40 sm:pb-28 radial-glow overflow-hidden">
         <div className="mx-auto max-w-6xl px-6">
@@ -105,7 +104,7 @@ export default function HomePage() {
                 {t.hero.subtitle}
               </p>
 
-              {/* Task 5: Social proof / trust indicators above the fold */}
+              {/* Trust indicators above the fold */}
               <div className="animate-fade-in-up animation-delay-200 mt-6 flex flex-col sm:flex-row items-center lg:items-start gap-3">
                 <div className="flex -space-x-2">
                   {[
@@ -147,12 +146,18 @@ export default function HomePage() {
                   </Button>
                 </Link>
               </div>
+
+              {/* ShiryoDialog trigger link below CTAs */}
+              <div className="animate-fade-in-up animation-delay-300 mt-4 flex justify-center lg:justify-start">
+                <ShiryoDialog locale={locale} />
+              </div>
+
               <p className="animate-fade-in-up animation-delay-300 mt-6 text-sm text-zinc-500">
                 {t.hero.stats}
               </p>
             </div>
 
-            {/* Right: Hero visual (Task 9) */}
+            {/* Right: Hero visual */}
             <div className="animate-fade-in-up animation-delay-300 hidden lg:block">
               <HeroVisual />
             </div>
@@ -161,7 +166,7 @@ export default function HomePage() {
       </section>
 
       {/* ===============================================
-          BEFORE / AFTER -- The Emotional Contrast
+          SECTION 2: BEFORE / AFTER -- The Emotional Contrast
           =============================================== */}
       <section className="py-20 sm:py-28 border-t border-zinc-800/50">
         <div className="mx-auto max-w-5xl px-6">
@@ -211,154 +216,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Chaos Hero -- The Problem (Visual) */}
-      <ChaosHero />
-
       {/* ===============================================
-          CASE STUDY -- MOTTO Digital (Proof)
+          SECTION 3: BRAIN & BODY -- The Paradigm Shift (NEW)
           =============================================== */}
-      <section id="proof" className="py-20 sm:py-28 border-t border-zinc-800/50">
-        <div className="mx-auto max-w-6xl px-6">
-          <AnimateInView className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 border-emerald-500/30 text-emerald-300 bg-emerald-500/10">
-              {t.caseStudy.badge}
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-              {t.caseStudy.title}{" "}
-              <span className="gradient-text">{t.caseStudy.titleHighlight}</span>
-            </h2>
-            <p className="mt-4 text-zinc-400 max-w-2xl mx-auto text-lg">
-              {t.caseStudy.subtitle}
-            </p>
-          </AnimateInView>
-
-          {/* Metrics Grid with CountUp (Task 7) */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-            {t.caseStudy.metrics.map((metric, i) => (
-              <AnimateInView key={metric.label} delay={i * 100}>
-                <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-5 text-center">
-                  <div className="text-3xl sm:text-4xl font-bold gradient-text mb-1">
-                    <CountUp end={metric.value} />
-                  </div>
-                  <div className="text-sm font-medium text-zinc-200">{metric.label}</div>
-                  <div className="text-xs text-zinc-500 mt-1">{metric.sublabel}</div>
-                </div>
-              </AnimateInView>
-            ))}
-          </div>
-
-          {/* How it works in practice */}
-          <AnimateInView>
-            <div className="rounded-xl border border-indigo-500/20 bg-indigo-500/5 p-8">
-              <h3 className="text-xl font-semibold mb-6 text-center">{t.caseStudy.howItWorksTitle}</h3>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[
-                  { icon: <Brain className="size-6 text-indigo-400" /> },
-                  { icon: <Zap className="size-6 text-amber-400" /> },
-                  { icon: <TrendingUp className="size-6 text-emerald-400" /> },
-                  { icon: <Database className="size-6 text-blue-400" /> },
-                  { icon: <Clock className="size-6 text-violet-400" /> },
-                  { icon: <Users className="size-6 text-teal-400" /> },
-                ].map((item, i) => {
-                  const content = t.caseStudy.howItWorks[i];
-                  return { ...item, title: content.title, description: content.description };
-                }).map((item, i) => (
-                  <AnimateInView key={item.title} delay={i * 80}>
-                    <div className="flex flex-col gap-3">
-                      <div className="flex size-10 items-center justify-center rounded-lg bg-zinc-800/50 border border-zinc-700/50">
-                        {item.icon}
-                      </div>
-                      <h4 className="text-sm font-semibold">{item.title}</h4>
-                      <p className="text-xs text-zinc-400 leading-relaxed">{item.description}</p>
-                    </div>
-                  </AnimateInView>
-                ))}
-              </div>
-            </div>
-          </AnimateInView>
-
-          {/* Task 3: Animated workflow demo */}
-          <WorkflowDemo />
-
-          {/* Task 30: Animated system demo */}
-          <AnimateInView>
-            <SystemDemo />
-          </AnimateInView>
-
-          <AnimateInView className="mt-8 text-center">
-            <p className="text-zinc-400 text-sm italic">
-              {t.caseStudy.testimonial}
-            </p>
-            <p className="mt-3 text-sm font-medium text-zinc-300">{t.caseStudy.testimonialAuthor}</p>
-          </AnimateInView>
-        </div>
-      </section>
+      <BrainBodySection locale={locale} />
 
       {/* ===============================================
-          MID-PAGE CTA -- Catch interested readers
-          =============================================== */}
-      <AnimateInView as="section" className="py-14 sm:py-20 border-t border-zinc-800/50">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">
-            {t.midCta.title}
-          </h2>
-          <p className="text-zinc-400 mb-8 max-w-xl mx-auto">
-            {t.midCta.subtitle}
-          </p>
-          <Link href="/audit">
-            <Button size="lg" className="bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow">
-              {t.cta.title}
-              <ArrowRight className="size-4" />
-            </Button>
-          </Link>
-        </div>
-      </AnimateInView>
-
-      {/* ===============================================
-          THE PROBLEM -- Why Current Approaches Fail
-          =============================================== */}
-      <section className="py-20 sm:py-28 border-t border-zinc-800/50">
-        <div className="mx-auto max-w-6xl px-6">
-          <AnimateInView className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 border-red-500/30 text-red-300 bg-red-500/10">
-              {t.problems.badge}
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-              {t.problems.title}{" "}
-              <span className="text-zinc-500">{t.problems.titleMuted}</span>
-            </h2>
-            <p className="mt-4 text-zinc-400 max-w-2xl mx-auto text-lg">
-              {t.problems.subtitle}
-            </p>
-          </AnimateInView>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { icon: <Zap className="size-6 text-red-400" />, iconBg: "bg-red-500/10 border-red-500/20" },
-              { icon: <Lock className="size-6 text-amber-400" />, iconBg: "bg-amber-500/10 border-amber-500/20" },
-              { icon: <Layers className="size-6 text-orange-400" />, iconBg: "bg-orange-500/10 border-orange-500/20" },
-              { icon: <Server className="size-6 text-purple-400" />, iconBg: "bg-purple-500/10 border-purple-500/20" },
-              { icon: <Zap className="size-6 text-pink-400" />, iconBg: "bg-pink-500/10 border-pink-500/20" },
-              { icon: <Database className="size-6 text-cyan-400" />, iconBg: "bg-cyan-500/10 border-cyan-500/20" },
-            ].map((item, i) => {
-              const content = t.problems.items[i];
-              return { ...item, title: content.title, description: content.description };
-            }).map((item, i) => (
-              <AnimateInView key={item.title} delay={i * 80}>
-                <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6 hover:border-zinc-700/50 transition-colors h-full">
-                  <div className={`mb-4 flex size-12 items-center justify-center rounded-lg border ${item.iconBg}`}>
-                    {item.icon}
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed">{item.description}</p>
-                </div>
-              </AnimateInView>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===============================================
-          THE AIOS STACK -- Architecture (pushed lower)
+          SECTION 4: THE AIOS STACK / PYRAMID -- What You Own
           =============================================== */}
       <section id="stack" className="py-20 sm:py-28 border-t border-zinc-800/50">
         <div className="mx-auto max-w-6xl px-6">
@@ -419,13 +283,163 @@ export default function HomePage() {
       </section>
 
       {/* ===============================================
-          THE PROGRAM -- Restructured with Quick Win
+          SECTION 5: LIVE SYSTEM SHOWCASE (Proof)
+          =============================================== */}
+      <section id="proof" className="py-20 sm:py-28 border-t border-zinc-800/50">
+        <div className="mx-auto max-w-6xl px-6">
+          <AnimateInView className="text-center mb-16">
+            <Badge variant="outline" className="mb-4 border-emerald-500/30 text-emerald-300 bg-emerald-500/10">
+              {t.caseStudy.badge}
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
+              {t.caseStudy.title}{" "}
+              <span className="gradient-text">{t.caseStudy.titleHighlight}</span>
+            </h2>
+            <p className="mt-4 text-zinc-400 max-w-2xl mx-auto text-lg">
+              {t.caseStudy.subtitle}
+            </p>
+          </AnimateInView>
+
+          {/* Metrics Grid with CountUp */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+            {t.caseStudy.metrics.map((metric, i) => (
+              <AnimateInView key={metric.label} delay={i * 100}>
+                <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-5 text-center">
+                  <div className="text-3xl sm:text-4xl font-bold gradient-text mb-1">
+                    <CountUp end={metric.value} />
+                  </div>
+                  <div className="text-sm font-medium text-zinc-200">{metric.label}</div>
+                  <div className="text-xs text-zinc-500 mt-1">{metric.sublabel}</div>
+                </div>
+              </AnimateInView>
+            ))}
+          </div>
+
+          {/* Agent Org Chart (NEW) */}
+          <AgentOrgChart locale={locale} />
+
+          {/* How it works in practice */}
+          <AnimateInView>
+            <div className="rounded-xl border border-indigo-500/20 bg-indigo-500/5 p-8 mt-10">
+              <h3 className="text-xl font-semibold mb-6 text-center">{t.caseStudy.howItWorksTitle}</h3>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  { icon: <Brain className="size-6 text-indigo-400" /> },
+                  { icon: <Zap className="size-6 text-amber-400" /> },
+                  { icon: <TrendingUp className="size-6 text-emerald-400" /> },
+                  { icon: <Database className="size-6 text-blue-400" /> },
+                  { icon: <Clock className="size-6 text-violet-400" /> },
+                  { icon: <Users className="size-6 text-teal-400" /> },
+                ].map((item, i) => {
+                  const content = t.caseStudy.howItWorks[i];
+                  return { ...item, title: content.title, description: content.description };
+                }).map((item, i) => (
+                  <AnimateInView key={item.title} delay={i * 80}>
+                    <div className="flex flex-col gap-3">
+                      <div className="flex size-10 items-center justify-center rounded-lg bg-zinc-800/50 border border-zinc-700/50">
+                        {item.icon}
+                      </div>
+                      <h4 className="text-sm font-semibold">{item.title}</h4>
+                      <p className="text-xs text-zinc-400 leading-relaxed">{item.description}</p>
+                    </div>
+                  </AnimateInView>
+                ))}
+              </div>
+            </div>
+          </AnimateInView>
+
+          {/* Animated workflow demo */}
+          <WorkflowDemo />
+
+          {/* Animated system demo */}
+          <AnimateInView>
+            <SystemDemo />
+          </AnimateInView>
+
+          {/* Lewis's quote */}
+          <AnimateInView className="mt-8 text-center">
+            <p className="text-zinc-400 text-sm italic">
+              {t.caseStudy.testimonial}
+            </p>
+            <p className="mt-3 text-sm font-medium text-zinc-300">{t.caseStudy.testimonialAuthor}</p>
+          </AnimateInView>
+        </div>
+      </section>
+
+      {/* ===============================================
+          MID-PAGE CTA -- Catch interested readers
+          =============================================== */}
+      <AnimateInView as="section" className="py-14 sm:py-20 border-t border-zinc-800/50">
+        <div className="mx-auto max-w-3xl px-6 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">
+            {t.midCta.title}
+          </h2>
+          <p className="text-zinc-400 mb-8 max-w-xl mx-auto">
+            {t.midCta.subtitle}
+          </p>
+          <Link href="/audit">
+            <Button size="lg" className="bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow">
+              {t.cta.title}
+              <ArrowRight className="size-4" />
+            </Button>
+          </Link>
+        </div>
+      </AnimateInView>
+
+      {/* Chaos Hero -- The Problem (Visual) */}
+      <ChaosHero />
+
+      {/* ===============================================
+          THE PROBLEM -- Why Current Approaches Fail
+          =============================================== */}
+      <section className="py-20 sm:py-28 border-t border-zinc-800/50">
+        <div className="mx-auto max-w-6xl px-6">
+          <AnimateInView className="text-center mb-16">
+            <Badge variant="outline" className="mb-4 border-red-500/30 text-red-300 bg-red-500/10">
+              {t.problems.badge}
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
+              {t.problems.title}{" "}
+              <span className="text-zinc-500">{t.problems.titleMuted}</span>
+            </h2>
+            <p className="mt-4 text-zinc-400 max-w-2xl mx-auto text-lg">
+              {t.problems.subtitle}
+            </p>
+          </AnimateInView>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { icon: <Zap className="size-6 text-red-400" />, iconBg: "bg-red-500/10 border-red-500/20" },
+              { icon: <Lock className="size-6 text-amber-400" />, iconBg: "bg-amber-500/10 border-amber-500/20" },
+              { icon: <Layers className="size-6 text-orange-400" />, iconBg: "bg-orange-500/10 border-orange-500/20" },
+              { icon: <Server className="size-6 text-purple-400" />, iconBg: "bg-purple-500/10 border-purple-500/20" },
+              { icon: <Zap className="size-6 text-pink-400" />, iconBg: "bg-pink-500/10 border-pink-500/20" },
+              { icon: <Database className="size-6 text-cyan-400" />, iconBg: "bg-cyan-500/10 border-cyan-500/20" },
+            ].map((item, i) => {
+              const content = t.problems.items[i];
+              return { ...item, title: content.title, description: content.description };
+            }).map((item, i) => (
+              <AnimateInView key={item.title} delay={i * 80}>
+                <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6 hover:border-zinc-700/50 transition-colors h-full">
+                  <div className={`mb-4 flex size-12 items-center justify-center rounded-lg border ${item.iconBg}`}>
+                    {item.icon}
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                  <p className="text-zinc-400 text-sm leading-relaxed">{item.description}</p>
+                </div>
+              </AnimateInView>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===============================================
+          SECTION 6: THE OFFER -- Program Timeline + Pricing
           =============================================== */}
       <section id="program" className="py-20 sm:py-28 border-t border-zinc-800/50">
         <div className="mx-auto max-w-6xl px-6">
           <AnimateInView className="text-center mb-16">
             <Badge variant="outline" className="mb-4 border-indigo-500/30 text-indigo-300 bg-indigo-500/10">
-              6-Month Program
+              {t.program.badge}
             </Badge>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
               {t.program.title}{" "}
@@ -437,22 +451,22 @@ export default function HomePage() {
           </AnimateInView>
 
           <div className="space-y-6">
-            {/* Phase 0: Quick Win */}
+            {/* Month 1: Mapping & Planning */}
             <AnimateInView>
-              <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-8">
+              <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-8">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="flex size-10 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-300 font-bold text-sm">
-                    <Zap className="size-5" />
+                  <div className="flex size-10 items-center justify-center rounded-full bg-indigo-500/20 text-indigo-300 font-bold text-sm">
+                    1
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold">{t.program.quickWin.title}</h3>
-                    <p className="text-sm text-emerald-400">{t.program.quickWin.subtitle}</p>
+                    <h3 className="text-xl font-semibold">{t.program.month1.title}</h3>
+                    <p className="text-sm text-zinc-500">{t.program.month1.subtitle}</p>
                   </div>
                 </div>
                 <ul className="space-y-3">
-                  {t.program.quickWin.items.map((item) => (
+                  {t.program.month1.items.map((item: string) => (
                     <li key={item} className="flex items-start gap-3 text-sm text-zinc-300">
-                      <Check className="size-4 text-emerald-400 mt-0.5 shrink-0" />
+                      <Check className="size-4 text-indigo-400 mt-0.5 shrink-0" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -460,21 +474,21 @@ export default function HomePage() {
               </div>
             </AnimateInView>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              {/* Phase 1 */}
+            <div className="grid md:grid-cols-3 gap-6">
+              {/* Month 2 */}
               <AnimateInView delay={100}>
                 <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-8 h-full">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="flex size-10 items-center justify-center rounded-full bg-indigo-500/20 text-indigo-300 font-bold text-sm">
-                      1
+                      2
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold">{t.program.phase1.title}</h3>
-                      <p className="text-sm text-zinc-500">{t.program.phase1.subtitle}</p>
+                      <h3 className="text-xl font-semibold">{t.program.month2.title}</h3>
+                      <p className="text-sm text-zinc-500">{t.program.month2.subtitle}</p>
                     </div>
                   </div>
                   <ul className="space-y-3">
-                    {t.program.phase1.items.map((item) => (
+                    {t.program.month2.items.map((item: string) => (
                       <li key={item} className="flex items-start gap-3 text-sm text-zinc-300">
                         <Check className="size-4 text-indigo-400 mt-0.5 shrink-0" />
                         <span>{item}</span>
@@ -483,22 +497,44 @@ export default function HomePage() {
                   </ul>
                 </div>
               </AnimateInView>
-              {/* Phase 2 */}
+              {/* Month 3 */}
               <AnimateInView delay={200}>
                 <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-8 h-full">
                   <div className="flex items-center gap-3 mb-6">
                     <div className="flex size-10 items-center justify-center rounded-full bg-indigo-500/20 text-indigo-300 font-bold text-sm">
-                      2
+                      3
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold">{t.program.phase2.title}</h3>
-                      <p className="text-sm text-zinc-500">{t.program.phase2.subtitle}</p>
+                      <h3 className="text-xl font-semibold">{t.program.month3.title}</h3>
+                      <p className="text-sm text-zinc-500">{t.program.month3.subtitle}</p>
                     </div>
                   </div>
                   <ul className="space-y-3">
-                    {t.program.phase2.items.map((item) => (
+                    {t.program.month3.items.map((item: string) => (
                       <li key={item} className="flex items-start gap-3 text-sm text-zinc-300">
                         <Check className="size-4 text-indigo-400 mt-0.5 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </AnimateInView>
+              {/* Months 4-6 */}
+              <AnimateInView delay={300}>
+                <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-8 h-full">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="flex size-10 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-300 font-bold text-sm">
+                      4-6
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold">{t.program.month4.title}</h3>
+                      <p className="text-sm text-emerald-400">{t.program.month4.subtitle}</p>
+                    </div>
+                  </div>
+                  <ul className="space-y-3">
+                    {t.program.month4.items.map((item: string) => (
+                      <li key={item} className="flex items-start gap-3 text-sm text-zinc-300">
+                        <Check className="size-4 text-emerald-400 mt-0.5 shrink-0" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -525,95 +561,100 @@ export default function HomePage() {
               </div>
             </div>
           </AnimateInView>
-        </div>
-      </section>
 
-      {/* ===============================================
-          VALUE STACK -- What You Get (with values)
-          =============================================== */}
-      <section className="py-20 sm:py-28 border-t border-zinc-800/50">
-        <div className="mx-auto max-w-6xl px-6">
-          <AnimateInView className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-              {t.valueStack.title}
-            </h2>
-            <p className="mt-4 text-zinc-400 max-w-2xl mx-auto text-lg">
-              {t.valueStack.subtitle}
-            </p>
-          </AnimateInView>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { icon: <Database className="size-6 text-blue-400" />, iconBg: "bg-blue-500/10 border-blue-500/20" },
-              { icon: <Server className="size-6 text-emerald-400" />, iconBg: "bg-emerald-500/10 border-emerald-500/20" },
-              { icon: <GraduationCap className="size-6 text-amber-400" />, iconBg: "bg-amber-500/10 border-amber-500/20" },
-              { icon: <ShieldCheck className="size-6 text-indigo-400" />, iconBg: "bg-indigo-500/10 border-indigo-500/20" },
-              { icon: <Unlock className="size-6 text-teal-400" />, iconBg: "bg-teal-500/10 border-teal-500/20" },
-              { icon: <Calendar className="size-6 text-violet-400" />, iconBg: "bg-violet-500/10 border-violet-500/20" },
-            ].map((visual, i) => {
-              const item = { ...visual, ...t.valueStack.items[i] };
-              return item;
-            }).map((item, i) => (
-              <AnimateInView key={item.title} delay={i * 80}>
-                <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6 hover:border-zinc-700/50 transition-colors h-full">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`flex size-12 items-center justify-center rounded-lg border ${item.iconBg}`}>
-                      {item.icon}
-                    </div>
-                    <span className="text-xs text-zinc-500 font-medium">{item.value} value</span>
+          {/* Divider between program and pricing */}
+          <div className="border-t border-zinc-800/50 my-16" />
+
+          {/* ===============================================
+              PRICING -- Two Cards Only (within same section)
+              =============================================== */}
+          <div id="pricing">
+            <AnimateInView className="text-center mb-16">
+              <Badge variant="outline" className="mb-4 border-indigo-500/30 text-indigo-300 bg-indigo-500/10">
+                {t.pricing.badge}
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
+                {t.pricing.title}
+              </h2>
+              <p className="mt-4 text-zinc-400 max-w-2xl mx-auto text-lg">
+                {t.pricing.subtitle}
+              </p>
+            </AnimateInView>
+
+            {/* Scarcity banner — uses t.pricing.spotsLeft, no hardcoded text */}
+            <AnimateInView className="mb-8">
+              <div className="flex items-center justify-center gap-3 rounded-xl border border-amber-500/20 bg-amber-500/[0.05] p-4">
+                <Timer className="size-5 text-amber-400 shrink-0" />
+                <p className="text-sm font-medium text-amber-300">
+                  {t.pricing.spotsLeft}
+                </p>
+              </div>
+            </AnimateInView>
+
+            {/* Two pricing cards */}
+            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {/* Monthly Plan: ¥200,000/mo */}
+              <AnimateInView delay={100}>
+                <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-8 flex flex-col h-full">
+                  <h3 className="text-xl font-semibold mb-1">{t.pricing.monthly}</h3>
+                  <div className="flex items-baseline gap-1 mb-1">
+                    <span className="text-4xl font-bold">&yen;200,000</span>
+                    <span className="text-zinc-500">{t.pricing.monthlyPer}</span>
                   </div>
-                  <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed">{item.description}</p>
+                  <p className="text-sm text-zinc-500 mb-6">&times;6 = &yen;1,200,000 total</p>
+                  <ul className="space-y-3 mb-8 flex-1">
+                    {t.pricingDetails.monthlyFeatures.map((item) => (
+                      <li key={item} className="flex items-start gap-3 text-sm text-zinc-300">
+                        <Check className="size-4 text-zinc-500 mt-0.5 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href="/audit" className="w-full">
+                    <Button variant="outline" className="w-full border-zinc-700 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100">
+                      {t.pricing.monthlyCta}
+                    </Button>
+                  </Link>
                 </div>
               </AnimateInView>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===============================================
-          BONUSES -- Each Solves a Specific Objection
-          =============================================== */}
-      <section className="py-20 sm:py-28 border-t border-zinc-800/50">
-        <div className="mx-auto max-w-4xl px-6">
-          <AnimateInView className="text-center mb-12">
-            <Badge variant="outline" className="mb-4 border-amber-500/30 text-amber-300 bg-amber-500/10">
-              {t.bonuses.badge}
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-              {t.bonuses.title}
-            </h2>
-          </AnimateInView>
-          <div className="space-y-4">
-            {[
-              { icon: <ShieldCheck className="size-5 text-emerald-400" /> },
-              { icon: <HeadphonesIcon className="size-5 text-indigo-400" /> },
-              { icon: <BarChart3 className="size-5 text-amber-400" /> },
-              { icon: <Video className="size-5 text-violet-400" /> },
-            ].map((visual, i) => ({
-              ...visual, ...t.bonuses.items[i],
-            })).map((bonus, i) => (
-              <AnimateInView key={bonus.title} delay={i * 80}>
-                <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6 flex flex-col sm:flex-row gap-4 hover:border-zinc-700/50 transition-colors">
-                  <div className="flex size-10 items-center justify-center rounded-lg bg-zinc-800/50 border border-zinc-700/50 shrink-0">
-                    {bonus.icon}
+              {/* Pay in Full: ¥1,000,000 */}
+              <AnimateInView delay={200}>
+                <div className="rounded-xl border-2 border-indigo-500/30 bg-indigo-500/5 p-8 flex flex-col relative glow scale-[1.02] h-full">
+                  <Badge className="absolute -top-3 right-6 bg-indigo-600 text-white border-0">
+                    {t.pricing.bestValue}
+                  </Badge>
+                  <h3 className="text-xl font-semibold mb-1">{t.pricing.payInFull}</h3>
+                  <div className="flex items-baseline gap-1 mb-1">
+                    <span className="text-4xl font-bold">&yen;1,000,000</span>
                   </div>
-                  <div className="flex-1">
-                    <div className="flex flex-wrap items-center gap-3 mb-1">
-                      <h3 className="font-semibold">{bonus.title}</h3>
-                      <span className="text-xs text-zinc-500">{bonus.value} value</span>
-                    </div>
-                    <p className="text-sm text-zinc-400 leading-relaxed">{bonus.description}</p>
-                    <p className="text-xs text-indigo-400 mt-2 italic">Solves: {bonus.solves}</p>
-                  </div>
+                  <p className="text-sm text-zinc-500 mb-6">
+                    {locale === "ja" ? "月払いより¥200,000お得" : "Save ¥200,000 vs monthly"}
+                  </p>
+                  <ul className="space-y-3 mb-8 flex-1">
+                    {t.pricingDetails.upfrontFeatures.map((item) => (
+                      <li key={item} className="flex items-start gap-3 text-sm text-zinc-300">
+                        <Check className="size-4 text-indigo-400 mt-0.5 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href="/audit" className="w-full">
+                    <Button className="w-full bg-indigo-600 hover:bg-indigo-500 text-white">
+                      {t.pricing.payInFullCta}
+                    </Button>
+                  </Link>
                 </div>
               </AnimateInView>
-            ))}
+            </div>
+            <AnimateInView className="mt-6 text-center space-y-2">
+              <p className="text-sm text-indigo-300">
+                {t.pricing.launchNote}
+              </p>
+              <p className="text-xs text-zinc-500">
+                {t.pricing.ceoNote}
+              </p>
+            </AnimateInView>
           </div>
-          <AnimateInView className="mt-8 text-center">
-            <p className="text-zinc-500 text-sm">
-              {t.bonuses.totalLabel} <span className="text-zinc-300 font-semibold">{t.bonuses.totalAmount}</span> {t.bonuses.totalSuffix}
-            </p>
-          </AnimateInView>
         </div>
       </section>
 
@@ -642,126 +683,12 @@ export default function HomePage() {
       </AnimateInView>
 
       {/* ===============================================
-          PRICING -- Value Stack + Premium
+          SECTION 7: FAQ -- Common Questions
           =============================================== */}
-      <section id="pricing" className="py-20 sm:py-28 border-t border-zinc-800/50">
-        <div className="mx-auto max-w-4xl px-6">
-          <AnimateInView className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 border-indigo-500/30 text-indigo-300 bg-indigo-500/10">
-              {t.pricing.badge}
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-              {t.pricing.title}
-            </h2>
-            <p className="mt-4 text-zinc-400 max-w-2xl mx-auto text-lg">
-              {t.pricing.subtitle}
-            </p>
-          </AnimateInView>
-
-          {/* Task 1: Urgency/scarcity messaging */}
-          <AnimateInView className="mb-8">
-            <div className="flex items-center justify-center gap-3 rounded-xl border border-amber-500/20 bg-amber-500/[0.05] p-4">
-              <Timer className="size-5 text-amber-400 shrink-0" />
-              <p className="text-sm font-medium text-amber-300">
-                {t.pricing.spotsLeft}
-              </p>
-              <div className="flex gap-1 ml-2">
-                <div className="size-3 rounded-full bg-amber-400/80" />
-                <div className="size-3 rounded-full bg-amber-400/80" />
-                <div className="size-3 rounded-full bg-zinc-700" />
-              </div>
-            </div>
-          </AnimateInView>
-
-          {/* Value Anchor */}
-          <AnimateInView>
-            <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6 mb-8">
-              <h3 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider mb-4 text-center">{t.pricingDetails.whatsIncluded}</h3>
-              <div className="grid sm:grid-cols-2 gap-3 text-sm">
-                {t.pricingDetails.valueItems.map((row) => (
-                  <div key={row.item} className="flex items-center justify-between py-2 border-b border-zinc-800/30">
-                    <span className="text-zinc-300">{row.item}</span>
-                    <span className="text-zinc-500 ml-4 shrink-0">{row.value}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="flex items-center justify-between pt-4 mt-2 border-t border-zinc-700/50">
-                <span className="font-semibold text-zinc-200">{t.pricingDetails.totalValueLabel}</span>
-                <span className="font-bold text-lg text-zinc-200">{t.pricingDetails.totalValueAmount}</span>
-              </div>
-            </div>
-          </AnimateInView>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Monthly Plan */}
-            <AnimateInView delay={100}>
-              <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-8 flex flex-col h-full">
-                <h3 className="text-xl font-semibold mb-1">{t.pricing.monthly}</h3>
-                <div className="flex items-baseline gap-1 mb-1">
-                  <span className="text-4xl font-bold">&yen;500,000</span>
-                  <span className="text-zinc-500">{t.pricing.monthlyPer}</span>
-                </div>
-                <p className="text-sm text-zinc-500 mb-6">{t.pricing.monthlyTotal}</p>
-                <ul className="space-y-3 mb-8 flex-1">
-                  {t.pricingDetails.monthlyFeatures.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm text-zinc-300">
-                      <Check className="size-4 text-zinc-500 mt-0.5 shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link href="/audit" className="w-full">
-                  <Button variant="outline" className="w-full border-zinc-700 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100">
-                    {t.pricing.monthlyCta}
-                  </Button>
-                </Link>
-              </div>
-            </AnimateInView>
-            {/* Upfront Plan */}
-            <AnimateInView delay={200}>
-              <div className="rounded-xl border-2 border-indigo-500/30 bg-indigo-500/5 p-8 flex flex-col relative glow scale-[1.02] h-full">
-                <Badge className="absolute -top-3 right-6 bg-indigo-600 text-white border-0">
-                  {t.pricing.bestValue}
-                </Badge>
-                <h3 className="text-xl font-semibold mb-1">{t.pricing.payInFull}</h3>
-                <div className="flex items-baseline gap-1 mb-1">
-                  <span className="text-4xl font-bold">&yen;2,500,000</span>
-                </div>
-                <p className="text-sm text-zinc-500 mb-6">{t.pricing.payInFullSave}</p>
-                <ul className="space-y-3 mb-8 flex-1">
-                  {t.pricingDetails.upfrontFeatures.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm text-zinc-300">
-                      <Check className="size-4 text-indigo-400 mt-0.5 shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link href="/audit" className="w-full">
-                  <Button className="w-full bg-indigo-600 hover:bg-indigo-500 text-white">
-                    {t.pricing.payInFullCta}
-                  </Button>
-                </Link>
-              </div>
-            </AnimateInView>
-          </div>
-          <AnimateInView className="mt-6 text-center space-y-2">
-            <p className="text-sm text-indigo-300">
-              {t.pricing.launchNote}
-            </p>
-            <p className="text-xs text-zinc-500">
-              {t.pricing.ceoNote}
-            </p>
-          </AnimateInView>
-        </div>
-      </section>
+      <FAQSection locale={locale} />
 
       {/* ===============================================
-          FAQ -- Common Questions
-          =============================================== */}
-      <FAQSection />
-
-      {/* ===============================================
-          FREE AUDIT CTA
+          SECTION 8: FREE AUDIT CTA
           =============================================== */}
       <AnimateInView as="section" className="py-20 sm:py-28 border-t border-zinc-800/50">
         <div className="mx-auto max-w-3xl px-6 text-center" id="audit">
@@ -795,15 +722,19 @@ export default function HomePage() {
       </AnimateInView>
 
       {/* ===============================================
-          CONSULTANT BIO
+          CONSULTANT BIO -- Lewis Rice (with real headshot)
           =============================================== */}
       <AnimateInView as="section" className="py-20 sm:py-28 border-t border-zinc-800/50">
         <div className="mx-auto max-w-3xl px-6">
           <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-8 sm:p-10">
             <div className="flex flex-col sm:flex-row gap-6 items-start">
-              <div className="flex size-20 items-center justify-center rounded-full bg-indigo-500/10 border border-indigo-500/20 shrink-0">
-                <User className="size-10 text-indigo-400" />
-              </div>
+              <Image
+                src="/lewis-rice.jpg"
+                alt="Lewis Rice"
+                width={80}
+                height={80}
+                className="rounded-full border border-indigo-500/20 object-cover shrink-0"
+              />
               <div>
                 <h3 className="text-xl font-semibold mb-1">{t.bio.name}</h3>
                 <p className="text-sm text-zinc-500 mb-4">{t.bio.title}</p>
