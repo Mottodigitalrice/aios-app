@@ -12,7 +12,6 @@ import {
   FlaskConical,
   Sparkles,
   Zap,
-  Lock,
   Check,
   ArrowRight,
   Calendar,
@@ -29,14 +28,10 @@ import {
   Timer,
 } from "lucide-react";
 import { MobileNav } from "@/components/landing/mobile-nav";
-import { AIOSArchitectureDiagram } from "@/components/landing/aios-diagram";
-import { ChaosHero } from "@/components/landing/chaos-hero";
 import { FAQSection } from "@/components/landing/faq-section";
-import { WorkflowDemo } from "@/components/landing/workflow-demo";
 import { HeroVisual } from "@/components/landing/hero-visual";
 import { LanguageToggle } from "@/components/landing/language-toggle";
 import { AnimateInView, CountUp } from "@/components/landing/animate-in-view";
-import { SystemDemo } from "@/components/landing/system-demo";
 import { BrainBodySection } from "@/components/landing/brain-body-section";
 import { AgentOrgChart } from "@/components/landing/agent-org-chart";
 import { ShiryoDialog } from "@/components/landing/shiryo-dialog";
@@ -277,8 +272,6 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* Architecture Diagram */}
-          <AIOSArchitectureDiagram />
         </div>
       </section>
 
@@ -348,14 +341,6 @@ export default function HomePage() {
             </div>
           </AnimateInView>
 
-          {/* Animated workflow demo */}
-          <WorkflowDemo />
-
-          {/* Animated system demo */}
-          <AnimateInView>
-            <SystemDemo />
-          </AnimateInView>
-
           {/* Lewis's quote */}
           <AnimateInView className="mt-8 text-center">
             <p className="text-zinc-400 text-sm italic">
@@ -385,52 +370,6 @@ export default function HomePage() {
           </Link>
         </div>
       </AnimateInView>
-
-      {/* Chaos Hero -- The Problem (Visual) */}
-      <ChaosHero />
-
-      {/* ===============================================
-          THE PROBLEM -- Why Current Approaches Fail
-          =============================================== */}
-      <section className="py-20 sm:py-28 border-t border-zinc-800/50">
-        <div className="mx-auto max-w-6xl px-6">
-          <AnimateInView className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 border-red-500/30 text-red-300 bg-red-500/10">
-              {t.problems.badge}
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-              {t.problems.title}{" "}
-              <span className="text-zinc-500">{t.problems.titleMuted}</span>
-            </h2>
-            <p className="mt-4 text-zinc-400 max-w-2xl mx-auto text-lg">
-              {t.problems.subtitle}
-            </p>
-          </AnimateInView>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { icon: <Zap className="size-6 text-red-400" />, iconBg: "bg-red-500/10 border-red-500/20" },
-              { icon: <Lock className="size-6 text-amber-400" />, iconBg: "bg-amber-500/10 border-amber-500/20" },
-              { icon: <Layers className="size-6 text-orange-400" />, iconBg: "bg-orange-500/10 border-orange-500/20" },
-              { icon: <Server className="size-6 text-purple-400" />, iconBg: "bg-purple-500/10 border-purple-500/20" },
-              { icon: <Zap className="size-6 text-pink-400" />, iconBg: "bg-pink-500/10 border-pink-500/20" },
-              { icon: <Database className="size-6 text-cyan-400" />, iconBg: "bg-cyan-500/10 border-cyan-500/20" },
-            ].map((item, i) => {
-              const content = t.problems.items[i];
-              return { ...item, title: content.title, description: content.description };
-            }).map((item, i) => (
-              <AnimateInView key={item.title} delay={i * 80}>
-                <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6 hover:border-zinc-700/50 transition-colors h-full">
-                  <div className={`mb-4 flex size-12 items-center justify-center rounded-lg border ${item.iconBg}`}>
-                    {item.icon}
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed">{item.description}</p>
-                </div>
-              </AnimateInView>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ===============================================
           SECTION 6: THE OFFER -- Program Timeline + Pricing
