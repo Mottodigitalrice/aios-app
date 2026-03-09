@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { METRICS } from "@/lib/constants";
 
 /* ── Feed items that cycle through the activity log ── */
 const feedItems = [
@@ -85,7 +86,7 @@ export function HeroVisual() {
   useEffect(() => {
     if (hasAnimated.current) return;
     hasAnimated.current = true;
-    const targets = { tasks: 63, projects: 26, pipeline: 9 };
+    const targets = { tasks: METRICS.tasksInProgress, projects: METRICS.activeProjects, pipeline: METRICS.pipelineDeals };
     const duration = 1800;
     const steps = 30;
     const interval = duration / steps;
