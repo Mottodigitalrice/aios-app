@@ -219,8 +219,6 @@ const en = {
         "Currently running 26 projects, 63 tasks, and 9 pipeline deals \u2014 on one system, managed by one person.",
       guaranteeHint: "Backed by the Ownership Guarantee \u2014 if your team can\u2019t manage AI agents by month 6, we keep going free.",
       trust: "Trusted by companies across Japan",
-      testimonial:
-        "\u201CThis changed how we operate. Chaos to clarity in 60 days.\u201D",
     },
     pricing: {
       badge: "Choose Your Path",
@@ -470,7 +468,6 @@ const en = {
       description: "Complete the full 6-month program. If you can\u2019t independently create and manage AI agents by the end, we\u2019ll keep going until you can \u2014 at zero additional cost.",
       cohortNote: "Group cohort: join the next cohort free until you\u2019re there.",
       corporateNote: "Corporate: we continue working with your team at no charge.",
-      refund: "",
     },
     shiryo: {
       buttonText: "Download Presentation",

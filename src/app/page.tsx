@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -51,6 +51,11 @@ function getInitialLocale(): "en" | "ja" {
 export default function HomePage() {
   const [locale, setLocale] = useState<"en" | "ja">(getInitialLocale);
   const t = dictionaries[locale].landing;
+
+  // Keep <html lang> in sync for screen readers and SEO crawlers
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
 
   // Sync locale to URL param so language persists on refresh / sharing
   const handleLocaleToggle = (newLocale: "en" | "ja") => {
@@ -388,26 +393,26 @@ export default function HomePage() {
               <h3 className="text-xl font-semibold mb-6 text-center">{t.caseStudy.howItWorksTitle}</h3>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
-                  { icon: <Brain className="size-6 text-indigo-400" /> },
-                  { icon: <Zap className="size-6 text-amber-400" /> },
-                  { icon: <TrendingUp className="size-6 text-emerald-400" /> },
-                  { icon: <Database className="size-6 text-blue-400" /> },
-                  { icon: <Clock className="size-6 text-violet-400" /> },
-                  { icon: <Users className="size-6 text-teal-400" /> },
-                ].map((item, i) => {
+                  <Brain key="b" className="size-6 text-indigo-400" />,
+                  <Zap key="z" className="size-6 text-amber-400" />,
+                  <TrendingUp key="t" className="size-6 text-emerald-400" />,
+                  <Database key="d" className="size-6 text-blue-400" />,
+                  <Clock key="c" className="size-6 text-violet-400" />,
+                  <Users key="u" className="size-6 text-teal-400" />,
+                ].map((icon, i) => {
                   const content = t.caseStudy.howItWorks[i];
-                  return { ...item, title: content.title, description: content.description };
-                }).map((item, i) => (
-                  <AnimateInView key={item.title} delay={i * 80}>
-                    <div className="flex flex-col gap-3">
-                      <div className="flex size-10 items-center justify-center rounded-lg bg-zinc-800/50 border border-zinc-700/50">
-                        {item.icon}
+                  return (
+                    <AnimateInView key={content.title} delay={i * 80}>
+                      <div className="flex flex-col gap-3">
+                        <div className="flex size-10 items-center justify-center rounded-lg bg-zinc-800/50 border border-zinc-700/50">
+                          {icon}
+                        </div>
+                        <h4 className="text-sm font-semibold">{content.title}</h4>
+                        <p className="text-xs text-zinc-400 leading-relaxed">{content.description}</p>
                       </div>
-                      <h4 className="text-sm font-semibold">{item.title}</h4>
-                      <p className="text-xs text-zinc-400 leading-relaxed">{item.description}</p>
-                    </div>
-                  </AnimateInView>
-                ))}
+                    </AnimateInView>
+                  );
+                })}
               </div>
             </div>
           </AnimateInView>
