@@ -24,6 +24,9 @@ export const metadata: Metadata = {
     "AI導入支援",
   ],
   authors: [{ name: "Lewis Rice", url: "https://mottodigital.com" }],
+  alternates: {
+    canonical: "https://aios.mottodigital.jp",
+  },
   openGraph: {
     title: "AIOS — AI Operating System for Business",
     description:
