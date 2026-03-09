@@ -192,7 +192,7 @@ const PRESENTER_NOTES: Record<number, { timing: string; en: string[]; jp: string
     jp: [
       "問いは「AIを使うべきか？」ではありません。",
       "「AIを動かすインフラがあるか？」です。",
-      "次のステップは3つ：無料AI監査を受ける、プレゼン資料をダウンロード、または直接通話を予約。",
+      "次のステップは3つ：無料AI活用診断を受ける、プレゼン資料をダウンロード、または直接通話を予約。",
       "ご清聴ありがとうございました。ご質問はどうぞ。",
     ],
   },
@@ -808,7 +808,7 @@ export default function PresentationPage() {
                     Get Your Free AI Audit
                   </p>
                   <p className="text-sm text-zinc-500 mt-1">
-                    無料AI監査を受ける
+                    無料AI活用診断を受ける
                   </p>
                   <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-600 text-white font-semibold text-sm group-hover:bg-indigo-500 transition-colors">
                     <ArrowRight className="size-4" />
