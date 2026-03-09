@@ -325,6 +325,11 @@ export default function HomePage() {
             ))}
           </div>
 
+          {/* Bridge to pyramid */}
+          <AnimateInView className="text-center mb-8">
+            <p className="text-sm text-zinc-500">{t.stack.pyramidFraming}</p>
+          </AnimateInView>
+
           {/* AIOS Pyramid Diagram */}
           <AIOSPyramid locale={locale} />
 
