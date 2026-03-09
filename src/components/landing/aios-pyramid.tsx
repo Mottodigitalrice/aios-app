@@ -94,7 +94,7 @@ const tools = [
   { name: "Slack", logo: "/logos/slack.svg" },
   { name: "Gmail", logo: "/logos/gmail.svg" },
   { name: "LINE", logo: "/logos/line.svg" },
-  { name: "Kintone", logo: "/logos/kintone.svg" },
+  { name: "kintone", logo: "/logos/kintone.svg" },
   { name: "Stripe", logo: "/logos/stripe.svg" },
 ];
 

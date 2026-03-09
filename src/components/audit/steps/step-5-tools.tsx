@@ -14,7 +14,7 @@ const TOOL_LOGOS: Record<string, string> = {
   HubSpot: "hubspot.svg",
   Salesforce: "salesforce.svg",
   Chatwork: "chatwork.svg",
-  Kintone: "kintone.svg",
+  kintone: "kintone.svg",
   freee: "freee.svg",
   LINE: "line.svg",
   Zoom: "zoom.svg",

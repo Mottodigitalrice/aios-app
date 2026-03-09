@@ -59,7 +59,7 @@ const en = {
           "HubSpot",
           "Salesforce",
           "Chatwork",
-          "Kintone",
+          "kintone",
           "freee",
           "LINE",
           "Microsoft 365",

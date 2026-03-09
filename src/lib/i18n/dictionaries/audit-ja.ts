@@ -190,7 +190,7 @@ const auditDict = {
         "HubSpot",
         "Salesforce",
         "Chatwork",
-        "Kintone",
+        "kintone",
         "freee",
         "LINE",
         "Microsoft 365",
