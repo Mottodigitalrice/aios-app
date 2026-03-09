@@ -193,7 +193,53 @@ export default function HomePage() {
       </section>
 
       {/* ===============================================
-          SECTION 2: BEFORE / AFTER -- The Emotional Contrast
+          SECTION 2: PROBLEMS -- Why most AI adoption fails
+          =============================================== */}
+      <section className="py-20 sm:py-28 border-t border-zinc-800/50">
+        <div className="mx-auto max-w-6xl px-6">
+          <AnimateInView className="text-center mb-16">
+            <Badge variant="outline" className="mb-4 border-red-500/30 text-red-300 bg-red-500/10">
+              {t.problems.badge}
+            </Badge>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
+              {t.problems.title}{" "}
+              <span className="text-zinc-500">{t.problems.titleMuted}</span>
+            </h2>
+            <p className="text-zinc-400 max-w-2xl mx-auto mt-4">
+              {t.problems.subtitle}
+            </p>
+          </AnimateInView>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { icon: <Layers className="size-5 text-red-400" /> },
+              { icon: <ShieldCheck className="size-5 text-red-400" /> },
+              { icon: <Brain className="size-5 text-red-400" /> },
+              { icon: <Users className="size-5 text-red-400" /> },
+              { icon: <Timer className="size-5 text-red-400" /> },
+              { icon: <Database className="size-5 text-red-400" /> },
+            ].map((item, i) => {
+              const content = t.problems.items[i];
+              return (
+                <AnimateInView key={content.title} delay={i * 80}>
+                  <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-6 h-full">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="flex size-9 items-center justify-center rounded-lg bg-red-500/10 border border-red-500/20">
+                        {item.icon}
+                      </div>
+                      <h3 className="text-sm font-semibold">{content.title}</h3>
+                    </div>
+                    <p className="text-xs text-zinc-400 leading-relaxed">{content.description}</p>
+                  </div>
+                </AnimateInView>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ===============================================
+          SECTION 3: BEFORE / AFTER -- The Emotional Contrast
           =============================================== */}
       <section className="py-20 sm:py-28 border-t border-zinc-800/50">
         <div className="mx-auto max-w-5xl px-6">
@@ -386,52 +432,6 @@ export default function HomePage() {
           </div>
         </div>
       </AnimateInView>
-
-      {/* ===============================================
-          SECTION 5b: PROBLEMS -- Why most AI adoption fails
-          =============================================== */}
-      <section className="py-20 sm:py-28 border-t border-zinc-800/50">
-        <div className="mx-auto max-w-6xl px-6">
-          <AnimateInView className="text-center mb-16">
-            <Badge variant="outline" className="mb-4 border-red-500/30 text-red-300 bg-red-500/10">
-              {t.problems.badge}
-            </Badge>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-              {t.problems.title}{" "}
-              <span className="text-zinc-500">{t.problems.titleMuted}</span>
-            </h2>
-            <p className="text-zinc-400 max-w-2xl mx-auto mt-4">
-              {t.problems.subtitle}
-            </p>
-          </AnimateInView>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { icon: <Layers className="size-5 text-red-400" /> },
-              { icon: <ShieldCheck className="size-5 text-red-400" /> },
-              { icon: <Brain className="size-5 text-red-400" /> },
-              { icon: <Users className="size-5 text-red-400" /> },
-              { icon: <Timer className="size-5 text-red-400" /> },
-              { icon: <Database className="size-5 text-red-400" /> },
-            ].map((item, i) => {
-              const content = t.problems.items[i];
-              return (
-                <AnimateInView key={content.title} delay={i * 80}>
-                  <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-6 h-full">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="flex size-9 items-center justify-center rounded-lg bg-red-500/10 border border-red-500/20">
-                        {item.icon}
-                      </div>
-                      <h3 className="text-sm font-semibold">{content.title}</h3>
-                    </div>
-                    <p className="text-xs text-zinc-400 leading-relaxed">{content.description}</p>
-                  </div>
-                </AnimateInView>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
       {/* ===============================================
           SECTION 6: THE OFFER -- Program Timeline + Pricing
