@@ -10,9 +10,18 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { Menu, Layers } from "lucide-react";
+import en from "@/lib/i18n/dictionaries/en";
+import ja from "@/lib/i18n/dictionaries/ja";
 
-export function MobileNav() {
+const dictionaries = { en, ja } as const;
+
+interface MobileNavProps {
+  locale?: "en" | "ja";
+}
+
+export function MobileNav({ locale = "en" }: MobileNavProps) {
   const [open, setOpen] = useState(false);
+  const t = dictionaries[locale].landing;
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -35,26 +44,26 @@ export function MobileNav() {
               className="text-zinc-400 hover:text-zinc-100 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 rounded-sm"
               onClick={() => setOpen(false)}
             >
-              Case Study
+              {t.nav.proof}
             </Link>
             <Link
               href="#program"
               className="text-zinc-400 hover:text-zinc-100 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 rounded-sm"
               onClick={() => setOpen(false)}
             >
-              Program
+              {t.nav.program}
             </Link>
             <Link
               href="#pricing"
               className="text-zinc-400 hover:text-zinc-100 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 rounded-sm"
               onClick={() => setOpen(false)}
             >
-              Pricing
+              {t.nav.pricing}
             </Link>
           </nav>
           <Link href="/audit" onClick={() => setOpen(false)}>
             <Button className="w-full bg-indigo-600 hover:bg-indigo-500 text-white">
-              Free Audit
+              {t.nav.cta}
             </Button>
           </Link>
         </div>

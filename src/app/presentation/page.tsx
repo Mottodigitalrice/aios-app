@@ -9,8 +9,6 @@ import {
   Cloud,
   ArrowRight,
   ArrowDown,
-  Database,
-  Lock,
   RefreshCw,
   Zap,
   ChevronDown,
@@ -19,9 +17,7 @@ import {
   Sparkles,
   TrendingDown,
   RotateCcw,
-  FileCode,
   Bot,
-  HardDrive,
   Cpu,
   Network,
   MessageSquare,
@@ -298,7 +294,7 @@ export default function PresentationPage() {
       <div className="relative h-full pt-12">
 
         {/* ===== SLIDE 0: TITLE ===== */}
-        <SlideWrapper active={slideIndex === 0} transition="scale" direction={direction} slideIndex={0} currentSlide={slideIndex}>
+        <SlideWrapper active={slideIndex === 0} transition="scale" direction={direction}>
           <section className="h-full flex flex-col items-center justify-center px-8 radial-glow relative">
             <div className="pres-orbs" />
             <div className="pres-orbs-extra" />
@@ -336,7 +332,7 @@ export default function PresentationPage() {
         </SlideWrapper>
 
         {/* ===== SLIDE 1: THE AI ADOPTION TRAP ===== */}
-        <SlideWrapper active={slideIndex === 1} transition="stagger" direction={direction} slideIndex={1} currentSlide={slideIndex}>
+        <SlideWrapper active={slideIndex === 1} transition="stagger" direction={direction}>
           <section className="h-full flex flex-col items-center justify-center px-8 overflow-y-auto relative">
             <div className="pres-problem-glow" />
             <div className="relative z-10 flex flex-col items-center w-full">
@@ -408,7 +404,7 @@ export default function PresentationPage() {
         </SlideWrapper>
 
         {/* ===== SLIDE 2: 2024 — THE ERA OF CHATBOTS ===== */}
-        <SlideWrapper active={slideIndex === 2} transition="slide" direction={direction} slideIndex={2} currentSlide={slideIndex}>
+        <SlideWrapper active={slideIndex === 2} transition="slide" direction={direction}>
           <section className="h-full flex flex-col items-center justify-center px-8 overflow-y-auto">
             <div className="shrink-0 pb-4 text-center">
               <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-300 text-xs font-medium uppercase tracking-wider">
@@ -472,7 +468,7 @@ export default function PresentationPage() {
         </SlideWrapper>
 
         {/* ===== SLIDE 3: 2025 — AI AUTOMATIONS & AGENTS ===== */}
-        <SlideWrapper active={slideIndex === 3} transition="slide" direction={direction} slideIndex={3} currentSlide={slideIndex}>
+        <SlideWrapper active={slideIndex === 3} transition="slide" direction={direction}>
           <section className="h-full flex flex-col items-center justify-center px-8 overflow-y-auto">
             <div className="shrink-0 pb-4 text-center">
               <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-300 text-xs font-medium uppercase tracking-wider">
@@ -555,7 +551,7 @@ export default function PresentationPage() {
         </SlideWrapper>
 
         {/* ===== SLIDE 4: BRAIN + BODY ===== */}
-        <SlideWrapper active={slideIndex === 4} transition="stagger" direction={direction} slideIndex={4} currentSlide={slideIndex}>
+        <SlideWrapper active={slideIndex === 4} transition="stagger" direction={direction}>
           <section className="h-full flex flex-col items-center justify-center px-8 relative">
             <div className="pres-dots" />
             <div className="relative z-10 flex flex-col items-center">
@@ -594,7 +590,7 @@ export default function PresentationPage() {
         </SlideWrapper>
 
         {/* ===== SLIDE 5: AI ENTERS THE COMMAND LINE ===== */}
-        <SlideWrapper active={slideIndex === 5} transition="stagger" direction={direction} slideIndex={5} currentSlide={slideIndex}>
+        <SlideWrapper active={slideIndex === 5} transition="stagger" direction={direction}>
           <section className="h-full flex flex-col items-center justify-center px-8 overflow-y-auto relative">
             <div className="pres-dots" />
             <div className="relative z-10 flex flex-col items-center w-full">
@@ -690,7 +686,7 @@ export default function PresentationPage() {
         </SlideWrapper>
 
         {/* ===== SLIDE 6: OWNERSHIP ===== */}
-        <SlideWrapper active={slideIndex === 6} transition="slide" direction={direction} slideIndex={6} currentSlide={slideIndex}>
+        <SlideWrapper active={slideIndex === 6} transition="slide" direction={direction}>
           <section className="h-full flex flex-col items-center justify-center px-4 relative overflow-y-auto">
             <div className="pres-shield-pattern" />
             <div className="relative z-10 flex flex-col items-center w-full">
@@ -714,7 +710,7 @@ export default function PresentationPage() {
         </SlideWrapper>
 
         {/* ===== SLIDE 7: SELF-IMPROVING ===== */}
-        <SlideWrapper active={slideIndex === 7} transition="slide" direction={direction} slideIndex={7} currentSlide={slideIndex}>
+        <SlideWrapper active={slideIndex === 7} transition="slide" direction={direction}>
           <section className="h-full flex flex-col items-center justify-center px-8 overflow-y-auto">
             <div className="shrink-0 pb-4 text-center">
               <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-300 text-xs font-medium uppercase tracking-wider">
@@ -784,7 +780,7 @@ export default function PresentationPage() {
         </SlideWrapper>
 
         {/* ===== SLIDE 8: CLOSING ===== */}
-        <SlideWrapper active={slideIndex === 8} transition="scale" direction={direction} slideIndex={8} currentSlide={slideIndex}>
+        <SlideWrapper active={slideIndex === 8} transition="scale" direction={direction}>
           <section className="h-full flex flex-col items-center justify-center px-8 relative">
             <div className="pres-closing-glow" />
             <div className="relative z-10 flex flex-col items-center max-w-4xl w-full">
@@ -960,22 +956,23 @@ function SlideWrapper({
   children,
   transition,
   direction,
-  slideIndex,
-  currentSlide,
 }: {
   active: boolean;
   children: React.ReactNode;
   transition: "scale" | "slide" | "stagger";
   direction: "forward" | "backward";
-  slideIndex: number;
-  currentSlide: number;
 }) {
   const [shouldRender, setShouldRender] = useState(active);
   const [animClass, setAnimClass] = useState("");
+  const prevActive = useRef(active);
+
+  // Ensure shouldRender stays true while active
+  if (active && !shouldRender) {
+    setShouldRender(true);
+  }
 
   useEffect(() => {
-    if (active) {
-      setShouldRender(true);
+    if (active && !prevActive.current) {
       // Enter animation
       requestAnimationFrame(() => {
         if (transition === "scale") {
@@ -986,20 +983,24 @@ function SlideWrapper({
           setAnimClass(direction === "forward" ? "pres-enter-right" : "pres-enter-left");
         }
       });
-    } else if (shouldRender) {
-      // Exit animation
-      if (transition === "scale") {
-        setAnimClass("pres-exit-scale");
-      } else {
-        setAnimClass(direction === "forward" ? "pres-exit-right" : "pres-exit-left");
-      }
+    } else if (!active && prevActive.current) {
+      // Exit animation — use rAF to avoid synchronous setState in effect
+      requestAnimationFrame(() => {
+        if (transition === "scale") {
+          setAnimClass("pres-exit-scale");
+        } else {
+          setAnimClass(direction === "forward" ? "pres-exit-right" : "pres-exit-left");
+        }
+      });
       const timer = setTimeout(() => {
         setShouldRender(false);
         setAnimClass("");
       }, 450);
+      prevActive.current = active;
       return () => clearTimeout(timer);
     }
-  }, [active, transition, direction, shouldRender]);
+    prevActive.current = active;
+  }, [active, transition, direction]);
 
   if (!shouldRender && !active) return null;
 
@@ -1045,18 +1046,6 @@ function CycleBox({
       <div className={`flex justify-center mb-1.5 ${highlight ? "text-red-400" : "text-zinc-400"}`}>{icon}</div>
       <p className={`font-semibold text-xs sm:text-sm ${highlight ? "text-red-300" : ""}`}>{label}</p>
       <p className="text-[10px] sm:text-xs text-zinc-500">{sublabel}</p>
-    </div>
-  );
-}
-
-function OwnershipItem({ icon, label, sublabel }: { icon: React.ReactNode; label: string; sublabel: string }) {
-  return (
-    <div className="flex items-center gap-3 p-3 rounded-lg bg-zinc-900/50 border border-zinc-800/50">
-      <div className="text-indigo-400">{icon}</div>
-      <div>
-        <p className="text-sm font-medium">{label}</p>
-        <p className="text-xs text-zinc-500">{sublabel}</p>
-      </div>
     </div>
   );
 }

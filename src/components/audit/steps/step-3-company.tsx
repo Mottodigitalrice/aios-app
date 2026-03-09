@@ -133,6 +133,8 @@ export function Step3Company({
             onChange={(e) => updateField("company", e.target.value)}
             onBlur={() => validateField("company")}
             placeholder={step.companyPlaceholder}
+            aria-invalid={!!fieldErrors.company}
+            aria-describedby={fieldErrors.company ? "company-error" : undefined}
             className={`bg-zinc-950/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20 h-12 text-base ${
               fieldErrors.company
                 ? "border-red-500/70 focus-visible:border-red-500/70 focus-visible:ring-red-500/20"
@@ -147,7 +149,7 @@ export function Step3Company({
             }}
           />
           {fieldErrors.company && (
-            <p className="text-xs text-red-400 mt-1">{fieldErrors.company}</p>
+            <p id="company-error" role="alert" className="text-xs text-red-400 mt-1">{fieldErrors.company}</p>
           )}
         </div>
 

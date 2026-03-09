@@ -9,7 +9,6 @@ import {
   Check,
   FileText,
   CalendarCheck,
-  Share2,
   Copy,
   Linkedin,
   Mail,
@@ -22,32 +21,30 @@ import { TidyCalEmbed } from "./tidycal-embed";
 // Confetti particle component (CSS-only)
 // ---------------------------------------------------------------------------
 
-function ConfettiParticles() {
-  const [particles, setParticles] = useState<
-    { id: number; x: number; delay: number; duration: number; color: string; size: number; rotation: number }[]
-  >([]);
+const CONFETTI_COLORS = [
+  "bg-indigo-400",
+  "bg-indigo-500",
+  "bg-violet-400",
+  "bg-emerald-400",
+  "bg-amber-400",
+  "bg-rose-400",
+  "bg-sky-400",
+];
 
-  useEffect(() => {
-    const colors = [
-      "bg-indigo-400",
-      "bg-indigo-500",
-      "bg-violet-400",
-      "bg-emerald-400",
-      "bg-amber-400",
-      "bg-rose-400",
-      "bg-sky-400",
-    ];
-    const newParticles = Array.from({ length: 50 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      delay: Math.random() * 1.5,
-      duration: 2 + Math.random() * 2,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      size: 4 + Math.random() * 6,
-      rotation: Math.random() * 360,
-    }));
-    setParticles(newParticles);
-  }, []);
+function generateParticles() {
+  return Array.from({ length: 50 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    delay: Math.random() * 1.5,
+    duration: 2 + Math.random() * 2,
+    color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+    size: 4 + Math.random() * 6,
+    rotation: Math.random() * 360,
+  }));
+}
+
+function ConfettiParticles() {
+  const [particles] = useState(generateParticles);
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[60] overflow-hidden">
@@ -74,21 +71,18 @@ function ConfettiParticles() {
 // Sparkle background
 // ---------------------------------------------------------------------------
 
-function SparkleBackground() {
-  const [sparkles, setSparkles] = useState<
-    { id: number; x: number; y: number; delay: number; size: number }[]
-  >([]);
+function generateSparkles() {
+  return Array.from({ length: 20 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    delay: Math.random() * 4,
+    size: 2 + Math.random() * 3,
+  }));
+}
 
-  useEffect(() => {
-    const newSparkles = Array.from({ length: 20 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      delay: Math.random() * 4,
-      size: 2 + Math.random() * 3,
-    }));
-    setSparkles(newSparkles);
-  }, []);
+function SparkleBackground() {
+  const [sparkles] = useState(generateSparkles);
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">

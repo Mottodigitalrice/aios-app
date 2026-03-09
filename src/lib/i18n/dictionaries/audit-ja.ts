@@ -1,6 +1,8 @@
 const auditDict = {
   nav: {
     backToHome: "ホームに戻る",
+    home: "ホーム",
+    privacy: "プライバシー",
   },
   badge: "無料 · 義務なし",
   title: "無料",
@@ -289,6 +291,14 @@ const auditDict = {
     required: "必須",
     optional: "任意",
     stepOf: "ステップ {current} / {total}",
+  },
+  progressBar: {
+    1: { text: "良いスタートです！", timeLeft: "残り約3分" },
+    2: { text: "順調です！", timeLeft: "残り約2分" },
+    3: { text: "半分まで来ました！", timeLeft: "残り約2分" },
+    4: { text: "あと少しです！", timeLeft: "残り約1分" },
+    5: { text: "もうすぐです！", timeLeft: "残り約1分" },
+    6: { text: "最後のステップです！", timeLeft: "1分以内" },
   },
   success: {
     title: "送信完了 — ありがとうございます",

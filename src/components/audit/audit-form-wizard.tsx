@@ -132,30 +132,29 @@ function AuditFormWizardInner() {
 
   const [direction, setDirection] = useState<"forward" | "backward">("forward");
   const [animating, setAnimating] = useState(false);
-  const prevStep = useRef(currentStep);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Track step direction for animation
+  // Clear animation after transition
   useEffect(() => {
-    if (currentStep !== prevStep.current) {
-      setDirection(currentStep > prevStep.current ? "forward" : "backward");
-      setAnimating(true);
-      prevStep.current = currentStep;
+    if (animating) {
       const timer = setTimeout(() => setAnimating(false), 300);
       return () => clearTimeout(timer);
     }
-  }, [currentStep]);
+  }, [animating]);
 
   // Keyboard support — Escape goes back
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && currentStep > 0) {
-        handleBack();
+        setDirection("backward");
+        setAnimating(true);
+        setError(null);
+        goToPrev();
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentStep]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [currentStep, goToPrev, setError]);
 
   if (isComplete) {
     return <AuditSuccess perspective={formData.perspective || undefined} />;
@@ -163,11 +162,13 @@ function AuditFormWizardInner() {
 
   const handleNext = () => {
     setDirection("forward");
+    setAnimating(true);
     goToNext();
   };
 
   const handleBack = () => {
     setDirection("backward");
+    setAnimating(true);
     setError(null);
     goToPrev();
   };
@@ -385,13 +386,13 @@ function AuditFormWizardInner() {
               href="/"
               className="hover:text-zinc-300 transition-colors"
             >
-              Home
+              {t.nav.home}
             </Link>
             <Link
               href="/privacy"
               className="hover:text-zinc-300 transition-colors"
             >
-              Privacy
+              {t.nav.privacy}
             </Link>
           </div>
         </div>

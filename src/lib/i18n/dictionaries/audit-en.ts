@@ -1,6 +1,8 @@
 const auditDict = {
   nav: {
     backToHome: "Back to Home",
+    home: "Home",
+    privacy: "Privacy",
   },
   badge: "Free \u00B7 No Obligation",
   title: "Get Your Free",
@@ -284,6 +286,14 @@ const auditDict = {
     required: "Required",
     optional: "Optional",
     stepOf: "Step {current} of {total}",
+  },
+  progressBar: {
+    1: { text: "Great start!", timeLeft: "~3 min left" },
+    2: { text: "You're doing great!", timeLeft: "~2 min left" },
+    3: { text: "Halfway there!", timeLeft: "~2 min left" },
+    4: { text: "Keep going!", timeLeft: "~1 min left" },
+    5: { text: "Almost there!", timeLeft: "~1 min left" },
+    6: { text: "Last step!", timeLeft: "Less than 1 min" },
   },
   success: {
     title: "You\u2019re In \u2014 Thank You",

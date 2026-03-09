@@ -81,7 +81,7 @@ export default function HomePage() {
           </div>
           <div className="flex sm:hidden items-center gap-3">
             <LanguageToggle locale={locale} onToggle={setLocale} />
-            <MobileNav />
+            <MobileNav locale={locale} />
           </div>
         </div>
       </nav>

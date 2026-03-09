@@ -183,7 +183,7 @@ export function Step2AboutYou({
             </button>
           </div>
           {fieldErrors.perspective && (
-            <p className="text-xs text-red-400 mt-1">{fieldErrors.perspective}</p>
+            <p role="alert" className="text-xs text-red-400 mt-1">{fieldErrors.perspective}</p>
           )}
         </div>
 
@@ -198,6 +198,8 @@ export function Step2AboutYou({
             onChange={(e) => updateField("name", e.target.value)}
             onBlur={() => validateField("name")}
             placeholder={step.namePlaceholder}
+            aria-invalid={!!fieldErrors.name}
+            aria-describedby={fieldErrors.name ? "name-error" : undefined}
             className={`bg-zinc-950/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20 h-12 text-base ${
               fieldErrors.name
                 ? "border-red-500/70 focus-visible:border-red-500/70 focus-visible:ring-red-500/20"
@@ -211,7 +213,7 @@ export function Step2AboutYou({
             }}
           />
           {fieldErrors.name && (
-            <p className="text-xs text-red-400 mt-1">{fieldErrors.name}</p>
+            <p id="name-error" role="alert" className="text-xs text-red-400 mt-1">{fieldErrors.name}</p>
           )}
         </div>
 

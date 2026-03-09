@@ -14,22 +14,18 @@ interface AuditLocaleContextValue {
 
 const AuditLocaleContext = createContext<AuditLocaleContextValue | null>(null);
 
-export function AuditLocaleProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocale] = useState<Locale>("en");
+function getInitialLocale(): Locale {
+  if (typeof window === "undefined") return "en";
+  const params = new URLSearchParams(window.location.search);
+  const urlLocale = params.get("lang");
+  if (urlLocale === "ja" || urlLocale === "en") return urlLocale;
+  const stored = localStorage.getItem("aios-audit-locale");
+  if (stored === "ja" || stored === "en") return stored;
+  return "en";
+}
 
-  // Check URL params or localStorage for saved locale
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const urlLocale = params.get("lang");
-    if (urlLocale === "ja" || urlLocale === "en") {
-      setLocale(urlLocale);
-      return;
-    }
-    const stored = localStorage.getItem("aios-audit-locale");
-    if (stored === "ja" || stored === "en") {
-      setLocale(stored);
-    }
-  }, []);
+export function AuditLocaleProvider({ children }: { children: React.ReactNode }) {
+  const [locale, setLocale] = useState<Locale>(getInitialLocale);
 
   // Persist locale choice
   useEffect(() => {

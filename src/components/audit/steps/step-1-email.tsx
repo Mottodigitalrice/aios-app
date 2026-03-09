@@ -55,6 +55,8 @@ export function Step1Email({
             onChange={(e) => updateField("email", e.target.value)}
             onBlur={() => formData.email && validateField("email")}
             placeholder={step.emailPlaceholder}
+            aria-invalid={!!fieldErrors.email}
+            aria-describedby={fieldErrors.email ? "email-error" : undefined}
             className={`bg-zinc-950/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20 h-12 text-base ${
               fieldErrors.email
                 ? "border-red-500/70 focus-visible:border-red-500/70 focus-visible:ring-red-500/20"
@@ -69,7 +71,7 @@ export function Step1Email({
             }}
           />
           {fieldErrors.email && (
-            <p className="text-xs text-red-400 mt-1">{fieldErrors.email}</p>
+            <p id="email-error" role="alert" className="text-xs text-red-400 mt-1">{fieldErrors.email}</p>
           )}
         </div>
 
@@ -95,7 +97,7 @@ export function Step1Email({
             </span>
           </label>
           {fieldErrors.privacyConsent && (
-            <p className="text-xs text-red-400 mt-1 ml-7">{fieldErrors.privacyConsent}</p>
+            <p role="alert" className="text-xs text-red-400 mt-1 ml-7">{fieldErrors.privacyConsent}</p>
           )}
         </div>
       </div>

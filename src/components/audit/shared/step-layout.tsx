@@ -15,7 +15,6 @@ interface StepLayoutProps {
   isLoading?: boolean;
   canContinue?: boolean;
   error?: string | null;
-  fieldErrors?: Record<string, string>;
 }
 
 export function StepLayout({
@@ -29,7 +28,6 @@ export function StepLayout({
   isLoading,
   canContinue = true,
   error,
-  fieldErrors: _fieldErrors,
 }: StepLayoutProps) {
   const { t } = useAuditLocale();
 
@@ -49,7 +47,7 @@ export function StepLayout({
       <div className="mb-8">{children}</div>
 
       {error && (
-        <p className="text-sm text-red-400 mb-4">{error}</p>
+        <p role="alert" className="text-sm text-red-400 mb-4">{error}</p>
       )}
 
       <div className="flex items-center gap-3">

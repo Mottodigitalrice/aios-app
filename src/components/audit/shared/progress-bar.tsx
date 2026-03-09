@@ -1,54 +1,29 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
 import { Check } from "lucide-react";
+import { useAuditLocale } from "../audit-locale-context";
 
 interface ProgressBarProps {
   currentStep: number;
   totalSteps: number;
 }
 
-const STEP_ENCOURAGEMENT: Record<number, { text: string; timeLeft: string }> = {
-  1: { text: "Great start!", timeLeft: "~3 min left" },
-  2: { text: "You're doing great!", timeLeft: "~2 min left" },
-  3: { text: "Halfway there!", timeLeft: "~2 min left" },
-  4: { text: "Keep going!", timeLeft: "~1 min left" },
-  5: { text: "Almost there!", timeLeft: "~1 min left" },
-  6: { text: "Last step!", timeLeft: "Less than 1 min" },
-};
-
 export function ProgressBar({ currentStep, totalSteps }: ProgressBarProps) {
+  const { t } = useAuditLocale();
   const progress = ((currentStep + 1) / totalSteps) * 100;
-  const encouragement = STEP_ENCOURAGEMENT[currentStep];
-  const [showCheck, setShowCheck] = useState(false);
-  const [animKey, setAnimKey] = useState(0);
-  const prevStep = useRef(currentStep);
-
-  useEffect(() => {
-    if (currentStep > prevStep.current) {
-      // Step advanced forward — show checkmark briefly
-      setShowCheck(true);
-      const timer = setTimeout(() => setShowCheck(false), 800);
-      prevStep.current = currentStep;
-      return () => clearTimeout(timer);
-    }
-    prevStep.current = currentStep;
-  }, [currentStep]);
-
-  // Re-key the encouragement text to re-trigger animation
-  useEffect(() => {
-    setAnimKey((k) => k + 1);
-  }, [currentStep]);
+  const encouragement = t.progressBar?.[currentStep as keyof typeof t.progressBar];
 
   return (
     <div className="w-full">
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
           <span className="text-xs text-zinc-500">
-            Step {currentStep + 1} of {totalSteps}
+            {t.common.stepOf
+              .replace("{current}", String(currentStep + 1))
+              .replace("{total}", String(totalSteps))}
           </span>
-          {showCheck && (
-            <div className="animate-check-pop">
+          {currentStep > 0 && (
+            <div key={currentStep} className="animate-check-pop">
               <Check className="size-3.5 text-emerald-400" />
             </div>
           )}
@@ -65,7 +40,7 @@ export function ProgressBar({ currentStep, totalSteps }: ProgressBarProps) {
       </div>
       {encouragement && (
         <div
-          key={animKey}
+          key={currentStep}
           className="flex items-center justify-between mt-2 animate-encourage"
         >
           <span className="text-xs font-medium text-indigo-400">
