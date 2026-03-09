@@ -85,9 +85,9 @@ export default function ReportsPage() {
                       </Badge>
                     </TableCell>
                     <TableCell className="text-muted-foreground">
-                      {formatDistanceToNow(new Date(report.createdAt ?? Date.now()), {
-                        addSuffix: true,
-                      })}
+                      {report.createdAt
+                        ? formatDistanceToNow(new Date(report.createdAt), { addSuffix: true })
+                        : "—"}
                     </TableCell>
                   </TableRow>
                 ))}

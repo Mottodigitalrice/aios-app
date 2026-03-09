@@ -704,10 +704,10 @@ export default function HomePage() {
           </p>
           <div className="grid sm:grid-cols-2 gap-4 max-w-lg mx-auto mb-10 text-left">
             {[
-              <ShieldCheck className="size-5 text-indigo-400 shrink-0" />,
-              <User className="size-5 text-indigo-400 shrink-0" />,
-              <Calendar className="size-5 text-indigo-400 shrink-0" />,
-              <FileText className="size-5 text-indigo-400 shrink-0" />,
+              <ShieldCheck key="shield" className="size-5 text-indigo-400 shrink-0" />,
+              <User key="user" className="size-5 text-indigo-400 shrink-0" />,
+              <Calendar key="cal" className="size-5 text-indigo-400 shrink-0" />,
+              <FileText key="file" className="size-5 text-indigo-400 shrink-0" />,
             ].map((icon, i) => (
               <div key={i} className="flex items-center gap-3 text-sm text-zinc-300">
                 {icon}
