@@ -340,9 +340,9 @@ export default function HomePage() {
             </div>
           </AnimateInView>
 
-          {/* Lewis's quote */}
+          {/* Founder reflection */}
           <AnimateInView className="mt-8 text-center">
-            <p className="text-zinc-400 text-sm italic">
+            <p className="text-zinc-400 text-sm leading-relaxed max-w-2xl mx-auto">
               {t.caseStudy.testimonial}
             </p>
             <p className="mt-3 text-sm font-medium text-zinc-300">{t.caseStudy.testimonialAuthor}</p>
@@ -563,6 +563,22 @@ export default function HomePage() {
               <p className="mt-4 text-zinc-400 max-w-2xl mx-auto text-lg">
                 {t.pricing.subtitle}
               </p>
+            </AnimateInView>
+
+            {/* ROI comparison — value framing before price */}
+            <AnimateInView className="mb-10">
+              <div className="grid sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+                <div className="rounded-xl border border-red-500/20 bg-red-500/[0.03] p-5 text-center">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-red-400 mb-2">{t.pricing.roiComparison.traditional.label}</p>
+                  <p className="text-2xl font-bold text-zinc-200">{t.pricing.roiComparison.traditional.price}</p>
+                  <p className="text-sm text-zinc-500 mt-1">{t.pricing.roiComparison.traditional.detail}</p>
+                </div>
+                <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.03] p-5 text-center">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-emerald-400 mb-2">{t.pricing.roiComparison.aios.label}</p>
+                  <p className="text-2xl font-bold text-zinc-200">{t.pricing.roiComparison.aios.price}</p>
+                  <p className="text-sm text-zinc-500 mt-1">{t.pricing.roiComparison.aios.detail}</p>
+                </div>
+              </div>
             </AnimateInView>
 
             {/* Two pricing columns */}

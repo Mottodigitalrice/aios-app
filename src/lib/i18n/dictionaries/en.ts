@@ -269,6 +269,19 @@ const en = {
         guarantee: "Team can\u2019t create & manage agents by month 6? We continue free.",
       },
 
+      roiComparison: {
+        title: "How it compares",
+        traditional: {
+          label: "Traditional AI consulting",
+          price: "\u00A55M+",
+          detail: "3-month PoC, then they leave",
+        },
+        aios: {
+          label: "AIOS 6-month build",
+          price: "\u00A51.2M",
+          detail: "You own everything. Forever.",
+        },
+      },
       launchNote: "Early pricing \u2014 increases after 5 clients.",
     },
     // FAQ content lives in faq-section.tsx (self-contained component with categories)
@@ -341,8 +354,8 @@ const en = {
         { title: "Smart scheduling", description: "Tasks carry time estimates and deadlines. The system checks availability, avoids double-booking, and schedules work blocks automatically." },
         { title: "One person. Agency output.", description: "26 active projects, 4 paying clients, 9 pipeline deals, multi-language operations \u2014 all managed by one person with AIOS as the backbone." },
       ],
-      testimonial: "\u201CBefore AIOS, everything lived in my head. If I wasn\u2019t in the weeds, things would fall apart. Now I have an operating system that truly understands my business \u2014 every project, every promise, every process. I could hand this to someone else tomorrow and they\u2019d have full context on day one.\u201D",
-      testimonialAuthor: "\u2014 Lewis Rice, Founder, MOTTO Digital",
+      testimonial: "Before AIOS, everything lived in my head. If I wasn\u2019t in the weeds, things would fall apart. Now I have an operating system that truly understands my business \u2014 every project, every promise, every process. I could hand this to someone else tomorrow and they\u2019d have full context on day one.",
+      testimonialAuthor: "Lewis Rice \u2014 Founder, MOTTO Digital",
     },
     orgChart: {
       title: "The agent team running MOTTO Digital",
