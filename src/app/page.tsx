@@ -790,7 +790,7 @@ export default function HomePage() {
             </div>
             <div>
               <h4 className="text-sm font-semibold mb-3 text-zinc-300">{t.footer.contact}</h4>
-              <div className="flex flex-col gap-2 text-sm text-zinc-500">
+              <address className="flex flex-col gap-2 text-sm text-zinc-500 not-italic">
                 <a href="mailto:lewis@mottodigital.jp" className="flex items-center gap-2 hover:text-zinc-300 transition-colors">
                   <Mail className="size-4" />
                   lewis@mottodigital.jp
@@ -800,7 +800,7 @@ export default function HomePage() {
                   LinkedIn
                 </a>
                 <p className="text-zinc-500 mt-1">{t.footer.contactCta}</p>
-              </div>
+              </address>
             </div>
           </div>
           {/* Company legitimacy signals */}

@@ -32,21 +32,21 @@ export function MobileNav() {
           <nav className="flex flex-col gap-4">
             <Link
               href="#proof"
-              className="text-zinc-400 hover:text-zinc-100 transition-colors"
+              className="text-zinc-400 hover:text-zinc-100 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 rounded-sm"
               onClick={() => setOpen(false)}
             >
               Case Study
             </Link>
             <Link
               href="#program"
-              className="text-zinc-400 hover:text-zinc-100 transition-colors"
+              className="text-zinc-400 hover:text-zinc-100 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 rounded-sm"
               onClick={() => setOpen(false)}
             >
               Program
             </Link>
             <Link
               href="#pricing"
-              className="text-zinc-400 hover:text-zinc-100 transition-colors"
+              className="text-zinc-400 hover:text-zinc-100 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 rounded-sm"
               onClick={() => setOpen(false)}
             >
               Pricing

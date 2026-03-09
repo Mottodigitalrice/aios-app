@@ -146,7 +146,7 @@ function AuditFormWizardInner() {
     }
   }, [currentStep]);
 
-  // Keyboard support
+  // Keyboard support — Escape goes back
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && currentStep > 0) {
@@ -155,7 +155,7 @@ function AuditFormWizardInner() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  });
+  }, [currentStep]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (isComplete) {
     return <AuditSuccess perspective={formData.perspective || undefined} />;
