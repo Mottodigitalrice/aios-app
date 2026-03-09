@@ -235,7 +235,7 @@ const auditDict = {
       experienceOptions: ["なし", "実験中", "定期的に使用", "上級"],
       triedBeforeLabel: "AIを試したことはありますか？その結果は？",
       triedBeforePlaceholder: "経験を教えてください（なければ空白でOK）...",
-      visionLabel: "6ヶ月後にAIに何をしてほしい？",
+      visionLabel: "6ヶ月後、AIに期待することは？",
       visionOptions: [
         "繰り返し作業の自動化",
         "既存ツールの連携",
@@ -262,7 +262,7 @@ const auditDict = {
       ],
     },
     8: {
-      question: "もう少しで完了です",
+      question: "あと少しです。ありがとうございます。",
       sourceLabel: "どこで知りましたか？",
       sourceOptions: [
         "LinkedIn",

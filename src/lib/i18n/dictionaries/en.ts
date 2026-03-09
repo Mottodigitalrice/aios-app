@@ -301,7 +301,7 @@ const en = {
         "20 disconnected tools, nothing talks to each other",
         "Locked into vendors \u2014 switching means starting from scratch",
         "AI feels like hype you can\u2019t act on",
-        "Every process lives in someone\u2019s head, not on paper",
+        "When something goes wrong, there\u2019s only one person who can fix it",
         "You\u2019re either in the weeds or things fall apart",
       ],
       with: [
