@@ -221,8 +221,11 @@ export function FAQSection({ locale = "en" }: FAQSectionProps) {
     }))
     .filter((g) => g.items.length > 0);
 
-  // Build a flat index for the accordion (one open at a time across all groups)
-  let globalIndex = 0;
+  // Precompute starting index for each group (avoids mutable variable during render)
+  const groupOffsets = grouped.reduce<number[]>((acc, group, i) => {
+    acc.push(i === 0 ? 0 : acc[i - 1] + grouped[i - 1].items.length);
+    return acc;
+  }, []);
 
   // FAQ structured data for Google rich snippets (always EN for SEO)
   const faqSchema = JSON.stringify({
@@ -258,11 +261,7 @@ export function FAQSection({ locale = "en" }: FAQSectionProps) {
 
         {/* Grouped FAQ accordion */}
         <div className="space-y-8">
-          {grouped.map((group) => {
-            const startIndex = globalIndex;
-
-            // Render group
-            const rendered = (
+          {grouped.map((group, groupIdx) => (
               <div key={group.category}>
                 {/* Category label */}
                 <p className="text-xs text-zinc-500 uppercase tracking-wider mb-3 pl-1">
@@ -271,7 +270,7 @@ export function FAQSection({ locale = "en" }: FAQSectionProps) {
 
                 <div className="space-y-3">
                   {group.items.map((faq, i) => {
-                    const idx = startIndex + i;
+                    const idx = groupOffsets[groupIdx] + i;
                     const isOpen = openIndex === idx;
 
                     return (
@@ -314,11 +313,7 @@ export function FAQSection({ locale = "en" }: FAQSectionProps) {
                   })}
                 </div>
               </div>
-            );
-
-            globalIndex += group.items.length;
-            return rendered;
-          })}
+          ))}
         </div>
 
         {/* CTA at bottom of FAQ */}

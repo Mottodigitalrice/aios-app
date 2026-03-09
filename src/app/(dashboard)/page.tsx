@@ -143,9 +143,9 @@ export default function DashboardPage() {
                       {lead.status}
                     </Badge>
                     <span className="text-xs text-muted-foreground whitespace-nowrap">
-                      {formatDistanceToNow(new Date(lead.createdAt ?? Date.now()), {
-                        addSuffix: true,
-                      })}
+                      {lead.createdAt
+                        ? formatDistanceToNow(new Date(lead.createdAt), { addSuffix: true })
+                        : "—"}
                     </span>
                   </div>
                 </Link>

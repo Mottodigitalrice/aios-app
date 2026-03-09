@@ -295,7 +295,7 @@ export default function LeadDetailPage({
             <div className="flex justify-between">
               <span className="text-muted-foreground">Submitted</span>
               <span className="font-medium">
-                {format(new Date(lead.createdAt ?? Date.now()), "PPP 'at' p")}
+                {lead.createdAt ? format(new Date(lead.createdAt), "PPP 'at' p") : "—"}
               </span>
             </div>
             <div className="flex justify-between">
