@@ -84,7 +84,7 @@ export default function LeadsPage() {
                       </Badge>
                     </TableCell>
                     <TableCell className="text-muted-foreground">
-                      {formatDistanceToNow(new Date(lead.createdAt), {
+                      {formatDistanceToNow(new Date(lead.createdAt ?? Date.now()), {
                         addSuffix: true,
                       })}
                     </TableCell>

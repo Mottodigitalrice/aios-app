@@ -78,14 +78,14 @@ export default function ReportsPage() {
                       <Badge
                         variant="outline"
                         className={
-                          REPORT_STATUS_COLORS[report.status] || ""
+                          REPORT_STATUS_COLORS[report.status ?? ""] || ""
                         }
                       >
                         {report.status}
                       </Badge>
                     </TableCell>
                     <TableCell className="text-muted-foreground">
-                      {formatDistanceToNow(new Date(report.createdAt), {
+                      {formatDistanceToNow(new Date(report.createdAt ?? Date.now()), {
                         addSuffix: true,
                       })}
                     </TableCell>
