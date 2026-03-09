@@ -215,7 +215,7 @@ const en = {
       cta: "Get Your Free AI Audit",
       ctaSecondary: "See It In Action",
       stats:
-        "Currently running 26 projects, 63 tasks, and 9 pipeline deals \u2014 on one system, managed by one person.",
+        "Currently managing 26 projects, 63 tasks, and 9 deals in one system \u2014 saving ~20 hours per week compared to manual management.",
       trust: "Trusted by companies across Japan",
       testimonial:
         "\u201CThis changed how we operate. Chaos to clarity in 60 days.\u201D",
@@ -548,6 +548,12 @@ const en = {
       pricingLink: "Pricing",
       auditLink: "Free AI Audit",
       contact: "Contact",
+      contactCta: "Feel free to reach out",
+      company: {
+        representative: "Lewis Rice",
+        location: "Tokyo, Japan",
+        founded: "Est. 2024",
+      },
       copyright: "MOTTO Digital Inc. All rights reserved.",
     },
   },

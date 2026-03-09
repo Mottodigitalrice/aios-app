@@ -725,10 +725,19 @@ export default function HomePage() {
                   <Linkedin className="size-4" />
                   LinkedIn
                 </a>
+                <p className="text-zinc-500 mt-1">{t.footer.contactCta}</p>
               </div>
             </div>
           </div>
-          <div className="border-t border-zinc-800/50 pt-6 text-center text-xs text-zinc-600">
+          {/* Company legitimacy signals */}
+          <div className="border-t border-zinc-800/50 pt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-xs text-zinc-600">
+            <span>{t.footer.company.representative}</span>
+            <span className="hidden sm:inline text-zinc-700">|</span>
+            <span>{t.footer.company.location}</span>
+            <span className="hidden sm:inline text-zinc-700">|</span>
+            <span>{t.footer.company.founded}</span>
+          </div>
+          <div className="border-t border-zinc-800/30 mt-4 pt-4 text-center text-xs text-zinc-600">
             &copy; {new Date().getFullYear()} {t.footer.copyright}
           </div>
         </div>

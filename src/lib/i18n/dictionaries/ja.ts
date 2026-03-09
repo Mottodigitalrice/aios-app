@@ -210,7 +210,7 @@ const ja = {
       cta: "無料AIオーディットを受ける",
       ctaSecondary: "実際の動きを見る",
       stats:
-        "現在26プロジェクト、63タスク、9件の商談をひとつのシステムで、一人で管理中。",
+        "現在26プロジェクト、63タスク、9件の商談をひとつのシステムで管理中。手動管理と比べて週約20時間を節約。",
       trust: "日本全国の企業に信頼されています",
       testimonial:
         "「このシステムで、社内が変わりました。60日で、混沌から安心へ。」",
@@ -543,6 +543,12 @@ const ja = {
       pricingLink: "料金",
       auditLink: "無料AIオーディット",
       contact: "お問い合わせ",
+      contactCta: "お気軽にご相談ください",
+      company: {
+        representative: "代表：Lewis Rice",
+        location: "所在地：東京",
+        founded: "設立：2024年",
+      },
       copyright: "MOTTO Digital Inc. All rights reserved.",
     },
   },
