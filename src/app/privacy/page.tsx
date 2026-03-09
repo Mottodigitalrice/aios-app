@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import { Layers, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import en from "@/lib/i18n/dictionaries/en";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | AIOS — MOTTO Digital",
+  description:
+    "Privacy policy for AIOS by MOTTO Digital. How we collect, use, and protect your data.",
+};
 
 const { privacy } = en;
 
