@@ -319,6 +319,8 @@ const auditDict = {
           "通話後、完全な監査レポートはあなたのものです。義務なし、完全無料。",
       },
     },
+    bookEmbedTitle: "都合の良い時間を選んでください",
+    bookFallback: "新しいタブで予約ページを開く",
     bookCta: "無料監査通話を予約",
     bookCtaPersonal: "4月コホートに参加",
     bookSubtext: "30分 · ビデオ通話 · 営業なし",

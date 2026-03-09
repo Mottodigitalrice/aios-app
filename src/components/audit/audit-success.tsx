@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useAuditLocale } from "./audit-locale-context";
+import { TidyCalEmbed } from "./tidycal-embed";
 
 // ---------------------------------------------------------------------------
 // Confetti particle component (CSS-only)
@@ -336,21 +337,28 @@ export function AuditSuccess({ perspective }: AuditSuccessProps) {
                 ? t.success.bookDescriptionPersonal
                 : t.success.bookDescription}
             </p>
+
+            {/* TidyCal Embed */}
+            <h3 className="text-sm font-semibold text-zinc-300 mb-3">
+              {"bookEmbedTitle" in t.success
+                ? t.success.bookEmbedTitle
+                : "Pick a time that works for you"}
+            </h3>
+            <TidyCalEmbed path="rice/ai" />
+
+            {/* Fallback link */}
             <Link
               href="https://tidycal.com/rice/ai"
               target="_blank"
               rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 mt-4 text-sm text-indigo-400 hover:text-indigo-300 transition-colors"
             >
-              <Button
-                size="lg"
-                className="w-full bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow"
-              >
-                <CalendarCheck className="size-5" />
-                {isPersonal && "bookCtaPersonal" in t.success
-                  ? t.success.bookCtaPersonal
-                  : t.success.bookCta}
-              </Button>
+              <CalendarCheck className="size-3.5" />
+              {"bookFallback" in t.success
+                ? t.success.bookFallback
+                : "Or open scheduler in new tab"}
             </Link>
+
             <p className="mt-3 text-xs text-zinc-500">
               {isPersonal && "bookSubtextPersonal" in t.success
                 ? t.success.bookSubtextPersonal
