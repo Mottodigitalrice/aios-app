@@ -215,7 +215,7 @@ const en = {
       cta: "Get Your Free AI Audit",
       ctaSecondary: "See It In Action",
       stats:
-        "Currently managing 26 projects, 63 tasks, and 9 deals in one system \u2014 saving ~20 hours per week compared to manual management.",
+        "Currently running 26 projects, 63 tasks, and 9 pipeline deals \u2014 on one system, managed by one person.",
       trust: "Trusted by companies across Japan",
       testimonial:
         "\u201CThis changed how we operate. Chaos to clarity in 60 days.\u201D",
