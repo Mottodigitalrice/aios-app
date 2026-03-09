@@ -39,7 +39,6 @@ export function ShiryoDialog({ locale }: { locale: "en" | "ja" }) {
 
     setLoading(true);
     // TODO: POST to /api/send-presentation when backend is ready
-    console.log("PDF requested for:", email, "locale:", locale);
 
     // Simulate brief delay
     await new Promise((resolve) => setTimeout(resolve, 800));

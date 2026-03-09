@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/sign-in", "/sign-up", "/dashboard"],
+      disallow: ["/api/", "/sign-in", "/sign-up", "/dashboard", "/leads", "/reports", "/report"],
     },
     sitemap: "https://aios.mottodigital.jp/sitemap.xml",
   };
