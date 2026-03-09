@@ -8,9 +8,6 @@ import { Badge } from "@/components/ui/badge";
 import {
   Layers,
   Database,
-  Server,
-  FlaskConical,
-  Sparkles,
   Zap,
   Check,
   ArrowRight,
@@ -35,6 +32,7 @@ import { AnimateInView, CountUp } from "@/components/landing/animate-in-view";
 import { BrainBodySection } from "@/components/landing/brain-body-section";
 import { AgentOrgChart } from "@/components/landing/agent-org-chart";
 import { ShiryoDialog } from "@/components/landing/shiryo-dialog";
+import { AIOSPyramid } from "@/components/landing/aios-pyramid";
 
 import en from "@/lib/i18n/dictionaries/en";
 import ja from "@/lib/i18n/dictionaries/ja";
@@ -247,30 +245,8 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-6">
-            {[
-              { icon: <Database className="size-6 text-blue-400" />, badgeClass: "bg-blue-500/20 text-blue-300 border-blue-500/30", borderClass: "border-blue-500/20 bg-blue-500/5 hover:border-blue-500/30", iconBg: "bg-blue-500/10 border-blue-500/20" },
-              { icon: <FlaskConical className="size-6 text-emerald-400" />, badgeClass: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30", borderClass: "border-emerald-500/20 bg-emerald-500/5 hover:border-emerald-500/30", iconBg: "bg-emerald-500/10 border-emerald-500/20" },
-              { icon: <Server className="size-6 text-violet-400" />, badgeClass: "bg-violet-500/20 text-violet-300 border-violet-500/30", borderClass: "border-violet-500/20 bg-violet-500/5 hover:border-violet-500/30", iconBg: "bg-violet-500/10 border-violet-500/20" },
-              { icon: <Sparkles className="size-6 text-amber-400" />, badgeClass: "bg-amber-500/20 text-amber-300 border-amber-500/30", borderClass: "border-amber-500/20 bg-amber-500/5 hover:border-amber-500/30", iconBg: "bg-amber-500/10 border-amber-500/20" },
-            ].map((layer, i) => {
-              const content = t.stack.layers[i];
-              return { ...layer, badge: content.badge, title: content.title, description: content.description };
-            }).map((layer, i) => (
-              <AnimateInView key={layer.title} delay={i * 100}>
-                <div className={`rounded-xl border ${layer.borderClass} p-6 transition-colors h-full`}>
-                  <div className={`mb-4 flex size-12 items-center justify-center rounded-lg border ${layer.iconBg}`}>
-                    {layer.icon}
-                  </div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Badge className={`${layer.badgeClass} text-[10px]`}>{layer.badge}</Badge>
-                    <h3 className="text-lg font-semibold">{layer.title}</h3>
-                  </div>
-                  <p className="text-zinc-400 text-sm leading-relaxed">{layer.description}</p>
-                </div>
-              </AnimateInView>
-            ))}
-          </div>
+          {/* AIOS Pyramid Diagram */}
+          <AIOSPyramid locale={locale} />
 
         </div>
       </section>
