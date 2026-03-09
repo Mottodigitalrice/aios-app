@@ -547,6 +547,7 @@ const en = {
       programLink: "Program",
       pricingLink: "Pricing",
       auditLink: "Free AI Audit",
+      privacyLink: "Privacy Policy",
       contact: "Contact",
       contactCta: "Feel free to reach out",
       company: {

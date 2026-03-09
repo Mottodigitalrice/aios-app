@@ -758,6 +758,7 @@ export default function HomePage() {
                 <Link href="#program" className="hover:text-zinc-300 transition-colors">{t.footer.programLink}</Link>
                 <Link href="#pricing" className="hover:text-zinc-300 transition-colors">{t.footer.pricingLink}</Link>
                 <Link href="/audit" className="hover:text-zinc-300 transition-colors">{t.footer.auditLink}</Link>
+                <Link href="/privacy" className="hover:text-zinc-300 transition-colors">{t.footer.privacyLink}</Link>
               </div>
             </div>
             <div>
