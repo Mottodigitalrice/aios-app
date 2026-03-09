@@ -28,6 +28,7 @@ export const metadata: Metadata = {
     title: "AIOS — AI Operating System for Business",
     description:
       "Connected to your data. Owned by you. Locked into nobody. 6-month hands-on AI infrastructure program by MOTTO Digital.",
+    url: "https://aios.mottodigital.jp",
     type: "website",
     locale: "en_US",
     alternateLocale: "ja_JP",
@@ -62,12 +63,13 @@ export default function RootLayout({
               name: "MOTTO Digital",
               description:
                 "AI Operating System development for Japanese SMBs. 6-month hands-on program to build, deploy, and own your AI infrastructure.",
-              url: "https://mottodigital.com",
+              url: "https://aios.mottodigital.jp",
               founder: {
                 "@type": "Person",
                 name: "Lewis Rice",
                 jobTitle: "CEO",
               },
+              priceRange: "¥30,000–¥200,000/月",
               areaServed: {
                 "@type": "Country",
                 name: "Japan",
