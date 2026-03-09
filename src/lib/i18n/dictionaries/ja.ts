@@ -543,6 +543,7 @@ const ja = {
       pricingLink: "料金",
       auditLink: "無料AIオーディット",
       privacyLink: "プライバシーポリシー",
+      presentationLink: "資料",
       contact: "お問い合わせ",
       contactCta: "お気軽にご相談ください",
       company: {

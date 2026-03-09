@@ -548,6 +548,7 @@ const en = {
       pricingLink: "Pricing",
       auditLink: "Free AI Audit",
       privacyLink: "Privacy Policy",
+      presentationLink: "Presentation",
       contact: "Contact",
       contactCta: "Feel free to reach out",
       company: {

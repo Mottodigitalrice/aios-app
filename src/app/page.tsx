@@ -34,6 +34,7 @@ import { AgentOrgChart } from "@/components/landing/agent-org-chart";
 import { ShiryoDialog } from "@/components/landing/shiryo-dialog";
 import { AIOSPyramid } from "@/components/landing/aios-pyramid";
 
+import { METRICS } from "@/lib/constants";
 import en from "@/lib/i18n/dictionaries/en";
 import ja from "@/lib/i18n/dictionaries/ja";
 
@@ -269,19 +270,22 @@ export default function HomePage() {
             </p>
           </AnimateInView>
 
-          {/* Metrics Grid with CountUp */}
+          {/* Metrics Grid with CountUp — values from constants.ts for easy updates */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-            {t.caseStudy.metrics.map((metric, i) => (
-              <AnimateInView key={metric.label} delay={i * 100}>
-                <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-5 text-center">
-                  <div className="text-3xl sm:text-4xl font-bold gradient-text mb-1">
-                    <CountUp end={metric.value} />
+            {[METRICS.activeProjects, METRICS.tasksInProgress, METRICS.pipelineDeals, METRICS.locationsManaged].map((value, i) => {
+              const metric = t.caseStudy.metrics[i];
+              return (
+                <AnimateInView key={metric.label} delay={i * 100}>
+                  <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-5 text-center">
+                    <div className="text-3xl sm:text-4xl font-bold gradient-text mb-1">
+                      <CountUp end={value} />
+                    </div>
+                    <div className="text-sm font-medium text-zinc-200">{metric.label}</div>
+                    <div className="text-xs text-zinc-500 mt-1">{metric.sublabel}</div>
                   </div>
-                  <div className="text-sm font-medium text-zinc-200">{metric.label}</div>
-                  <div className="text-xs text-zinc-500 mt-1">{metric.sublabel}</div>
-                </div>
-              </AnimateInView>
-            ))}
+                </AnimateInView>
+              );
+            })}
           </div>
 
           {/* Agent Org Chart (NEW) */}
@@ -762,6 +766,7 @@ export default function HomePage() {
                 <Link href="#pricing" className="hover:text-zinc-300 transition-colors">{t.footer.pricingLink}</Link>
                 <Link href="/audit" className="hover:text-zinc-300 transition-colors">{t.footer.auditLink}</Link>
                 <Link href="/privacy" className="hover:text-zinc-300 transition-colors">{t.footer.privacyLink}</Link>
+                <Link href="/presentation" className="hover:text-zinc-300 transition-colors">{t.footer.presentationLink}</Link>
               </div>
             </div>
             <div>
