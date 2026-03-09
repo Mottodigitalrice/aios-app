@@ -143,11 +143,6 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Single-line testimonial */}
-              <p className="animate-fade-in-up animation-delay-200 mt-4 text-sm text-zinc-500 italic max-w-lg mx-auto lg:mx-0">
-                {t.hero.testimonial}
-              </p>
-
               <div className="animate-fade-in-up animation-delay-300 mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                 <div className="flex flex-col items-center sm:items-start">
                   <Link href="/audit">
