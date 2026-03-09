@@ -153,20 +153,22 @@ export function HeroVisual({ locale = "en" }: { locale?: "en" | "ja" }) {
 
   /* Cycle feed items */
   useEffect(() => {
+    const len = feedItems.length;
     const timer = setInterval(() => {
       setVisibleFeed((prev) => {
-        const next = (prev[0] + 1) % feedItems.length;
-        return [next, (next + 1) % feedItems.length, (next + 2) % feedItems.length];
+        const next = (prev[0] + 1) % len;
+        return [next, (next + 1) % len, (next + 2) % len];
       });
     }, 3000);
     return () => clearInterval(timer);
-  }, []);
+  }, [feedItems.length]);
 
   /* Cycle agent pulse */
   useEffect(() => {
-    const timer = setInterval(() => setAgentPulse((p) => (p + 1) % agents.length), 2500);
+    const len = agents.length;
+    const timer = setInterval(() => setAgentPulse((p) => (p + 1) % len), 2500);
     return () => clearInterval(timer);
-  }, []);
+  }, [agents.length]);
 
   return (
     <div className="relative w-full max-w-md mx-auto mt-12 lg:mt-0 lg:max-w-none">

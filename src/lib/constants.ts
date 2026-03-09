@@ -9,7 +9,6 @@ export const METRICS = {
   tasksInProgress: 63,
   pipelineDeals: 9,
   locationsManaged: 16,
-  payingClients: 4,
 } as const;
 
 export const ROUTES = {
