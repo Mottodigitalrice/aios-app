@@ -23,19 +23,25 @@ export interface AuditFormData {
   employees: string;
   workType: string;
   useCase: "personal" | "business" | "both" | "";
-  // Step 4 (NEW: Data Maturity)
+  // Step 4 (Data Maturity — corporate path)
   dataMaturity: string;
+  dataConfidence: number | null;
   dataLocation: string[];
+  dataRestructuringOpenness: string;
   // Step 5
   tools: string[];
-  // Step 6
+  // Step 6 (Challenges + Operations)
   challenge: string[];
   challengeOther: string;
-  // Step 7 (expanded with budget)
+  bottlenecks: string[];
+  repetitiveHoursPerWeek: string;
+  // Step 7 (AI experience & readiness)
   aiExperience: string;
   sixMonthVision: string[];
   sixMonthVisionOther: string;
   aiBudget: string;
+  aiTriedBefore: string;
+  aiTimeline: string;
   // Step 8
   source: string;
   preferredTime: string;
@@ -53,14 +59,20 @@ const INITIAL_DATA: AuditFormData = {
   workType: "",
   useCase: "",
   dataMaturity: "",
+  dataConfidence: null,
   dataLocation: [],
+  dataRestructuringOpenness: "",
   tools: [],
   challenge: [],
   challengeOther: "",
+  bottlenecks: [],
+  repetitiveHoursPerWeek: "",
   aiExperience: "",
   sixMonthVision: [],
   sixMonthVisionOther: "",
   aiBudget: "",
+  aiTriedBefore: "",
+  aiTimeline: "",
   source: "",
   preferredTime: "",
   website: "",
@@ -271,7 +283,9 @@ export function useAuditForm() {
             break;
           case 3:
             if (formData.dataMaturity) updatePayload.dataMaturity = formData.dataMaturity;
+            if (formData.dataConfidence !== null) updatePayload.dataConfidence = formData.dataConfidence;
             if (formData.dataLocation.length > 0) updatePayload.dataLocation = formData.dataLocation;
+            if (formData.dataRestructuringOpenness) updatePayload.dataRestructuringOpenness = formData.dataRestructuringOpenness;
             break;
           case 4:
             if (formData.tools.length > 0)
@@ -282,6 +296,10 @@ export function useAuditForm() {
               updatePayload.challenge = formData.challenge;
             if (formData.challengeOther)
               updatePayload.challengeOther = formData.challengeOther;
+            if (formData.bottlenecks.length > 0)
+              updatePayload.bottlenecks = formData.bottlenecks;
+            if (formData.repetitiveHoursPerWeek)
+              updatePayload.repetitiveHoursPerWeek = formData.repetitiveHoursPerWeek;
             break;
           case 6:
             if (formData.aiExperience)
@@ -292,6 +310,10 @@ export function useAuditForm() {
               updatePayload.sixMonthVisionOther = formData.sixMonthVisionOther;
             if (formData.aiBudget)
               updatePayload.aiBudget = formData.aiBudget;
+            if (formData.aiTriedBefore)
+              updatePayload.aiTriedBefore = formData.aiTriedBefore;
+            if (formData.aiTimeline)
+              updatePayload.aiTimeline = formData.aiTimeline;
             break;
         }
 

@@ -29,6 +29,7 @@ export function Step4Data({
 }: Step4DataProps) {
   const { t } = useAuditLocale();
   const step = t.steps[4];
+  const isCorporate = formData.perspective === "corporate";
 
   return (
     <StepLayout
@@ -54,6 +55,35 @@ export function Step4Data({
           </div>
         </div>
 
+        {/* Confidence scale 1-10 — corporate path only */}
+        {isCorporate && (
+          <div className="space-y-3">
+            <Label className="text-zinc-300">{step.confidenceLabel}</Label>
+            <div className="space-y-2">
+              <div className="flex gap-1.5">
+                {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => (
+                  <button
+                    key={n}
+                    type="button"
+                    onClick={() => updateField("dataConfidence", n)}
+                    className={`flex-1 h-10 rounded-lg border text-sm font-medium transition-all duration-200 ${
+                      formData.dataConfidence === n
+                        ? "border-indigo-500/50 bg-indigo-500/10 text-indigo-300 ring-1 ring-indigo-500/30"
+                        : "border-zinc-800/50 bg-zinc-900/50 text-zinc-400 hover:border-zinc-700 hover:text-zinc-300"
+                    }`}
+                  >
+                    {n}
+                  </button>
+                ))}
+              </div>
+              <div className="flex justify-between text-xs text-zinc-500">
+                <span>{step.confidenceMin}</span>
+                <span>{step.confidenceMax}</span>
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="space-y-3">
           <Label className="text-zinc-300">{step.dataLocationLabel}</Label>
           <MultiSelectChips
@@ -63,6 +93,23 @@ export function Step4Data({
             allowOther={false}
           />
         </div>
+
+        {/* Openness to restructuring — corporate path only */}
+        {isCorporate && (
+          <div className="space-y-3">
+            <Label className="text-zinc-300">{step.restructuringLabel}</Label>
+            <div className="grid grid-cols-1 gap-2">
+              {step.restructuringOptions.map((option) => (
+                <SelectCard
+                  key={option}
+                  label={option}
+                  selected={formData.dataRestructuringOpenness === option}
+                  onClick={() => updateField("dataRestructuringOpenness", option)}
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </StepLayout>
   );

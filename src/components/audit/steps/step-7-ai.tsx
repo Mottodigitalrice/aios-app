@@ -55,6 +55,21 @@ export function Step7AI({
           </div>
         </div>
 
+        {/* "Have you tried AI before?" open text */}
+        <div className="space-y-2">
+          <Label htmlFor="aiTriedBefore" className="text-zinc-300">
+            {step.triedBeforeLabel}
+          </Label>
+          <textarea
+            id="aiTriedBefore"
+            value={formData.aiTriedBefore}
+            onChange={(e) => updateField("aiTriedBefore", e.target.value)}
+            placeholder={step.triedBeforePlaceholder}
+            rows={3}
+            className="w-full rounded-lg bg-zinc-950/50 border border-zinc-700/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20 focus-visible:ring-1 focus-visible:outline-none px-3 py-2.5 text-base resize-none"
+          />
+        </div>
+
         <div className="space-y-3">
           <Label className="text-zinc-300">
             {step.visionLabel}
@@ -68,6 +83,23 @@ export function Step7AI({
               updateField("sixMonthVisionOther", value)
             }
           />
+        </div>
+
+        {/* "How soon would you move forward?" */}
+        <div className="space-y-3">
+          <Label className="text-zinc-300">
+            {step.timelineLabel}
+          </Label>
+          <div className="grid grid-cols-2 gap-2">
+            {step.timelineOptions.map((option) => (
+              <SelectCard
+                key={option}
+                label={option}
+                selected={formData.aiTimeline === option}
+                onClick={() => updateField("aiTimeline", option)}
+              />
+            ))}
+          </div>
         </div>
 
         <div className="space-y-3">
