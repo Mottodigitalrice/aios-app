@@ -327,16 +327,14 @@ export function AuditSuccess({ perspective }: AuditSuccessProps) {
           {/* Book Meeting CTA */}
           <div className="rounded-xl border border-indigo-500/30 bg-indigo-500/5 p-6 mb-8 animate-fade-in-up animation-delay-400">
             <p className="text-zinc-300 text-sm mb-4 leading-relaxed">
-              {isPersonal && "bookDescriptionPersonal" in t.success
+              {isPersonal
                 ? t.success.bookDescriptionPersonal
                 : t.success.bookDescription}
             </p>
 
             {/* TidyCal Embed */}
             <h3 className="text-sm font-semibold text-zinc-300 mb-3">
-              {"bookEmbedTitle" in t.success
-                ? t.success.bookEmbedTitle
-                : "Pick a time that works for you"}
+              {t.success.bookEmbedTitle}
             </h3>
             <TidyCalEmbed path="rice/ai" />
 
@@ -348,13 +346,11 @@ export function AuditSuccess({ perspective }: AuditSuccessProps) {
               className="inline-flex items-center gap-1.5 mt-4 text-sm text-indigo-400 hover:text-indigo-300 transition-colors"
             >
               <CalendarCheck className="size-3.5" />
-              {"bookFallback" in t.success
-                ? t.success.bookFallback
-                : "Or open scheduler in new tab"}
+              {t.success.bookFallback}
             </Link>
 
             <p className="mt-3 text-xs text-zinc-500">
-              {isPersonal && "bookSubtextPersonal" in t.success
+              {isPersonal
                 ? t.success.bookSubtextPersonal
                 : t.success.bookSubtext}
             </p>
