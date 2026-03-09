@@ -24,7 +24,6 @@ import {
   HardDrive,
   Cpu,
   Network,
-  Brain,
   MessageSquare,
   Workflow,
   AlertTriangle,
@@ -38,6 +37,7 @@ import {
   Clock,
 } from "lucide-react";
 import { AIOSPyramid } from "@/components/landing/aios-pyramid";
+import { BrainBodyDiagram } from "@/components/landing/brain-body-section";
 
 // ── Slide definitions ──
 // Each slide has a name and number of internal sub-steps
@@ -572,60 +572,8 @@ export default function PresentationPage() {
               </div>
 
               <FadeIn show={localStep >= 1}>
-                <div className="w-full max-w-3xl flex flex-col items-center">
-                  {/* Brain + Body diagram */}
-                  <div className="flex items-center gap-6 sm:gap-10">
-                    {/* Brain (AI Model) — sphere */}
-                    <div className="flex flex-col items-center">
-                      <div className="size-28 sm:size-36 rounded-full border-2 border-violet-500/40 bg-violet-950/20 flex items-center justify-center relative">
-                        <Brain className="size-12 sm:size-16 text-violet-400" />
-                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-zinc-950 px-2">
-                          <span className="text-[10px] text-violet-400 font-semibold uppercase tracking-wider">Brain</span>
-                        </div>
-                      </div>
-                      <p className="mt-3 text-sm font-semibold text-violet-300">AI Model</p>
-                      <p className="text-xs text-zinc-500">Claude, GPT, Gemini</p>
-                      <p className="text-xs text-zinc-600 mt-1">Can think. Can&apos;t act.</p>
-                      <p className="text-[10px] text-zinc-700">考えられる。行動できない。</p>
-                    </div>
-
-                    {/* Plus sign */}
-                    <div className="text-3xl sm:text-4xl font-light text-zinc-600">+</div>
-
-                    {/* Body (Agentic Harness) — cube with sphere inside */}
-                    <div className="flex flex-col items-center">
-                      <div className="size-28 sm:size-36 rounded-2xl border-2 border-emerald-500/40 bg-emerald-950/20 flex items-center justify-center relative">
-                        {/* Inner sphere */}
-                        <div className="size-16 sm:size-20 rounded-full border border-violet-500/30 bg-violet-950/10 flex items-center justify-center">
-                          <Brain className="size-7 sm:size-9 text-violet-400/70" />
-                        </div>
-                        {/* Corner accents for "cube" feeling */}
-                        <div className="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-emerald-500/40 rounded-tl" />
-                        <div className="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-emerald-500/40 rounded-tr" />
-                        <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-emerald-500/40 rounded-bl" />
-                        <div className="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-emerald-500/40 rounded-br" />
-                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-zinc-950 px-2">
-                          <span className="text-[10px] text-emerald-400 font-semibold uppercase tracking-wider">Body</span>
-                        </div>
-                      </div>
-                      <p className="mt-3 text-sm font-semibold text-emerald-300">Agentic Harness</p>
-                      <p className="text-xs text-zinc-500">Terminal, files, APIs, servers</p>
-                      <p className="text-xs text-emerald-400 mt-1">Can think AND act.</p>
-                      <p className="text-[10px] text-zinc-600">考えて、行動できる。</p>
-                    </div>
-                  </div>
-
-                  {/* Equals */}
-                  <div className="mt-6 flex items-center gap-3">
-                    <div className="h-px w-12 bg-zinc-700" />
-                    <span className="text-lg text-zinc-500 font-light">=</span>
-                    <div className="h-px w-12 bg-zinc-700" />
-                  </div>
-
-                  <div className="mt-4 px-6 py-3 rounded-xl border border-emerald-500/30 bg-emerald-950/20 text-center">
-                    <p className="text-lg font-semibold text-emerald-300">An AI that can operate your entire business</p>
-                    <p className="text-sm text-zinc-500 mt-1">ビジネス全体を運営できるAI</p>
-                  </div>
+                <div className="w-full max-w-3xl">
+                  <BrainBodyDiagram locale="en" compact />
                 </div>
               </FadeIn>
 
@@ -758,7 +706,7 @@ export default function PresentationPage() {
 
               <FadeIn show={localStep >= 1}>
                 <div className="mt-6 w-full max-w-4xl [&_h3]:!text-2xl [&_h3]:!sm\\:text-3xl [&_p]:!text-base">
-                  <AIOSPyramid locale="en" />
+                  <AIOSPyramid locale="en" compact />
                 </div>
               </FadeIn>
             </div>

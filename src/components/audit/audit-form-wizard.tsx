@@ -41,7 +41,7 @@ function AuditSidebar({ step }: { step: number }) {
 
   const ICONS = [
     [FileText, Clock, Sparkles, Shield],
-    [Users, TrendingUp],
+    [Users, TrendingUp, Sparkles],
     [Users, TrendingUp],
     [Database, CheckCircle2],
     [Zap, CheckCircle2],
@@ -158,7 +158,7 @@ function AuditFormWizardInner() {
   });
 
   if (isComplete) {
-    return <AuditSuccess />;
+    return <AuditSuccess perspective={formData.perspective || undefined} />;
   }
 
   const handleNext = () => {

@@ -230,14 +230,23 @@ function Connector({
 /* ══════════════════════════════════════════════════
    MAIN COMPONENT
    ══════════════════════════════════════════════════ */
-export function AIOSPyramid({ locale }: { locale: "en" | "ja" }) {
+export function AIOSPyramid({
+  locale,
+  compact = false,
+}: {
+  locale: "en" | "ja";
+  compact?: boolean;
+}) {
   const t = content[locale];
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.05 });
-  const [step, setStep] = useState(0);
+  // In compact mode (presentation), start fully revealed
+  const [step, setStep] = useState(compact ? 5 : 0);
   const [hoveredLayer, setHoveredLayer] = useState<number | null>(null);
 
   // Staggered reveal: bottom-up (step 1=L1, step 4=L4, step 5=footer)
+  // Skip animation in compact mode — everything is immediately visible
   useEffect(() => {
+    if (compact) return;
     if (!isInView) return;
     const timers = [
       setTimeout(() => setStep(1), 200),
@@ -247,7 +256,7 @@ export function AIOSPyramid({ locale }: { locale: "en" | "ja" }) {
       setTimeout(() => setStep(5), 1100),
     ];
     return () => timers.forEach(clearTimeout);
-  }, [isInView]);
+  }, [isInView, compact]);
 
   return (
     <div className="mt-12" ref={ref}>

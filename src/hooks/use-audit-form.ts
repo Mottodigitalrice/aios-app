@@ -15,11 +15,14 @@ export interface AuditFormData {
   email: string;
   privacyConsent: boolean;
   // Step 2
+  perspective: "personal" | "corporate" | "";
   name: string;
   role: string;
   // Step 3
   company: string;
   employees: string;
+  workType: string;
+  useCase: "personal" | "business" | "both" | "";
   // Step 4 (NEW: Data Maturity)
   dataMaturity: string;
   dataLocation: string[];
@@ -42,10 +45,13 @@ export interface AuditFormData {
 const INITIAL_DATA: AuditFormData = {
   email: "",
   privacyConsent: false,
+  perspective: "",
   name: "",
   role: "",
   company: "",
   employees: "",
+  workType: "",
+  useCase: "",
   dataMaturity: "",
   dataLocation: [],
   tools: [],
@@ -67,7 +73,7 @@ const STORAGE_KEY = "aios-audit-lead";
 // Per-step validation schemas
 // ---------------------------------------------------------------------------
 
-const stepSchemas: Record<number, z.ZodType> = {
+const baseStepSchemas: Record<number, z.ZodType> = {
   0: z.object({
     email: z.string().check(
       z.email({ message: "Please enter a valid email" })
@@ -78,16 +84,29 @@ const stepSchemas: Record<number, z.ZodType> = {
   }),
   1: z.object({
     name: z.string().min(1, "Name is required"),
+    perspective: z.string().min(1, "Please select a perspective"),
   }),
-  2: z.object({
-    company: z.string().min(1, "Company name is required"),
-  }),
+  // Step 2 (company) — validated dynamically based on perspective
+  2: z.object({}),
   3: z.object({}), // data maturity — optional
   4: z.object({}), // tools — optional
   5: z.object({}), // challenges — optional
   6: z.object({}), // AI experience & readiness — optional
   7: z.object({}), // logistics — optional
 };
+
+// Corporate requires company name, personal does not
+const step2CorporateSchema = z.object({
+  company: z.string().min(1, "Company name is required"),
+});
+const step2PersonalSchema = z.object({});
+
+function getStepSchemas(perspective: string): Record<number, z.ZodType> {
+  return {
+    ...baseStepSchemas,
+    2: perspective === "corporate" ? step2CorporateSchema : step2PersonalSchema,
+  };
+}
 
 // ---------------------------------------------------------------------------
 // Hook
@@ -161,6 +180,7 @@ export function useAuditForm() {
 
   const validateField = useCallback(
     (field: keyof AuditFormData) => {
+      const stepSchemas = getStepSchemas(formData.perspective);
       const schema = stepSchemas[currentStep];
       if (!schema) return;
 
@@ -196,6 +216,7 @@ export function useAuditForm() {
   );
 
   const validateCurrentStep = useCallback((): string | null => {
+    const stepSchemas = getStepSchemas(formData.perspective);
     const schema = stepSchemas[currentStep];
     if (!schema) return null;
 
@@ -240,10 +261,13 @@ export function useAuditForm() {
           case 1:
             updatePayload.name = formData.name;
             if (formData.role) updatePayload.role = formData.role;
+            if (formData.perspective) updatePayload.perspective = formData.perspective;
             break;
           case 2:
-            updatePayload.company = formData.company;
+            if (formData.company) updatePayload.company = formData.company;
             if (formData.employees) updatePayload.employees = formData.employees;
+            if (formData.workType) updatePayload.workType = formData.workType;
+            if (formData.useCase) updatePayload.useCase = formData.useCase;
             break;
           case 3:
             if (formData.dataMaturity) updatePayload.dataMaturity = formData.dataMaturity;

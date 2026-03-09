@@ -21,9 +21,10 @@ const auditDict = {
         ],
       },
       1: {
-        title: "You're in good company",
+        title: "Personalized for you",
         items: [
-          "50+ companies have taken the audit",
+          "Choose personal or corporate perspective for tailored questions",
+          "50+ companies and professionals have taken the audit",
           "Average 40% efficiency gain after implementation",
         ],
         testimonial: {
@@ -104,6 +105,11 @@ const auditDict = {
     },
     2: {
       question: "Tell us about yourself",
+      perspectiveLabel: "What perspective should this audit take?",
+      perspectivePersonal: "Personal",
+      perspectivePersonalDesc: "AI for my own workflow and role",
+      perspectiveCorporate: "Corporate",
+      perspectiveCorporateDesc: "AI for my company or team",
       nameLabel: "What\u2019s your name?",
       namePlaceholder: "Your full name",
       roleLabel: "What\u2019s your role?",
@@ -118,10 +124,27 @@ const auditDict = {
     },
     3: {
       question: "Tell us about your company",
+      questionPersonal: "Tell us about your work",
       companyLabel: "What company are you with?",
       companyPlaceholder: "Company name",
+      companyOptionalLabel: "Company / Organization (optional)",
       sizeLabel: "How big is your team?",
       sizeOptions: ["1-5", "6-20", "21-50", "51-100", "100+"],
+      workTypeLabel: "What kind of work do you do?",
+      workTypeOptions: [
+        "Consulting",
+        "Design / Creative",
+        "Marketing",
+        "Software Development",
+        "Finance / Accounting",
+        "Sales",
+        "Education / Training",
+        "Other",
+      ],
+      useCaseLabel: "Is this for...",
+      useCasePersonal: "Personal productivity only",
+      useCaseBusiness: "My business / clients",
+      useCaseBoth: "Both personal and business",
     },
     4: {
       question: "How is your business data organized?",
@@ -257,9 +280,13 @@ const auditDict = {
       },
     },
     bookCta: "Book Your Free Audit Call",
+    bookCtaPersonal: "Join the April Cohort",
     bookSubtext: "30 minutes \u00B7 Video call \u00B7 No sales pressure",
+    bookSubtextPersonal: "Small group \u00B7 Hands-on workshop \u00B7 Free",
     bookDescription:
       "Go ahead and pick a time that works for you. Lewis will have your audit ready by the call.",
+    bookDescriptionPersonal:
+      "Join the next cohort and learn how to apply AI to your personal workflow with a small group of professionals.",
     sharePrompt: "Know someone who would benefit?",
     copyLink: "Copy link",
     copied: "Copied!",

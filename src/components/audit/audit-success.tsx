@@ -208,10 +208,15 @@ function useTimelineSteps() {
 // Main component
 // ---------------------------------------------------------------------------
 
-export function AuditSuccess() {
+interface AuditSuccessProps {
+  perspective?: "personal" | "corporate" | string;
+}
+
+export function AuditSuccess({ perspective }: AuditSuccessProps) {
   const { t } = useAuditLocale();
   const [showConfetti, setShowConfetti] = useState(true);
   const timelineSteps = useTimelineSteps();
+  const isPersonal = perspective === "personal";
 
   useEffect(() => {
     const timer = setTimeout(() => setShowConfetti(false), 4000);
@@ -327,7 +332,9 @@ export function AuditSuccess() {
           {/* Book Meeting CTA */}
           <div className="rounded-xl border border-indigo-500/30 bg-indigo-500/5 p-6 mb-8 animate-fade-in-up animation-delay-400">
             <p className="text-zinc-300 text-sm mb-4 leading-relaxed">
-              {t.success.bookDescription}
+              {isPersonal && "bookDescriptionPersonal" in t.success
+                ? t.success.bookDescriptionPersonal
+                : t.success.bookDescription}
             </p>
             <Link
               href="https://tidycal.com/rice/ai"
@@ -339,11 +346,15 @@ export function AuditSuccess() {
                 className="w-full bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow"
               >
                 <CalendarCheck className="size-5" />
-                {t.success.bookCta}
+                {isPersonal && "bookCtaPersonal" in t.success
+                  ? t.success.bookCtaPersonal
+                  : t.success.bookCta}
               </Button>
             </Link>
             <p className="mt-3 text-xs text-zinc-500">
-              {t.success.bookSubtext}
+              {isPersonal && "bookSubtextPersonal" in t.success
+                ? t.success.bookSubtextPersonal
+                : t.success.bookSubtext}
             </p>
           </div>
 

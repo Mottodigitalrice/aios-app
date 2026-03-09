@@ -81,7 +81,13 @@ function Connector({ className = "" }: { className?: string }) {
 /* ─────────────────────────────────────────────
    AgentOrgChart — Section 5 org chart component
    ───────────────────────────────────────────── */
-export function AgentOrgChart({ locale }: { locale: "en" | "ja" }) {
+export function AgentOrgChart({
+  locale,
+  compact = false,
+}: {
+  locale: "en" | "ja";
+  compact?: boolean;
+}) {
   const dict = dictionaries[locale];
   // ja.ts may not have orgChart yet — fall back to en
   const t =
@@ -89,9 +95,8 @@ export function AgentOrgChart({ locale }: { locale: "en" | "ja" }) {
       ? (dict.landing as typeof en.landing).orgChart
       : en.landing.orgChart;
 
-  return (
-    <AnimateInView>
-      <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/30 p-6 sm:p-10">
+  const inner = (
+    <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/30 p-6 sm:p-10">
         {/* Section title */}
         <h3 className="text-lg sm:text-xl font-semibold text-center mb-8 sm:mb-10">
           {t.title}
@@ -241,6 +246,9 @@ export function AgentOrgChart({ locale }: { locale: "en" | "ja" }) {
           </div>
         </div>
       </div>
-    </AnimateInView>
   );
+
+  // In compact mode (presentation), skip the scroll-triggered animation wrapper
+  if (compact) return inner;
+  return <AnimateInView>{inner}</AnimateInView>;
 }

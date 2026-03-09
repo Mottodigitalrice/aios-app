@@ -467,7 +467,7 @@ export default function HomePage() {
                 {t.program.byMonth6.metrics.map((metric, i) => (
                   <div key={i} className="text-center">
                     <div className="text-3xl font-bold gradient-text mb-2">
-                      {i === 0 ? <CountUp end={3} suffix="+" /> : i === 1 ? <CountUp end={100} suffix="%" /> : metric.value}
+                      {i === 0 ? <CountUp end={10} /> : i === 1 ? <CountUp end={100} suffix="%" /> : metric.value}
                     </div>
                     <div className="text-sm font-medium text-zinc-200">{metric.label}</div>
                     <div className="text-xs text-zinc-500 mt-1">{metric.sublabel}</div>
@@ -481,7 +481,7 @@ export default function HomePage() {
           <div className="border-t border-zinc-800/50 my-16" />
 
           {/* ===============================================
-              PRICING -- Two Cards Only (within same section)
+              PRICING -- Group Cohort + Corporate Build
               =============================================== */}
           <div id="pricing">
             <AnimateInView className="text-center mb-16">
@@ -496,77 +496,92 @@ export default function HomePage() {
               </p>
             </AnimateInView>
 
-            {/* Scarcity banner — uses t.pricing.spotsLeft, no hardcoded text */}
-            <AnimateInView className="mb-8">
-              <div className="flex items-center justify-center gap-3 rounded-xl border border-amber-500/20 bg-amber-500/[0.05] p-4">
-                <Timer className="size-5 text-amber-400 shrink-0" />
-                <p className="text-sm font-medium text-amber-300">
-                  {t.pricing.spotsLeft}
-                </p>
-              </div>
-            </AnimateInView>
+            {/* Two pricing columns */}
+            <div className="grid lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
 
-            {/* Two pricing cards */}
-            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              {/* Monthly Plan: ¥200,000/mo */}
+              {/* Left: Group Cohort */}
               <AnimateInView delay={100}>
                 <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-8 flex flex-col h-full">
-                  <h3 className="text-xl font-semibold mb-1">{t.pricing.monthly}</h3>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-indigo-400 mb-2">{t.pricing.cohort.label}</span>
+                  <h3 className="text-2xl font-bold mb-3">{t.pricing.cohort.title}</h3>
                   <div className="flex items-baseline gap-1 mb-1">
-                    <span className="text-4xl font-bold">&yen;200,000</span>
-                    <span className="text-zinc-500">{t.pricing.monthlyPer}</span>
+                    <span className="text-4xl font-bold">{t.pricing.cohort.price}</span>
+                    <span className="text-zinc-500">{t.pricing.cohort.pricePer}</span>
                   </div>
-                  <p className="text-sm text-zinc-500 mb-6">&times;6 = &yen;1,200,000 total</p>
-                  <ul className="space-y-3 mb-8 flex-1">
-                    {t.pricingDetails.monthlyFeatures.map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-sm text-zinc-300">
-                        <Check className="size-4 text-zinc-500 mt-0.5 shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Link href="/audit" className="w-full">
-                    <Button variant="outline" className="w-full border-zinc-700 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100">
-                      {t.pricing.monthlyCta}
-                    </Button>
-                  </Link>
-                </div>
-              </AnimateInView>
-              {/* Pay in Full: ¥1,000,000 */}
-              <AnimateInView delay={200}>
-                <div className="rounded-xl border-2 border-indigo-500/30 bg-indigo-500/5 p-8 flex flex-col relative glow scale-[1.02] h-full">
-                  <Badge className="absolute -top-3 right-6 bg-indigo-600 text-white border-0">
-                    {t.pricing.bestValue}
-                  </Badge>
-                  <h3 className="text-xl font-semibold mb-1">{t.pricing.payInFull}</h3>
-                  <div className="flex items-baseline gap-1 mb-1">
-                    <span className="text-4xl font-bold">&yen;1,000,000</span>
+                  <p className="text-sm text-zinc-500 mb-1">{t.pricing.cohort.commitment}</p>
+                  <div className="flex items-center gap-2 mb-6">
+                    <Timer className="size-4 text-amber-400 shrink-0" />
+                    <p className="text-sm font-medium text-amber-300">{t.pricing.cohort.spots}</p>
                   </div>
-                  <p className="text-sm text-zinc-500 mb-6">
-                    {locale === "ja" ? "月払いより¥200,000お得" : "Save ¥200,000 vs monthly"}
-                  </p>
-                  <ul className="space-y-3 mb-8 flex-1">
-                    {t.pricingDetails.upfrontFeatures.map((item) => (
+                  <ul className="space-y-3 mb-6 flex-1">
+                    {t.pricing.cohort.features.map((item) => (
                       <li key={item} className="flex items-start gap-3 text-sm text-zinc-300">
                         <Check className="size-4 text-indigo-400 mt-0.5 shrink-0" />
                         <span>{item}</span>
                       </li>
                     ))}
                   </ul>
+                  <p className="text-xs text-zinc-500 mb-2">{t.pricing.cohort.bestFor}</p>
+                  <p className="text-xs text-emerald-400/70 mb-6">{t.pricing.cohort.guarantee}</p>
                   <Link href="/audit" className="w-full">
                     <Button className="w-full bg-indigo-600 hover:bg-indigo-500 text-white">
-                      {t.pricing.payInFullCta}
+                      {t.pricing.cohort.cta}
                     </Button>
                   </Link>
                 </div>
               </AnimateInView>
+
+              {/* Right: Corporate Build */}
+              <AnimateInView delay={200}>
+                <div className="rounded-xl border-2 border-indigo-500/30 bg-indigo-500/5 p-8 flex flex-col h-full relative">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-indigo-400 mb-2">{t.pricing.corporate.label}</span>
+                  <h3 className="text-2xl font-bold mb-3">{t.pricing.corporate.title}</h3>
+
+                  {/* Monthly option */}
+                  <div className="flex items-baseline gap-1 mb-0.5">
+                    <span className="text-4xl font-bold">{t.pricing.corporate.monthlyPrice}</span>
+                    <span className="text-zinc-500">{t.pricing.corporate.monthlyPer}</span>
+                  </div>
+                  <p className="text-sm text-zinc-500 mb-3">{t.pricing.corporate.monthlyTotal}</p>
+
+                  {/* Pay-in-full option */}
+                  <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/[0.05] p-3 mb-6 flex items-center justify-between">
+                    <div>
+                      <span className="text-lg font-bold">{t.pricing.corporate.payInFull}</span>
+                      <span className="ml-2 text-sm text-emerald-400">{t.pricing.corporate.payInFullSave}</span>
+                    </div>
+                    <Badge className="bg-indigo-600 text-white border-0 shrink-0">{t.pricing.corporate.bestValue}</Badge>
+                  </div>
+
+                  <ul className="space-y-3 mb-6 flex-1">
+                    {t.pricing.corporate.features.map((item) => (
+                      <li key={item} className="flex items-start gap-3 text-sm text-zinc-300">
+                        <Check className="size-4 text-indigo-400 mt-0.5 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-xs text-zinc-500 mb-2">{t.pricing.corporate.bestFor}</p>
+                  <p className="text-xs text-emerald-400/70 mb-6">{t.pricing.corporate.guarantee}</p>
+                  <div className="space-y-3">
+                    <Link href="/audit" className="w-full block">
+                      <Button variant="outline" className="w-full border-zinc-700 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100">
+                        {t.pricing.corporate.monthlyCta}
+                      </Button>
+                    </Link>
+                    <Link href="/audit" className="w-full block">
+                      <Button className="w-full bg-indigo-600 hover:bg-indigo-500 text-white">
+                        {t.pricing.corporate.payInFullCta}
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </AnimateInView>
             </div>
-            <AnimateInView className="mt-6 text-center space-y-2">
+
+            <AnimateInView className="mt-6 text-center">
               <p className="text-sm text-indigo-300">
                 {t.pricing.launchNote}
-              </p>
-              <p className="text-xs text-zinc-500">
-                {t.pricing.ceoNote}
               </p>
             </AnimateInView>
           </div>
@@ -588,9 +603,12 @@ export default function HomePage() {
             <p className="text-zinc-400 leading-relaxed mb-6 max-w-xl mx-auto">
               {t.guarantee.description}
             </p>
-            <div className="border-t border-emerald-500/20 pt-6 mt-6">
-              <p className="text-sm text-zinc-500">
-                {t.guarantee.refund}
+            <div className="border-t border-emerald-500/20 pt-6 mt-6 space-y-2">
+              <p className="text-sm text-zinc-400">
+                {t.guarantee.cohortNote}
+              </p>
+              <p className="text-sm text-zinc-400">
+                {t.guarantee.corporateNote}
               </p>
             </div>
           </div>

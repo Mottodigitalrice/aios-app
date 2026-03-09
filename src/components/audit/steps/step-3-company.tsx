@@ -33,11 +33,89 @@ export function Step3Company({
 }: Step3Props) {
   const { t } = useAuditLocale();
   const step = t.steps[3];
-  const canContinue = formData.company.length > 0;
+  const isPersonal = formData.perspective === "personal";
 
+  // Corporate: company required. Personal: always can continue.
+  const canContinue = isPersonal ? true : formData.company.length > 0;
+
+  const question = isPersonal ? step.questionPersonal : step.question;
+
+  if (isPersonal) {
+    return (
+      <StepLayout
+        question={question}
+        onNext={onNext}
+        onBack={onBack}
+        isLoading={isLoading}
+        canContinue={canContinue}
+        error={error}
+      >
+        <div className="space-y-6">
+          {/* Work type selector */}
+          <div className="space-y-3">
+            <Label className="text-zinc-300">{step.workTypeLabel}</Label>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {step.workTypeOptions.map((wt) => (
+                <SelectCard
+                  key={wt}
+                  label={wt}
+                  selected={formData.workType === wt}
+                  onClick={() => updateField("workType", wt)}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Use case selector */}
+          <div className="space-y-3">
+            <Label className="text-zinc-300">{step.useCaseLabel}</Label>
+            <div className="grid grid-cols-1 gap-2">
+              <SelectCard
+                label={step.useCasePersonal}
+                selected={formData.useCase === "personal"}
+                onClick={() => updateField("useCase", "personal")}
+              />
+              <SelectCard
+                label={step.useCaseBusiness}
+                selected={formData.useCase === "business"}
+                onClick={() => updateField("useCase", "business")}
+              />
+              <SelectCard
+                label={step.useCaseBoth}
+                selected={formData.useCase === "both"}
+                onClick={() => updateField("useCase", "both")}
+              />
+            </div>
+          </div>
+
+          {/* Optional company name */}
+          <div className="space-y-2">
+            <Label htmlFor="company" className="text-zinc-300">
+              {step.companyOptionalLabel}
+            </Label>
+            <Input
+              id="company"
+              value={formData.company}
+              onChange={(e) => updateField("company", e.target.value)}
+              placeholder={step.companyPlaceholder}
+              className="bg-zinc-950/50 border-zinc-700/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20 h-12 text-base"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  e.preventDefault();
+                  onNext();
+                }
+              }}
+            />
+          </div>
+        </div>
+      </StepLayout>
+    );
+  }
+
+  // Corporate variant (original)
   return (
     <StepLayout
-      question={step.question}
+      question={question}
       onNext={onNext}
       onBack={onBack}
       isLoading={isLoading}
