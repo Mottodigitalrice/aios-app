@@ -40,8 +40,16 @@ import ja from "@/lib/i18n/dictionaries/ja";
 
 const dictionaries = { en, ja } as const;
 
+function getInitialLocale(): "en" | "ja" {
+  if (typeof window === "undefined") return "en";
+  const params = new URLSearchParams(window.location.search);
+  const urlLocale = params.get("lang");
+  if (urlLocale === "ja" || urlLocale === "en") return urlLocale;
+  return "en";
+}
+
 export default function HomePage() {
-  const [locale, setLocale] = useState<"en" | "ja">("en");
+  const [locale, setLocale] = useState<"en" | "ja">(getInitialLocale);
   const t = dictionaries[locale].landing;
 
   return (
