@@ -367,12 +367,15 @@ export default function HomePage() {
           <p className="text-zinc-400 mb-8 max-w-xl mx-auto">
             {t.midCta.subtitle}
           </p>
-          <Link href="/audit">
-            <Button size="lg" className="bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow">
-              {t.cta.title}
-              <ArrowRight className="size-4" />
-            </Button>
-          </Link>
+          <div className="flex flex-col items-center">
+            <Link href="/audit">
+              <Button size="lg" className="bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow">
+                {t.cta.title}
+                <ArrowRight className="size-4" />
+              </Button>
+            </Link>
+            <span className="text-xs text-zinc-500 mt-1.5">{t.hero.ctaTime}</span>
+          </div>
         </div>
       </AnimateInView>
 
@@ -739,12 +742,15 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-          <Link href="/audit">
-            <Button size="lg" className="bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow">
-              {t.cta.title}
-              <ArrowRight className="size-4" />
-            </Button>
-          </Link>
+          <div className="flex flex-col items-center">
+            <Link href="/audit">
+              <Button size="lg" className="bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow">
+                {t.cta.title}
+                <ArrowRight className="size-4" />
+              </Button>
+            </Link>
+            <span className="text-xs text-zinc-500 mt-1.5">{t.hero.ctaTime}</span>
+          </div>
         </div>
       </AnimateInView>
 
