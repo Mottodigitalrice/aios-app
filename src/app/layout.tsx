@@ -9,6 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 const notoSansJP = Noto_Sans_JP({ subsets: ["latin"], weight: ["300", "400", "500", "700"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://aios.mottodigital.jp"),
   title: "AIOS — AI Operating System for Business | MOTTO Digital",
   description:
     "Build an AI Operating System for your business. Connected to your data, owned by you, locked into nobody. 6-month hands-on program by MOTTO Digital in Tokyo.",
