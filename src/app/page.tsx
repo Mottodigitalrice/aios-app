@@ -626,9 +626,12 @@ export default function HomePage() {
             </div>
 
             <AnimateInView className="mt-6 text-center">
-              <p className="text-sm text-indigo-300">
-                {t.pricing.launchNote}
-              </p>
+              <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-2">
+                <Timer className="size-4 text-amber-400 shrink-0" />
+                <p className="text-sm font-medium text-amber-300">
+                  {t.pricing.launchNote}
+                </p>
+              </div>
             </AnimateInView>
           </div>
         </div>
