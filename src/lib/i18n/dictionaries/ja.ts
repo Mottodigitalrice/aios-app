@@ -13,7 +13,7 @@ const ja = {
   audit: {
     badge: "無料 · 義務なし",
     title: "無料",
-    titleHighlight: "AI監査",
+    titleHighlight: "AI活用診断",
     subtitle:
       "かんたんな質問に答えるだけで、Lewisが直接AI活用度監査レポートを作成します。",
     chips: ["カスタムレポート", "ライブ通話", "完全無料"],
@@ -125,7 +125,7 @@ const ja = {
         {
           title: "Lewisが回答を確認",
           description:
-            "あなたが共有した内容を確認し、あなたに合わせたAI監査を準備します。",
+            "あなたが共有した内容を確認し、あなたに合わせたAI活用診断を準備します。",
         },
         {
           title: "一緒に確認",
@@ -162,7 +162,7 @@ const ja = {
       howUsed: {
         title: "情報の使用目的",
         items: [
-          "AI監査レポートの作成",
+          "AI活用診断レポートの作成",
           "監査通話のスケジュール調整",
           "関連サービスのご案内",
           "サービスの改善",
@@ -199,7 +199,7 @@ const ja = {
       proof: "実績",
       program: "プログラム",
       pricing: "料金",
-      cta: "無料AIオーディット",
+      cta: "無料AI活用診断",
     },
     hero: {
       badge: "同時導入は3社まで",
@@ -207,7 +207,7 @@ const ja = {
       titleHighlight: "あなたのものとして。あなたとともに成長する。",
       subtitle:
         "プロジェクト、クライアント、すべての約束——整理され、つながり、あなたのために動き続ける。特定のベンダーに縛られない。一緒に構築し、すべてをあなたが所有する。",
-      cta: "無料AIオーディットを受ける",
+      cta: "無料AI活用診断を受ける",
       ctaSecondary: "実際の動きを見る",
       stats:
         "現在26プロジェクト、63タスク、9件の商談をひとつのシステムで、一人で管理中。",
@@ -268,7 +268,7 @@ const ja = {
     },
     // FAQ content lives in faq-section.tsx (self-contained component with categories)
     cta: {
-      title: "無料AIオーディットを受ける",
+      title: "無料AI活用診断を受ける",
     },
     beforeAfter: {
       title: "ビジネスに「頭脳」ができると、",
@@ -360,7 +360,7 @@ const ja = {
     },
     midCta: {
       title: "あなたのビジネスではどうなるか、見てみませんか？",
-      subtitle: "無料AIオーディットはサクッと5分で完了。Lewisが直接回答を確認し、カスタムレポートを通話で説明します。",
+      subtitle: "無料AI活用診断はサクッと5分で完了。Lewisが直接回答を確認し、カスタムレポートを通話で説明します。",
     },
     problems: {
       badge: "問題点",
@@ -473,7 +473,7 @@ const ja = {
     auditCta: {
       title: "自社に合うかどうか迷っていますか？",
       titleHighlight: "無料で確認できます。",
-      subtitle: "あなたのビジネスについて教えてください。ルイスが回答を一つひとつ確認し、最も影響の大きいAIの機会を特定し、通話でカスタムオーディットを一緒に確認します。レポートはそのままあなたのものです——義務は一切ありません。",
+      subtitle: "あなたのビジネスについて教えてください。ルイスが回答を一つひとつ確認し、最も影響の大きいAIの機会を特定し、通話でカスタム診断レポートを一緒に確認します。レポートはそのままあなたのものです——義務は一切ありません。",
       benefits: [
         "完全無料、義務なし",
         "ルイスが直接確認",
@@ -495,7 +495,7 @@ const ja = {
       caseStudyLink: "実績",
       programLink: "プログラム",
       pricingLink: "料金",
-      auditLink: "無料AIオーディット",
+      auditLink: "無料AI活用診断",
       privacyLink: "プライバシーポリシー",
       presentationLink: "資料",
       contact: "お問い合わせ",

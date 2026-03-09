@@ -6,7 +6,7 @@ const auditDict = {
   },
   badge: "無料 · 義務なし",
   title: "無料",
-  titleHighlight: "AI監査",
+  titleHighlight: "AI活用診断",
   subtitle:
     "かんたんな質問に答えるだけで、Lewisが直接AI活用度監査レポートを作成します。通話で内容を説明し、レポートは完全無料であなたのものです。",
   chips: ["カスタムレポート", "ライブ通話", "完全無料"],
@@ -293,12 +293,12 @@ const auditDict = {
     stepOf: "ステップ {current} / {total}",
   },
   progressBar: {
-    1: { text: "良いスタートです！", timeLeft: "残り約3分" },
-    2: { text: "順調です！", timeLeft: "残り約2分" },
-    3: { text: "半分まで来ました！", timeLeft: "残り約2分" },
-    4: { text: "あと少しです！", timeLeft: "残り約1分" },
-    5: { text: "もうすぐです！", timeLeft: "残り約1分" },
-    6: { text: "最後のステップです！", timeLeft: "1分以内" },
+    1: { text: "良い調子です", timeLeft: "残り約3分" },
+    2: { text: "順調に進んでいます", timeLeft: "残り約2分" },
+    3: { text: "折り返し地点です", timeLeft: "残り約2分" },
+    4: { text: "もう少しです", timeLeft: "残り約1分" },
+    5: { text: "ほぼ完了です", timeLeft: "残り約1分" },
+    6: { text: "最後のステップです", timeLeft: "1分以内" },
   },
   success: {
     title: "送信完了 — ありがとうございます",
@@ -310,12 +310,12 @@ const auditDict = {
       submitted: {
         title: "送信完了",
         description:
-          "回答を受け付けました。AI監査への一歩を踏み出しました。",
+          "回答を受け付けました。AI活用診断への一歩を踏み出しました。",
       },
       review: {
         title: "Lewisが回答を確認",
         description:
-          "あなたが共有した内容を確認し、あなたに合わせたAI監査を準備します。",
+          "あなたが共有した内容を確認し、あなたに合わせたAI活用診断を準備します。",
         statusLabel: "進行中",
       },
       call: {
@@ -343,8 +343,8 @@ const auditDict = {
     copyLink: "リンクをコピー",
     copied: "コピーしました",
     shareText:
-      "MOTTO Digitalの無料AI監査に登録しました。ぜひチェックしてください。",
-    shareEmailSubject: "無料AI監査",
+      "MOTTO Digitalの無料AI活用診断に登録しました。ぜひチェックしてください。",
+    shareEmailSubject: "無料AI活用診断",
     backHome: "ホームに戻る",
   },
 } as const;

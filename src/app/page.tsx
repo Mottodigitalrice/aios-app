@@ -157,11 +157,13 @@ export default function HomePage() {
                 <ShiryoDialog locale={locale} />
               </div>
 
-              {/* Guarantee hint — elevated per competitor analysis */}
-              <p className="animate-fade-in-up animation-delay-300 mt-5 text-xs text-emerald-400/70 flex items-center gap-1.5 justify-center lg:justify-start">
-                <ShieldCheck className="size-3.5 shrink-0" />
-                {t.hero.guaranteeHint}
-              </p>
+              {/* Guarantee hint — elevated for conversion */}
+              <div className="animate-fade-in-up animation-delay-300 mt-5 inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-2 justify-center lg:justify-start">
+                <ShieldCheck className="size-4 text-emerald-400 shrink-0" />
+                <p className="text-sm text-emerald-300">
+                  {t.hero.guaranteeHint}
+                </p>
+              </div>
 
               <p className="animate-fade-in-up animation-delay-300 mt-4 text-sm text-zinc-500">
                 {t.hero.stats}
