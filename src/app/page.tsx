@@ -568,7 +568,37 @@ export default function HomePage() {
             </div>
           </AnimateInView>
 
-          {/* Divider between program and pricing */}
+          {/* Divider between program and guarantee */}
+          <div className="border-t border-zinc-800/50 my-16" />
+
+          {/* ===============================================
+              GUARANTEE -- Risk Reversal (before pricing)
+              =============================================== */}
+          <AnimateInView className="mb-16">
+            <div className="mx-auto max-w-3xl text-center">
+              <div className="rounded-xl border-2 border-emerald-500/30 bg-emerald-500/5 p-8 sm:p-12">
+                <div className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                  <ShieldCheck className="size-8 text-emerald-400" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4 uppercase">
+                  {t.guarantee.title}
+                </h2>
+                <p className="text-zinc-400 leading-relaxed mb-6 max-w-xl mx-auto">
+                  {t.guarantee.description}
+                </p>
+                <div className="border-t border-emerald-500/20 pt-6 mt-6 space-y-2">
+                  <p className="text-sm text-zinc-400">
+                    {t.guarantee.cohortNote}
+                  </p>
+                  <p className="text-sm text-zinc-400">
+                    {t.guarantee.corporateNote}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </AnimateInView>
+
+          {/* Divider between guarantee and pricing */}
           <div className="border-t border-zinc-800/50 my-16" />
 
           {/* ===============================================
@@ -699,39 +729,48 @@ export default function HomePage() {
       </section>
 
       {/* ===============================================
-          GUARANTEE -- Risk Reversal
+          SECTION 7: FAQ -- Common Questions
+          =============================================== */}
+      <FAQSection locale={locale} />
+
+      {/* ===============================================
+          CONSULTANT BIO -- Lewis Rice (know who you're booking with)
           =============================================== */}
       <AnimateInView as="section" className="py-20 sm:py-28 border-t border-zinc-800/50">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <div className="rounded-xl border-2 border-emerald-500/30 bg-emerald-500/5 p-8 sm:p-12">
-            <div className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-500/20">
-              <ShieldCheck className="size-8 text-emerald-400" />
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4 uppercase">
-              {t.guarantee.title}
-            </h2>
-            <p className="text-zinc-400 leading-relaxed mb-6 max-w-xl mx-auto">
-              {t.guarantee.description}
-            </p>
-            <div className="border-t border-emerald-500/20 pt-6 mt-6 space-y-2">
-              <p className="text-sm text-zinc-400">
-                {t.guarantee.cohortNote}
-              </p>
-              <p className="text-sm text-zinc-400">
-                {t.guarantee.corporateNote}
-              </p>
+        <div className="mx-auto max-w-3xl px-6">
+          <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-8 sm:p-10">
+            <div className="flex flex-col sm:flex-row gap-6 items-start">
+              <Image
+                src="/lewis-rice.jpg"
+                alt="Lewis Rice"
+                width={80}
+                height={80}
+                className="rounded-full border border-indigo-500/20 object-cover shrink-0"
+              />
+              <div>
+                <h3 className="text-xl font-semibold mb-1">{t.bio.name}</h3>
+                <p className="text-sm text-zinc-500 mb-4">{t.bio.title}</p>
+                <p className="text-zinc-400 text-sm leading-relaxed mb-4">
+                  {t.bio.bio1}
+                </p>
+                <p className="text-zinc-400 text-sm leading-relaxed mb-6">
+                  {t.bio.bio2}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {t.bio.tags.map((tag) => (
+                    <Badge key={tag} variant="outline" className="border-zinc-700 text-zinc-400 text-xs">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </AnimateInView>
 
       {/* ===============================================
-          SECTION 7: FAQ -- Common Questions
-          =============================================== */}
-      <FAQSection locale={locale} />
-
-      {/* ===============================================
-          SECTION 8: FREE AUDIT CTA
+          SECTION 8: FREE AUDIT CTA (final conversion point)
           =============================================== */}
       <AnimateInView as="section" className="py-20 sm:py-28 border-t border-zinc-800/50">
         <div className="mx-auto max-w-3xl px-6 text-center" id="audit">
@@ -763,42 +802,6 @@ export default function HomePage() {
               </Button>
             </Link>
             <span className="text-xs text-zinc-500 mt-1.5">{t.hero.ctaTime}</span>
-          </div>
-        </div>
-      </AnimateInView>
-
-      {/* ===============================================
-          CONSULTANT BIO -- Lewis Rice (with real headshot)
-          =============================================== */}
-      <AnimateInView as="section" className="py-20 sm:py-28 border-t border-zinc-800/50">
-        <div className="mx-auto max-w-3xl px-6">
-          <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-8 sm:p-10">
-            <div className="flex flex-col sm:flex-row gap-6 items-start">
-              <Image
-                src="/lewis-rice.jpg"
-                alt="Lewis Rice"
-                width={80}
-                height={80}
-                className="rounded-full border border-indigo-500/20 object-cover shrink-0"
-              />
-              <div>
-                <h3 className="text-xl font-semibold mb-1">{t.bio.name}</h3>
-                <p className="text-sm text-zinc-500 mb-4">{t.bio.title}</p>
-                <p className="text-zinc-400 text-sm leading-relaxed mb-4">
-                  {t.bio.bio1}
-                </p>
-                <p className="text-zinc-400 text-sm leading-relaxed mb-6">
-                  {t.bio.bio2}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {t.bio.tags.map((tag) => (
-                    <Badge key={tag} variant="outline" className="border-zinc-700 text-zinc-400 text-xs">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </AnimateInView>
