@@ -831,7 +831,7 @@ export default function HomePage() {
               </p>
             </div>
             <div>
-              <h4 className="text-sm font-semibold mb-3 text-zinc-300">{t.footer.navigate}</h4>
+              <p className="text-sm font-semibold mb-3 text-zinc-300">{t.footer.navigate}</p>
               <div className="flex flex-col gap-2 text-sm text-zinc-500">
                 <Link href="#proof" className="hover:text-zinc-300 transition-colors">{t.footer.caseStudyLink}</Link>
                 <Link href="#program" className="hover:text-zinc-300 transition-colors">{t.footer.programLink}</Link>
@@ -842,7 +842,7 @@ export default function HomePage() {
               </div>
             </div>
             <div>
-              <h4 className="text-sm font-semibold mb-3 text-zinc-300">{t.footer.contact}</h4>
+              <p className="text-sm font-semibold mb-3 text-zinc-300">{t.footer.contact}</p>
               <address className="flex flex-col gap-2 text-sm text-zinc-500 not-italic">
                 <a href="mailto:lewis@mottodigital.jp" className="flex items-center gap-2 hover:text-zinc-300 transition-colors">
                   <Mail className="size-4" />
