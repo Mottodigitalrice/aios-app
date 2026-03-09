@@ -37,6 +37,7 @@ import {
   Globe,
   Clock,
 } from "lucide-react";
+import { AIOSPyramid } from "@/components/landing/aios-pyramid";
 
 // ── Slide definitions ──
 // Each slide has a name and number of internal sub-steps
@@ -742,46 +743,22 @@ export default function PresentationPage() {
 
         {/* ===== SLIDE 6: OWNERSHIP ===== */}
         <SlideWrapper active={slideIndex === 6} transition="slide" direction={direction} slideIndex={6} currentSlide={slideIndex}>
-          <section className="h-full flex flex-col items-center justify-center px-8 relative">
+          <section className="h-full flex flex-col items-center justify-center px-4 relative overflow-y-auto">
             <div className="pres-shield-pattern" />
             <div className="relative z-10 flex flex-col items-center w-full">
-              <div className="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-medium uppercase tracking-wider">
+              <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-medium uppercase tracking-wider">
                 04 — Ownership / オーナーシップ
               </div>
-              <h2 className="text-4xl sm:text-6xl font-bold text-center">
+              <h2 className="text-3xl sm:text-5xl font-bold text-center">
                 You Own <span className="gradient-text">Everything</span>
               </h2>
-              <p className="text-xl text-zinc-500 mt-3 text-center">
+              <p className="text-lg text-zinc-500 mt-2 text-center">
                 すべてがあなたのもの
               </p>
 
               <FadeIn show={localStep >= 1}>
-                <div className="mt-10 w-full max-w-3xl">
-                  <div className="p-8 rounded-2xl border-2 border-dashed border-indigo-500/30 bg-indigo-950/10 relative">
-                    <div className="absolute -top-3 left-6 bg-zinc-950 px-3 text-sm font-semibold text-indigo-400 tracking-wider uppercase">
-                      Your System / あなたのシステム
-                    </div>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
-                      <OwnershipItem icon={<FileCode className="size-5" />} label="Your Skills" sublabel="スキル" />
-                      <OwnershipItem icon={<Bot className="size-5" />} label="Your Agents" sublabel="エージェント" />
-                      <OwnershipItem icon={<Database className="size-5" />} label="Your Data" sublabel="データ" />
-                      <OwnershipItem icon={<HardDrive className="size-5" />} label="Your Server" sublabel="サーバー" />
-                      <OwnershipItem icon={<Lock className="size-5" />} label="Your Security" sublabel="セキュリティ" />
-                      <OwnershipItem icon={<Code className="size-5" />} label="Your Code" sublabel="コード" />
-                    </div>
-                    <div className="mt-6 p-4 rounded-xl border border-zinc-700 bg-zinc-900/50 text-center">
-                      <p className="text-sm text-zinc-400 mb-3">Plug in any AI model / 好きなAIモデルを接続</p>
-                      <div className="flex flex-wrap justify-center gap-3 text-xs">
-                        {["Claude", "GPT", "Gemini", "Local LLMs"].map((m) => (
-                          <span key={m} className="px-3 py-1.5 rounded-lg bg-zinc-800 border border-zinc-700 text-zinc-300">{m}</span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-6 text-center">
-                    <p className="text-lg text-zinc-300">No vendor lock-in. Switch providers anytime.</p>
-                    <p className="text-base text-zinc-500 mt-1">ベンダーロックインなし。いつでもプロバイダー変更可能。</p>
-                  </div>
+                <div className="mt-6 w-full max-w-4xl [&_h3]:!text-2xl [&_h3]:!sm\\:text-3xl [&_p]:!text-base">
+                  <AIOSPyramid locale="en" />
                 </div>
               </FadeIn>
             </div>
