@@ -60,6 +60,13 @@ export function MobileNav({ locale = "en" }: MobileNavProps) {
             >
               {t.nav.pricing}
             </Link>
+            <Link
+              href="/presentation"
+              className="text-zinc-400 hover:text-zinc-100 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 rounded-sm"
+              onClick={() => setOpen(false)}
+            >
+              {t.footer.presentationLink}
+            </Link>
           </nav>
           <Link href="/audit" onClick={() => setOpen(false)}>
             <Button className="w-full bg-indigo-600 hover:bg-indigo-500 text-white">

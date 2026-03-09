@@ -213,6 +213,7 @@ const en = {
       subtitle:
         "Every project. Every client. Every promise \u2014 organized, connected, and working for you. Not locked into any vendor. Built with you, owned by you entirely.",
       cta: "Get Your Free AI Audit",
+      ctaTime: "Takes 5 minutes",
       ctaSecondary: "See It In Action",
       stats:
         "Currently running 26 projects, 63 tasks, and 9 pipeline deals \u2014 on one system, managed by one person.",

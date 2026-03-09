@@ -72,6 +72,9 @@ export default function HomePage() {
             <Link href="#pricing" className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 rounded-sm">
               {t.nav.pricing}
             </Link>
+            <Link href="/presentation" className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 rounded-sm">
+              {t.footer.presentationLink}
+            </Link>
             <LanguageToggle locale={locale} onToggle={setLocale} />
             <Link href="/audit">
               <Button size="sm" className="bg-indigo-600 hover:bg-indigo-500 text-white">
@@ -138,12 +141,15 @@ export default function HomePage() {
               </p>
 
               <div className="animate-fade-in-up animation-delay-300 mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                <Link href="/audit">
-                  <Button size="lg" className="bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow w-full sm:w-auto">
-                    {t.hero.cta}
-                    <ArrowRight className="size-4" />
-                  </Button>
-                </Link>
+                <div className="flex flex-col items-center sm:items-start">
+                  <Link href="/audit">
+                    <Button size="lg" className="bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow w-full sm:w-auto">
+                      {t.hero.cta}
+                      <ArrowRight className="size-4" />
+                    </Button>
+                  </Link>
+                  <span className="text-xs text-zinc-500 mt-1.5">{t.hero.ctaTime}</span>
+                </div>
                 <Link href="#proof">
                   <Button size="lg" variant="outline" className="border-zinc-700 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100 gap-2 w-full sm:w-auto">
                     {t.hero.ctaSecondary}
