@@ -1,12 +1,12 @@
 "use client";
 
-import { Brain } from "lucide-react";
+import { Brain, Zap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { AnimateInView } from "@/components/landing/animate-in-view";
 
 const content = {
   en: {
-    badge: "03 — 2026: THE BREAKTHROUGH",
+    badge: "The Paradigm Shift",
     heading: "Giving AI a Body",
     headingJa: "AIに「体」を与える",
     brainLabel: "BRAIN",
@@ -23,7 +23,7 @@ const content = {
     resultJa: "ビジネス全体を運営できるAI",
   },
   ja: {
-    badge: "03 — 2026: ブレイクスルー",
+    badge: "発想の転換",
     heading: "AIに「体」を与える",
     headingJa: "Giving AI a Body",
     brainLabel: "BRAIN",
@@ -98,7 +98,7 @@ export function BrainBodyDiagram({
         {/* BODY — square with emerald dashed border */}
         <div className="flex flex-col items-center gap-4 flex-1 max-w-[280px]">
           <div className={`${shapeSize} rounded-xl border-2 border-dashed border-emerald-500/60 bg-emerald-500/5 flex items-center justify-center`}>
-            <Brain className={`${iconSize} text-emerald-400`} />
+            <Zap className={`${iconSize} text-emerald-400`} />
           </div>
           <div className="text-center">
             <div className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400 mb-2">
