@@ -198,7 +198,7 @@ export default function HomePage() {
 
             {/* Right: Hero visual */}
             <div className="animate-fade-in-up animation-delay-300 hidden lg:block">
-              <HeroVisual />
+              <HeroVisual locale={locale} />
             </div>
           </div>
         </div>

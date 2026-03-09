@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { METRICS } from "@/lib/constants";
 
 /* ── Feed items that cycle through the activity log ── */
-const feedItems = [
+const feedItemsEN = [
   { text: "Invoice reconciliation completed", icon: "check", color: "emerald" },
   { text: "New lead: Tanaka Corp via LINE", icon: "plus", color: "indigo" },
   { text: "Weekly report generated", icon: "doc", color: "violet" },
@@ -13,13 +13,56 @@ const feedItems = [
   { text: "Pipeline: 3 deals moved to proposal", icon: "arrow", color: "emerald" },
 ];
 
+const feedItemsJA = [
+  { text: "請求書の照合が完了しました", icon: "check", color: "emerald" },
+  { text: "新規リード: 田中商事（LINE経由）", icon: "plus", color: "indigo" },
+  { text: "週次レポートを生成しました", icon: "doc", color: "violet" },
+  { text: "GBP投稿を予約: 良和ハウス", icon: "cal", color: "amber" },
+  { text: "齋藤さんへフォローアップメール送信", icon: "send", color: "blue" },
+  { text: "パイプライン: 3件が提案段階に移動", icon: "arrow", color: "emerald" },
+];
+
 /* ── Agent status indicators ── */
-const agents = [
+const agentsEN = [
   { name: "Sales", status: "active", tasks: 3 },
   { name: "Support", status: "active", tasks: 2 },
   { name: "Data", status: "idle", tasks: 0 },
   { name: "Content", status: "active", tasks: 1 },
 ];
+
+const agentsJA = [
+  { name: "営業", status: "active", tasks: 3 },
+  { name: "サポート", status: "active", tasks: 2 },
+  { name: "データ", status: "idle", tasks: 0 },
+  { name: "コンテンツ", status: "active", tasks: 1 },
+];
+
+const dashboardLabels = {
+  en: {
+    title: "AIOS Dashboard",
+    connected: "Connected",
+    activeTasks: "Active Tasks",
+    projects: "Projects",
+    pipeline: "Pipeline",
+    aiAgents: "AI Agents",
+    activeCount: "3 active",
+    liveActivity: "Live Activity",
+    justNow: "Just now",
+    command: "Mark Tanaka proposal complete. Schedule follow-up for Thursday.",
+  },
+  ja: {
+    title: "AIOSダッシュボード",
+    connected: "接続中",
+    activeTasks: "進行中タスク",
+    projects: "プロジェクト",
+    pipeline: "パイプライン",
+    aiAgents: "AIエージェント",
+    activeCount: "3件稼働中",
+    liveActivity: "最新アクティビティ",
+    justNow: "たった今",
+    command: "田中提案書を完了。木曜にフォローアップを予約。",
+  },
+};
 
 /* ── Tiny SVG icons (no imports needed) ── */
 function MiniIcon({ type, className }: { type: string; className?: string }) {
@@ -76,7 +119,10 @@ const colorClasses: Record<string, { dot: string; text: string; bg: string; bord
   blue: { dot: "bg-blue-400", text: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/20" },
 };
 
-export function HeroVisual() {
+export function HeroVisual({ locale = "en" }: { locale?: "en" | "ja" }) {
+  const feedItems = locale === "ja" ? feedItemsJA : feedItemsEN;
+  const agents = locale === "ja" ? agentsJA : agentsEN;
+  const dl = dashboardLabels[locale];
   const [visibleFeed, setVisibleFeed] = useState<number[]>([0, 1, 2]);
   const [counts, setCounts] = useState({ tasks: 0, projects: 0, pipeline: 0 });
   const [agentPulse, setAgentPulse] = useState(0);
@@ -137,11 +183,11 @@ export function HeroVisual() {
             <div className="size-2 rounded-full bg-zinc-600" />
           </div>
           <div className="flex-1 flex justify-center">
-            <span className="text-[10px] text-zinc-500 font-medium tracking-wide">AIOS Dashboard</span>
+            <span className="text-[10px] text-zinc-500 font-medium tracking-wide">{dl.title}</span>
           </div>
           <div className="flex items-center gap-1.5">
             <div className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[9px] text-emerald-400/80 font-medium">Connected</span>
+            <span className="text-[9px] text-emerald-400/80 font-medium">{dl.connected}</span>
           </div>
         </div>
 
@@ -150,9 +196,9 @@ export function HeroVisual() {
           {/* Top metrics row */}
           <div className="grid grid-cols-3 gap-2">
             {[
-              { label: "Active Tasks", value: counts.tasks, color: "indigo" },
-              { label: "Projects", value: counts.projects, color: "violet" },
-              { label: "Pipeline", value: counts.pipeline, color: "emerald" },
+              { label: dl.activeTasks, value: counts.tasks, color: "indigo" },
+              { label: dl.projects, value: counts.projects, color: "violet" },
+              { label: dl.pipeline, value: counts.pipeline, color: "emerald" },
             ].map((m) => (
               <div
                 key={m.label}
@@ -169,8 +215,8 @@ export function HeroVisual() {
           {/* Agent status strip */}
           <div className="rounded-lg border border-zinc-800/50 bg-zinc-900/40 px-3 py-2">
             <div className="flex items-center justify-between mb-1.5">
-              <span className="text-[9px] text-zinc-500 font-semibold uppercase tracking-wider">AI Agents</span>
-              <span className="text-[9px] text-emerald-400/70">3 active</span>
+              <span className="text-[9px] text-zinc-500 font-semibold uppercase tracking-wider">{dl.aiAgents}</span>
+              <span className="text-[9px] text-emerald-400/70">{dl.activeCount}</span>
             </div>
             <div className="flex items-center gap-2">
               {agents.map((agent, i) => (
@@ -199,8 +245,8 @@ export function HeroVisual() {
           {/* Live activity feed */}
           <div className="space-y-1">
             <div className="flex items-center justify-between px-0.5 mb-1">
-              <span className="text-[9px] text-zinc-500 font-semibold uppercase tracking-wider">Live Activity</span>
-              <span className="text-[9px] text-zinc-600">Just now</span>
+              <span className="text-[9px] text-zinc-500 font-semibold uppercase tracking-wider">{dl.liveActivity}</span>
+              <span className="text-[9px] text-zinc-600">{dl.justNow}</span>
             </div>
             {visibleFeed.map((idx, position) => {
               const item = feedItems[idx];
@@ -228,7 +274,7 @@ export function HeroVisual() {
               <span className="text-indigo-400/60 text-[10px]">aios</span>
               <span className="text-[10px] text-zinc-400">{">"}</span>
               <span className="text-[10px] text-zinc-300 typing-animation">
-                Mark Tanaka proposal complete. Schedule follow-up for Thursday.
+                {dl.command}
               </span>
             </div>
           </div>
