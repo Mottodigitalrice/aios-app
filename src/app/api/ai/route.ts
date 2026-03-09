@@ -1,15 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { chat, chatStream, ModelKey } from "@/lib/openrouter";
-import { auth } from "@clerk/nextjs/server";
 
 export async function POST(req: NextRequest) {
   try {
-    // Verify user is authenticated
-    const { userId } = await auth();
-    if (!userId) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
     const { messages, model = "fast", stream = false } = await req.json();
 
     if (!messages || !Array.isArray(messages)) {

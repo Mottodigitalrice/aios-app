@@ -18,7 +18,7 @@ export function Header() {
             View Site
           </Button>
         </Link>
-        <UserButton afterSignOutUrl="/" />
+        <UserButton />
       </div>
     </header>
   );

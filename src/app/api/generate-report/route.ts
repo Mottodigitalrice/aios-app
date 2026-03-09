@@ -3,7 +3,16 @@ import { ConvexHttpClient } from "convex/browser";
 import { api } from "../../../../convex/_generated/api";
 import type { Id } from "../../../../convex/_generated/dataModel";
 
-const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
+// Lazy-load to avoid build-time errors when env var not set
+let _convex: ConvexHttpClient | null = null;
+function getConvex(): ConvexHttpClient {
+  if (!_convex) {
+    const url = process.env.NEXT_PUBLIC_CONVEX_URL;
+    if (!url) throw new Error("NEXT_PUBLIC_CONVEX_URL not configured");
+    _convex = new ConvexHttpClient(url);
+  }
+  return _convex;
+}
 
 /**
  * POST /api/generate-report
@@ -41,7 +50,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Trigger the Convex action
-    const result = await convex.action(
+    const result = await getConvex().action(
       api.functions.auditReports.generateReport,
       { leadId: leadId as Id<"auditLeads"> }
     );
