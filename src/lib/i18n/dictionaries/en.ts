@@ -271,54 +271,7 @@ const en = {
 
       launchNote: "Early pricing \u2014 increases after 5 clients.",
     },
-    faq: {
-      badge: "Common Questions",
-      title: "Frequently asked questions.",
-      stillQuestions: "Still have questions?",
-      bookCall: "Book a free call",
-      items: [
-        {
-          question: "My team isn\u2019t technical at all. Can we still do this?",
-          answer: "Yes \u2014 this is specifically designed for non-technical teams. Every system we build gets documented in plain language, with video walkthroughs your team can reference. We train your people to use and maintain the system, not to become developers. If your team can use LINE and Excel, they can operate an AIOS.",
-        },
-        {
-          question: "What if AI doesn\u2019t work for our specific business?",
-          answer: "That\u2019s exactly what the free audit is for. Before we take any money, we analyze your business, your tools, and your workflows. If AI isn\u2019t going to deliver real value for you, I\u2019ll tell you that clearly \u2014 and you keep the audit report either way. I don\u2019t take on engagements I don\u2019t believe in.",
-        },
-        {
-          question: "How is this different from hiring an AI consultant?",
-          answer: "Most consultants deliver a strategy document and leave. We build a working system with you \u2014 and train your team to run it independently. By the end, you don\u2019t need us. That\u2019s the whole point. The Ownership Guarantee makes it contractual.",
-        },
-        {
-          question: "What do we actually own at the end?",
-          answer: "Everything. Your data stays in your systems. Your agents run on your infrastructure. Your workflows run on your automation platform (n8n, self-hosted). Your documentation lives wherever you store files. You could end the engagement tomorrow and everything keeps running.",
-        },
-        {
-          question: "What if we want to start with just one department?",
-          answer: "Completely fine. Most engagements start with the highest-impact area \u2014 often operations or sales \u2014 and expand from there. AIOS is designed to grow incrementally. You don\u2019t need to transform the whole company at once.",
-        },
-        {
-          question: "What happens after the 6 months?",
-          answer: "You own a fully documented, running AI operating system. Your team can operate and extend it independently. If you want ongoing strategic guidance, we offer an AI Koumon (Advisor) service starting at \u00A550,000/month \u2014 but there\u2019s no pressure and no automatic renewal.",
-        },
-        {
-          question: "We\u2019ve been burned by IT projects that went over budget and over time. How is this different?",
-          answer: "Fixed scope, fixed price, fixed timeline. \u00A5200,000/month \u00D7 6 months. No scope creep because we work together weekly \u2014 if something needs to change, we talk about it openly. The Ownership Guarantee means I\u2019m personally committed to delivery.",
-        },
-        {
-          question: "\u00A51,200,000 is a significant investment. How do I justify it internally?",
-          answer: "Think about what the problem costs. If one senior team member spends 3 hours a day on tasks that should be automated, that\u2019s 15+ hours a week of high-salary time on repetitive work. Over 6 months, that easily exceeds what you invest in AIOS \u2014 before accounting for errors, delays, or missed opportunities. AIOS pays for itself when it works. And the free audit will tell you honestly whether it will.",
-        },
-        {
-          question: "Will this work with the tools we already use?",
-          answer: "Yes. We start from where you are \u2014 Kintone, Freee, Chatwork, Google Workspace, LINE, whatever your team uses. We don\u2019t ask you to replace your stack. We connect it.",
-        },
-        {
-          question: "Can I see this in action before committing?",
-          answer: "The free AI Audit is the right first step. You\u2019ll see how I think, how I analyze a business, and whether my approach fits your situation. That 30-minute call is the demo.",
-        },
-      ],
-    },
+    // FAQ content lives in faq-section.tsx (self-contained component with categories)
     cta: {
       title: "Get Your Free AI Audit",
     },
