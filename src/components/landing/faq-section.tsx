@@ -83,7 +83,7 @@ const faqsEN: FAQItem[] = [
   {
     question: "Will this work with the tools we already use?",
     answer:
-      "Yes. We start from where you are — Kintone, Freee, Chatwork, Google Workspace, LINE, whatever your team uses. We don't ask you to replace your stack. We connect it.",
+      "Yes. We start from where you are — Kintone, freee, Chatwork, Google Workspace, LINE, whatever your team uses. We don't ask you to replace your stack. We connect it.",
     category: "Ownership & Technical",
   },
   {
@@ -152,7 +152,7 @@ const faqsJA: FAQItem[] = [
   {
     question: "今使っているツールと連携できますか？",
     answer:
-      "はい。Kintone、Freee、Chatwork、Google Workspace、LINE——現在お使いのツールからスタートします。ツールスタックを入れ替える必要はありません。つなぐことが私たちの仕事です。",
+      "はい。Kintone、freee、Chatwork、Google Workspace、LINE——現在お使いのツールからスタートします。ツールスタックを入れ替える必要はありません。つなぐことが私たちの仕事です。",
     category: "Ownership & Technical",
   },
   {
