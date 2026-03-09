@@ -52,6 +52,18 @@ export default function HomePage() {
   const [locale, setLocale] = useState<"en" | "ja">(getInitialLocale);
   const t = dictionaries[locale].landing;
 
+  // Sync locale to URL param so language persists on refresh / sharing
+  const handleLocaleToggle = (newLocale: "en" | "ja") => {
+    setLocale(newLocale);
+    const url = new URL(window.location.href);
+    if (newLocale === "en") {
+      url.searchParams.delete("lang");
+    } else {
+      url.searchParams.set("lang", newLocale);
+    }
+    window.history.replaceState({}, "", url.toString());
+  };
+
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 grid-pattern">
       {/* Skip to main content — a11y */}
@@ -83,7 +95,7 @@ export default function HomePage() {
             <Link href="/presentation" className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 rounded-sm">
               {t.footer.presentationLink}
             </Link>
-            <LanguageToggle locale={locale} onToggle={setLocale} />
+            <LanguageToggle locale={locale} onToggle={handleLocaleToggle} />
             <Link href="/audit">
               <Button size="sm" className="bg-indigo-600 hover:bg-indigo-500 text-white">
                 {t.nav.cta}
@@ -91,7 +103,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="flex sm:hidden items-center gap-3">
-            <LanguageToggle locale={locale} onToggle={setLocale} />
+            <LanguageToggle locale={locale} onToggle={handleLocaleToggle} />
             <MobileNav locale={locale} />
           </div>
         </div>
