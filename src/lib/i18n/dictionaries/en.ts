@@ -205,6 +205,7 @@ const en = {
       program: "Program",
       pricing: "Pricing",
       cta: "Free AI Audit",
+      skipToContent: "Skip to main content",
     },
     hero: {
       badge: "Only 3 companies at a time",

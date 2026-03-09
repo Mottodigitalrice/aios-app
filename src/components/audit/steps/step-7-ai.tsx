@@ -82,6 +82,8 @@ export function Step7AI({
             onOtherChange={(value) =>
               updateField("sixMonthVisionOther", value)
             }
+            otherLabel={t.common.other}
+            otherPlaceholder={t.common.otherPlaceholder}
           />
         </div>
 

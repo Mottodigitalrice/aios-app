@@ -12,6 +12,8 @@ interface MultiSelectChipsProps {
   otherValue?: string;
   onOtherChange?: (value: string) => void;
   renderIcon?: (option: string) => React.ReactNode;
+  otherLabel?: string;
+  otherPlaceholder?: string;
 }
 
 export function MultiSelectChips({
@@ -22,6 +24,8 @@ export function MultiSelectChips({
   otherValue = "",
   onOtherChange,
   renderIcon,
+  otherLabel = "Other",
+  otherPlaceholder = "Please specify...",
 }: MultiSelectChipsProps) {
   const [showOtherInput, setShowOtherInput] = useState(
     selected.includes("Other")
@@ -78,7 +82,7 @@ export function MultiSelectChips({
                 : "border-zinc-800/50 bg-zinc-900/50 text-zinc-400 hover:border-zinc-700 hover:text-zinc-300"
             )}
           >
-            + Other
+            + {otherLabel}
           </button>
         )}
       </div>
@@ -86,7 +90,7 @@ export function MultiSelectChips({
         <Input
           value={otherValue}
           onChange={(e) => onOtherChange?.(e.target.value)}
-          placeholder="Please specify..."
+          placeholder={otherPlaceholder}
           className="bg-zinc-950/50 border-zinc-700/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20"
           autoFocus
         />

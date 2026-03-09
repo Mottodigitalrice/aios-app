@@ -46,6 +46,8 @@ export function Step6Challenges({
           onChange={(selected) => updateField("challenge", selected)}
           otherValue={formData.challengeOther}
           onOtherChange={(value) => updateField("challengeOther", value)}
+          otherLabel={t.common.other}
+          otherPlaceholder={t.common.otherPlaceholder}
         />
 
         {/* Bottlenecks */}

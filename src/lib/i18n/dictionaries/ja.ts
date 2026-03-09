@@ -200,6 +200,7 @@ const ja = {
       program: "プログラム",
       pricing: "料金",
       cta: "無料AI活用診断",
+      skipToContent: "メインコンテンツへ",
     },
     hero: {
       badge: "同時導入は3社まで",

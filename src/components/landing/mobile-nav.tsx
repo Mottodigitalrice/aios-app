@@ -28,11 +28,11 @@ export function MobileNav({ locale = "en" }: MobileNavProps) {
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" className="sm:hidden text-zinc-400 hover:text-zinc-100">
           <Menu className="size-5" />
-          <span className="sr-only">Menu</span>
+          <span className="sr-only">{locale === "ja" ? "メニュー" : "Menu"}</span>
         </Button>
       </SheetTrigger>
       <SheetContent side="right" className="bg-zinc-950 border-zinc-800 w-72">
-        <SheetTitle className="sr-only">Navigation</SheetTitle>
+        <SheetTitle className="sr-only">{locale === "ja" ? "ナビゲーション" : "Navigation"}</SheetTitle>
         <div className="flex flex-col gap-8 pt-8">
           <Link href="/" className="flex items-center gap-2 text-lg font-bold" onClick={() => setOpen(false)}>
             <Layers className="size-5 text-indigo-400" />

@@ -1,8 +1,28 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AlertCircle } from "lucide-react";
+
+const labels = {
+  en: {
+    title: "Something went wrong",
+    description: "An unexpected error occurred. Please try again.",
+    retry: "Try again",
+  },
+  ja: {
+    title: "エラーが発生しました",
+    description: "予期しないエラーが発生しました。もう一度お試しください。",
+    retry: "もう一度試す",
+  },
+};
+
+function getLocale(): "en" | "ja" {
+  if (typeof window === "undefined") return "en";
+  const params = new URLSearchParams(window.location.search);
+  const lang = params.get("lang");
+  return lang === "ja" ? "ja" : "en";
+}
 
 export default function Error({
   error,
@@ -11,6 +31,9 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const [locale] = useState(getLocale);
+  const t = labels[locale];
+
   useEffect(() => {
     console.error(error);
   }, [error]);
@@ -21,15 +44,15 @@ export default function Error({
         <div className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full bg-red-500/10 border border-red-500/20">
           <AlertCircle className="size-8 text-red-400" />
         </div>
-        <h1 className="text-2xl font-bold tracking-tight">Something went wrong</h1>
+        <h1 className="text-2xl font-bold tracking-tight">{t.title}</h1>
         <p className="mt-3 text-zinc-400">
-          An unexpected error occurred. Please try again.
+          {t.description}
         </p>
         <Button
           onClick={reset}
           className="mt-8 bg-indigo-600 hover:bg-indigo-500 text-white"
         >
-          Try again
+          {t.retry}
         </Button>
       </div>
     </div>

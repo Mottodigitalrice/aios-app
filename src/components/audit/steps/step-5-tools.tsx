@@ -71,6 +71,7 @@ export function Step5Tools({
         selected={formData.tools}
         onChange={(selected) => updateField("tools", selected)}
         renderIcon={renderIcon}
+        allowOther={false}
       />
     </StepLayout>
   );
