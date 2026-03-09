@@ -224,8 +224,26 @@ export function FAQSection({ locale = "en" }: FAQSectionProps) {
   // Build a flat index for the accordion (one open at a time across all groups)
   let globalIndex = 0;
 
+  // FAQ structured data for Google rich snippets (always EN for SEO)
+  const faqSchema = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqsEN.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  });
+
   return (
     <section className="py-20 sm:py-28 border-t border-zinc-800/50">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: faqSchema }}
+      />
       <div className="mx-auto max-w-3xl px-6">
         {/* Header */}
         <div className="text-center mb-12">
@@ -263,6 +281,7 @@ export function FAQSection({ locale = "en" }: FAQSectionProps) {
                       >
                         <button
                           onClick={() => setOpenIndex(isOpen ? null : idx)}
+                          aria-expanded={isOpen}
                           className="w-full flex items-center gap-3 p-5 text-left hover:bg-zinc-800/30 transition-colors"
                         >
                           <div className="flex-1 min-w-0">

@@ -46,7 +46,16 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 grid-pattern">
+      {/* Skip to main content — a11y */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-indigo-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-md focus:text-sm"
+      >
+        Skip to main content
+      </a>
+
       {/* Fixed Navigation */}
+      <header>
       <nav className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/50 bg-zinc-950/80 backdrop-blur-xl">
         <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
           <Link href="/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
@@ -54,13 +63,13 @@ export default function HomePage() {
             <span>MOTTO Digital</span>
           </Link>
           <div className="hidden sm:flex items-center gap-6">
-            <Link href="#proof" className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors">
+            <Link href="#proof" className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 rounded-sm">
               {t.nav.proof}
             </Link>
-            <Link href="#program" className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors">
+            <Link href="#program" className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 rounded-sm">
               {t.nav.program}
             </Link>
-            <Link href="#pricing" className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors">
+            <Link href="#pricing" className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 rounded-sm">
               {t.nav.pricing}
             </Link>
             <LanguageToggle locale={locale} onToggle={setLocale} />
@@ -76,7 +85,9 @@ export default function HomePage() {
           </div>
         </div>
       </nav>
+      </header>
 
+      <main id="main-content">
       {/* ===============================================
           SECTION 1: HERO -- Dream Outcome, Not the Vehicle
           =============================================== */}
@@ -100,7 +111,7 @@ export default function HomePage() {
 
               {/* Trust indicators above the fold */}
               <div className="animate-fade-in-up animation-delay-200 mt-6 flex flex-col sm:flex-row items-center lg:items-start gap-3">
-                <div className="flex -space-x-2">
+                <div className="flex -space-x-2" aria-hidden="true">
                   {[
                     "bg-indigo-500",
                     "bg-violet-500",
@@ -748,6 +759,8 @@ export default function HomePage() {
           </div>
         </div>
       </AnimateInView>
+
+      </main>
 
       {/* Footer */}
       <footer className="border-t border-zinc-800/50 py-16">
