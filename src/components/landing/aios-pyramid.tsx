@@ -90,7 +90,7 @@ const tools = [
   { name: "Notion", logo: "/logos/notion.svg" },
   { name: "Chatwork", logo: "/logos/chatwork.svg" },
   { name: "HubSpot", logo: "/logos/hubspot.svg" },
-  { name: "Freee", logo: "/logos/freee.svg" },
+  { name: "freee", logo: "/logos/freee.svg" },
   { name: "Slack", logo: "/logos/slack.svg" },
   { name: "Gmail", logo: "/logos/gmail.svg" },
   { name: "LINE", logo: "/logos/line.svg" },
