@@ -7,21 +7,18 @@ interface TidyCalEmbedProps {
   path?: string;
 }
 
+function isTidyCalLoaded() {
+  return typeof document !== "undefined" &&
+    !!document.querySelector('script[src="https://asset-tidycal.b-cdn.net/js/embed.js"]');
+}
+
 export function TidyCalEmbed({ path = "rice/ai" }: TidyCalEmbedProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => !isTidyCalLoaded());
 
   useEffect(() => {
-    // Check if script is already loaded
-    const existingScript = document.querySelector(
-      'script[src="https://asset-tidycal.b-cdn.net/js/embed.js"]'
-    );
-
-    if (existingScript) {
-      // Script already exists — TidyCal should render into the data-path div
-      setLoading(false);
-      return;
-    }
+    // Script already loaded — nothing to do
+    if (isTidyCalLoaded()) return;
 
     const script = document.createElement("script");
     script.src = "https://asset-tidycal.b-cdn.net/js/embed.js";
@@ -38,7 +35,6 @@ export function TidyCalEmbed({ path = "rice/ai" }: TidyCalEmbedProps) {
     document.body.appendChild(script);
 
     return () => {
-      // Clean up script on unmount
       try {
         document.body.removeChild(script);
       } catch {
@@ -47,11 +43,12 @@ export function TidyCalEmbed({ path = "rice/ai" }: TidyCalEmbedProps) {
     };
   }, []);
 
-  // Hide loading state after a timeout regardless (TidyCal may render without triggering onload)
+  // Fallback: hide loading after timeout (TidyCal may render without triggering onload)
   useEffect(() => {
+    if (!loading) return;
     const timeout = setTimeout(() => setLoading(false), 5000);
     return () => clearTimeout(timeout);
-  }, []);
+  }, [loading]);
 
   return (
     <div
