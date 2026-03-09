@@ -191,7 +191,7 @@ const auditDict = {
         "Salesforce",
         "Chatwork",
         "Kintone",
-        "Freee",
+        "freee",
         "LINE",
         "Microsoft 365",
         "Zoom",

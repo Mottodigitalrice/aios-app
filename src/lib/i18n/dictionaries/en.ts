@@ -60,7 +60,7 @@ const en = {
           "Salesforce",
           "Chatwork",
           "Kintone",
-          "Freee",
+          "freee",
           "LINE",
           "Microsoft 365",
           "Zoom",
@@ -392,7 +392,7 @@ const en = {
         { title: "No compounding value", description: "Disconnected tools can\u2019t share context. Every AI interaction starts from zero. You\u2019re paying for intelligence that forgets everything between sessions." },
         { title: "Consultants build, then leave", description: "Traditional consultancies deliver a PDF and walk away. Or worse \u2014 build something only they can maintain, creating permanent dependency. Your team never learns to operate it." },
         { title: "Expensive pilots that don\u2019t scale", description: "You pay \u00A55M for a 3-month PoC that proves AI \u201Cworks\u201D in a sandbox. Then it sits there. No one knows how to expand it, and the consulting firm quotes another \u00A55M to try." },
-        { title: "Data stays siloed", description: "Sales data in HubSpot, accounting in Freee, communication in Chatwork, files on Google Drive. AI can only be as smart as the data it can access \u2014 and right now it can\u2019t see across systems." },
+        { title: "Data stays siloed", description: "Sales data in HubSpot, accounting in freee, communication in Chatwork, files on Google Drive. AI can only be as smart as the data it can access \u2014 and right now it can\u2019t see across systems." },
       ],
     },
     stack: {
