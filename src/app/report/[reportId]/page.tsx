@@ -86,7 +86,7 @@ const INVESTMENT = {
     note: "Save \u00a5200,000 \u2014 pay 5, get 6",
   },
   footnote:
-    "Launch pricing \u2014 first 3 clients only.",
+    "Launch pricing \u2014 first 5 clients only.",
 };
 
 const NEXT_STEPS = [

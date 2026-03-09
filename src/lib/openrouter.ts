@@ -1,15 +1,15 @@
 import OpenAI from "openai";
 
-// Available models - update as needed
+// Available models — update as needed
 export const MODELS = {
   // Fast & cheap (for simple tasks)
   fast: "openai/gpt-4o-mini",
 
   // Smart (for complex reasoning)
-  smart: "anthropic/claude-3.5-sonnet",
+  smart: "anthropic/claude-sonnet-4-20250514",
 
   // Creative (for writing)
-  creative: "anthropic/claude-3-opus",
+  creative: "anthropic/claude-opus-4-20250514",
 
   // Japanese-optimized
   japanese: "openai/gpt-4o",
