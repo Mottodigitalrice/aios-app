@@ -159,7 +159,7 @@ const PRESENTER_NOTES: Record<number, { timing: string; en: string[]; jp: string
       "This is the infrastructure play — you OWN the system.",
     ],
     jp: [
-      "ここが我々の差別化ポイントです。",
+      "ここがわたしたちの差別化ポイントです。",
       "全てがあなたのもの — スキル、エージェント、データ、サーバー、コード。",
       "どのAIモデルでも接続可能。ベンダーロックインなし。",
       "インフラを所有するという戦略です。",
@@ -192,7 +192,7 @@ const PRESENTER_NOTES: Record<number, { timing: string; en: string[]; jp: string
     jp: [
       "問いは「AIを使うべきか？」ではありません。",
       "「AIを動かすインフラがあるか？」です。",
-      "次のステップは3つ：無料AI活用診断を受ける、プレゼン資料をダウンロード、または直接通話を予約。",
+      "次のステップは3つ：まずは無料AI活用診断から、申し込み、または直接通話を予約。",
       "ご清聴ありがとうございました。ご質問はどうぞ。",
     ],
   },
@@ -794,7 +794,7 @@ export default function PresentationPage() {
                     Get Your Free AI Audit
                   </p>
                   <p className="text-sm text-zinc-500 mt-1">
-                    無料AI活用診断を受ける
+                    まずは無料AI活用診断から
                   </p>
                   <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-600 text-white font-semibold text-sm group-hover:bg-indigo-500 transition-colors">
                     <ArrowRight className="size-4" />
@@ -813,7 +813,7 @@ export default function PresentationPage() {
                     Sign Up Now
                   </p>
                   <p className="text-sm text-zinc-500 mt-1">
-                    今すぐ申し込む
+                    申し込んでみませんか
                   </p>
                   <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-600 text-white font-semibold text-sm group-hover:bg-emerald-500 transition-colors">
                     <ArrowRight className="size-4" />
