@@ -213,9 +213,9 @@ const en = {
       titleHighlight: "Yours to own. Yours to grow.",
       subtitle:
         "Every project. Every client. Every promise \u2014 organized, connected, and working for you. Not locked into any vendor. Built with you, owned by you entirely.",
-      cta: "Get Your Free AI Audit",
+      cta: "Get your free AI audit",
       ctaTime: "Takes 5 minutes",
-      ctaSecondary: "See It In Action",
+      ctaSecondary: "Download presentation",
       stats:
         "Currently running 26 projects, 63 tasks, and 9 pipeline deals \u2014 on one system, managed by one person.",
       guaranteeHint: "Backed by the Ownership Guarantee \u2014 if your team can\u2019t manage AI agents by month 6, we keep going free.",
@@ -283,6 +283,12 @@ const en = {
         },
       },
       launchNote: "Early pricing \u2014 increases after 5 clients.",
+    },
+    leadMagnet: {
+      title: "Not sure yet?",
+      subtitle: "Take our free AI audit to see where you or your company stands with AI \u2014 and what the next step should be for you.",
+      detail: "Completely free, no obligation. You\u2019ll get a personalized report reviewed by Lewis.",
+      cta: "Take the free AI audit",
     },
     // FAQ content lives in faq-section.tsx (self-contained component with categories)
     cta: {
@@ -480,11 +486,9 @@ const en = {
         cta: "Open Presentation",
       },
       getPdf: {
-        label: "Get the PDF",
-        body: "Get a downloadable PDF sent to your email. Takes 30 seconds.",
-        emailPlaceholder: "Your work email",
-        cta: "Send Me the PDF",
-        successMessage: "Done. Check your inbox \u2014 the PDF is on its way.",
+        label: "Download PDF",
+        body: "Get the complete AIOS overview as a PDF file.",
+        cta: "Download PDF",
       },
     },
     auditCta: {

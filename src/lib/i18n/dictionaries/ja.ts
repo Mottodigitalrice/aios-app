@@ -210,7 +210,7 @@ const ja = {
         "プロジェクトも、クライアントも、すべての約束も。整理されて、つながって、あなたのために動き続けます。ベンダーに縛られない。一緒につくって、すべてあなたのものに。",
       cta: "無料AI活用診断を受ける",
       ctaTime: "所要時間：約5分",
-      ctaSecondary: "実際の動きを見る",
+      ctaSecondary: "資料をダウンロード",
       stats:
         "現在26プロジェクト、63タスク、9件の商談をひとつのシステムで、一人で管理中。",
       guaranteeHint: "オーナーシップ保証 — 6ヶ月後にAIエージェントを管理できなければ、できるまで無償でサポート。",
@@ -278,6 +278,12 @@ const ja = {
         },
       },
       launchNote: "先着5社限定の導入価格。",
+    },
+    leadMagnet: {
+      title: "まだ迷っていますか？",
+      subtitle: "無料のAI活用診断で、あなたや会社のAI活用レベルと、次に取るべきステップを確認できます。",
+      detail: "完全無料、義務なし。ルイスが直接レビューしたパーソナライズドレポートをお届けします。",
+      cta: "無料AI活用診断を受ける",
     },
     // FAQ content lives in faq-section.tsx (self-contained component with categories)
     cta: {
@@ -475,11 +481,9 @@ const ja = {
         cta: "資料を開く",
       },
       getPdf: {
-        label: "PDFをもらう",
-        body: "ダウンロード可能なPDFをメールでお送りします。30秒で完了します。",
-        emailPlaceholder: "会社のメールアドレス",
-        cta: "PDFを送ってもらう",
-        successMessage: "送信しました。受信トレイをご確認ください。",
+        label: "PDFをダウンロード",
+        body: "AIOS概要の完全版をPDFファイルでダウンロードできます。",
+        cta: "PDFをダウンロード",
       },
     },
     auditCta: {

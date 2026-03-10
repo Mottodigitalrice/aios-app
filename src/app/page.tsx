@@ -170,17 +170,15 @@ export default function HomePage() {
                   </Link>
                   <span className="text-xs text-zinc-500 mt-1.5">{t.hero.ctaTime}</span>
                 </div>
-                <Link href="#proof">
-                  <Button size="lg" variant="outline" className="border-zinc-700 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100 gap-2 w-full sm:w-auto">
-                    {t.hero.ctaSecondary}
-                    <ArrowRight className="size-4" />
-                  </Button>
-                </Link>
-              </div>
-
-              {/* ShiryoDialog trigger link below CTAs */}
-              <div className="animate-fade-in-up animation-delay-300 mt-4 flex justify-center lg:justify-start">
-                <ShiryoDialog locale={locale} />
+                <ShiryoDialog
+                  locale={locale}
+                  trigger={
+                    <Button size="lg" variant="outline" className="border-zinc-700 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100 gap-2 w-full sm:w-auto">
+                      {t.hero.ctaSecondary}
+                      <FileText className="size-4" />
+                    </Button>
+                  }
+                />
               </div>
 
               {/* Guarantee hint — elevated for conversion */}
@@ -739,6 +737,27 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Lead Magnet — for visitors not ready to buy */}
+      <AnimateInView as="section" className="py-16 sm:py-20">
+        <div className="mx-auto max-w-2xl px-6 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">
+            {t.leadMagnet.title}
+          </h2>
+          <p className="text-zinc-400 text-lg mb-2">
+            {t.leadMagnet.subtitle}
+          </p>
+          <p className="text-zinc-500 text-sm mb-8">
+            {t.leadMagnet.detail}
+          </p>
+          <Link href="/audit">
+            <Button variant="outline" size="lg" className="border-indigo-500/30 text-indigo-300 hover:bg-indigo-500/10 hover:text-indigo-200 gap-2">
+              {t.leadMagnet.cta}
+              <ArrowRight className="size-4" />
+            </Button>
+          </Link>
+        </div>
+      </AnimateInView>
 
       {/* ===============================================
           SECTION 7: FAQ -- Common Questions
