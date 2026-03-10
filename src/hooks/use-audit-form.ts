@@ -239,9 +239,8 @@ export function useAuditForm() {
         body: JSON.stringify(formData),
       });
 
-      const result = await response.json();
-
       if (!response.ok) {
+        const result = await response.json().catch(() => ({}));
         throw new Error(result.error || "Something went wrong. Please try again.");
       }
 

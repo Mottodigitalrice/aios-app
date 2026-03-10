@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
           },
           body: JSON.stringify({
             name: `AIOS Audit: ${data.name} (${data.perspective})`,
-            project: "1ede0cb5-63d9-8061-8571-df183897d8e2",
+            projectId: "1ede0cb5-63d9-8061-8571-df183897d8e2",
             status: "INBOX",
             notes: `Name: ${data.name}\nEmail: ${data.email}\nPerspective: ${data.perspective}\nRole: ${data.role || "N/A"}\nCompany: ${data.company || "N/A"}\nEmployees: ${data.employees || "N/A"}\nWork Type: ${data.workType || "N/A"}\nUse Case: ${data.useCase || "N/A"}\nData Maturity: ${data.dataMaturity || "N/A"}\nData Confidence: ${data.dataConfidence ?? "N/A"}\nData Location: ${dataLocation || "N/A"}\nData Restructuring Openness: ${data.dataRestructuringOpenness || "N/A"}\nTools: ${tools || "N/A"}\nChallenges: ${challenge || "N/A"}${data.challengeOther ? ` (Other: ${data.challengeOther})` : ""}\nBottlenecks: ${bottlenecks || "N/A"}\nRepetitive Hours/Week: ${data.repetitiveHoursPerWeek || "N/A"}\nAI Experience: ${data.aiExperience || "N/A"}\n6-Month Vision: ${sixMonthVision || "N/A"}${data.sixMonthVisionOther ? ` (Other: ${data.sixMonthVisionOther})` : ""}\nAI Budget: ${data.aiBudget || "N/A"}\nAI Tried Before: ${data.aiTriedBefore || "N/A"}\nAI Timeline: ${data.aiTimeline || "N/A"}\nSource: ${data.source || "N/A"}\nPreferred Time: ${data.preferredTime || "N/A"}\nWebsite: ${data.website || "N/A"}`,
           }),
