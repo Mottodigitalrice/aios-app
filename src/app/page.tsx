@@ -845,9 +845,9 @@ export default function HomePage() {
             <div>
               <p className="text-sm font-semibold mb-3 text-zinc-300">{t.footer.contact}</p>
               <address className="flex flex-col gap-2 text-sm text-zinc-500 not-italic">
-                <a href="mailto:lewis@mottodigital.jp" className="flex items-center gap-2 hover:text-zinc-300 transition-colors">
+                <a href="mailto:rice@mottodigital.jp" className="flex items-center gap-2 hover:text-zinc-300 transition-colors">
                   <Mail className="size-4" />
-                  lewis@mottodigital.jp
+                  rice@mottodigital.jp
                 </a>
                 <a href="https://www.linkedin.com/in/ricelewis/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-zinc-300 transition-colors">
                   <Linkedin className="size-4" />

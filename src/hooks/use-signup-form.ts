@@ -223,7 +223,7 @@ export function useSignupForm() {
       setError(
         err instanceof Error
           ? err.message
-          : "Something went wrong. Please try again or email lewis@mottodigital.jp."
+          : "Something went wrong. Please try again or email rice@mottodigital.jp."
       );
     } finally {
       setIsLoading(false);

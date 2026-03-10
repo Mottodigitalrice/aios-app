@@ -132,7 +132,7 @@ const signupDict = {
       },
     ],
     contactPrompt: "\u3054\u4E0D\u660E\u306A\u70B9\u304C\u3042\u308C\u3070\u3001\u304A\u6C17\u8EFD\u306B\u3054\u9023\u7D61\u304F\u3060\u3055\u3044\uFF1A",
-    contactEmail: "lewis@mottodigital.jp",
+    contactEmail: "rice@mottodigital.jp",
     backHome: "\u30DB\u30FC\u30E0\u306B\u623B\u308B",
   },
   sidebar: {

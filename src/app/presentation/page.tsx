@@ -887,7 +887,7 @@ export default function PresentationPage() {
                   </div>
                   <div className="flex items-center gap-2 text-sm text-zinc-400">
                     <Mail className="size-4 text-indigo-400/70" />
-                    <span>lewis@mottodigital.jp</span>
+                    <span>rice@mottodigital.jp</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-zinc-400">
                     <Linkedin className="size-4 text-indigo-400/70" />

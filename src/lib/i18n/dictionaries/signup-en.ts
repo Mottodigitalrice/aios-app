@@ -132,7 +132,7 @@ const signupDict = {
       },
     ],
     contactPrompt: "Questions in the meantime? Reach out anytime:",
-    contactEmail: "lewis@mottodigital.jp",
+    contactEmail: "rice@mottodigital.jp",
     backHome: "Back to Home",
   },
   sidebar: {

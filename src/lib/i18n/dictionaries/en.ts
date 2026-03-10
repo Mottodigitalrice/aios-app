@@ -181,7 +181,7 @@ const en = {
       retention: {
         title: "Data Retention",
         content:
-          "We retain your information for as long as necessary to provide our services and maintain our business relationship. You may request deletion of your data at any time by contacting us at hello@mottodigital.com.",
+          "We retain your information for as long as necessary to provide our services and maintain our business relationship. You may request deletion of your data at any time by contacting us at rice@mottodigital.jp.",
       },
       rights: {
         title: "Your Rights",
@@ -195,7 +195,7 @@ const en = {
       contact: {
         title: "Contact Us",
         content:
-          "If you have questions about this privacy policy or wish to exercise your rights, please contact us at hello@mottodigital.com.",
+          "If you have questions about this privacy policy or wish to exercise your rights, please contact us at rice@mottodigital.jp.",
       },
     },
   },

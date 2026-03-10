@@ -176,7 +176,7 @@ const ja = {
       retention: {
         title: "情報の保持",
         content:
-          "サービス提供に必要な期間保持します。削除ご希望の場合はhello@mottodigital.comまで。",
+          "サービス提供に必要な期間保持します。削除ご希望の場合はrice@mottodigital.jpまで。",
       },
       rights: {
         title: "あなたの権利",
@@ -190,7 +190,7 @@ const ja = {
       contact: {
         title: "お問い合わせ",
         content:
-          "ご質問がある場合はhello@mottodigital.comまでご連絡ください。",
+          "ご質問がある場合はrice@mottodigital.jpまでご連絡ください。",
       },
     },
   },

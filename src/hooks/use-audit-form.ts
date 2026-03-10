@@ -1,9 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
-import { useMutation, useAction } from "convex/react";
-import { api } from "../../convex/_generated/api";
-import { Id } from "../../convex/_generated/dataModel";
+import { useState, useCallback } from "react";
 import { z } from "zod";
 
 // ---------------------------------------------------------------------------
@@ -79,7 +76,6 @@ const INITIAL_DATA: AuditFormData = {
 };
 
 const TOTAL_STEPS = 8;
-const STORAGE_KEY = "aios-audit-lead";
 
 // ---------------------------------------------------------------------------
 // Per-step validation schemas
@@ -129,50 +125,10 @@ export type FieldErrors = Record<string, string>;
 export function useAuditForm() {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<AuditFormData>(INITIAL_DATA);
-  const [leadId, setLeadId] = useState<Id<"auditLeads"> | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isComplete, setIsComplete] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
-
-  const createPartialLead = useMutation(
-    api.functions.auditLeads.createPartialLead
-  );
-  const updatePartialLead = useMutation(
-    api.functions.auditLeads.updatePartialLead
-  );
-  const finalizeLead = useMutation(api.functions.auditLeads.finalizeLead);
-  const forwardWebhook = useAction(
-    api.functions.auditLeads.forwardToWebhook
-  );
-
-  // Restore from localStorage
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        const { leadId: storedId, formData: storedData, currentStep: storedStep } =
-          JSON.parse(stored);
-        if (storedId && storedData) {
-          setLeadId(storedId as Id<"auditLeads">);
-          setFormData({ ...INITIAL_DATA, ...storedData });
-          setCurrentStep(storedStep || 0);
-        }
-      }
-    } catch {
-      // Ignore parse errors
-    }
-  }, []);
-
-  // Save to localStorage on changes
-  useEffect(() => {
-    if (leadId) {
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify({ leadId, formData, currentStep })
-      );
-    }
-  }, [leadId, formData, currentStep]);
 
   const updateField = useCallback(
     <K extends keyof AuditFormData>(field: K, value: AuditFormData[K]) => {
@@ -249,93 +205,7 @@ export function useAuditForm() {
     return null;
   }, [currentStep, formData]);
 
-  const saveStep = useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      if (currentStep === 0) {
-        // Step 1: Create or update partial lead
-        const id = await createPartialLead({
-          email: formData.email,
-          privacyConsent: formData.privacyConsent,
-        });
-        setLeadId(id);
-      } else if (leadId) {
-        // Steps 2-6: Update partial lead
-        const updatePayload: Record<string, unknown> = {
-          id: leadId,
-          currentStep: currentStep + 1,
-        };
-
-        // Include step-specific fields
-        switch (currentStep) {
-          case 1:
-            updatePayload.name = formData.name;
-            if (formData.role) updatePayload.role = formData.role;
-            if (formData.perspective) updatePayload.perspective = formData.perspective;
-            break;
-          case 2:
-            if (formData.company) updatePayload.company = formData.company;
-            if (formData.employees) updatePayload.employees = formData.employees;
-            if (formData.workType) updatePayload.workType = formData.workType;
-            if (formData.useCase) updatePayload.useCase = formData.useCase;
-            break;
-          case 3:
-            if (formData.dataMaturity) updatePayload.dataMaturity = formData.dataMaturity;
-            if (formData.dataConfidence !== null) updatePayload.dataConfidence = formData.dataConfidence;
-            if (formData.dataLocation.length > 0) updatePayload.dataLocation = formData.dataLocation;
-            if (formData.dataRestructuringOpenness) updatePayload.dataRestructuringOpenness = formData.dataRestructuringOpenness;
-            break;
-          case 4:
-            if (formData.tools.length > 0)
-              updatePayload.tools = formData.tools;
-            break;
-          case 5:
-            if (formData.challenge.length > 0)
-              updatePayload.challenge = formData.challenge;
-            if (formData.challengeOther)
-              updatePayload.challengeOther = formData.challengeOther;
-            if (formData.bottlenecks.length > 0)
-              updatePayload.bottlenecks = formData.bottlenecks;
-            if (formData.repetitiveHoursPerWeek)
-              updatePayload.repetitiveHoursPerWeek = formData.repetitiveHoursPerWeek;
-            break;
-          case 6:
-            if (formData.aiExperience)
-              updatePayload.aiExperience = formData.aiExperience;
-            if (formData.sixMonthVision.length > 0)
-              updatePayload.sixMonthVision = formData.sixMonthVision;
-            if (formData.sixMonthVisionOther)
-              updatePayload.sixMonthVisionOther = formData.sixMonthVisionOther;
-            if (formData.aiBudget)
-              updatePayload.aiBudget = formData.aiBudget;
-            if (formData.aiTriedBefore)
-              updatePayload.aiTriedBefore = formData.aiTriedBefore;
-            if (formData.aiTimeline)
-              updatePayload.aiTimeline = formData.aiTimeline;
-            break;
-        }
-
-        await updatePartialLead(updatePayload as Parameters<typeof updatePartialLead>[0]);
-      }
-    } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Something went wrong. Please try again."
-      );
-      throw err;
-    } finally {
-      setIsLoading(false);
-    }
-  }, [
-    currentStep,
-    formData,
-    leadId,
-    createPartialLead,
-    updatePartialLead,
-  ]);
-
-  const goToNext = useCallback(async () => {
+  const goToNext = useCallback(() => {
     // Validate
     const validationError = validateCurrentStep();
     if (validationError) {
@@ -343,17 +213,12 @@ export function useAuditForm() {
       return;
     }
 
-    try {
-      await saveStep();
-      if (currentStep < TOTAL_STEPS - 1) {
-        setCurrentStep((prev) => prev + 1);
-        setError(null);
-        setFieldErrors({});
-      }
-    } catch {
-      // Error already set in saveStep
+    if (currentStep < TOTAL_STEPS - 1) {
+      setCurrentStep((prev) => prev + 1);
+      setError(null);
+      setFieldErrors({});
     }
-  }, [currentStep, validateCurrentStep, saveStep]);
+  }, [currentStep, validateCurrentStep]);
 
   const goToPrev = useCallback(() => {
     if (currentStep > 0) {
@@ -364,42 +229,38 @@ export function useAuditForm() {
   }, [currentStep]);
 
   const submitFinal = useCallback(async () => {
-    if (!leadId) return;
-
     setIsLoading(true);
     setError(null);
 
     try {
-      // Save final step data + finalize
-      await finalizeLead({
-        id: leadId,
-        source: formData.source || undefined,
-        preferredTime: formData.preferredTime || undefined,
-        website: formData.website || undefined,
+      const response = await fetch("/api/audit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
 
-      // Fire and forget webhook
-      forwardWebhook({ leadId }).catch(console.error);
+      const result = await response.json();
 
-      // Clear localStorage
-      localStorage.removeItem(STORAGE_KEY);
+      if (!response.ok) {
+        throw new Error(result.error || "Something went wrong. Please try again.");
+      }
+
       setIsComplete(true);
     } catch (err) {
       setError(
         err instanceof Error
           ? err.message
-          : "Something went wrong. Please try again or email us at hello@mottodigital.com."
+          : "Something went wrong. Please try again or email us at rice@mottodigital.jp."
       );
     } finally {
       setIsLoading(false);
     }
-  }, [leadId, formData, finalizeLead, forwardWebhook]);
+  }, [formData]);
 
   return {
     currentStep,
     totalSteps: TOTAL_STEPS,
     formData,
-    leadId,
     isLoading,
     error,
     fieldErrors,
