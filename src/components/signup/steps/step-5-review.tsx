@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Loader2, Sparkles, Mail, ShieldCheck } from "lucide-react";
+import { ArrowLeft, Loader2, Sparkles, ShieldCheck } from "lucide-react";
 import { useSignupLocale } from "../signup-locale-context";
 import type { SignupFormData } from "@/hooks/use-signup-form";
 
@@ -24,14 +24,39 @@ export function Step5Review({
   const s = t.steps[5];
 
   const isCohort = formData.track === "cohort";
-  const isFull = formData.plan === "full";
-
   const trackDisplay = isCohort ? s.trackCohort : s.trackCorporate;
-  const priceDisplay = isCohort
-    ? s.cohortPrice
-    : isFull
-      ? s.corporateFullPrice
-      : s.corporateMonthlyPrice;
+
+  // Build rows for the summary table
+  const rows: { label: string; value: string }[] = [
+    { label: s.trackLabel, value: trackDisplay },
+  ];
+
+  // Only show plan for corporate
+  if (!isCohort && formData.plan) {
+    rows.push({
+      label: s.planLabel,
+      value: formData.plan === "full" ? s.planFull : s.planMonthly,
+    });
+  }
+
+  rows.push({ label: s.nameLabel, value: formData.name });
+  rows.push({ label: s.emailLabel, value: formData.email });
+
+  if (formData.company) {
+    rows.push({ label: s.companyLabel, value: formData.company });
+  }
+  if (formData.role) {
+    rows.push({ label: s.roleLabel, value: formData.role });
+  }
+  if (formData.goals) {
+    rows.push({ label: s.goalsLabel, value: formData.goals });
+  }
+  if (formData.startPreference) {
+    rows.push({ label: s.startLabel, value: formData.startPreference });
+  }
+  if (formData.referralSource) {
+    rows.push({ label: s.referralLabel, value: formData.referralSource });
+  }
 
   return (
     <div className="w-full max-w-xl mx-auto">
@@ -52,61 +77,19 @@ export function Step5Review({
           </h3>
 
           <div className="grid gap-3">
-            <div className="flex justify-between items-center py-2 border-b border-zinc-800/30">
-              <span className="text-sm text-zinc-400">{s.trackLabel}</span>
-              <span className="text-sm font-medium text-zinc-100">
-                {trackDisplay}
-              </span>
-            </div>
-            {!isCohort && (
-              <div className="flex justify-between items-center py-2 border-b border-zinc-800/30">
-                <span className="text-sm text-zinc-400">{s.planLabel}</span>
-                <span className="text-sm font-medium text-zinc-100">
-                  {isFull ? s.planFull : s.planMonthly}
+            {rows.map((row) => (
+              <div
+                key={row.label}
+                className="flex justify-between items-start py-2 border-b border-zinc-800/30 gap-4"
+              >
+                <span className="text-sm text-zinc-400 shrink-0">
+                  {row.label}
+                </span>
+                <span className="text-sm font-medium text-zinc-100 text-right">
+                  {row.value}
                 </span>
               </div>
-            )}
-            <div className="flex justify-between items-center py-2 border-b border-zinc-800/30">
-              <span className="text-sm text-zinc-400">{s.priceLabel}</span>
-              <span className="text-sm font-bold text-indigo-400">
-                {priceDisplay}
-              </span>
-            </div>
-            <div className="flex justify-between items-center py-2 border-b border-zinc-800/30">
-              <span className="text-sm text-zinc-400">{s.nameLabel}</span>
-              <span className="text-sm text-zinc-100">{formData.name}</span>
-            </div>
-            <div className="flex justify-between items-center py-2 border-b border-zinc-800/30">
-              <span className="text-sm text-zinc-400">{s.emailLabel}</span>
-              <span className="text-sm text-zinc-100">{formData.email}</span>
-            </div>
-            {formData.company && (
-              <div className="flex justify-between items-center py-2 border-b border-zinc-800/30">
-                <span className="text-sm text-zinc-400">{s.companyLabel}</span>
-                <span className="text-sm text-zinc-100">
-                  {formData.company}
-                </span>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Payment note */}
-        <div className="rounded-xl border border-amber-500/20 bg-amber-500/[0.05] p-5">
-          <h4 className="text-sm font-semibold text-amber-300 mb-2">
-            {s.paymentTitle}
-          </h4>
-          <p className="text-sm text-zinc-400 leading-relaxed mb-3">
-            {s.paymentComingSoon}
-          </p>
-          <div className="flex items-center gap-2">
-            <Mail className="size-4 text-indigo-400 shrink-0" />
-            <a
-              href={`mailto:${s.contactEmail}`}
-              className="text-sm text-indigo-400 hover:text-indigo-300 transition-colors"
-            >
-              {s.contactEmail}
-            </a>
+            ))}
           </div>
         </div>
 

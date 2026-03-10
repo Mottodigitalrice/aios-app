@@ -133,7 +133,7 @@ export function Step1Track({
           </div>
         </button>
 
-        {/* Payment plan selection for corporate */}
+        {/* Billing plan selection for corporate */}
         {formData.track === "corporate" && (
           <div className="ml-1 mt-2">
             <p className="text-sm font-medium text-zinc-300 mb-3">

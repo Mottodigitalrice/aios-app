@@ -23,6 +23,7 @@ const signupDict = {
     1: { text: "Great choice!", timeLeft: "~3 min left" },
     2: { text: "Almost there!", timeLeft: "~2 min left" },
     3: { text: "One more step!", timeLeft: "~1 min left" },
+    4: { text: "Just confirm and you\u2019re done!", timeLeft: "< 1 min" },
   },
   steps: {
     1: {
@@ -46,7 +47,7 @@ const signupDict = {
         "Same Corporate Build program, paid upfront. Save \u00A5200,000 compared to monthly.",
       monthlyPlanLabel: "Monthly",
       fullPlanLabel: "Pay in Full & Save",
-      planSelectionLabel: "Payment plan:",
+      planSelectionLabel: "Billing plan:",
     },
     2: {
       question: "About You",
@@ -88,54 +89,49 @@ const signupDict = {
       notesPlaceholder: "Optional \u2014 any questions, context, or special requests...",
     },
     5: {
-      question: "Review & Enroll",
-      description: "Review your selections and complete your enrollment.",
-      summaryTitle: "Enrollment Summary",
+      question: "Review & Submit",
+      description:
+        "Take a moment to review your details. When everything looks good, hit submit.",
+      summaryTitle: "Your Enrollment Details",
       trackLabel: "Track",
       trackCohort: "Group Cohort",
       trackCorporate: "Corporate Build",
       planLabel: "Plan",
-      planMonthly: "Monthly (\u00A5200,000/mo \u00D7 6)",
-      planFull: "Pay in Full (\u00A51,000,000)",
-      priceLabel: "Price",
-      cohortPrice: "\u00A530,000/person/month \u00D7 6 months",
-      corporateMonthlyPrice: "\u00A5200,000/month \u00D7 6 months = \u00A51,200,000",
-      corporateFullPrice: "\u00A51,000,000 (save \u00A5200,000)",
+      planMonthly: "Monthly",
+      planFull: "Pay in Full",
       nameLabel: "Name",
       emailLabel: "Email",
       companyLabel: "Company",
-      paymentTitle: "Payment",
-      paymentComingSoon:
-        "Payment system coming soon. Lewis will contact you directly to complete enrollment.",
-      contactEmail: "lewis@mottodigital.jp",
-      contactPrompt: "Questions? Reach out directly:",
-      submitButton: "Complete Enrollment",
+      roleLabel: "Role",
+      goalsLabel: "Goals",
+      startLabel: "Start preference",
+      referralLabel: "Heard about us",
       guarantee:
         "Backed by the Ownership Guarantee \u2014 if your team can\u2019t manage AI agents by month 6, we keep going free.",
     },
   },
   success: {
-    title: "You\u2019re Enrolled \u2014 Welcome!",
+    title: "You\u2019re All Set!",
     subtitle:
-      "Lewis will reach out within 24 hours to confirm your enrollment and next steps.",
+      "Thank you for signing up for AIOS. Lewis will be in touch with you soon with next steps.",
     steps: [
       {
-        title: "Lewis confirms your enrollment",
+        title: "Lewis reviews your submission",
         description:
-          "He\u2019ll review your submission and reach out to finalize details.",
+          "He\u2019ll look over your details and prepare a personalized plan.",
       },
       {
-        title: "Onboarding call",
+        title: "Personal follow-up",
         description:
-          "A 30-minute call to discuss your goals, set up your environment, and plan the first session.",
+          "Expect a message from Lewis within 24 hours to discuss next steps and answer any questions.",
       },
       {
-        title: "Program begins",
+        title: "Onboarding & kickoff",
         description:
-          "Sessions start, your AI operating system build begins, and you\u2019re on your way.",
+          "A short call to align on goals, set up your environment, and get started.",
       },
     ],
-    contactPrompt: "In the meantime, feel free to reach out:",
+    contactPrompt: "Questions in the meantime? Reach out anytime:",
     contactEmail: "lewis@mottodigital.jp",
     backHome: "Back to Home",
   },
@@ -170,14 +166,14 @@ const signupDict = {
         items: [
           "Lewis personally reviews every enrollment",
           "You\u2019ll hear back within 24 hours",
-          "No payment required today",
+          "No commitment until you speak with Lewis",
         ],
       },
       4: {
         title: "Ready to go!",
         items: [
-          "Review your selections carefully",
-          "Lewis will reach out to finalize enrollment",
+          "Double-check your details before submitting",
+          "Lewis will follow up personally within 24 hours",
           "Backed by the Ownership Guarantee",
         ],
       },
