@@ -27,6 +27,7 @@ import {
 import { MobileNav } from "@/components/landing/mobile-nav";
 import { FAQSection } from "@/components/landing/faq-section";
 import { HeroVisual } from "@/components/landing/hero-visual";
+import { HeroOrgVisual } from "@/components/landing/hero-org-visual";
 import { LanguageToggle } from "@/components/landing/language-toggle";
 import { AnimateInView, CountUp } from "@/components/landing/animate-in-view";
 import { BrainBodySection } from "@/components/landing/brain-body-section";
@@ -171,9 +172,9 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Right: Hero visual */}
+            {/* Right: Hero visual — living org chart */}
             <div className="animate-fade-in-up animation-delay-300 hidden lg:block">
-              <HeroVisual locale={locale} />
+              <HeroOrgVisual locale={locale} />
             </div>
           </div>
         </div>
