@@ -26,6 +26,7 @@ import {
   DollarSign,
   Unlink,
   ExternalLink,
+  Download,
   Mail,
   Linkedin,
   QrCode,
@@ -818,7 +819,8 @@ export default function PresentationPage() {
 
                 {/* Download This Presentation */}
                 <a
-                  href="/presentation"
+                  href="/aios-overview.pdf"
+                  download
                   onClick={(e) => e.stopPropagation()}
                   className="block rounded-2xl border-2 border-zinc-700/50 bg-zinc-900/30 p-6 text-center transition-all duration-300 hover:border-zinc-600/60 hover:scale-[1.02] group"
                 >
@@ -830,8 +832,8 @@ export default function PresentationPage() {
                     プレゼン資料をダウンロード
                   </p>
                   <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-700 text-zinc-300 font-semibold text-sm group-hover:border-zinc-600 transition-colors">
-                    <ExternalLink className="size-4" />
-                    View PDF
+                    <Download className="size-4" />
+                    Download PDF
                   </div>
                 </a>
 
