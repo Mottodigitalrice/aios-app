@@ -730,7 +730,7 @@ export default function HomePage() {
                 </div>
 
                 {/* Capacity indicators */}
-                <div className="grid sm:grid-cols-2 gap-6 mb-8">
+                <div className="grid sm:grid-cols-3 gap-6 mb-8">
                   {/* Corporate slots */}
                   <div className="rounded-lg border border-zinc-800/50 bg-zinc-950/50 p-5">
                     <div className="flex items-center justify-between mb-3">
@@ -746,19 +746,32 @@ export default function HomePage() {
                     <p className="text-xs text-zinc-500">{t.pricing.intake.corporate.clients}</p>
                   </div>
 
-                  {/* Cohort slots */}
+                  {/* English Cohort */}
                   <div className="rounded-lg border border-zinc-800/50 bg-zinc-950/50 p-5">
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-sm font-semibold text-zinc-200">{t.pricing.intake.cohort.title}</span>
-                      <span className="text-xs text-indigo-400 font-medium">{t.pricing.intake.cohort.label}</span>
+                      <span className="text-sm font-semibold text-zinc-200">{t.pricing.intake.cohortEN.title}</span>
+                      <span className="text-xs text-indigo-400 font-medium">{t.pricing.intake.cohortEN.label}</span>
                     </div>
                     <div className="h-2 w-full rounded-full bg-zinc-800 overflow-hidden mb-3">
                       <div
                         className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-indigo-400 transition-all duration-1000"
-                        style={{ width: `${(t.pricing.intake.cohort.filled / t.pricing.intake.cohort.total) * 100}%` }}
+                        style={{ width: `${Math.max((t.pricing.intake.cohortEN.filled / t.pricing.intake.cohortEN.total) * 100, 0)}%` }}
                       />
                     </div>
-                    <p className="text-xs text-zinc-500">{t.pricing.intake.cohort.tracks}</p>
+                  </div>
+
+                  {/* Japanese Cohort */}
+                  <div className="rounded-lg border border-zinc-800/50 bg-zinc-950/50 p-5">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm font-semibold text-zinc-200">{t.pricing.intake.cohortJP.title}</span>
+                      <span className="text-xs text-indigo-400 font-medium">{t.pricing.intake.cohortJP.label}</span>
+                    </div>
+                    <div className="h-2 w-full rounded-full bg-zinc-800 overflow-hidden mb-3">
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-indigo-400 transition-all duration-1000"
+                        style={{ width: `${(t.pricing.intake.cohortJP.filled / t.pricing.intake.cohortJP.total) * 100}%` }}
+                      />
+                    </div>
                   </div>
                 </div>
 

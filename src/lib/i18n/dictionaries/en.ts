@@ -294,12 +294,17 @@ const en = {
           label: "2 of 5 slots taken",
           clients: "Current clients: SkillHunters, Eden",
         },
-        cohort: {
-          title: "Group Cohort",
+        cohortEN: {
+          title: "English Cohort",
+          filled: 0,
+          total: 10,
+          label: "0 of 10 spots filled",
+        },
+        cohortJP: {
+          title: "Japanese Cohort",
           filled: 1,
-          total: 2,
-          label: "2 cohorts planned \u00B7 1 signed up",
-          tracks: "English & Japanese tracks available",
+          total: 10,
+          label: "1 of 10 spots filled",
         },
         commitment: "This is a new service \u2014 and that\u2019s exactly why I\u2019m limiting it. The future of my business depends on making these first clients wildly successful. I\u2019m not spreading thin. I\u2019m going deep with the people who trust me first. I\u2019m convinced of the impact this can have, and I want to prove it.",
         author: "\u2014 Lewis Rice, Founder",

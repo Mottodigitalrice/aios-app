@@ -289,12 +289,17 @@ const ja = {
           label: "5枠中2枠が決定済み",
           clients: "契約中: SkillHunters、Eden",
         },
-        cohort: {
-          title: "グループコホート",
+        cohortEN: {
+          title: "英語コホート",
+          filled: 0,
+          total: 10,
+          label: "10枠中0枠が登録済み",
+        },
+        cohortJP: {
+          title: "日本語コホート",
           filled: 1,
-          total: 2,
-          label: "2クラス予定 · 1名が登録済み",
-          tracks: "英語＆日本語トラックあり",
+          total: 10,
+          label: "10枠中1枠が登録済み",
         },
         commitment: "これはまだ実績のないサービスです。だからこそ、人数を絞ります。MOTTO Digitalの未来は、最初のクライアントを圧倒的に成功させることにかかっています。薄く広くではなく、信じて任せてくれた人たちに全力で向き合います。このサービスが持つインパクトを、まず証明したい。",
         author: "\u2014 ルイス・ライス（創業者）",
