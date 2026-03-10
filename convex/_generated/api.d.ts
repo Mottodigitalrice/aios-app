@@ -10,6 +10,7 @@
 
 import type * as functions_auditLeads from "../functions/auditLeads.js";
 import type * as functions_auditReports from "../functions/auditReports.js";
+import type * as functions_signups from "../functions/signups.js";
 import type * as functions_users from "../functions/users.js";
 
 import type {
@@ -21,6 +22,7 @@ import type {
 declare const fullApi: ApiFromModules<{
   "functions/auditLeads": typeof functions_auditLeads;
   "functions/auditReports": typeof functions_auditReports;
+  "functions/signups": typeof functions_signups;
   "functions/users": typeof functions_users;
 }>;
 

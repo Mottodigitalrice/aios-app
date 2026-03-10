@@ -285,6 +285,12 @@ const ja = {
       detail: "完全無料、義務なし。ルイスが直接レビューしたパーソナライズドレポートをお届けします。",
       cta: "無料AI活用診断を受ける",
     },
+    signup: {
+      badge: "AIOS\u30D7\u30ED\u30B0\u30E9\u30E0",
+      title: "",
+      titleHighlight: "AIOS\u306B\u7533\u3057\u8FBC\u3080",
+      subtitle: "AI\u30AA\u30DA\u30EC\u30FC\u30C6\u30A3\u30F3\u30B0\u30B7\u30B9\u30C6\u30E0\u3092\u69CB\u7BC9\u3059\u308B\u6E96\u5099\u306F\u3067\u304D\u307E\u3057\u305F\u304B\uFF1F\u30C8\u30E9\u30C3\u30AF\u3092\u9078\u3093\u3067\u3001\u59CB\u3081\u307E\u3057\u3087\u3046\u3002",
+    },
     // FAQ content lives in faq-section.tsx (self-contained component with categories)
     cta: {
       title: "無料AI活用診断を受ける",

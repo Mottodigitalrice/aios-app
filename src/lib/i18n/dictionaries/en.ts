@@ -290,6 +290,12 @@ const en = {
       detail: "Completely free, no obligation. You\u2019ll get a personalized report reviewed by Lewis.",
       cta: "Take the free AI audit",
     },
+    signup: {
+      badge: "AIOS Program",
+      title: "Sign Up for",
+      titleHighlight: "AIOS",
+      subtitle: "Ready to build your AI operating system? Choose your track and let\u2019s get started.",
+    },
     // FAQ content lives in faq-section.tsx (self-contained component with categories)
     cta: {
       title: "Get Your Free AI Audit",

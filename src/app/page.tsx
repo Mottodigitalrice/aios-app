@@ -670,7 +670,7 @@ export default function HomePage() {
                   </ul>
                   <p className="text-xs text-zinc-500 mb-2">{t.pricing.cohort.bestFor}</p>
                   <p className="text-xs text-emerald-400/70 mb-6">{t.pricing.cohort.guarantee}</p>
-                  <Link href="/audit" className="w-full">
+                  <Link href="/signup?track=cohort" className="w-full">
                     <Button className="w-full bg-indigo-600 hover:bg-indigo-500 text-white">
                       {t.pricing.cohort.cta}
                     </Button>
@@ -711,12 +711,12 @@ export default function HomePage() {
                   <p className="text-xs text-zinc-500 mb-2">{t.pricing.corporate.bestFor}</p>
                   <p className="text-xs text-emerald-400/70 mb-6">{t.pricing.corporate.guarantee}</p>
                   <div className="space-y-3">
-                    <Link href="/audit" className="w-full block">
+                    <Link href="/signup?track=corporate&plan=monthly" className="w-full block">
                       <Button variant="outline" className="w-full border-zinc-700 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100">
                         {t.pricing.corporate.monthlyCta}
                       </Button>
                     </Link>
-                    <Link href="/audit" className="w-full block">
+                    <Link href="/signup?track=corporate&plan=full" className="w-full block">
                       <Button className="w-full bg-indigo-600 hover:bg-indigo-500 text-white">
                         {t.pricing.corporate.payInFullCta}
                       </Button>

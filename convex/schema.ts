@@ -85,6 +85,34 @@ export default defineSchema({
     updatedAt: v.optional(v.number()),
   }).index("by_lead", ["leadId"]),
 
+  signups: defineTable({
+    track: v.union(v.literal("cohort"), v.literal("corporate")),
+    plan: v.optional(v.union(v.literal("monthly"), v.literal("full"))),
+    name: v.string(),
+    email: v.string(),
+    company: v.optional(v.string()),
+    role: v.optional(v.string()),
+    goals: v.string(),
+    painPoints: v.optional(v.string()),
+    teamSize: v.optional(v.number()),
+    startPreference: v.string(),
+    referralSource: v.string(),
+    notes: v.optional(v.string()),
+    status: v.union(
+      v.literal("pending"),
+      v.literal("contacted"),
+      v.literal("paid"),
+      v.literal("enrolled")
+    ),
+    stripeSessionId: v.optional(v.string()),
+    webhookSent: v.optional(v.boolean()),
+    createdAt: v.number(),
+    updatedAt: v.optional(v.number()),
+  })
+    .index("by_email", ["email"])
+    .index("by_status", ["status"])
+    .index("by_created", ["createdAt"]),
+
   users: defineTable({
     clerkId: v.string(),
     email: v.string(),
