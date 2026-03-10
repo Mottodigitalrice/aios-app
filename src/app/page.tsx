@@ -137,9 +137,9 @@ export default function HomePage() {
                 {t.hero.subtitle}
               </p>
 
-              <div className="animate-fade-in-up animation-delay-300 mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                <div className="flex flex-col items-center sm:items-start">
-                  <Link href="/audit">
+              <div className="animate-fade-in-up animation-delay-300 mt-8 flex flex-col sm:flex-row items-start justify-center lg:justify-start gap-4">
+                <div className="flex flex-col items-center sm:items-start w-full sm:w-auto">
+                  <Link href="/audit" className="w-full sm:w-auto">
                     <Button size="lg" className="bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow w-full sm:w-auto">
                       {t.hero.cta}
                       <ArrowRight className="size-4" />
@@ -147,15 +147,18 @@ export default function HomePage() {
                   </Link>
                   <span className="text-xs text-zinc-500 mt-1.5">{t.hero.ctaTime}</span>
                 </div>
-                <ShiryoDialog
-                  locale={locale}
-                  trigger={
-                    <Button size="lg" variant="outline" className="border-zinc-700 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100 gap-2 w-full sm:w-auto">
-                      {t.hero.ctaSecondary}
-                      <FileText className="size-4" />
-                    </Button>
-                  }
-                />
+                <div className="flex flex-col items-center sm:items-start w-full sm:w-auto">
+                  <ShiryoDialog
+                    locale={locale}
+                    trigger={
+                      <Button size="lg" variant="outline" className="border-zinc-700 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100 gap-2 w-full sm:w-auto">
+                        {t.hero.ctaSecondary}
+                        <FileText className="size-4" />
+                      </Button>
+                    }
+                  />
+                  <span className="text-xs text-zinc-500 mt-1.5 invisible">{t.hero.ctaTime}</span>
+                </div>
               </div>
 
               {/* Guarantee hint — elevated for conversion */}
