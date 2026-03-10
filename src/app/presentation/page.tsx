@@ -253,6 +253,34 @@ export default function PresentationPage() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [advance, goBack]);
 
+  // Touch swipe support for mobile navigation
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+  useEffect(() => {
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    };
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (!touchStartRef.current) return;
+      const dx = e.changedTouches[0].clientX - touchStartRef.current.x;
+      const dy = e.changedTouches[0].clientY - touchStartRef.current.y;
+      const absDx = Math.abs(dx);
+      const absDy = Math.abs(dy);
+      // Only register horizontal swipes (min 50px, more horizontal than vertical)
+      if (absDx > 50 && absDx > absDy * 1.5) {
+        if (dx < 0) advance();  // swipe left = forward
+        else goBack();          // swipe right = back
+        e.preventDefault();
+      }
+      touchStartRef.current = null;
+    };
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchend", handleTouchEnd, { passive: false });
+    return () => {
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [advance, goBack]);
+
   const { slideIndex, localStep } = getSlideAndStep(globalStep);
   const currentNotes = PRESENTER_NOTES[slideIndex];
 
@@ -285,11 +313,17 @@ export default function PresentationPage() {
         </div>
       </div>
 
-      {/* Navigation hint */}
-      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-zinc-900/60 backdrop-blur-sm rounded-full px-4 py-1.5 text-[11px] text-zinc-600 border border-zinc-800/30 transition-opacity duration-300"
+      {/* Navigation hint — desktop */}
+      <div className="hidden sm:block fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-zinc-900/60 backdrop-blur-sm rounded-full px-4 py-1.5 text-[11px] text-zinc-600 border border-zinc-800/30 transition-opacity duration-300"
         style={{ opacity: globalStep === 0 ? 1 : 0, bottom: showNotes ? "36vh" : "1rem" }}
       >
         Click · Space · Arrow Keys &nbsp;|&nbsp; Right-click to go back &nbsp;|&nbsp; N = Notes
+      </div>
+      {/* Navigation hint — mobile */}
+      <div className="sm:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-zinc-900/60 backdrop-blur-sm rounded-full px-4 py-1.5 text-[11px] text-zinc-600 border border-zinc-800/30 transition-opacity duration-300"
+        style={{ opacity: globalStep === 0 ? 1 : 0, bottom: showNotes ? "36vh" : "1rem" }}
+      >
+        Tap to advance &nbsp;|&nbsp; Swipe right to go back
       </div>
 
       {/* ── Slide container ── */}
@@ -354,14 +388,14 @@ export default function PresentationPage() {
               <FadeIn show={localStep >= 1}>
                 <div className="mt-8 w-full max-w-2xl mx-auto">
                   {/* Linear 4-step flow */}
-                  <div className="flex items-center justify-center gap-2 sm:gap-3">
-                    <CycleNode icon={<Sparkles className="size-5" />} label="Try AI Tools" sublabel="AIツールを試す" num="1" />
-                    <ChevronRight className="size-5 text-red-400/50 shrink-0" />
-                    <CycleNode icon={<Zap className="size-5" />} label="Some Results" sublabel="ある程度の成果" num="2" />
-                    <ChevronRight className="size-5 text-red-400/50 shrink-0" />
-                    <CycleNode icon={<TrendingDown className="size-5" />} label="Can&#39;t Scale" sublabel="拡張できない" num="3" />
-                    <ChevronRight className="size-5 text-red-400/50 shrink-0" />
-                    <CycleNode icon={<RotateCcw className="size-5 text-red-400" />} label="Give Up" sublabel="手作業に戻る" num="4" highlight />
+                  <div className="flex items-center justify-center gap-1 sm:gap-3">
+                    <CycleNode icon={<Sparkles className="size-4 sm:size-5" />} label="Try AI Tools" sublabel="AIツールを試す" num="1" />
+                    <ChevronRight className="size-4 sm:size-5 text-red-400/50 shrink-0" />
+                    <CycleNode icon={<Zap className="size-4 sm:size-5" />} label="Some Results" sublabel="ある程度の成果" num="2" />
+                    <ChevronRight className="size-4 sm:size-5 text-red-400/50 shrink-0" />
+                    <CycleNode icon={<TrendingDown className="size-4 sm:size-5" />} label="Can&#39;t Scale" sublabel="拡張できない" num="3" />
+                    <ChevronRight className="size-4 sm:size-5 text-red-400/50 shrink-0" />
+                    <CycleNode icon={<RotateCcw className="size-4 sm:size-5 text-red-400" />} label="Give Up" sublabel="手作業に戻る" num="4" highlight />
                   </div>
                   {/* Return arrow showing the loop */}
                   <div className="flex items-center justify-center mt-3 gap-2">
@@ -862,6 +896,29 @@ export default function PresentationPage() {
         </SlideWrapper>
       </div>
 
+      {/* ── Mobile nav arrows (always visible on mobile after first step) ── */}
+      <div
+        className="sm:hidden fixed bottom-4 right-4 z-50 flex gap-2 transition-opacity duration-300"
+        style={{ opacity: globalStep > 0 ? 1 : 0, bottom: showNotes ? "36vh" : "1rem" }}
+      >
+        <button
+          onClick={(e) => { e.stopPropagation(); goBack(); }}
+          disabled={globalStep === 0}
+          className="size-9 rounded-full bg-zinc-900/70 backdrop-blur-sm border border-zinc-800/40 flex items-center justify-center text-zinc-500 hover:text-zinc-300 disabled:opacity-30 transition-all"
+          aria-label="Previous"
+        >
+          <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button
+          onClick={(e) => { e.stopPropagation(); advance(); }}
+          disabled={globalStep === TOTAL_GLOBAL_STEPS - 1}
+          className="size-9 rounded-full bg-zinc-900/70 backdrop-blur-sm border border-zinc-800/40 flex items-center justify-center text-zinc-500 hover:text-zinc-300 disabled:opacity-30 transition-all"
+          aria-label="Next"
+        >
+          <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+
       {/* ── Presenter Notes Panel ── */}
       <div className={`pres-notes-panel ${showNotes ? "pres-notes-visible" : "pres-notes-hidden"}`} onClick={(e) => e.stopPropagation()}>
         <div className="mx-auto max-w-4xl px-6 py-4">
@@ -1002,7 +1059,7 @@ function CycleNode({
   icon: React.ReactNode; label: string; sublabel: string; highlight?: boolean; num?: string;
 }) {
   return (
-    <div className={`p-3 rounded-xl border text-center w-[120px] relative ${
+    <div className={`p-2 sm:p-3 rounded-xl border text-center w-[72px] sm:w-[120px] relative ${
       highlight ? "border-red-500/40 bg-red-950/30 shadow-lg shadow-red-500/10" : "border-zinc-700/80 bg-zinc-900/80"
     }`}>
       {num && (
@@ -1011,8 +1068,8 @@ function CycleNode({
         }`}>{num}</div>
       )}
       <div className={`flex justify-center mb-1 ${highlight ? "text-red-400" : "text-zinc-400"}`}>{icon}</div>
-      <p className={`font-semibold text-xs leading-tight ${highlight ? "text-red-300" : ""}`}>{label}</p>
-      <p className="text-[10px] text-zinc-500 mt-0.5">{sublabel}</p>
+      <p className={`font-semibold text-[10px] sm:text-xs leading-tight ${highlight ? "text-red-300" : ""}`}>{label}</p>
+      <p className="text-[9px] sm:text-[10px] text-zinc-500 mt-0.5">{sublabel}</p>
     </div>
   );
 }
