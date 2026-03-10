@@ -258,6 +258,8 @@ export default function PresentationPage() {
 
   return (
     <div
+      role="application"
+      aria-label="MOTTO Digital presentation — use arrow keys or click to navigate"
       className="h-screen overflow-hidden bg-zinc-950 text-zinc-100 grid-pattern cursor-pointer select-none relative"
       onClick={advance}
       onContextMenu={(e) => { e.preventDefault(); goBack(); }}
@@ -782,7 +784,7 @@ export default function PresentationPage() {
               </div>
 
               {/* CTA Cards */}
-              <div className="mt-10 w-full max-w-3xl grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="mt-10 w-full max-w-2xl grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Get Your Free AI Audit */}
                 <a
                   href="/audit"
@@ -971,7 +973,7 @@ function SlideWrapper({
 
   return (
     <div
-      className={`absolute inset-0 ${active ? "pointer-events-auto" : "pointer-events-none"} ${animClass}`}
+      className={`absolute inset-0 bg-zinc-950 ${active ? "pointer-events-auto z-10" : "pointer-events-none z-0"} ${animClass}`}
     >
       {children}
     </div>
