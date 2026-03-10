@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
+import { isDuplicateRequest } from "@/lib/dedup";
 
 export async function POST(req: NextRequest) {
   try {
+    // Dedup check — prevent double-clicks / page refreshes
+    const dedup = isDuplicateRequest(req.headers.get("x-request-id"));
+    if (dedup === true) {
+      return NextResponse.json({ success: true, duplicate: true });
+    }
     let data;
     try {
       data = await req.json();

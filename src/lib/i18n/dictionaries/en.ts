@@ -215,7 +215,7 @@ const en = {
         "Every project. Every client. Every promise \u2014 organized, connected, and working for you. Not locked into any vendor. Built with you, owned by you entirely.",
       cta: "Get your free AI audit",
       ctaTime: "Takes 5 minutes",
-      ctaSecondary: "Download presentation",
+      ctaSecondary: "View presentation",
       stats:
         "Currently running 26 projects, 63 tasks, and 9 pipeline deals \u2014 on one system, managed by one person.",
       guaranteeHint: "Backed by the Ownership Guarantee \u2014 if your team can\u2019t manage AI agents by month 6, we keep going free.",
