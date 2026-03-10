@@ -26,7 +26,7 @@ const activityJA = [
   { agent: "COO", text: "請求書を照合済み", color: "amber" as const },
   { agent: "CFO", text: "月次レポート完了", color: "emerald" as const },
   { agent: "notion-ops", text: "12件のタスクを同期", color: "zinc" as const },
-  { agent: "n8n-builder", text: "ワークフロー展開", color: "zinc" as const },
+  { agent: "n8n-builder", text: "ワークフロー展開完了", color: "zinc" as const },
 ];
 
 /* ──────────────────────────────────────────────
@@ -436,7 +436,7 @@ export function HeroOrgVisual({ locale = "en" }: { locale?: "en" | "ja" }) {
               <div className="flex items-center gap-1.5">
                 <div className="size-1 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="text-[8px] text-zinc-500 font-semibold uppercase tracking-wider">
-                  {locale === "ja" ? "ライブアクティビティ" : "Live Activity"}
+                  {locale === "ja" ? "最新の動き" : "Live Activity"}
                 </span>
               </div>
               <span className="text-[8px] text-zinc-600">
