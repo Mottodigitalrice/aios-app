@@ -25,13 +25,13 @@ import {
   AlertTriangle,
   DollarSign,
   Unlink,
-  ExternalLink,
   Download,
   Mail,
   Linkedin,
   QrCode,
   Globe,
   Clock,
+  UserPlus,
 } from "lucide-react";
 import { AIOSPyramid } from "@/components/landing/aios-pyramid";
 import { BrainBodyDiagram } from "@/components/landing/brain-body-section";
@@ -349,39 +349,55 @@ export default function PresentationPage() {
                 </p>
               </div>
 
-              {/* Cycle Diagram — Pure CSS flow */}
+              {/* Cycle Diagram — Circular loop */}
               <FadeIn show={localStep >= 1}>
-                <div className="mt-8 w-full max-w-3xl">
-                  {/* Top row: [1] → [2] → [3] */}
-                  <div className="flex items-center justify-center gap-3 sm:gap-4">
-                    <CycleBox icon={<Sparkles className="size-5 sm:size-6" />} label="Try AI Tools" sublabel="AIツールを試す" num="1" />
-                    <ArrowRight className="text-red-500/50 size-5 shrink-0" />
-                    <CycleBox icon={<Zap className="size-5 sm:size-6" />} label="Some Results" sublabel="ある程度の成果" num="2" />
-                    <ArrowRight className="text-red-500/50 size-5 shrink-0" />
-                    <CycleBox icon={<Network className="size-5 sm:size-6" />} label="Hard to Scale" sublabel="拡張が困難" num="3" />
-                  </div>
+                <div className="mt-6 w-full flex justify-center">
+                  <div className="relative" style={{ width: 420, height: 380 }}>
+                    {/* SVG circular arrows */}
+                    <svg viewBox="0 0 420 380" className="absolute inset-0 w-full h-full" fill="none">
+                      <defs>
+                        <marker id="arrowRed" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                          <path d="M0,1 L6,4 L0,7" fill="none" stroke="rgba(239,68,68,0.5)" strokeWidth="1.5" />
+                        </marker>
+                      </defs>
+                      {/* Top → Right arc */}
+                      <path d="M 280,80 Q 370,80 370,190" stroke="rgba(239,68,68,0.35)" strokeWidth="2" strokeDasharray="6,4" markerEnd="url(#arrowRed)" />
+                      {/* Right → Bottom arc */}
+                      <path d="M 370,220 Q 370,320 260,330" stroke="rgba(239,68,68,0.35)" strokeWidth="2" strokeDasharray="6,4" markerEnd="url(#arrowRed)" />
+                      {/* Bottom → Left arc */}
+                      <path d="M 160,330 Q 50,320 50,220" stroke="rgba(239,68,68,0.35)" strokeWidth="2" strokeDasharray="6,4" markerEnd="url(#arrowRed)" />
+                      {/* Left → Top arc */}
+                      <path d="M 50,180 Q 50,80 140,80" stroke="rgba(239,68,68,0.35)" strokeWidth="2" strokeDasharray="6,4" markerEnd="url(#arrowRed)" />
+                    </svg>
 
-                  {/* Down connector */}
-                  <div className="flex justify-center py-2.5">
-                    <ArrowDown className="size-5 text-red-500/50" />
-                  </div>
-
-                  {/* Bottom row: [4] → [5 highlighted] */}
-                  <div className="flex items-center justify-center gap-3 sm:gap-4">
-                    <CycleBox icon={<TrendingDown className="size-5 sm:size-6" />} label="Effort > Reward" sublabel="労力 > 成果" num="4" />
-                    <ArrowRight className="text-red-500/50 size-5 shrink-0" />
-                    <CycleBox icon={<RotateCcw className="size-5 sm:size-6 text-red-400" />} label="Back to Manual" sublabel="手作業に戻る" highlight num="5" />
-                  </div>
-
-                  {/* Cycle repeat indicator */}
-                  <div className="flex items-center justify-center gap-3 mt-5 px-8">
-                    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-red-500/30 to-transparent" />
-                    <div className="flex items-center gap-1.5 text-red-400/70">
-                      <RotateCcw className="size-3.5" />
-                      <span className="text-xs font-semibold tracking-wide uppercase">Cycle Repeats</span>
-                      <span className="text-[10px] text-red-400/50">/ 繰り返し</span>
+                    {/* Center label */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div className="flex flex-col items-center gap-1">
+                        <RotateCcw className="size-6 text-red-500/40 animate-[spin_8s_linear_infinite]" />
+                        <span className="text-xs font-bold text-red-400/60 uppercase tracking-widest">Endless Loop</span>
+                        <span className="text-[10px] text-red-400/40">終わりのない循環</span>
+                      </div>
                     </div>
-                    <div className="h-px flex-1 bg-gradient-to-r from-transparent via-red-500/30 to-transparent" />
+
+                    {/* Top node — Try AI Tools */}
+                    <div className="absolute" style={{ top: 0, left: '50%', transform: 'translateX(-50%)' }}>
+                      <CycleNode icon={<Sparkles className="size-5" />} label="Try AI Tools" sublabel="AIツールを試す" num="1" />
+                    </div>
+
+                    {/* Right node — Some Results */}
+                    <div className="absolute" style={{ top: '50%', right: -16, transform: 'translateY(-50%)' }}>
+                      <CycleNode icon={<Zap className="size-5" />} label="Some Results" sublabel="ある程度の成果" num="2" />
+                    </div>
+
+                    {/* Bottom node — Hard to Scale */}
+                    <div className="absolute" style={{ bottom: 0, left: '50%', transform: 'translateX(-50%)' }}>
+                      <CycleNode icon={<TrendingDown className="size-5" />} label="Can't Scale" sublabel="拡張できない" num="3" />
+                    </div>
+
+                    {/* Left node — Back to Manual */}
+                    <div className="absolute" style={{ top: '50%', left: -16, transform: 'translateY(-50%)' }}>
+                      <CycleNode icon={<RotateCcw className="size-5 text-red-400" />} label="Give Up" sublabel="手作業に戻る" num="4" highlight />
+                    </div>
                   </div>
                 </div>
               </FadeIn>
@@ -837,24 +853,22 @@ export default function PresentationPage() {
                   </div>
                 </a>
 
-                {/* Book a Call */}
+                {/* Sign Up Now */}
                 <a
-                  href="https://tidycal.com/rice/ai"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/signup?track=cohort"
                   onClick={(e) => e.stopPropagation()}
                   className="block rounded-2xl border-2 border-emerald-500/30 bg-emerald-950/10 p-6 text-center transition-all duration-300 hover:border-emerald-400/50 hover:scale-[1.02] group"
                 >
-                  <Clock className="size-7 text-emerald-400 mx-auto mb-3" />
+                  <UserPlus className="size-7 text-emerald-400 mx-auto mb-3" />
                   <p className="text-lg font-bold text-emerald-200 group-hover:text-emerald-100 transition-colors">
-                    Book a Call
+                    Sign Up Now
                   </p>
                   <p className="text-sm text-zinc-500 mt-1">
-                    通話を予約する
+                    今すぐ申し込む
                   </p>
                   <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-600 text-white font-semibold text-sm group-hover:bg-emerald-500 transition-colors">
-                    <ExternalLink className="size-4" />
-                    Schedule Now
+                    <ArrowRight className="size-4" />
+                    Get Started
                   </div>
                 </a>
               </div>
@@ -1048,6 +1062,27 @@ function CycleBox({
       <div className={`flex justify-center mb-1.5 ${highlight ? "text-red-400" : "text-zinc-400"}`}>{icon}</div>
       <p className={`font-semibold text-xs sm:text-sm ${highlight ? "text-red-300" : ""}`}>{label}</p>
       <p className="text-[10px] sm:text-xs text-zinc-500">{sublabel}</p>
+    </div>
+  );
+}
+
+function CycleNode({
+  icon, label, sublabel, highlight, num,
+}: {
+  icon: React.ReactNode; label: string; sublabel: string; highlight?: boolean; num?: string;
+}) {
+  return (
+    <div className={`p-3 rounded-xl border text-center w-[120px] relative ${
+      highlight ? "border-red-500/40 bg-red-950/30 shadow-lg shadow-red-500/10" : "border-zinc-700/80 bg-zinc-900/80"
+    }`}>
+      {num && (
+        <div className={`absolute -top-2 -right-2 size-5 rounded-full text-[10px] font-bold flex items-center justify-center ${
+          highlight ? "bg-red-500 text-white" : "bg-zinc-700 text-zinc-300"
+        }`}>{num}</div>
+      )}
+      <div className={`flex justify-center mb-1 ${highlight ? "text-red-400" : "text-zinc-400"}`}>{icon}</div>
+      <p className={`font-semibold text-xs leading-tight ${highlight ? "text-red-300" : ""}`}>{label}</p>
+      <p className="text-[10px] text-zinc-500 mt-0.5">{sublabel}</p>
     </div>
   );
 }

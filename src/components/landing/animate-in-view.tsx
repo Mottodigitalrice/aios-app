@@ -31,20 +31,23 @@ export function AnimateInView({
   delay = 0,
   as: Tag = "div",
 }: AnimateInViewProps) {
-  const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.1 });
+  const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.05, rootMargin: "0px 0px 200px 0px" });
   const prefersReduced = usePrefersReducedMotion();
-  const visible = isInView || prefersReduced;
+
+  // Content is ALWAYS visible (opacity starts at 1).
+  // Animation is a subtle enhancement: slight translate + very light opacity lift.
+  const animated = isInView || prefersReduced;
 
   return (
     <Tag
       ref={ref}
       className={className}
       style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(24px)",
+        opacity: animated ? 1 : 0.85,
+        transform: animated ? "translateY(0)" : "translateY(12px)",
         transition: prefersReduced
           ? "none"
-          : `opacity 0.6s ease-out ${delay}ms, transform 0.6s ease-out ${delay}ms`,
+          : `opacity 0.5s ease-out ${delay}ms, transform 0.5s ease-out ${delay}ms`,
         willChange: prefersReduced ? "auto" : "opacity, transform",
       }}
     >

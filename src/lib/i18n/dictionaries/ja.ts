@@ -214,7 +214,6 @@ const ja = {
       stats:
         "現在26プロジェクト、63タスク、9件の商談をひとつのシステムで、一人で管理中。",
       guaranteeHint: "オーナーシップ保証 — 6ヶ月後にAIエージェントを管理できなければ、できるまで無償でサポート。",
-      trust: "日本全国の企業に信頼されています",
     },
     pricing: {
       badge: "あなたに合うプランを見つける",
@@ -350,7 +349,6 @@ const ja = {
         { value: 26, label: "アクティブプロジェクト", sublabel: "同時進行で管理中" },
         { value: 63, label: "進行中タスク", sublabel: "全プロジェクトにわたって" },
         { value: 9, label: "商談案件", sublabel: "自動追跡中" },
-        { value: 16, label: "管理拠点", sublabel: "GBP投稿を自動化" },
       ],
       howItWorksTitle: "実際の運用方法",
       howItWorks: [

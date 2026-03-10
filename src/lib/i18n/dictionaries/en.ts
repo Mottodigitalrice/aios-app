@@ -219,7 +219,6 @@ const en = {
       stats:
         "Currently running 26 projects, 63 tasks, and 9 pipeline deals \u2014 on one system, managed by one person.",
       guaranteeHint: "Backed by the Ownership Guarantee \u2014 if your team can\u2019t manage AI agents by month 6, we keep going free.",
-      trust: "Trusted by companies across Japan",
     },
     pricing: {
       badge: "Choose Your Path",
@@ -355,7 +354,6 @@ const en = {
         { value: 26, label: "Active Projects", sublabel: "managed simultaneously" },
         { value: 63, label: "Tasks In Progress", sublabel: "across all projects" },
         { value: 9, label: "Pipeline Deals", sublabel: "tracked automatically" },
-        { value: 16, label: "Locations Managed", sublabel: "automated GBP posting" },
       ],
       howItWorksTitle: "How it works in practice",
       howItWorks: [

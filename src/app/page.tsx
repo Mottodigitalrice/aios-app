@@ -137,29 +137,6 @@ export default function HomePage() {
                 {t.hero.subtitle}
               </p>
 
-              {/* Trust indicators above the fold */}
-              <div className="animate-fade-in-up animation-delay-200 mt-6 flex flex-col sm:flex-row items-center lg:items-start gap-3">
-                <div className="flex -space-x-2" aria-hidden="true">
-                  {[
-                    "bg-indigo-500",
-                    "bg-violet-500",
-                    "bg-emerald-500",
-                    "bg-amber-500",
-                    "bg-teal-500",
-                  ].map((bg, i) => (
-                    <div
-                      key={i}
-                      className={`size-8 rounded-full ${bg} border-2 border-zinc-950 flex items-center justify-center`}
-                    >
-                      <User className="size-3.5 text-white/80" />
-                    </div>
-                  ))}
-                </div>
-                <div className="text-sm text-zinc-400">
-                  <span className="text-zinc-200 font-medium">{t.hero.trust}</span>
-                </div>
-              </div>
-
               <div className="animate-fade-in-up animation-delay-300 mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                 <div className="flex flex-col items-center sm:items-start">
                   <Link href="/audit">
@@ -365,8 +342,8 @@ export default function HomePage() {
           </AnimateInView>
 
           {/* Metrics Grid with CountUp — values from constants.ts for easy updates */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-            {[METRICS.activeProjects, METRICS.tasksInProgress, METRICS.pipelineDeals, METRICS.locationsManaged].map((value, i) => {
+          <div className="grid grid-cols-3 gap-4 mb-10">
+            {[METRICS.activeProjects, METRICS.tasksInProgress, METRICS.pipelineDeals].map((value, i) => {
               const metric = t.caseStudy.metrics[i];
               return (
                 <AnimateInView key={metric.label} delay={i * 100}>
