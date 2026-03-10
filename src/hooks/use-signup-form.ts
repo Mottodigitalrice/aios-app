@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { useMutation, useAction } from "convex/react";
-import { api } from "../../convex/_generated/api";
 import { z } from "zod";
 
 // ---------------------------------------------------------------------------
@@ -89,9 +87,6 @@ export function useSignupForm() {
   const [error, setError] = useState<string | null>(null);
   const [isComplete, setIsComplete] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
-
-  const submitSignup = useMutation(api.functions.signups.submit);
-  const forwardWebhook = useAction(api.functions.signups.forwardToWebhook);
 
   const updateField = useCallback(
     <K extends keyof SignupFormData>(field: K, value: SignupFormData[K]) => {
@@ -194,26 +189,34 @@ export function useSignupForm() {
     setError(null);
 
     try {
-      const signupId = await submitSignup({
-        track: formData.track as "cohort" | "corporate",
-        plan:
-          formData.track === "corporate" && formData.plan
-            ? (formData.plan as "monthly" | "full")
+      const response = await fetch("/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          track: formData.track,
+          plan:
+            formData.track === "corporate" && formData.plan
+              ? formData.plan
+              : undefined,
+          name: formData.name,
+          email: formData.email,
+          company: formData.company || undefined,
+          role: formData.role || undefined,
+          goals: formData.goals,
+          painPoints: formData.painPoints || undefined,
+          teamSize: formData.teamSize
+            ? parseInt(formData.teamSize, 10)
             : undefined,
-        name: formData.name,
-        email: formData.email,
-        company: formData.company || undefined,
-        role: formData.role || undefined,
-        goals: formData.goals,
-        painPoints: formData.painPoints || undefined,
-        teamSize: formData.teamSize ? parseInt(formData.teamSize, 10) : undefined,
-        startPreference: formData.startPreference,
-        referralSource: formData.referralSource,
-        notes: formData.notes || undefined,
+          startPreference: formData.startPreference,
+          referralSource: formData.referralSource,
+          notes: formData.notes || undefined,
+        }),
       });
 
-      // Fire and forget webhook
-      forwardWebhook({ signupId }).catch(console.error);
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.error || "Something went wrong");
+      }
 
       setIsComplete(true);
     } catch (err) {
@@ -225,7 +228,7 @@ export function useSignupForm() {
     } finally {
       setIsLoading(false);
     }
-  }, [formData, submitSignup, forwardWebhook]);
+  }, [formData]);
 
   return {
     currentStep,
