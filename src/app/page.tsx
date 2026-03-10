@@ -26,7 +26,6 @@ import {
 } from "lucide-react";
 import { MobileNav } from "@/components/landing/mobile-nav";
 import { FAQSection } from "@/components/landing/faq-section";
-import { HeroVisual } from "@/components/landing/hero-visual";
 import { HeroOrgVisual } from "@/components/landing/hero-org-visual";
 import { LanguageToggle } from "@/components/landing/language-toggle";
 import { AnimateInView, CountUp } from "@/components/landing/animate-in-view";

@@ -19,7 +19,6 @@ import {
   RotateCcw,
   Bot,
   Cpu,
-  Network,
   MessageSquare,
   Workflow,
   AlertTriangle,
@@ -307,7 +306,7 @@ export default function PresentationPage() {
                 The <span className="gradient-text">AI Paradigm Shift</span>
               </h1>
               <p className="text-2xl sm:text-3xl text-zinc-500 mt-4 text-center font-light">
-                AIパラダイムシフト
+                AIの発想の転換
               </p>
 
               <FadeIn show={localStep >= 1}>
@@ -1046,27 +1045,6 @@ function FadeIn({ show, children }: { show: boolean; children: React.ReactNode }
 }
 
 /* ============ Helper Components ============ */
-
-function CycleBox({
-  icon, label, sublabel, highlight, num,
-}: {
-  icon: React.ReactNode; label: string; sublabel: string; highlight?: boolean; num?: string;
-}) {
-  return (
-    <div className={`p-3 sm:p-4 rounded-xl border text-center min-w-[90px] sm:min-w-[130px] relative ${
-      highlight ? "border-red-500/30 bg-red-950/20" : "border-zinc-700 bg-zinc-900/50"
-    }`}>
-      {num && (
-        <div className={`absolute -top-2 -left-2 size-5 rounded-full text-[10px] font-bold flex items-center justify-center ${
-          highlight ? "bg-red-500 text-white" : "bg-zinc-700 text-zinc-300"
-        }`}>{num}</div>
-      )}
-      <div className={`flex justify-center mb-1.5 ${highlight ? "text-red-400" : "text-zinc-400"}`}>{icon}</div>
-      <p className={`font-semibold text-xs sm:text-sm ${highlight ? "text-red-300" : ""}`}>{label}</p>
-      <p className="text-[10px] sm:text-xs text-zinc-500">{sublabel}</p>
-    </div>
-  );
-}
 
 function CycleNode({
   icon, label, sublabel, highlight, num,
