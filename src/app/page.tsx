@@ -711,6 +711,68 @@ export default function HomePage() {
                 </p>
               </div>
             </AnimateInView>
+
+            {/* ===============================================
+                INTAKE CAPACITY — Scarcity + Commitment
+                =============================================== */}
+            <AnimateInView className="mt-16">
+              <div className="max-w-3xl mx-auto rounded-xl border border-zinc-800/50 bg-zinc-900/30 p-8 sm:p-10">
+                <div className="text-center mb-8">
+                  <Badge variant="outline" className="mb-4 border-amber-500/30 text-amber-300 bg-amber-500/10">
+                    {t.pricing.intake.badge}
+                  </Badge>
+                  <h3 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">
+                    {t.pricing.intake.title}
+                  </h3>
+                  <p className="text-zinc-400 max-w-xl mx-auto">
+                    {t.pricing.intake.subtitle}
+                  </p>
+                </div>
+
+                {/* Capacity indicators */}
+                <div className="grid sm:grid-cols-2 gap-6 mb-8">
+                  {/* Corporate slots */}
+                  <div className="rounded-lg border border-zinc-800/50 bg-zinc-950/50 p-5">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm font-semibold text-zinc-200">{t.pricing.intake.corporate.title}</span>
+                      <span className="text-xs text-amber-400 font-medium">{t.pricing.intake.corporate.label}</span>
+                    </div>
+                    <div className="h-2 w-full rounded-full bg-zinc-800 overflow-hidden mb-3">
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-amber-500 to-amber-400 transition-all duration-1000"
+                        style={{ width: `${(t.pricing.intake.corporate.filled / t.pricing.intake.corporate.total) * 100}%` }}
+                      />
+                    </div>
+                    <p className="text-xs text-zinc-500">{t.pricing.intake.corporate.clients}</p>
+                  </div>
+
+                  {/* Cohort slots */}
+                  <div className="rounded-lg border border-zinc-800/50 bg-zinc-950/50 p-5">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-sm font-semibold text-zinc-200">{t.pricing.intake.cohort.title}</span>
+                      <span className="text-xs text-indigo-400 font-medium">{t.pricing.intake.cohort.label}</span>
+                    </div>
+                    <div className="h-2 w-full rounded-full bg-zinc-800 overflow-hidden mb-3">
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-indigo-400 transition-all duration-1000"
+                        style={{ width: `${(t.pricing.intake.cohort.filled / t.pricing.intake.cohort.total) * 100}%` }}
+                      />
+                    </div>
+                    <p className="text-xs text-zinc-500">{t.pricing.intake.cohort.tracks}</p>
+                  </div>
+                </div>
+
+                {/* Personal commitment from Lewis */}
+                <div className="border-t border-zinc-800/50 pt-6">
+                  <p className="text-sm text-zinc-400 leading-relaxed italic">
+                    &ldquo;{t.pricing.intake.commitment}&rdquo;
+                  </p>
+                  <p className="mt-3 text-sm font-medium text-zinc-300">
+                    {t.pricing.intake.author}
+                  </p>
+                </div>
+              </div>
+            </AnimateInView>
           </div>
         </div>
       </section>
