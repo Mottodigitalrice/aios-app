@@ -12,6 +12,7 @@ import {
   RefreshCw,
   Zap,
   ChevronDown,
+  ChevronRight,
   Code,
   Wrench,
   Sparkles,
@@ -24,7 +25,6 @@ import {
   AlertTriangle,
   DollarSign,
   Unlink,
-  Download,
   Mail,
   Linkedin,
   QrCode,
@@ -348,56 +348,24 @@ export default function PresentationPage() {
                 </p>
               </div>
 
-              {/* Cycle Diagram — Circular loop */}
+              {/* Cycle Diagram — Clean linear flow with return arrow */}
               <FadeIn show={localStep >= 1}>
-                <div className="mt-6 w-full flex justify-center">
-                  <div className="relative" style={{ width: 460, height: 370 }}>
-                    {/* SVG circular arrows — viewBox matches container */}
-                    <svg viewBox="0 0 460 370" className="absolute inset-0 w-full h-full" fill="none">
-                      <defs>
-                        <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto">
-                          <path d="M1,1 L7,5 L1,9" fill="none" stroke="rgba(239,68,68,0.6)" strokeWidth="1.5" />
-                        </marker>
-                      </defs>
-                      {/* Clockwise arcs: Top→Right, Right→Bottom, Bottom→Left, Left→Top */}
-                      {/* Center is at (230, 185). Nodes at top(230,40), right(390,185), bottom(230,330), left(70,185) */}
-                      {/* Arc from top-right of top node → top of right node */}
-                      <path d="M 295,55 C 380,55 400,120 400,170" stroke="rgba(239,68,68,0.3)" strokeWidth="2" strokeDasharray="6,4" markerEnd="url(#arrowRed)" />
-                      {/* Arc from bottom of right node → right of bottom node */}
-                      <path d="M 400,210 C 400,280 360,325 295,335" stroke="rgba(239,68,68,0.3)" strokeWidth="2" strokeDasharray="6,4" markerEnd="url(#arrowRed)" />
-                      {/* Arc from left of bottom node → bottom of left node */}
-                      <path d="M 165,335 C 90,325 60,280 60,210" stroke="rgba(239,68,68,0.3)" strokeWidth="2" strokeDasharray="6,4" markerEnd="url(#arrowRed)" />
-                      {/* Arc from top of left node → left of top node */}
-                      <path d="M 60,160 C 60,90 100,55 165,55" stroke="rgba(239,68,68,0.3)" strokeWidth="2" strokeDasharray="6,4" markerEnd="url(#arrowRed)" />
-                    </svg>
-
-                    {/* Center label */}
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                      <div className="flex flex-col items-center gap-1">
-                        <RotateCcw className="size-6 text-red-500/40 animate-[spin_8s_linear_infinite]" />
-                        <span className="text-[11px] font-bold text-red-400/60 uppercase tracking-widest">Endless Loop</span>
-                        <span className="text-[10px] text-red-400/40">終わりのない循環</span>
-                      </div>
-                    </div>
-
-                    {/* Top node — Try AI Tools */}
-                    <div className="absolute" style={{ top: 0, left: '50%', transform: 'translateX(-50%)' }}>
-                      <CycleNode icon={<Sparkles className="size-5" />} label="Try AI Tools" sublabel="AIツールを試す" num="1" />
-                    </div>
-
-                    {/* Right node — Some Results */}
-                    <div className="absolute" style={{ top: '50%', right: 0, transform: 'translateY(-50%)' }}>
-                      <CycleNode icon={<Zap className="size-5" />} label="Some Results" sublabel="ある程度の成果" num="2" />
-                    </div>
-
-                    {/* Bottom node — Can't Scale */}
-                    <div className="absolute" style={{ bottom: 0, left: '50%', transform: 'translateX(-50%)' }}>
-                      <CycleNode icon={<TrendingDown className="size-5" />} label="Can't Scale" sublabel="拡張できない" num="3" />
-                    </div>
-
-                    {/* Left node — Give Up */}
-                    <div className="absolute" style={{ top: '50%', left: 0, transform: 'translateY(-50%)' }}>
-                      <CycleNode icon={<RotateCcw className="size-5 text-red-400" />} label="Give Up" sublabel="手作業に戻る" num="4" highlight />
+                <div className="mt-8 w-full max-w-2xl mx-auto">
+                  {/* Linear 4-step flow */}
+                  <div className="flex items-center justify-center gap-2 sm:gap-3">
+                    <CycleNode icon={<Sparkles className="size-5" />} label="Try AI Tools" sublabel="AIツールを試す" num="1" />
+                    <ChevronRight className="size-5 text-red-400/50 shrink-0" />
+                    <CycleNode icon={<Zap className="size-5" />} label="Some Results" sublabel="ある程度の成果" num="2" />
+                    <ChevronRight className="size-5 text-red-400/50 shrink-0" />
+                    <CycleNode icon={<TrendingDown className="size-5" />} label="Can&#39;t Scale" sublabel="拡張できない" num="3" />
+                    <ChevronRight className="size-5 text-red-400/50 shrink-0" />
+                    <CycleNode icon={<RotateCcw className="size-5 text-red-400" />} label="Give Up" sublabel="手作業に戻る" num="4" highlight />
+                  </div>
+                  {/* Return arrow showing the loop */}
+                  <div className="flex items-center justify-center mt-3 gap-2">
+                    <div className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-red-500/20 bg-red-950/20">
+                      <RotateCcw className="size-3.5 text-red-400/60 animate-[spin_8s_linear_infinite]" />
+                      <span className="text-xs font-semibold text-red-400/70 uppercase tracking-wider">Repeat / 繰り返す</span>
                     </div>
                   </div>
                 </div>
@@ -831,26 +799,6 @@ export default function PresentationPage() {
                   <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-600 text-white font-semibold text-sm group-hover:bg-indigo-500 transition-colors">
                     <ArrowRight className="size-4" />
                     Start Now
-                  </div>
-                </a>
-
-                {/* Download This Presentation */}
-                <a
-                  href="/aios-overview.pdf"
-                  download
-                  onClick={(e) => e.stopPropagation()}
-                  className="block rounded-2xl border-2 border-zinc-700/50 bg-zinc-900/30 p-6 text-center transition-all duration-300 hover:border-zinc-600/60 hover:scale-[1.02] group"
-                >
-                  <Monitor className="size-7 text-zinc-400 mx-auto mb-3 group-hover:text-zinc-300 transition-colors" />
-                  <p className="text-lg font-bold text-zinc-300 group-hover:text-zinc-100 transition-colors">
-                    Download Presentation
-                  </p>
-                  <p className="text-sm text-zinc-500 mt-1">
-                    プレゼン資料をダウンロード
-                  </p>
-                  <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-700 text-zinc-300 font-semibold text-sm group-hover:border-zinc-600 transition-colors">
-                    <Download className="size-4" />
-                    Download PDF
                   </div>
                 </a>
 

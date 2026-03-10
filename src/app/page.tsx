@@ -31,7 +31,6 @@ import { LanguageToggle } from "@/components/landing/language-toggle";
 import { AnimateInView, CountUp } from "@/components/landing/animate-in-view";
 import { BrainBodySection } from "@/components/landing/brain-body-section";
 import { AgentOrgChart } from "@/components/landing/agent-org-chart";
-import { ShiryoDialog } from "@/components/landing/shiryo-dialog";
 import { AIOSPyramid } from "@/components/landing/aios-pyramid";
 
 import { METRICS } from "@/lib/constants";
@@ -148,15 +147,12 @@ export default function HomePage() {
                   <span className="text-xs text-zinc-500 mt-1.5">{t.hero.ctaTime}</span>
                 </div>
                 <div className="flex flex-col items-center sm:items-start w-full sm:w-auto">
-                  <ShiryoDialog
-                    locale={locale}
-                    trigger={
-                      <Button size="lg" variant="outline" className="border-zinc-700 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100 gap-2 w-full sm:w-auto">
-                        {t.hero.ctaSecondary}
-                        <FileText className="size-4" />
-                      </Button>
-                    }
-                  />
+                  <Link href="/presentation" className="w-full sm:w-auto">
+                    <Button size="lg" variant="outline" className="border-zinc-700 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100 gap-2 w-full sm:w-auto">
+                      {t.hero.ctaSecondary}
+                      <FileText className="size-4" />
+                    </Button>
+                  </Link>
                   <span className="text-xs text-zinc-500 mt-1.5 invisible">{t.hero.ctaTime}</span>
                 </div>
               </div>
