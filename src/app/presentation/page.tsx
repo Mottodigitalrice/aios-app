@@ -352,29 +352,31 @@ export default function PresentationPage() {
               {/* Cycle Diagram — Circular loop */}
               <FadeIn show={localStep >= 1}>
                 <div className="mt-6 w-full flex justify-center">
-                  <div className="relative" style={{ width: 420, height: 380 }}>
-                    {/* SVG circular arrows */}
-                    <svg viewBox="0 0 420 380" className="absolute inset-0 w-full h-full" fill="none">
+                  <div className="relative" style={{ width: 460, height: 370 }}>
+                    {/* SVG circular arrows — viewBox matches container */}
+                    <svg viewBox="0 0 460 370" className="absolute inset-0 w-full h-full" fill="none">
                       <defs>
-                        <marker id="arrowRed" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-                          <path d="M0,1 L6,4 L0,7" fill="none" stroke="rgba(239,68,68,0.5)" strokeWidth="1.5" />
+                        <marker id="arrowRed" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto">
+                          <path d="M1,1 L7,5 L1,9" fill="none" stroke="rgba(239,68,68,0.6)" strokeWidth="1.5" />
                         </marker>
                       </defs>
-                      {/* Top → Right arc */}
-                      <path d="M 280,80 Q 370,80 370,190" stroke="rgba(239,68,68,0.35)" strokeWidth="2" strokeDasharray="6,4" markerEnd="url(#arrowRed)" />
-                      {/* Right → Bottom arc */}
-                      <path d="M 370,220 Q 370,320 260,330" stroke="rgba(239,68,68,0.35)" strokeWidth="2" strokeDasharray="6,4" markerEnd="url(#arrowRed)" />
-                      {/* Bottom → Left arc */}
-                      <path d="M 160,330 Q 50,320 50,220" stroke="rgba(239,68,68,0.35)" strokeWidth="2" strokeDasharray="6,4" markerEnd="url(#arrowRed)" />
-                      {/* Left → Top arc */}
-                      <path d="M 50,180 Q 50,80 140,80" stroke="rgba(239,68,68,0.35)" strokeWidth="2" strokeDasharray="6,4" markerEnd="url(#arrowRed)" />
+                      {/* Clockwise arcs: Top→Right, Right→Bottom, Bottom→Left, Left→Top */}
+                      {/* Center is at (230, 185). Nodes at top(230,40), right(390,185), bottom(230,330), left(70,185) */}
+                      {/* Arc from top-right of top node → top of right node */}
+                      <path d="M 295,55 C 380,55 400,120 400,170" stroke="rgba(239,68,68,0.3)" strokeWidth="2" strokeDasharray="6,4" markerEnd="url(#arrowRed)" />
+                      {/* Arc from bottom of right node → right of bottom node */}
+                      <path d="M 400,210 C 400,280 360,325 295,335" stroke="rgba(239,68,68,0.3)" strokeWidth="2" strokeDasharray="6,4" markerEnd="url(#arrowRed)" />
+                      {/* Arc from left of bottom node → bottom of left node */}
+                      <path d="M 165,335 C 90,325 60,280 60,210" stroke="rgba(239,68,68,0.3)" strokeWidth="2" strokeDasharray="6,4" markerEnd="url(#arrowRed)" />
+                      {/* Arc from top of left node → left of top node */}
+                      <path d="M 60,160 C 60,90 100,55 165,55" stroke="rgba(239,68,68,0.3)" strokeWidth="2" strokeDasharray="6,4" markerEnd="url(#arrowRed)" />
                     </svg>
 
                     {/* Center label */}
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                       <div className="flex flex-col items-center gap-1">
                         <RotateCcw className="size-6 text-red-500/40 animate-[spin_8s_linear_infinite]" />
-                        <span className="text-xs font-bold text-red-400/60 uppercase tracking-widest">Endless Loop</span>
+                        <span className="text-[11px] font-bold text-red-400/60 uppercase tracking-widest">Endless Loop</span>
                         <span className="text-[10px] text-red-400/40">終わりのない循環</span>
                       </div>
                     </div>
@@ -385,17 +387,17 @@ export default function PresentationPage() {
                     </div>
 
                     {/* Right node — Some Results */}
-                    <div className="absolute" style={{ top: '50%', right: -16, transform: 'translateY(-50%)' }}>
+                    <div className="absolute" style={{ top: '50%', right: 0, transform: 'translateY(-50%)' }}>
                       <CycleNode icon={<Zap className="size-5" />} label="Some Results" sublabel="ある程度の成果" num="2" />
                     </div>
 
-                    {/* Bottom node — Hard to Scale */}
+                    {/* Bottom node — Can't Scale */}
                     <div className="absolute" style={{ bottom: 0, left: '50%', transform: 'translateX(-50%)' }}>
                       <CycleNode icon={<TrendingDown className="size-5" />} label="Can't Scale" sublabel="拡張できない" num="3" />
                     </div>
 
-                    {/* Left node — Back to Manual */}
-                    <div className="absolute" style={{ top: '50%', left: -16, transform: 'translateY(-50%)' }}>
+                    {/* Left node — Give Up */}
+                    <div className="absolute" style={{ top: '50%', left: 0, transform: 'translateY(-50%)' }}>
                       <CycleNode icon={<RotateCcw className="size-5 text-red-400" />} label="Give Up" sublabel="手作業に戻る" num="4" highlight />
                     </div>
                   </div>
