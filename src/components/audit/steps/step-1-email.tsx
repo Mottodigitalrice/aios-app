@@ -81,6 +81,7 @@ export function Step1Email({
               type="checkbox"
               checked={formData.privacyConsent}
               onChange={(e) => updateField("privacyConsent", e.target.checked)}
+              aria-label={step.consentLabel}
               className={`mt-0.5 size-4 rounded bg-zinc-900 text-indigo-500 focus:ring-indigo-500/20 accent-indigo-500 ${
                 fieldErrors.privacyConsent ? "border-red-500" : "border-zinc-600"
               }`}

@@ -1,6 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isDuplicateRequest } from "@/lib/dedup";
 
+const WEBHOOK_TIMEOUT_MS = 10_000;
+
+function fetchWithTimeout(url: string, options: RequestInit): Promise<Response> {
+  return Promise.race([
+    fetch(url, options),
+    new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error(`Timeout after ${WEBHOOK_TIMEOUT_MS}ms: ${url}`)), WEBHOOK_TIMEOUT_MS)
+    ),
+  ]);
+}
+
 export async function POST(req: NextRequest) {
   try {
     // Dedup check — prevent double-clicks / page refreshes
@@ -47,7 +58,7 @@ export async function POST(req: NextRequest) {
     };
 
     // Forward to n8n webhook (fire and forget)
-    const webhookPromise = fetch(
+    const webhookPromise = fetchWithTimeout(
       "https://n8n.mottodigital.jp/webhook/free-audit-intake",
       {
         method: "POST",
@@ -59,7 +70,7 @@ export async function POST(req: NextRequest) {
     // Forward to MOTTO API for Notion task creation (fire and forget)
     const mottoApiKey = process.env.MOTTO_API_KEY;
     const notionPromise = mottoApiKey
-      ? fetch("https://vps.mottodigital.jp/tasks", {
+      ? fetchWithTimeout("https://vps.mottodigital.jp/tasks", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

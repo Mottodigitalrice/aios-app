@@ -57,6 +57,7 @@ export function MultiSelectChips({
           <button
             key={option}
             type="button"
+            aria-pressed={selected.includes(option)}
             onClick={() => toggleOption(option)}
             className={cn(
               "inline-flex items-center gap-2 rounded-lg border px-3.5 py-2 text-sm font-medium transition-all duration-200",
@@ -74,6 +75,7 @@ export function MultiSelectChips({
         {allowOther && (
           <button
             type="button"
+            aria-pressed={showOtherInput}
             onClick={() => toggleOption("Other")}
             className={cn(
               "inline-flex items-center gap-2 rounded-lg border px-3.5 py-2 text-sm font-medium transition-all duration-200",

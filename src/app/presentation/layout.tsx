@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://aios.mottodigital.jp/presentation",
   },
+  robots: { index: false, follow: false },
   openGraph: {
     title: "資料 — AIOS Presentation | MOTTO Digital",
     description:
