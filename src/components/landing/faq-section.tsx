@@ -191,9 +191,9 @@ const sectionLabels = {
   ja: {
     badge: "よくある質問",
     title: "よくある質問",
-    subtitle: "10の質問に答えます — クリックで展開",
-    ctaText: "まだ質問がありますか？",
-    ctaButton: "まずは無料通話から",
+    subtitle: "気になる質問をクリックしてください",
+    ctaText: "ほかにも気になることがあれば",
+    ctaButton: "気軽に相談してみませんか",
   },
 };
 

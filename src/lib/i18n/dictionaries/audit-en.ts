@@ -26,64 +26,44 @@ const auditDict = {
         title: "Personalized for you",
         items: [
           "Choose personal or corporate perspective for tailored questions",
-          "50+ companies and professionals have taken the audit",
-          "Average 40% efficiency gain after implementation",
+          "Lewis personally reviews every submission",
+          "Tailored to your specific tools, team, and goals",
         ],
-        testimonial: {
-          quote:
-            "The audit opened our eyes to automation opportunities we never considered. Highly recommended.",
-          author: "Takeshi M.",
-          role: "CEO, Tech Startup",
-        },
       },
       2: {
         title: "Why we ask this",
         items: [
           "Company size determines the right AI strategy",
-          "We tailor recommendations to your team's scale",
+          "Your answers shape the specific recommendations in your report",
         ],
-        testimonial: {
-          quote:
-            "Lewis understood our company's unique challenges from the start. The report was spot-on.",
-          author: "Yuki S.",
-          role: "COO, Manufacturing",
-        },
       },
       3: {
         title: "Data drives AI success",
         items: [
           "How you manage data determines your AI ceiling",
-          "We'll identify data gaps before recommending solutions",
+          "This helps Lewis identify your quick wins",
         ],
-        highlight:
-          "Companies with organized data see 3x faster AI adoption results.",
       },
       4: {
         title: "Making progress!",
         items: [
-          "Your tool stack helps us identify quick wins",
-          "We'll map integration opportunities across your tools",
+          "Your tool stack helps Lewis identify integration opportunities",
+          "Every tool you use becomes a potential automation target",
         ],
-        highlight:
-          "Most companies have 3-5 automation opportunities hiding in their current stack.",
       },
       5: {
         title: "Great insights!",
         items: [
-          "Understanding your pain points helps us prioritize",
-          "Each challenge maps to a specific AI solution",
+          "Understanding your pain points helps prioritize recommendations",
+          "Each challenge maps to specific, actionable next steps",
         ],
-        highlight:
-          "Companies typically save 15-20 hours per week after addressing their top 3 challenges.",
       },
       6: {
         title: "Assessing readiness",
         items: [
-          "Your AI experience shapes our recommendation level",
-          "We match solutions to your team's current capabilities",
+          "Your AI experience shapes the recommendation level",
+          "The report meets you where you are, not where you should be",
         ],
-        highlight:
-          "85% of audit recipients start implementing within the first month.",
       },
       7: {
         title: "One click away!",
@@ -106,7 +86,7 @@ const auditDict = {
       consentLink: "privacy policy",
     },
     2: {
-      question: "Tell us about yourself",
+      question: "A bit about you",
       perspectiveLabel: "What perspective should this audit take?",
       perspectivePersonal: "Personal",
       perspectivePersonalDesc: "AI for my own workflow and role",
@@ -125,8 +105,8 @@ const auditDict = {
       ],
     },
     3: {
-      question: "Tell us about your company",
-      questionPersonal: "Tell us about your work",
+      question: "About your company",
+      questionPersonal: "About your work",
       companyLabel: "What company are you with?",
       companyPlaceholder: "Company name",
       companyOptionalLabel: "Company / Organization (optional)",
@@ -305,7 +285,7 @@ const auditDict = {
       submitted: {
         title: "Submission received",
         description:
-          "Your answers are in. You\u2019re already ahead of 90% of companies.",
+          "Your answers are in. Lewis will start reviewing them shortly.",
       },
       review: {
         title: "Lewis reviews your answers",

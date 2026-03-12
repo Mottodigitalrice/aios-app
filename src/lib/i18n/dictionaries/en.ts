@@ -370,7 +370,7 @@ const en = {
           body: "Give it access to your tools, your data, your systems. Now it can do anything you can do on a computer \u2014 automatically, on command, while you sleep. That\u2019s what AIOS deploys for your business.",
         },
       ],
-      closing: "This is the shift that makes the rest of the page possible.",
+      closing: "This is the shift that makes everything else possible.",
     },
     caseStudy: {
       badge: "Case Study #1",

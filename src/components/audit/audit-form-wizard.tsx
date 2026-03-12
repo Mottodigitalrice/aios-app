@@ -72,27 +72,6 @@ function AuditSidebar({ step }: { step: number }) {
             })}
           </div>
 
-          {"highlight" in sidebarStep && sidebarStep.highlight && (
-            <div className="mt-5 rounded-lg bg-indigo-500/10 border border-indigo-500/20 p-4">
-              <p className="text-xs text-indigo-300 leading-relaxed">
-                {sidebarStep.highlight}
-              </p>
-            </div>
-          )}
-
-          {"testimonial" in sidebarStep && sidebarStep.testimonial && (
-            <div className="mt-5 pt-5 border-t border-zinc-800/50">
-              <p className="text-sm text-zinc-400 italic leading-relaxed mb-3">
-                &ldquo;{sidebarStep.testimonial.quote}&rdquo;
-              </p>
-              <div>
-                <p className="text-sm font-medium text-zinc-300">
-                  {sidebarStep.testimonial.author}
-                </p>
-                <p className="text-xs text-zinc-500">{sidebarStep.testimonial.role}</p>
-              </div>
-            </div>
-          )}
         </div>
 
         {/* Trust badge */}
