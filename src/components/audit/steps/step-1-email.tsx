@@ -29,7 +29,7 @@ export function Step1Email({
   error,
   fieldErrors,
 }: Step1Props) {
-  const { t } = useAuditLocale();
+  const { t, locale } = useAuditLocale();
   const step = t.steps[1];
   const canContinue = formData.email.length > 0 && formData.privacyConsent;
 
@@ -89,7 +89,7 @@ export function Step1Email({
             <span className="text-sm text-zinc-400 group-hover:text-zinc-300 transition-colors">
               {step.consentLabel}{" "}
               <Link
-                href="/privacy"
+                href={locale === "ja" ? "/privacy?lang=ja" : "/privacy"}
                 target="_blank"
                 className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2"
               >

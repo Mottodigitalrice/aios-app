@@ -395,7 +395,7 @@ function SignupFormWizardInner() {
               {t.nav.home}
             </Link>
             <Link
-              href="/privacy"
+              href={locale === "ja" ? "/privacy?lang=ja" : "/privacy"}
               className="hover:text-zinc-300 transition-colors"
             >
               {t.nav.privacy}

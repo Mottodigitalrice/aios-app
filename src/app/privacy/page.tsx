@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Layers, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import en from "@/lib/i18n/dictionaries/en";
+import ja from "@/lib/i18n/dictionaries/ja";
+
+const dictionaries = { en, ja } as const;
 
 export const metadata: Metadata = {
   title: "Privacy Policy | AIOS — MOTTO Digital",
@@ -9,9 +12,21 @@ export const metadata: Metadata = {
     "Privacy policy for AIOS by MOTTO Digital. How we collect, use, and protect your data.",
 };
 
-const { privacy } = en;
+export default async function PrivacyPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ lang?: string }>;
+}) {
+  const { lang } = await searchParams;
+  const locale = lang === "ja" ? "ja" : "en";
+  const { privacy } = dictionaries[locale];
 
-export default function PrivacyPage() {
+  const navLabels = {
+    en: { backToAudit: "Back to Audit", home: "Home", freeAudit: "Free Audit" },
+    ja: { backToAudit: "診断に戻る", home: "ホーム", freeAudit: "無料診断" },
+  };
+  const nav = navLabels[locale];
+
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 grid-pattern">
       {/* Nav */}
@@ -29,7 +44,7 @@ export default function PrivacyPage() {
             className="flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-100 transition-colors"
           >
             <ArrowLeft className="size-4" />
-            <span className="hidden sm:inline">Back to Audit</span>
+            <span className="hidden sm:inline">{nav.backToAudit}</span>
           </Link>
         </div>
       </nav>
@@ -132,13 +147,13 @@ export default function PrivacyPage() {
               href="/"
               className="hover:text-zinc-300 transition-colors"
             >
-              Home
+              {nav.home}
             </Link>
             <Link
               href="/audit"
               className="hover:text-zinc-300 transition-colors"
             >
-              Free Audit
+              {nav.freeAudit}
             </Link>
           </div>
         </div>
