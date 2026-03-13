@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" fill="none">
+  <path d="M96 16C51.82 16 16 51.82 16 96s35.82 80 80 80 80-35.82 80-80S140.18 16 96 16Z" fill="#4285F4"/>
+  <path d="M96 16C51.82 16 16 51.82 16 96h80V16Z" fill="#EA4335"/>
+  <path d="M16 96c0 44.18 35.82 80 80 80V96H16Z" fill="#FBBC04"/>
+  <path d="M96 96v80c44.18 0 80-35.82 80-80H96Z" fill="#34A853"/>
+  <path d="M96 16v80h80c0-44.18-35.82-80-80-80Z" fill="#4285F4"/>
+  <circle cx="96" cy="96" r="28" fill="white"/>
+</svg>

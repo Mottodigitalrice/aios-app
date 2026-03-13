@@ -221,6 +221,7 @@ const en = {
       stats:
         "Currently running 26 projects, 63 tasks, and 9 pipeline deals \u2014 on one system, managed by one person.",
       guaranteeHint: "Backed by the Ownership Guarantee \u2014 if your team can\u2019t manage AI agents by month 6, we keep going free.",
+      builtWith: "Built with",
     },
     pricing: {
       badge: "Choose Your Path",
