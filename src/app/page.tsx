@@ -183,46 +183,6 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Built with */}
-          <div className="animate-fade-in-up animation-delay-400 mt-12 text-center">
-            <p className="text-xs text-zinc-500 uppercase tracking-wider mb-4">
-              {t.hero.builtWith}
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8">
-              {/* Tier 1: AI Coding Platforms */}
-              {[
-                { src: "/logos/anthropic.svg", name: "Claude Code" },
-                { src: "/logos/openai.svg", name: "Codex" },
-                { src: "/logos/antigravity.svg", name: "Anti-Gravity" },
-              ].map((logo) => (
-                <Image
-                  key={logo.name}
-                  src={logo.src}
-                  alt={logo.name}
-                  width={24}
-                  height={24}
-                  className="opacity-50 brightness-0 invert hover:opacity-80 transition-opacity"
-                />
-              ))}
-              <span className="text-zinc-700">·</span>
-              {/* Tier 2: Tech Stack */}
-              {[
-                { src: "/logos/vscode.svg", name: "VS Code" },
-                { src: "/logos/racknerd.svg", name: "RackNerd" },
-                { src: "/logos/github.svg", name: "GitHub" },
-                { src: "/logos/supabase.svg", name: "Supabase" },
-              ].map((logo) => (
-                <Image
-                  key={logo.name}
-                  src={logo.src}
-                  alt={logo.name}
-                  width={18}
-                  height={18}
-                  className="opacity-40 brightness-0 invert hover:opacity-70 transition-opacity"
-                />
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
@@ -366,6 +326,47 @@ export default function HomePage() {
 
           {/* AIOS Pyramid Diagram */}
           <AIOSPyramid locale={locale} />
+
+          {/* Built with */}
+          <AnimateInView className="mt-12 text-center">
+            <p className="text-xs text-zinc-500 uppercase tracking-wider mb-4">
+              {t.hero.builtWith}
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8">
+              {/* Tier 1: AI Coding Platforms */}
+              {[
+                { src: "/logos/claude-code.svg", name: "Claude Code" },
+                { src: "/logos/codex.svg", name: "Codex" },
+                { src: "/logos/antigravity.svg", name: "Anti-Gravity" },
+              ].map((logo) => (
+                <Image
+                  key={logo.name}
+                  src={logo.src}
+                  alt={logo.name}
+                  width={28}
+                  height={28}
+                  className="opacity-70 hover:opacity-100 transition-opacity"
+                />
+              ))}
+              <span className="text-zinc-700">·</span>
+              {/* Tier 2: Tech Stack */}
+              {[
+                { src: "/logos/vscode.svg", name: "VS Code" },
+                { src: "/logos/racknerd.svg", name: "RackNerd" },
+                { src: "/logos/github.svg", name: "GitHub" },
+                { src: "/logos/supabase.svg", name: "Supabase" },
+              ].map((logo) => (
+                <Image
+                  key={logo.name}
+                  src={logo.src}
+                  alt={logo.name}
+                  width={22}
+                  height={22}
+                  className="opacity-60 hover:opacity-90 transition-opacity"
+                />
+              ))}
+            </div>
+          </AnimateInView>
 
         </div>
       </section>
