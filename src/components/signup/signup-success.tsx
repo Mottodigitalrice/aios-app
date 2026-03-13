@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import {
-  Layers,
   CheckCircle2,
   ArrowLeft,
   Mail,
@@ -23,10 +22,9 @@ export function SignupSuccess() {
         <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
           <Link
             href="/"
-            className="flex items-center gap-2 text-lg font-bold tracking-tight"
+            className="text-lg font-bold tracking-tight"
           >
-            <Layers className="size-6 text-indigo-400" />
-            <span>MOTTO Digital</span>
+            MOTTO Digital
           </Link>
           <div className="flex items-center gap-4">
             <LanguageToggle locale={locale} onToggle={setLocale} />
@@ -124,10 +122,9 @@ export function SignupSuccess() {
         <div className="mx-auto max-w-6xl px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
           <Link
             href="/"
-            className="flex items-center gap-2 text-sm font-semibold text-zinc-400"
+            className="text-sm font-semibold text-zinc-400"
           >
-            <Layers className="size-5 text-indigo-400" />
-            <span>MOTTO Digital</span>
+            MOTTO Digital
           </Link>
           <div className="flex items-center gap-6 text-sm text-zinc-500">
             <Link href="/" className="hover:text-zinc-300 transition-colors">

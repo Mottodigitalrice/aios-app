@@ -9,7 +9,7 @@ import {
   SheetTrigger,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { Menu, Layers } from "lucide-react";
+import { Menu } from "lucide-react";
 import en from "@/lib/i18n/dictionaries/en";
 import ja from "@/lib/i18n/dictionaries/ja";
 
@@ -34,9 +34,8 @@ export function MobileNav({ locale = "en" }: MobileNavProps) {
       <SheetContent side="right" className="bg-zinc-950 border-zinc-800 w-72">
         <SheetTitle className="sr-only">{locale === "ja" ? "ナビゲーション" : "Navigation"}</SheetTitle>
         <div className="flex flex-col gap-8 pt-8">
-          <Link href="/" className="flex items-center gap-2 text-lg font-bold" onClick={() => setOpen(false)}>
-            <Layers className="size-5 text-indigo-400" />
-            <span>MOTTO Digital</span>
+          <Link href="/" className="text-lg font-bold" onClick={() => setOpen(false)}>
+            MOTTO Digital
           </Link>
           <nav className="flex flex-col gap-4">
             <Link
@@ -68,7 +67,7 @@ export function MobileNav({ locale = "en" }: MobileNavProps) {
               {t.footer.presentationLink}
             </Link>
           </nav>
-          <Link href="/audit" onClick={() => setOpen(false)}>
+          <Link href="/signup" onClick={() => setOpen(false)}>
             <Button className="w-full bg-indigo-600 hover:bg-indigo-500 text-white">
               {t.nav.cta}
             </Button>

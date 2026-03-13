@@ -82,9 +82,8 @@ export default function HomePage() {
       <header>
       <nav className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/50 bg-zinc-950/80 backdrop-blur-xl">
         <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
-          <Link href="/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
-            <Layers className="size-6 text-indigo-400" />
-            <span>MOTTO Digital</span>
+          <Link href="/" className="text-lg font-bold tracking-tight">
+            MOTTO Digital
           </Link>
           <div className="hidden sm:flex items-center gap-6">
             <Link href="#proof" className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400 rounded-sm">
@@ -100,7 +99,7 @@ export default function HomePage() {
               {t.footer.presentationLink}
             </Link>
             <LanguageToggle locale={locale} onToggle={handleLocaleToggle} />
-            <Link href="/audit">
+            <Link href="/signup">
               <Button size="sm" className="bg-indigo-600 hover:bg-indigo-500 text-white">
                 {t.nav.cta}
               </Button>
@@ -138,7 +137,7 @@ export default function HomePage() {
 
               <div className="animate-fade-in-up animation-delay-300 mt-8 flex flex-col sm:flex-row items-start justify-center lg:justify-start gap-4">
                 <div className="flex flex-col items-center sm:items-start w-full sm:w-auto">
-                  <Link href="/audit" className="w-full sm:w-auto">
+                  <Link href="/signup" className="w-full sm:w-auto">
                     <Button size="lg" className="bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow w-full sm:w-auto">
                       {t.hero.cta}
                       <ArrowRight className="size-4" />
@@ -147,14 +146,22 @@ export default function HomePage() {
                   <span className="text-xs text-zinc-500 mt-1.5">{t.hero.ctaTime}</span>
                 </div>
                 <div className="flex flex-col items-center sm:items-start w-full sm:w-auto">
-                  <Link href="/presentation" className="w-full sm:w-auto">
+                  <Link href="/audit" className="w-full sm:w-auto">
                     <Button size="lg" variant="outline" className="border-zinc-700 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100 gap-2 w-full sm:w-auto">
                       {t.hero.ctaSecondary}
-                      <FileText className="size-4" />
+                      <ArrowRight className="size-4" />
                     </Button>
                   </Link>
-                  <span className="text-xs text-zinc-500 mt-1.5 invisible">{t.hero.ctaTime}</span>
+                  <span className="text-xs text-zinc-500 mt-1.5">{t.hero.ctaSecondaryTime}</span>
                 </div>
+              </div>
+
+              {/* Scarcity line */}
+              <div className="animate-fade-in-up animation-delay-300 mt-4 inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-4 py-2 justify-center lg:justify-start">
+                <Timer className="size-4 text-amber-400 shrink-0" />
+                <p className="text-sm font-medium text-amber-300">
+                  {t.hero.scarcity}
+                </p>
               </div>
 
               {/* Guarantee hint — elevated for conversion */}
@@ -413,7 +420,7 @@ export default function HomePage() {
             {t.midCta.subtitle}
           </p>
           <div className="flex flex-col items-center">
-            <Link href="/audit">
+            <Link href="/signup">
               <Button size="lg" className="bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow">
                 {t.cta.title}
                 <ArrowRight className="size-4" />
@@ -726,6 +733,13 @@ export default function HomePage() {
                   <p className="text-zinc-400 max-w-xl mx-auto">
                     {t.pricing.intake.subtitle}
                   </p>
+                  {/* Scarcity badges */}
+                  <div className="flex flex-wrap items-center justify-center gap-3 mt-4">
+                    <Badge className="bg-amber-500/20 text-amber-300 border border-amber-500/30 text-sm px-3 py-1">
+                      {t.pricing.intake.spotsRemaining}
+                    </Badge>
+                    <span className="text-xs text-zinc-500">{t.pricing.intake.nextCohort}</span>
+                  </div>
                 </div>
 
                 {/* Capacity indicators */}
@@ -751,12 +765,13 @@ export default function HomePage() {
                       <span className="text-sm font-semibold text-zinc-200">{t.pricing.intake.cohortEN.title}</span>
                       <span className="text-xs text-indigo-400 font-medium">{t.pricing.intake.cohortEN.label}</span>
                     </div>
-                    <div className="h-2 w-full rounded-full bg-zinc-800 overflow-hidden mb-3">
+                    <div className="h-3 w-full rounded-full bg-zinc-800 overflow-hidden mb-3">
                       <div
                         className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-indigo-400 transition-all duration-1000"
-                        style={{ width: `${Math.max((t.pricing.intake.cohortEN.filled / t.pricing.intake.cohortEN.total) * 100, 0)}%` }}
+                        style={{ width: `${(t.pricing.intake.cohortEN.filled / t.pricing.intake.cohortEN.total) * 100}%` }}
                       />
                     </div>
+                    <p className="text-xs text-zinc-500">{t.pricing.intake.cohortEN.total - t.pricing.intake.cohortEN.filled} spots open</p>
                   </div>
 
                   {/* Japanese Cohort */}
@@ -765,13 +780,25 @@ export default function HomePage() {
                       <span className="text-sm font-semibold text-zinc-200">{t.pricing.intake.cohortJP.title}</span>
                       <span className="text-xs text-indigo-400 font-medium">{t.pricing.intake.cohortJP.label}</span>
                     </div>
-                    <div className="h-2 w-full rounded-full bg-zinc-800 overflow-hidden mb-3">
+                    <div className="h-3 w-full rounded-full bg-zinc-800 overflow-hidden mb-3">
                       <div
                         className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-indigo-400 transition-all duration-1000"
                         style={{ width: `${(t.pricing.intake.cohortJP.filled / t.pricing.intake.cohortJP.total) * 100}%` }}
                       />
                     </div>
+                    <p className="text-xs text-zinc-500">{t.pricing.intake.cohortJP.total - t.pricing.intake.cohortJP.filled} spots open</p>
                   </div>
+                </div>
+
+                {/* Save your spot CTA */}
+                <div className="text-center mb-8">
+                  <Link href="/signup">
+                    <Button size="lg" className="bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow">
+                      {t.pricing.intake.cta}
+                      <ArrowRight className="size-4" />
+                    </Button>
+                  </Link>
+                  <p className="text-xs text-zinc-500 mt-2">{t.pricing.intake.ctaNote}</p>
                 </div>
 
                 {/* Personal commitment from Lewis */}
@@ -852,7 +879,7 @@ export default function HomePage() {
       </AnimateInView>
 
       {/* ===============================================
-          SECTION 8: FREE AUDIT CTA (final conversion point)
+          SECTION 8: FINAL CTA (dual conversion point)
           =============================================== */}
       <AnimateInView as="section" className="py-20 sm:py-28 border-t border-zinc-800/50">
         <div className="mx-auto max-w-3xl px-6 text-center" id="audit">
@@ -876,14 +903,30 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-          <div className="flex flex-col items-center">
-            <Link href="/audit">
-              <Button size="lg" className="bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow">
-                {t.cta.title}
-                <ArrowRight className="size-4" />
-              </Button>
-            </Link>
-            <span className="text-xs text-zinc-500 mt-1.5">{t.hero.ctaTime}</span>
+          {/* Meet first, then decide trust point */}
+          <div className="flex items-center justify-center gap-2 mb-8">
+            <Users className="size-4 text-emerald-400 shrink-0" />
+            <p className="text-sm text-emerald-300">{t.guarantee.meetFirst}</p>
+          </div>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col items-center">
+              <Link href="/signup">
+                <Button size="lg" className="bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow">
+                  {t.cta.title}
+                  <ArrowRight className="size-4" />
+                </Button>
+              </Link>
+              <span className="text-xs text-zinc-500 mt-1.5">{t.hero.ctaTime}</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <Link href="/audit">
+                <Button size="lg" variant="outline" className="border-zinc-700 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100 gap-2">
+                  {t.hero.ctaSecondary}
+                  <ArrowRight className="size-4" />
+                </Button>
+              </Link>
+              <span className="text-xs text-zinc-500 mt-1.5">{t.hero.ctaSecondaryTime}</span>
+            </div>
           </div>
         </div>
       </AnimateInView>
@@ -895,9 +938,8 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl px-6">
           <div className="grid sm:grid-cols-3 gap-10 mb-10">
             <div>
-              <Link href="/" className="flex items-center gap-2 text-lg font-bold tracking-tight mb-3">
-                <Layers className="size-5 text-indigo-400" />
-                <span>MOTTO Digital</span>
+              <Link href="/" className="text-lg font-bold tracking-tight mb-3 block">
+                MOTTO Digital
               </Link>
               <p className="text-sm text-zinc-500 leading-relaxed">
                 {t.footer.tagline}

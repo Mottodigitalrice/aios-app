@@ -13,7 +13,7 @@ const signupDict = {
   common: {
     continue: "Continue",
     back: "Back",
-    submit: "Submit Enrollment",
+    submit: "Save your spot",
     saving: "Saving...",
     required: "Required",
     optional: "Optional",
@@ -111,24 +111,24 @@ const signupDict = {
     },
   },
   success: {
-    title: "You\u2019re All Set!",
+    title: "Your Spot Is Saved!",
     subtitle:
-      "Thank you for signing up for AIOS. Lewis will be in touch with you soon with next steps.",
+      "You\u2019ll receive an email to schedule a meeting with Lewis. After that meeting, you have 3 days to decide. No pressure.",
     steps: [
       {
-        title: "Lewis reviews your submission",
+        title: "Schedule your meeting with Lewis",
         description:
-          "He\u2019ll look over your details and prepare a personalized plan.",
+          "You\u2019ll receive an email with a link to book a time that works for you.",
       },
       {
-        title: "Personal follow-up",
+        title: "Meet Lewis and discuss the program",
         description:
-          "Expect a message from Lewis within 24 hours to discuss next steps and answer any questions.",
+          "A relaxed conversation about your business, goals, and how AIOS can help. No sales pressure.",
       },
       {
-        title: "Onboarding & kickoff",
+        title: "3 days to decide",
         description:
-          "A short call to align on goals, set up your environment, and get started.",
+          "After the meeting, you have 3 days to decide if it\u2019s right for you. If not, your spot goes to the next person. No hard feelings.",
       },
     ],
     contactPrompt: "Questions in the meantime? Reach out anytime:",
