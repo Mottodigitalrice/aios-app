@@ -8,10 +8,12 @@ import { mutation, query, action } from "../_generated/server";
 export const submit = mutation({
   args: {
     track: v.union(v.literal("cohort"), v.literal("corporate")),
+    signupType: v.optional(v.union(v.literal("individual"), v.literal("company"), v.literal("department"))),
     plan: v.optional(v.union(v.literal("monthly"), v.literal("full"))),
     name: v.string(),
     email: v.string(),
     company: v.optional(v.string()),
+    departmentName: v.optional(v.string()),
     role: v.optional(v.string()),
     goals: v.string(),
     painPoints: v.optional(v.string()),

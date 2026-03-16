@@ -7,7 +7,7 @@ import { SelectCard } from "../shared/select-card";
 import type { AuditFormData, FieldErrors } from "@/hooks/use-audit-form";
 import { useAuditLocale } from "../audit-locale-context";
 import { useState } from "react";
-import { User, Building } from "lucide-react";
+import { User, Building, Users } from "lucide-react";
 
 interface Step2Props {
   formData: AuditFormData;
@@ -22,6 +22,27 @@ interface Step2Props {
   error: string | null;
   fieldErrors: FieldErrors;
 }
+
+const PERSPECTIVE_OPTIONS = [
+  {
+    value: "individual" as const,
+    icon: User,
+    labelKey: "perspectiveIndividual" as const,
+    descKey: "perspectiveIndividualDesc" as const,
+  },
+  {
+    value: "company" as const,
+    icon: Building,
+    labelKey: "perspectiveCompany" as const,
+    descKey: "perspectiveCompanyDesc" as const,
+  },
+  {
+    value: "department" as const,
+    icon: Users,
+    labelKey: "perspectiveDepartment" as const,
+    descKey: "perspectiveDepartmentDesc" as const,
+  },
+] as const;
 
 export function Step2AboutYou({
   formData,
@@ -62,125 +83,71 @@ export function Step2AboutYou({
       error={error}
     >
       <div className="space-y-6">
-        {/* Perspective selector */}
+        {/* Perspective selector — 3 cards */}
         <div className="space-y-3">
           <Label className="text-zinc-300">
             {step.perspectiveLabel} <span className="text-red-400">*</span>
           </Label>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <button
-              type="button"
-              onClick={() => updateField("perspective", "personal")}
-              className={`relative flex flex-col items-center gap-3 rounded-xl border p-5 text-center transition-all duration-200 ${
-                formData.perspective === "personal"
-                  ? "border-indigo-500/50 bg-indigo-500/10 ring-1 ring-indigo-500/30"
-                  : "border-zinc-800/50 bg-zinc-900/50 hover:border-zinc-700 hover:bg-zinc-800/50"
-              }`}
-            >
-              <div
-                className={`flex size-10 items-center justify-center rounded-full ${
-                  formData.perspective === "personal"
-                    ? "bg-indigo-500/20"
-                    : "bg-zinc-800"
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {PERSPECTIVE_OPTIONS.map(({ value, icon: Icon, labelKey, descKey }) => (
+              <button
+                key={value}
+                type="button"
+                onClick={() => updateField("perspective", value)}
+                className={`relative flex flex-col items-center gap-3 rounded-xl border p-5 text-center transition-all duration-200 ${
+                  formData.perspective === value
+                    ? "border-indigo-500/50 bg-indigo-500/10 ring-1 ring-indigo-500/30"
+                    : "border-zinc-800/50 bg-zinc-900/50 hover:border-zinc-700 hover:bg-zinc-800/50"
                 }`}
               >
-                <User
-                  className={`size-5 ${
-                    formData.perspective === "personal"
-                      ? "text-indigo-400"
-                      : "text-zinc-400"
-                  }`}
-                />
-              </div>
-              <div>
-                <p
-                  className={`text-sm font-semibold ${
-                    formData.perspective === "personal"
-                      ? "text-indigo-300"
-                      : "text-zinc-300"
+                <div
+                  className={`flex size-10 items-center justify-center rounded-full ${
+                    formData.perspective === value
+                      ? "bg-indigo-500/20"
+                      : "bg-zinc-800"
                   }`}
                 >
-                  {step.perspectivePersonal}
-                </p>
-                <p className="text-xs text-zinc-500 mt-1">
-                  {step.perspectivePersonalDesc}
-                </p>
-              </div>
-              {formData.perspective === "personal" && (
-                <span className="absolute top-3 right-3 size-5 rounded-full bg-indigo-500 flex items-center justify-center">
-                  <svg
-                    className="size-3 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={3}
-                    stroke="currentColor"
+                  <Icon
+                    className={`size-5 ${
+                      formData.perspective === value
+                        ? "text-indigo-400"
+                        : "text-zinc-400"
+                    }`}
+                  />
+                </div>
+                <div>
+                  <p
+                    className={`text-sm font-semibold ${
+                      formData.perspective === value
+                        ? "text-indigo-300"
+                        : "text-zinc-300"
+                    }`}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    />
-                  </svg>
-                </span>
-              )}
-            </button>
-
-            <button
-              type="button"
-              onClick={() => updateField("perspective", "corporate")}
-              className={`relative flex flex-col items-center gap-3 rounded-xl border p-5 text-center transition-all duration-200 ${
-                formData.perspective === "corporate"
-                  ? "border-indigo-500/50 bg-indigo-500/10 ring-1 ring-indigo-500/30"
-                  : "border-zinc-800/50 bg-zinc-900/50 hover:border-zinc-700 hover:bg-zinc-800/50"
-              }`}
-            >
-              <div
-                className={`flex size-10 items-center justify-center rounded-full ${
-                  formData.perspective === "corporate"
-                    ? "bg-indigo-500/20"
-                    : "bg-zinc-800"
-                }`}
-              >
-                <Building
-                  className={`size-5 ${
-                    formData.perspective === "corporate"
-                      ? "text-indigo-400"
-                      : "text-zinc-400"
-                  }`}
-                />
-              </div>
-              <div>
-                <p
-                  className={`text-sm font-semibold ${
-                    formData.perspective === "corporate"
-                      ? "text-indigo-300"
-                      : "text-zinc-300"
-                  }`}
-                >
-                  {step.perspectiveCorporate}
-                </p>
-                <p className="text-xs text-zinc-500 mt-1">
-                  {step.perspectiveCorporateDesc}
-                </p>
-              </div>
-              {formData.perspective === "corporate" && (
-                <span className="absolute top-3 right-3 size-5 rounded-full bg-indigo-500 flex items-center justify-center">
-                  <svg
-                    className="size-3 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={3}
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.5 12.75l6 6 9-13.5"
-                    />
-                  </svg>
-                </span>
-              )}
-            </button>
+                    {step[labelKey]}
+                  </p>
+                  <p className="text-xs text-zinc-500 mt-1">
+                    {step[descKey]}
+                  </p>
+                </div>
+                {formData.perspective === value && (
+                  <span className="absolute top-3 right-3 size-5 rounded-full bg-indigo-500 flex items-center justify-center">
+                    <svg
+                      className="size-3 text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={3}
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"
+                      />
+                    </svg>
+                  </span>
+                )}
+              </button>
+            ))}
           </div>
           {fieldErrors.perspective && (
             <p role="alert" className="text-xs text-red-400 mt-1">{fieldErrors.perspective}</p>

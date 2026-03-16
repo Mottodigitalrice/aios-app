@@ -1,4 +1,5 @@
 import type { Locale } from "./config";
+import type signupEnDict from "./dictionaries/signup-en";
 
 const dictionaries = {
   en: () => import("./dictionaries/signup-en").then((m) => m.default),
@@ -6,7 +7,8 @@ const dictionaries = {
 };
 
 export async function getSignupDictionary(locale: Locale) {
-  return dictionaries[locale]();
+  return dictionaries[locale]() as Promise<typeof signupEnDict>;
 }
 
-export type SignupDictionary = Awaited<ReturnType<typeof getSignupDictionary>>;
+// EN is the canonical type
+export type SignupDictionary = typeof signupEnDict;

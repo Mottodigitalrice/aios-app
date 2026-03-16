@@ -1,4 +1,5 @@
 import type { Locale } from "./config";
+import type enDict from "./dictionaries/en";
 
 const dictionaries = {
   en: () => import("./dictionaries/en").then((m) => m.default),
@@ -6,7 +7,8 @@ const dictionaries = {
 };
 
 export async function getDictionary(locale: Locale) {
-  return dictionaries[locale]();
+  return dictionaries[locale]() as Promise<typeof enDict>;
 }
 
-export type Dictionary = Awaited<ReturnType<typeof getDictionary>>;
+// EN is the canonical type — JA must structurally match
+export type Dictionary = typeof enDict;

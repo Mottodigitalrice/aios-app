@@ -1,4 +1,5 @@
 import type { Locale } from "./config";
+import type auditEnDict from "./dictionaries/audit-en";
 
 const dictionaries = {
   en: () => import("./dictionaries/audit-en").then((m) => m.default),
@@ -6,7 +7,8 @@ const dictionaries = {
 };
 
 export async function getAuditDictionary(locale: Locale) {
-  return dictionaries[locale]();
+  return dictionaries[locale]() as Promise<typeof auditEnDict>;
 }
 
-export type AuditDictionary = Awaited<ReturnType<typeof getAuditDictionary>>;
+// EN is the canonical type
+export type AuditDictionary = typeof auditEnDict;

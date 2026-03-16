@@ -32,7 +32,7 @@ export function AuditLocaleProvider({ children }: { children: React.ReactNode })
     localStorage.setItem("aios-audit-locale", locale);
   }, [locale]);
 
-  const t = locale === "ja" ? auditJa : auditEn;
+  const t = (locale === "ja" ? auditJa : auditEn) as AuditDictionary;
 
   return (
     <AuditLocaleContext.Provider value={{ locale, setLocale, t }}>

@@ -27,9 +27,26 @@ const signupDict = {
   },
   steps: {
     1: {
-      question: "Choose Your Track",
+      question: "How would you like to use AIOS?",
       description:
-        "Select the program that fits your needs. Both include the Ownership Guarantee.",
+        "Choose the option that best fits your situation. All include the Ownership Guarantee.",
+      // 3-card options
+      individualLabel: "For Myself",
+      individualPrice: "\u00A530,000/person/month",
+      individualDescription:
+        "Learn alongside 5\u201310 professionals in a structured 6-month program. 2x weekly sessions, Slack support, and your own GitHub setup.",
+      individualBestFor: "Best for freelancers, solo founders, and small teams",
+      companyLabel: "For My Company",
+      companyPrice: "\u00A5200,000/month",
+      companyDescription:
+        "Dedicated AI build for your entire company. 1-on-1 or group training with up to 10 attendees.",
+      companyBestFor: "Best for companies with 5\u201350 employees",
+      departmentLabel: "For My Team / Department",
+      departmentPrice: "\u00A5200,000/month",
+      departmentDescription:
+        "Focused AI build for one team or department within your organization.",
+      departmentBestFor: "Best for departments within larger organizations",
+      // Backward compat keys (used in review, etc.)
       cohortLabel: "Group Cohort",
       cohortPrice: "\u00A530,000/person/month",
       cohortDescription:
@@ -59,6 +76,9 @@ const signupDict = {
       companyLabel: "Company name",
       companyPlaceholder: "Your company name",
       companyRequired: "Required for Corporate Build",
+      departmentLabel: "Department / Team name",
+      departmentPlaceholder: "e.g. Marketing, Engineering, Sales",
+      departmentRequired: "Required for team/department builds",
       roleLabel: "Role / Title",
       rolePlaceholder: "e.g. CEO, CTO, Founder",
     },
@@ -72,6 +92,8 @@ const signupDict = {
       painPointsPlaceholder:
         "e.g. Too much manual data entry, information scattered across tools...",
       teamSizeLabel: "How many people on your team would be involved?",
+      teamSizeLabelCompany: "How many people are in your company?",
+      teamSizeLabelDepartment: "How many people are on your team?",
       teamSizePlaceholder: "e.g. 5",
     },
     4: {
@@ -96,6 +118,11 @@ const signupDict = {
       trackLabel: "Track",
       trackCohort: "Group Cohort",
       trackCorporate: "Corporate Build",
+      trackIndividual: "Group Cohort (Individual)",
+      trackCompany: "Corporate Build (Company)",
+      trackDepartment: "Corporate Build (Department)",
+      signupTypeLabel: "Type",
+      departmentLabel: "Department",
       planLabel: "Plan",
       planMonthly: "Monthly",
       planFull: "Pay in Full",

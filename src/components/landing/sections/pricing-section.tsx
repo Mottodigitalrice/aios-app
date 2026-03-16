@@ -83,7 +83,7 @@ export default function PricingSection({ t, locale }: SectionProps) {
               </ul>
               <p className="text-xs mb-2" style={{ color: "var(--lp-text-muted)" }}>{t.pricing.cohort.bestFor}</p>
               <p className="text-xs text-emerald-400/70 mb-6">{t.pricing.cohort.guarantee}</p>
-              <Link href="/signup?track=cohort" className="w-full">
+              <Link href="/signup?type=individual" className="w-full">
                 <Button className="w-full bg-[#1D1D1F] hover:bg-[#2D2D2F] hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 text-white rounded-full">
                   {t.pricing.cohort.cta}
                 </Button>
@@ -125,12 +125,12 @@ export default function PricingSection({ t, locale }: SectionProps) {
               <p className="text-xs mb-2" style={{ color: "var(--lp-text-muted)" }}>{t.pricing.corporate.bestFor}</p>
               <p className="text-xs text-emerald-400/70 mb-6">{t.pricing.corporate.guarantee}</p>
               <div className="space-y-3">
-                <Link href="/signup?track=corporate&plan=monthly" className="w-full block">
+                <Link href="/signup?type=company&plan=monthly" className="w-full block">
                   <Button variant="outline" className="w-full border-[#D1D1D6] hover:bg-[#F5F5F7] hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 rounded-full" style={{ color: "var(--lp-text-heading)" }}>
                     {t.pricing.corporate.monthlyCta}
                   </Button>
                 </Link>
-                <Link href="/signup?track=corporate&plan=full" className="w-full block">
+                <Link href="/signup?type=company&plan=full" className="w-full block">
                   <Button className="w-full bg-[#1D1D1F] hover:bg-[#2D2D2F] hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 text-white rounded-full">
                     {t.pricing.corporate.payInFullCta}
                   </Button>

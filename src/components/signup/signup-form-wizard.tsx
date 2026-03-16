@@ -158,16 +158,34 @@ function SignupFormWizardInner() {
   const [animating, setAnimating] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Read URL params on mount for track pre-selection
+  // Read URL params on mount for track/type pre-selection
   useEffect(() => {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
+    const urlType = params.get("type");
     const urlTrack = params.get("track");
     const urlPlan = params.get("plan");
 
-    if (urlTrack === "cohort" || urlTrack === "corporate") {
+    // New ?type= param takes priority
+    if (urlType === "individual" || urlType === "company" || urlType === "department") {
+      updateField("signupType", urlType);
+      if (urlType === "individual") {
+        updateField("track", "cohort");
+      } else {
+        updateField("track", "corporate");
+        if (!urlPlan) updateField("plan", "monthly");
+      }
+    } else if (urlTrack === "cohort" || urlTrack === "corporate") {
+      // Legacy ?track= param fallback
       updateField("track", urlTrack);
+      if (urlTrack === "cohort") {
+        updateField("signupType", "individual");
+      } else {
+        updateField("signupType", "company");
+        if (!urlPlan) updateField("plan", "monthly");
+      }
     }
+
     if (urlPlan === "monthly" || urlPlan === "full") {
       updateField("plan", urlPlan);
     }

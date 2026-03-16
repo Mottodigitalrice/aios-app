@@ -32,7 +32,7 @@ export function SignupLocaleProvider({ children }: { children: React.ReactNode }
     localStorage.setItem("aios-signup-locale", locale);
   }, [locale]);
 
-  const t = locale === "ja" ? signupJa : signupEn;
+  const t = (locale === "ja" ? signupJa : signupEn) as SignupDictionary;
 
   return (
     <SignupLocaleContext.Provider value={{ locale, setLocale, t }}>

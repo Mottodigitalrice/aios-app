@@ -9,17 +9,22 @@ import { FAQSection } from "@/components/landing/faq-section";
 import { LanguageToggle } from "@/components/landing/language-toggle";
 
 import HeroSection from "@/components/landing/sections/hero-section";
-import PainSection from "@/components/landing/sections/pain-section";
+import ValuePropsSection from "@/components/landing/sections/value-props-section";
+import BeforeAfterSection from "@/components/landing/sections/before-after-section";
+import { BrainBodySection } from "@/components/landing/brain-body-section";
+import AgenticTerminalSection from "@/components/landing/sections/agentic-terminal-section";
 import SolutionSection from "@/components/landing/sections/solution-section";
+import ProgramSection from "@/components/landing/sections/program-section";
+import MidCtaSection from "@/components/landing/sections/mid-cta-section";
 import ProofSection from "@/components/landing/sections/proof-section";
-import HowItWorksSection from "@/components/landing/sections/how-it-works-section";
+import BioSection from "@/components/landing/sections/bio-section";
 import GuaranteeSection from "@/components/landing/sections/guarantee-section";
 import PricingSection from "@/components/landing/sections/pricing-section";
-import BioSection from "@/components/landing/sections/bio-section";
 import CtaSection from "@/components/landing/sections/cta-section";
 
 import en from "@/lib/i18n/dictionaries/en";
 import ja from "@/lib/i18n/dictionaries/ja";
+import type { LandingT } from "@/components/landing/sections/types";
 
 const dictionaries = { en, ja } as const;
 
@@ -33,7 +38,7 @@ function getInitialLocale(): "en" | "ja" {
 
 export default function HomePage() {
   const [locale, setLocale] = useState<"en" | "ja">(getInitialLocale);
-  const t = dictionaries[locale].landing;
+  const t = dictionaries[locale].landing as LandingT;
 
   useEffect(() => {
     document.documentElement.lang = locale;
@@ -99,43 +104,67 @@ export default function HomePage() {
       </header>
 
       <main id="main-content">
+        {/* ━━ WHAT — The Problem & Outcome ━━━━━━━━━━━━━━━━━ */}
+
         {/* 1. Hero */}
         <HeroSection t={t} locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
-        {/* 2. Pain (3 felt-pain problems) */}
-        <PainSection t={t} locale={locale} />
+        {/* 2. Value Props (replaces PainSection) */}
+        <ValuePropsSection t={t} locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
-        {/* 3. Solution — Pyramid only */}
+        {/* 3. Before/After */}
+        <BeforeAfterSection t={t} locale={locale} />
+        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
+
+        {/* ━━ HOW — How It Works ━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+
+        {/* 4. Brain + Body (paradigm shift) */}
+        <BrainBodySection locale={locale} />
+        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
+
+        {/* 5. Agentic Terminal (the tools that make it possible) */}
+        <AgenticTerminalSection t={t} locale={locale} />
+        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
+
+        {/* 6. Solution — Pyramid (the model-agnostic stack you own) */}
         <SolutionSection t={t} locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
-        {/* 4. Proof — Metrics + org chart + Lewis quote */}
+        {/* 7. Program — 6-month roadmap */}
+        <ProgramSection t={t} locale={locale} />
+        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
+
+        {/* 8. Mid CTA — "Save Your Spot" nudge */}
+        <MidCtaSection t={t} locale={locale} />
+        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
+
+        {/* ━━ WHO — Who's Doing It ━━━━━━━━━━━━━━━━━━━━━━━━ */}
+
+        {/* 9. Proof — Lewis's AIOS metrics + org chart */}
         <ProofSection t={t} locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
-        {/* 5. How It Works — 3-step process */}
-        <HowItWorksSection t={t} locale={locale} />
-        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
-
-        {/* 6. Guarantee — Full-width showstopper */}
-        <GuaranteeSection t={t} locale={locale} />
-        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
-
-        {/* 7. Pricing — Two tiers */}
-        <PricingSection t={t} locale={locale} />
-        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
-
-        {/* 8. Bio — Lewis trust builder */}
+        {/* 10. Bio — Company story, vision, ethical AI */}
         <BioSection t={t} locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
-        {/* 9. FAQ — 6 questions */}
+        {/* 11. Guarantee */}
+        <GuaranteeSection t={t} locale={locale} />
+        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
+
+        {/* ━━ CLOSE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
+
+        {/* 12. Pricing */}
+        <PricingSection t={t} locale={locale} />
+        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
+
+        {/* 13. FAQ */}
         <FAQSection locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
-        {/* 10. Final CTA */}
+        {/* 14. Final CTA */}
         <CtaSection t={t} locale={locale} />
       </main>
 

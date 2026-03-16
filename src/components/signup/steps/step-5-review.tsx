@@ -23,16 +23,25 @@ export function Step5Review({
   const { t } = useSignupLocale();
   const s = t.steps[5];
 
-  const isCohort = formData.track === "cohort";
-  const trackDisplay = isCohort ? s.trackCohort : s.trackCorporate;
+  // 3-way track display based on signupType
+  const trackDisplay =
+    formData.signupType === "individual"
+      ? s.trackIndividual
+      : formData.signupType === "department"
+        ? s.trackDepartment
+        : formData.signupType === "company"
+          ? s.trackCompany
+          : formData.track === "cohort"
+            ? s.trackCohort
+            : s.trackCorporate;
 
   // Build rows for the summary table
   const rows: { label: string; value: string }[] = [
     { label: s.trackLabel, value: trackDisplay },
   ];
 
-  // Only show plan for corporate
-  if (!isCohort && formData.plan) {
+  // Only show plan for non-individual
+  if (formData.signupType !== "individual" && formData.plan) {
     rows.push({
       label: s.planLabel,
       value: formData.plan === "full" ? s.planFull : s.planMonthly,
@@ -44,6 +53,9 @@ export function Step5Review({
 
   if (formData.company) {
     rows.push({ label: s.companyLabel, value: formData.company });
+  }
+  if (formData.departmentName) {
+    rows.push({ label: s.departmentLabel, value: formData.departmentName });
   }
   if (formData.role) {
     rows.push({ label: s.roleLabel, value: formData.role });
