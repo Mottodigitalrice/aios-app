@@ -204,14 +204,14 @@ function useTimelineSteps() {
 // ---------------------------------------------------------------------------
 
 interface AuditSuccessProps {
-  perspective?: "personal" | "corporate" | string;
+  perspective?: "individual" | "company" | "department" | string;
 }
 
 export function AuditSuccess({ perspective }: AuditSuccessProps) {
   const { t } = useAuditLocale();
   const [showConfetti, setShowConfetti] = useState(true);
   const timelineSteps = useTimelineSteps();
-  const isPersonal = perspective === "personal";
+  const isPersonal = perspective === "individual";
 
   useEffect(() => {
     const timer = setTimeout(() => setShowConfetti(false), 4000);

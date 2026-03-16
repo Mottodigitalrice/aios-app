@@ -25,7 +25,7 @@ const auditDict = {
       1: {
         title: "Personalized for you",
         items: [
-          "Choose personal or corporate perspective for tailored questions",
+          "Choose your perspective for tailored questions",
           "Lewis personally reviews every submission",
           "Tailored to your specific tools, team, and goals",
         ],
@@ -33,7 +33,7 @@ const auditDict = {
       2: {
         title: "Why we ask this",
         items: [
-          "Company size determines the right AI strategy",
+          "Your context determines the right AI strategy",
           "Your answers shape the specific recommendations in your report",
         ],
       },
@@ -88,10 +88,15 @@ const auditDict = {
     2: {
       question: "A bit about you",
       perspectiveLabel: "What perspective should this audit take?",
-      perspectivePersonal: "Personal",
-      perspectivePersonalDesc: "AI for my own workflow and role",
-      perspectiveCorporate: "Corporate",
-      perspectiveCorporateDesc: "AI for my company or team",
+      perspectiveIndividual: "Individual",
+      perspectiveIndividualDesc:
+        "I\u2019m a solo practitioner, freelancer, or business owner without a team",
+      perspectiveCompany: "Company",
+      perspectiveCompanyDesc:
+        "I\u2019m filling this out for our whole organization",
+      perspectiveDepartment: "Department",
+      perspectiveDepartmentDesc:
+        "I\u2019m filling this out for a specific department or team",
       nameLabel: "What\u2019s your name?",
       namePlaceholder: "Your full name",
       roleLabel: "What\u2019s your role?",
@@ -106,14 +111,15 @@ const auditDict = {
     },
     3: {
       question: "About your company",
-      questionPersonal: "About your work",
+      questionIndividual: "About your work",
+      questionDepartment: "About your department",
       companyLabel: "What company are you with?",
       companyPlaceholder: "Company name",
       companyOptionalLabel: "Company / Organization (optional)",
-      sizeLabel: "How big is your team?",
-      sizeOptions: ["1-5", "6-20", "21-50", "51-100", "100+"],
-      workTypeLabel: "What kind of work do you do?",
-      workTypeOptions: [
+      sizeLabel: "How big is your company?",
+      sizeOptions: ["1-5", "6-20", "21-50", "51-100", "101-500", "500+"],
+      industryLabel: "What industry are you in?",
+      industryOptions: [
         "Consulting",
         "Design / Creative",
         "Marketing",
@@ -121,17 +127,51 @@ const auditDict = {
         "Finance / Accounting",
         "Sales",
         "Education / Training",
+        "Healthcare",
+        "Legal",
+        "Real Estate",
         "Other",
       ],
-      useCaseLabel: "Is this for...",
-      useCasePersonal: "Personal productivity only",
-      useCaseBusiness: "My business / clients",
-      useCaseBoth: "Both personal and business",
+      revenueLabel: "Revenue range (optional)",
+      revenueOptions: [
+        "Pre-revenue",
+        "Under \u00A55M",
+        "\u00A55M\u2013\u00A525M",
+        "\u00A525M\u2013\u00A5100M",
+        "\u00A5100M+",
+      ],
+      teamCompositionLabel: "What does your team look like?",
+      teamCompositionOptions: [
+        "Completely solo",
+        "1-2 contractors",
+        "Small team (3-5)",
+      ],
+      departmentNameLabel: "Department name",
+      departmentNamePlaceholder: "e.g. Marketing",
+      departmentSizeLabel: "How big is your department?",
+      departmentSizeOptions: ["1-3", "4-10", "11-25", "26-50", "50+"],
+      departmentFunctionLabel: "Department function",
+      departmentFunctionOptions: [
+        "Marketing",
+        "Sales",
+        "Operations",
+        "Finance",
+        "HR",
+        "Engineering",
+        "Customer Success",
+        "Legal",
+        "Other",
+      ],
     },
     4: {
-      question: "How is your business data organized?",
+      question: "How is your data organized?",
+      questionIndividual: "Your workflow & data",
       description:
         "This helps us understand your AI readiness foundation.",
+      typicalDayLabel:
+        "Walk me through a typical workday \u2014 what does a normal day look like?",
+      typicalDayPlaceholder:
+        "e.g. I start by checking emails, then work on client proposals for a few hours, followed by meetings in the afternoon...",
       maturityLabel: "Which best describes your current data situation?",
       maturityOptions: [
         "Mostly in people\u2019s heads or scattered files",
@@ -152,16 +192,31 @@ const auditDict = {
         "Paper / physical",
         "Other",
       ],
-      restructuringLabel: "How open is your team to reorganizing how you store and manage data?",
+      restructuringLabel:
+        "How open is your team to reorganizing how you store and manage data?",
       restructuringOptions: [
         "Very resistant \u2014 we\u2019d rather not change",
         "Cautious \u2014 open if the ROI is clear",
         "Ready \u2014 we know our data needs work",
         "Already restructuring \u2014 just need direction",
       ],
+      processDocLabel: "How are your processes documented?",
+      processDocOptions: [
+        "Not at all",
+        "Some SOPs but outdated",
+        "Well-documented for key processes",
+        "Comprehensive and current",
+      ],
+      toolAutonomyLabel: "Does your department choose its own tools?",
+      toolAutonomyOptions: [
+        "We pick our own",
+        "IT decides but we have input",
+        "IT decides everything",
+      ],
     },
     5: {
       question: "What tools does your team use?",
+      questionIndividual: "What tools do you use?",
       description:
         "Select all that apply \u2014 this helps us understand your current stack.",
       tools: [
@@ -182,6 +237,7 @@ const auditDict = {
     },
     6: {
       question: "What are your biggest operational challenges?",
+      questionIndividual: "What are your biggest challenges?",
       description: "Select all that apply.",
       challenges: [
         "Manual data entry / repetitive tasks",
@@ -195,7 +251,18 @@ const auditDict = {
         "Reporting takes too long",
         "Knowledge lost when employees leave",
       ],
-      bottlenecksLabel: "Where are the biggest bottlenecks in your operations?",
+      challengesIndividual: [
+        "Manual data entry / repetitive tasks",
+        "Information scattered across tools",
+        "Client communication takes too long",
+        "No clear AI strategy",
+        "Too many disconnected subscriptions",
+        "Difficulty scaling my business",
+        "Reporting / invoicing takes too long",
+        "Hard to stay organized",
+      ],
+      bottlenecksLabel:
+        "Where are the biggest bottlenecks in your operations?",
       bottlenecksDescription: "Select all that apply.",
       bottlenecks: [
         "Leads / pipeline",
@@ -207,15 +274,43 @@ const auditDict = {
         "Disconnected tools",
         "Onboarding new staff",
       ],
-      repetitiveHoursLabel: "How many hours per week does your team spend on repetitive tasks?",
+      repetitiveHoursLabel:
+        "How many hours per week do you spend on repetitive tasks?",
+      repetitiveHoursLabelTeam:
+        "How many hours per week does your team spend on repetitive tasks?",
       repetitiveHoursPlaceholder: "e.g. 15",
+      robotTaskLabel:
+        "What\u2019s the single task you wish you could hand off to a robot?",
+      robotTaskPlaceholder:
+        "e.g. Formatting invoices and chasing late payments...",
+      onboardingLabel: "What does onboarding look like for new employees?",
+      onboardingOptions: [
+        "No formal process",
+        "Basic docs",
+        "Structured program",
+        "We struggle with this",
+      ],
+      crossDeptLabel:
+        "How much does your department depend on other departments?",
+      crossDeptOptions: [
+        "Very independent",
+        "Some dependencies",
+        "Heavily dependent",
+      ],
     },
     7: {
       question: "AI experience & readiness",
       experienceLabel: "How much AI experience does your team have?",
-      experienceOptions: ["None yet", "Experimenting", "Using regularly", "Advanced"],
+      experienceLabelIndividual: "How much AI experience do you have?",
+      experienceOptions: [
+        "None yet",
+        "Experimenting",
+        "Using regularly",
+        "Advanced",
+      ],
       triedBeforeLabel: "Have you tried AI before? What happened?",
-      triedBeforePlaceholder: "Tell us about your experience (or leave blank if none)...",
+      triedBeforePlaceholder:
+        "Tell us about your experience (or leave blank if none)...",
       visionLabel: "What would you want AI to do in 6 months?",
       visionOptions: [
         "Automate repetitive tasks",
@@ -233,7 +328,8 @@ const auditDict = {
         "This quarter",
         "Just exploring",
       ],
-      budgetLabel: "What\u2019s your approximate monthly budget for AI tools & infrastructure?",
+      budgetLabel:
+        "What\u2019s your approximate monthly budget for AI tools & infrastructure?",
       budgetOptions: [
         "Not sure yet",
         "Under \u00A550,000",
@@ -241,11 +337,25 @@ const auditDict = {
         "\u00A5200,000 \u2013 \u00A5500,000",
         "\u00A5500,000+",
       ],
+      decisionMakerLabel: "Who makes the final call on new technology?",
+      decisionMakerOptions: [
+        "I do",
+        "My manager",
+        "IT / CTO",
+        "Committee",
+        "Not sure",
+      ],
     },
     8: {
       question: "Almost done \u2014 just a few logistics",
       sourceLabel: "How did you find us?",
-      sourceOptions: ["LinkedIn", "Referral", "Google Search", "Social Media", "Event"],
+      sourceOptions: [
+        "LinkedIn",
+        "Referral",
+        "Google Search",
+        "Social Media",
+        "Event",
+      ],
       timeLabel: "When\u2019s a good time for a call?",
       timeOptions: [
         "Morning (9-12 JST)",
@@ -309,7 +419,8 @@ const auditDict = {
     bookCta: "Book Your Free Audit Call",
     bookCtaPersonal: "Join the April Cohort",
     bookSubtext: "30 minutes \u00B7 Video call \u00B7 No sales pressure",
-    bookSubtextPersonal: "Small group \u00B7 Hands-on workshop \u00B7 Free",
+    bookSubtextPersonal:
+      "Small group \u00B7 Hands-on workshop \u00B7 Free",
     bookDescription:
       "Go ahead and pick a time that works for you. Lewis will have your audit ready by the call.",
     bookDescriptionPersonal:

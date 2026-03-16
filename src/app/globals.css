@@ -113,8 +113,11 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
 
-  /* ── Landing Page Design Tokens (Light / Apple B&W + Gold) ── */
+/* ── Landing Page Design Tokens (Light / Apple B&W + Gold) ── */
+/* Scoped to :root so they work regardless of dark/light mode */
+:root {
   --lp-bg-primary: #FFFFFF;
   --lp-bg-elevated: #F5F5F7;
   --lp-bg-subtle: #FAFAFA;

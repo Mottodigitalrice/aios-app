@@ -29,6 +29,13 @@ export function Step7AI({
 }: Step7Props) {
   const { t } = useAuditLocale();
   const step = t.steps[7];
+  const perspective = formData.perspective;
+  const isIndividual = perspective === "individual";
+  const isCompanyOrDept = perspective === "company" || perspective === "department";
+
+  const experienceLabel = isIndividual
+    ? step.experienceLabelIndividual
+    : step.experienceLabel;
 
   return (
     <StepLayout
@@ -41,7 +48,7 @@ export function Step7AI({
       <div className="space-y-8">
         <div className="space-y-3">
           <Label className="text-zinc-300">
-            {step.experienceLabel}
+            {experienceLabel}
           </Label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {step.experienceOptions.map((option) => (
@@ -119,6 +126,25 @@ export function Step7AI({
             ))}
           </div>
         </div>
+
+        {/* Decision maker — company/department paths only */}
+        {isCompanyOrDept && (
+          <div className="space-y-3">
+            <Label className="text-zinc-300">
+              {step.decisionMakerLabel}
+            </Label>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {step.decisionMakerOptions.map((option) => (
+                <SelectCard
+                  key={option}
+                  label={option}
+                  selected={formData.decisionMaker === option}
+                  onClick={() => updateField("decisionMaker", option)}
+                />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </StepLayout>
   );

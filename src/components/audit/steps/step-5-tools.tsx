@@ -42,6 +42,10 @@ export function Step5Tools({
 }: Step5Props) {
   const { t } = useAuditLocale();
   const step = t.steps[5];
+  const isIndividual = formData.perspective === "individual";
+  const question = isIndividual && "questionIndividual" in step
+    ? step.questionIndividual
+    : step.question;
 
   const renderIcon = (option: string) => {
     const logo = TOOL_LOGOS[option];
@@ -59,7 +63,7 @@ export function Step5Tools({
 
   return (
     <StepLayout
-      question={step.question}
+      question={question}
       description={step.description}
       onNext={onNext}
       onBack={onBack}

@@ -209,10 +209,10 @@ const en = {
     },
     hero: {
       badge: "April 2026 \u2014 Limited Spots",
-      title: "Stop being the bottleneck.",
-      titleHighlight: "Build an AI team that actually works.",
+      title: "Your business needs an",
+      titleHighlight: "AI Operating System.",
       subtitle:
-        "6-month program. From \u00A530,000/month. We build your AI operating system with you \u2014 and train your team to run it. You own everything.",
+        "Stop working in your business. Start working on it. We build your AI operating system in 6 months \u2014 train your team to run it \u2014 and you own everything. From \u00A530,000/month.",
       cta: "Save Your Spot",
       ctaTime: "30-second signup \u00B7 Meet Lewis first, then decide",
       ctaSecondary: "Get a Free AI Audit",
@@ -228,7 +228,6 @@ const en = {
       title: "Two ways to build your AI operating system",
       subtitle:
         "Whether you\u2019re building for yourself or your company, the outcome is the same: AI agents you own, running in production by month 6.",
-
       cohort: {
         label: "For Individuals",
         title: "Group Cohort",
@@ -247,7 +246,6 @@ const en = {
         guarantee: "Can\u2019t build & manage agents by month 6? Join the next cohort free.",
         bestFor: "Best for freelancers, solo founders, and small teams (<5 people)",
       },
-
       corporate: {
         label: "For Companies",
         title: "Corporate Build",
@@ -270,7 +268,6 @@ const en = {
         bestFor: "Best for companies with 5\u201350 employees",
         guarantee: "Team can\u2019t create & manage agents by month 6? We continue free.",
       },
-
       roiComparison: {
         title: "How it compares",
         traditional: {
@@ -285,7 +282,6 @@ const en = {
         },
       },
       launchNote: "Early pricing \u2014 increases after 5 clients.",
-
       intake: {
         badge: "April 2026 Intake",
         title: "Limited capacity. Full commitment.",
@@ -329,10 +325,57 @@ const en = {
       titleHighlight: "AIOS",
       subtitle: "Ready to build your AI operating system? Choose your track and let\u2019s get started.",
     },
-    // FAQ content lives in faq-section.tsx (self-contained component with categories)
     cta: {
       title: "Save Your Spot",
       titleSecondary: "Or get a free AI audit first",
+    },
+    valueProps: {
+      badge: "What Changes",
+      title: "Five things that become possible",
+      titleHighlight: "with an AI Operating System",
+      items: [
+        {
+          title: "Freedom from the day-to-day",
+          description: "Your business knowledge lives in a system, not your head. Step away for a week \u2014 nothing breaks. The AI knows every project, every client, every process.",
+        },
+        {
+          title: "AI that actually does the work",
+          description: "Not a chatbot that gives advice. AI agents that pick up tasks, execute them, and hand back results \u2014 autonomously, on your infrastructure.",
+        },
+        {
+          title: "One connected system, not 20 disconnected tools",
+          description: "CRM, project management, scheduling, communications \u2014 unified into one system that talks to itself. No more copy-pasting between tabs.",
+        },
+        {
+          title: "You own everything. No lock-in. Ever.",
+          description: "Your code, your data, your servers. Swap any AI model, change any tool, fire us tomorrow \u2014 the system keeps running. No vendor dependency.",
+        },
+        {
+          title: "Your team learns to build, not just use",
+          description: "By month 6, your team creates and manages AI agents independently. Not dependent on consultants. Not locked into our platform. Truly self-sufficient.",
+        },
+      ],
+    },
+    agenticTerminal: {
+      badge: "The Shift",
+      title: "AI just learned",
+      titleHighlight: "how to use a computer.",
+      subtitle: "The tools are here. The question is whether you\u2019ll harness them \u2014 or watch your competitors do it first.",
+      chatbotEra: {
+        label: "2023: The Chatbot Era",
+        description: "AI could think, write, and analyze. But it couldn\u2019t do anything. You asked a question, got an answer, then went and did the work yourself.",
+      },
+      agenticEra: {
+        label: "2025: The Agentic Era",
+        description: "AI can now operate inside a terminal. It reads files, writes code, sends emails, updates databases, deploys to servers, and triggers workflows \u2014 autonomously.",
+      },
+      tools: [
+        { name: "Claude Code", maker: "Anthropic" },
+        { name: "Codex", maker: "OpenAI" },
+        { name: "Cursor", maker: "Cursor" },
+        { name: "GitHub Copilot", maker: "Microsoft" },
+      ],
+      closing: "AIOS harnesses these tools into a system that runs your business. Not a demo. Not a proof of concept. A production operating system.",
     },
     beforeAfter: {
       title: "What changes when your business",
@@ -444,8 +487,9 @@ const en = {
       ],
     },
     midCta: {
-      title: "Ready to see what this looks like for your business?",
-      subtitle: "The free AI audit takes 5 minutes. Lewis personally reviews every response and walks you through a custom report on a call.",
+      title: "Ready to build yours?",
+      subtitle: "Save your spot for the April cohort. Meet Lewis first, then decide. No commitment until after your call.",
+      cta: "Save Your Spot",
     },
     problems: {
       badge: "Sound Familiar?",
@@ -565,9 +609,12 @@ const en = {
     bio: {
       name: "Lewis Rice",
       title: "Founder, MOTTO Digital \u00B7 Tokyo, Japan",
-      bio1: "I don\u2019t just build AI systems for clients \u2014 I run my own company on the same system I\u2019ll build for you. 26 active projects, 63 in-progress tasks, 4 clients, 9 pipeline deals, and 16 locations \u2014 all managed through the AIOS I built for myself.",
-      bio2: "After years of watching companies get locked into expensive, fragmented AI tools, I created this framework \u2014 a systematic approach to building connected AI systems that you own and that grow with your business. I work hands-on with your team, teaching as we build, so you\u2019re never dependent on anyone.",
-      tags: ["AI Agents", "Infrastructure Design", "No-Code / Low-Code", "Team Training", "Bilingual EN/JP"],
+      sectionTitle: "Who\u2019s behind this",
+      bio1: "I don\u2019t just build AI systems for clients \u2014 I run my own company on the same system I\u2019ll build for you. 26 active projects, 63 in-progress tasks, 4 clients, 9 pipeline deals \u2014 all managed through the AIOS I built for myself.",
+      bio2: "I\u2019ve lived in Japan for 18 years. I built MOTTO Digital to help small and medium businesses here harness AI \u2014 not the way big consulting firms do it (expensive, abstract, disposable), but the way it should be done: hands-on, owned by you, growing with your business.",
+      bio3: "I believe AI should amplify people, not replace them. Every system I build is designed to make your team more capable \u2014 not dependent on me, not locked into a platform, not paying rent on someone else\u2019s intelligence. You own the agents, the code, the data. Forever.",
+      bio4: "When I\u2019m not building AI systems, I\u2019m raising my family here in Tokyo. This isn\u2019t a side project \u2014 it\u2019s my life\u2019s work. The future of my business depends on making my first clients wildly successful.",
+      tags: ["AI Agents", "Infrastructure Design", "No-Code / Low-Code", "Team Training", "Bilingual EN/JP", "18 Years in Japan"],
     },
     footer: {
       tagline: "AI Operating System for Business.",

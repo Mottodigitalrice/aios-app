@@ -29,11 +29,16 @@ export function Step4Data({
 }: Step4DataProps) {
   const { t } = useAuditLocale();
   const step = t.steps[4];
-  const isCorporate = formData.perspective === "corporate";
+  const perspective = formData.perspective;
+  const isIndividual = perspective === "individual";
+  const isCompanyOrDept = perspective === "company" || perspective === "department";
+  const isDepartment = perspective === "department";
+
+  const question = isIndividual ? step.questionIndividual : step.question;
 
   return (
     <StepLayout
-      question={step.question}
+      question={question}
       description={step.description}
       onNext={onNext}
       onBack={onBack}
@@ -41,6 +46,24 @@ export function Step4Data({
       error={error}
     >
       <div className="space-y-8">
+        {/* Typical day — individual path */}
+        {isIndividual && (
+          <div className="space-y-2">
+            <Label htmlFor="typicalDay" className="text-zinc-300">
+              {step.typicalDayLabel}
+            </Label>
+            <textarea
+              id="typicalDay"
+              value={formData.typicalDay}
+              onChange={(e) => updateField("typicalDay", e.target.value)}
+              placeholder={step.typicalDayPlaceholder}
+              rows={4}
+              className="w-full rounded-lg bg-zinc-950/50 border border-zinc-700/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20 focus-visible:ring-1 focus-visible:outline-none px-3 py-2.5 text-base resize-none"
+            />
+          </div>
+        )}
+
+        {/* Data maturity — all paths */}
         <div className="space-y-3">
           <Label className="text-zinc-300">{step.maturityLabel}</Label>
           <div className="grid grid-cols-1 gap-2">
@@ -55,8 +78,8 @@ export function Step4Data({
           </div>
         </div>
 
-        {/* Confidence scale 1-10 — corporate path only */}
-        {isCorporate && (
+        {/* Confidence scale 1-10 — company/department paths */}
+        {isCompanyOrDept && (
           <div className="space-y-3">
             <Label className="text-zinc-300">{step.confidenceLabel}</Label>
             <div className="space-y-2">
@@ -84,6 +107,7 @@ export function Step4Data({
           </div>
         )}
 
+        {/* Data location — all paths */}
         <div className="space-y-3">
           <Label className="text-zinc-300">{step.dataLocationLabel}</Label>
           <MultiSelectChips
@@ -94,8 +118,8 @@ export function Step4Data({
           />
         </div>
 
-        {/* Openness to restructuring — corporate path only */}
-        {isCorporate && (
+        {/* Openness to restructuring — company/department paths */}
+        {isCompanyOrDept && (
           <div className="space-y-3">
             <Label className="text-zinc-300">{step.restructuringLabel}</Label>
             <div className="grid grid-cols-1 gap-2">
@@ -105,6 +129,40 @@ export function Step4Data({
                   label={option}
                   selected={formData.dataRestructuringOpenness === option}
                   onClick={() => updateField("dataRestructuringOpenness", option)}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Process documentation — company/department paths */}
+        {isCompanyOrDept && (
+          <div className="space-y-3">
+            <Label className="text-zinc-300">{step.processDocLabel}</Label>
+            <div className="grid grid-cols-1 gap-2">
+              {step.processDocOptions.map((option) => (
+                <SelectCard
+                  key={option}
+                  label={option}
+                  selected={formData.processDocumentation === option}
+                  onClick={() => updateField("processDocumentation", option)}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Tool autonomy — department path only */}
+        {isDepartment && (
+          <div className="space-y-3">
+            <Label className="text-zinc-300">{step.toolAutonomyLabel}</Label>
+            <div className="grid grid-cols-1 gap-2">
+              {step.toolAutonomyOptions.map((option) => (
+                <SelectCard
+                  key={option}
+                  label={option}
+                  selected={formData.toolAutonomy === option}
+                  onClick={() => updateField("toolAutonomy", option)}
                 />
               ))}
             </div>

@@ -25,7 +25,7 @@ const auditDict = {
       1: {
         title: "あなたに合わせた診断",
         items: [
-          "個人または法人の観点を選んで、最適な質問を受けましょう",
+          "あなたの視点を選んで、最適な質問を受けましょう",
           "Lewisがすべての回答を直接確認します",
           "あなたのツール、チーム、目標に合わせた診断です",
         ],
@@ -33,7 +33,7 @@ const auditDict = {
       2: {
         title: "なぜこの質問をするのか",
         items: [
-          "会社の規模によって最適なAI戦略が変わります",
+          "あなたの状況が最適なAI戦略を決めます",
           "あなたの回答がレポートの提案内容を決めます",
         ],
       },
@@ -88,10 +88,14 @@ const auditDict = {
     2: {
       question: "あなたについて教えてください",
       perspectiveLabel: "この診断はどの観点で行いますか？",
-      perspectivePersonal: "個人",
-      perspectivePersonalDesc: "自分の業務と役割にAIを活用したい",
-      perspectiveCorporate: "法人",
-      perspectiveCorporateDesc: "会社やチームにAIを導入したい",
+      perspectiveIndividual: "個人",
+      perspectiveIndividualDesc:
+        "個人事業主、フリーランス、またはチームのない経営者",
+      perspectiveCompany: "会社全体",
+      perspectiveCompanyDesc: "会社全体のためにこの診断を受けたい",
+      perspectiveDepartment: "部門",
+      perspectiveDepartmentDesc:
+        "特定の部門やチームのためにこの診断を受けたい",
       nameLabel: "お名前は？",
       namePlaceholder: "フルネーム",
       roleLabel: "役職は？",
@@ -106,14 +110,15 @@ const auditDict = {
     },
     3: {
       question: "会社について教えてください",
-      questionPersonal: "お仕事について教えてください",
+      questionIndividual: "お仕事について教えてください",
+      questionDepartment: "部門について教えてください",
       companyLabel: "会社名は？",
       companyPlaceholder: "会社名",
       companyOptionalLabel: "会社名 / 組織名（任意）",
-      sizeLabel: "チームの規模は？",
-      sizeOptions: ["1-5人", "6-20人", "21-50人", "51-100人", "100人以上"],
-      workTypeLabel: "どのようなお仕事をされていますか？",
-      workTypeOptions: [
+      sizeLabel: "会社の規模は？",
+      sizeOptions: ["1-5", "6-20", "21-50", "51-100", "101-500", "500+"],
+      industryLabel: "業種は？",
+      industryOptions: [
         "コンサルティング",
         "デザイン / クリエイティブ",
         "マーケティング",
@@ -121,17 +126,51 @@ const auditDict = {
         "財務 / 会計",
         "営業",
         "教育 / トレーニング",
+        "医療",
+        "法務",
+        "不動産",
         "その他",
       ],
-      useCaseLabel: "これは何のためですか？",
-      useCasePersonal: "個人の生産性向上のみ",
-      useCaseBusiness: "自分のビジネス / クライアント向け",
-      useCaseBoth: "個人とビジネスの両方",
+      revenueLabel: "売上規模（任意）",
+      revenueOptions: [
+        "売上前",
+        "500万円未満",
+        "500万〜2,500万円",
+        "2,500万〜1億円",
+        "1億円以上",
+      ],
+      teamCompositionLabel: "チームの構成は？",
+      teamCompositionOptions: [
+        "完全に一人",
+        "1〜2人の外注",
+        "少人数チーム（3〜5人）",
+      ],
+      departmentNameLabel: "部門名",
+      departmentNamePlaceholder: "例: マーケティング",
+      departmentSizeLabel: "部門の人数は？",
+      departmentSizeOptions: ["1-3", "4-10", "11-25", "26-50", "50+"],
+      departmentFunctionLabel: "部門の機能",
+      departmentFunctionOptions: [
+        "マーケティング",
+        "営業",
+        "オペレーション",
+        "財務",
+        "人事",
+        "エンジニアリング",
+        "カスタマーサクセス",
+        "法務",
+        "その他",
+      ],
     },
     4: {
-      question: "ビジネスデータの管理状況は？",
+      question: "データの管理状況は？",
+      questionIndividual: "ワークフローとデータ",
       description:
         "AI導入の準備状況を把握するための質問です。",
+      typicalDayLabel:
+        "一日の仕事の流れを教えてください。普段どんな一日を過ごしていますか？",
+      typicalDayPlaceholder:
+        "例: メールチェックから始まり、午前中はクライアントの提案書作成、午後は打ち合わせ...",
       maturityLabel: "現在のデータ管理状況は？",
       maturityOptions: [
         "主に個人の頭の中や散らばったファイル",
@@ -152,16 +191,31 @@ const auditDict = {
         "紙 / 物理的な書類",
         "その他",
       ],
-      restructuringLabel: "データの保管・管理方法を再編成することに、チームはどの程度オープンですか？",
+      restructuringLabel:
+        "データの保管・管理方法を再編成することに、チームはどの程度オープンですか？",
       restructuringOptions: [
         "非常に消極的 — 変えたくない",
         "慎重 — ROIが明確ならオープン",
         "準備ができている — データの整理が必要だと認識している",
         "既に再編成中 — 方向性だけ必要",
       ],
+      processDocLabel: "業務プロセスはどの程度文書化されていますか？",
+      processDocOptions: [
+        "全くない",
+        "SOPはあるが古い",
+        "主要プロセスは整備済み",
+        "包括的で最新",
+      ],
+      toolAutonomyLabel: "部門で独自にツールを選べますか？",
+      toolAutonomyOptions: [
+        "自分たちで選ぶ",
+        "IT部門が決めるが意見は言える",
+        "IT部門がすべて決める",
+      ],
     },
     5: {
       question: "チームが使用しているツールは？",
+      questionIndividual: "使用しているツールは？",
       description: "該当するものをすべて選択してください。",
       tools: [
         "Slack",
@@ -181,6 +235,7 @@ const auditDict = {
     },
     6: {
       question: "最大の運営課題は？",
+      questionIndividual: "最大の課題は？",
       description: "該当するものをすべて選択してください。",
       challenges: [
         "手作業データ入力 / 繰り返し作業",
@@ -194,6 +249,16 @@ const auditDict = {
         "レポート作成に時間がかかりすぎる",
         "従業員が退職すると知識が失われる",
       ],
+      challengesIndividual: [
+        "手作業データ入力 / 繰り返し作業",
+        "ツール間で情報が分散",
+        "クライアントとのやり取りに時間がかかる",
+        "明確なAI戦略がない",
+        "サブスクリプションが多すぎる",
+        "事業の拡大が困難",
+        "レポート / 請求書作成に時間がかかる",
+        "整理整頓が難しい",
+      ],
       bottlenecksLabel: "業務の最大のボトルネックはどこですか？",
       bottlenecksDescription: "該当するものをすべて選択してください。",
       bottlenecks: [
@@ -206,12 +271,34 @@ const auditDict = {
         "ツールの分断",
         "新人オンボーディング",
       ],
-      repetitiveHoursLabel: "チームが繰り返し作業に費やす週間時間は？",
+      repetitiveHoursLabel:
+        "繰り返し作業に費やす週間時間は？",
+      repetitiveHoursLabelTeam:
+        "チームが繰り返し作業に費やす週間時間は？",
       repetitiveHoursPlaceholder: "例: 15",
+      robotTaskLabel:
+        "ロボットに任せたいタスクを一つ挙げるとしたら？",
+      robotTaskPlaceholder:
+        "例: 請求書のフォーマット作成と未払い催促...",
+      onboardingLabel: "新入社員のオンボーディングはどうなっていますか？",
+      onboardingOptions: [
+        "正式なプロセスなし",
+        "基本的な資料あり",
+        "体系的なプログラム",
+        "この分野で困っている",
+      ],
+      crossDeptLabel:
+        "部門は他の部門にどの程度依存していますか？",
+      crossDeptOptions: [
+        "非常に独立",
+        "一部依存あり",
+        "大きく依存",
+      ],
     },
     7: {
       question: "AI経験と準備状況",
       experienceLabel: "チームのAI経験は？",
+      experienceLabelIndividual: "あなたのAI経験は？",
       experienceOptions: ["なし", "実験中", "定期的に使用", "上級"],
       triedBeforeLabel: "AIを試したことはありますか？その結果は？",
       triedBeforePlaceholder: "経験を教えてください（なければ空白でOK）...",
@@ -239,6 +326,14 @@ const auditDict = {
         "￥5万 〜 ￥20万",
         "￥20万 〜 ￥50万",
         "￥50万以上",
+      ],
+      decisionMakerLabel: "新しいテクノロジーの最終決定は誰がしますか？",
+      decisionMakerOptions: [
+        "自分",
+        "上司",
+        "IT / CTO",
+        "委員会",
+        "分からない",
       ],
     },
     8: {

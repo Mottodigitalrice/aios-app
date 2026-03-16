@@ -9,7 +9,7 @@ export default function BeforeAfterSection({ t, locale }: SectionProps) {
 
   return (
     <section
-      className="border-t border-zinc-800/50"
+      className="border-t border-[#E8E8ED]"
       style={{ backgroundColor: "var(--lp-bg-primary)", paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}
     >
       <div className="mx-auto max-w-5xl px-6">

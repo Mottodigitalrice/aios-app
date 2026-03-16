@@ -12,7 +12,7 @@ export default function MidCtaSection({ t, locale }: SectionProps) {
   return (
     <AnimateInView
       as="section"
-      className="border-t border-zinc-800/50"
+      className="border-t border-[#E8E8ED]"
       style={{ backgroundColor: "var(--lp-bg-subtle)", paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}
     >
       <div className="mx-auto max-w-3xl px-6 text-center">
@@ -27,8 +27,8 @@ export default function MidCtaSection({ t, locale }: SectionProps) {
         </p>
         <div className="flex flex-col items-center">
           <Link href="/signup">
-            <Button size="lg" className="bg-indigo-600 hover:bg-indigo-500 hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 text-white gap-2 shadow-[0_0_20px_oklch(0.65_0.18_260/30%)]">
-              {t.cta.title}
+            <Button size="lg" className="bg-[#1D1D1F] hover:bg-[#2D2D2F] hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 text-white gap-2 rounded-full px-8">
+              {t.midCta.cta || t.cta.title}
               <ArrowRight className="size-4" />
             </Button>
           </Link>

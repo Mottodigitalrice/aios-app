@@ -12,26 +12,36 @@ export interface AuditFormData {
   email: string;
   privacyConsent: boolean;
   // Step 2
-  perspective: "personal" | "corporate" | "";
+  perspective: "individual" | "company" | "department" | "";
   name: string;
   role: string;
-  // Step 3
+  // Step 3 — Context (branched by perspective)
   company: string;
   employees: string;
-  workType: string;
-  useCase: "personal" | "business" | "both" | "";
-  // Step 4 (Data Maturity — corporate path)
+  industry: string;
+  revenueRange: string;
+  teamComposition: string;
+  departmentName: string;
+  departmentSize: string;
+  departmentFunction: string;
+  // Step 4 (Workflow & Data — branched)
+  typicalDay: string;
   dataMaturity: string;
   dataConfidence: number | null;
   dataLocation: string[];
   dataRestructuringOpenness: string;
+  processDocumentation: string;
+  toolAutonomy: string;
   // Step 5
   tools: string[];
-  // Step 6 (Challenges + Operations)
+  // Step 6 (Challenges — branched)
   challenge: string[];
   challengeOther: string;
   bottlenecks: string[];
   repetitiveHoursPerWeek: string;
+  robotTask: string;
+  onboardingProcess: string;
+  crossDeptDependency: string;
   // Step 7 (AI experience & readiness)
   aiExperience: string;
   sixMonthVision: string[];
@@ -39,6 +49,7 @@ export interface AuditFormData {
   aiBudget: string;
   aiTriedBefore: string;
   aiTimeline: string;
+  decisionMaker: string;
   // Step 8
   source: string;
   preferredTime: string;
@@ -53,23 +64,34 @@ const INITIAL_DATA: AuditFormData = {
   role: "",
   company: "",
   employees: "",
-  workType: "",
-  useCase: "",
+  industry: "",
+  revenueRange: "",
+  teamComposition: "",
+  departmentName: "",
+  departmentSize: "",
+  departmentFunction: "",
+  typicalDay: "",
   dataMaturity: "",
   dataConfidence: null,
   dataLocation: [],
   dataRestructuringOpenness: "",
+  processDocumentation: "",
+  toolAutonomy: "",
   tools: [],
   challenge: [],
   challengeOther: "",
   bottlenecks: [],
   repetitiveHoursPerWeek: "",
+  robotTask: "",
+  onboardingProcess: "",
+  crossDeptDependency: "",
   aiExperience: "",
   sixMonthVision: [],
   sixMonthVisionOther: "",
   aiBudget: "",
   aiTriedBefore: "",
   aiTimeline: "",
+  decisionMaker: "",
   source: "",
   preferredTime: "",
   website: "",
@@ -103,16 +125,25 @@ const baseStepSchemas: Record<number, z.ZodType> = {
   7: z.object({}), // logistics — optional
 };
 
-// Corporate requires company name, personal does not
-const step2CorporateSchema = z.object({
+// Company/department require company name, individual does not
+const step2CompanySchema = z.object({
   company: z.string().min(1, "Company name is required"),
 });
-const step2PersonalSchema = z.object({});
+const step2DepartmentSchema = z.object({
+  company: z.string().min(1, "Company name is required"),
+});
+const step2IndividualSchema = z.object({});
 
 function getStepSchemas(perspective: string): Record<number, z.ZodType> {
+  const step2 =
+    perspective === "company"
+      ? step2CompanySchema
+      : perspective === "department"
+        ? step2DepartmentSchema
+        : step2IndividualSchema;
   return {
     ...baseStepSchemas,
-    2: perspective === "corporate" ? step2CorporateSchema : step2PersonalSchema,
+    2: step2,
   };
 }
 
