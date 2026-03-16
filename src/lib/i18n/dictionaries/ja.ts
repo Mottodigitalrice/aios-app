@@ -204,19 +204,19 @@ const ja = {
     },
     hero: {
       badge: "2026年4月 — 残りわずか",
-      title: "ビジネスを動かす、ひとつのAIシステム。",
-      titleHighlight: "あなたのものとして。あなたとともに、成長。",
+      title: "あなたがいないと\n止まる会社を、\n卒業しませんか。",
+      titleHighlight: "動くAIをつくる。",
       subtitle:
-        "プロジェクトも、クライアントも、すべての約束も。整理されて、つながる。あなたのために動き続けます。ベンダーに縛られない。一緒につくって、すべてあなたのものに。",
-      cta: "4月の席を確保する",
-      ctaTime: "クレジットカード不要・コミットメント不要",
-      ctaSecondary: "無料AI活用診断",
+        "6ヶ月プログラム。月額￥30,000から。AIオペレーティングシステムを一緒に構築し、チームが運用できるように訓練します。すべてあなたのものに。",
+      cta: "席を確保する",
+      ctaTime: "30秒で登録 · まずはLewisと面談、その後ご判断",
+      ctaSecondary: "まずは無料AI活用診断",
       ctaSecondaryTime: "所要時間：約5分",
       scarcity: "4月の残り枠：3社。次回コホート：10月（未確定）。",
       stats:
-        "現在26プロジェクト、63タスク、9件の商談をひとつのシステムで、一人で管理中。",
-      guaranteeHint: "オーナーシップ保証 — 6ヶ月後にAIエージェントを管理できなければ、できるまで無償でサポート。",
-      builtWith: "使用技術",
+        "\u73FE\u572826\u30D7\u30ED\u30B8\u30A7\u30AF\u30C8\u300163\u30BF\u30B9\u30AF\u30019\u4EF6\u306E\u5546\u8AC7\u3092\u3072\u3068\u3064\u306E\u30B7\u30B9\u30C6\u30E0\u3067\u3001\u4E00\u4EBA\u3067\u7BA1\u7406\u4E2D\u3002",
+      guaranteeHint: "6\u30F6\u6708\u5F8CAI\u30A8\u30FC\u30B8\u30A7\u30F3\u30C8\u3092\u7BA1\u7406\u3067\u304D\u306A\u3051\u308C\u3070\u3001\u3067\u304D\u308B\u307E\u3067\u7121\u511F\u3067\u30B5\u30DD\u30FC\u30C8\u3002",
+      builtWith: "\u4F7F\u7528\u6280\u8853",
     },
     pricing: {
       badge: "あなたに合うプランを見つける",
@@ -326,7 +326,8 @@ const ja = {
     },
     // FAQ content lives in faq-section.tsx (self-contained component with categories)
     cta: {
-      title: "4月の席を確保する",
+      title: "席を確保する",
+      titleSecondary: "まずは無料AI活用診断から",
     },
     beforeAfter: {
       title: "会社に「頭脳」ができると、",
@@ -415,22 +416,41 @@ const ja = {
         { name: "n8n-builder", description: "自動化ワークフローの構築・デバッグ" },
       ],
     },
+    howItWorks: {
+      badge: "\u3069\u3046\u9032\u3081\u308B\u304B",
+      title: "3\u3064\u306E\u30B9\u30C6\u30C3\u30D7\u3002",
+      titleHighlight: "6\u30F6\u6708\u3002\u305A\u3063\u3068\u3042\u306A\u305F\u306E\u3082\u306E\u3002",
+      steps: [
+        {
+          num: "1",
+          title: "\u7121\u6599\u8A3A\u65AD",
+          description: "\u3042\u306A\u305F\u306E\u30D3\u30B8\u30CD\u30B9\u306B\u3064\u3044\u3066\u6559\u3048\u3066\u304F\u3060\u3055\u3044\u3002Lewis\u304C\u76F4\u63A5\u78BA\u8A8D\u3057\u3001\u6D3B\u7528\u306E\u53EF\u80FD\u6027\u3092\u4E00\u7DD2\u306B\u63A2\u308A\u307E\u3059\u3002\u5B8C\u5168\u7121\u6599\u3067\u3059\u3002",
+        },
+        {
+          num: "2",
+          title: "6\u30F6\u6708\u306E\u69CB\u7BC9",
+          description: "\u696D\u52D9\u3092\u30DE\u30C3\u30D4\u30F3\u30B0\u3057\u3001AI\u30A2\u30FC\u30AD\u30C6\u30AF\u30C1\u30E3\u3092\u8A2D\u8A08\u3057\u3001\u30A8\u30FC\u30B8\u30A7\u30F3\u30C8\u3092\u69CB\u7BC9\u3057\u3001\u30C1\u30FC\u30E0\u3092\u30C8\u30EC\u30FC\u30CB\u30F3\u30B0\u3002\u6BCE\u9031\u306E\u30BB\u30C3\u30B7\u30E7\u30F3\u3067\u3001\u78BA\u5B9F\u306B\u9032\u307F\u307E\u3059\u3002",
+        },
+        {
+          num: "3",
+          title: "\u305A\u3063\u3068\u3042\u306A\u305F\u306E\u3082\u306E",
+          description: "6\u30F6\u6708\u5F8C\u3001\u30C1\u30FC\u30E0\u304C\u81EA\u529B\u3067\u30B7\u30B9\u30C6\u30E0\u3092\u904B\u7528\u3002\u30A8\u30FC\u30B8\u30A7\u30F3\u30C8\u3082\u3001\u30B3\u30FC\u30C9\u3082\u3001\u30A4\u30F3\u30D5\u30E9\u3082\u3001\u3059\u3079\u3066\u3042\u306A\u305F\u306E\u3082\u306E\u3067\u3059\u3002",
+        },
+      ],
+    },
     midCta: {
       title: "あなたのビジネスではどうなるか、見てみませんか？",
       subtitle: "無料AI活用診断はサクッと5分で完了。Lewisが直接回答を確認して、カスタムレポートを通話で説明します。",
     },
     problems: {
-      badge: "問題点",
-      title: "なぜAI導入の多くが",
-      titleMuted: "失敗するのか",
-      subtitle: "AIの力は誰もが知っています。問題は導入するかどうかではなく、どう導入するか。従来のアプローチの問題点を見てみましょう。",
+      badge: "\u5FC3\u5F53\u305F\u308A\u3042\u308A\u307E\u305B\u3093\u304B\uFF1F",
+      title: "\u3082\u3046\u6C17\u3065\u3044\u3066\u3044\u308B\u306F\u305A\u3067\u3059\u3002",
+      titleMuted: "\u4F55\u304B\u3092\u5909\u3048\u306A\u3044\u3068\u3044\u3051\u306A\u3044\u3002",
+      subtitle: "",
       items: [
-        { title: "ツール優先、システムが後回し", description: "ChatGPTのライセンス、チャットボット、自動化ツールを別々に購入。半年後には8つのサブスク、連携ゼロ、ビジネスを何も知らないAI。" },
-        { title: "ベンダーロックインがデフォルト", description: "プロンプト、ワークフロー、ビジネスロジックが所有していないプラットフォームに依存。乗り換えるとゼロから。AIは学習せず、リセットされる。" },
-        { title: "複利的価値がない", description: "バラバラのツールはコンテキストを共有できない。毎回AIのやり取りがゼロから。セッション間ですべてを忘れる知能にお金を払っている。" },
-        { title: "コンサルタントは作って、去る", description: "従来のコンサルはPDFを納品して去る。もっと悪いことに、自分たちしか保守できないものを作り、永続的な依存を生み出す。" },
-        { title: "高額なPoCがスケールしない", description: "3ヶ月のPoCに500万円。サンドボックスで「動く」ことを証明。その後放置。拡張方法は誰も知らず、コンサルはさらに500万円を見積もる。" },
-        { title: "データがサイロ化したまま", description: "営業はHubSpot、経理はfreee、連絡はChatwork、ファイルはGoogle Drive。情報がバラバラに散らばっていて、AIが見えるのはアクセスできるデータだけ。" },
+        { title: "\u3042\u306A\u305F\u304C\u3044\u306A\u3044\u3068\u3001\u4F1A\u793E\u304C\u6B62\u307E\u308B", description: "\u3059\u3079\u3066\u306E\u5224\u65AD\u304C\u3042\u306A\u305F\u3092\u901A\u308B\u3002\u3042\u306A\u305F\u304C\u3044\u306A\u3044\u3068\u4F55\u3082\u9032\u307E\u306A\u3044\u3002\u4F1A\u793E\u306F\u3001\u3042\u306A\u305F\u304C\u500B\u4EBA\u7684\u306B\u7BA1\u7406\u3067\u304D\u308B\u7BC4\u56F2\u3092\u8D85\u3048\u3066\u6210\u9577\u3067\u304D\u306A\u3044\u3002" },
+        { title: "AI\u3092\u8A66\u3057\u305F\u304C\u3001\u4F55\u3082\u5909\u308F\u3089\u306A\u304B\u3063\u305F", description: "ChatGPT\u3092\u5C0E\u5165\u3057\u305F\u3002\u30C1\u30FC\u30E0\u306F1\u9031\u9593\u89E6\u3063\u3066\u307F\u305F\u3002\u3067\u3082\u4F55\u3082\u5B9A\u7740\u3057\u306A\u304B\u3063\u305F\u3002\u696D\u52D9\u30D7\u30ED\u30BB\u30B9\u306F\u5909\u308F\u3089\u305A\u3001\u307E\u305F\u624B\u4F5C\u696D\u306B\u623B\u3063\u3066\u3044\u308B\u3002" },
+        { title: "\u30C4\u30FC\u30EB\u540C\u58EB\u304C\u3064\u306A\u304C\u3063\u3066\u3044\u306A\u3044", description: "5\u3064\u4EE5\u4E0A\u306E\u30C4\u30FC\u30EB\u306B\u304A\u91D1\u3092\u6255\u3063\u3066\u3044\u308B\u306E\u306B\u3001\u3069\u308C\u3082\u9023\u643A\u3057\u3066\u3044\u306A\u3044\u3002\u30C1\u30FC\u30E0\u306F\u30BF\u30D6\u9593\u3067\u30C7\u30FC\u30BF\u3092\u30B3\u30D4\u30DA\u3002\u60C5\u5831\u306F\u4EBA\u306E\u982D\u306E\u4E2D\u306B\u3042\u3063\u3066\u3001\u30B7\u30B9\u30C6\u30E0\u306B\u306F\u306A\u3044\u3002" },
       ],
     },
     stack: {
@@ -504,11 +524,12 @@ const ja = {
       },
     },
     guarantee: {
-      title: "オーナーシップ保証",
-      description: "6ヶ月のプログラムを完走してください。終了時にAIエージェントを自力で作成・管理できない場合、できるようになるまで追加費用なしでサポートを継続します。",
-      cohortNote: "グループコホート：できるようになるまで次のコホートに無料参加。",
-      corporateNote: "コーポレート：チームができるまで無償でサポート継続。",
-      meetFirst: "まずは面談。それから判断。席を確保しても、Lewisとの面談後にご判断いただけます。",
+      title: "\u30AA\u30FC\u30CA\u30FC\u30B7\u30C3\u30D7\u4FDD\u8A3C",
+      headline: "6\u30F6\u6708\u5F8C\u306B\u3067\u304D\u306A\u3051\u308C\u3070\u3001\n\u3067\u304D\u308B\u307E\u3067\u7121\u511F\u3002",
+      description: "\u8A00\u3044\u8A33\u306A\u3057\u3002\u5C0F\u3055\u306A\u6587\u5B57\u306A\u3057\u30026\u30F6\u6708\u306E\u30D7\u30ED\u30B0\u30E9\u30E0\u3092\u5B8C\u8D70\u3057\u3066\u304F\u3060\u3055\u3044\u3002\u30C1\u30FC\u30E0\u304CAI\u30A8\u30FC\u30B8\u30A7\u30F3\u30C8\u3092\u81EA\u529B\u3067\u69CB\u7BC9\u30FB\u7BA1\u7406\u3067\u304D\u306A\u3044\u5834\u5408\u3001\u3067\u304D\u308B\u3088\u3046\u306B\u306A\u308B\u307E\u3067\u7121\u511F\u3067\u30B5\u30DD\u30FC\u30C8\u3092\u7D9A\u3051\u307E\u3059\u3002",
+      cohortNote: "\u30B0\u30EB\u30FC\u30D7\u30B3\u30DB\u30FC\u30C8\uFF1A\u3067\u304D\u308B\u3088\u3046\u306B\u306A\u308B\u307E\u3067\u6B21\u306E\u30B3\u30DB\u30FC\u30C8\u306B\u7121\u6599\u53C2\u52A0\u3002",
+      corporateNote: "\u30B3\u30FC\u30DD\u30EC\u30FC\u30C8\uFF1A\u30C1\u30FC\u30E0\u304C\u3067\u304D\u308B\u307E\u3067\u7121\u511F\u3067\u30B5\u30DD\u30FC\u30C8\u7D99\u7D9A\u3002",
+      meetFirst: "\u307E\u305A\u306F\u9762\u8AC7\u3002\u305D\u308C\u304B\u3089\u5224\u65AD\u3002\u5E2D\u3092\u78BA\u4FDD\u3057\u3066\u3082\u3001Lewis\u3068\u306E\u9762\u8AC7\u5F8C\u306B\u3054\u5224\u65AD\u3044\u305F\u3060\u3051\u307E\u3059\u3002",
     },
     shiryo: {
       buttonText: "資料をダウンロード",

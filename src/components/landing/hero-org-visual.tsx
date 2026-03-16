@@ -143,7 +143,7 @@ function OrgNode({
       {/* Task count badge */}
       {taskCount !== undefined && taskCount > 0 && (
         <div className="absolute -top-1.5 -left-1.5">
-          <div className="flex items-center justify-center size-4 rounded-full bg-indigo-500/80 text-[7px] font-bold text-white">
+          <div className="flex items-center justify-center size-4 rounded-full bg-indigo-500/80 text-[10px] font-bold text-white">
             {taskCount}
           </div>
         </div>
@@ -154,7 +154,7 @@ function OrgNode({
         <span className={`text-[11px] font-semibold leading-tight ${p.text}`}>{label}</span>
       </div>
       {sublabel && (
-        <span className="block text-[8px] text-zinc-500 mt-0.5 leading-tight">{sublabel}</span>
+        <span className="block text-[11px] text-zinc-500 mt-0.5 leading-tight">{sublabel}</span>
       )}
     </div>
   );
@@ -163,7 +163,7 @@ function OrgNode({
 /* ──────────────────────────────────────────────
    Main Component — HeroOrgVisual
    ────────────────────────────────────────────── */
-export function HeroOrgVisual({ locale = "en" }: { locale?: "en" | "ja" }) {
+export function HeroOrgVisual({ locale = "en", mobile = false }: { locale?: "en" | "ja"; mobile?: boolean }) {
   const dict = dictionaries[locale];
   const t = "orgChart" in dict.landing
     ? (dict.landing as typeof en.landing).orgChart
@@ -187,7 +187,7 @@ export function HeroOrgVisual({ locale = "en" }: { locale?: "en" | "ja" }) {
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveAgent((prev) => (prev + 1) % 5);
-    }, 3000);
+    }, 2500);
     return () => clearInterval(timer);
   }, []);
 
@@ -216,45 +216,69 @@ export function HeroOrgVisual({ locale = "en" }: { locale?: "en" | "ja" }) {
 
   const currentActivity = activity[activityIndex];
 
+  // Mobile simplified view: CEO -> Integrator -> 5 C-suite only
+  if (mobile) {
+    return (
+      <div className="relative w-full max-w-sm mx-auto">
+        <div className="relative rounded-2xl border border-zinc-700/50 ring-1 ring-zinc-700/40 bg-zinc-900/80 backdrop-blur-sm overflow-hidden shadow-2xl shadow-indigo-500/[0.06]">
+          {/* Title bar */}
+          <div className="flex items-center gap-2 px-4 py-2.5 border-b border-zinc-800/50 bg-zinc-900/60">
+            <div className="flex gap-1.5">
+              <div className="size-2 rounded-full bg-zinc-600" />
+              <div className="size-2 rounded-full bg-zinc-600" />
+              <div className="size-2 rounded-full bg-zinc-600" />
+            </div>
+            <div className="flex-1 flex justify-center">
+              <span className="text-[10px] text-zinc-500 font-medium tracking-wide">
+                {locale === "ja" ? "AIOSエージェント構成" : "AIOS Agent Structure"}
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <div className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-[9px] text-emerald-400/80 font-medium">
+                {locale === "ja" ? "稼働中" : "Live"}
+              </span>
+            </div>
+          </div>
+          <div className="p-4 space-y-0">
+            {/* CEO */}
+            <div className="flex justify-center">
+              <OrgNode label={t.ceo} color="indigo" isActive={true} icon={
+                <svg className="size-3 text-indigo-300" viewBox="0 0 16 16" fill="currentColor">
+                  <circle cx="8" cy="5" r="3" /><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6" />
+                </svg>
+              } />
+            </div>
+            <PulseLine color="indigo" height={16} />
+            {/* Integrator */}
+            <div className="flex justify-center">
+              <div className="relative rounded-lg border border-indigo-500/40 bg-indigo-500/[0.1] px-4 py-2 text-center">
+                <div className="flex items-center justify-center gap-2">
+                  <SparkleIcon className="size-3.5 text-indigo-300" />
+                  <span className="text-[11px] font-semibold text-indigo-200">{t.integrator}</span>
+                </div>
+              </div>
+            </div>
+            <PulseLine color="indigo" height={16} />
+            {/* C-suite row */}
+            <div className="grid grid-cols-5 gap-1">
+              {t.csuite.map((agent, i) => (
+                <OrgNode key={agent.role} label={agent.role} color={csuiteColors[i]} isActive={true} isHighlighted={activeAgent === i} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative w-full max-w-md mx-auto mt-12 lg:mt-0 lg:max-w-none">
-      {/* CSS keyframes injected inline */}
-      <style>{`
-        @keyframes hero-pulse-line {
-          0%, 100% { top: 0; opacity: 0; }
-          20% { opacity: 0.8; }
-          80% { opacity: 0.8; }
-          100% { top: 60%; opacity: 0; }
-        }
-        @keyframes hero-glow-rotate {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        @keyframes hero-data-flow {
-          0% { transform: translateY(-4px); opacity: 0; }
-          50% { opacity: 1; }
-          100% { transform: translateY(4px); opacity: 0; }
-        }
-        @keyframes hero-sparkle-spin {
-          0% { transform: rotate(0deg) scale(1); }
-          50% { transform: rotate(180deg) scale(1.15); }
-          100% { transform: rotate(360deg) scale(1); }
-        }
-        @keyframes hero-node-appear {
-          from { opacity: 0; transform: scale(0.85) translateY(8px); }
-          to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        @keyframes hero-feed-slide {
-          from { opacity: 0; transform: translateX(-8px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-      `}</style>
-
       {/* Ambient glow */}
       <div className="absolute -inset-8 rounded-3xl bg-gradient-to-br from-indigo-500/[0.07] via-transparent to-violet-500/[0.07] blur-3xl pointer-events-none" />
 
       {/* Main frame */}
-      <div className="relative rounded-2xl border border-zinc-800/70 bg-zinc-950/90 backdrop-blur-sm overflow-hidden shadow-2xl shadow-indigo-500/[0.04]">
+      <div className="relative rounded-2xl border border-zinc-700/50 ring-1 ring-zinc-700/40 bg-zinc-900/80 backdrop-blur-sm overflow-hidden shadow-2xl shadow-indigo-500/[0.06]">
         {/* Title bar */}
         <div className="flex items-center gap-2 px-4 py-2.5 border-b border-zinc-800/50 bg-zinc-900/60">
           <div className="flex gap-1.5">
@@ -414,10 +438,10 @@ export function HeroOrgVisual({ locale = "en" }: { locale?: "en" | "ja" }) {
                 key={vendor.name}
                 className="rounded-md border border-zinc-700/40 bg-zinc-800/30 px-2 py-1.5 text-center"
               >
-                <span className="text-[8px] font-mono font-medium text-zinc-400 leading-tight block">
+                <span className="text-[11px] font-mono font-medium text-zinc-400 leading-tight block">
                   {vendor.name}
                 </span>
-                <span className="text-[7px] text-zinc-600 leading-tight block mt-0.5">
+                <span className="text-[10px] text-zinc-600 leading-tight block mt-0.5">
                   {vendor.description}
                 </span>
               </div>
@@ -435,11 +459,11 @@ export function HeroOrgVisual({ locale = "en" }: { locale?: "en" | "ja" }) {
             <div className="flex items-center justify-between mb-1">
               <div className="flex items-center gap-1.5">
                 <div className="size-1 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-[8px] text-zinc-500 font-semibold uppercase tracking-wider">
+                <span className="text-[11px] text-zinc-500 font-semibold uppercase tracking-wider">
                   {locale === "ja" ? "最新の動き" : "Live Activity"}
                 </span>
               </div>
-              <span className="text-[8px] text-zinc-600">
+              <span className="text-[11px] text-zinc-600">
                 {locale === "ja" ? "たった今" : "just now"}
               </span>
             </div>
@@ -449,7 +473,7 @@ export function HeroOrgVisual({ locale = "en" }: { locale?: "en" | "ja" }) {
               style={{ animation: "hero-feed-slide 0.4s ease-out" }}
             >
               <div className={`shrink-0 rounded px-1 py-0.5 ${palette[currentActivity.color].bg} border ${palette[currentActivity.color].border}`}>
-                <span className={`text-[7px] font-bold ${palette[currentActivity.color].text}`}>
+                <span className={`text-[10px] font-bold ${palette[currentActivity.color].text}`}>
                   {currentActivity.agent}
                 </span>
               </div>

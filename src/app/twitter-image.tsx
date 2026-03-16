@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "AIOS — AI Operating System for Business | MOTTO Digital";
+export const alt = "AIOS — Build an AI Team That Actually Works | MOTTO Digital";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -91,7 +91,7 @@ export default async function Image() {
               maxWidth: "900px",
             }}
           >
-            AI Operating System
+            Build an AI Team
           </div>
           <div
             style={{
@@ -104,7 +104,7 @@ export default async function Image() {
               lineHeight: 1.1,
             }}
           >
-            for Your Business
+            That Actually Works
           </div>
 
           <div
@@ -117,7 +117,7 @@ export default async function Image() {
               marginTop: "8px",
             }}
           >
-            Connected to your data. Owned by you. Locked into nobody.
+            Stop being the bottleneck. You own everything.
           </div>
 
           <div

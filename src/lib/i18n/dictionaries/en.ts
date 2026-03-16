@@ -204,23 +204,23 @@ const en = {
       proof: "Proof",
       program: "Program",
       pricing: "Pricing",
-      cta: "Save your spot",
+      cta: "Save Your Spot",
       skipToContent: "Skip to main content",
     },
     hero: {
-      badge: "April 2026 \u2014 Limited spots remaining",
-      title: "One AI system that helps you run your business.",
-      titleHighlight: "Yours to own. Yours to grow.",
+      badge: "April 2026 \u2014 Limited Spots",
+      title: "Stop being the bottleneck.",
+      titleHighlight: "Build an AI team that actually works.",
       subtitle:
-        "Every project. Every client. Every promise \u2014 organized, connected, and working for you. Not locked into any vendor. Built with you, owned by you entirely.",
-      cta: "Save your April spot",
-      ctaTime: "No credit card, no commitment",
-      ctaSecondary: "Free AI Audit",
+        "6-month program. From \u00A530,000/month. We build your AI operating system with you \u2014 and train your team to run it. You own everything.",
+      cta: "Save Your Spot",
+      ctaTime: "30-second signup \u00B7 Meet Lewis first, then decide",
+      ctaSecondary: "Get a Free AI Audit",
       ctaSecondaryTime: "Takes 5 minutes",
-      scarcity: "3 spots remaining for April. Next cohort: October (unconfirmed).",
+      scarcity: "3 company spots remaining for April. Next cohort: October (unconfirmed).",
       stats:
         "Currently running 26 projects, 63 tasks, and 9 pipeline deals \u2014 on one system, managed by one person.",
-      guaranteeHint: "Backed by the Ownership Guarantee \u2014 if your team can\u2019t manage AI agents by month 6, we keep going free.",
+      guaranteeHint: "If your team can\u2019t manage AI agents by month 6, we keep going \u2014 free.",
       builtWith: "Built with",
     },
     pricing: {
@@ -331,7 +331,8 @@ const en = {
     },
     // FAQ content lives in faq-section.tsx (self-contained component with categories)
     cta: {
-      title: "Save your April spot",
+      title: "Save Your Spot",
+      titleSecondary: "Or get a free AI audit first",
     },
     beforeAfter: {
       title: "What changes when your business",
@@ -420,22 +421,41 @@ const en = {
         { name: "n8n-builder", description: "Builds and debugs automation workflows" },
       ],
     },
+    howItWorks: {
+      badge: "How It Works",
+      title: "Three steps.",
+      titleHighlight: "Six months. Yours forever.",
+      steps: [
+        {
+          num: "1",
+          title: "Free Audit",
+          description: "Tell us about your business. Lewis personally reviews it and walks you through opportunities \u2014 completely free.",
+        },
+        {
+          num: "2",
+          title: "6-Month Build",
+          description: "We map your operations, design your AI architecture, build your agents, and train your team. Weekly sessions, real progress.",
+        },
+        {
+          num: "3",
+          title: "Own Forever",
+          description: "By month 6, your team runs the system independently. You own everything \u2014 the agents, the code, the infrastructure. No lock-in.",
+        },
+      ],
+    },
     midCta: {
       title: "Ready to see what this looks like for your business?",
       subtitle: "The free AI audit takes 5 minutes. Lewis personally reviews every response and walks you through a custom report on a call.",
     },
     problems: {
-      badge: "The Problem",
-      title: "Why most AI adoption",
-      titleMuted: "fails",
-      subtitle: "Everyone knows AI is powerful. The question isn\u2019t whether to adopt it \u2014 it\u2019s how. Here\u2019s what the traditional approach gets wrong.",
+      badge: "Sound Familiar?",
+      title: "You already know",
+      titleMuted: "something has to change.",
+      subtitle: "",
       items: [
-        { title: "Tool-first, not system-first", description: "Companies buy ChatGPT seats, a chatbot plugin, an automation tool \u2014 each solving one problem in isolation. Six months later: 8 subscriptions, zero integration, and AI that knows nothing about your business." },
-        { title: "Vendor lock-in by default", description: "Your prompts, workflows, and business logic live inside platforms you don\u2019t own. Switch providers and you start from scratch. Your AI doesn\u2019t learn \u2014 it resets." },
-        { title: "No compounding value", description: "Disconnected tools can\u2019t share context. Every AI interaction starts from zero. You\u2019re paying for intelligence that forgets everything between sessions." },
-        { title: "Consultants build, then leave", description: "Traditional consultancies deliver a PDF and walk away. Or worse \u2014 build something only they can maintain, creating permanent dependency. Your team never learns to operate it." },
-        { title: "Expensive pilots that don\u2019t scale", description: "You pay \u00A55M for a 3-month PoC that proves AI \u201Cworks\u201D in a sandbox. Then it sits there. No one knows how to expand it, and the consulting firm quotes another \u00A55M to try." },
-        { title: "Data stays siloed", description: "Sales data in HubSpot, accounting in freee, communication in Chatwork, files on Google Drive. AI can only be as smart as the data it can access \u2014 and right now it can\u2019t see across systems." },
+        { title: "You\u2019re the bottleneck", description: "Every decision runs through you. If you\u2019re not in the room, nothing moves. Your business can\u2019t grow past what you can personally manage." },
+        { title: "Your AI experiments went nowhere", description: "You tried ChatGPT. Your team played with it for a week. Nothing stuck. No processes changed. You\u2019re back to doing everything manually." },
+        { title: "Your tools don\u2019t talk to each other", description: "You\u2019re paying for 5+ tools. None of them connect. Your team copies data between tabs. Information lives in people\u2019s heads, not in systems." },
       ],
     },
     stack: {
@@ -510,7 +530,8 @@ const en = {
     },
     guarantee: {
       title: "The Ownership Guarantee",
-      description: "Complete the full 6-month program. If you can\u2019t independently create and manage AI agents by the end, we\u2019ll keep going until you can \u2014 at zero additional cost.",
+      headline: "If your team can\u2019t create and manage AI agents by month 6, we keep working with you \u2014 free \u2014 until they can.",
+      description: "No hedging. No fine print. Complete the 6-month program. If your team isn\u2019t independently building and managing AI agents by the end, we continue at zero cost until they are.",
       cohortNote: "Group cohort: join the next cohort free until you\u2019re there.",
       corporateNote: "Corporate: we continue working with your team at no charge.",
       meetFirst: "Meet first, then decide. Save your spot \u2014 no commitment until after your meeting with Lewis.",

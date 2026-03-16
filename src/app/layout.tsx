@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
-import { Inter, Noto_Sans_JP } from "next/font/google";
+import { Inter, Noto_Sans_JP, DM_Sans, Shippori_Mincho } from "next/font/google";
 import "./globals.css";
 import { ClerkClientProvider } from "@/components/providers/clerk-provider";
 import { ConvexClientProvider } from "@/components/providers/convex-provider";
 import { Toaster } from "@/components/ui/sonner";
 
-const inter = Inter({ subsets: ["latin"] });
-const notoSansJP = Noto_Sans_JP({ subsets: ["latin"], weight: ["300", "400", "500", "700"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const notoSansJP = Noto_Sans_JP({ subsets: ["latin"], weight: ["300", "400", "500", "700"], variable: "--font-noto-sans-jp" });
+const dmSans = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-dm-sans" });
+const shipporiMincho = Shippori_Mincho({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-shippori-mincho" });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://aios.mottodigital.jp"),
-  title: "AIOS — AI Operating System for Business | MOTTO Digital",
+  title: "AIOS — Build an AI Team That Actually Works | MOTTO Digital",
   description:
-    "Build an AI Operating System for your business. Connected to your data, owned by you, locked into nobody. 6-month hands-on program by MOTTO Digital in Tokyo.",
+    "Stop being the bottleneck. 6-month AI build program from ¥30,000/month — we build your AI operating system with you and train your team to run it. You own everything.",
   keywords: [
     "AI operating system",
     "AI consulting Japan",
@@ -28,9 +30,9 @@ export const metadata: Metadata = {
     canonical: "https://aios.mottodigital.jp",
   },
   openGraph: {
-    title: "AIOS — AI Operating System for Business",
+    title: "AIOS — Build an AI Team That Actually Works",
     description:
-      "Connected to your data. Owned by you. Locked into nobody. 6-month hands-on AI infrastructure program by MOTTO Digital.",
+      "Stop being the bottleneck. 6-month AI build program — we build your AI operating system with you and train your team to run it. You own everything.",
     url: "https://aios.mottodigital.jp",
     type: "website",
     locale: "en_US",
@@ -39,9 +41,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AIOS — AI Operating System for Business",
+    title: "AIOS — Build an AI Team That Actually Works",
     description:
-      "Build an AI Operating System for your business. Connected to your data, owned by you, locked into nobody.",
+      "Stop being the bottleneck. 6-month AI build program — we build your AI operating system with you and train your team to run it. You own everything.",
   },
   robots: {
     index: true,
@@ -55,7 +57,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className={`${inter.variable} ${notoSansJP.variable} ${dmSans.variable} ${shipporiMincho.variable}`}>
       <head>
         <script
           type="application/ld+json"
@@ -65,7 +67,7 @@ export default function RootLayout({
               "@type": "ProfessionalService",
               name: "MOTTO Digital",
               description:
-                "AI Operating System development for Japanese SMBs. 6-month hands-on program to build, deploy, and own your AI infrastructure.",
+                "Build an AI team that actually works. 6-month hands-on program for Japanese SMBs — we build your AI operating system with you and train your team to run it.",
               url: "https://aios.mottodigital.jp",
               founder: {
                 "@type": "Person",
@@ -92,7 +94,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.className} ${notoSansJP.className} antialiased`}>
+      <body className={`${inter.className} ${notoSansJP.className} antialiased font-sans`}>
         <ClerkClientProvider>
           <ConvexClientProvider>
             {children}

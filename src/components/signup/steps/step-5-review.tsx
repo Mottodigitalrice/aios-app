@@ -113,7 +113,7 @@ export function Step5Review({
           type="button"
           variant="outline"
           onClick={onBack}
-          className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 gap-2"
+          className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 gap-2 min-h-[44px]"
         >
           <ArrowLeft className="size-4" />
           {t.common.back}
@@ -122,7 +122,7 @@ export function Step5Review({
           type="button"
           onClick={onSubmit}
           disabled={isLoading}
-          className="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 bg-indigo-600 hover:bg-indigo-500 hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 text-white gap-2 shadow-[0_0_20px_oklch(0.65_0.18_260/30%)] disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px]"
         >
           {isLoading ? (
             <>
@@ -136,6 +136,33 @@ export function Step5Review({
             </>
           )}
         </Button>
+      </div>
+
+      {/* What happens next */}
+      <div className="mt-8 rounded-xl border border-zinc-800/50 bg-zinc-900/30 p-5">
+        <h4 className="text-sm font-semibold text-zinc-300 mb-3">
+          {s.whatHappensNextTitle || "What happens next"}
+        </h4>
+        <ol className="space-y-2 text-sm text-zinc-400">
+          <li className="flex items-start gap-2">
+            <span className="text-indigo-400 font-semibold shrink-0">1.</span>
+            <span>{s.whatHappensNext1 || "Lewis reviews your submission within 24 hours"}</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-indigo-400 font-semibold shrink-0">2.</span>
+            <span>{s.whatHappensNext2 || "You'll get a personal email"}</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-indigo-400 font-semibold shrink-0">3.</span>
+            <span>{s.whatHappensNext3 || "Book a free call to discuss"}</span>
+          </li>
+        </ol>
+        <div className="mt-4 pt-3 border-t border-zinc-800/30 flex items-center gap-2">
+          <ShieldCheck className="size-4 text-emerald-400 shrink-0" />
+          <p className="text-xs text-emerald-300/80">
+            {s.guaranteeReinforcement || "Backed by our Ownership Guarantee"}
+          </p>
+        </div>
       </div>
     </div>
   );

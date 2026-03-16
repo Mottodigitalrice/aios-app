@@ -56,7 +56,7 @@ export function StepLayout({
             type="button"
             variant="outline"
             onClick={onBack}
-            className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 gap-2"
+            className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 gap-2 min-h-[44px]"
           >
             <ArrowLeft className="size-4" />
             {t.common.back}
@@ -66,7 +66,7 @@ export function StepLayout({
           type="button"
           onClick={onNext}
           disabled={!canContinue || isLoading}
-          className="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 bg-indigo-600 hover:bg-indigo-500 hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 text-white gap-2 shadow-[0_0_20px_oklch(0.65_0.18_260/30%)] disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px]"
         >
           {isLoading ? (
             <>

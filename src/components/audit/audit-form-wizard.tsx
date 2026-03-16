@@ -327,14 +327,12 @@ function AuditFormWizardInner() {
         </section>
       )}
 
-      {/* Progress bar — shown from step 2 onwards */}
-      {currentStep > 0 && (
-        <div className="pt-24 sm:pt-28 pb-4 px-6">
-          <div className="mx-auto max-w-xl">
-            <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
-          </div>
+      {/* Progress bar — shown on all steps (below hero on step 0, top on later steps) */}
+      <div className={currentStep === 0 ? "pb-4 px-6" : "pt-24 sm:pt-28 pb-4 px-6"}>
+        <div className="mx-auto max-w-xl">
+          <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
         </div>
-      )}
+      </div>
 
       {/* Step content + sidebar */}
       <section

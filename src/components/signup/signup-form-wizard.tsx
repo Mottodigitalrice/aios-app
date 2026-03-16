@@ -327,9 +327,9 @@ function SignupFormWizardInner() {
                 {t.badge}
               </Badge>
             </div>
-            <h1 className="animate-fade-in-up animation-delay-100 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.1]">
+            <h1 className="animate-fade-in-up animation-delay-100 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.1] text-zinc-100">
               {t.title}{" "}
-              <span className="gradient-text">{t.titleHighlight}</span>
+              <span className="text-indigo-400">{t.titleHighlight}</span>
             </h1>
             <p className="animate-fade-in-up animation-delay-200 mt-4 text-lg text-zinc-400 max-w-xl mx-auto leading-relaxed">
               {t.subtitle}
@@ -352,17 +352,15 @@ function SignupFormWizardInner() {
         </section>
       )}
 
-      {/* Progress bar -- shown from step 2 onwards */}
-      {currentStep > 0 && (
-        <div className="pt-24 sm:pt-28 pb-4 px-6">
-          <div className="mx-auto max-w-xl">
-            <SignupProgressBar
-              currentStep={currentStep}
-              totalSteps={totalSteps}
-            />
-          </div>
+      {/* Progress bar -- shown on all steps */}
+      <div className={currentStep === 0 ? "pb-4 px-6" : "pt-24 sm:pt-28 pb-4 px-6"}>
+        <div className="mx-auto max-w-xl">
+          <SignupProgressBar
+            currentStep={currentStep}
+            totalSteps={totalSteps}
+          />
         </div>
-      )}
+      </div>
 
       {/* Step content + sidebar */}
       <section

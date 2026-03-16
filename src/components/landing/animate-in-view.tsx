@@ -23,6 +23,7 @@ interface AnimateInViewProps {
   className?: string;
   delay?: number;
   as?: "div" | "section";
+  style?: React.CSSProperties;
 }
 
 export function AnimateInView({
@@ -30,6 +31,7 @@ export function AnimateInView({
   className = "",
   delay = 0,
   as: Tag = "div",
+  style: externalStyle,
 }: AnimateInViewProps) {
   const [ref, isInView] = useInView<HTMLDivElement>({ threshold: 0.05, rootMargin: "0px 0px 200px 0px" });
   const prefersReduced = usePrefersReducedMotion();
@@ -47,8 +49,9 @@ export function AnimateInView({
         transform: animated ? "translateY(0)" : "translateY(12px)",
         transition: prefersReduced
           ? "none"
-          : `opacity 0.5s ease-out ${delay}ms, transform 0.5s ease-out ${delay}ms`,
+          : `opacity 0.35s ease-out ${delay}ms, transform 0.35s ease-out ${delay}ms`,
         willChange: prefersReduced ? "auto" : "opacity, transform",
+        ...externalStyle,
       }}
     >
       {children}

@@ -108,6 +108,11 @@ const signupDict = {
       referralLabel: "Heard about us",
       guarantee:
         "Backed by the Ownership Guarantee \u2014 if your team can\u2019t manage AI agents by month 6, we keep going free.",
+      whatHappensNextTitle: "What happens next",
+      whatHappensNext1: "Lewis reviews your submission within 24 hours",
+      whatHappensNext2: "You'll get a personal email to discuss",
+      whatHappensNext3: "Book a free call — no pressure, no obligation",
+      guaranteeReinforcement: "Backed by our Ownership Guarantee",
     },
   },
   success: {
