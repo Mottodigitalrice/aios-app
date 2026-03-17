@@ -28,7 +28,7 @@ export default function HeroSection({ t, locale }: SectionProps) {
       style={{ backgroundColor: "var(--lp-bg-primary)" }}
     >
       <div className="mx-auto max-w-6xl px-6">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className={`grid lg:grid-cols-2 gap-12 items-center ${locale === "ja" ? "lg:grid-cols-[1.15fr_0.85fr]" : ""}`}>
           {/* Left: Text content */}
           <div className="text-center lg:text-left">
             <div className="animate-fade-in-up">
@@ -39,9 +39,9 @@ export default function HeroSection({ t, locale }: SectionProps) {
             <h1
               className={`animate-fade-in-up animation-delay-100 font-bold tracking-tight leading-[1.1] ${headingFont}`}
               style={{
-                fontSize: "var(--text-display)",
+                fontSize: locale === "ja" ? "clamp(1.75rem, 4vw, 3.25rem)" : "var(--text-display)",
                 color: "var(--lp-text-heading)",
-                ...(locale === "ja" ? { wordBreak: "keep-all" as const, lineHeight: "1.3" } : {}),
+                ...(locale === "ja" ? { overflowWrap: "break-word" as const, wordBreak: "break-word" as const, lineHeight: "1.3" } : {}),
               }}
             >
               {renderTitle(t.hero.title)}{" "}
@@ -70,11 +70,11 @@ export default function HeroSection({ t, locale }: SectionProps) {
               </div>
               <div className="flex flex-col items-center sm:items-start w-full sm:w-auto">
                 <Link href="/audit" className="w-full sm:w-auto">
-                  <Button size="lg" variant="outline" className="border-[#D1D1D6] text-[#1D1D1F] hover:bg-[#F5F5F7] hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 gap-2 rounded-full px-8 py-3.5 w-full sm:w-auto">
+                  <Button size="lg" className="bg-[#B8860B] hover:bg-[#A0750A] hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 text-white gap-2 rounded-full px-8 py-3.5 w-full sm:w-auto">
                     {t.hero.ctaSecondary}
                   </Button>
                 </Link>
-                <span className="text-xs mt-1.5" style={{ color: "var(--lp-text-muted)" }}>{t.hero.ctaSecondaryTime}</span>
+                <span className="text-xs mt-1.5 text-center sm:text-left max-w-[220px]" style={{ color: "var(--lp-text-muted)" }}>{t.hero.ctaSecondarySubtitle}</span>
               </div>
             </div>
 

@@ -13,7 +13,7 @@ export default function PricingSection({ t, locale }: SectionProps) {
   return (
     <section
       id="pricing"
-      className="border-t border-zinc-800/50"
+      className="border-t border-[#E8E8ED]"
       style={{ backgroundColor: "var(--lp-bg-subtle)", paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}
     >
       <div className="mx-auto max-w-6xl px-6">

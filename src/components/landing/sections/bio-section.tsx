@@ -1,9 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { AnimateInView } from "@/components/landing/animate-in-view";
 import type { SectionProps } from "./types";
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export default function BioSection({ t, locale }: SectionProps) {
   const headingFont = locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]";
@@ -32,12 +33,13 @@ export default function BioSection({ t, locale }: SectionProps) {
           >
             {/* Top: Photo + name/title */}
             <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start mb-8">
-              <Image
-                src="/lewis-rice.jpg"
+              <img
+                src={`${basePath}/lewis-rice.jpg`}
                 alt="Lewis Rice"
                 width={120}
                 height={120}
                 className="rounded-2xl border border-[#E8E8ED] object-cover shrink-0"
+                style={{ width: 120, height: 120 }}
               />
               <div className="text-center sm:text-left">
                 <h3 className={`text-2xl font-semibold mb-1 ${headingFont}`} style={{ color: "var(--lp-text-heading)" }}>

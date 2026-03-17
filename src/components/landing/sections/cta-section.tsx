@@ -12,7 +12,7 @@ export default function CtaSection({ t, locale }: SectionProps) {
   return (
     <AnimateInView
       as="section"
-      className="border-t border-zinc-800/50"
+      className="border-t border-[#E8E8ED]"
       style={{ backgroundColor: "var(--lp-bg-elevated)", paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}
     >
       <div className="mx-auto max-w-3xl px-6 text-center" id="audit">
@@ -61,11 +61,11 @@ export default function CtaSection({ t, locale }: SectionProps) {
           </div>
           <div className="flex flex-col items-center">
             <Link href="/audit">
-              <Button size="lg" variant="outline" className="border-[#D1D1D6] text-[#1D1D1F] hover:bg-[#F5F5F7] hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 gap-2 rounded-full px-8">
+              <Button size="lg" className="bg-[#B8860B] hover:bg-[#A0750A] hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 text-white gap-2 rounded-full px-8">
                 {t.cta.titleSecondary}
               </Button>
             </Link>
-            <span className="text-xs mt-1.5" style={{ color: "var(--lp-text-muted)" }}>{t.hero.ctaSecondaryTime}</span>
+            <span className="text-xs mt-1.5" style={{ color: "var(--lp-text-muted)" }}>{t.hero.ctaSecondarySubtitle}</span>
           </div>
         </div>
       </div>

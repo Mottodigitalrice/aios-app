@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { useInView } from "@/hooks/use-in-view";
+
+/* eslint-disable @next/next/no-img-element */
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 /* ── Bilingual content ── */
 interface PyramidLayerText {
@@ -104,7 +106,7 @@ const envOptions = [
   {
     label: "VPS",
     icon: (
-      <svg className="size-4 text-violet-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg className="size-4 text-violet-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <rect x="2" y="2" width="20" height="8" rx="2" />
         <rect x="2" y="14" width="20" height="8" rx="2" />
         <circle cx="6" cy="6" r="1" fill="currentColor" />
@@ -115,7 +117,7 @@ const envOptions = [
   {
     label: "Local",
     icon: (
-      <svg className="size-4 text-violet-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg className="size-4 text-violet-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <rect x="3" y="4" width="18" height="12" rx="2" />
         <path d="M7 20h10" />
         <path d="M9 16v4" />
@@ -126,7 +128,7 @@ const envOptions = [
   {
     label: "On-Prem",
     icon: (
-      <svg className="size-4 text-violet-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg className="size-4 text-violet-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M4 21V7l8-4 8 4v14" />
         <path d="M8 10h8" />
         <path d="M8 14h8" />
@@ -158,7 +160,7 @@ const layerConfigs: LayerConfig[] = [
     bg: "bg-blue-500/[0.04]",
     bgHover: "bg-blue-500/[0.08]",
     ring: "ring-blue-500/20",
-    labelColor: "text-blue-400",
+    labelColor: "text-blue-600",
     numBg: "bg-blue-500/10 border-blue-500/20",
   },
   {
@@ -166,7 +168,7 @@ const layerConfigs: LayerConfig[] = [
     bg: "bg-emerald-500/[0.04]",
     bgHover: "bg-emerald-500/[0.08]",
     ring: "ring-emerald-500/20",
-    labelColor: "text-emerald-400",
+    labelColor: "text-emerald-600",
     numBg: "bg-emerald-500/10 border-emerald-500/20",
   },
   {
@@ -174,7 +176,7 @@ const layerConfigs: LayerConfig[] = [
     bg: "bg-violet-500/[0.04]",
     bgHover: "bg-violet-500/[0.08]",
     ring: "ring-violet-500/20",
-    labelColor: "text-violet-400",
+    labelColor: "text-violet-600",
     numBg: "bg-violet-500/10 border-violet-500/20",
   },
   {
@@ -182,7 +184,7 @@ const layerConfigs: LayerConfig[] = [
     bg: "bg-amber-500/[0.04]",
     bgHover: "bg-amber-500/[0.08]",
     ring: "ring-amber-500/20",
-    labelColor: "text-amber-400",
+    labelColor: "text-amber-600",
     numBg: "bg-amber-500/10 border-amber-500/20",
   },
 ];
@@ -281,7 +283,7 @@ export function AIOSPyramid({
             {/* Label */}
             <div className="absolute -left-5 top-1/2 -translate-y-1/2">
               <span
-                className="block text-[10px] font-semibold text-indigo-400/70 uppercase tracking-wider whitespace-nowrap"
+                className="block text-[10px] font-semibold text-indigo-600/70 uppercase tracking-wider whitespace-nowrap"
                 style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
               >
                 {t.youOwn}
@@ -293,7 +295,7 @@ export function AIOSPyramid({
             <div className="h-full border-l-2 border-t-2 border-b-2 border-amber-500/20 rounded-l-md" />
             <div className="absolute -left-5 top-1/2 -translate-y-1/2">
               <span
-                className="block text-[10px] font-semibold text-amber-400/60 uppercase tracking-wider whitespace-nowrap"
+                className="block text-[10px] font-semibold text-amber-600/60 uppercase tracking-wider whitespace-nowrap"
                 style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
               >
                 &#8635; {t.swappable}
@@ -315,7 +317,7 @@ export function AIOSPyramid({
             <ModelContent visible={step >= 4} t={t} />
           </PyramidLayer>
 
-          <Connector fromColor="rgba(245,158,11,0.4)" toColor="rgba(139,92,246,0.4)" visible={step >= 4} />
+          <Connector fromColor="rgba(245,158,11,0.6)" toColor="rgba(139,92,246,0.6)" visible={step >= 4} />
 
           {/* Layer 3 — Environment */}
           <PyramidLayer
@@ -328,7 +330,7 @@ export function AIOSPyramid({
             <EnvironmentContent visible={step >= 3} />
           </PyramidLayer>
 
-          <Connector fromColor="rgba(139,92,246,0.4)" toColor="rgba(16,185,129,0.4)" visible={step >= 3} />
+          <Connector fromColor="rgba(139,92,246,0.6)" toColor="rgba(16,185,129,0.6)" visible={step >= 3} />
 
           {/* Layer 2 — Agent Architecture */}
           <PyramidLayer
@@ -341,7 +343,7 @@ export function AIOSPyramid({
             <AgentContent visible={step >= 2} t={t} />
           </PyramidLayer>
 
-          <Connector fromColor="rgba(16,185,129,0.4)" toColor="rgba(59,130,246,0.4)" visible={step >= 2} />
+          <Connector fromColor="rgba(16,185,129,0.6)" toColor="rgba(59,130,246,0.6)" visible={step >= 2} />
 
           {/* Layer 1 — Data Layer (widest) */}
           <PyramidLayer
@@ -365,16 +367,16 @@ export function AIOSPyramid({
           }}
         >
           <div className="inline-flex items-center gap-2.5 rounded-full border border-indigo-500/20 bg-indigo-500/[0.05] px-4 py-2">
-            <svg className="size-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg className="size-4 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
-            <span className="text-xs text-indigo-300 font-medium">
+            <span className="text-xs text-indigo-600 font-medium">
               {t.youOwn} (L1&ndash;L3)
             </span>
           </div>
           <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/[0.05] px-4 py-2">
-            <span className="text-sm text-amber-400">&#8635;</span>
-            <span className="text-xs text-amber-300 font-medium">
+            <span className="text-sm text-amber-600">&#8635;</span>
+            <span className="text-xs text-amber-600 font-medium">
               {t.layers[3].label} &mdash; {t.swappable}
             </span>
           </div>
@@ -469,7 +471,7 @@ function PyramidLayer({
               </div>
             </div>
             {layerIndex === 3 && (
-              <span className="text-[10px] font-medium text-amber-400/70 border border-amber-500/20 bg-amber-500/[0.05] rounded-full px-2 py-0.5 shrink-0 ml-2">
+              <span className="text-[10px] font-medium text-amber-600/70 border border-amber-500/20 bg-amber-500/[0.05] rounded-full px-2 py-0.5 shrink-0 ml-2">
                 &#8635; {t.swappable}
               </span>
             )}
@@ -492,25 +494,25 @@ function DataContent({ visible, t }: { visible: boolean; t: PyramidContent }) {
       {tools.map((tool, i) => (
         <div
           key={tool.name}
-          className="flex items-center gap-1.5 rounded-lg border border-zinc-700/30 bg-zinc-800/50 px-2 py-1.5 transition-all duration-300 hover:border-blue-500/30 hover:bg-blue-500/[0.04]"
+          className="flex items-center gap-1.5 rounded-lg border border-[#E8E8ED] bg-white px-2 py-1.5 transition-all duration-300 hover:border-blue-500/30 hover:bg-blue-500/[0.04]"
           style={{
             opacity: visible ? 1 : 0,
             transform: visible ? "none" : "translateY(6px)",
             transition: `all 0.4s ease-out ${i * 30}ms`,
           }}
         >
-          <Image
-            src={tool.logo}
+          <img
+            src={`${basePath}${tool.logo}`}
             alt={tool.name}
             width={13}
             height={13}
-            className="opacity-60 brightness-0 invert"
+            className="opacity-70"
           />
-          <span className="text-[10px] text-zinc-400 font-medium">{tool.name}</span>
+          <span className="text-[10px] font-medium" style={{ color: "var(--lp-text-body)" }}>{tool.name}</span>
         </div>
       ))}
-      <div className="flex items-center rounded-lg border border-dashed border-zinc-700/30 px-2 py-1.5">
-        <span className="text-[10px] text-zinc-600">{t.plusYourTools}</span>
+      <div className="flex items-center rounded-lg border border-dashed border-[#E8E8ED] px-2 py-1.5">
+        <span className="text-[10px] text-zinc-400">{t.plusYourTools}</span>
       </div>
     </div>
   );
@@ -523,7 +525,7 @@ function AgentContent({ visible, t }: { visible: boolean; t: PyramidContent }) {
       {agents.map((agent, i) => (
         <div
           key={agent}
-          className="flex items-center gap-1.5 rounded-lg border border-emerald-500/20 bg-zinc-800/50 px-2.5 py-1.5 transition-all duration-300 hover:border-emerald-500/35 hover:bg-emerald-500/[0.04]"
+          className="flex items-center gap-1.5 rounded-lg border border-emerald-500/20 bg-white px-2.5 py-1.5 transition-all duration-300 hover:border-emerald-500/35 hover:bg-emerald-500/[0.04]"
           style={{
             opacity: visible ? 1 : 0,
             transform: visible ? "none" : "translateY(6px)",
@@ -531,11 +533,11 @@ function AgentContent({ visible, t }: { visible: boolean; t: PyramidContent }) {
           }}
         >
           <div className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-[10px] text-zinc-400 font-medium">{agent}</span>
+          <span className="text-[10px] font-medium" style={{ color: "var(--lp-text-body)" }}>{agent}</span>
         </div>
       ))}
       <div className="flex items-center rounded-lg border border-dashed border-emerald-500/15 bg-emerald-500/[0.02] px-2.5 py-1.5">
-        <span className="text-[10px] text-emerald-400/60 font-medium">{t.toolsMCP}</span>
+        <span className="text-[10px] text-emerald-600/60 font-medium">{t.toolsMCP}</span>
       </div>
     </div>
   );
@@ -548,7 +550,7 @@ function EnvironmentContent({ visible }: { visible: boolean }) {
       {envOptions.map((env, i) => (
         <div
           key={env.label}
-          className="flex items-center gap-1.5 rounded-lg border border-violet-500/20 bg-zinc-800/50 px-2.5 py-1.5 transition-all duration-300 hover:border-violet-500/35 hover:bg-violet-500/[0.04]"
+          className="flex items-center gap-1.5 rounded-lg border border-violet-500/20 bg-white px-2.5 py-1.5 transition-all duration-300 hover:border-violet-500/35 hover:bg-violet-500/[0.04]"
           style={{
             opacity: visible ? 1 : 0,
             transform: visible ? "none" : "translateY(6px)",
@@ -556,7 +558,7 @@ function EnvironmentContent({ visible }: { visible: boolean }) {
           }}
         >
           {env.icon}
-          <span className="text-[10px] text-zinc-400 font-medium">{env.label}</span>
+          <span className="text-[10px] font-medium" style={{ color: "var(--lp-text-body)" }}>{env.label}</span>
         </div>
       ))}
     </div>
@@ -577,13 +579,13 @@ function ModelContent({ visible, t }: { visible: boolean; t: PyramidContent }) {
             transition: `all 0.4s ease-out ${i * 70}ms`,
           }}
         >
-          <div className="size-10 sm:size-12 rounded-xl border border-amber-500/25 bg-zinc-900/80 flex items-center justify-center transition-all duration-200 hover:border-amber-500/40 hover:bg-amber-500/[0.04]">
-            <Image
-              src={model.logo}
+          <div className="size-10 sm:size-12 rounded-xl border border-amber-500/25 bg-white/80 flex items-center justify-center transition-all duration-200 hover:border-amber-500/40 hover:bg-amber-500/[0.04]">
+            <img
+              src={`${basePath}${model.logo}`}
               alt={model.name}
               width={18}
               height={18}
-              className="opacity-70 brightness-0 invert"
+              className="opacity-80"
             />
           </div>
           <span className="text-[9px] sm:text-[10px] text-zinc-500 font-medium">{model.name}</span>
@@ -597,10 +599,10 @@ function ModelContent({ visible, t }: { visible: boolean; t: PyramidContent }) {
           transition: "all 0.4s ease-out 210ms",
         }}
       >
-        <div className="size-10 sm:size-12 rounded-xl border border-dashed border-amber-500/15 bg-zinc-900/30 flex items-center justify-center">
-          <span className="text-zinc-600 text-base">+</span>
+        <div className="size-10 sm:size-12 rounded-xl border border-dashed border-amber-500/15 bg-white/50 flex items-center justify-center">
+          <span className="text-zinc-400 text-base">+</span>
         </div>
-        <span className="text-[9px] sm:text-[10px] text-zinc-600 font-medium">{t.anyLLM}</span>
+        <span className="text-[9px] sm:text-[10px] text-zinc-400 font-medium">{t.anyLLM}</span>
       </div>
     </div>
   );

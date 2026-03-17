@@ -63,7 +63,7 @@ const palette: Record<AgentColor, {
   },
   zinc: {
     bg: "bg-zinc-500/[0.06]", border: "border-zinc-700/50", text: "text-zinc-400",
-    dot: "bg-zinc-500", glow: "shadow-zinc-500/10", line: "from-zinc-600/30 to-zinc-600/10",
+    dot: "bg-zinc-500", glow: "shadow-zinc-500/10", line: "from-zinc-400/40 to-zinc-400/15",
   },
 };
 
@@ -229,7 +229,7 @@ export function HeroOrgVisual({ locale = "en", mobile = false }: { locale?: "en"
               <div className="size-2 rounded-full bg-zinc-600" />
             </div>
             <div className="flex-1 flex justify-center">
-              <span className="text-[10px] text-zinc-500 font-medium tracking-wide">
+              <span className="text-[10px] text-zinc-300 font-semibold tracking-wider uppercase">
                 {locale === "ja" ? "AIOSエージェント構成" : "AIOS Agent Structure"}
               </span>
             </div>
@@ -287,7 +287,7 @@ export function HeroOrgVisual({ locale = "en", mobile = false }: { locale?: "en"
             <div className="size-2 rounded-full bg-zinc-600" />
           </div>
           <div className="flex-1 flex justify-center">
-            <span className="text-[10px] text-zinc-500 font-medium tracking-wide">
+            <span className="text-[10px] text-zinc-300 font-semibold tracking-wider uppercase">
               {locale === "ja" ? "AIOSエージェント構成" : "AIOS Agent Structure"}
             </span>
           </div>
@@ -380,12 +380,12 @@ export function HeroOrgVisual({ locale = "en", mobile = false }: { locale?: "en"
                 <div className="w-px h-full bg-gradient-to-b from-indigo-500/40 to-indigo-500/10" />
               </div>
               {/* Horizontal fan line */}
-              <div className="absolute top-2/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-600/40 to-transparent" />
+              <div className="absolute top-2/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-400/50 to-transparent" />
               {/* 5 vertical drops */}
               {[0, 1, 2, 3, 4].map((i) => (
                 <div
                   key={i}
-                  className="absolute w-px bg-zinc-600/30"
+                  className="absolute w-px bg-zinc-400/40"
                   style={{
                     left: `${10 + i * 20}%`,
                     top: "66%",
@@ -420,8 +420,8 @@ export function HeroOrgVisual({ locale = "en", mobile = false }: { locale?: "en"
           {/* C-suite → Vendors connection */}
           <div className="flex justify-center" style={{ height: 16 }}>
             <div className="relative w-[70%] h-full">
-              <div className="absolute left-1/2 top-0 w-px h-2/3 -translate-x-px bg-gradient-to-b from-zinc-600/30 to-zinc-600/10" />
-              <div className="absolute top-2/3 left-[5%] right-[5%] h-px bg-gradient-to-r from-transparent via-zinc-700/30 to-transparent" />
+              <div className="absolute left-1/2 top-0 w-px h-2/3 -translate-x-px bg-gradient-to-b from-zinc-400/40 to-zinc-400/15" />
+              <div className="absolute top-2/3 left-[5%] right-[5%] h-px bg-gradient-to-r from-transparent via-zinc-500/40 to-transparent" />
             </div>
           </div>
 

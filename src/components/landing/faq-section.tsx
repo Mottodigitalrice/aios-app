@@ -135,7 +135,7 @@ export function FAQSection({ locale = "en" }: FAQSectionProps) {
   });
 
   return (
-    <section className="border-t border-zinc-800/50" style={{ paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}>
+    <section className="border-t border-[#E8E8ED]" style={{ paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: faqSchema }}
@@ -143,10 +143,10 @@ export function FAQSection({ locale = "en" }: FAQSectionProps) {
       <div className="mx-auto max-w-3xl px-6">
         {/* Header */}
         <div className="text-center mb-12">
-          <span className="inline-block mb-4 px-3 py-1 rounded-full border border-zinc-700 text-zinc-400 bg-zinc-800/50 text-xs font-medium">
+          <span className="inline-block mb-4 px-3 py-1 rounded-full border border-[#B8860B]/20 text-[#B8860B] bg-[#B8860B]/5 text-xs font-medium">
             {labels.badge}
           </span>
-          <h2 className={`text-3xl sm:text-4xl font-bold tracking-tight ${headingFont}`} style={{ ...(locale === "ja" ? { wordBreak: "keep-all" as const } : {}) }}>
+          <h2 className={`text-3xl sm:text-4xl font-bold tracking-tight ${headingFont}`} style={{ color: "var(--lp-text-heading)", ...(locale === "ja" ? { wordBreak: "keep-all" as const } : {}) }}>
             {labels.title}
           </h2>
           <p className="mt-3 text-zinc-500 text-sm">{labels.subtitle}</p>
@@ -160,15 +160,15 @@ export function FAQSection({ locale = "en" }: FAQSectionProps) {
             return (
               <div
                 key={faq.question}
-                className="rounded-xl border border-zinc-800/50 bg-zinc-900/50 overflow-hidden"
+                className="rounded-xl border border-[#E8E8ED] bg-white overflow-hidden"
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : idx)}
                   aria-expanded={isOpen}
-                  className="w-full flex items-center gap-3 p-5 min-h-[44px] text-left hover:bg-zinc-800/30 transition-colors"
+                  className="w-full flex items-center gap-3 p-5 min-h-[44px] text-left hover:bg-zinc-100 transition-colors"
                 >
                   <div className="flex-1 min-w-0">
-                    <span className="text-sm font-semibold text-zinc-200 block pr-2">
+                    <span className="text-sm font-semibold block pr-2" style={{ color: "var(--lp-text-heading)" }}>
                       {faq.question}
                     </span>
                   </div>
@@ -186,7 +186,7 @@ export function FAQSection({ locale = "en" }: FAQSectionProps) {
                 >
                   <div className="overflow-hidden">
                     <div className="px-5 pb-5">
-                      <p className="text-sm text-zinc-400 leading-relaxed" style={{ ...(locale === "ja" ? { lineHeight: "1.9" } : {}) }}>
+                      <p className="text-sm leading-relaxed" style={{ color: "var(--lp-text-body)", ...(locale === "ja" ? { lineHeight: "1.9" } : {}) }}>
                         {faq.answer}
                       </p>
                     </div>
@@ -198,12 +198,12 @@ export function FAQSection({ locale = "en" }: FAQSectionProps) {
         </div>
 
         {/* CTA at bottom of FAQ */}
-        <div className="mt-10 text-center rounded-xl border border-zinc-800/50 bg-zinc-900/50 p-6">
-          <p className="text-zinc-400 mb-4">{labels.ctaText}</p>
+        <div className="mt-10 text-center rounded-xl border border-[#E8E8ED] bg-white p-6">
+          <p className="mb-4" style={{ color: "var(--lp-text-body)" }}>{labels.ctaText}</p>
           <Link href="/audit">
             <Button
               variant="outline"
-              className="border-indigo-500/30 text-indigo-300 hover:bg-indigo-500/10 hover:text-indigo-200 gap-2"
+              className="border-[#1D1D1F] text-[#1D1D1F] hover:bg-[#F5F5F7] gap-2"
             >
               {labels.ctaButton}
               <ArrowRight className="size-4" />

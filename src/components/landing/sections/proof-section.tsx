@@ -69,23 +69,23 @@ export default function ProofSection({ t, locale }: SectionProps) {
         {/* Agent Org Chart */}
         <AgentOrgChart locale={locale} />
 
-        {/* Founder reflection / Lewis quote */}
+        {/* Founder reflection — first-person statement */}
         <AnimateInView className="mt-10">
           <div
-            className="max-w-2xl mx-auto rounded-2xl p-8 border-l-4 border-[#B8860B]/40"
-            style={{ backgroundColor: "var(--lp-bg-elevated)" }}
+            className="max-w-2xl mx-auto rounded-2xl p-8"
+            style={{ backgroundColor: "var(--lp-bg-elevated)", border: "1px solid var(--lp-border-visible)" }}
           >
+            <p className="text-sm font-semibold mb-3" style={{ color: "var(--lp-text-heading)" }}>
+              {t.caseStudy.testimonialAuthor}
+            </p>
             <p
-              className="text-base leading-relaxed italic"
+              className="text-base leading-relaxed"
               style={{
                 color: "var(--lp-text-body)",
-                ...(locale === "ja" ? { lineHeight: "1.9", fontStyle: "normal" } : {}),
+                ...(locale === "ja" ? { lineHeight: "1.9" } : {}),
               }}
             >
-              &ldquo;{t.caseStudy.testimonial}&rdquo;
-            </p>
-            <p className="mt-4 text-sm font-medium" style={{ color: "var(--lp-text-heading)" }}>
-              {t.caseStudy.testimonialAuthor}
+              {t.caseStudy.testimonial}
             </p>
           </div>
         </AnimateInView>

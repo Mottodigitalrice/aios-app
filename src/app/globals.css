@@ -131,7 +131,7 @@
   --lp-accent-subtle: rgba(184, 134, 11, 0.08);
   --lp-success: #1B7D5A;
   --lp-warning: #B8860B;
-  --lp-section-gap: clamp(5rem, 10vw, 8rem);
+  --lp-section-gap: clamp(3.5rem, 7vw, 5.5rem);
 
   /* ── Type Scale ── */
   --text-display: clamp(2.5rem, 5vw, 4rem);

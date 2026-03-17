@@ -33,8 +33,7 @@ export default function ValuePropsSection({ t, locale }: SectionProps) {
               ...(locale === "ja" ? { wordBreak: "keep-all" } : {}),
             }}
           >
-            {t.valueProps.title}{" "}
-            <span className="gradient-text">{t.valueProps.titleHighlight}</span>
+            {t.valueProps.title}{t.valueProps.titleHighlight ? <>{" "}<span className="gradient-text">{t.valueProps.titleHighlight}</span></> : null}
           </h2>
         </AnimateInView>
 
