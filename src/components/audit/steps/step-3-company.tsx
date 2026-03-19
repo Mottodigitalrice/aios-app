@@ -60,7 +60,7 @@ export function Step3Company({
         <div className="space-y-6">
           {/* Industry */}
           <div className="space-y-3">
-            <Label className="text-zinc-300">{step.industryLabel}</Label>
+            <Label className="text-[#6E6E73]">{step.industryLabel}</Label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {step.industryOptions.map((ind) => (
                 <SelectCard
@@ -75,7 +75,7 @@ export function Step3Company({
 
           {/* Revenue range (optional) */}
           <div className="space-y-3">
-            <Label className="text-zinc-300">
+            <Label className="text-[#6E6E73]">
               {step.revenueLabel}
             </Label>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -92,7 +92,7 @@ export function Step3Company({
 
           {/* Team composition */}
           <div className="space-y-3">
-            <Label className="text-zinc-300">{step.teamCompositionLabel}</Label>
+            <Label className="text-[#6E6E73]">{step.teamCompositionLabel}</Label>
             <div className="grid grid-cols-1 gap-2">
               {step.teamCompositionOptions.map((tc) => (
                 <SelectCard
@@ -107,7 +107,7 @@ export function Step3Company({
 
           {/* Optional company name */}
           <div className="space-y-2">
-            <Label htmlFor="company" className="text-zinc-300">
+            <Label htmlFor="company" className="text-[#6E6E73]">
               {step.companyOptionalLabel}
             </Label>
             <Input
@@ -115,7 +115,7 @@ export function Step3Company({
               value={formData.company}
               onChange={(e) => updateField("company", e.target.value)}
               placeholder={step.companyPlaceholder}
-              className="bg-zinc-950/50 border-zinc-700/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20 h-12 text-base"
+              className="bg-white border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus-visible:border-[#B8860B]/50 focus-visible:ring-[#B8860B]/20 h-12 text-base"
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   e.preventDefault();
@@ -143,8 +143,8 @@ export function Step3Company({
         <div className="space-y-6">
           {/* Company name (required) */}
           <div className="space-y-2">
-            <Label htmlFor="company" className="text-zinc-300">
-              {step.companyLabel} <span className="text-red-400">*</span>
+            <Label htmlFor="company" className="text-[#6E6E73]">
+              {step.companyLabel} <span className="text-red-600">*</span>
             </Label>
             <Input
               id="company"
@@ -154,21 +154,21 @@ export function Step3Company({
               placeholder={step.companyPlaceholder}
               aria-invalid={!!fieldErrors.company}
               aria-describedby={fieldErrors.company ? "company-error" : undefined}
-              className={`bg-zinc-950/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20 h-12 text-base ${
+              className={`bg-white text-[#1D1D1F] placeholder:text-[#86868B] focus-visible:border-[#B8860B]/50 focus-visible:ring-[#B8860B]/20 h-12 text-base ${
                 fieldErrors.company
-                  ? "border-red-500/70 focus-visible:border-red-500/70 focus-visible:ring-red-500/20"
-                  : "border-zinc-700/50"
+                  ? "border-red-500/50 focus-visible:border-red-500/50 focus-visible:ring-red-500/20"
+                  : "border-[#E8E8ED]"
               }`}
               autoFocus
             />
             {fieldErrors.company && (
-              <p id="company-error" role="alert" className="text-xs text-red-400 mt-1">{fieldErrors.company}</p>
+              <p id="company-error" role="alert" className="text-xs text-red-600 mt-1">{fieldErrors.company}</p>
             )}
           </div>
 
           {/* Company size */}
           <div className="space-y-3">
-            <Label className="text-zinc-300">{step.sizeLabel}</Label>
+            <Label className="text-[#6E6E73]">{step.sizeLabel}</Label>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {step.sizeOptions.map((size) => (
                 <SelectCard
@@ -183,7 +183,7 @@ export function Step3Company({
 
           {/* Department name */}
           <div className="space-y-2">
-            <Label htmlFor="departmentName" className="text-zinc-300">
+            <Label htmlFor="departmentName" className="text-[#6E6E73]">
               {step.departmentNameLabel}
             </Label>
             <Input
@@ -191,13 +191,13 @@ export function Step3Company({
               value={formData.departmentName}
               onChange={(e) => updateField("departmentName", e.target.value)}
               placeholder={step.departmentNamePlaceholder}
-              className="bg-zinc-950/50 border-zinc-700/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20 h-12 text-base"
+              className="bg-white border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus-visible:border-[#B8860B]/50 focus-visible:ring-[#B8860B]/20 h-12 text-base"
             />
           </div>
 
           {/* Department size */}
           <div className="space-y-3">
-            <Label className="text-zinc-300">{step.departmentSizeLabel}</Label>
+            <Label className="text-[#6E6E73]">{step.departmentSizeLabel}</Label>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
               {step.departmentSizeOptions.map((size) => (
                 <SelectCard
@@ -212,7 +212,7 @@ export function Step3Company({
 
           {/* Department function */}
           <div className="space-y-3">
-            <Label className="text-zinc-300">{step.departmentFunctionLabel}</Label>
+            <Label className="text-[#6E6E73]">{step.departmentFunctionLabel}</Label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {step.departmentFunctionOptions.map((fn) => (
                 <SelectCard
@@ -242,8 +242,8 @@ export function Step3Company({
       <div className="space-y-6">
         {/* Company name (required) */}
         <div className="space-y-2">
-          <Label htmlFor="company" className="text-zinc-300">
-            {step.companyLabel} <span className="text-red-400">*</span>
+          <Label htmlFor="company" className="text-[#6E6E73]">
+            {step.companyLabel} <span className="text-red-600">*</span>
           </Label>
           <Input
             id="company"
@@ -253,10 +253,10 @@ export function Step3Company({
             placeholder={step.companyPlaceholder}
             aria-invalid={!!fieldErrors.company}
             aria-describedby={fieldErrors.company ? "company-error" : undefined}
-            className={`bg-zinc-950/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20 h-12 text-base ${
+            className={`bg-white text-[#1D1D1F] placeholder:text-[#86868B] focus-visible:border-[#B8860B]/50 focus-visible:ring-[#B8860B]/20 h-12 text-base ${
               fieldErrors.company
-                ? "border-red-500/70 focus-visible:border-red-500/70 focus-visible:ring-red-500/20"
-                : "border-zinc-700/50"
+                ? "border-red-500/50 focus-visible:border-red-500/50 focus-visible:ring-red-500/20"
+                : "border-[#E8E8ED]"
             }`}
             autoFocus
             onKeyDown={(e) => {
@@ -267,13 +267,13 @@ export function Step3Company({
             }}
           />
           {fieldErrors.company && (
-            <p id="company-error" role="alert" className="text-xs text-red-400 mt-1">{fieldErrors.company}</p>
+            <p id="company-error" role="alert" className="text-xs text-red-600 mt-1">{fieldErrors.company}</p>
           )}
         </div>
 
         {/* Industry */}
         <div className="space-y-3">
-          <Label className="text-zinc-300">{step.industryLabel}</Label>
+          <Label className="text-[#6E6E73]">{step.industryLabel}</Label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {step.industryOptions.map((ind) => (
               <SelectCard
@@ -288,7 +288,7 @@ export function Step3Company({
 
         {/* Company size */}
         <div className="space-y-3">
-          <Label className="text-zinc-300">{step.sizeLabel}</Label>
+          <Label className="text-[#6E6E73]">{step.sizeLabel}</Label>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {step.sizeOptions.map((size) => (
               <SelectCard
@@ -303,7 +303,7 @@ export function Step3Company({
 
         {/* Revenue range (optional) */}
         <div className="space-y-3">
-          <Label className="text-zinc-300">
+          <Label className="text-[#6E6E73]">
             {step.revenueLabel}
           </Label>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">

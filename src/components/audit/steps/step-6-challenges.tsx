@@ -65,7 +65,7 @@ export function Step6Challenges({
         {/* Bottlenecks — company/department paths */}
         {!isIndividual && (
           <div className="space-y-3">
-            <Label className="text-zinc-300">{step.bottlenecksLabel}</Label>
+            <Label className="text-[#6E6E73]">{step.bottlenecksLabel}</Label>
             <MultiSelectChips
               options={[...step.bottlenecks]}
               selected={formData.bottlenecks}
@@ -77,7 +77,7 @@ export function Step6Challenges({
 
         {/* Repetitive hours per week — all paths */}
         <div className="space-y-2">
-          <Label htmlFor="repetitiveHours" className="text-zinc-300">
+          <Label htmlFor="repetitiveHours" className="text-[#6E6E73]">
             {repetitiveLabel}
           </Label>
           <Input
@@ -88,14 +88,14 @@ export function Step6Challenges({
             value={formData.repetitiveHoursPerWeek}
             onChange={(e) => updateField("repetitiveHoursPerWeek", e.target.value)}
             placeholder={step.repetitiveHoursPlaceholder}
-            className="bg-zinc-950/50 border-zinc-700/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20 h-12 text-base max-w-xs"
+            className="bg-white border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus-visible:border-[#B8860B]/50 focus-visible:ring-[#B8860B]/20 h-12 text-base max-w-xs"
           />
         </div>
 
         {/* Robot task — individual path */}
         {isIndividual && (
           <div className="space-y-2">
-            <Label htmlFor="robotTask" className="text-zinc-300">
+            <Label htmlFor="robotTask" className="text-[#6E6E73]">
               {step.robotTaskLabel}
             </Label>
             <textarea
@@ -104,7 +104,7 @@ export function Step6Challenges({
               onChange={(e) => updateField("robotTask", e.target.value)}
               placeholder={step.robotTaskPlaceholder}
               rows={3}
-              className="w-full rounded-lg bg-zinc-950/50 border border-zinc-700/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20 focus-visible:ring-1 focus-visible:outline-none px-3 py-2.5 text-base resize-none"
+              className="w-full rounded-lg bg-white border border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus-visible:border-[#B8860B]/50 focus-visible:ring-[#B8860B]/20 focus-visible:ring-1 focus-visible:outline-none px-3 py-2.5 text-base resize-none"
             />
           </div>
         )}
@@ -112,7 +112,7 @@ export function Step6Challenges({
         {/* Onboarding — company path */}
         {isCompany && (
           <div className="space-y-3">
-            <Label className="text-zinc-300">{step.onboardingLabel}</Label>
+            <Label className="text-[#6E6E73]">{step.onboardingLabel}</Label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {step.onboardingOptions.map((option) => (
                 <SelectCard
@@ -129,7 +129,7 @@ export function Step6Challenges({
         {/* Cross-department dependency — department path */}
         {isDepartment && (
           <div className="space-y-3">
-            <Label className="text-zinc-300">{step.crossDeptLabel}</Label>
+            <Label className="text-[#6E6E73]">{step.crossDeptLabel}</Label>
             <div className="grid grid-cols-1 gap-2">
               {step.crossDeptOptions.map((option) => (
                 <SelectCard

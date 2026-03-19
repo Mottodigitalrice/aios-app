@@ -34,11 +34,11 @@ export function StepLayout({
   return (
     <div className="w-full max-w-xl mx-auto">
       <div className="mb-8">
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100 mb-2">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1D1D1F] mb-2">
           {question}
         </h2>
         {description && (
-          <p className="text-zinc-400 text-base leading-relaxed">
+          <p className="text-[#6E6E73] text-base leading-relaxed">
             {description}
           </p>
         )}
@@ -47,7 +47,7 @@ export function StepLayout({
       <div className="mb-8">{children}</div>
 
       {error && (
-        <p role="alert" className="text-sm text-red-400 mb-4">{error}</p>
+        <p role="alert" className="text-sm text-red-600 mb-4">{error}</p>
       )}
 
       <div className="flex items-center gap-3">
@@ -56,7 +56,7 @@ export function StepLayout({
             type="button"
             variant="outline"
             onClick={onBack}
-            className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 gap-2 min-h-[44px]"
+            className="border-[#E8E8ED] text-[#6E6E73] hover:bg-[#F5F5F7] hover:text-[#1D1D1F] gap-2 min-h-[44px]"
           >
             <ArrowLeft className="size-4" />
             {t.common.back}
@@ -66,7 +66,7 @@ export function StepLayout({
           type="button"
           onClick={onNext}
           disabled={!canContinue || isLoading}
-          className="flex-1 bg-indigo-600 hover:bg-indigo-500 hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 text-white gap-2 shadow-[0_0_20px_oklch(0.65_0.18_260/30%)] disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px]"
+          className="flex-1 bg-[#1D1D1F] hover:bg-[#2D2D2F] hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 text-white gap-2 disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px]"
         >
           {isLoading ? (
             <>

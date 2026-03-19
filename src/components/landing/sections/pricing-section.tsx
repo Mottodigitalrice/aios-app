@@ -26,7 +26,7 @@ export default function PricingSection({ t, locale }: SectionProps) {
             style={{
               fontSize: "var(--text-h2)",
               color: "var(--lp-text-heading)",
-              ...(locale === "ja" ? { wordBreak: "keep-all" } : {}),
+              ...(locale === "ja" ? { overflowWrap: "break-word" } : {}),
             }}
           >
             {t.pricing.title}

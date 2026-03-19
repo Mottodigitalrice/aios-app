@@ -56,7 +56,7 @@ export function Step8Logistics({
     >
       <div className="space-y-8">
         <div className="space-y-3">
-          <Label className="text-zinc-300">{step.sourceLabel}</Label>
+          <Label className="text-[#6E6E73]">{step.sourceLabel}</Label>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {step.sourceOptions.map((source) => (
               <SelectCard
@@ -77,14 +77,14 @@ export function Step8Logistics({
               value={formData.source}
               onChange={(e) => updateField("source", e.target.value)}
               placeholder={t.common.otherPlaceholder}
-              className="bg-zinc-950/50 border-zinc-700/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20"
+              className="bg-white border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus-visible:border-[#B8860B]/50 focus-visible:ring-[#B8860B]/20"
               autoFocus
             />
           )}
         </div>
 
         <div className="space-y-3">
-          <Label className="text-zinc-300">
+          <Label className="text-[#6E6E73]">
             {step.timeLabel}
           </Label>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -100,15 +100,15 @@ export function Step8Logistics({
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="website" className="text-zinc-300">
-            {step.websiteLabel} <span className="text-zinc-500">({t.common.optional})</span>
+          <Label htmlFor="website" className="text-[#6E6E73]">
+            {step.websiteLabel} <span className="text-[#86868B]">({t.common.optional})</span>
           </Label>
           <Input
             id="website"
             value={formData.website}
             onChange={(e) => updateField("website", e.target.value)}
             placeholder={step.websitePlaceholder}
-            className="bg-zinc-950/50 border-zinc-700/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20 h-12 text-base"
+            className="bg-white border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus-visible:border-[#B8860B]/50 focus-visible:ring-[#B8860B]/20 h-12 text-base"
           />
         </div>
       </div>

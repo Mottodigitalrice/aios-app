@@ -45,7 +45,7 @@ export function Step1Email({
     >
       <div className="space-y-6">
         <div className="space-y-2">
-          <Label htmlFor="email" className="text-zinc-300">
+          <Label htmlFor="email" className="text-[#6E6E73]">
             {step.emailLabel}
           </Label>
           <Input
@@ -57,10 +57,10 @@ export function Step1Email({
             placeholder={step.emailPlaceholder}
             aria-invalid={!!fieldErrors.email}
             aria-describedby={fieldErrors.email ? "email-error" : undefined}
-            className={`bg-zinc-950/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20 h-12 text-base ${
+            className={`bg-white text-[#1D1D1F] placeholder:text-[#86868B] focus-visible:border-[#B8860B]/50 focus-visible:ring-[#B8860B]/20 h-12 text-base ${
               fieldErrors.email
-                ? "border-red-500/70 focus-visible:border-red-500/70 focus-visible:ring-red-500/20"
-                : "border-zinc-700/50"
+                ? "border-red-500/50 focus-visible:border-red-500/50 focus-visible:ring-red-500/20"
+                : "border-[#E8E8ED]"
             }`}
             autoFocus
             onKeyDown={(e) => {
@@ -71,7 +71,7 @@ export function Step1Email({
             }}
           />
           {fieldErrors.email && (
-            <p id="email-error" role="alert" className="text-xs text-red-400 mt-1">{fieldErrors.email}</p>
+            <p id="email-error" role="alert" className="text-xs text-red-600 mt-1">{fieldErrors.email}</p>
           )}
         </div>
 
@@ -82,23 +82,23 @@ export function Step1Email({
               checked={formData.privacyConsent}
               onChange={(e) => updateField("privacyConsent", e.target.checked)}
               aria-label={step.consentLabel}
-              className={`mt-0.5 size-4 rounded bg-zinc-900 text-indigo-500 focus:ring-indigo-500/20 accent-indigo-500 ${
-                fieldErrors.privacyConsent ? "border-red-500" : "border-zinc-600"
+              className={`mt-0.5 size-4 rounded bg-white text-[#B8860B] focus:ring-[#B8860B]/20 accent-[#B8860B] ${
+                fieldErrors.privacyConsent ? "border-red-500" : "border-[#E8E8ED]"
               }`}
             />
-            <span className="text-sm text-zinc-400 group-hover:text-zinc-300 transition-colors">
+            <span className="text-sm text-[#6E6E73] group-hover:text-[#6E6E73] transition-colors">
               {step.consentLabel}{" "}
               <Link
                 href={locale === "ja" ? "/privacy?lang=ja" : "/privacy"}
                 target="_blank"
-                className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2"
+                className="text-[#B8860B] hover:text-[#D4A843] underline underline-offset-2"
               >
                 {step.consentLink}
               </Link>
             </span>
           </label>
           {fieldErrors.privacyConsent && (
-            <p role="alert" className="text-xs text-red-400 mt-1 ml-7">{fieldErrors.privacyConsent}</p>
+            <p role="alert" className="text-xs text-red-600 mt-1 ml-7">{fieldErrors.privacyConsent}</p>
           )}
         </div>
       </div>

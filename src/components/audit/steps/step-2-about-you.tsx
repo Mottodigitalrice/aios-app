@@ -85,8 +85,8 @@ export function Step2AboutYou({
       <div className="space-y-6">
         {/* Perspective selector — 3 cards */}
         <div className="space-y-3">
-          <Label className="text-zinc-300">
-            {step.perspectiveLabel} <span className="text-red-400">*</span>
+          <Label className="text-[#6E6E73]">
+            {step.perspectiveLabel} <span className="text-red-600">*</span>
           </Label>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {PERSPECTIVE_OPTIONS.map(({ value, icon: Icon, labelKey, descKey }) => (
@@ -96,22 +96,22 @@ export function Step2AboutYou({
                 onClick={() => updateField("perspective", value)}
                 className={`relative flex flex-col items-center gap-3 rounded-xl border p-5 text-center transition-all duration-200 ${
                   formData.perspective === value
-                    ? "border-indigo-500/50 bg-indigo-500/10 ring-1 ring-indigo-500/30"
-                    : "border-zinc-800/50 bg-zinc-900/50 hover:border-zinc-700 hover:bg-zinc-800/50"
+                    ? "border-[#B8860B]/30 bg-[#B8860B]/8 ring-1 ring-[#B8860B]/20"
+                    : "border-[#E8E8ED] bg-[#F5F5F7] hover:border-[#B8860B]/30 hover:bg-[#F5F5F7]"
                 }`}
               >
                 <div
                   className={`flex size-10 items-center justify-center rounded-full ${
                     formData.perspective === value
-                      ? "bg-indigo-500/20"
-                      : "bg-zinc-800"
+                      ? "bg-[#B8860B]/10"
+                      : "bg-[#E8E8ED]"
                   }`}
                 >
                   <Icon
                     className={`size-5 ${
                       formData.perspective === value
-                        ? "text-indigo-400"
-                        : "text-zinc-400"
+                        ? "text-[#B8860B]"
+                        : "text-[#6E6E73]"
                     }`}
                   />
                 </div>
@@ -119,18 +119,18 @@ export function Step2AboutYou({
                   <p
                     className={`text-sm font-semibold ${
                       formData.perspective === value
-                        ? "text-indigo-300"
-                        : "text-zinc-300"
+                        ? "text-[#B8860B]"
+                        : "text-[#6E6E73]"
                     }`}
                   >
                     {step[labelKey]}
                   </p>
-                  <p className="text-xs text-zinc-500 mt-1">
+                  <p className="text-xs text-[#86868B] mt-1">
                     {step[descKey]}
                   </p>
                 </div>
                 {formData.perspective === value && (
-                  <span className="absolute top-3 right-3 size-5 rounded-full bg-indigo-500 flex items-center justify-center">
+                  <span className="absolute top-3 right-3 size-5 rounded-full bg-[#B8860B] flex items-center justify-center">
                     <svg
                       className="size-3 text-white"
                       fill="none"
@@ -150,14 +150,14 @@ export function Step2AboutYou({
             ))}
           </div>
           {fieldErrors.perspective && (
-            <p role="alert" className="text-xs text-red-400 mt-1">{fieldErrors.perspective}</p>
+            <p role="alert" className="text-xs text-red-600 mt-1">{fieldErrors.perspective}</p>
           )}
         </div>
 
         {/* Name field */}
         <div className="space-y-2">
-          <Label htmlFor="name" className="text-zinc-300">
-            {step.nameLabel} <span className="text-red-400">*</span>
+          <Label htmlFor="name" className="text-[#6E6E73]">
+            {step.nameLabel} <span className="text-red-600">*</span>
           </Label>
           <Input
             id="name"
@@ -167,10 +167,10 @@ export function Step2AboutYou({
             placeholder={step.namePlaceholder}
             aria-invalid={!!fieldErrors.name}
             aria-describedby={fieldErrors.name ? "name-error" : undefined}
-            className={`bg-zinc-950/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20 h-12 text-base ${
+            className={`bg-white text-[#1D1D1F] placeholder:text-[#86868B] focus-visible:border-[#B8860B]/50 focus-visible:ring-[#B8860B]/20 h-12 text-base ${
               fieldErrors.name
-                ? "border-red-500/70 focus-visible:border-red-500/70 focus-visible:ring-red-500/20"
-                : "border-zinc-700/50"
+                ? "border-red-500/50 focus-visible:border-red-500/50 focus-visible:ring-red-500/20"
+                : "border-[#E8E8ED]"
             }`}
             onKeyDown={(e) => {
               if (e.key === "Enter" && canContinue) {
@@ -180,13 +180,13 @@ export function Step2AboutYou({
             }}
           />
           {fieldErrors.name && (
-            <p id="name-error" role="alert" className="text-xs text-red-400 mt-1">{fieldErrors.name}</p>
+            <p id="name-error" role="alert" className="text-xs text-red-600 mt-1">{fieldErrors.name}</p>
           )}
         </div>
 
         {/* Role selector */}
         <div className="space-y-3">
-          <Label className="text-zinc-300">{step.roleLabel}</Label>
+          <Label className="text-[#6E6E73]">{step.roleLabel}</Label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {step.roleOptions.map((role) => (
               <SelectCard
@@ -207,7 +207,7 @@ export function Step2AboutYou({
               value={formData.role}
               onChange={(e) => updateField("role", e.target.value)}
               placeholder={t.common.otherPlaceholder}
-              className="bg-zinc-950/50 border-zinc-700/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20"
+              className="bg-white border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus-visible:border-[#B8860B]/50 focus-visible:ring-[#B8860B]/20"
               autoFocus
             />
           )}

@@ -62,8 +62,8 @@ export function MultiSelectChips({
             className={cn(
               "inline-flex items-center gap-2 rounded-lg border px-3.5 py-2 text-sm font-medium transition-all duration-200",
               selected.includes(option)
-                ? "border-indigo-500/50 bg-indigo-500/10 text-indigo-300"
-                : "border-zinc-800/50 bg-zinc-900/50 text-zinc-400 hover:border-zinc-700 hover:text-zinc-300"
+                ? "border-[#B8860B]/30 bg-[#B8860B]/8 text-[#B8860B]"
+                : "border-[#E8E8ED] bg-[#F5F5F7] text-[#6E6E73] hover:border-[#B8860B]/30 hover:text-[#6E6E73]"
             )}
           >
             {renderIcon && (
@@ -80,8 +80,8 @@ export function MultiSelectChips({
             className={cn(
               "inline-flex items-center gap-2 rounded-lg border px-3.5 py-2 text-sm font-medium transition-all duration-200",
               showOtherInput
-                ? "border-indigo-500/50 bg-indigo-500/10 text-indigo-300"
-                : "border-zinc-800/50 bg-zinc-900/50 text-zinc-400 hover:border-zinc-700 hover:text-zinc-300"
+                ? "border-[#B8860B]/30 bg-[#B8860B]/8 text-[#B8860B]"
+                : "border-[#E8E8ED] bg-[#F5F5F7] text-[#6E6E73] hover:border-[#B8860B]/30 hover:text-[#6E6E73]"
             )}
           >
             + {otherLabel}
@@ -93,7 +93,7 @@ export function MultiSelectChips({
           value={otherValue}
           onChange={(e) => onOtherChange?.(e.target.value)}
           placeholder={otherPlaceholder}
-          className="bg-zinc-950/50 border-zinc-700/50 text-zinc-100 placeholder:text-zinc-600 focus-visible:border-indigo-500/50 focus-visible:ring-indigo-500/20"
+          className="bg-white border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus-visible:border-[#B8860B]/50 focus-visible:ring-[#B8860B]/20"
           autoFocus
         />
       )}

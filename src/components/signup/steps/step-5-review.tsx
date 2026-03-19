@@ -73,18 +73,18 @@ export function Step5Review({
   return (
     <div className="w-full max-w-xl mx-auto">
       <div className="mb-8">
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100 mb-2">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1D1D1F] mb-2">
           {s.question}
         </h2>
-        <p className="text-zinc-400 text-base leading-relaxed">
+        <p className="text-[#6E6E73] text-base leading-relaxed">
           {s.description}
         </p>
       </div>
 
       <div className="space-y-6 mb-8">
         {/* Enrollment summary */}
-        <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/30 p-6 space-y-4">
-          <h3 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider">
+        <div className="rounded-xl border border-[#E8E8ED] bg-[#F5F5F7] p-6 space-y-4">
+          <h3 className="text-sm font-semibold text-[#6E6E73] uppercase tracking-wider">
             {s.summaryTitle}
           </h3>
 
@@ -92,12 +92,12 @@ export function Step5Review({
             {rows.map((row) => (
               <div
                 key={row.label}
-                className="flex justify-between items-start py-2 border-b border-zinc-800/30 gap-4"
+                className="flex justify-between items-start py-2 border-b border-[#E8E8ED] gap-4"
               >
-                <span className="text-sm text-zinc-400 shrink-0">
+                <span className="text-sm text-[#6E6E73] shrink-0">
                   {row.label}
                 </span>
-                <span className="text-sm font-medium text-zinc-100 text-right">
+                <span className="text-sm font-medium text-[#1D1D1F] text-right">
                   {row.value}
                 </span>
               </div>
@@ -106,16 +106,16 @@ export function Step5Review({
         </div>
 
         {/* Guarantee */}
-        <div className="flex items-start gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.05] p-4">
-          <ShieldCheck className="size-5 text-emerald-400 mt-0.5 shrink-0" />
-          <p className="text-xs text-emerald-300 leading-relaxed">
+        <div className="flex items-start gap-3 rounded-xl border border-[#1B7D5A]/20 bg-[#1B7D5A]/5 p-4">
+          <ShieldCheck className="size-5 text-[#1B7D5A] mt-0.5 shrink-0" />
+          <p className="text-xs text-[#1B7D5A] leading-relaxed">
             {s.guarantee}
           </p>
         </div>
       </div>
 
       {error && (
-        <p role="alert" className="text-sm text-red-400 mb-4">
+        <p role="alert" className="text-sm text-red-600 mb-4">
           {error}
         </p>
       )}
@@ -125,7 +125,7 @@ export function Step5Review({
           type="button"
           variant="outline"
           onClick={onBack}
-          className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 gap-2 min-h-[44px]"
+          className="border-[#E8E8ED] text-[#6E6E73] hover:bg-[#F5F5F7] hover:text-[#1D1D1F] gap-2 min-h-[44px]"
         >
           <ArrowLeft className="size-4" />
           {t.common.back}
@@ -134,7 +134,7 @@ export function Step5Review({
           type="button"
           onClick={onSubmit}
           disabled={isLoading}
-          className="flex-1 bg-indigo-600 hover:bg-indigo-500 hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 text-white gap-2 shadow-[0_0_20px_oklch(0.65_0.18_260/30%)] disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px]"
+          className="flex-1 bg-[#1D1D1F] hover:bg-[#2D2D2F] hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 text-white gap-2 disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px]"
         >
           {isLoading ? (
             <>
@@ -151,27 +151,27 @@ export function Step5Review({
       </div>
 
       {/* What happens next */}
-      <div className="mt-8 rounded-xl border border-zinc-800/50 bg-zinc-900/30 p-5">
-        <h4 className="text-sm font-semibold text-zinc-300 mb-3">
+      <div className="mt-8 rounded-xl border border-[#E8E8ED] bg-[#F5F5F7] p-5">
+        <h4 className="text-sm font-semibold text-[#6E6E73] mb-3">
           {s.whatHappensNextTitle || "What happens next"}
         </h4>
-        <ol className="space-y-2 text-sm text-zinc-400">
+        <ol className="space-y-2 text-sm text-[#6E6E73]">
           <li className="flex items-start gap-2">
-            <span className="text-indigo-400 font-semibold shrink-0">1.</span>
+            <span className="text-[#B8860B] font-semibold shrink-0">1.</span>
             <span>{s.whatHappensNext1 || "Lewis reviews your submission within 24 hours"}</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-indigo-400 font-semibold shrink-0">2.</span>
+            <span className="text-[#B8860B] font-semibold shrink-0">2.</span>
             <span>{s.whatHappensNext2 || "You'll get a personal email"}</span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="text-indigo-400 font-semibold shrink-0">3.</span>
+            <span className="text-[#B8860B] font-semibold shrink-0">3.</span>
             <span>{s.whatHappensNext3 || "Book a free call to discuss"}</span>
           </li>
         </ol>
-        <div className="mt-4 pt-3 border-t border-zinc-800/30 flex items-center gap-2">
-          <ShieldCheck className="size-4 text-emerald-400 shrink-0" />
-          <p className="text-xs text-emerald-300/80">
+        <div className="mt-4 pt-3 border-t border-[#E8E8ED] flex items-center gap-2">
+          <ShieldCheck className="size-4 text-[#1B7D5A] shrink-0" />
+          <p className="text-xs text-[#1B7D5A]/80">
             {s.guaranteeReinforcement || "Backed by our Ownership Guarantee"}
           </p>
         </div>

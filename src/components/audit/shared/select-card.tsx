@@ -17,14 +17,14 @@ export function SelectCard({ label, selected, onClick, icon }: SelectCardProps) 
       className={cn(
         "flex items-center gap-3 w-full rounded-xl border p-4 text-left text-sm font-medium transition-all duration-200",
         selected
-          ? "border-indigo-500/50 bg-indigo-500/10 text-indigo-300 ring-1 ring-indigo-500/30"
-          : "border-zinc-800/50 bg-zinc-900/50 text-zinc-300 hover:border-zinc-700 hover:bg-zinc-800/50"
+          ? "border-[#B8860B]/30 bg-[#B8860B]/8 text-[#B8860B] ring-1 ring-[#B8860B]/20"
+          : "border-[#E8E8ED] bg-[#F5F5F7] text-[#6E6E73] hover:border-[#B8860B]/30 hover:bg-[#F5F5F7]"
       )}
     >
       {icon && <span className="shrink-0">{icon}</span>}
       <span>{label}</span>
       {selected && (
-        <span className="ml-auto shrink-0 size-5 rounded-full bg-indigo-500 flex items-center justify-center">
+        <span className="ml-auto shrink-0 size-5 rounded-full bg-[#B8860B] flex items-center justify-center">
           <svg
             className="size-3 text-white"
             fill="none"

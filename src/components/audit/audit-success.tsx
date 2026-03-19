@@ -22,10 +22,10 @@ import { TidyCalEmbed } from "./tidycal-embed";
 // ---------------------------------------------------------------------------
 
 const CONFETTI_COLORS = [
-  "bg-indigo-400",
-  "bg-indigo-500",
+  "bg-[#B8860B]",
+  "bg-[#D4A843]",
   "bg-violet-400",
-  "bg-emerald-400",
+  "bg-[#1B7D5A]",
   "bg-amber-400",
   "bg-rose-400",
   "bg-sky-400",
@@ -89,7 +89,7 @@ function SparkleBackground() {
       {sparkles.map((s) => (
         <div
           key={s.id}
-          className="absolute rounded-full bg-indigo-400/40 sparkle-pulse"
+          className="absolute rounded-full bg-[#B8860B]/40 sparkle-pulse"
           style={{
             left: `${s.x}%`,
             top: `${s.y}%`,
@@ -124,13 +124,13 @@ function ShareSection() {
 
   return (
     <div className="flex flex-col items-center gap-3">
-      <p className="text-sm text-zinc-500">{t.success.sharePrompt}</p>
+      <p className="text-sm text-[#86868B]">{t.success.sharePrompt}</p>
       <div className="flex items-center gap-2">
         <Button
           variant="outline"
           size="sm"
           onClick={handleCopy}
-          className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 gap-2"
+          className="border-[#E8E8ED] text-[#6E6E73] hover:bg-[#F5F5F7] hover:text-[#1D1D1F] gap-2"
         >
           {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
           {copied ? t.success.copied : t.success.copyLink}
@@ -143,7 +143,7 @@ function ShareSection() {
           <Button
             variant="outline"
             size="sm"
-            className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100"
+            className="border-[#E8E8ED] text-[#6E6E73] hover:bg-[#F5F5F7] hover:text-[#1D1D1F]"
           >
             <Linkedin className="size-3.5" />
           </Button>
@@ -154,7 +154,7 @@ function ShareSection() {
           <Button
             variant="outline"
             size="sm"
-            className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100"
+            className="border-[#E8E8ED] text-[#6E6E73] hover:bg-[#F5F5F7] hover:text-[#1D1D1F]"
           >
             <Mail className="size-3.5" />
           </Button>
@@ -219,47 +219,47 @@ export function AuditSuccess({ perspective }: AuditSuccessProps) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 grid-pattern relative">
+    <div className="min-h-screen bg-white text-[#1D1D1F] relative">
       {showConfetti && <ConfettiParticles />}
       <SparkleBackground />
 
       {/* Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/50 bg-zinc-950/80 backdrop-blur-xl">
+      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-[#E8E8ED] bg-white/80 backdrop-blur-xl">
         <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
           <Link
             href="/"
             className="flex items-center gap-2 text-lg font-bold tracking-tight"
           >
-            <Layers className="size-6 text-indigo-400" />
+            <Layers className="size-6 text-[#B8860B]" />
             <span>MOTTO Digital</span>
           </Link>
         </div>
       </nav>
 
       {/* Success Content */}
-      <div className="relative z-10 flex items-center justify-center min-h-screen px-6 radial-glow">
+      <div className="relative z-10 flex items-center justify-center min-h-screen px-6">
         <div className="max-w-lg w-full text-center pt-24 pb-12">
           {/* Celebration checkmark */}
-          <div className="mx-auto mb-6 flex size-20 items-center justify-center rounded-full bg-emerald-500/10 border-2 border-emerald-500/30 animate-fade-in-up success-check-pulse">
-            <Check className="size-10 text-emerald-400" />
+          <div className="mx-auto mb-6 flex size-20 items-center justify-center rounded-full bg-[#1B7D5A]/10 border-2 border-[#1B7D5A]/20 animate-fade-in-up success-check-pulse">
+            <Check className="size-10 text-[#1B7D5A]" />
           </div>
 
           <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3 animate-fade-in-up animation-delay-100">
             {t.success.title}
           </h1>
 
-          <p className="text-zinc-400 text-lg mb-3 leading-relaxed animate-fade-in-up animation-delay-200">
+          <p className="text-[#6E6E73] text-lg mb-3 leading-relaxed animate-fade-in-up animation-delay-200">
             {t.success.subtitle}
           </p>
 
           {/* Estimated timeline */}
-          <p className="text-sm text-indigo-400 mb-10 animate-fade-in-up animation-delay-200">
+          <p className="text-sm text-[#B8860B] mb-10 animate-fade-in-up animation-delay-200">
             {t.success.reachOut}
           </p>
 
           {/* Timeline stepper */}
           <div className="text-left mb-8 animate-fade-in-up animation-delay-300">
-            <h3 className="text-sm font-semibold text-zinc-500 uppercase tracking-wider mb-4">
+            <h3 className="text-sm font-semibold text-[#86868B] uppercase tracking-wider mb-4">
               {t.success.timelineTitle}
             </h3>
             <div className="relative">
@@ -270,19 +270,19 @@ export function AuditSuccess({ perspective }: AuditSuccessProps) {
                     <div
                       className={`flex size-9 shrink-0 items-center justify-center rounded-full border-2 ${
                         step.status === "complete"
-                          ? "bg-emerald-500/20 border-emerald-500/50"
+                          ? "bg-[#1B7D5A]/10 border-[#1B7D5A]/20"
                           : step.status === "active"
-                            ? "bg-indigo-500/20 border-indigo-500/50 animate-pulse"
-                            : "bg-zinc-800/50 border-zinc-700/50"
+                            ? "bg-[#B8860B]/10 border-[#B8860B]/30 animate-pulse"
+                            : "bg-[#E8E8ED] border-[#E8E8ED]"
                       }`}
                     >
                       <step.icon
                         className={`size-4 ${
                           step.status === "complete"
-                            ? "text-emerald-400"
+                            ? "text-[#1B7D5A]"
                             : step.status === "active"
-                              ? "text-indigo-400"
-                              : "text-zinc-500"
+                              ? "text-[#B8860B]"
+                              : "text-[#86868B]"
                         }`}
                       />
                     </div>
@@ -290,8 +290,8 @@ export function AuditSuccess({ perspective }: AuditSuccessProps) {
                       <div
                         className={`w-0.5 flex-1 my-1 ${
                           step.status === "complete"
-                            ? "bg-emerald-500/30"
-                            : "bg-zinc-800"
+                            ? "bg-[#1B7D5A]/20"
+                            : "bg-[#E8E8ED]"
                         }`}
                       />
                     )}
@@ -302,20 +302,20 @@ export function AuditSuccess({ perspective }: AuditSuccessProps) {
                     <p
                       className={`font-semibold text-sm ${
                         step.status === "complete"
-                          ? "text-emerald-300"
+                          ? "text-[#1B7D5A]"
                           : step.status === "active"
-                            ? "text-zinc-100"
-                            : "text-zinc-400"
+                            ? "text-[#1D1D1F]"
+                            : "text-[#6E6E73]"
                       }`}
                     >
                       {step.title}
                       {step.status === "active" && "statusLabel" in step && (
-                        <span className="ml-2 text-xs text-indigo-400 font-normal">
+                        <span className="ml-2 text-xs text-[#B8860B] font-normal">
                           {step.statusLabel}
                         </span>
                       )}
                     </p>
-                    <p className="text-sm text-zinc-500 leading-relaxed mt-0.5">
+                    <p className="text-sm text-[#86868B] leading-relaxed mt-0.5">
                       {step.description}
                     </p>
                   </div>
@@ -325,15 +325,15 @@ export function AuditSuccess({ perspective }: AuditSuccessProps) {
           </div>
 
           {/* Book Meeting CTA */}
-          <div className="rounded-xl border border-indigo-500/30 bg-indigo-500/5 p-6 mb-8 animate-fade-in-up animation-delay-400">
-            <p className="text-zinc-300 text-sm mb-4 leading-relaxed">
+          <div className="rounded-xl border border-[#B8860B]/20 bg-[#B8860B]/5 p-6 mb-8 animate-fade-in-up animation-delay-400">
+            <p className="text-[#6E6E73] text-sm mb-4 leading-relaxed">
               {isPersonal
                 ? t.success.bookDescriptionPersonal
                 : t.success.bookDescription}
             </p>
 
             {/* TidyCal Embed */}
-            <h3 className="text-sm font-semibold text-zinc-300 mb-3">
+            <h3 className="text-sm font-semibold text-[#6E6E73] mb-3">
               {t.success.bookEmbedTitle}
             </h3>
             <TidyCalEmbed path="rice/ai" />
@@ -343,13 +343,13 @@ export function AuditSuccess({ perspective }: AuditSuccessProps) {
               href="https://tidycal.com/rice/ai"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 mt-4 text-sm text-indigo-400 hover:text-indigo-300 transition-colors"
+              className="inline-flex items-center gap-1.5 mt-4 text-sm text-[#B8860B] hover:text-[#D4A843] transition-colors"
             >
               <CalendarCheck className="size-3.5" />
               {t.success.bookFallback}
             </Link>
 
-            <p className="mt-3 text-xs text-zinc-500">
+            <p className="mt-3 text-xs text-[#86868B]">
               {isPersonal
                 ? t.success.bookSubtextPersonal
                 : t.success.bookSubtext}
@@ -364,7 +364,7 @@ export function AuditSuccess({ perspective }: AuditSuccessProps) {
           <Link href="/">
             <Button
               variant="outline"
-              className="border-zinc-700 text-zinc-100 hover:bg-zinc-800 hover:text-zinc-100 gap-2"
+              className="border-[#E8E8ED] text-[#1D1D1F] hover:bg-[#F5F5F7] hover:text-[#1D1D1F] gap-2"
             >
               <ArrowLeft className="size-4" />
               {t.success.backHome}

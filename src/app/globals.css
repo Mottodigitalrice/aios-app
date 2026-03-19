@@ -391,7 +391,7 @@ html {
 .pres-orbs::before {
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, oklch(0.55 0.22 264), transparent 70%);
+  background: radial-gradient(circle, rgba(184, 134, 11, 0.15), transparent 70%);
   top: 10%;
   left: 15%;
   animation: pres-float-1 12s ease-in-out infinite;
@@ -399,7 +399,7 @@ html {
 .pres-orbs::after {
   width: 350px;
   height: 350px;
-  background: radial-gradient(circle, oklch(0.55 0.24 285), transparent 70%);
+  background: radial-gradient(circle, rgba(212, 168, 67, 0.12), transparent 70%);
   bottom: 15%;
   right: 10%;
   animation: pres-float-2 15s ease-in-out infinite;
@@ -412,7 +412,7 @@ html {
   border-radius: 50%;
   filter: blur(90px);
   opacity: 0.1;
-  background: radial-gradient(circle, oklch(0.65 0.20 280), transparent 70%);
+  background: radial-gradient(circle, rgba(184, 134, 11, 0.1), transparent 70%);
   top: 50%;
   left: 60%;
   animation: pres-float-3 10s ease-in-out infinite;
@@ -443,7 +443,7 @@ html {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background-image: radial-gradient(circle 1px, oklch(0.65 0.18 260 / 12%) 1px, transparent 1px);
+  background-image: radial-gradient(circle 1px, rgba(184, 134, 11, 0.12) 1px, transparent 1px);
   background-size: 40px 40px;
   animation: pres-drift 8s ease-in-out infinite;
 }
@@ -455,15 +455,15 @@ html {
   pointer-events: none;
   z-index: 0;
   background-image:
-    radial-gradient(circle 2px at 25% 25%, oklch(0.65 0.18 260 / 8%) 1px, transparent 1px),
-    radial-gradient(circle 2px at 75% 75%, oklch(0.65 0.18 260 / 6%) 1px, transparent 1px);
+    radial-gradient(circle 2px at 25% 25%, rgba(184, 134, 11, 0.08) 1px, transparent 1px),
+    radial-gradient(circle 2px at 75% 75%, rgba(184, 134, 11, 0.06) 1px, transparent 1px);
   background-size: 80px 80px;
 }
 .pres-shield-pattern::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 50% 50% at 50% 50%, oklch(0.65 0.18 260 / 6%), transparent 70%);
+  background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(184, 134, 11, 0.04), transparent 70%);
 }
 
 /* Intensified closing glow */
@@ -476,15 +476,15 @@ html {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background: radial-gradient(ellipse 60% 50% at 50% 30%, oklch(0.65 0.18 260 / 18%) 0%, transparent 70%),
-              radial-gradient(ellipse 40% 40% at 50% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 60%);
+  background: radial-gradient(ellipse 60% 50% at 50% 30%, rgba(184, 134, 11, 0.06) 0%, transparent 70%),
+              radial-gradient(ellipse 40% 40% at 50% 70%, rgba(212, 168, 67, 0.04) 0%, transparent 60%);
   animation: pres-glow-pulse 5s ease-in-out infinite;
 }
 
 /* CTA glow border animation */
 @keyframes pres-cta-glow {
-  0%, 100% { box-shadow: 0 0 20px oklch(0.65 0.18 260 / 30%), 0 0 40px oklch(0.65 0.18 260 / 10%); }
-  50% { box-shadow: 0 0 30px oklch(0.65 0.18 260 / 50%), 0 0 60px oklch(0.65 0.18 260 / 20%); }
+  0%, 100% { box-shadow: 0 0 20px rgba(184, 134, 11, 0.1), 0 0 40px rgba(184, 134, 11, 0.04); }
+  50% { box-shadow: 0 0 30px rgba(184, 134, 11, 0.15), 0 0 60px rgba(184, 134, 11, 0.06); }
 }
 .pres-cta-glow {
   animation: pres-cta-glow 3s ease-in-out infinite;
@@ -559,9 +559,9 @@ html {
   z-index: 60;
   max-height: 35vh;
   overflow-y: auto;
-  background: rgba(9, 9, 11, 0.95);
+  background: rgba(245, 245, 247, 0.95);
   backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(63, 63, 70, 0.5);
+  border-top: 1px solid rgba(232, 232, 237, 1);
   transition: transform 300ms ease-out, opacity 300ms ease-out;
 }
 .pres-notes-panel.pres-notes-hidden {

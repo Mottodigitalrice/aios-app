@@ -73,10 +73,10 @@ export function Step1Track({
   return (
     <div className="w-full max-w-xl mx-auto">
       <div className="mb-8">
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100 mb-2">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1D1D1F] mb-2">
           {s.question}
         </h2>
-        <p className="text-zinc-400 text-base leading-relaxed">
+        <p className="text-[#6E6E73] text-base leading-relaxed">
           {s.description}
         </p>
       </div>
@@ -93,35 +93,35 @@ export function Step1Track({
               className={cn(
                 "w-full rounded-xl border p-5 text-left transition-all duration-200",
                 isSelected
-                  ? "border-indigo-500/50 bg-indigo-500/10 ring-1 ring-indigo-500/30"
-                  : "border-zinc-800/50 bg-zinc-900/50 hover:border-zinc-700 hover:bg-zinc-800/50"
+                  ? "border-[#B8860B]/30 bg-[#B8860B]/8 ring-1 ring-[#B8860B]/20"
+                  : "border-[#E8E8ED] bg-[#F5F5F7] hover:border-[#B8860B]/30 hover:bg-[#F5F5F7]"
               )}
             >
               <div className="flex items-start gap-4">
                 <div
                   className={cn(
                     "mt-1 rounded-lg p-2",
-                    isSelected ? "bg-indigo-500/20" : "bg-zinc-800"
+                    isSelected ? "bg-[#B8860B]/10" : "bg-[#E8E8ED]"
                   )}
                 >
-                  <Icon className="size-5 text-indigo-400" />
+                  <Icon className="size-5 text-[#B8860B]" />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-1">
-                    <h3 className="font-semibold text-zinc-100">{card.label}</h3>
+                    <h3 className="font-semibold text-[#1D1D1F]">{card.label}</h3>
                     {isSelected && (
-                      <span className="size-5 rounded-full bg-indigo-500 flex items-center justify-center">
+                      <span className="size-5 rounded-full bg-[#B8860B] flex items-center justify-center">
                         <Check className="size-3 text-white" strokeWidth={3} />
                       </span>
                     )}
                   </div>
-                  <p className="text-sm font-medium text-indigo-400 mb-2">
+                  <p className="text-sm font-medium text-[#B8860B] mb-2">
                     {card.price}
                   </p>
-                  <p className="text-sm text-zinc-400 leading-relaxed mb-2">
+                  <p className="text-sm text-[#6E6E73] leading-relaxed mb-2">
                     {card.description}
                   </p>
-                  <p className="text-xs text-zinc-500">{card.bestFor}</p>
+                  <p className="text-xs text-[#86868B]">{card.bestFor}</p>
                 </div>
               </div>
             </button>
@@ -131,7 +131,7 @@ export function Step1Track({
         {/* Billing plan selection for corporate tracks */}
         {showBillingPlan && (
           <div className="ml-1 mt-2">
-            <p className="text-sm font-medium text-zinc-300 mb-3">
+            <p className="text-sm font-medium text-[#6E6E73] mb-3">
               {s.planSelectionLabel}
             </p>
             <div className="grid grid-cols-2 gap-3">
@@ -141,12 +141,12 @@ export function Step1Track({
                 className={cn(
                   "rounded-lg border p-3 text-left text-sm transition-all duration-200",
                   formData.plan === "monthly"
-                    ? "border-indigo-500/50 bg-indigo-500/10 text-indigo-300 ring-1 ring-indigo-500/30"
-                    : "border-zinc-800/50 bg-zinc-900/50 text-zinc-300 hover:border-zinc-700"
+                    ? "border-[#B8860B]/30 bg-[#B8860B]/8 text-[#B8860B] ring-1 ring-[#B8860B]/20"
+                    : "border-[#E8E8ED] bg-[#F5F5F7] text-[#6E6E73] hover:border-[#B8860B]/30"
                 )}
               >
                 <p className="font-medium">{s.monthlyPlanLabel}</p>
-                <p className="text-xs text-zinc-500 mt-1">
+                <p className="text-xs text-[#86868B] mt-1">
                   {s.corporateMonthlyPrice}
                 </p>
               </button>
@@ -156,8 +156,8 @@ export function Step1Track({
                 className={cn(
                   "rounded-lg border p-3 text-left text-sm transition-all duration-200 relative",
                   formData.plan === "full"
-                    ? "border-emerald-500/50 bg-emerald-500/10 text-emerald-300 ring-1 ring-emerald-500/30"
-                    : "border-zinc-800/50 bg-zinc-900/50 text-zinc-300 hover:border-zinc-700"
+                    ? "border-[#1B7D5A]/20 bg-[#1B7D5A]/10 text-[#1B7D5A] ring-1 ring-[#1B7D5A]/20"
+                    : "border-[#E8E8ED] bg-[#F5F5F7] text-[#6E6E73] hover:border-[#B8860B]/30"
                 )}
               >
                 <Badge className="absolute -top-2 right-2 bg-emerald-600 text-white border-0 text-[10px] px-1.5 py-0">
@@ -165,7 +165,7 @@ export function Step1Track({
                   {s.payInFullSave}
                 </Badge>
                 <p className="font-medium">{s.fullPlanLabel}</p>
-                <p className="text-xs text-zinc-500 mt-1">
+                <p className="text-xs text-[#86868B] mt-1">
                   {s.payInFullPrice}
                 </p>
               </button>
@@ -175,7 +175,7 @@ export function Step1Track({
       </div>
 
       {error && (
-        <p role="alert" className="text-sm text-red-400 mb-4">
+        <p role="alert" className="text-sm text-red-600 mb-4">
           {error}
         </p>
       )}
@@ -185,7 +185,7 @@ export function Step1Track({
           type="button"
           onClick={onNext}
           disabled={!formData.signupType || isLoading}
-          className="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 bg-[#1D1D1F] hover:bg-[#2D2D2F] text-white gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {t.common.continue}
           <ArrowRight className="size-4" />

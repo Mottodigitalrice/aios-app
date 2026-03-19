@@ -36,10 +36,10 @@ export function Step4GettingStarted({
   return (
     <div className="w-full max-w-xl mx-auto">
       <div className="mb-8">
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100 mb-2">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1D1D1F] mb-2">
           {s.question}
         </h2>
-        <p className="text-zinc-400 text-base leading-relaxed">
+        <p className="text-[#6E6E73] text-base leading-relaxed">
           {s.description}
         </p>
       </div>
@@ -47,8 +47,8 @@ export function Step4GettingStarted({
       <div className="space-y-6 mb-8">
         {/* When to start */}
         <div className="space-y-3">
-          <Label className="text-sm font-medium text-zinc-300">
-            {s.startLabel} <span className="text-red-400">*</span>
+          <Label className="text-sm font-medium text-[#6E6E73]">
+            {s.startLabel} <span className="text-red-600">*</span>
           </Label>
           <div className="space-y-2">
             {s.startOptions.map((option) => (
@@ -59,13 +59,13 @@ export function Step4GettingStarted({
                 className={cn(
                   "flex items-center gap-3 w-full rounded-xl border p-4 text-left text-sm font-medium transition-all duration-200",
                   formData.startPreference === option
-                    ? "border-indigo-500/50 bg-indigo-500/10 text-indigo-300 ring-1 ring-indigo-500/30"
-                    : "border-zinc-800/50 bg-zinc-900/50 text-zinc-300 hover:border-zinc-700 hover:bg-zinc-800/50"
+                    ? "border-[#B8860B]/30 bg-[#B8860B]/8 text-[#B8860B] ring-1 ring-[#B8860B]/20"
+                    : "border-[#E8E8ED] bg-[#F5F5F7] text-[#6E6E73] hover:border-[#B8860B]/30 hover:bg-[#F5F5F7]"
                 )}
               >
                 <span>{option}</span>
                 {formData.startPreference === option && (
-                  <span className="ml-auto shrink-0 size-5 rounded-full bg-indigo-500 flex items-center justify-center">
+                  <span className="ml-auto shrink-0 size-5 rounded-full bg-[#B8860B] flex items-center justify-center">
                     <svg
                       className="size-3 text-white"
                       fill="none"
@@ -85,14 +85,14 @@ export function Step4GettingStarted({
             ))}
           </div>
           {fieldErrors?.startPreference && (
-            <p className="text-xs text-red-400">{fieldErrors.startPreference}</p>
+            <p className="text-xs text-red-600">{fieldErrors.startPreference}</p>
           )}
         </div>
 
         {/* Referral source */}
         <div className="space-y-3">
-          <Label className="text-sm font-medium text-zinc-300">
-            {s.sourceLabel} <span className="text-red-400">*</span>
+          <Label className="text-sm font-medium text-[#6E6E73]">
+            {s.sourceLabel} <span className="text-red-600">*</span>
           </Label>
           <div className="flex flex-wrap gap-2">
             {s.sourceOptions.map((option) => (
@@ -103,8 +103,8 @@ export function Step4GettingStarted({
                 className={cn(
                   "rounded-full border px-4 py-2 text-sm font-medium transition-all duration-200",
                   formData.referralSource === option
-                    ? "border-indigo-500/50 bg-indigo-500/10 text-indigo-300 ring-1 ring-indigo-500/30"
-                    : "border-zinc-800/50 bg-zinc-900/50 text-zinc-300 hover:border-zinc-700 hover:bg-zinc-800/50"
+                    ? "border-[#B8860B]/30 bg-[#B8860B]/8 text-[#B8860B] ring-1 ring-[#B8860B]/20"
+                    : "border-[#E8E8ED] bg-[#F5F5F7] text-[#6E6E73] hover:border-[#B8860B]/30 hover:bg-[#F5F5F7]"
                 )}
               >
                 {option}
@@ -112,15 +112,15 @@ export function Step4GettingStarted({
             ))}
           </div>
           {fieldErrors?.referralSource && (
-            <p className="text-xs text-red-400">{fieldErrors.referralSource}</p>
+            <p className="text-xs text-red-600">{fieldErrors.referralSource}</p>
           )}
         </div>
 
         {/* Notes */}
         <div className="space-y-2">
-          <Label htmlFor="signup-notes" className="text-sm font-medium text-zinc-300">
+          <Label htmlFor="signup-notes" className="text-sm font-medium text-[#6E6E73]">
             {s.notesLabel}{" "}
-            <span className="text-zinc-500 text-xs">({t.common.optional})</span>
+            <span className="text-[#86868B] text-xs">({t.common.optional})</span>
           </Label>
           <Textarea
             id="signup-notes"
@@ -128,13 +128,13 @@ export function Step4GettingStarted({
             onChange={(e) => updateField("notes", e.target.value)}
             placeholder={s.notesPlaceholder}
             rows={3}
-            className="bg-zinc-900/50 border-zinc-800 text-zinc-100 placeholder:text-zinc-600 focus:border-indigo-500 focus:ring-indigo-500/20 resize-none"
+            className="bg-[#F5F5F7] border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus:border-[#B8860B]/50 focus:ring-[#B8860B]/20 resize-none"
           />
         </div>
       </div>
 
       {error && (
-        <p role="alert" className="text-sm text-red-400 mb-4">
+        <p role="alert" className="text-sm text-red-600 mb-4">
           {error}
         </p>
       )}
@@ -144,7 +144,7 @@ export function Step4GettingStarted({
           type="button"
           variant="outline"
           onClick={onBack}
-          className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 gap-2"
+          className="border-[#E8E8ED] text-[#6E6E73] hover:bg-[#F5F5F7] hover:text-[#1D1D1F] gap-2"
         >
           <ArrowLeft className="size-4" />
           {t.common.back}
@@ -153,7 +153,7 @@ export function Step4GettingStarted({
           type="button"
           onClick={onNext}
           disabled={isLoading}
-          className="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 bg-[#1D1D1F] hover:bg-[#2D2D2F] text-white gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isLoading ? (
             <>

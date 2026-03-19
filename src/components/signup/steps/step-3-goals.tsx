@@ -38,10 +38,10 @@ export function Step3Goals({
   return (
     <div className="w-full max-w-xl mx-auto">
       <div className="mb-8">
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100 mb-2">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1D1D1F] mb-2">
           {s.question}
         </h2>
-        <p className="text-zinc-400 text-base leading-relaxed">
+        <p className="text-[#6E6E73] text-base leading-relaxed">
           {s.description}
         </p>
       </div>
@@ -49,8 +49,8 @@ export function Step3Goals({
       <div className="space-y-5 mb-8">
         {/* Goals */}
         <div className="space-y-2">
-          <Label htmlFor="signup-goals" className="text-sm font-medium text-zinc-300">
-            {s.goalsLabel} <span className="text-red-400">*</span>
+          <Label htmlFor="signup-goals" className="text-sm font-medium text-[#6E6E73]">
+            {s.goalsLabel} <span className="text-red-600">*</span>
           </Label>
           <Textarea
             id="signup-goals"
@@ -59,18 +59,18 @@ export function Step3Goals({
             onBlur={() => validateField("goals")}
             placeholder={s.goalsPlaceholder}
             rows={4}
-            className="bg-zinc-900/50 border-zinc-800 text-zinc-100 placeholder:text-zinc-600 focus:border-indigo-500 focus:ring-indigo-500/20 resize-none"
+            className="bg-[#F5F5F7] border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus:border-[#B8860B]/50 focus:ring-[#B8860B]/20 resize-none"
           />
           {fieldErrors?.goals && (
-            <p className="text-xs text-red-400">{fieldErrors.goals}</p>
+            <p className="text-xs text-red-600">{fieldErrors.goals}</p>
           )}
         </div>
 
         {/* Pain Points */}
         <div className="space-y-2">
-          <Label htmlFor="signup-pain-points" className="text-sm font-medium text-zinc-300">
+          <Label htmlFor="signup-pain-points" className="text-sm font-medium text-[#6E6E73]">
             {s.painPointsLabel}{" "}
-            <span className="text-zinc-500 text-xs">({t.common.optional})</span>
+            <span className="text-[#86868B] text-xs">({t.common.optional})</span>
           </Label>
           <Textarea
             id="signup-pain-points"
@@ -78,20 +78,20 @@ export function Step3Goals({
             onChange={(e) => updateField("painPoints", e.target.value)}
             placeholder={s.painPointsPlaceholder}
             rows={3}
-            className="bg-zinc-900/50 border-zinc-800 text-zinc-100 placeholder:text-zinc-600 focus:border-indigo-500 focus:ring-indigo-500/20 resize-none"
+            className="bg-[#F5F5F7] border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus:border-[#B8860B]/50 focus:ring-[#B8860B]/20 resize-none"
           />
         </div>
 
         {/* Team Size (company/department only) */}
         {(formData.signupType === "company" || formData.signupType === "department") && (
           <div className="space-y-2">
-            <Label htmlFor="signup-team-size" className="text-sm font-medium text-zinc-300">
+            <Label htmlFor="signup-team-size" className="text-sm font-medium text-[#6E6E73]">
               {formData.signupType === "company"
                 ? s.teamSizeLabelCompany
                 : formData.signupType === "department"
                   ? s.teamSizeLabelDepartment
                   : s.teamSizeLabel}{" "}
-              <span className="text-zinc-500 text-xs">({t.common.optional})</span>
+              <span className="text-[#86868B] text-xs">({t.common.optional})</span>
             </Label>
             <Input
               id="signup-team-size"
@@ -100,14 +100,14 @@ export function Step3Goals({
               value={formData.teamSize}
               onChange={(e) => updateField("teamSize", e.target.value)}
               placeholder={s.teamSizePlaceholder}
-              className="bg-zinc-900/50 border-zinc-800 text-zinc-100 placeholder:text-zinc-600 focus:border-indigo-500 focus:ring-indigo-500/20 max-w-[200px]"
+              className="bg-[#F5F5F7] border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus:border-[#B8860B]/50 focus:ring-[#B8860B]/20 max-w-[200px]"
             />
           </div>
         )}
       </div>
 
       {error && (
-        <p role="alert" className="text-sm text-red-400 mb-4">
+        <p role="alert" className="text-sm text-red-600 mb-4">
           {error}
         </p>
       )}
@@ -117,7 +117,7 @@ export function Step3Goals({
           type="button"
           variant="outline"
           onClick={onBack}
-          className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 gap-2"
+          className="border-[#E8E8ED] text-[#6E6E73] hover:bg-[#F5F5F7] hover:text-[#1D1D1F] gap-2"
         >
           <ArrowLeft className="size-4" />
           {t.common.back}
@@ -126,7 +126,7 @@ export function Step3Goals({
           type="button"
           onClick={onNext}
           disabled={isLoading}
-          className="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 bg-[#1D1D1F] hover:bg-[#2D2D2F] text-white gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isLoading ? (
             <>

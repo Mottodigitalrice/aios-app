@@ -53,11 +53,11 @@ export function TidyCalEmbed({ path = "rice/ai" }: TidyCalEmbedProps) {
   return (
     <div
       ref={containerRef}
-      className="relative rounded-xl overflow-hidden border border-zinc-800 bg-white min-h-[400px]"
+      className="relative rounded-xl overflow-hidden border border-[#E8E8ED] bg-white min-h-[400px]"
     >
       {loading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/80 z-10">
-          <Loader2 className="size-6 text-indigo-400 animate-spin" />
+        <div className="absolute inset-0 flex items-center justify-center bg-[#F5F5F7] z-10">
+          <Loader2 className="size-6 text-[#B8860B] animate-spin" />
         </div>
       )}
       <div className="tidycal-embed" data-path={path} />

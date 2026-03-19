@@ -44,22 +44,22 @@ function SignupProgressBar({
     <div className="w-full">
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
-          <span className="text-xs text-zinc-500">
+          <span className="text-xs text-[#86868B]">
             {t.common.stepOf
               .replace("{current}", String(currentStep + 1))
               .replace("{total}", String(totalSteps))}
           </span>
           {currentStep > 0 && (
             <div key={currentStep} className="animate-check-pop">
-              <Check className="size-3.5 text-emerald-400" />
+              <Check className="size-3.5 text-[#1B7D5A]" />
             </div>
           )}
         </div>
-        <span className="text-xs text-zinc-500">{Math.round(progress)}%</span>
+        <span className="text-xs text-[#86868B]">{Math.round(progress)}%</span>
       </div>
-      <div className="h-1.5 w-full rounded-full bg-zinc-800/50 overflow-hidden">
+      <div className="h-1.5 w-full rounded-full bg-[#E8E8ED] overflow-hidden">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-indigo-600 to-indigo-400 transition-all duration-500 ease-out"
+          className="h-full rounded-full bg-gradient-to-r from-[#B8860B] to-[#D4A843] transition-all duration-500 ease-out"
           style={{ width: `${progress}%` }}
         />
       </div>
@@ -68,10 +68,10 @@ function SignupProgressBar({
           key={currentStep}
           className="flex items-center justify-between mt-2 animate-encourage"
         >
-          <span className="text-xs font-medium text-indigo-400">
+          <span className="text-xs font-medium text-[#B8860B]">
             {encouragement.text}
           </span>
-          <span className="text-xs text-zinc-600">
+          <span className="text-xs text-[#86868B]">
             {encouragement.timeLeft}
           </span>
         </div>
@@ -102,8 +102,8 @@ function SignupSidebar({ step }: { step: number }) {
   return (
     <div className="hidden lg:block w-80 shrink-0">
       <div className="sticky top-28 space-y-6">
-        <div className="rounded-xl border border-zinc-800/50 bg-zinc-900/30 p-6">
-          <h3 className="text-sm font-semibold text-zinc-400 uppercase tracking-wider mb-4">
+        <div className="rounded-xl border border-[#E8E8ED] bg-[#F5F5F7] p-6">
+          <h3 className="text-sm font-semibold text-[#6E6E73] uppercase tracking-wider mb-4">
             {sidebarStep.title}
           </h3>
           <div className="space-y-3">
@@ -111,8 +111,8 @@ function SignupSidebar({ step }: { step: number }) {
               const Icon = stepIcons[i % stepIcons.length];
               return (
                 <div key={i} className="flex items-start gap-3">
-                  <Icon className="size-4 text-indigo-400 mt-0.5 shrink-0" />
-                  <p className="text-sm text-zinc-300 leading-relaxed">
+                  <Icon className="size-4 text-[#B8860B] mt-0.5 shrink-0" />
+                  <p className="text-sm text-[#6E6E73] leading-relaxed">
                     {item}
                   </p>
                 </div>
@@ -123,8 +123,8 @@ function SignupSidebar({ step }: { step: number }) {
 
         {/* Trust badge */}
         <div className="flex items-center gap-2 px-2">
-          <Shield className="size-4 text-emerald-400" />
-          <p className="text-xs text-zinc-500">{t.sidebar.trustBadge}</p>
+          <Shield className="size-4 text-[#1B7D5A]" />
+          <p className="text-xs text-[#86868B]">{t.sidebar.trustBadge}</p>
         </div>
       </div>
     </div>
@@ -310,9 +310,9 @@ function SignupFormWizardInner() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 grid-pattern">
+    <div className="min-h-screen bg-white text-[#1D1D1F]">
       {/* Fixed Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/50 bg-zinc-950/80 backdrop-blur-xl">
+      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-[#E8E8ED] bg-white/80 backdrop-blur-xl">
         <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
           <Link
             href="/"
@@ -324,7 +324,7 @@ function SignupFormWizardInner() {
             <LanguageToggle locale={locale} onToggle={setLocale} />
             <Link
               href="/"
-              className="flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-100 transition-colors"
+              className="flex items-center gap-2 text-sm text-[#6E6E73] hover:text-[#1D1D1F] transition-colors"
             >
               <ArrowLeft className="size-4" />
               <span className="hidden sm:inline">{t.nav.backToHome}</span>
@@ -335,21 +335,21 @@ function SignupFormWizardInner() {
 
       {/* Hero -- only on first step */}
       {currentStep === 0 && (
-        <section className="relative pt-32 pb-8 sm:pt-40 sm:pb-12 radial-glow">
+        <section className="relative pt-32 pb-8 sm:pt-40 sm:pb-12">
           <div className="mx-auto max-w-2xl px-6 text-center">
             <div className="animate-fade-in-up">
               <Badge
                 variant="outline"
-                className="mb-6 border-indigo-500/30 text-indigo-300 bg-indigo-500/10"
+                className="mb-6 border-[#B8860B]/20 text-[#B8860B] bg-[#B8860B]/8"
               >
                 {t.badge}
               </Badge>
             </div>
-            <h1 className="animate-fade-in-up animation-delay-100 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.1] text-zinc-100">
+            <h1 className="animate-fade-in-up animation-delay-100 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.1] text-[#1D1D1F]">
               {t.title}{" "}
-              <span className="text-indigo-400">{t.titleHighlight}</span>
+              <span className="text-[#B8860B]">{t.titleHighlight}</span>
             </h1>
-            <p className="animate-fade-in-up animation-delay-200 mt-4 text-lg text-zinc-400 max-w-xl mx-auto leading-relaxed">
+            <p className="animate-fade-in-up animation-delay-200 mt-4 text-lg text-[#6E6E73] max-w-xl mx-auto leading-relaxed">
               {t.subtitle}
             </p>
             <div className="animate-fade-in-up animation-delay-300 mt-6 flex flex-wrap items-center justify-center gap-3">
@@ -358,9 +358,9 @@ function SignupFormWizardInner() {
                 return (
                   <div
                     key={chip}
-                    className="flex items-center gap-2 rounded-full border border-zinc-800/50 bg-zinc-900/50 px-4 py-2 text-sm text-zinc-300"
+                    className="flex items-center gap-2 rounded-full border border-[#E8E8ED] bg-[#F5F5F7] px-4 py-2 text-sm text-[#6E6E73]"
                   >
-                    <Icon className="size-4 text-indigo-400" />
+                    <Icon className="size-4 text-[#B8860B]" />
                     <span>{chip}</span>
                   </div>
                 );
@@ -395,21 +395,21 @@ function SignupFormWizardInner() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-zinc-800/50 py-12">
+      <footer className="border-t border-[#E8E8ED] py-12">
         <div className="mx-auto max-w-6xl px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
           <Link
             href="/"
-            className="text-sm font-semibold text-zinc-400"
+            className="text-sm font-semibold text-[#6E6E73]"
           >
             MOTTO Digital
           </Link>
-          <div className="flex items-center gap-6 text-sm text-zinc-500">
-            <Link href="/" className="hover:text-zinc-300 transition-colors">
+          <div className="flex items-center gap-6 text-sm text-[#86868B]">
+            <Link href="/" className="hover:text-[#6E6E73] transition-colors">
               {t.nav.home}
             </Link>
             <Link
               href={locale === "ja" ? "/privacy?lang=ja" : "/privacy"}
-              className="hover:text-zinc-300 transition-colors"
+              className="hover:text-[#6E6E73] transition-colors"
             >
               {t.nav.privacy}
             </Link>

@@ -37,10 +37,10 @@ export function Step2AboutYou({
   return (
     <div className="w-full max-w-xl mx-auto">
       <div className="mb-8">
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-100 mb-2">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1D1D1F] mb-2">
           {s.question}
         </h2>
-        <p className="text-zinc-400 text-base leading-relaxed">
+        <p className="text-[#6E6E73] text-base leading-relaxed">
           {s.description}
         </p>
       </div>
@@ -48,8 +48,8 @@ export function Step2AboutYou({
       <div className="space-y-5 mb-8">
         {/* Full Name */}
         <div className="space-y-2">
-          <Label htmlFor="signup-name" className="text-sm font-medium text-zinc-300">
-            {s.nameLabel} <span className="text-red-400">*</span>
+          <Label htmlFor="signup-name" className="text-sm font-medium text-[#6E6E73]">
+            {s.nameLabel} <span className="text-red-600">*</span>
           </Label>
           <Input
             id="signup-name"
@@ -58,17 +58,17 @@ export function Step2AboutYou({
             onChange={(e) => updateField("name", e.target.value)}
             onBlur={() => validateField("name")}
             placeholder={s.namePlaceholder}
-            className="bg-zinc-900/50 border-zinc-800 text-zinc-100 placeholder:text-zinc-600 focus:border-indigo-500 focus:ring-indigo-500/20"
+            className="bg-[#F5F5F7] border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus:border-[#B8860B]/50 focus:ring-[#B8860B]/20"
           />
           {fieldErrors?.name && (
-            <p className="text-xs text-red-400">{fieldErrors.name}</p>
+            <p className="text-xs text-red-600">{fieldErrors.name}</p>
           )}
         </div>
 
         {/* Email */}
         <div className="space-y-2">
-          <Label htmlFor="signup-email" className="text-sm font-medium text-zinc-300">
-            {s.emailLabel} <span className="text-red-400">*</span>
+          <Label htmlFor="signup-email" className="text-sm font-medium text-[#6E6E73]">
+            {s.emailLabel} <span className="text-red-600">*</span>
           </Label>
           <Input
             id="signup-email"
@@ -77,21 +77,21 @@ export function Step2AboutYou({
             onChange={(e) => updateField("email", e.target.value)}
             onBlur={() => validateField("email")}
             placeholder={s.emailPlaceholder}
-            className="bg-zinc-900/50 border-zinc-800 text-zinc-100 placeholder:text-zinc-600 focus:border-indigo-500 focus:ring-indigo-500/20"
+            className="bg-[#F5F5F7] border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus:border-[#B8860B]/50 focus:ring-[#B8860B]/20"
           />
           {fieldErrors?.email && (
-            <p className="text-xs text-red-400">{fieldErrors.email}</p>
+            <p className="text-xs text-red-600">{fieldErrors.email}</p>
           )}
         </div>
 
         {/* Company */}
         <div className="space-y-2">
-          <Label htmlFor="signup-company" className="text-sm font-medium text-zinc-300">
+          <Label htmlFor="signup-company" className="text-sm font-medium text-[#6E6E73]">
             {s.companyLabel}{" "}
             {formData.signupType === "company" || formData.signupType === "department" ? (
-              <span className="text-red-400">*</span>
+              <span className="text-red-600">*</span>
             ) : (
-              <span className="text-zinc-500 text-xs">({t.common.optional})</span>
+              <span className="text-[#86868B] text-xs">({t.common.optional})</span>
             )}
           </Label>
           <Input
@@ -101,21 +101,21 @@ export function Step2AboutYou({
             onChange={(e) => updateField("company", e.target.value)}
             onBlur={() => validateField("company")}
             placeholder={s.companyPlaceholder}
-            className="bg-zinc-900/50 border-zinc-800 text-zinc-100 placeholder:text-zinc-600 focus:border-indigo-500 focus:ring-indigo-500/20"
+            className="bg-[#F5F5F7] border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus:border-[#B8860B]/50 focus:ring-[#B8860B]/20"
           />
           {(formData.signupType === "company" || formData.signupType === "department") && (
-            <p className="text-xs text-zinc-500">{s.companyRequired}</p>
+            <p className="text-xs text-[#86868B]">{s.companyRequired}</p>
           )}
           {fieldErrors?.company && (
-            <p className="text-xs text-red-400">{fieldErrors.company}</p>
+            <p className="text-xs text-red-600">{fieldErrors.company}</p>
           )}
         </div>
 
         {/* Department (department signup only) */}
         {formData.signupType === "department" && (
           <div className="space-y-2">
-            <Label htmlFor="signup-department" className="text-sm font-medium text-zinc-300">
-              {s.departmentLabel} <span className="text-red-400">*</span>
+            <Label htmlFor="signup-department" className="text-sm font-medium text-[#6E6E73]">
+              {s.departmentLabel} <span className="text-red-600">*</span>
             </Label>
             <Input
               id="signup-department"
@@ -124,20 +124,20 @@ export function Step2AboutYou({
               onChange={(e) => updateField("departmentName", e.target.value)}
               onBlur={() => validateField("departmentName")}
               placeholder={s.departmentPlaceholder}
-              className="bg-zinc-900/50 border-zinc-800 text-zinc-100 placeholder:text-zinc-600 focus:border-indigo-500 focus:ring-indigo-500/20"
+              className="bg-[#F5F5F7] border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus:border-[#B8860B]/50 focus:ring-[#B8860B]/20"
             />
-            <p className="text-xs text-zinc-500">{s.departmentRequired}</p>
+            <p className="text-xs text-[#86868B]">{s.departmentRequired}</p>
             {fieldErrors?.departmentName && (
-              <p className="text-xs text-red-400">{fieldErrors.departmentName}</p>
+              <p className="text-xs text-red-600">{fieldErrors.departmentName}</p>
             )}
           </div>
         )}
 
         {/* Role */}
         <div className="space-y-2">
-          <Label htmlFor="signup-role" className="text-sm font-medium text-zinc-300">
+          <Label htmlFor="signup-role" className="text-sm font-medium text-[#6E6E73]">
             {s.roleLabel}{" "}
-            <span className="text-zinc-500 text-xs">({t.common.optional})</span>
+            <span className="text-[#86868B] text-xs">({t.common.optional})</span>
           </Label>
           <Input
             id="signup-role"
@@ -145,13 +145,13 @@ export function Step2AboutYou({
             value={formData.role}
             onChange={(e) => updateField("role", e.target.value)}
             placeholder={s.rolePlaceholder}
-            className="bg-zinc-900/50 border-zinc-800 text-zinc-100 placeholder:text-zinc-600 focus:border-indigo-500 focus:ring-indigo-500/20"
+            className="bg-[#F5F5F7] border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus:border-[#B8860B]/50 focus:ring-[#B8860B]/20"
           />
         </div>
       </div>
 
       {error && (
-        <p role="alert" className="text-sm text-red-400 mb-4">
+        <p role="alert" className="text-sm text-red-600 mb-4">
           {error}
         </p>
       )}
@@ -161,7 +161,7 @@ export function Step2AboutYou({
           type="button"
           variant="outline"
           onClick={onBack}
-          className="border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 gap-2"
+          className="border-[#E8E8ED] text-[#6E6E73] hover:bg-[#F5F5F7] hover:text-[#1D1D1F] gap-2"
         >
           <ArrowLeft className="size-4" />
           {t.common.back}
@@ -170,7 +170,7 @@ export function Step2AboutYou({
           type="button"
           onClick={onNext}
           disabled={isLoading}
-          className="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white gap-2 glow disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 bg-[#1D1D1F] hover:bg-[#2D2D2F] text-white gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isLoading ? (
             <>
