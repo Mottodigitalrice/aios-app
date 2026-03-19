@@ -100,8 +100,38 @@ const ja = {
       title: "AIが「コンピュータの",
       titleHighlight: "使い方」を覚えた。",
       subtitle: "ツールはすでにある。問題は、あなたがそれを活用するか——それとも競合に先を越されるかです。",
-      chatbotEra: { label: "2023年：チャットボットの時代", description: "AIは考え、書き、分析できました。でも何もできなかった。質問して、答えをもらって、そのあとは自分で動くしかなかった。" },
-      agenticEra: { label: "2025年：エージェントの時代", description: "AIがターミナルの中で動けるようになりました。ファイルを読み、コードを書き、メールを送り、データベースを更新し、サーバーにデプロイし、ワークフローを実行する——自律的に。" },
+      timeline: [
+        {
+          year: "2024",
+          label: "チャットボット",
+          description: "AIは考え、書き、分析できました。でも何もできなかった。質問して、答えをもらって、そのあとは自分で動くしかなかった。",
+          status: "past" as const,
+        },
+        {
+          year: "2025",
+          label: "自動化＆エージェント",
+          description: "AIツールが実際のシステムに接続し始めました。ワークフロービルダー、API連携、初期の自律エージェントが登場——ただし、導入には手間がかかりました。",
+          status: "past" as const,
+        },
+        {
+          year: "2026",
+          label: "エージェンティックAI",
+          description: "AIがターミナルの中で動けるようになりました。ファイルを読み、コードを書き、メールを送り、データベースを更新し、サーバーにデプロイする——自律的に。ブレイクスルーの年です。",
+          status: "current" as const,
+        },
+      ],
+      architecture: {
+        agentLabel: "AIエージェント（CLI）",
+        agentSub: "脳＋体＝完全な自律性",
+        layers: [
+          { label: "ローカルPC", sublabel: "Local Machine" },
+          { label: "ローカルサーバー", sublabel: "Local Server" },
+          { label: "クラウドサーバー", sublabel: "VPS / Cloud" },
+        ],
+        softwareLabel: "あらゆるソフトウェアに接続",
+        softwareLabelJa: "Connected to any software",
+        integrations: ["Notion", "Slack", "CRM", "Email", "Database", "ERP", "POS", "LINE", "会計ソフト", "EC"],
+      },
       tools: [
         { name: "Claude Code", maker: "Anthropic" },
         { name: "Codex", maker: "OpenAI" },

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Brain, Zap } from "lucide-react";
+import { Brain, ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { AnimateInView } from "@/components/landing/animate-in-view";
 import { useInView } from "@/hooks/use-in-view";
@@ -11,16 +11,16 @@ const content = {
     badge: "The Paradigm Shift",
     heading: "Giving AI a Body",
     headingJa: "AIに「体」を与える",
-    brainLabel: "BRAIN",
+    brainLabel: "BRAIN ONLY",
     brainTitle: "AI Model",
     brainSub: "Claude, GPT, Gemini",
     brainCapability: "Can think. Can't act.",
     brainCapabilityJa: "考えられる。行動できない。",
-    bodyLabel: "BODY",
-    bodyTitle: "Agentic Harness",
-    bodySub: "Terminal, files, APIs, servers",
-    bodyCapability: "Can think AND act.",
-    bodyCapabilityJa: "考えて、行動できる。",
+    harnessLabel: "BRAIN + HARNESS",
+    harnessTitle: "Agentic AI",
+    harnessSub: "Terminal, files, APIs, servers",
+    harnessCapability: "Can think AND act.",
+    harnessCapabilityJa: "考えて、行動できる。",
     result: "An AI that can operate your entire business",
     resultJa: "ビジネス全体を運営できるAI",
   },
@@ -28,25 +28,50 @@ const content = {
     badge: "発想の転換",
     heading: "AIに「体」を与える",
     headingJa: "Giving AI a Body",
-    brainLabel: "BRAIN",
+    brainLabel: "BRAIN ONLY",
     brainTitle: "AIモデル",
     brainSub: "Claude, GPT, Gemini",
     brainCapability: "考えられる。行動できない。",
     brainCapabilityJa: "Can think. Can't act.",
-    bodyLabel: "BODY",
-    bodyTitle: "エージェンティック・ハーネス",
-    bodySub: "ターミナル、ファイル、API、サーバー",
-    bodyCapability: "考えて、行動できる。",
-    bodyCapabilityJa: "Can think AND act.",
+    harnessLabel: "BRAIN + HARNESS",
+    harnessTitle: "エージェンティックAI",
+    harnessSub: "ターミナル、ファイル、API、サーバー",
+    harnessCapability: "考えて、行動できる。",
+    harnessCapabilityJa: "Can think AND act.",
     result: "ビジネス全体を運営できるAI",
     resultJa: "An AI that can operate your entire business",
   },
 } as const;
 
+/* 3D-depth style helpers (V2 from canvas) */
+const brainSoloStyle = {
+  background: "linear-gradient(160deg, rgba(99,102,241,0.06), rgba(99,102,241,0.14))",
+  border: "2px solid rgba(99,102,241,0.3)",
+  boxShadow: "0 12px 40px rgba(99,102,241,0.12), 0 0 0 1px rgba(99,102,241,0.05), inset 0 -6px 20px rgba(99,102,241,0.06)",
+};
+
+const harnessOuterStyle = {
+  background: "linear-gradient(160deg, rgba(16,185,129,0.04), rgba(16,185,129,0.1))",
+  border: "2.5px dashed rgba(16,185,129,0.35)",
+  boxShadow: "0 16px 48px rgba(16,185,129,0.1), 0 0 0 1px rgba(16,185,129,0.04), inset 0 2px 24px rgba(255,255,255,0.15)",
+};
+
+const harnessInnerStyle = {
+  background: "linear-gradient(160deg, rgba(99,102,241,0.08), rgba(99,102,241,0.18))",
+  border: "2px solid rgba(99,102,241,0.35)",
+  boxShadow: "0 6px 24px rgba(99,102,241,0.15), inset 0 -4px 12px rgba(99,102,241,0.08)",
+};
+
+const resultStyle = {
+  background: "linear-gradient(135deg, rgba(16,185,129,0.04), rgba(16,185,129,0.1))",
+  border: "2px solid rgba(16,185,129,0.25)",
+  boxShadow: "0 6px 24px rgba(16,185,129,0.08)",
+};
+
 /**
- * BrainBodyDiagram — the pure visual (brain + body + equals + result).
- * Extracted so both the LP section and the presentation can share it.
- * When `compact` is true, sizes are slightly reduced for slide contexts.
+ * BrainBodyDiagram — LEFT: brain alone, arrow, RIGHT: brain inside harness.
+ * 3D depth style with gradients and shadows.
+ * Shared between LP section and presentation.
  */
 export function BrainBodyDiagram({
   locale,
@@ -57,33 +82,35 @@ export function BrainBodyDiagram({
 }) {
   const t = content[locale];
 
-  const shapeSize = compact
-    ? "size-24 sm:size-28"
-    : "size-28 sm:size-32";
-  const iconSize = compact
-    ? "size-10 sm:size-12"
-    : "size-12 sm:size-14";
+  const soloSize = compact ? "w-36 h-36 sm:w-40 sm:h-40" : "w-40 h-40 sm:w-44 sm:h-44";
+  const outerSize = compact ? "w-48 h-48 sm:w-52 sm:h-52" : "w-52 h-52 sm:w-56 sm:h-56";
+  const innerSize = compact ? "w-28 h-28 sm:w-32 sm:h-32" : "w-32 h-32 sm:w-36 sm:h-36";
+  const iconLg = compact ? "size-12 sm:size-14" : "size-14 sm:size-16";
+  const iconSm = compact ? "size-10 sm:size-11" : "size-11 sm:size-12";
 
   return (
     <div className="flex flex-col items-center gap-8">
-      {/* Top row: Brain + Body side by side */}
+      {/* Side-by-side: Brain alone → Brain in Harness */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 w-full">
-        {/* BRAIN — circle with purple/indigo border */}
-        <div className="flex flex-col items-center gap-4 flex-1 max-w-[280px]">
-          <div className={`${shapeSize} rounded-full border-2 border-indigo-500/40 bg-indigo-500/5 flex items-center justify-center`}>
-            <Brain className={`${iconSize} text-indigo-500`} />
+        {/* LEFT: Brain alone */}
+        <div className="flex flex-col items-center gap-4 flex-1 max-w-[260px]">
+          <div
+            className={`${soloSize} rounded-full flex items-center justify-center`}
+            style={brainSoloStyle}
+          >
+            <Brain className={`${iconLg} text-indigo-500`} />
           </div>
           <div className="text-center">
-            <div className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-500 mb-2">
+            <div className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-500 mb-1">
               {t.brainLabel}
             </div>
-            <div className="text-lg font-semibold" style={{ color: "var(--lp-text-heading)" }}>
+            <div className="text-base font-semibold" style={{ color: "var(--lp-text-heading)" }}>
               {t.brainTitle}
             </div>
-            <div className="text-sm mt-1" style={{ color: "var(--lp-text-muted)" }}>
+            <div className="text-sm mt-0.5" style={{ color: "var(--lp-text-muted)" }}>
               {t.brainSub}
             </div>
-            <div className="text-sm font-medium text-emerald-600 mt-2">
+            <div className="text-sm font-medium mt-2" style={{ color: "var(--lp-text-body)" }}>
               {t.brainCapability}
             </div>
             <div className="text-xs mt-0.5" style={{ color: "var(--lp-text-muted)" }}>
@@ -92,31 +119,39 @@ export function BrainBodyDiagram({
           </div>
         </div>
 
-        {/* Plus sign */}
-        <div className="text-3xl sm:text-4xl font-bold select-none" style={{ color: "var(--lp-text-muted)" }}>
-          +
+        {/* Arrow */}
+        <div className="flex items-center justify-center shrink-0">
+          <ArrowRight className="size-8 sm:size-10 rotate-90 sm:rotate-0" style={{ color: "var(--lp-text-muted)" }} />
         </div>
 
-        {/* BODY — square with emerald dashed border */}
-        <div className="flex flex-col items-center gap-4 flex-1 max-w-[280px]">
-          <div className={`${shapeSize} rounded-xl border-2 border-dashed border-emerald-500/40 bg-emerald-500/5 flex items-center justify-center`}>
-            <Zap className={`${iconSize} text-emerald-500`} />
+        {/* RIGHT: Brain inside Harness */}
+        <div className="flex flex-col items-center gap-4 flex-1 max-w-[260px]">
+          <div
+            className={`${outerSize} rounded-2xl flex items-center justify-center`}
+            style={harnessOuterStyle}
+          >
+            <div
+              className={`${innerSize} rounded-full flex items-center justify-center`}
+              style={harnessInnerStyle}
+            >
+              <Brain className={`${iconSm} text-indigo-500`} />
+            </div>
           </div>
           <div className="text-center">
-            <div className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-500 mb-2">
-              {t.bodyLabel}
+            <div className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 mb-1">
+              {t.harnessLabel}
             </div>
-            <div className="text-lg font-semibold" style={{ color: "var(--lp-text-heading)" }}>
-              {t.bodyTitle}
+            <div className="text-base font-semibold" style={{ color: "var(--lp-text-heading)" }}>
+              {t.harnessTitle}
             </div>
-            <div className="text-sm mt-1" style={{ color: "var(--lp-text-muted)" }}>
-              {t.bodySub}
+            <div className="text-sm mt-0.5" style={{ color: "var(--lp-text-muted)" }}>
+              {t.harnessSub}
             </div>
             <div className="text-sm font-medium text-emerald-600 mt-2">
-              {t.bodyCapability}
+              {t.harnessCapability}
             </div>
             <div className="text-xs mt-0.5" style={{ color: "var(--lp-text-muted)" }}>
-              {t.bodyCapabilityJa}
+              {t.harnessCapabilityJa}
             </div>
           </div>
         </div>
@@ -130,7 +165,7 @@ export function BrainBodyDiagram({
       </div>
 
       {/* Result box */}
-      <div className="rounded-xl border-2 border-emerald-500/20 bg-emerald-500/5 px-8 py-6 text-center max-w-lg">
+      <div className="rounded-xl px-8 py-6 text-center max-w-lg" style={resultStyle}>
         <p className="text-lg sm:text-xl font-semibold text-emerald-700">
           {t.result}
         </p>
@@ -143,19 +178,23 @@ export function BrainBodyDiagram({
 }
 
 /**
- * BrainBodySection — the full landing-page section with header, scroll
- * animations, and outer wrapper. Uses BrainBodyDiagram internally.
- * Light Apple theme with sequential animation: brain appears → body slides in.
+ * BrainBodySection — full landing-page section with scroll animations.
+ * Brain solo appears first, then the harness side slides in.
  */
 export function BrainBodySection({ locale }: { locale: "en" | "ja" }) {
   const t = content[locale];
   const [sectionRef, isInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
-  const [showBody, setShowBody] = useState(false);
+  const [showHarness, setShowHarness] = useState(false);
+  const [showResult, setShowResult] = useState(false);
 
   useEffect(() => {
     if (isInView) {
-      const timer = setTimeout(() => setShowBody(true), 600);
-      return () => clearTimeout(timer);
+      const harnessTimer = setTimeout(() => setShowHarness(true), 600);
+      const resultTimer = setTimeout(() => setShowResult(true), 1200);
+      return () => {
+        clearTimeout(harnessTimer);
+        clearTimeout(resultTimer);
+      };
     }
   }, [isInView]);
 
@@ -184,33 +223,35 @@ export function BrainBodySection({ locale }: { locale: "en" | "ja" }) {
           </p>
         </AnimateInView>
 
-        {/* Brain + Body Diagram with sequential animation */}
+        {/* Animated side-by-side */}
         <AnimateInView delay={200}>
           <div className="flex flex-col items-center gap-8">
-            {/* Top row: Brain + Body */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10 w-full">
-              {/* BRAIN — always visible once in view */}
+              {/* LEFT: Brain alone — appears first */}
               <div
-                className="flex flex-col items-center gap-4 flex-1 max-w-[280px] transition-all duration-500"
+                className="flex flex-col items-center gap-4 flex-1 max-w-[260px] transition-all duration-500"
                 style={{
                   opacity: isInView ? 1 : 0,
                   transform: isInView ? "translateY(0)" : "translateY(20px)",
                 }}
               >
-                <div className="size-28 sm:size-32 rounded-full border-2 border-indigo-500/40 bg-indigo-500/5 flex items-center justify-center">
-                  <Brain className="size-12 sm:size-14 text-indigo-500" />
+                <div
+                  className="w-40 h-40 sm:w-44 sm:h-44 rounded-full flex items-center justify-center"
+                  style={brainSoloStyle}
+                >
+                  <Brain className="size-14 sm:size-16 text-indigo-500" />
                 </div>
                 <div className="text-center">
-                  <div className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-500 mb-2">
+                  <div className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-500 mb-1">
                     {t.brainLabel}
                   </div>
-                  <div className="text-lg font-semibold" style={{ color: "var(--lp-text-heading)" }}>
+                  <div className="text-base font-semibold" style={{ color: "var(--lp-text-heading)" }}>
                     {t.brainTitle}
                   </div>
-                  <div className="text-sm mt-1" style={{ color: "var(--lp-text-muted)" }}>
+                  <div className="text-sm mt-0.5" style={{ color: "var(--lp-text-muted)" }}>
                     {t.brainSub}
                   </div>
-                  <div className="text-sm font-medium text-emerald-600 mt-2">
+                  <div className="text-sm font-medium mt-2" style={{ color: "var(--lp-text-body)" }}>
                     {t.brainCapability}
                   </div>
                   <div className="text-xs mt-0.5" style={{ color: "var(--lp-text-muted)" }}>
@@ -219,56 +260,62 @@ export function BrainBodySection({ locale }: { locale: "en" | "ja" }) {
                 </div>
               </div>
 
-              {/* Plus sign — appears with body */}
+              {/* Arrow — appears with harness */}
               <div
-                className="text-3xl sm:text-4xl font-bold select-none transition-all duration-500"
+                className="flex items-center justify-center shrink-0 transition-all duration-500"
                 style={{
-                  color: "var(--lp-text-muted)",
-                  opacity: showBody ? 1 : 0,
-                  transform: showBody ? "scale(1)" : "scale(0.5)",
+                  opacity: showHarness ? 1 : 0,
+                  transform: showHarness ? "scale(1)" : "scale(0.5)",
                 }}
               >
-                +
+                <ArrowRight className="size-8 sm:size-10 rotate-90 sm:rotate-0" style={{ color: "var(--lp-text-muted)" }} />
               </div>
 
-              {/* BODY — slides in after delay */}
+              {/* RIGHT: Brain inside Harness — slides in */}
               <div
-                className="flex flex-col items-center gap-4 flex-1 max-w-[280px] transition-all duration-700 ease-out"
+                className="flex flex-col items-center gap-4 flex-1 max-w-[260px] transition-all duration-700 ease-out"
                 style={{
-                  opacity: showBody ? 1 : 0,
-                  transform: showBody ? "translateX(0)" : "translateX(40px)",
+                  opacity: showHarness ? 1 : 0,
+                  transform: showHarness ? "translateX(0)" : "translateX(40px)",
                 }}
               >
-                <div className="size-28 sm:size-32 rounded-xl border-2 border-dashed border-emerald-500/40 bg-emerald-500/5 flex items-center justify-center">
-                  <Zap className="size-12 sm:size-14 text-emerald-500" />
+                <div
+                  className="w-52 h-52 sm:w-56 sm:h-56 rounded-2xl flex items-center justify-center"
+                  style={harnessOuterStyle}
+                >
+                  <div
+                    className="w-32 h-32 sm:w-36 sm:h-36 rounded-full flex items-center justify-center"
+                    style={harnessInnerStyle}
+                  >
+                    <Brain className="size-11 sm:size-12 text-indigo-500" />
+                  </div>
                 </div>
                 <div className="text-center">
-                  <div className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-500 mb-2">
-                    {t.bodyLabel}
+                  <div className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 mb-1">
+                    {t.harnessLabel}
                   </div>
-                  <div className="text-lg font-semibold" style={{ color: "var(--lp-text-heading)" }}>
-                    {t.bodyTitle}
+                  <div className="text-base font-semibold" style={{ color: "var(--lp-text-heading)" }}>
+                    {t.harnessTitle}
                   </div>
-                  <div className="text-sm mt-1" style={{ color: "var(--lp-text-muted)" }}>
-                    {t.bodySub}
+                  <div className="text-sm mt-0.5" style={{ color: "var(--lp-text-muted)" }}>
+                    {t.harnessSub}
                   </div>
                   <div className="text-sm font-medium text-emerald-600 mt-2">
-                    {t.bodyCapability}
+                    {t.harnessCapability}
                   </div>
                   <div className="text-xs mt-0.5" style={{ color: "var(--lp-text-muted)" }}>
-                    {t.bodyCapabilityJa}
+                    {t.harnessCapabilityJa}
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Equals divider — appears with body */}
+            {/* Equals divider */}
             <div
               className="flex items-center gap-4 w-full max-w-md transition-all duration-500"
               style={{
-                opacity: showBody ? 1 : 0,
-                transform: showBody ? "translateY(0)" : "translateY(10px)",
-                transitionDelay: "200ms",
+                opacity: showResult ? 1 : 0,
+                transform: showResult ? "translateY(0)" : "translateY(10px)",
               }}
             >
               <div className="flex-1 h-px" style={{ backgroundColor: "var(--lp-border-visible)" }} />
@@ -276,13 +323,13 @@ export function BrainBodySection({ locale }: { locale: "en" | "ja" }) {
               <div className="flex-1 h-px" style={{ backgroundColor: "var(--lp-border-visible)" }} />
             </div>
 
-            {/* Result box — appears last */}
+            {/* Result box */}
             <div
-              className="rounded-xl border-2 border-emerald-500/20 bg-emerald-500/5 px-8 py-6 text-center max-w-lg transition-all duration-500"
+              className="rounded-xl px-8 py-6 text-center max-w-lg transition-all duration-500"
               style={{
-                opacity: showBody ? 1 : 0,
-                transform: showBody ? "translateY(0)" : "translateY(10px)",
-                transitionDelay: "400ms",
+                ...resultStyle,
+                opacity: showResult ? 1 : 0,
+                transform: showResult ? "translateY(0)" : "translateY(10px)",
               }}
             >
               <p className="text-lg sm:text-xl font-semibold text-emerald-700">

@@ -15,13 +15,13 @@ interface SignupLocaleContextValue {
 const SignupLocaleContext = createContext<SignupLocaleContextValue | null>(null);
 
 function getInitialLocale(): Locale {
-  if (typeof window === "undefined") return "en";
+  if (typeof window === "undefined") return "ja";
   const params = new URLSearchParams(window.location.search);
   const urlLocale = params.get("lang");
   if (urlLocale === "ja" || urlLocale === "en") return urlLocale;
   const stored = localStorage.getItem("aios-signup-locale");
   if (stored === "ja" || stored === "en") return stored;
-  return "en";
+  return "ja";
 }
 
 export function SignupLocaleProvider({ children }: { children: React.ReactNode }) {

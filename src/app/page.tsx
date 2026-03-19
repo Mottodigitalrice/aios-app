@@ -29,11 +29,11 @@ import type { LandingT } from "@/components/landing/sections/types";
 const dictionaries = { en, ja } as const;
 
 function getInitialLocale(): "en" | "ja" {
-  if (typeof window === "undefined") return "en";
+  if (typeof window === "undefined") return "ja";
   const params = new URLSearchParams(window.location.search);
   const urlLocale = params.get("lang");
   if (urlLocale === "ja" || urlLocale === "en") return urlLocale;
-  return "en";
+  return "ja";
 }
 
 export default function HomePage() {
@@ -47,7 +47,7 @@ export default function HomePage() {
   const handleLocaleToggle = (newLocale: "en" | "ja") => {
     setLocale(newLocale);
     const url = new URL(window.location.href);
-    if (newLocale === "en") {
+    if (newLocale === "ja") {
       url.searchParams.delete("lang");
     } else {
       url.searchParams.set("lang", newLocale);

@@ -18,7 +18,7 @@ export default async function PrivacyPage({
   searchParams: Promise<{ lang?: string }>;
 }) {
   const { lang } = await searchParams;
-  const locale = lang === "ja" ? "ja" : "en";
+  const locale = lang === "en" ? "en" : "ja";
   const { privacy } = dictionaries[locale];
 
   const navLabels = {

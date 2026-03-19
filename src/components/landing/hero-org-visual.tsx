@@ -30,7 +30,7 @@ const activityJA = [
 ];
 
 /* ──────────────────────────────────────────────
-   Color system — matches the agent-org-chart.tsx
+   Color system — light theme version
    ────────────────────────────────────────────── */
 type AgentColor = "indigo" | "violet" | "blue" | "rose" | "amber" | "emerald" | "zinc";
 
@@ -38,32 +38,32 @@ const palette: Record<AgentColor, {
   bg: string; border: string; text: string; dot: string; glow: string; line: string;
 }> = {
   indigo: {
-    bg: "bg-indigo-500/[0.08]", border: "border-indigo-500/30", text: "text-indigo-300",
-    dot: "bg-indigo-400", glow: "shadow-indigo-500/20", line: "from-indigo-500/40 to-indigo-500/10",
+    bg: "bg-indigo-500/[0.06]", border: "border-indigo-500/20", text: "text-indigo-600",
+    dot: "bg-indigo-500", glow: "shadow-indigo-500/10", line: "from-indigo-500/30 to-indigo-500/5",
   },
   violet: {
-    bg: "bg-violet-500/[0.08]", border: "border-violet-500/30", text: "text-violet-300",
-    dot: "bg-violet-400", glow: "shadow-violet-500/20", line: "from-violet-500/40 to-violet-500/10",
+    bg: "bg-violet-500/[0.06]", border: "border-violet-500/20", text: "text-violet-600",
+    dot: "bg-violet-500", glow: "shadow-violet-500/10", line: "from-violet-500/30 to-violet-500/5",
   },
   blue: {
-    bg: "bg-blue-500/[0.08]", border: "border-blue-500/30", text: "text-blue-300",
-    dot: "bg-blue-400", glow: "shadow-blue-500/20", line: "from-blue-500/40 to-blue-500/10",
+    bg: "bg-blue-500/[0.06]", border: "border-blue-500/20", text: "text-blue-600",
+    dot: "bg-blue-500", glow: "shadow-blue-500/10", line: "from-blue-500/30 to-blue-500/5",
   },
   rose: {
-    bg: "bg-rose-500/[0.08]", border: "border-rose-500/30", text: "text-rose-300",
-    dot: "bg-rose-400", glow: "shadow-rose-500/20", line: "from-rose-500/40 to-rose-500/10",
+    bg: "bg-rose-500/[0.06]", border: "border-rose-500/20", text: "text-rose-600",
+    dot: "bg-rose-500", glow: "shadow-rose-500/10", line: "from-rose-500/30 to-rose-500/5",
   },
   amber: {
-    bg: "bg-amber-500/[0.08]", border: "border-amber-500/30", text: "text-amber-300",
-    dot: "bg-amber-400", glow: "shadow-amber-500/20", line: "from-amber-500/40 to-amber-500/10",
+    bg: "bg-amber-500/[0.06]", border: "border-amber-500/20", text: "text-amber-600",
+    dot: "bg-amber-500", glow: "shadow-amber-500/10", line: "from-amber-500/30 to-amber-500/5",
   },
   emerald: {
-    bg: "bg-emerald-500/[0.08]", border: "border-emerald-500/30", text: "text-emerald-300",
-    dot: "bg-emerald-400", glow: "shadow-emerald-500/20", line: "from-emerald-500/40 to-emerald-500/10",
+    bg: "bg-emerald-500/[0.06]", border: "border-emerald-500/20", text: "text-emerald-600",
+    dot: "bg-emerald-500", glow: "shadow-emerald-500/10", line: "from-emerald-500/30 to-emerald-500/5",
   },
   zinc: {
-    bg: "bg-zinc-500/[0.06]", border: "border-zinc-700/50", text: "text-zinc-400",
-    dot: "bg-zinc-500", glow: "shadow-zinc-500/10", line: "from-zinc-400/40 to-zinc-400/15",
+    bg: "bg-zinc-500/[0.04]", border: "border-zinc-300/50", text: "text-zinc-500",
+    dot: "bg-zinc-400", glow: "shadow-zinc-500/5", line: "from-zinc-400/30 to-zinc-400/10",
   },
 };
 
@@ -133,9 +133,9 @@ function OrgNode({
       {/* Status dot */}
       {isActive !== undefined && (
         <div className="absolute -top-1 -right-1 flex items-center justify-center">
-          <div className={`size-2.5 rounded-full ${isActive ? "bg-emerald-400" : "bg-zinc-600"}`} />
+          <div className={`size-2.5 rounded-full ${isActive ? "bg-emerald-500" : "bg-zinc-300"}`} />
           {isActive && (
-            <div className="absolute size-2.5 rounded-full bg-emerald-400 animate-ping opacity-40" />
+            <div className="absolute size-2.5 rounded-full bg-emerald-500 animate-ping opacity-40" />
           )}
         </div>
       )}
@@ -143,7 +143,7 @@ function OrgNode({
       {/* Task count badge */}
       {taskCount !== undefined && taskCount > 0 && (
         <div className="absolute -top-1.5 -left-1.5">
-          <div className="flex items-center justify-center size-4 rounded-full bg-indigo-500/80 text-[10px] font-bold text-white">
+          <div className="flex items-center justify-center size-4 rounded-full bg-indigo-500 text-[10px] font-bold text-white">
             {taskCount}
           </div>
         </div>
@@ -154,16 +154,16 @@ function OrgNode({
         <span className={`text-[11px] font-semibold leading-tight ${p.text}`}>{label}</span>
       </div>
       {sublabel && (
-        <span className="block text-[11px] text-zinc-500 mt-0.5 leading-tight">{sublabel}</span>
+        <span className="block text-[11px] mt-0.5 leading-tight" style={{ color: "var(--lp-text-muted)" }}>{sublabel}</span>
       )}
     </div>
   );
 }
 
 /* ──────────────────────────────────────────────
-   Main Component — HeroOrgVisual
+   Main Component — HeroOrgVisual (Light Theme)
    ────────────────────────────────────────────── */
-export function HeroOrgVisual({ locale = "en", mobile = false }: { locale?: "en" | "ja"; mobile?: boolean }) {
+export function HeroOrgVisual({ locale = "ja", mobile = false }: { locale?: "en" | "ja"; mobile?: boolean }) {
   const dict = dictionaries[locale];
   const t = "orgChart" in dict.landing
     ? (dict.landing as typeof en.landing).orgChart
@@ -177,13 +177,11 @@ export function HeroOrgVisual({ locale = "en", mobile = false }: { locale?: "en"
   const [taskCounts, setTaskCounts] = useState([3, 2, 1, 4, 2]);
   const hasAnimated = useRef(false);
 
-  // Mount animation
   useEffect(() => {
     const timer = setTimeout(() => setMounted(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
-  // Cycle active agent highlight
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveAgent((prev) => (prev + 1) % 5);
@@ -191,7 +189,6 @@ export function HeroOrgVisual({ locale = "en", mobile = false }: { locale?: "en"
     return () => clearInterval(timer);
   }, []);
 
-  // Cycle activity feed
   useEffect(() => {
     const timer = setInterval(() => {
       setActivityIndex((prev) => (prev + 1) % activity.length);
@@ -199,7 +196,6 @@ export function HeroOrgVisual({ locale = "en", mobile = false }: { locale?: "en"
     return () => clearInterval(timer);
   }, [activity.length]);
 
-  // Randomly shift task counts for "alive" feel
   useEffect(() => {
     if (hasAnimated.current) return;
     hasAnimated.current = true;
@@ -216,51 +212,58 @@ export function HeroOrgVisual({ locale = "en", mobile = false }: { locale?: "en"
 
   const currentActivity = activity[activityIndex];
 
-  // Mobile simplified view: CEO -> Integrator -> 5 C-suite only
+  // Mobile simplified view
   if (mobile) {
     return (
       <div className="relative w-full max-w-sm mx-auto">
-        <div className="relative rounded-2xl border border-zinc-700/50 ring-1 ring-zinc-700/40 bg-zinc-900/80 backdrop-blur-sm overflow-hidden shadow-2xl shadow-indigo-500/[0.06]">
+        <div
+          className="relative rounded-2xl overflow-hidden"
+          style={{
+            backgroundColor: "var(--lp-bg-elevated)",
+            border: "1px solid var(--lp-border-visible)",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.06)",
+          }}
+        >
           {/* Title bar */}
-          <div className="flex items-center gap-2 px-4 py-2.5 border-b border-zinc-800/50 bg-zinc-900/60">
+          <div
+            className="flex items-center gap-2 px-4 py-2.5"
+            style={{ borderBottom: "1px solid var(--lp-border-visible)" }}
+          >
             <div className="flex gap-1.5">
-              <div className="size-2 rounded-full bg-zinc-600" />
-              <div className="size-2 rounded-full bg-zinc-600" />
-              <div className="size-2 rounded-full bg-zinc-600" />
+              <div className="size-2 rounded-full bg-zinc-300" />
+              <div className="size-2 rounded-full bg-zinc-300" />
+              <div className="size-2 rounded-full bg-zinc-300" />
             </div>
             <div className="flex-1 flex justify-center">
-              <span className="text-[10px] text-zinc-300 font-semibold tracking-wider uppercase">
+              <span className="text-[10px] font-semibold tracking-wider uppercase" style={{ color: "var(--lp-text-heading)" }}>
                 {locale === "ja" ? "AIOSエージェント構成" : "AIOS Agent Structure"}
               </span>
             </div>
             <div className="flex items-center gap-1.5">
-              <div className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[9px] text-emerald-400/80 font-medium">
+              <div className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[9px] text-emerald-600 font-medium">
                 {locale === "ja" ? "稼働中" : "Live"}
               </span>
             </div>
           </div>
           <div className="p-4 space-y-0">
-            {/* CEO */}
             <div className="flex justify-center">
               <OrgNode label={t.ceo} color="indigo" isActive={true} icon={
-                <svg className="size-3 text-indigo-300" viewBox="0 0 16 16" fill="currentColor">
+                <svg className="size-3 text-indigo-600" viewBox="0 0 16 16" fill="currentColor">
                   <circle cx="8" cy="5" r="3" /><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6" />
                 </svg>
               } />
             </div>
             <PulseLine color="indigo" height={16} />
-            {/* Integrator */}
             <div className="flex justify-center">
-              <div className="relative rounded-lg border border-indigo-500/40 bg-indigo-500/[0.1] px-4 py-2 text-center">
+              <div className="relative rounded-lg border border-indigo-500/20 bg-indigo-500/[0.06] px-4 py-2 text-center">
                 <div className="flex items-center justify-center gap-2">
-                  <SparkleIcon className="size-3.5 text-indigo-300" />
-                  <span className="text-[11px] font-semibold text-indigo-200">{t.integrator}</span>
+                  <SparkleIcon className="size-3.5 text-indigo-600" />
+                  <span className="text-[11px] font-semibold text-indigo-600">{t.integrator}</span>
                 </div>
               </div>
             </div>
             <PulseLine color="indigo" height={16} />
-            {/* C-suite row */}
             <div className="grid grid-cols-5 gap-1">
               {t.csuite.map((agent, i) => (
                 <OrgNode key={agent.role} label={agent.role} color={csuiteColors[i]} isActive={true} isHighlighted={activeAgent === i} />
@@ -274,26 +277,36 @@ export function HeroOrgVisual({ locale = "en", mobile = false }: { locale?: "en"
 
   return (
     <div className="relative w-full max-w-md mx-auto mt-12 lg:mt-0 lg:max-w-none">
-      {/* Ambient glow */}
-      <div className="absolute -inset-8 rounded-3xl bg-gradient-to-br from-indigo-500/[0.07] via-transparent to-violet-500/[0.07] blur-3xl pointer-events-none" />
+      {/* Ambient glow — light version */}
+      <div className="absolute -inset-8 rounded-3xl bg-gradient-to-br from-indigo-500/[0.04] via-transparent to-violet-500/[0.04] blur-3xl pointer-events-none" />
 
       {/* Main frame */}
-      <div className="relative rounded-2xl border border-zinc-700/50 ring-1 ring-zinc-700/40 bg-zinc-900/80 backdrop-blur-sm overflow-hidden shadow-2xl shadow-indigo-500/[0.06]">
+      <div
+        className="relative rounded-2xl overflow-hidden"
+        style={{
+          backgroundColor: "var(--lp-bg-elevated)",
+          border: "1px solid var(--lp-border-visible)",
+          boxShadow: "0 12px 40px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.02)",
+        }}
+      >
         {/* Title bar */}
-        <div className="flex items-center gap-2 px-4 py-2.5 border-b border-zinc-800/50 bg-zinc-900/60">
+        <div
+          className="flex items-center gap-2 px-4 py-2.5"
+          style={{ borderBottom: "1px solid var(--lp-border-visible)" }}
+        >
           <div className="flex gap-1.5">
-            <div className="size-2 rounded-full bg-zinc-600" />
-            <div className="size-2 rounded-full bg-zinc-600" />
-            <div className="size-2 rounded-full bg-zinc-600" />
+            <div className="size-2 rounded-full bg-zinc-300" />
+            <div className="size-2 rounded-full bg-zinc-300" />
+            <div className="size-2 rounded-full bg-zinc-300" />
           </div>
           <div className="flex-1 flex justify-center">
-            <span className="text-[10px] text-zinc-300 font-semibold tracking-wider uppercase">
+            <span className="text-[10px] font-semibold tracking-wider uppercase" style={{ color: "var(--lp-text-heading)" }}>
               {locale === "ja" ? "AIOSエージェント構成" : "AIOS Agent Structure"}
             </span>
           </div>
           <div className="flex items-center gap-1.5">
-            <div className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-[9px] text-emerald-400/80 font-medium">
+            <div className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-[9px] text-emerald-600 font-medium">
               {locale === "ja" ? "稼働中" : "Live"}
             </span>
           </div>
@@ -301,7 +314,7 @@ export function HeroOrgVisual({ locale = "en", mobile = false }: { locale?: "en"
 
         {/* Body */}
         <div className="p-4 space-y-0">
-          {/* ─── CEO node ─── */}
+          {/* CEO node */}
           <div
             className="flex justify-center"
             style={{
@@ -314,7 +327,7 @@ export function HeroOrgVisual({ locale = "en", mobile = false }: { locale?: "en"
               color="indigo"
               isActive={true}
               icon={
-                <svg className="size-3 text-indigo-300" viewBox="0 0 16 16" fill="currentColor">
+                <svg className="size-3 text-indigo-600" viewBox="0 0 16 16" fill="currentColor">
                   <circle cx="8" cy="5" r="3" />
                   <path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6" />
                 </svg>
@@ -322,10 +335,9 @@ export function HeroOrgVisual({ locale = "en", mobile = false }: { locale?: "en"
             />
           </div>
 
-          {/* CEO → Integrator connection */}
           <PulseLine color="indigo" height={20} />
 
-          {/* ─── Integrator AI node ─── */}
+          {/* Integrator AI node */}
           <div
             className="flex justify-center"
             style={{
@@ -334,38 +346,38 @@ export function HeroOrgVisual({ locale = "en", mobile = false }: { locale?: "en"
             }}
           >
             <div className="relative">
-              {/* Rotating glow ring */}
+              {/* Rotating glow ring — subtle for light theme */}
               <div
-                className="absolute -inset-1 rounded-xl opacity-30"
+                className="absolute -inset-1 rounded-xl opacity-20"
                 style={{
-                  background: "conic-gradient(from 0deg, transparent, rgba(99, 102, 241, 0.4), transparent, rgba(139, 92, 246, 0.4), transparent)",
+                  background: "conic-gradient(from 0deg, transparent, rgba(99, 102, 241, 0.3), transparent, rgba(139, 92, 246, 0.3), transparent)",
                   animation: "hero-glow-rotate 6s linear infinite",
                   filter: "blur(4px)",
                 }}
               />
-              <div className="relative rounded-lg border border-indigo-500/40 bg-indigo-500/[0.1] px-4 py-2.5 text-center backdrop-blur-sm">
+              <div className="relative rounded-lg border border-indigo-500/20 bg-indigo-500/[0.06] px-4 py-2.5 text-center">
                 <div className="absolute -top-1 -right-1 flex items-center justify-center">
-                  <div className="size-2.5 rounded-full bg-emerald-400" />
-                  <div className="absolute size-2.5 rounded-full bg-emerald-400 animate-ping opacity-40" />
+                  <div className="size-2.5 rounded-full bg-emerald-500" />
+                  <div className="absolute size-2.5 rounded-full bg-emerald-500 animate-ping opacity-40" />
                 </div>
                 <div className="flex items-center justify-center gap-2">
                   <div className="relative">
-                    <SparkleIcon className="size-3.5 text-indigo-300" />
+                    <SparkleIcon className="size-3.5 text-indigo-600" />
                     <span
                       className="absolute inset-0"
                       style={{ animation: "hero-sparkle-spin 4s linear infinite" }}
                     >
-                      <SparkleIcon className="size-3.5 text-violet-300 opacity-60" />
+                      <SparkleIcon className="size-3.5 text-violet-500 opacity-50" />
                     </span>
                   </div>
-                  <span className="text-[11px] font-semibold text-indigo-200">{t.integrator}</span>
+                  <span className="text-[11px] font-semibold text-indigo-600">{t.integrator}</span>
                   <div
                     className="flex gap-0.5"
                     style={{ animation: "hero-data-flow 2s ease-in-out infinite" }}
                   >
-                    <div className="size-1 rounded-full bg-indigo-400/60" />
-                    <div className="size-1 rounded-full bg-violet-400/60" />
-                    <div className="size-1 rounded-full bg-indigo-400/60" />
+                    <div className="size-1 rounded-full bg-indigo-400/50" />
+                    <div className="size-1 rounded-full bg-violet-400/50" />
+                    <div className="size-1 rounded-full bg-indigo-400/50" />
                   </div>
                 </div>
               </div>
@@ -375,28 +387,26 @@ export function HeroOrgVisual({ locale = "en", mobile = false }: { locale?: "en"
           {/* Integrator → C-suite connections */}
           <div className="flex justify-center" style={{ height: 20 }}>
             <div className="relative w-[85%] h-full">
-              {/* Main vertical line down from integrator */}
               <div className="absolute left-1/2 top-0 w-px h-2/3 -translate-x-px">
-                <div className="w-px h-full bg-gradient-to-b from-indigo-500/40 to-indigo-500/10" />
+                <div className="w-px h-full bg-gradient-to-b from-indigo-500/30 to-indigo-500/5" />
               </div>
-              {/* Horizontal fan line */}
-              <div className="absolute top-2/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-400/50 to-transparent" />
-              {/* 5 vertical drops */}
+              <div className="absolute top-2/3 left-0 right-0 h-px" style={{ background: "linear-gradient(to right, transparent, var(--lp-border-visible), transparent)" }} />
               {[0, 1, 2, 3, 4].map((i) => (
                 <div
                   key={i}
-                  className="absolute w-px bg-zinc-400/40"
+                  className="absolute w-px"
                   style={{
                     left: `${10 + i * 20}%`,
                     top: "66%",
                     height: "34%",
+                    backgroundColor: "var(--lp-border-visible)",
                   }}
                 />
               ))}
             </div>
           </div>
 
-          {/* ─── C-suite row ─── */}
+          {/* C-suite row */}
           <div
             className="grid grid-cols-5 gap-1.5"
             style={{
@@ -420,12 +430,12 @@ export function HeroOrgVisual({ locale = "en", mobile = false }: { locale?: "en"
           {/* C-suite → Vendors connection */}
           <div className="flex justify-center" style={{ height: 16 }}>
             <div className="relative w-[70%] h-full">
-              <div className="absolute left-1/2 top-0 w-px h-2/3 -translate-x-px bg-gradient-to-b from-zinc-400/40 to-zinc-400/15" />
-              <div className="absolute top-2/3 left-[5%] right-[5%] h-px bg-gradient-to-r from-transparent via-zinc-500/40 to-transparent" />
+              <div className="absolute left-1/2 top-0 w-px h-2/3 -translate-x-px" style={{ background: "linear-gradient(to bottom, var(--lp-border-visible), transparent)" }} />
+              <div className="absolute top-2/3 left-[5%] right-[5%] h-px" style={{ background: "linear-gradient(to right, transparent, var(--lp-border-visible), transparent)" }} />
             </div>
           </div>
 
-          {/* ─── Vendor specialists row ─── */}
+          {/* Vendor specialists row */}
           <div
             className="flex flex-wrap justify-center gap-1.5"
             style={{
@@ -436,34 +446,40 @@ export function HeroOrgVisual({ locale = "en", mobile = false }: { locale?: "en"
             {t.vendors.map((vendor) => (
               <div
                 key={vendor.name}
-                className="rounded-md border border-zinc-700/40 bg-zinc-800/30 px-2 py-1.5 text-center"
+                className="rounded-md px-2 py-1.5 text-center"
+                style={{
+                  border: "1px solid var(--lp-border-visible)",
+                  backgroundColor: "var(--lp-bg-primary)",
+                }}
               >
-                <span className="text-[11px] font-mono font-medium text-zinc-400 leading-tight block">
+                <span className="text-[11px] font-mono font-medium leading-tight block" style={{ color: "var(--lp-text-body)" }}>
                   {vendor.name}
                 </span>
-                <span className="text-[10px] text-zinc-600 leading-tight block mt-0.5">
+                <span className="text-[10px] leading-tight block mt-0.5" style={{ color: "var(--lp-text-muted)" }}>
                   {vendor.description}
                 </span>
               </div>
             ))}
           </div>
 
-          {/* ─── Live activity ticker ─── */}
+          {/* Live activity ticker */}
           <div
-            className="mt-3 rounded-lg border border-zinc-800/40 bg-zinc-900/50 px-3 py-2"
+            className="mt-3 rounded-lg px-3 py-2"
             style={{
+              border: "1px solid var(--lp-border-visible)",
+              backgroundColor: "var(--lp-bg-primary)",
               animation: mounted ? "hero-node-appear 0.5s ease-out 0.6s forwards" : "none",
               opacity: mounted ? 1 : 0,
             }}
           >
             <div className="flex items-center justify-between mb-1">
               <div className="flex items-center gap-1.5">
-                <div className="size-1 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-[11px] text-zinc-500 font-semibold uppercase tracking-wider">
+                <div className="size-1 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-[11px] font-semibold uppercase tracking-wider" style={{ color: "var(--lp-text-muted)" }}>
                   {locale === "ja" ? "最新の動き" : "Live Activity"}
                 </span>
               </div>
-              <span className="text-[11px] text-zinc-600">
+              <span className="text-[11px]" style={{ color: "var(--lp-text-muted)" }}>
                 {locale === "ja" ? "たった今" : "just now"}
               </span>
             </div>
@@ -477,15 +493,15 @@ export function HeroOrgVisual({ locale = "en", mobile = false }: { locale?: "en"
                   {currentActivity.agent}
                 </span>
               </div>
-              <span className="text-[9px] text-zinc-400 truncate">{currentActivity.text}</span>
+              <span className="text-[9px] truncate" style={{ color: "var(--lp-text-body)" }}>{currentActivity.text}</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Floating accent lines (matches hero-visual.tsx pattern) */}
-      <div className="absolute -top-3 -right-3 w-20 h-px bg-gradient-to-r from-transparent to-indigo-500/20" />
-      <div className="absolute -bottom-3 -left-3 w-16 h-px bg-gradient-to-r from-violet-500/20 to-transparent" />
+      {/* Floating accent lines — subtle for light theme */}
+      <div className="absolute -top-3 -right-3 w-20 h-px bg-gradient-to-r from-transparent to-indigo-500/10" />
+      <div className="absolute -bottom-3 -left-3 w-16 h-px bg-gradient-to-r from-violet-500/10 to-transparent" />
     </div>
   );
 }

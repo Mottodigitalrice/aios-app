@@ -363,13 +363,37 @@ const en = {
       title: "AI just learned",
       titleHighlight: "how to use a computer.",
       subtitle: "The tools are here. The question is whether you\u2019ll harness them \u2014 or watch your competitors do it first.",
-      chatbotEra: {
-        label: "2023: The Chatbot Era",
-        description: "AI could think, write, and analyze. But it couldn\u2019t do anything. You asked a question, got an answer, then went and did the work yourself.",
-      },
-      agenticEra: {
-        label: "2025: The Agentic Era",
-        description: "AI can now operate inside a terminal. It reads files, writes code, sends emails, updates databases, deploys to servers, and triggers workflows \u2014 autonomously.",
+      timeline: [
+        {
+          year: "2024",
+          label: "Chatbots",
+          description: "AI could think, write, and analyze. But it couldn\u2019t do anything. You asked a question, got an answer, then did the work yourself.",
+          status: "past" as const,
+        },
+        {
+          year: "2025",
+          label: "Automation & Agents",
+          description: "AI tools start connecting to real systems. Workflow builders, API integrations, and early autonomous agents emerge \u2014 but require heavy setup.",
+          status: "past" as const,
+        },
+        {
+          year: "2026",
+          label: "Agentic AI",
+          description: "AI operates inside a terminal. It reads files, writes code, sends emails, updates databases, deploys to servers \u2014 autonomously. The breakthrough year.",
+          status: "current" as const,
+        },
+      ],
+      architecture: {
+        agentLabel: "AI Agent (CLI)",
+        agentSub: "Brain + Body = Full Autonomy",
+        layers: [
+          { label: "Local Machine", sublabel: "\u30ED\u30FC\u30AB\u30EBPC" },
+          { label: "Local Server", sublabel: "\u30ED\u30FC\u30AB\u30EB\u30B5\u30FC\u30D0\u30FC" },
+          { label: "VPS / Cloud", sublabel: "\u30AF\u30E9\u30A6\u30C9\u30B5\u30FC\u30D0\u30FC" },
+        ],
+        softwareLabel: "Connected to any software",
+        softwareLabelJa: "\u3042\u3089\u3086\u308B\u30BD\u30D5\u30C8\u30A6\u30A7\u30A2\u306B\u63A5\u7D9A",
+        integrations: ["Notion", "Slack", "CRM", "Email", "Database", "ERP", "POS", "LINE", "Accounting", "E-commerce"],
       },
       tools: [
         { name: "Claude Code", maker: "Anthropic" },

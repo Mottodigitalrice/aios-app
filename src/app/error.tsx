@@ -18,10 +18,10 @@ const labels = {
 };
 
 function getLocale(): "en" | "ja" {
-  if (typeof window === "undefined") return "en";
+  if (typeof window === "undefined") return "ja";
   const params = new URLSearchParams(window.location.search);
   const lang = params.get("lang");
-  return lang === "ja" ? "ja" : "en";
+  return lang === "en" ? "en" : "ja";
 }
 
 export default function Error({

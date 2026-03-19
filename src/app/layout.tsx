@@ -57,7 +57,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${notoSansJP.variable} ${dmSans.variable} ${shipporiMincho.variable}`}>
+    <html lang="ja" className={`${inter.variable} ${notoSansJP.variable} ${dmSans.variable} ${shipporiMincho.variable}`}>
       <head>
         <script
           type="application/ld+json"

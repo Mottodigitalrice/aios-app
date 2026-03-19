@@ -214,6 +214,13 @@ export default function PresentationPage() {
   const [showNotes, setShowNotes] = useState(false);
   const prevGlobalStepRef = useRef(0);
   const [direction, setDirection] = useState<"forward" | "backward">("forward");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [locale, setLocale] = useState<"en" | "ja">(() => {
+    if (typeof window === "undefined") return "ja";
+    const params = new URLSearchParams(window.location.search);
+    const lang = params.get("lang");
+    return lang === "en" ? "en" : "ja";
+  });
 
   const advance = useCallback(() => {
     setGlobalStep((s) => {
@@ -338,28 +345,63 @@ export default function PresentationPage() {
               <div className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-sm">
                 MOTTO Digital — AI Infrastructure
               </div>
-              <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-center leading-tight">
-                The <span className="gradient-text">AI Paradigm Shift</span>
-              </h1>
-              <p className="text-2xl sm:text-3xl text-zinc-500 mt-4 text-center font-light">
-                AIの発想の転換
-              </p>
+              {locale === "ja" ? (
+                <>
+                  <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-center leading-tight">
+                    <span className="gradient-text">AIの発想の転換</span>
+                  </h1>
+                  <p className="text-2xl sm:text-3xl text-zinc-500 mt-4 text-center font-light">
+                    The AI Paradigm Shift
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-center leading-tight">
+                    <span className="gradient-text">The AI Paradigm Shift</span>
+                  </h1>
+                  <p className="text-2xl sm:text-3xl text-zinc-500 mt-4 text-center font-light">
+                    AIの発想の転換
+                  </p>
+                </>
+              )}
 
               <FadeIn show={localStep >= 1}>
                 <div className="mt-10 text-center max-w-2xl">
-                  <p className="text-xl text-zinc-300 leading-relaxed">
-                    Why most businesses are stuck — and what just changed
-                  </p>
-                  <p className="text-lg text-zinc-500 mt-2">
-                    なぜ多くの企業が行き詰まっているのか、そして何が変わったのか
-                  </p>
+                  {locale === "ja" ? (
+                    <>
+                      <p className="text-xl text-zinc-300 leading-relaxed">
+                        なぜ多くの企業が行き詰まっているのか、そして何が変わったのか
+                      </p>
+                      <p className="text-lg text-zinc-500 mt-2">
+                        Why most businesses are stuck — and what just changed
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-xl text-zinc-300 leading-relaxed">
+                        Why most businesses are stuck — and what just changed
+                      </p>
+                      <p className="text-lg text-zinc-500 mt-2">
+                        なぜ多くの企業が行き詰まっているのか、そして何が変わったのか
+                      </p>
+                    </>
+                  )}
                 </div>
               </FadeIn>
 
               {localStep < 1 && (
                 <div className="absolute -bottom-32 text-zinc-600 text-center">
-                  <p className="text-sm mb-1">Click anywhere to begin</p>
-                  <p className="text-xs text-zinc-700">クリックして開始</p>
+                  {locale === "ja" ? (
+                    <>
+                      <p className="text-sm mb-1">クリックして開始</p>
+                      <p className="text-xs text-zinc-700">Click anywhere to begin</p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-sm mb-1">Click anywhere to begin</p>
+                      <p className="text-xs text-zinc-700">クリックして開始</p>
+                    </>
+                  )}
                   <ChevronDown className="mx-auto mt-2 size-4 animate-bounce" />
                 </div>
               )}
@@ -374,14 +416,27 @@ export default function PresentationPage() {
             <div className="relative z-10 flex flex-col items-center w-full">
               <div className="shrink-0 pb-4 text-center">
                 <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-red-500/30 bg-red-500/10 text-red-300 text-xs font-medium uppercase tracking-wider">
-                  01 — The Problem / 問題
+                  {locale === "ja" ? "01 — 問題 / The Problem" : "01 — The Problem / 問題"}
                 </div>
-                <h2 className="text-4xl sm:text-5xl font-bold text-center">
-                  The AI Adoption Trap
-                </h2>
-                <p className="text-lg text-zinc-500 mt-2 text-center">
-                  AI導入の罠
-                </p>
+                {locale === "ja" ? (
+                  <>
+                    <h2 className="text-4xl sm:text-5xl font-bold text-center">
+                      AI導入の罠
+                    </h2>
+                    <p className="text-lg text-zinc-500 mt-2 text-center">
+                      The AI Adoption Trap
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <h2 className="text-4xl sm:text-5xl font-bold text-center">
+                      The AI Adoption Trap
+                    </h2>
+                    <p className="text-lg text-zinc-500 mt-2 text-center">
+                      AI導入の罠
+                    </p>
+                  </>
+                )}
               </div>
 
               {/* Cycle Diagram — Clean linear flow with return arrow */}
@@ -389,19 +444,19 @@ export default function PresentationPage() {
                 <div className="mt-8 w-full max-w-2xl mx-auto">
                   {/* Linear 4-step flow */}
                   <div className="flex items-center justify-center gap-1 sm:gap-3">
-                    <CycleNode icon={<Sparkles className="size-4 sm:size-5" />} label="Try AI Tools" sublabel="AIツールを試す" num="1" />
+                    <CycleNode icon={<Sparkles className="size-4 sm:size-5" />} label={locale === "ja" ? "AIツールを試す" : "Try AI Tools"} sublabel={locale === "ja" ? "Try AI Tools" : "AIツールを試す"} num="1" />
                     <ChevronRight className="size-4 sm:size-5 text-red-400/50 shrink-0" />
-                    <CycleNode icon={<Zap className="size-4 sm:size-5" />} label="Some Results" sublabel="ある程度の成果" num="2" />
+                    <CycleNode icon={<Zap className="size-4 sm:size-5" />} label={locale === "ja" ? "ある程度の成果" : "Some Results"} sublabel={locale === "ja" ? "Some Results" : "ある程度の成果"} num="2" />
                     <ChevronRight className="size-4 sm:size-5 text-red-400/50 shrink-0" />
-                    <CycleNode icon={<TrendingDown className="size-4 sm:size-5" />} label="Can&#39;t Scale" sublabel="拡張できない" num="3" />
+                    <CycleNode icon={<TrendingDown className="size-4 sm:size-5" />} label={locale === "ja" ? "拡張できない" : "Can't Scale"} sublabel={locale === "ja" ? "Can't Scale" : "拡張できない"} num="3" />
                     <ChevronRight className="size-4 sm:size-5 text-red-400/50 shrink-0" />
-                    <CycleNode icon={<RotateCcw className="size-4 sm:size-5 text-red-400" />} label="Give Up" sublabel="手作業に戻る" num="4" highlight />
+                    <CycleNode icon={<RotateCcw className="size-4 sm:size-5 text-red-400" />} label={locale === "ja" ? "手作業に戻る" : "Give Up"} sublabel={locale === "ja" ? "Give Up" : "手作業に戻る"} num="4" highlight />
                   </div>
                   {/* Return arrow showing the loop */}
                   <div className="flex items-center justify-center mt-3 gap-2">
                     <div className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-red-500/20 bg-red-950/20">
                       <RotateCcw className="size-3.5 text-red-400/60 animate-[spin_8s_linear_infinite]" />
-                      <span className="text-xs font-semibold text-red-400/70 uppercase tracking-wider">Repeat / 繰り返す</span>
+                      <span className="text-xs font-semibold text-red-400/70 uppercase tracking-wider">{locale === "ja" ? "繰り返す / Repeat" : "Repeat / 繰り返す"}</span>
                     </div>
                   </div>
                 </div>
@@ -411,13 +466,27 @@ export default function PresentationPage() {
               <FadeIn show={localStep >= 2}>
                 <div className="mt-6 max-w-2xl pb-8">
                   <div className="p-5 rounded-xl border border-red-500/20 bg-red-950/20">
-                    <p className="text-lg sm:text-xl text-zinc-200 text-center leading-relaxed">
-                      Models keep getting better — but the{" "}
-                      <span className="text-red-400 font-semibold">environment stays limited</span>
-                    </p>
-                    <p className="text-base text-zinc-500 text-center mt-2">
-                      モデルは進化し続ける — <span className="text-red-400">しかし環境は制限されたまま</span>
-                    </p>
+                    {locale === "ja" ? (
+                      <>
+                        <p className="text-lg sm:text-xl text-zinc-200 text-center leading-relaxed">
+                          モデルは進化し続ける — <span className="text-red-400 font-semibold">しかし環境は制限されたまま</span>
+                        </p>
+                        <p className="text-base text-zinc-500 text-center mt-2">
+                          Models keep getting better — but the{" "}
+                          <span className="text-red-400">environment stays limited</span>
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-lg sm:text-xl text-zinc-200 text-center leading-relaxed">
+                          Models keep getting better — but the{" "}
+                          <span className="text-red-400 font-semibold">environment stays limited</span>
+                        </p>
+                        <p className="text-base text-zinc-500 text-center mt-2">
+                          モデルは進化し続ける — <span className="text-red-400">しかし環境は制限されたまま</span>
+                        </p>
+                      </>
+                    )}
                   </div>
                 </div>
               </FadeIn>
@@ -430,14 +499,27 @@ export default function PresentationPage() {
           <section className="h-full flex flex-col items-center justify-center px-8 overflow-y-auto">
             <div className="shrink-0 pb-4 text-center">
               <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-300 text-xs font-medium uppercase tracking-wider">
-                02 — The Timeline / タイムライン
+                {locale === "ja" ? "02 — タイムライン / The Timeline" : "02 — The Timeline / タイムライン"}
               </div>
-              <h2 className="text-4xl sm:text-5xl font-bold text-center">
-                <span className="text-blue-400">2024</span> — The Era of Chatbots
-              </h2>
-              <p className="text-lg text-zinc-500 mt-2 text-center">
-                チャットボットの時代
-              </p>
+              {locale === "ja" ? (
+                <>
+                  <h2 className="text-4xl sm:text-5xl font-bold text-center">
+                    <span className="text-blue-400">2024</span> — チャットボットの時代
+                  </h2>
+                  <p className="text-lg text-zinc-500 mt-2 text-center">
+                    The Era of Chatbots
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h2 className="text-4xl sm:text-5xl font-bold text-center">
+                    <span className="text-blue-400">2024</span> — The Era of Chatbots
+                  </h2>
+                  <p className="text-lg text-zinc-500 mt-2 text-center">
+                    チャットボットの時代
+                  </p>
+                </>
+              )}
             </div>
 
             <FadeIn show={localStep >= 1}>
@@ -446,28 +528,48 @@ export default function PresentationPage() {
                 <div className="p-6 rounded-xl border border-blue-500/20 bg-blue-950/10 mb-6">
                   <div className="flex items-center gap-3 mb-4">
                     <MessageSquare className="size-6 text-blue-400" />
-                    <h3 className="text-lg font-semibold text-blue-300">ChatGPT, Claude &amp; Gemini go mainstream</h3>
+                    <h3 className="text-lg font-semibold text-blue-300">{locale === "ja" ? "ChatGPT・Claude・Geminiが主流に" : "ChatGPT, Claude & Gemini Go Mainstream"}</h3>
                   </div>
                   <ul className="space-y-3 text-sm text-zinc-300">
                     <li className="flex items-start gap-3">
                       <span className="text-blue-400 mt-0.5 shrink-0">&#9656;</span>
-                      <span>Companies knew they <em>should</em> use AI — training courses on prompting everywhere<br />
-                      <span className="text-xs text-zinc-500">企業はAIを使うべきだと知っていた — プロンプト研修が至る所で</span></span>
+                      {locale === "ja" ? (
+                        <span>企業はAIを使うべきだと知っていた — プロンプト研修が至る所で<br />
+                        <span className="text-xs text-zinc-500">Companies knew they should use AI — training courses on prompting everywhere</span></span>
+                      ) : (
+                        <span>Companies knew they should use AI — training courses on prompting everywhere<br />
+                        <span className="text-xs text-zinc-500">企業はAIを使うべきだと知っていた — プロンプト研修が至る所で</span></span>
+                      )}
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-blue-400 mt-0.5 shrink-0">&#9656;</span>
-                      <span>High-skill users could build custom GPTs and projects — some improvement<br />
-                      <span className="text-xs text-zinc-500">スキルの高い人はカスタムGPTを作れた — ある程度の改善</span></span>
+                      {locale === "ja" ? (
+                        <span>スキルの高い人はカスタムGPTを作れた — ある程度の改善<br />
+                        <span className="text-xs text-zinc-500">High-skill users could build custom GPTs and projects — some improvement</span></span>
+                      ) : (
+                        <span>High-skill users could build custom GPTs and projects — some improvement<br />
+                        <span className="text-xs text-zinc-500">スキルの高い人はカスタムGPTを作れた — ある程度の改善</span></span>
+                      )}
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-blue-400 mt-0.5 shrink-0">&#9656;</span>
-                      <span>Most employees? Still couldn&apos;t use it effectively<br />
-                      <span className="text-xs text-zinc-500">大多数の社員は効果的に使えなかった</span></span>
+                      {locale === "ja" ? (
+                        <span>大多数の社員は効果的に使えなかった<br />
+                        <span className="text-xs text-zinc-500">Most employees? Still couldn&apos;t use it effectively</span></span>
+                      ) : (
+                        <span>Most employees? Still couldn&apos;t use it effectively<br />
+                        <span className="text-xs text-zinc-500">大多数の社員は効果的に使えなかった</span></span>
+                      )}
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-zinc-600 mt-0.5 shrink-0">&#9656;</span>
-                      <span className="text-zinc-400">No secure access for all staff — not ready to invest yet<br />
-                      <span className="text-xs text-zinc-600">全社員へのセキュアなアクセスなし — まだ投資の準備ができていない</span></span>
+                      {locale === "ja" ? (
+                        <span className="text-zinc-400">全社員へのセキュアなアクセスなし — まだ投資の準備ができていない<br />
+                        <span className="text-xs text-zinc-600">No secure access for all staff — not ready to invest yet</span></span>
+                      ) : (
+                        <span className="text-zinc-400">No secure access for all staff — not ready to invest yet<br />
+                        <span className="text-xs text-zinc-600">全社員へのセキュアなアクセスなし — まだ投資の準備ができていない</span></span>
+                      )}
                     </li>
                   </ul>
                 </div>
@@ -477,12 +579,25 @@ export default function PresentationPage() {
             <FadeIn show={localStep >= 2}>
               <div className="max-w-2xl pb-8">
                 <div className="p-5 rounded-xl border border-blue-500/20 bg-blue-950/20 text-center">
-                  <p className="text-lg text-zinc-200">
-                    AI could <span className="text-blue-400 font-semibold">talk</span> — but it couldn&apos;t <span className="text-zinc-500">do anything</span>
-                  </p>
-                  <p className="text-sm text-zinc-500 mt-2">
-                    AIは「話す」ことができた — しかし「行動」はできなかった
-                  </p>
+                  {locale === "ja" ? (
+                    <>
+                      <p className="text-lg text-zinc-200">
+                        AIは<span className="text-blue-400 font-semibold">「話す」</span>ことができた — しかし<span className="text-zinc-500">「行動」はできなかった</span>
+                      </p>
+                      <p className="text-sm text-zinc-500 mt-2">
+                        AI could talk — but it couldn&apos;t do anything
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-lg text-zinc-200">
+                        AI could <span className="text-blue-400 font-semibold">talk</span> — but it <span className="text-zinc-500">couldn&apos;t do anything</span>
+                      </p>
+                      <p className="text-sm text-zinc-500 mt-2">
+                        AIは「話す」ことができた — しかし「行動」はできなかった
+                      </p>
+                    </>
+                  )}
                 </div>
               </div>
             </FadeIn>
@@ -494,14 +609,27 @@ export default function PresentationPage() {
           <section className="h-full flex flex-col items-center justify-center px-8 overflow-y-auto">
             <div className="shrink-0 pb-4 text-center">
               <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-300 text-xs font-medium uppercase tracking-wider">
-                02 — The Timeline / タイムライン
+                {locale === "ja" ? "02 — タイムライン / The Timeline" : "02 — The Timeline / タイムライン"}
               </div>
-              <h2 className="text-4xl sm:text-5xl font-bold text-center">
-                <span className="text-amber-400">2025</span> — Automations &amp; Agents
-              </h2>
-              <p className="text-lg text-zinc-500 mt-2 text-center">
-                自動化とAIエージェント
-              </p>
+              {locale === "ja" ? (
+                <>
+                  <h2 className="text-4xl sm:text-5xl font-bold text-center">
+                    <span className="text-amber-400">2025</span> — 自動化とAIエージェント
+                  </h2>
+                  <p className="text-lg text-zinc-500 mt-2 text-center">
+                    Automations &amp; Agents
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h2 className="text-4xl sm:text-5xl font-bold text-center">
+                    <span className="text-amber-400">2025</span> — Automations &amp; Agents
+                  </h2>
+                  <p className="text-lg text-zinc-500 mt-2 text-center">
+                    自動化とAIエージェント
+                  </p>
+                </>
+              )}
             </div>
 
             <FadeIn show={localStep >= 1}>
@@ -510,28 +638,67 @@ export default function PresentationPage() {
                 <div className="p-6 rounded-xl border border-amber-500/20 bg-amber-950/10 mb-6">
                   <div className="flex items-center gap-3 mb-4">
                     <Workflow className="size-6 text-amber-400" />
-                    <h3 className="text-lg font-semibold text-amber-300">AI started doing useful work</h3>
-                    <span className="text-sm text-zinc-500">— but with big limitations</span>
+                    {locale === "ja" ? (
+                      <>
+                        <h3 className="text-lg font-semibold text-amber-300">AIが実用的な仕事を始めた</h3>
+                        <span className="text-sm text-zinc-500">— しかし大きな制限付き</span>
+                      </>
+                    ) : (
+                      <>
+                        <h3 className="text-lg font-semibold text-amber-300">AI Started Doing Real Work</h3>
+                        <span className="text-sm text-zinc-500">— but with major limitations</span>
+                      </>
+                    )}
                   </div>
 
                   <div className="grid sm:grid-cols-3 gap-4">
                     <div className="p-4 rounded-lg border border-amber-500/10 bg-zinc-900/50">
                       <AlertTriangle className="size-5 text-amber-400 mb-2" />
-                      <p className="font-semibold text-sm mb-1">High Expertise Required</p>
-                      <p className="text-xs text-zinc-500">構築に高度な専門知識が必要</p>
-                      <p className="text-xs text-zinc-400 mt-2">Building agents requires developers — not accessible to most teams</p>
+                      {locale === "ja" ? (
+                        <>
+                          <p className="font-semibold text-sm mb-1">構築に高度な専門知識が必要</p>
+                          <p className="text-xs text-zinc-500">High Expertise Required</p>
+                          <p className="text-xs text-zinc-400 mt-2">エージェント構築には開発者が必要 — ほとんどのチームには手が届かない</p>
+                        </>
+                      ) : (
+                        <>
+                          <p className="font-semibold text-sm mb-1">High Expertise Required</p>
+                          <p className="text-xs text-zinc-500">構築に高度な専門知識が必要</p>
+                          <p className="text-xs text-zinc-400 mt-2">Building agents requires developers — out of reach for most teams</p>
+                        </>
+                      )}
                     </div>
                     <div className="p-4 rounded-lg border border-amber-500/10 bg-zinc-900/50">
                       <DollarSign className="size-5 text-amber-400 mb-2" />
-                      <p className="font-semibold text-sm mb-1">Vendor Lock-In</p>
-                      <p className="text-xs text-zinc-500">ベンダーロックイン</p>
-                      <p className="text-xs text-zinc-400 mt-2">Stop paying the subscription &rarr; all your agent work disappears</p>
+                      {locale === "ja" ? (
+                        <>
+                          <p className="font-semibold text-sm mb-1">ベンダーロックイン</p>
+                          <p className="text-xs text-zinc-500">Vendor Lock-In</p>
+                          <p className="text-xs text-zinc-400 mt-2">サブスクを止めたら → エージェントの成果がすべて消える</p>
+                        </>
+                      ) : (
+                        <>
+                          <p className="font-semibold text-sm mb-1">Vendor Lock-In</p>
+                          <p className="text-xs text-zinc-500">ベンダーロックイン</p>
+                          <p className="text-xs text-zinc-400 mt-2">Stop paying and everything your agents built disappears</p>
+                        </>
+                      )}
                     </div>
                     <div className="p-4 rounded-lg border border-amber-500/10 bg-zinc-900/50">
                       <Unlink className="size-5 text-amber-400 mb-2" />
-                      <p className="font-semibold text-sm mb-1">Agent Isolation</p>
-                      <p className="text-xs text-zinc-500">エージェントの孤立</p>
-                      <p className="text-xs text-zinc-400 mt-2">Agent A, B, C, D — isolated. No collaboration, no shared context</p>
+                      {locale === "ja" ? (
+                        <>
+                          <p className="font-semibold text-sm mb-1">エージェントの孤立</p>
+                          <p className="text-xs text-zinc-500">Agent Isolation</p>
+                          <p className="text-xs text-zinc-400 mt-2">エージェントA、B、C、D — 孤立。連携なし、共有コンテキストなし</p>
+                        </>
+                      ) : (
+                        <>
+                          <p className="font-semibold text-sm mb-1">Agent Isolation</p>
+                          <p className="text-xs text-zinc-500">エージェントの孤立</p>
+                          <p className="text-xs text-zinc-400 mt-2">Agents A, B, C, D — isolated. No coordination, no shared context</p>
+                        </>
+                      )}
                     </div>
                   </div>
 
@@ -547,7 +714,7 @@ export default function PresentationPage() {
                     ))}
                     <div className="hidden sm:flex flex-col items-center mx-2">
                       <Unlink className="size-5 text-red-400/50" />
-                      <p className="text-[10px] text-red-400/50 mt-1">isolated</p>
+                      <p className="text-[10px] text-red-400/50 mt-1">{locale === "ja" ? "孤立" : "Isolated"}</p>
                     </div>
                   </div>
                 </div>
@@ -557,15 +724,31 @@ export default function PresentationPage() {
             <FadeIn show={localStep >= 2}>
               <div className="max-w-2xl pb-8">
                 <div className="p-5 rounded-xl border border-amber-500/20 bg-amber-950/20 text-center">
-                  <p className="text-lg text-zinc-200">
-                    Companies were <span className="text-amber-400 font-semibold">renting</span> AI adoption, not <span className="text-zinc-500">owning</span> it
-                  </p>
-                  <p className="text-sm text-zinc-500 mt-2">
-                    企業はAI導入を「レンタル」していた — 「所有」していなかった
-                  </p>
-                  <p className="text-xs text-zinc-600 mt-3">
-                    Stop paying &rarr; back to square one / 支払いを止めたら、振り出しに戻る
-                  </p>
+                  {locale === "ja" ? (
+                    <>
+                      <p className="text-lg text-zinc-200">
+                        企業はAI導入を<span className="text-amber-400 font-semibold">「レンタル」</span>していた — <span className="text-zinc-500">「所有」していなかった</span>
+                      </p>
+                      <p className="text-sm text-zinc-500 mt-2">
+                        Companies were renting AI adoption, not owning it
+                      </p>
+                      <p className="text-xs text-zinc-600 mt-3">
+                        支払いを止めたら、振り出しに戻る / Stop paying &rarr; back to square one
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-lg text-zinc-200">
+                        Companies were <span className="text-amber-400 font-semibold">renting</span> AI adoption — <span className="text-zinc-500">not owning it</span>
+                      </p>
+                      <p className="text-sm text-zinc-500 mt-2">
+                        企業はAI導入を「レンタル」していた — 「所有」していなかった
+                      </p>
+                      <p className="text-xs text-zinc-600 mt-3">
+                        Stop paying &rarr; back to square one / 支払いを止めたら、振り出しに戻る
+                      </p>
+                    </>
+                  )}
                 </div>
               </div>
             </FadeIn>
@@ -579,31 +762,57 @@ export default function PresentationPage() {
             <div className="relative z-10 flex flex-col items-center">
               <div className="shrink-0 text-center mb-6">
                 <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 text-xs font-medium uppercase tracking-wider">
-                  03 — 2026: The Breakthrough / ブレイクスルー
+                  {locale === "ja" ? "03 — 2026: ブレイクスルー / The Breakthrough" : "03 — 2026: The Breakthrough / ブレイクスルー"}
                 </div>
-                <h2 className="text-4xl sm:text-5xl font-bold text-center">
-                  Giving AI a <span className="text-emerald-400">Body</span>
-                </h2>
-                <p className="text-lg text-zinc-500 mt-2 text-center">
-                  AIに「体」を与える
-                </p>
+                {locale === "ja" ? (
+                  <>
+                    <h2 className="text-4xl sm:text-5xl font-bold text-center">
+                      AIに<span className="text-emerald-400">「体」</span>を与える
+                    </h2>
+                    <p className="text-lg text-zinc-500 mt-2 text-center">
+                      Giving AI a Body
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <h2 className="text-4xl sm:text-5xl font-bold text-center">
+                      Giving AI a <span className="text-emerald-400">Body</span>
+                    </h2>
+                    <p className="text-lg text-zinc-500 mt-2 text-center">
+                      AIに「体」を与える
+                    </p>
+                  </>
+                )}
               </div>
 
               <FadeIn show={localStep >= 1}>
                 <div className="w-full max-w-3xl">
-                  <BrainBodyDiagram locale="en" compact />
+                  <BrainBodyDiagram locale={locale} compact />
                 </div>
               </FadeIn>
 
               <FadeIn show={localStep >= 2}>
                 <div className="mt-6 max-w-2xl">
                   <div className="p-5 rounded-xl border border-emerald-500/20 bg-emerald-950/20 text-center">
-                    <p className="text-lg text-zinc-200">
-                      This isn&apos;t a chatbot upgrade — it&apos;s a <span className="text-emerald-400 font-semibold">completely new category</span>
-                    </p>
-                    <p className="text-sm text-zinc-500 mt-2">
-                      チャットボットの進化ではない — <span className="text-emerald-400">全く新しいカテゴリー</span>
-                    </p>
+                    {locale === "ja" ? (
+                      <>
+                        <p className="text-lg text-zinc-200">
+                          チャットボットの進化ではない — <span className="text-emerald-400 font-semibold">全く新しいカテゴリー</span>
+                        </p>
+                        <p className="text-sm text-zinc-500 mt-2">
+                          This isn&apos;t a chatbot upgrade — it&apos;s a <span className="text-emerald-400">completely new category</span>
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-lg text-zinc-200">
+                          This isn&apos;t a chatbot upgrade — it&apos;s a <span className="text-emerald-400 font-semibold">completely new category</span>
+                        </p>
+                        <p className="text-sm text-zinc-500 mt-2">
+                          チャットボットの進化ではない — <span className="text-emerald-400">全く新しいカテゴリー</span>
+                        </p>
+                      </>
+                    )}
                   </div>
                 </div>
               </FadeIn>
@@ -618,14 +827,27 @@ export default function PresentationPage() {
             <div className="relative z-10 flex flex-col items-center w-full">
               <div className="shrink-0 pb-2 text-center">
                 <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-300 text-xs font-medium uppercase tracking-wider">
-                  03 — 2026: The Breakthrough / ブレイクスルー
+                  {locale === "ja" ? "03 — 2026: ブレイクスルー / The Breakthrough" : "03 — 2026: The Breakthrough / ブレイクスルー"}
                 </div>
-                <h2 className="text-4xl sm:text-5xl font-bold text-center">
-                  AI Enters the <span className="text-emerald-400">Command Line</span>
-                </h2>
-                <p className="text-lg text-zinc-500 mt-2 text-center">
-                  AIがコマンドラインに入る
-                </p>
+                {locale === "ja" ? (
+                  <>
+                    <h2 className="text-4xl sm:text-5xl font-bold text-center">
+                      AIが<span className="text-emerald-400">コマンドライン</span>に入る
+                    </h2>
+                    <p className="text-lg text-zinc-500 mt-2 text-center">
+                      AI Enters the Command Line
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <h2 className="text-4xl sm:text-5xl font-bold text-center">
+                      AI Enters the <span className="text-emerald-400">Command Line</span>
+                    </h2>
+                    <p className="text-lg text-zinc-500 mt-2 text-center">
+                      AIがコマンドラインに入る
+                    </p>
+                  </>
+                )}
 
                 {/* Agent logos */}
                 <div className="mt-4 flex items-center justify-center gap-3 sm:gap-5">
@@ -650,8 +872,8 @@ export default function PresentationPage() {
                   <div className="flex justify-center mb-3">
                     <div className="px-8 py-3 rounded-xl border-2 border-emerald-500/40 bg-emerald-950/30 text-center">
                       <Terminal className="size-7 text-emerald-400 mx-auto mb-1.5" />
-                      <p className="font-bold text-emerald-300 text-lg">AI Agent (CLI)</p>
-                      <p className="text-xs text-zinc-500 mt-1">Brain + Body = Full autonomy</p>
+                      <p className="font-bold text-emerald-300 text-lg">{locale === "ja" ? "AIエージェント（CLI）" : "AI Agent (CLI)"}</p>
+                      <p className="text-xs text-zinc-500 mt-1">{locale === "ja" ? "脳＋体＝完全な自律性" : "Brain + Body = Full Autonomy"}</p>
                     </div>
                   </div>
                   <div className="flex justify-center mb-3">
@@ -664,25 +886,25 @@ export default function PresentationPage() {
                   <div className="grid grid-cols-3 gap-3 sm:gap-5 mb-3">
                     <div className="p-3 rounded-xl border border-blue-500/20 bg-blue-950/10 text-center">
                       <Monitor className="size-5 text-blue-400 mx-auto mb-1.5" />
-                      <p className="font-semibold text-sm text-blue-300">Local Machine</p>
-                      <p className="text-xs text-zinc-500">ローカルPC</p>
+                      <p className="font-semibold text-sm text-blue-300">{locale === "ja" ? "ローカルPC" : "Local Machine"}</p>
+                      <p className="text-xs text-zinc-500">{locale === "ja" ? "Local Machine" : "ローカルPC"}</p>
                     </div>
                     <div className="p-3 rounded-xl border border-violet-500/20 bg-violet-950/10 text-center">
                       <Server className="size-5 text-violet-400 mx-auto mb-1.5" />
-                      <p className="font-semibold text-sm text-violet-300">Local Server</p>
-                      <p className="text-xs text-zinc-500">ローカルサーバー</p>
+                      <p className="font-semibold text-sm text-violet-300">{locale === "ja" ? "ローカルサーバー" : "Local Server"}</p>
+                      <p className="text-xs text-zinc-500">{locale === "ja" ? "Local Server" : "ローカルサーバー"}</p>
                     </div>
                     <div className="p-3 rounded-xl border border-amber-500/20 bg-amber-950/10 text-center">
                       <Cloud className="size-5 text-amber-400 mx-auto mb-1.5" />
-                      <p className="font-semibold text-sm text-amber-300">VPS / Cloud</p>
-                      <p className="text-xs text-zinc-500">クラウドサーバー</p>
+                      <p className="font-semibold text-sm text-amber-300">{locale === "ja" ? "クラウドサーバー" : "VPS / Cloud"}</p>
+                      <p className="text-xs text-zinc-500">{locale === "ja" ? "VPS / Cloud" : "クラウドサーバー"}</p>
                     </div>
                   </div>
                   <div className="flex justify-center mb-2"><ArrowDown className="size-4 text-zinc-600" /></div>
                   <div className="p-4 rounded-xl border border-zinc-700 bg-zinc-900/50 text-center">
-                    <p className="text-sm text-zinc-300 mb-2">Connected to any software / あらゆるソフトウェアに接続</p>
+                    <p className="text-sm text-zinc-300 mb-2">{locale === "ja" ? "あらゆるソフトウェアに接続 / Connected to any software" : "Connected to any software / あらゆるソフトウェアに接続"}</p>
                     <div className="flex flex-wrap justify-center gap-2 text-xs text-zinc-500">
-                      {["Notion", "Slack", "CRM", "Email", "Database", "ERP", "POS", "LINE", "会計ソフト", "EC"].map((s) => (
+                      {(locale === "ja" ? ["Notion", "Slack", "CRM", "Email", "Database", "ERP", "POS", "LINE", "会計ソフト", "EC"] : ["Notion", "Slack", "CRM", "Email", "Database", "ERP", "POS", "LINE", "Accounting", "E-commerce"]).map((s) => (
                         <span key={s} className="px-2.5 py-1 rounded-lg bg-zinc-800/50 border border-zinc-700/50">{s}</span>
                       ))}
                     </div>
@@ -694,12 +916,25 @@ export default function PresentationPage() {
               <FadeIn show={localStep >= 2}>
                 <div className="mt-4 max-w-2xl pb-8">
                   <div className="p-5 rounded-xl border border-emerald-500/20 bg-emerald-950/20">
-                    <p className="text-lg sm:text-xl text-zinc-200 text-center leading-relaxed">
-                      Any action a human can do on a computer — <span className="text-emerald-400 font-semibold">AI can now do too</span>
-                    </p>
-                    <p className="text-base text-zinc-500 text-center mt-2">
-                      人間がコンピュータでできるあらゆる操作 — <span className="text-emerald-400">AIも実行可能に</span>
-                    </p>
+                    {locale === "ja" ? (
+                      <>
+                        <p className="text-lg sm:text-xl text-zinc-200 text-center leading-relaxed">
+                          人間がコンピュータでできるあらゆる操作 — <span className="text-emerald-400 font-semibold">AIも実行可能に</span>
+                        </p>
+                        <p className="text-base text-zinc-500 text-center mt-2">
+                          Any action a human can do on a computer — <span className="text-emerald-400">AI can now do too</span>
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-lg sm:text-xl text-zinc-200 text-center leading-relaxed">
+                          Any action a human can do on a computer — <span className="text-emerald-400 font-semibold">AI can now do too</span>
+                        </p>
+                        <p className="text-base text-zinc-500 text-center mt-2">
+                          人間がコンピュータでできるあらゆる操作 — <span className="text-emerald-400">AIも実行可能に</span>
+                        </p>
+                      </>
+                    )}
                   </div>
                 </div>
               </FadeIn>
@@ -713,18 +948,31 @@ export default function PresentationPage() {
             <div className="pres-shield-pattern" />
             <div className="relative z-10 flex flex-col items-center w-full">
               <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-medium uppercase tracking-wider">
-                04 — Ownership / オーナーシップ
+                {locale === "ja" ? "04 — オーナーシップ / Ownership" : "04 — Ownership / オーナーシップ"}
               </div>
-              <h2 className="text-3xl sm:text-5xl font-bold text-center">
-                You Own <span className="gradient-text">Everything</span>
-              </h2>
-              <p className="text-lg text-zinc-500 mt-2 text-center">
-                すべてがあなたのもの
-              </p>
+              {locale === "ja" ? (
+                <>
+                  <h2 className="text-3xl sm:text-5xl font-bold text-center">
+                    すべてがあなたの<span className="gradient-text">もの</span>
+                  </h2>
+                  <p className="text-lg text-zinc-500 mt-2 text-center">
+                    You Own Everything
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h2 className="text-3xl sm:text-5xl font-bold text-center">
+                    You Own <span className="gradient-text">Everything</span>
+                  </h2>
+                  <p className="text-lg text-zinc-500 mt-2 text-center">
+                    すべてがあなたのもの
+                  </p>
+                </>
+              )}
 
               <FadeIn show={localStep >= 1}>
                 <div className="mt-6 w-full max-w-4xl [&_h3]:!text-2xl [&_h3]:!sm\\:text-3xl [&_p]:!text-base">
-                  <AIOSPyramid locale="en" compact />
+                  <AIOSPyramid locale={locale} compact />
                 </div>
               </FadeIn>
             </div>
@@ -736,50 +984,83 @@ export default function PresentationPage() {
           <section className="h-full flex flex-col items-center justify-center px-8 overflow-y-auto">
             <div className="shrink-0 pb-4 text-center">
               <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-300 text-xs font-medium uppercase tracking-wider">
-                05 — Self-Improving / 自己改善
+                {locale === "ja" ? "05 — 自己改善 / Self-Improving" : "05 — Self-Improving / 自己改善"}
               </div>
-              <h2 className="text-4xl sm:text-5xl font-bold text-center">
-                The System <span className="text-amber-400">Improves Itself</span>
-              </h2>
-              <p className="text-lg text-zinc-500 mt-2 text-center">
-                システムは自己改善する
-              </p>
+              {locale === "ja" ? (
+                <>
+                  <h2 className="text-4xl sm:text-5xl font-bold text-center">
+                    システムは<span className="text-amber-400">自己改善する</span>
+                  </h2>
+                  <p className="text-lg text-zinc-500 mt-2 text-center">
+                    The System Improves Itself
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h2 className="text-4xl sm:text-5xl font-bold text-center">
+                    The System <span className="text-amber-400">Improves Itself</span>
+                  </h2>
+                  <p className="text-lg text-zinc-500 mt-2 text-center">
+                    システムは自己改善する
+                  </p>
+                </>
+              )}
             </div>
 
             <FadeIn show={localStep >= 1}>
               <div className="mt-8 w-full max-w-3xl">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
                   <div className="p-5 rounded-xl border border-zinc-700 bg-zinc-900/50">
-                    <p className="font-semibold text-zinc-400 mb-3 text-sm uppercase tracking-wider">Before / これまで</p>
+                    <p className="font-semibold text-zinc-400 mb-3 text-sm uppercase tracking-wider">{locale === "ja" ? "これまで / Before" : "Before / これまで"}</p>
                     <ul className="space-y-2 text-sm text-zinc-400">
-                      <li>&bull; Expert team needed to maintain<br /><span className="text-xs text-zinc-600">維持に専門家チームが必要</span></li>
-                      <li>&bull; Something breaks &rarr; expensive fix<br /><span className="text-xs text-zinc-600">壊れる → 高額な修正</span></li>
-                      <li>&bull; Updates require developers<br /><span className="text-xs text-zinc-600">更新には開発者が必要</span></li>
+                      {locale === "ja" ? (
+                        <>
+                          <li>&bull; 維持に専門家チームが必要<br /><span className="text-xs text-zinc-600">Expert team needed to maintain</span></li>
+                          <li>&bull; 壊れる → 高額な修正<br /><span className="text-xs text-zinc-600">Something breaks &rarr; expensive fix</span></li>
+                          <li>&bull; 更新には開発者が必要<br /><span className="text-xs text-zinc-600">Updates require developers</span></li>
+                        </>
+                      ) : (
+                        <>
+                          <li>&bull; Expert team needed to maintain<br /><span className="text-xs text-zinc-600">維持に専門家チームが必要</span></li>
+                          <li>&bull; Something breaks &rarr; expensive fix<br /><span className="text-xs text-zinc-600">壊れる → 高額な修正</span></li>
+                          <li>&bull; Updates require developers<br /><span className="text-xs text-zinc-600">更新には開発者が必要</span></li>
+                        </>
+                      )}
                     </ul>
                   </div>
                   <div className="p-5 rounded-xl border border-amber-500/30 bg-amber-950/10">
-                    <p className="font-semibold text-amber-300 mb-3 text-sm uppercase tracking-wider">Now / これから</p>
+                    <p className="font-semibold text-amber-300 mb-3 text-sm uppercase tracking-wider">{locale === "ja" ? "これから / Now" : "Now / これから"}</p>
                     <ul className="space-y-2 text-sm text-zinc-300">
-                      <li className="flex items-start gap-2"><span className="text-amber-400 mt-0.5">&#10003;</span><span>Agent reads the code<br /><span className="text-xs text-zinc-500">エージェントがコードを読む</span></span></li>
-                      <li className="flex items-start gap-2"><span className="text-amber-400 mt-0.5">&#10003;</span><span>Agent diagnoses issues<br /><span className="text-xs text-zinc-500">問題を自動診断</span></span></li>
-                      <li className="flex items-start gap-2"><span className="text-amber-400 mt-0.5">&#10003;</span><span>Agent fixes &amp; deploys<br /><span className="text-xs text-zinc-500">修正してデプロイ</span></span></li>
+                      {locale === "ja" ? (
+                        <>
+                          <li className="flex items-start gap-2"><span className="text-amber-400 mt-0.5">&#10003;</span><span>エージェントがコードを読む<br /><span className="text-xs text-zinc-500">Agent reads the code</span></span></li>
+                          <li className="flex items-start gap-2"><span className="text-amber-400 mt-0.5">&#10003;</span><span>問題を自動診断<br /><span className="text-xs text-zinc-500">Agent diagnoses issues</span></span></li>
+                          <li className="flex items-start gap-2"><span className="text-amber-400 mt-0.5">&#10003;</span><span>修正してデプロイ<br /><span className="text-xs text-zinc-500">Agent fixes &amp; deploys</span></span></li>
+                        </>
+                      ) : (
+                        <>
+                          <li className="flex items-start gap-2"><span className="text-amber-400 mt-0.5">&#10003;</span><span>Agent reads the code<br /><span className="text-xs text-zinc-500">エージェントがコードを読む</span></span></li>
+                          <li className="flex items-start gap-2"><span className="text-amber-400 mt-0.5">&#10003;</span><span>Agent diagnoses issues<br /><span className="text-xs text-zinc-500">問題を自動診断</span></span></li>
+                          <li className="flex items-start gap-2"><span className="text-amber-400 mt-0.5">&#10003;</span><span>Agent fixes &amp; deploys<br /><span className="text-xs text-zinc-500">修正してデプロイ</span></span></li>
+                        </>
+                      )}
                     </ul>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-center gap-2 sm:gap-3 flex-wrap">
-                  <LoopStep icon={<Wrench className="size-5" />} label="Problem" sublabel="問題発生" />
+                  <LoopStep icon={<Wrench className="size-5" />} label={locale === "ja" ? "問題発生" : "Problem"} sublabel={locale === "ja" ? "Problem" : "問題発生"} />
                   <ArrowRight className="size-4 text-amber-500/50 shrink-0" />
-                  <LoopStep icon={<Cpu className="size-5" />} label="Detect" sublabel="検出" />
+                  <LoopStep icon={<Cpu className="size-5" />} label={locale === "ja" ? "検出" : "Detect"} sublabel={locale === "ja" ? "Detect" : "検出"} />
                   <ArrowRight className="size-4 text-amber-500/50 shrink-0" />
-                  <LoopStep icon={<Code className="size-5" />} label="Fix" sublabel="修正" />
+                  <LoopStep icon={<Code className="size-5" />} label={locale === "ja" ? "修正" : "Fix"} sublabel={locale === "ja" ? "Fix" : "修正"} />
                   <ArrowRight className="size-4 text-amber-500/50 shrink-0" />
-                  <LoopStep icon={<Zap className="size-5" />} label="Stronger" sublabel="強化" highlight />
+                  <LoopStep icon={<Zap className="size-5" />} label={locale === "ja" ? "強化" : "Stronger"} sublabel={locale === "ja" ? "Stronger" : "強化"} highlight />
                 </div>
                 <div className="flex justify-center mt-3">
                   <div className="flex items-center gap-1.5 text-xs text-amber-500/40">
                     <RefreshCw className="size-3" />
-                    continuous improvement loop / 継続的改善ループ
+                    {locale === "ja" ? "継続的改善ループ / continuous improvement loop" : "continuous improvement loop / 継続的改善ループ"}
                   </div>
                 </div>
               </div>
@@ -789,12 +1070,25 @@ export default function PresentationPage() {
             <FadeIn show={localStep >= 2}>
               <div className="mt-4 max-w-2xl pb-8">
                 <div className="p-5 rounded-xl border border-amber-500/20 bg-amber-950/20">
-                  <p className="text-lg sm:text-xl text-zinc-200 text-center leading-relaxed">
-                    You don&apos;t need a team of experts anymore — <span className="text-amber-400 font-semibold">the system maintains itself</span>
-                  </p>
-                  <p className="text-base text-zinc-500 text-center mt-2">
-                    もう専門家チームは不要 — <span className="text-amber-400">システムが自分自身をメンテナンスする</span>
-                  </p>
+                  {locale === "ja" ? (
+                    <>
+                      <p className="text-lg sm:text-xl text-zinc-200 text-center leading-relaxed">
+                        もう専門家チームは不要 — <span className="text-amber-400 font-semibold">システムが自分自身をメンテナンスする</span>
+                      </p>
+                      <p className="text-base text-zinc-500 text-center mt-2">
+                        You don&apos;t need a team of experts anymore — <span className="text-amber-400">the system maintains itself</span>
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-lg sm:text-xl text-zinc-200 text-center leading-relaxed">
+                        You don&apos;t need a team of experts anymore — <span className="text-amber-400 font-semibold">the system maintains itself</span>
+                      </p>
+                      <p className="text-base text-zinc-500 text-center mt-2">
+                        もう専門家チームは不要 — <span className="text-amber-400">システムが自分自身をメンテナンスする</span>
+                      </p>
+                    </>
+                  )}
                 </div>
               </div>
             </FadeIn>
@@ -806,16 +1100,33 @@ export default function PresentationPage() {
           <section className="h-full flex flex-col items-center justify-center px-8 relative">
             <div className="pres-closing-glow" />
             <div className="relative z-10 flex flex-col items-center max-w-4xl w-full">
-              <h2 className="text-3xl sm:text-5xl font-bold text-center leading-tight max-w-3xl">
-                The question isn&apos;t <span className="text-zinc-500">&ldquo;should we use AI?&rdquo;</span>
-              </h2>
-              <h2 className="text-3xl sm:text-5xl font-bold text-center leading-tight mt-4">
-                It&apos;s <span className="gradient-text">&ldquo;do we have the infrastructure to run it?&rdquo;</span>
-              </h2>
-              <div className="mt-6">
-                <p className="text-lg text-zinc-500 text-center">問いは「AIを使うべきか？」ではなく</p>
-                <p className="text-lg text-indigo-400 text-center mt-1">「AIを動かすインフラがあるか？」</p>
-              </div>
+              {locale === "ja" ? (
+                <>
+                  <h2 className="text-3xl sm:text-5xl font-bold text-center leading-tight max-w-3xl">
+                    問いは<span className="text-zinc-500">「AIを使うべきか？」</span>ではなく
+                  </h2>
+                  <h2 className="text-3xl sm:text-5xl font-bold text-center leading-tight mt-4">
+                    <span className="gradient-text">「AIを動かすインフラがあるか？」</span>
+                  </h2>
+                  <div className="mt-6">
+                    <p className="text-lg text-zinc-500 text-center">The question isn&apos;t &ldquo;should we use AI?&rdquo;</p>
+                    <p className="text-lg text-indigo-400 text-center mt-1">It&apos;s &ldquo;do we have the infrastructure to run it?&rdquo;</p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <h2 className="text-3xl sm:text-5xl font-bold text-center leading-tight max-w-3xl">
+                    The question isn&apos;t <span className="text-zinc-500">&ldquo;should we use AI?&rdquo;</span>
+                  </h2>
+                  <h2 className="text-3xl sm:text-5xl font-bold text-center leading-tight mt-4">
+                    <span className="gradient-text">It&apos;s &ldquo;do we have the infrastructure to run it?&rdquo;</span>
+                  </h2>
+                  <div className="mt-6">
+                    <p className="text-lg text-zinc-500 text-center">問いは「AIを使うべきか？」ではなく</p>
+                    <p className="text-lg text-indigo-400 text-center mt-1">「AIを動かすインフラがあるか？」</p>
+                  </div>
+                </>
+              )}
 
               {/* CTA Cards */}
               <div className="mt-10 w-full max-w-2xl grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -826,15 +1137,28 @@ export default function PresentationPage() {
                   className="block pres-cta-glow rounded-2xl border-2 border-indigo-500/40 bg-gradient-to-br from-indigo-950/40 via-indigo-900/20 to-violet-950/40 p-6 text-center transition-all duration-300 hover:border-indigo-400/60 hover:scale-[1.02] group"
                 >
                   <Sparkles className="size-7 text-indigo-400 mx-auto mb-3" />
-                  <p className="text-lg font-bold text-indigo-200 group-hover:text-indigo-100 transition-colors">
-                    Get Your Free AI Audit
-                  </p>
-                  <p className="text-sm text-zinc-500 mt-1">
-                    まずは無料AI活用診断から
-                  </p>
+                  {locale === "ja" ? (
+                    <>
+                      <p className="text-lg font-bold text-indigo-200 group-hover:text-indigo-100 transition-colors">
+                        まずは無料AI活用診断から
+                      </p>
+                      <p className="text-sm text-zinc-500 mt-1">
+                        Get Your Free AI Audit
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-lg font-bold text-indigo-200 group-hover:text-indigo-100 transition-colors">
+                        Get Your Free AI Audit
+                      </p>
+                      <p className="text-sm text-zinc-500 mt-1">
+                        まずは無料AI活用診断から
+                      </p>
+                    </>
+                  )}
                   <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-600 text-white font-semibold text-sm group-hover:bg-indigo-500 transition-colors">
                     <ArrowRight className="size-4" />
-                    Start Now
+                    {locale === "ja" ? "今すぐ始める" : "Start Now"}
                   </div>
                 </a>
 
@@ -845,15 +1169,28 @@ export default function PresentationPage() {
                   className="block rounded-2xl border-2 border-emerald-500/30 bg-emerald-950/10 p-6 text-center transition-all duration-300 hover:border-emerald-400/50 hover:scale-[1.02] group"
                 >
                   <UserPlus className="size-7 text-emerald-400 mx-auto mb-3" />
-                  <p className="text-lg font-bold text-emerald-200 group-hover:text-emerald-100 transition-colors">
-                    Sign Up Now
-                  </p>
-                  <p className="text-sm text-zinc-500 mt-1">
-                    申し込んでみませんか
-                  </p>
+                  {locale === "ja" ? (
+                    <>
+                      <p className="text-lg font-bold text-emerald-200 group-hover:text-emerald-100 transition-colors">
+                        申し込んでみませんか
+                      </p>
+                      <p className="text-sm text-zinc-500 mt-1">
+                        Sign Up Now
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-lg font-bold text-emerald-200 group-hover:text-emerald-100 transition-colors">
+                        Sign Up Now
+                      </p>
+                      <p className="text-sm text-zinc-500 mt-1">
+                        申し込んでみませんか
+                      </p>
+                    </>
+                  )}
                   <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-600 text-white font-semibold text-sm group-hover:bg-emerald-500 transition-colors">
                     <ArrowRight className="size-4" />
-                    Get Started
+                    {locale === "ja" ? "始めましょう" : "Get Started"}
                   </div>
                 </a>
               </div>
@@ -888,7 +1225,7 @@ export default function PresentationPage() {
                     <QrCode className="size-12 text-indigo-400/60" />
                     <p className="text-[10px] text-zinc-500 font-medium">QR CODE</p>
                   </div>
-                  <p className="text-xs text-zinc-500 mt-2">Scan to book / スキャンして予約</p>
+                  <p className="text-xs text-zinc-500 mt-2">{locale === "ja" ? "スキャンして予約 / Scan to book" : "Scan to book / スキャンして予約"}</p>
                 </div>
               </div>
             </div>
