@@ -148,6 +148,9 @@
   body {
     @apply bg-background text-foreground;
   }
+  a, button, [role="button"], input[type="submit"], input[type="button"] {
+    cursor: pointer;
+  }
 }
 
 /* Smooth scrolling */

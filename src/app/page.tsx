@@ -120,12 +120,12 @@ export default function HomePage() {
 
         {/* ━━ HOW — How It Works ━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
 
-        {/* 4. Brain + Body (paradigm shift) */}
-        <BrainBodySection locale={locale} />
+        {/* 4. Agentic Terminal (year progression: 2024→2025→2026) */}
+        <AgenticTerminalSection t={t} locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
-        {/* 5. Agentic Terminal (the tools that make it possible) */}
-        <AgenticTerminalSection t={t} locale={locale} />
+        {/* 5. Brain + Body (paradigm shift) */}
+        <BrainBodySection locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
         {/* 6. Solution — Pyramid (the model-agnostic stack you own) */}
