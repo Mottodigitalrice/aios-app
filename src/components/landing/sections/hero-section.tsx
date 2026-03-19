@@ -41,7 +41,7 @@ export default function HeroSection({ t, locale }: SectionProps) {
               style={{
                 fontSize: locale === "ja" ? "clamp(1.75rem, 4vw, 3.25rem)" : "var(--text-display)",
                 color: "var(--lp-text-heading)",
-                ...(locale === "ja" ? { wordBreak: "keep-all" as const, overflowWrap: "break-word" as const, lineHeight: "1.3" } : {}),
+                ...(locale === "ja" ? { wordBreak: "keep-all" as const, overflowWrap: "anywhere" as const, lineHeight: "1.3" } : {}),
               }}
             >
               {renderTitle(t.hero.title)}{" "}
@@ -52,7 +52,7 @@ export default function HeroSection({ t, locale }: SectionProps) {
               style={{
                 fontSize: "var(--text-body)",
                 color: "var(--lp-text-body)",
-                ...(locale === "ja" ? { lineHeight: "1.9" } : {}),
+                ...(locale === "ja" ? { lineHeight: "1.9", wordBreak: "keep-all" as const, overflowWrap: "anywhere" as const } : {}),
               }}
             >
               {t.hero.subtitle}
