@@ -209,20 +209,22 @@ const en = {
     },
     hero: {
       badge: "Now Accepting Clients \u2014 Limited Spots",
-      title: "The AI operating system that moves you from working in your business",
-      titleHighlight: "to working on it.",
+      title: "The",
+      titleHighlight: "AI Operating System",
+      titleSuffix: "that moves you from working in your business to working ON YOUR business.",
       subtitle:
-        "A system that can help automate the established parts of your business so you and your team can be released to grow your business. Co-built with you and owned entirely by you. No platform fees or vendor lock-in. Starting from \u00A520,000/month.",
+        "A system that helps automate the established parts of your business so you and your team can focus on growth. Co-built with you and owned entirely by you. No platform fees or vendor lock-in.",
+      pricingCallout: "Starting from \u00A520,000/month",
       cta: "Save Your Spot",
       ctaTime: "30-second signup \u00B7 Meet Lewis first, then decide",
       ctaSecondary: "Get a Free AI Audit",
       ctaSecondaryTime: "Takes 5 minutes",
-      ctaSecondarySubtitle: "Honest and free assessment of your business\u2019s next AI step.",
+      ctaSecondarySubtitle: "Completely free. Yours to keep. No obligation to purchase anything.",
       scarcity: "3 company spots remaining. 5 one-on-one spots open. Next group cohort: May 2026.",
       scarcityShort: "Limited spots!",
       stats:
         "the same AIOS system we use to operate our own business.",
-      guaranteeHint: "If your team can\u2019t manage AI agents by month 6, we keep going \u2014 free.",
+      guaranteeHint: "Can\u2019t run your AI system by month 6? We keep going \u2014 free \u2014 until you can.",
       builtWith: "Built with",
     },
     pricing: {
@@ -615,8 +617,8 @@ const en = {
     },
     guarantee: {
       title: "The Ownership Guarantee",
-      headline: "If your team can\u2019t create and manage AI agents by month 6, we keep working with you \u2014 free \u2014 until they can.",
-      description: "No hedging. No fine print. Complete the 6-month program. If your team isn\u2019t independently building and managing AI agents by the end, we continue at zero cost until they are.",
+      headline: "If you can\u2019t run your AI system by month 6, we keep going \u2014 free \u2014 until you can.",
+      description: "No hedging. No fine print. Complete the 6-month program. If you\u2019re not independently running your AI agentic system by the end, we continue at zero cost until you are.",
       individualNote: "Company Build & One-on-One: we continue working with you \u2014 free of charge.",
       companyNote: "Group Cohort: join the next cohort free until you\u2019re there.",
       meetFirst: "Meet first, then decide. Save your spot \u2014 no commitment until after your meeting with Lewis.",

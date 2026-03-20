@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, ShieldCheck } from "lucide-react";
-import { HeroOrgVisual } from "@/components/landing/hero-org-visual";
+import { AIOSPyramid } from "@/components/landing/aios-pyramid";
 import type { SectionProps } from "./types";
 
 export default function HeroSection({ t, locale }: SectionProps) {
@@ -44,8 +44,9 @@ export default function HeroSection({ t, locale }: SectionProps) {
                 ...(locale === "ja" ? { lineHeight: "1.3" } : {}),
               }}
             >
-              {renderTitle(t.hero.title)}{" "}
+              {renderTitle(t.hero.title)}{t.hero.title ? " " : ""}
               <span className="gradient-text">{renderTitle(t.hero.titleHighlight)}</span>
+              {" "}{renderTitle(t.hero.titleSuffix)}
             </h1>
             <p
               className="animate-fade-in-up animation-delay-200 mt-6 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
@@ -56,6 +57,13 @@ export default function HeroSection({ t, locale }: SectionProps) {
               }}
             >
               {t.hero.subtitle}
+            </p>
+
+            {/* Pricing callout */}
+            <p className="animate-fade-in-up animation-delay-200 mt-3">
+              <span className="inline-block text-lg font-bold" style={{ color: "#B8860B" }}>
+                {t.hero.pricingCallout}
+              </span>
             </p>
 
             <div className="animate-fade-in-up animation-delay-300 mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
@@ -71,7 +79,10 @@ export default function HeroSection({ t, locale }: SectionProps) {
                 </Button>
               </Link>
             </div>
-            <p className="animate-fade-in-up animation-delay-300 mt-3 text-xs text-center lg:text-left" style={{ color: "var(--lp-text-muted)" }}>
+            <p className="animate-fade-in-up animation-delay-300 mt-2 text-xs text-center lg:text-left" style={{ color: "var(--lp-text-muted)" }}>
+              {t.hero.ctaSecondarySubtitle}
+            </p>
+            <p className="animate-fade-in-up animation-delay-300 mt-1 text-xs text-center lg:text-left" style={{ color: "var(--lp-text-muted)" }}>
               {t.hero.ctaTime}
             </p>
 
@@ -88,12 +99,9 @@ export default function HeroSection({ t, locale }: SectionProps) {
             </p>
           </div>
 
-          {/* Right: Hero visual — full on lg, simplified on mobile */}
-          <div className="animate-fade-in-up animation-delay-300 hidden lg:block">
-            <HeroOrgVisual locale={locale} />
-          </div>
-          <div className="animate-fade-in-up animation-delay-300 lg:hidden mt-4">
-            <HeroOrgVisual locale={locale} mobile />
+          {/* Right: Hero visual — AIOS Pyramid (compact) */}
+          <div className="animate-fade-in-up animation-delay-300">
+            <AIOSPyramid locale={locale} compact />
           </div>
         </div>
       </div>
