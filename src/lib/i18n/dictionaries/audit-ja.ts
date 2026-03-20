@@ -407,7 +407,7 @@ const auditDict = {
     bookEmbedTitle: "都合の良い時間を選んでください",
     bookFallback: "新しいタブで予約ページを開く",
     bookCta: "無料診断通話を予約",
-    bookCtaPersonal: "4月コホートに参加",
+    bookCtaPersonal: "5月コホートに参加",
     bookSubtext: "30分 · ビデオ通話 · 営業なし",
     bookSubtextPersonal: "少人数グループ · 実践ワークショップ · 無料",
     bookDescription:

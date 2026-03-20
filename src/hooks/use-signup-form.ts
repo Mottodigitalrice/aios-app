@@ -47,9 +47,7 @@ const TOTAL_STEPS = 5; // steps 0-4
 // Per-step validation schemas
 // ---------------------------------------------------------------------------
 
-function getStepSchemas(_track: string, signupType: string): Record<number, z.ZodType> {
-  const needsCompany = signupType === "company";
-
+function getStepSchemas(_track: string, _signupType: string): Record<number, z.ZodType> {
   return {
     0: z.object({
       signupType: z.enum(["cohort", "individual", "company"], {
@@ -61,9 +59,8 @@ function getStepSchemas(_track: string, signupType: string): Record<number, z.Zo
       email: z.string().check(
         z.email({ message: "Please enter a valid email" })
       ),
-      ...(needsCompany
-        ? { company: z.string().min(1, "Company name is required") }
-        : {}),
+      company: z.string().min(1, "Company name is required"),
+      role: z.string().min(1, "Role is required"),
     }),
     2: z.object({
       goals: z.string().min(1, "Please describe your goals"),

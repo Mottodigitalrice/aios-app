@@ -51,7 +51,12 @@ export function Step4GettingStarted({
             {s.startLabel} <span className="text-red-600">*</span>
           </Label>
           <div className="space-y-2">
-            {s.startOptions.map((option) => (
+            {(formData.signupType === "cohort"
+              ? s.startOptionsCohort
+              : formData.signupType === "individual"
+                ? s.startOptionsIndividual
+                : s.startOptionsCompany
+            ).map((option) => (
               <button
                 key={option}
                 type="button"

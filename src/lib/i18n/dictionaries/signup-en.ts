@@ -56,7 +56,7 @@ const signupDict = {
       emailPlaceholder: "you@company.com",
       companyLabel: "Company name",
       companyPlaceholder: "Your company name",
-      companyRequired: "Required for Company Build",
+      companyRequired: "Required",
       roleLabel: "Role / Title",
       rolePlaceholder: "e.g. CEO, CTO, Founder",
     },
@@ -77,10 +77,17 @@ const signupDict = {
       question: "Getting Started",
       description: "A few final details to help us prepare for your enrollment.",
       startLabel: "When would you like to start?",
-      startOptions: [
-        "April 2026 cohort",
+      startOptionsCompany: [
         "As soon as possible",
-        "Just exploring",
+        "Not sure yet",
+      ],
+      startOptionsIndividual: [
+        "As soon as possible",
+        "Not sure yet",
+      ],
+      startOptionsCohort: [
+        "May 2026 cohort",
+        "Just exploring for now",
       ],
       sourceLabel: "How did you hear about AIOS?",
       sourceOptions: ["LinkedIn", "Referral", "Search", "Event", "Other"],

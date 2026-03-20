@@ -180,20 +180,35 @@ export default function PricingSection({ t, locale }: SectionProps) {
                 <p className="text-xs" style={{ color: "var(--lp-text-muted)" }}>{t.pricing.capacity.oneOnOne.label}</p>
               </div>
 
-              {/* Cohort */}
+              {/* Cohort — split into EN + JP tracks */}
               <div className="rounded-lg p-4 text-center" style={{ backgroundColor: "var(--lp-bg-subtle)" }}>
-                <p className="text-sm font-semibold mb-1" style={{ color: "var(--lp-text-heading)" }}>{t.pricing.capacity.cohort.title}</p>
-                <p className="text-xs mt-3" style={{ color: "var(--lp-text-muted)" }}>{t.pricing.capacity.cohort.label}</p>
+                <p className="text-sm font-semibold mb-3" style={{ color: "var(--lp-text-heading)" }}>{t.pricing.capacity.cohortHeading}</p>
+
+                {/* English track */}
+                <p className="text-xs font-medium mb-1" style={{ color: "var(--lp-text-body)" }}>{t.pricing.capacity.cohortEN.title}</p>
+                <div className="flex justify-center gap-1.5 mb-1">
+                  {Array.from({ length: t.pricing.capacity.cohortEN.total }).map((_, i) => (
+                    <div
+                      key={`en-${i}`}
+                      className={`size-3 rounded-full ${i < t.pricing.capacity.cohortEN.filled ? "bg-indigo-500" : "bg-[#E8E8ED]"}`}
+                    />
+                  ))}
+                </div>
+                <p className="text-xs mb-3" style={{ color: "var(--lp-text-muted)" }}>{t.pricing.capacity.cohortEN.label}</p>
+
+                {/* Japanese track */}
+                <p className="text-xs font-medium mb-1" style={{ color: "var(--lp-text-body)" }}>{t.pricing.capacity.cohortJP.title}</p>
+                <div className="flex justify-center gap-1.5 mb-1">
+                  {Array.from({ length: t.pricing.capacity.cohortJP.total }).map((_, i) => (
+                    <div
+                      key={`jp-${i}`}
+                      className={`size-3 rounded-full ${i < t.pricing.capacity.cohortJP.filled ? "bg-indigo-500" : "bg-[#E8E8ED]"}`}
+                    />
+                  ))}
+                </div>
+                <p className="text-xs" style={{ color: "var(--lp-text-muted)" }}>{t.pricing.capacity.cohortJP.label}</p>
               </div>
             </div>
-
-            <blockquote
-              className="text-sm italic border-l-2 border-indigo-500/30 pl-4"
-              style={{ color: "var(--lp-text-body)", ...(locale === "ja" ? { lineHeight: "1.9", fontStyle: "normal" } : {}) }}
-            >
-              {t.pricing.capacity.commitment}
-            </blockquote>
-            <p className="text-xs mt-2" style={{ color: "var(--lp-text-muted)" }}>{t.pricing.capacity.author}</p>
           </div>
         </AnimateInView>
 

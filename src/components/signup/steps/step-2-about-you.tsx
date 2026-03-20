@@ -87,12 +87,7 @@ export function Step2AboutYou({
         {/* Company */}
         <div className="space-y-2">
           <Label htmlFor="signup-company" className="text-sm font-medium text-[#6E6E73]">
-            {s.companyLabel}{" "}
-            {formData.signupType === "company" ? (
-              <span className="text-red-600">*</span>
-            ) : (
-              <span className="text-[#86868B] text-xs">({t.common.optional})</span>
-            )}
+            {s.companyLabel} <span className="text-red-600">*</span>
           </Label>
           <Input
             id="signup-company"
@@ -103,9 +98,6 @@ export function Step2AboutYou({
             placeholder={s.companyPlaceholder}
             className="bg-[#F5F5F7] border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus:border-[#B8860B]/50 focus:ring-[#B8860B]/20"
           />
-          {formData.signupType === "company" && (
-            <p className="text-xs text-[#86868B]">{s.companyRequired}</p>
-          )}
           {fieldErrors?.company && (
             <p className="text-xs text-red-600">{fieldErrors.company}</p>
           )}
@@ -114,17 +106,20 @@ export function Step2AboutYou({
         {/* Role */}
         <div className="space-y-2">
           <Label htmlFor="signup-role" className="text-sm font-medium text-[#6E6E73]">
-            {s.roleLabel}{" "}
-            <span className="text-[#86868B] text-xs">({t.common.optional})</span>
+            {s.roleLabel} <span className="text-red-600">*</span>
           </Label>
           <Input
             id="signup-role"
             type="text"
             value={formData.role}
             onChange={(e) => updateField("role", e.target.value)}
+            onBlur={() => validateField("role")}
             placeholder={s.rolePlaceholder}
             className="bg-[#F5F5F7] border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus:border-[#B8860B]/50 focus:ring-[#B8860B]/20"
           />
+          {fieldErrors?.role && (
+            <p className="text-xs text-red-600">{fieldErrors.role}</p>
+          )}
         </div>
       </div>
 

@@ -56,7 +56,7 @@ const signupDict = {
       emailPlaceholder: "you@company.com",
       companyLabel: "会社名",
       companyPlaceholder: "会社名",
-      companyRequired: "カンパニービルドは必須です",
+      companyRequired: "必須",
       roleLabel: "役職",
       rolePlaceholder: "\u4F8B\uFF1ACEO\u3001CTO\u3001\u5275\u696D\u8005",
     },
@@ -76,11 +76,18 @@ const signupDict = {
     4: {
       question: "\u958B\u59CB\u306B\u3064\u3044\u3066",
       description: "\u304A\u7533\u3057\u8FBC\u307F\u306E\u6E96\u5099\u306E\u305F\u3081\u3001\u6700\u5F8C\u306E\u8CEA\u554F\u3067\u3059\u3002",
-      startLabel: "\u3044\u3064\u304B\u3089\u59CB\u3081\u305F\u3044\u3067\u3059\u304B\uFF1F",
-      startOptions: [
-        "2026\u5E744\u6708\u30B3\u30DB\u30FC\u30C8",
-        "\u3067\u304D\u308B\u3060\u3051\u65E9\u304F",
-        "\u307E\u305A\u306F\u60C5\u5831\u53CE\u96C6",
+      startLabel: "いつから始めたいですか？",
+      startOptionsCompany: [
+        "できるだけ早く",
+        "まだ未定",
+      ],
+      startOptionsIndividual: [
+        "できるだけ早く",
+        "まだ未定",
+      ],
+      startOptionsCohort: [
+        "2026年5月コホート",
+        "まずは情報収集",
       ],
       sourceLabel: "AIOS\u3092\u3069\u3053\u3067\u77E5\u308A\u307E\u3057\u305F\u304B\uFF1F",
       sourceOptions: ["LinkedIn", "\u7D39\u4ECB", "\u691C\u7D22", "\u30A4\u30D9\u30F3\u30C8", "\u305D\u306E\u4ED6"],

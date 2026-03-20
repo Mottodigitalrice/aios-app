@@ -208,7 +208,7 @@ const en = {
       skipToContent: "Skip to main content",
     },
     hero: {
-      badge: "April 2026 \u2014 Limited Spots",
+      badge: "Now Accepting Clients \u2014 Limited Spots",
       title: "The AI operating system that moves you from working in your business",
       titleHighlight: "to working on it.",
       subtitle:
@@ -302,7 +302,7 @@ const en = {
       launchNote: "Early pricing \u2014 increases after first 5 clients.",
       capacity: {
         title: "Limited capacity. Full commitment.",
-        subtitle: "I work with a small number of clients at a time to ensure every engagement gets my full attention. Company and One-on-One clients can start anytime. Group cohorts run on a fixed schedule.",
+        subtitle: "I\u2019m intentionally limiting the number of clients I work with so I can give you my absolute best. Company and One-on-One clients can start anytime as long as there\u2019s space. Group cohorts run on a fixed schedule \u2014 the next one starts May 2026.",
         company: {
           title: "Company Build",
           filled: 2,
@@ -315,12 +315,19 @@ const en = {
           total: 5,
           label: "5 spots available",
         },
-        cohort: {
-          title: "May Cohort",
-          label: "English & Japanese tracks \u00B7 10 spots each",
+        cohortEN: {
+          title: "English Track",
+          filled: 0,
+          total: 10,
+          label: "0 of 10 spots filled",
         },
-        commitment: "This is a new service \u2014 and that\u2019s exactly why I\u2019m limiting it. The future of my business depends on making these first clients wildly successful. I\u2019m not spreading thin. I\u2019m going deep with the people who trust me first.",
-        author: "\u2014 Lewis Rice, Founder",
+        cohortJP: {
+          title: "Japanese Track",
+          filled: 1,
+          total: 10,
+          label: "1 of 10 spots filled",
+        },
+        cohortHeading: "May 2026 Cohort",
       },
     },
     leadMagnet: {
@@ -522,7 +529,7 @@ const en = {
     },
     midCta: {
       title: "Ready to build yours?",
-      subtitle: "Save your spot for the April cohort. Meet Lewis first, then decide. No commitment until after your call.",
+      subtitle: "Save your spot now. Meet Lewis first, then decide. No commitment until after your call.",
       cta: "Save Your Spot",
     },
     problems: {
@@ -610,8 +617,8 @@ const en = {
       title: "The Ownership Guarantee",
       headline: "If your team can\u2019t create and manage AI agents by month 6, we keep working with you \u2014 free \u2014 until they can.",
       description: "No hedging. No fine print. Complete the 6-month program. If your team isn\u2019t independently building and managing AI agents by the end, we continue at zero cost until they are.",
-      individualNote: "One-on-One & Group Cohort: we keep going free until you\u2019re there.",
-      companyNote: "Company Build: we continue working with your team at no charge.",
+      individualNote: "Company Build & One-on-One: we continue working with you \u2014 free of charge.",
+      companyNote: "Group Cohort: join the next cohort free until you\u2019re there.",
       meetFirst: "Meet first, then decide. Save your spot \u2014 no commitment until after your meeting with Lewis.",
     },
     shiryo: {

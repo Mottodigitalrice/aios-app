@@ -417,7 +417,7 @@ const auditDict = {
     bookEmbedTitle: "Pick a time that works for you",
     bookFallback: "Or open scheduler in new tab",
     bookCta: "Book Your Free Audit Call",
-    bookCtaPersonal: "Join the April Cohort",
+    bookCtaPersonal: "Join the May Cohort",
     bookSubtext: "30 minutes \u00B7 Video call \u00B7 No sales pressure",
     bookSubtextPersonal:
       "Small group \u00B7 Hands-on workshop \u00B7 Free",
