@@ -9,14 +9,12 @@ import { z } from "zod";
 
 export interface SignupFormData {
   // Step 1: Track selection
-  track: "cohort" | "corporate" | "";
-  signupType: "individual" | "company" | "department" | "";
-  plan: "monthly" | "full" | "";
+  track: "cohort" | "oneOnOne" | "company" | "";
+  signupType: "cohort" | "individual" | "company" | "";
   // Step 2: About you
   name: string;
   email: string;
   company: string;
-  departmentName: string;
   role: string;
   // Step 3: Goals
   goals: string;
@@ -31,11 +29,9 @@ export interface SignupFormData {
 const INITIAL_DATA: SignupFormData = {
   track: "",
   signupType: "",
-  plan: "",
   name: "",
   email: "",
   company: "",
-  departmentName: "",
   role: "",
   goals: "",
   painPoints: "",
@@ -51,13 +47,12 @@ const TOTAL_STEPS = 5; // steps 0-4
 // Per-step validation schemas
 // ---------------------------------------------------------------------------
 
-function getStepSchemas(track: string, signupType: string): Record<number, z.ZodType> {
-  const needsCompany = signupType === "company" || signupType === "department";
-  const needsDepartment = signupType === "department";
+function getStepSchemas(_track: string, signupType: string): Record<number, z.ZodType> {
+  const needsCompany = signupType === "company";
 
   return {
     0: z.object({
-      signupType: z.enum(["individual", "company", "department"], {
+      signupType: z.enum(["cohort", "individual", "company"], {
         message: "Please select an option",
       }),
     }),
@@ -68,9 +63,6 @@ function getStepSchemas(track: string, signupType: string): Record<number, z.Zod
       ),
       ...(needsCompany
         ? { company: z.string().min(1, "Company name is required") }
-        : {}),
-      ...(needsDepartment
-        ? { departmentName: z.string().min(1, "Department name is required") }
         : {}),
     }),
     2: z.object({
@@ -205,14 +197,9 @@ export function useSignupForm() {
         body: JSON.stringify({
           track: formData.track,
           signupType: formData.signupType || undefined,
-          plan:
-            formData.track === "corporate" && formData.plan
-              ? formData.plan
-              : undefined,
           name: formData.name,
           email: formData.email,
           company: formData.company || undefined,
-          departmentName: formData.departmentName || undefined,
           role: formData.role || undefined,
           goals: formData.goals,
           painPoints: formData.painPoints || undefined,

@@ -1,8 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { ArrowRight, User, Building2, Users, Check, Sparkles } from "lucide-react";
+import { ArrowRight, User, Building2, Users, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSignupLocale } from "../signup-locale-context";
 import type { SignupFormData, FieldErrors } from "@/hooks/use-signup-form";
@@ -29,18 +28,26 @@ export function Step1Track({
   const { t } = useSignupLocale();
   const s = t.steps[1];
 
-  const selectType = (type: "individual" | "company" | "department") => {
+  const selectType = (type: "cohort" | "individual" | "company") => {
     updateField("signupType", type);
-    if (type === "individual") {
+    if (type === "cohort") {
       updateField("track", "cohort");
-      updateField("plan", "");
+    } else if (type === "individual") {
+      updateField("track", "oneOnOne");
     } else {
-      updateField("track", "corporate");
-      if (!formData.plan) updateField("plan", "monthly");
+      updateField("track", "company");
     }
   };
 
   const cards = [
+    {
+      type: "cohort" as const,
+      icon: Users,
+      label: s.cohortLabel,
+      price: s.cohortPrice,
+      description: s.cohortDescription,
+      bestFor: s.cohortBestFor,
+    },
     {
       type: "individual" as const,
       icon: User,
@@ -57,18 +64,7 @@ export function Step1Track({
       description: s.companyDescription,
       bestFor: s.companyBestFor,
     },
-    {
-      type: "department" as const,
-      icon: Users,
-      label: s.departmentLabel,
-      price: s.departmentPrice,
-      description: s.departmentDescription,
-      bestFor: s.departmentBestFor,
-    },
   ];
-
-  const showBillingPlan =
-    formData.signupType === "company" || formData.signupType === "department";
 
   return (
     <div className="w-full max-w-xl mx-auto">
@@ -127,51 +123,6 @@ export function Step1Track({
             </button>
           );
         })}
-
-        {/* Billing plan selection for corporate tracks */}
-        {showBillingPlan && (
-          <div className="ml-1 mt-2">
-            <p className="text-sm font-medium text-[#6E6E73] mb-3">
-              {s.planSelectionLabel}
-            </p>
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                type="button"
-                onClick={() => updateField("plan", "monthly")}
-                className={cn(
-                  "rounded-lg border p-3 text-left text-sm transition-all duration-200",
-                  formData.plan === "monthly"
-                    ? "border-[#B8860B]/30 bg-[#B8860B]/8 text-[#B8860B] ring-1 ring-[#B8860B]/20"
-                    : "border-[#E8E8ED] bg-[#F5F5F7] text-[#6E6E73] hover:border-[#B8860B]/30"
-                )}
-              >
-                <p className="font-medium">{s.monthlyPlanLabel}</p>
-                <p className="text-xs text-[#86868B] mt-1">
-                  {s.corporateMonthlyPrice}
-                </p>
-              </button>
-              <button
-                type="button"
-                onClick={() => updateField("plan", "full")}
-                className={cn(
-                  "rounded-lg border p-3 text-left text-sm transition-all duration-200 relative",
-                  formData.plan === "full"
-                    ? "border-[#1B7D5A]/20 bg-[#1B7D5A]/10 text-[#1B7D5A] ring-1 ring-[#1B7D5A]/20"
-                    : "border-[#E8E8ED] bg-[#F5F5F7] text-[#6E6E73] hover:border-[#B8860B]/30"
-                )}
-              >
-                <Badge className="absolute -top-2 right-2 bg-emerald-600 text-white border-0 text-[10px] px-1.5 py-0">
-                  <Sparkles className="size-2.5 mr-0.5" />
-                  {s.payInFullSave}
-                </Badge>
-                <p className="font-medium">{s.fullPlanLabel}</p>
-                <p className="text-xs text-[#86868B] mt-1">
-                  {s.payInFullPrice}
-                </p>
-              </button>
-            </div>
-          </div>
-        )}
       </div>
 
       {error && (

@@ -82,15 +82,11 @@ export function Step3Goals({
           />
         </div>
 
-        {/* Team Size (company/department only) */}
-        {(formData.signupType === "company" || formData.signupType === "department") && (
+        {/* Team Size (company only) */}
+        {formData.signupType === "company" && (
           <div className="space-y-2">
             <Label htmlFor="signup-team-size" className="text-sm font-medium text-[#6E6E73]">
-              {formData.signupType === "company"
-                ? s.teamSizeLabelCompany
-                : formData.signupType === "department"
-                  ? s.teamSizeLabelDepartment
-                  : s.teamSizeLabel}{" "}
+              {s.teamSizeLabelCompany}{" "}
               <span className="text-[#86868B] text-xs">({t.common.optional})</span>
             </Label>
             <Input

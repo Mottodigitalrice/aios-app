@@ -88,7 +88,7 @@ export function Step2AboutYou({
         <div className="space-y-2">
           <Label htmlFor="signup-company" className="text-sm font-medium text-[#6E6E73]">
             {s.companyLabel}{" "}
-            {formData.signupType === "company" || formData.signupType === "department" ? (
+            {formData.signupType === "company" ? (
               <span className="text-red-600">*</span>
             ) : (
               <span className="text-[#86868B] text-xs">({t.common.optional})</span>
@@ -103,35 +103,13 @@ export function Step2AboutYou({
             placeholder={s.companyPlaceholder}
             className="bg-[#F5F5F7] border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus:border-[#B8860B]/50 focus:ring-[#B8860B]/20"
           />
-          {(formData.signupType === "company" || formData.signupType === "department") && (
+          {formData.signupType === "company" && (
             <p className="text-xs text-[#86868B]">{s.companyRequired}</p>
           )}
           {fieldErrors?.company && (
             <p className="text-xs text-red-600">{fieldErrors.company}</p>
           )}
         </div>
-
-        {/* Department (department signup only) */}
-        {formData.signupType === "department" && (
-          <div className="space-y-2">
-            <Label htmlFor="signup-department" className="text-sm font-medium text-[#6E6E73]">
-              {s.departmentLabel} <span className="text-red-600">*</span>
-            </Label>
-            <Input
-              id="signup-department"
-              type="text"
-              value={formData.departmentName}
-              onChange={(e) => updateField("departmentName", e.target.value)}
-              onBlur={() => validateField("departmentName")}
-              placeholder={s.departmentPlaceholder}
-              className="bg-[#F5F5F7] border-[#E8E8ED] text-[#1D1D1F] placeholder:text-[#86868B] focus:border-[#B8860B]/50 focus:ring-[#B8860B]/20"
-            />
-            <p className="text-xs text-[#86868B]">{s.departmentRequired}</p>
-            {fieldErrors?.departmentName && (
-              <p className="text-xs text-red-600">{fieldErrors.departmentName}</p>
-            )}
-          </div>
-        )}
 
         {/* Role */}
         <div className="space-y-2">

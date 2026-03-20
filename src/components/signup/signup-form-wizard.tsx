@@ -167,27 +167,22 @@ function SignupFormWizardInner() {
     const urlPlan = params.get("plan");
 
     // New ?type= param takes priority
-    if (urlType === "individual" || urlType === "company" || urlType === "department") {
-      updateField("signupType", urlType);
-      if (urlType === "individual") {
-        updateField("track", "cohort");
-      } else {
-        updateField("track", "corporate");
-        if (!urlPlan) updateField("plan", "monthly");
-      }
-    } else if (urlTrack === "cohort" || urlTrack === "corporate") {
+    if (urlType === "cohort") {
+      updateField("signupType", "cohort");
+      updateField("track", "cohort");
+    } else if (urlType === "individual") {
+      updateField("signupType", "individual");
+      updateField("track", "oneOnOne");
+    } else if (urlType === "company") {
+      updateField("signupType", "company");
+      updateField("track", "company");
+    } else if (urlTrack === "cohort") {
       // Legacy ?track= param fallback
-      updateField("track", urlTrack);
-      if (urlTrack === "cohort") {
-        updateField("signupType", "individual");
-      } else {
-        updateField("signupType", "company");
-        if (!urlPlan) updateField("plan", "monthly");
-      }
-    }
-
-    if (urlPlan === "monthly" || urlPlan === "full") {
-      updateField("plan", urlPlan);
+      updateField("signupType", "cohort");
+      updateField("track", "cohort");
+    } else if (urlTrack === "corporate") {
+      updateField("signupType", "company");
+      updateField("track", "company");
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

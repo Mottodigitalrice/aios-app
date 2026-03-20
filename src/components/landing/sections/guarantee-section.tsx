@@ -75,10 +75,10 @@ export default function GuaranteeSection({ t, locale }: SectionProps) {
 
               <div className="border-t border-emerald-500/15 pt-6 mt-6 space-y-2">
                 <p className="text-sm" style={{ color: "var(--lp-text-body)" }}>
-                  {t.guarantee.cohortNote}
+                  {t.guarantee.individualNote}
                 </p>
                 <p className="text-sm" style={{ color: "var(--lp-text-body)" }}>
-                  {t.guarantee.corporateNote}
+                  {t.guarantee.companyNote}
                 </p>
               </div>
 

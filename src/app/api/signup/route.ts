@@ -65,10 +65,10 @@ export async function POST(req: NextRequest) {
             "X-API-Key": mottoApiKey,
           },
           body: JSON.stringify({
-            name: `AIOS Signup: ${data.name} (${data.signupType}${data.plan ? ` - ${data.plan}` : ""})`,
+            name: `AIOS Signup: ${data.name} (${data.signupType})`,
             projectId: "1ede0cb5-63d9-8061-8571-df183897d8e2",
             status: "INBOX",
-            notes: `Track: ${data.track}\nSignup Type: ${data.signupType}\nPlan: ${data.plan || "N/A"}\nName: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company || "N/A"}\nDepartment: ${data.departmentName || "N/A"}\nRole: ${data.role || "N/A"}\nGoals: ${data.goals}\nPain Points: ${data.painPoints || "N/A"}\nTeam Size: ${data.teamSize || "N/A"}\nStart Preference: ${data.startPreference}\nReferral: ${data.referralSource}\nNotes: ${data.notes || "N/A"}`,
+            notes: `Track: ${data.track}\nSignup Type: ${data.signupType}\nName: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company || "N/A"}\nRole: ${data.role || "N/A"}\nGoals: ${data.goals}\nPain Points: ${data.painPoints || "N/A"}\nTeam Size: ${data.teamSize || "N/A"}\nStart Preference: ${data.startPreference}\nReferral: ${data.referralSource}\nNotes: ${data.notes || "N/A"}`,
           }),
         }).catch(console.error)
       : Promise.resolve();
