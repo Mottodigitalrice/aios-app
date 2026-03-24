@@ -6,7 +6,7 @@ import type { SectionProps } from "./types";
 
 const tools = [
   { name: "Claude Code", logo: "/logos/claude-code-icon.png", size: 44 },
-  { name: "Codex", logo: "/logos/openai.svg", size: 36 },
+  { name: "Codex", logo: "/logos/openai.svg", size: 44 },
   { name: "OpenClaw", logo: "/logos/openclaw.png", size: 44 },
 ];
 

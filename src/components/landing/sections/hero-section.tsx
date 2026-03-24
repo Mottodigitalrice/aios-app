@@ -115,7 +115,7 @@ export default function HeroSection({ t, locale }: SectionProps) {
                 </Button>
               </Link>
               <Link href="/audit" className="w-full sm:w-auto">
-                <Button size="lg" variant="outline" aria-label={t.hero.ctaSecondary} className="border-[#B8860B]/40 text-[#B8860B] hover:bg-[#B8860B]/10 hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 gap-2 rounded-full px-8 py-3.5 w-full sm:w-auto">
+                <Button size="lg" aria-label={t.hero.ctaSecondary} className="bg-[#B8860B] hover:bg-[#A0750A] hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 text-white gap-2 rounded-full px-8 py-3.5 w-full sm:w-auto">
                   {t.hero.ctaSecondary}
                 </Button>
               </Link>
