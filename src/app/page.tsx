@@ -22,6 +22,7 @@ import PricingSection from "@/components/landing/sections/pricing-section";
 import GuaranteeSection from "@/components/landing/sections/guarantee-section";
 import BioSection from "@/components/landing/sections/bio-section";
 import LeadMagnetSection from "@/components/landing/sections/lead-magnet-section";
+import ToolBannerSection from "@/components/landing/sections/tool-banner-section";
 import CtaSection from "@/components/landing/sections/cta-section";
 import { Badge } from "@/components/ui/badge";
 import { AnimateInView } from "@/components/landing/animate-in-view";
@@ -110,7 +111,9 @@ export default function HomePage() {
       <main id="main-content">
         {/* 1. Hero — headline + social proof + dual CTAs */}
         <HeroSection t={t} locale={locale} />
-        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
+
+        {/* 1.5. Tool Banner — what this is built on */}
+        <ToolBannerSection t={t} locale={locale} />
 
         {/* 2. Before/After — pain agitation: what changes when your business has a brain */}
         <BeforeAfterSection t={t} locale={locale} />
