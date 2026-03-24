@@ -5,9 +5,9 @@ import { AnimateInView } from "@/components/landing/animate-in-view";
 import type { SectionProps } from "./types";
 
 const tools = [
-  { name: "Claude Code", logo: "/logos/claude-code-icon.png" },
-  { name: "Codex", logo: "/logos/openai.svg" },
-  { name: "OpenClaw", logo: "/logos/openclaw.png" },
+  { name: "Claude Code", logo: "/logos/claude-code-icon.png", size: 44 },
+  { name: "Codex", logo: "/logos/openai.svg", size: 36 },
+  { name: "OpenClaw", logo: "/logos/openclaw.png", size: 44 },
 ];
 
 export default function ToolBannerSection({ t, locale }: SectionProps) {
@@ -25,31 +25,31 @@ export default function ToolBannerSection({ t, locale }: SectionProps) {
   return (
     <AnimateInView as="section">
       <div
-        className="py-8 sm:py-10"
+        className="py-10 sm:py-14"
         style={{ backgroundColor: "#F9F9FB", borderTop: "1px solid var(--lp-border)", borderBottom: "1px solid var(--lp-border)" }}
       >
-        <div className="mx-auto max-w-4xl px-6 text-center">
+        <div className="mx-auto max-w-3xl px-6 text-center">
           <p
-            className={`text-base sm:text-lg font-medium leading-relaxed mb-6 ${headingFont}`}
+            className={`text-lg sm:text-xl font-semibold leading-relaxed mb-8 ${headingFont}`}
             style={{ color: "var(--lp-text-heading)", ...(locale === "ja" ? { lineHeight: "1.9" } : {}) }}
           >
             {bannerText}
           </p>
-          <div className="flex items-center justify-center gap-8 sm:gap-12">
+          <div className="flex items-end justify-center gap-10 sm:gap-16">
             {tools.map((tool) => (
-              <div key={tool.name} className="flex flex-col items-center gap-2">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 relative flex items-center justify-center">
+              <div key={tool.name} className="flex flex-col items-center gap-3">
+                <div className="w-14 h-14 flex items-center justify-center">
                   <Image
                     src={`${basePath}${tool.logo}`}
                     alt={tool.name}
-                    width={56}
-                    height={56}
+                    width={tool.size}
+                    height={tool.size}
                     className="object-contain"
                   />
                 </div>
                 <span
-                  className="text-xs sm:text-sm font-medium"
-                  style={{ color: "var(--lp-text-body)" }}
+                  className="text-sm font-semibold"
+                  style={{ color: "var(--lp-text-heading)" }}
                 >
                   {tool.name}
                 </span>

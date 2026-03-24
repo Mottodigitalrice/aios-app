@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, ShieldCheck } from "lucide-react";
@@ -10,8 +9,6 @@ import type { SectionProps } from "./types";
 
 export default function HeroSection({ t, locale }: SectionProps) {
   const headingFont = locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]";
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-  const toolLogos = (t.hero as Record<string, unknown>).toolLogos as Array<{ name: string; logo: string }> | undefined;
 
   // Render title with explicit line breaks for JP
   const renderTitle = (text: string) => {
@@ -27,7 +24,7 @@ export default function HeroSection({ t, locale }: SectionProps) {
 
   return (
     <section
-      className="relative pt-36 pb-24 sm:pt-44 sm:pb-32 overflow-hidden"
+      className="relative pt-36 pb-20 sm:pt-44 sm:pb-28 overflow-hidden"
       style={{ background: "radial-gradient(ellipse at 30% 0%, rgba(184, 134, 11, 0.04) 0%, transparent 50%), var(--lp-bg-primary)" }}
     >
       <div className="mx-auto max-w-6xl px-6">
@@ -35,11 +32,10 @@ export default function HeroSection({ t, locale }: SectionProps) {
           {/* Left: Text content */}
           <div className="text-center lg:text-left">
             <div className="animate-fade-in-up">
-              <Badge variant="outline" className="mb-4 border-[#B8860B]/20 text-[#B8860B] bg-[#B8860B]/8">
+              <Badge variant="outline" className="mb-6 border-[#B8860B]/20 text-[#B8860B] bg-[#B8860B]/8">
                 {t.hero.badge}
               </Badge>
             </div>
-            {/* Tool logos moved to dedicated ToolBannerSection below hero */}
             <h1
               className={`animate-fade-in-up animation-delay-100 font-bold tracking-tight leading-[1.1] ${headingFont}`}
               style={{
@@ -58,7 +54,7 @@ export default function HeroSection({ t, locale }: SectionProps) {
               {renderTitle(t.hero.titleSuffix)}
             </p>
             <p
-              className="animate-fade-in-up animation-delay-200 mt-6 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
+              className="animate-fade-in-up animation-delay-200 mt-5 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
               style={{
                 fontSize: "var(--text-body)",
                 color: "var(--lp-text-body)",
@@ -67,14 +63,8 @@ export default function HeroSection({ t, locale }: SectionProps) {
             >
               {t.hero.subtitle}
             </p>
-            <p
-              className="animate-fade-in-up animation-delay-200 mt-2 text-sm"
-              style={{ color: "var(--lp-text-muted)" }}
-            >
-              {t.hero.agenticExplainer}
-            </p>
 
-            {/* Social proof bar — moved up per CPO/CMO review */}
+            {/* Social proof metrics */}
             <div
               role="group"
               aria-label="Key metrics"
@@ -88,20 +78,20 @@ export default function HeroSection({ t, locale }: SectionProps) {
                 <div key={i} className="flex items-center">
                   {i > 0 && (
                     <div
-                      className="w-px h-8 mx-4 sm:mx-5"
+                      className="w-px h-10 mx-5 sm:mx-6"
                       style={{ backgroundColor: "var(--lp-border)" }}
                     />
                   )}
-                  <div className="text-center">
+                  <div className="text-center lg:text-left">
                     <p
-                      className="text-2xl sm:text-3xl font-bold leading-none font-[family-name:var(--font-dm-sans)]"
+                      className="text-3xl sm:text-4xl font-bold leading-none font-[family-name:var(--font-dm-sans)]"
                       style={{ color: "var(--lp-text-heading)" }}
                     >
                       {metric.value}
                     </p>
                     <p
-                      className="text-xs mt-1"
-                      style={{ color: "var(--lp-text-muted)" }}
+                      className="text-sm mt-1.5 font-medium"
+                      style={{ color: "var(--lp-text-body)" }}
                     >
                       {metric.label}
                     </p>
@@ -110,8 +100,8 @@ export default function HeroSection({ t, locale }: SectionProps) {
               ))}
             </div>
             <p
-              className="animate-fade-in-up animation-delay-200 mt-2 text-sm font-medium"
-              style={{ color: "var(--lp-text-body)" }}
+              className="animate-fade-in-up animation-delay-200 mt-3 text-sm"
+              style={{ color: "var(--lp-text-muted)" }}
             >
               {t.hero.socialProof.context}
             </p>
