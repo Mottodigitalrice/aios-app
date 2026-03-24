@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, ShieldCheck } from "lucide-react";
@@ -9,6 +10,8 @@ import type { SectionProps } from "./types";
 
 export default function HeroSection({ t, locale }: SectionProps) {
   const headingFont = locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]";
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const toolLogos = (t.hero as Record<string, unknown>).toolLogos as Array<{ name: string; logo: string }> | undefined;
 
   // Render title with explicit line breaks for JP
   const renderTitle = (text: string) => {
@@ -32,10 +35,32 @@ export default function HeroSection({ t, locale }: SectionProps) {
           {/* Left: Text content */}
           <div className="text-center lg:text-left">
             <div className="animate-fade-in-up">
-              <Badge variant="outline" className="mb-6 border-[#B8860B]/20 text-[#B8860B] bg-[#B8860B]/8">
+              <Badge variant="outline" className="mb-4 border-[#B8860B]/20 text-[#B8860B] bg-[#B8860B]/8">
                 {t.hero.badge}
               </Badge>
             </div>
+            {/* Tool logo strip — immediately communicate what this is built on */}
+            {toolLogos && toolLogos.length > 0 && (
+              <div className="animate-fade-in-up mb-6 flex items-center justify-center lg:justify-start gap-5">
+                <span className="text-xs font-medium uppercase tracking-wider" style={{ color: "var(--lp-text-muted)" }}>
+                  {t.hero.builtWith}
+                </span>
+                {toolLogos.map((tool) => (
+                  <div key={tool.name} className="flex items-center gap-1.5 opacity-70 hover:opacity-100 transition-opacity">
+                    <Image
+                      src={`${basePath}${tool.logo}`}
+                      alt={tool.name}
+                      width={20}
+                      height={20}
+                      className="shrink-0"
+                    />
+                    <span className="text-xs font-medium" style={{ color: "var(--lp-text-body)" }}>
+                      {tool.name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
             <h1
               className={`animate-fade-in-up animation-delay-100 font-bold tracking-tight leading-[1.1] ${headingFont}`}
               style={{

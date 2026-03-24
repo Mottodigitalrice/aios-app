@@ -213,8 +213,8 @@ const en = {
       titleHighlight: "AI Operating System",
       titleSuffix: "that moves you from working in your business to working ON YOUR business.",
       subtitle:
-        "Amplify your team\u2019s best work. Automate the rest. Own the whole system \u2014 forever.",
-      agenticExplainer: "Agentic AI = AI that takes action, not just gives answers.",
+        "We help you build infrastructure you own to fully utilize Agentic AI tools like Claude Code, Codex, and OpenAI in your business \u2014 to truly get things done.",
+      agenticExplainer: "Agentic AI = AI that takes action, not just gives answers. Own the system. Own the results.",
       pricingCallout: "Starting from \u00A520,000/month",
       cta: "Reserve My Spot",
       ctaTime: "30-second signup \u00B7 Meet Lewis first, then decide",
@@ -227,15 +227,20 @@ const en = {
         "the same AIOS system we use to operate our own business.",
       guaranteeHint: "Can\u2019t run your AI system by month 6? We keep going \u2014 free \u2014 until you can.",
       socialProof: {
-        metric1Label: "Hours Saved Weekly",
-        metric1Value: "40+",
-        metric2Label: "AI Agents Running",
-        metric2Value: "26",
-        metric3Label: "Months Building AIOS",
-        metric3Value: "18",
-        context: "One person. One system. Full business operations.",
+        metric1Label: "Tasks Managed Right Now",
+        metric1Value: "51",
+        metric2Label: "Automated Workflows Running",
+        metric2Value: "20",
+        metric3Label: "Active Projects Simultaneously",
+        metric3Value: "26",
+        context: "One person. One system. Real production numbers \u2014 not a demo.",
       },
       builtWith: "Built with",
+      toolLogos: [
+        { name: "Claude Code", logo: "/logos/claude-code.svg" },
+        { name: "Codex", logo: "/logos/codex.svg" },
+        { name: "OpenAI", logo: "/logos/openai.svg" },
+      ],
     },
     pricing: {
       badge: "Choose Your Path",
@@ -344,10 +349,10 @@ const en = {
       },
     },
     leadMagnet: {
-      title: "Not sure yet?",
-      subtitle: "Take our free AI audit to see where you or your company stands with AI \u2014 and what the next step should be for you.",
-      detail: "Completely free, no obligation. You\u2019ll get a personalized report reviewed by Lewis.",
-      cta: "Get my free AI audit",
+      title: "Is your business ready for Agentic AI?",
+      subtitle: "We\u2019ll assess your operations, identify where AI agents can take real action \u2014 not just chat \u2014 and show you exactly what\u2019s possible for your business.",
+      detail: "Completely free, no obligation. Lewis personally reviews every audit and walks you through the results on a call.",
+      cta: "Get my free Agentic AI audit",
     },
     signup: {
       badge: "AIOS Program",
@@ -536,8 +541,8 @@ const en = {
       steps: [
         {
           num: "1",
-          title: "Free Audit",
-          description: "Tell us about your business. Lewis personally reviews it and walks you through opportunities \u2014 completely free.",
+          title: "Agentic AI Readiness Audit",
+          description: "We assess your operations for Agentic AI readiness \u2014 where agents can take real action in your business. Lewis personally reviews every audit.",
         },
         {
           num: "2",
