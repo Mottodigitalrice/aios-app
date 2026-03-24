@@ -246,7 +246,7 @@ const en = {
       badge: "Choose Your Path",
       title: "Three ways to build your AI operating system",
       subtitle:
-        "Whether you\u2019re building for yourself or your company, the outcome is the same: AI agents you own, running in production by month 6.",
+        "Whether you\u2019re building for yourself or your company, the outcome is the same: Agentic AI you own, running in production by month 6.",
       recommended: "Recommended",
       recommendedSubtext: "Most founders choose this",
       cohort: {
@@ -367,20 +367,20 @@ const en = {
     },
     valueProps: {
       badge: "What Changes",
-      title: "Five big impacts of an AIOS",
-      titleHighlight: "(AI Operating System)",
+      title: "Five big impacts of",
+      titleHighlight: "Agentic AI in your business",
       items: [
         {
           title: "You own everything",
           description: "A powerful multi-agent framework that you own. From running entirely local with open-source models to using the latest frontier forerunner \u2014 the choice is yours.",
         },
         {
-          title: "An AI system that improves itself",
-          description: "Finally, an AI system that updates its operating procedures while you use it. It learns more about you, your company, your workflows, and your skills to get better every time.",
+          title: "An Agentic AI system that improves itself",
+          description: "Finally, an Agentic AI system that updates its operating procedures while you use it. It learns more about you, your company, your workflows, and your skills to get better every time.",
         },
         {
-          title: "AI that actually does work",
-          description: "If a human can do it on a computer, this system can learn to do it too.",
+          title: "Agentic AI that actually does work",
+          description: "If a human can do it on a computer, Agentic AI can learn to do it too.",
         },
         {
           title: "One connected system",
@@ -388,7 +388,7 @@ const en = {
         },
         {
           title: "Freedom to work on your business, not just in it",
-          description: "AI agents you build amplify your team\u2019s output \u2014 handling the repetitive work so you can focus on growth.",
+          description: "Agentic AI amplifies your team\u2019s output \u2014 handling the repetitive work so you can focus on growth.",
         },
       ],
     },
@@ -449,16 +449,16 @@ const en = {
     },
     beforeAfter: {
       title: "What changes when your business",
-      titleHighlight: "has a brain",
-      withoutLabel: "Without an AI Operating System",
-      withLabel: "With your AI Operating System",
+      titleHighlight: "utilizes Agentic AI",
+      withoutLabel: "Without Agentic AI",
+      withLabel: "With Agentic AI running your operations",
       without: [
         "Your business knowledge lives in your head \u2014 if you\u2019re sick, things fall apart",
         "You wake up wondering what slipped through the cracks last night",
         "New hire takes 3-6 months to \u201Cget it\u201D \u2014 and then they leave",
         "20 disconnected tools, nothing talks to each other",
         "Locked into vendors \u2014 switching means starting from scratch",
-        "AI feels like hype you can\u2019t act on",
+        "AI feels like hype \u2014 chatbots that can\u2019t actually do anything",
         "When something goes wrong, there\u2019s only one person who can fix it",
         "You\u2019re either in the weeds or things fall apart",
       ],
@@ -468,7 +468,7 @@ const en = {
         "New hire asks the system and has full context on day one",
         "One connected system \u2014 26 projects managed by one person",
         "You own everything \u2014 swap any tool, keep all your data",
-        "AI agents execute real tasks while you focus on what only you can do",
+        "Agentic AI executes real tasks while you focus on what only you can do",
         "Every process is documented, executable, and improving automatically",
         "Work on your business while the system works in it",
       ],
@@ -594,7 +594,7 @@ const en = {
       badge: "6-Month Program",
       title: "A clear plan. A real system.",
       titleHighlight: "Built with you in 6 months.",
-      subtitle: "We work alongside your team to build AI that amplifies what they already do best. Infrastructure you\u2019ll own forever.",
+      subtitle: "We work alongside your team to build Agentic AI that amplifies what they already do best. Infrastructure you\u2019ll own forever.",
       month1: {
         title: "Mapping, Planning & Initial Launch Setup",
         subtitle: "Month 1",
@@ -603,7 +603,7 @@ const en = {
           "Identify highest-impact opportunities",
           "Design your custom AIOS architecture",
           "Receive your business context template to start filling immediately",
-          "Begin using AI with high context of who you are and what you\u2019re building",
+          "Begin using Agentic AI with high context of who you are and what you\u2019re building",
         ],
       },
       month2: {
@@ -620,7 +620,7 @@ const en = {
         subtitle: "Month 3",
         items: [
           "Build AI agents, skills, and workflows",
-          "Deploy agents that operate inside your business in real-world situations",
+          "Deploy Agentic AI that operates inside your business in real-world situations",
           "Train your team on each system as it goes live",
         ],
       },
@@ -644,8 +644,8 @@ const en = {
     },
     guarantee: {
       title: "The Ownership Guarantee",
-      headline: "If you can\u2019t run your AI system by month 6, we keep going \u2014 free \u2014 until you can.",
-      description: "No hedging. No fine print. Complete the 6-month program. If you\u2019re not independently running your AI agentic system by the end, we continue at zero cost until you are. We amplify your capabilities — we never replace your team.",
+      headline: "If you can\u2019t run your Agentic AI system by month 6, we keep going \u2014 free \u2014 until you can.",
+      description: "No hedging. No fine print. Complete the 6-month program. If you\u2019re not independently running your Agentic AI system by the end, we continue at zero cost until you are. We amplify your capabilities \u2014 we never replace your team.",
       individualNote: "Company Build & One-on-One: we continue working with you \u2014 free of charge.",
       companyNote: "Group Cohort: join the next cohort free until you\u2019re there.",
       meetFirst: "Meet first, then decide. Save your spot \u2014 no commitment until after your meeting with Lewis.",
@@ -681,8 +681,8 @@ const en = {
       title: "Founder, MOTTO Digital \u00B7 Tokyo, Japan",
       sectionTitle: "Who\u2019s behind this",
       bio1: "I don\u2019t just build AI systems for clients \u2014 I run my own company on the same system I\u2019ll build for you. 26 active projects, 63 in-progress tasks, 4 clients, 9 pipeline deals \u2014 all managed through the AIOS I built for myself.",
-      bio2: "I\u2019ve lived in Japan for 18 years. I built MOTTO Digital to help small and medium businesses here harness AI \u2014 not the way big consulting firms do it (expensive, abstract, disposable), but the way it should be done: hands-on, owned by you, growing with your business.",
-      bio3: "I believe AI should amplify people, not replace them. Every system I build is designed to make your team more capable \u2014 not dependent on me, not locked into a platform, not paying rent on someone else\u2019s intelligence. You own the agents, the code, the data. Forever.",
+      bio2: "I\u2019ve lived in Japan for 18 years. I built MOTTO Digital to help small and medium businesses here harness Agentic AI \u2014 not the way big consulting firms do it (expensive, abstract, disposable), but the way it should be done: hands-on, owned by you, growing with your business.",
+      bio3: "I believe Agentic AI should amplify people, not replace them. Every system I build is designed to make your team more capable \u2014 not dependent on me, not locked into a platform, not paying rent on someone else\u2019s intelligence. You own the agents, the code, the data. Forever.",
       bio4: "When I\u2019m not building AI systems, I\u2019m raising my family here in Tokyo. This isn\u2019t a side project \u2014 it\u2019s my life\u2019s work. The future of my business depends on making my first clients wildly successful.",
       tags: ["AI Agents", "Infrastructure Design", "No-Code / Low-Code", "Team Training", "Bilingual EN/JP", "18 Years in Japan"],
     },

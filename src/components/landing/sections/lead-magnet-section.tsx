@@ -14,12 +14,12 @@ export default function LeadMagnetSection({ t, locale }: SectionProps) {
       as="section"
       style={{ backgroundColor: "#F5F5F7", paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}
     >
-      <div className="mx-auto max-w-2xl px-6">
-        <div className="rounded-2xl border border-[#B8860B]/15 bg-white p-8 sm:p-12 text-center">
+      <div className="mx-auto max-w-2xl px-4 sm:px-6">
+        <div className="rounded-2xl border border-[#B8860B]/15 bg-white p-6 sm:p-12 text-center overflow-hidden">
           <div className="w-12 h-1 bg-[#B8860B]/30 rounded-full mx-auto mb-4" />
           <h2
-            className={`font-bold tracking-tight mb-4 ${headingFont}`}
-            style={{ fontSize: "var(--text-h2)", color: "var(--lp-text-heading)" }}
+            className={`font-bold tracking-tight mb-4 text-2xl sm:text-3xl ${headingFont}`}
+            style={{ color: "var(--lp-text-heading)" }}
           >
             {t.leadMagnet.title}
           </h2>
