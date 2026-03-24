@@ -12,19 +12,17 @@ export default function ProofSection({ t, locale }: SectionProps) {
   return (
     <section
       id="proof"
-      className="border-t border-[#E8E8ED]"
-      style={{ backgroundColor: "var(--lp-bg-primary)", paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}
+      style={{ backgroundColor: "#1D1D1F", paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}
     >
       <div className="mx-auto max-w-6xl px-6">
         <AnimateInView className="text-center mb-16">
-          <Badge variant="outline" className="mb-4 border-emerald-500/20 text-emerald-700 bg-emerald-500/5">
+          <Badge variant="outline" className="mb-4 border-emerald-400/30 text-emerald-400 bg-emerald-400/10">
             {t.caseStudy.badge}
           </Badge>
           <h2
-            className={`font-bold tracking-tight ${headingFont}`}
+            className={`font-bold tracking-tight text-white ${headingFont}`}
             style={{
               fontSize: "var(--text-h2)",
-              color: "var(--lp-text-heading)",
               ...(locale === "ja" ? { wordBreak: "keep-all" } : {}),
             }}
           >
@@ -32,9 +30,8 @@ export default function ProofSection({ t, locale }: SectionProps) {
             <span className="gradient-text">{t.caseStudy.titleHighlight}</span>
           </h2>
           <p
-            className="mt-4 max-w-2xl mx-auto text-lg"
+            className="mt-4 max-w-2xl mx-auto text-lg text-gray-400"
             style={{
-              color: "var(--lp-text-body)",
               ...(locale === "ja" ? { lineHeight: "1.9" } : {}),
             }}
           >
@@ -51,15 +48,15 @@ export default function ProofSection({ t, locale }: SectionProps) {
                 <div
                   className="rounded-2xl p-5 text-center"
                   style={{
-                    backgroundColor: "var(--lp-bg-elevated)",
-                    border: "1px solid var(--lp-border-visible)",
+                    backgroundColor: "rgba(255, 255, 255, 0.05)",
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
                   }}
                 >
                   <div className="text-3xl sm:text-4xl font-bold gradient-text mb-1">
                     <CountUp end={value} />
                   </div>
-                  <div className="text-sm font-medium" style={{ color: "var(--lp-text-heading)" }}>{metric.label}</div>
-                  <div className="text-xs mt-1" style={{ color: "var(--lp-text-muted)" }}>{metric.sublabel}</div>
+                  <div className="text-sm font-medium text-white">{metric.label}</div>
+                  <div className="text-xs mt-1 text-gray-500">{metric.sublabel}</div>
                 </div>
               </AnimateInView>
             );
@@ -67,21 +64,20 @@ export default function ProofSection({ t, locale }: SectionProps) {
         </div>
 
         {/* Agent Org Chart */}
-        <AgentOrgChart locale={locale} />
+        <AgentOrgChart locale={locale} dark />
 
         {/* Founder reflection — first-person statement */}
         <AnimateInView className="mt-10">
           <div
             className="max-w-2xl mx-auto rounded-2xl p-8"
-            style={{ backgroundColor: "var(--lp-bg-elevated)", border: "1px solid var(--lp-border-visible)" }}
+            style={{ backgroundColor: "rgba(255, 255, 255, 0.05)", border: "1px solid rgba(255, 255, 255, 0.1)" }}
           >
-            <p className="text-sm font-semibold mb-3" style={{ color: "var(--lp-text-heading)" }}>
+            <p className="text-sm font-semibold mb-3 text-white">
               {t.caseStudy.testimonialAuthor}
             </p>
             <p
-              className="text-base leading-relaxed"
+              className="text-base leading-relaxed text-gray-300"
               style={{
-                color: "var(--lp-text-body)",
                 ...(locale === "ja" ? { lineHeight: "1.9" } : {}),
               }}
             >

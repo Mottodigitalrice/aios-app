@@ -430,7 +430,7 @@ const auditDict = {
     copied: "Copied!",
     shareText:
       "I just signed up for a free AI readiness audit from MOTTO Digital. Check it out!",
-    shareEmailSubject: "Free AI Readiness Audit",
+    shareEmailSubject: "Agentic AI Readiness Audit",
     backHome: "Back to Home",
   },
 } as const;

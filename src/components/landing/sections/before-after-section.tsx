@@ -9,8 +9,9 @@ export default function BeforeAfterSection({ t, locale }: SectionProps) {
 
   return (
     <section
-      className="border-t border-[#E8E8ED]"
-      style={{ backgroundColor: "var(--lp-bg-primary)", paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}
+      id="before-after"
+      className=""
+      style={{ backgroundColor: "var(--lp-bg-elevated)", paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}
     >
       <div className="mx-auto max-w-5xl px-6">
         <AnimateInView className="text-center mb-12">
@@ -22,10 +23,10 @@ export default function BeforeAfterSection({ t, locale }: SectionProps) {
             <span className="gradient-text">{t.beforeAfter.titleHighlight}</span>
           </h2>
         </AnimateInView>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-6 relative">
           {/* WITHOUT */}
           <AnimateInView delay={100}>
-            <div className="rounded-xl border border-red-500/20 bg-red-500/[0.03] p-6 sm:p-8 h-full">
+            <div className="rounded-xl border-2 border-red-500/25 bg-red-500/[0.05] p-6 sm:p-8 h-full shadow-[inset_0_0_60px_rgba(239,68,68,0.03)]">
               <div className="flex items-center gap-2 mb-6">
                 <div className="size-2 rounded-full bg-red-400" />
                 <span className="text-sm font-semibold text-red-400 uppercase tracking-wider">{t.beforeAfter.withoutLabel}</span>
@@ -43,7 +44,7 @@ export default function BeforeAfterSection({ t, locale }: SectionProps) {
 
           {/* WITH */}
           <AnimateInView delay={200}>
-            <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.03] p-6 sm:p-8 h-full">
+            <div className="rounded-xl border-2 border-emerald-500/25 bg-emerald-500/[0.05] p-6 sm:p-8 h-full shadow-[inset_0_0_60px_rgba(16,185,129,0.03)]">
               <div className="flex items-center gap-2 mb-6">
                 <div className="size-2 rounded-full bg-emerald-400" />
                 <span className="text-sm font-semibold text-emerald-400 uppercase tracking-wider">{t.beforeAfter.withLabel}</span>

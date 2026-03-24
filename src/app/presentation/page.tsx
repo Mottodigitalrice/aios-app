@@ -819,7 +819,7 @@ export default function PresentationPage() {
 
               {/* CTA Cards */}
               <div className="mt-10 w-full max-w-2xl grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {/* Get Your Free AI Audit */}
+                {/* Get Your Agentic AI Audit */}
                 <a
                   href="/audit"
                   onClick={(e) => e.stopPropagation()}
@@ -827,7 +827,7 @@ export default function PresentationPage() {
                 >
                   <Sparkles className="size-7 text-[#B8860B] mx-auto mb-3" />
                   <p className="text-lg font-bold text-[#1D1D1F] group-hover:text-[#B8860B] transition-colors">
-                    Get Your Free AI Audit
+                    Get Your Agentic AI Audit
                   </p>
                   <p className="text-sm text-[#86868B] mt-1">
                     まずは無料AI活用診断から

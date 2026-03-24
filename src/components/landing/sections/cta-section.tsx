@@ -53,7 +53,7 @@ export default function CtaSection({ t, locale }: SectionProps) {
           <div className="flex flex-col items-center">
             <Link href="/signup">
               <Button size="lg" className="bg-[#1D1D1F] hover:bg-[#2D2D2F] hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 text-white gap-2 rounded-full px-8">
-                {t.cta.title}
+                {t.cta.cta}
                 <ArrowRight className="size-4" />
               </Button>
             </Link>
@@ -61,7 +61,7 @@ export default function CtaSection({ t, locale }: SectionProps) {
           </div>
           <div className="flex flex-col items-center">
             <Link href="/audit">
-              <Button size="lg" className="bg-[#B8860B] hover:bg-[#A0750A] hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 text-white gap-2 rounded-full px-8">
+              <Button size="lg" variant="outline" className="border-[#B8860B]/40 text-[#B8860B] hover:bg-[#B8860B]/10 hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 gap-2 rounded-full px-8">
                 {t.cta.titleSecondary}
               </Button>
             </Link>

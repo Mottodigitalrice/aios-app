@@ -16,6 +16,7 @@ export default function HowItWorksSection({ t, locale }: SectionProps) {
 
   return (
     <section
+      id="how-it-works"
       className="border-t border-[#E8E8ED]"
       style={{ backgroundColor: "var(--lp-bg-elevated)", paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}
     >

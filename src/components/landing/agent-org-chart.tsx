@@ -49,23 +49,25 @@ function OrgNode({
   sublabel,
   className = "",
   badgeClassName = "",
+  dark = false,
 }: {
   label: string;
   sublabel?: string;
   className?: string;
   badgeClassName?: string;
+  dark?: boolean;
 }) {
   return (
     <div
       className={`rounded-lg px-4 py-3 text-center ${className}`}
       style={{
-        border: className.includes("border-") ? undefined : "1px solid var(--lp-border-visible)",
-        backgroundColor: className.includes("bg-") ? undefined : "var(--lp-bg-elevated)",
+        border: className.includes("border-") ? undefined : dark ? "1px solid rgba(255,255,255,0.1)" : "1px solid var(--lp-border-visible)",
+        backgroundColor: className.includes("bg-") ? undefined : dark ? "rgba(255,255,255,0.05)" : "var(--lp-bg-elevated)",
       }}
     >
       <span className={`text-sm font-semibold ${badgeClassName}`}>{label}</span>
       {sublabel && (
-        <span className="block text-xs mt-0.5" style={{ color: "var(--lp-text-muted)" }}>{sublabel}</span>
+        <span className="block text-xs mt-0.5" style={{ color: dark ? "rgba(255,255,255,0.5)" : "var(--lp-text-muted)" }}>{sublabel}</span>
       )}
     </div>
   );
@@ -74,10 +76,10 @@ function OrgNode({
 /* ─────────────────────────────────────────────
    Vertical connector line
    ───────────────────────────────────────────── */
-function Connector({ className = "" }: { className?: string }) {
+function Connector({ className = "", dark = false }: { className?: string; dark?: boolean }) {
   return (
     <div className={`flex justify-center ${className}`}>
-      <div className="w-px h-6" style={{ backgroundColor: "var(--lp-border-visible)" }} />
+      <div className="w-px h-6" style={{ backgroundColor: dark ? "rgba(255,255,255,0.15)" : "var(--lp-border-visible)" }} />
     </div>
   );
 }
@@ -88,9 +90,11 @@ function Connector({ className = "" }: { className?: string }) {
 export function AgentOrgChart({
   locale,
   compact = false,
+  dark = false,
 }: {
   locale: "en" | "ja";
   compact?: boolean;
+  dark?: boolean;
 }) {
   const dict = dictionaries[locale];
   const t =
@@ -102,14 +106,14 @@ export function AgentOrgChart({
     <div
       className="rounded-xl p-6 sm:p-10"
       style={{
-        backgroundColor: "var(--lp-bg-elevated)",
-        border: "1px solid var(--lp-border-visible)",
+        backgroundColor: dark ? "rgba(255,255,255,0.03)" : "var(--lp-bg-elevated)",
+        border: dark ? "1px solid rgba(255,255,255,0.08)" : "1px solid var(--lp-border-visible)",
       }}
     >
         {/* Section title */}
         <h3
           className="text-lg sm:text-xl font-semibold text-center mb-8 sm:mb-10"
-          style={{ color: "var(--lp-text-heading)" }}
+          style={{ color: dark ? "#FFFFFF" : "var(--lp-text-heading)" }}
         >
           {t.title}
         </h3>
@@ -120,29 +124,31 @@ export function AgentOrgChart({
           <div className="flex justify-center">
             <OrgNode
               label={t.ceo}
-              className="border border-indigo-500/20 bg-indigo-500/[0.06] min-w-[180px]"
-              badgeClassName="text-indigo-600"
+              className={`border ${dark ? "border-indigo-400/30 bg-indigo-400/10" : "border-indigo-500/20 bg-indigo-500/[0.06]"} min-w-[180px]`}
+              badgeClassName={dark ? "text-indigo-300" : "text-indigo-600"}
+              dark={dark}
             />
           </div>
 
-          <Connector />
+          <Connector dark={dark} />
 
           {/* Integrator */}
           <div className="flex justify-center">
             <OrgNode
               label={t.integrator}
-              className="border border-indigo-500/20 bg-indigo-500/[0.06] min-w-[180px]"
-              badgeClassName="text-indigo-600"
+              className={`border ${dark ? "border-indigo-400/30 bg-indigo-400/10" : "border-indigo-500/20 bg-indigo-500/[0.06]"} min-w-[180px]`}
+              badgeClassName={dark ? "text-indigo-300" : "text-indigo-600"}
+              dark={dark}
             />
           </div>
 
-          <Connector />
+          <Connector dark={dark} />
 
           {/* Horizontal connector for C-suite */}
           <div className="flex justify-center">
             <div className="relative w-full max-w-3xl">
               {/* Horizontal line across top */}
-              <div className="absolute top-0 left-[10%] right-[10%] h-px" style={{ backgroundColor: "var(--lp-border-visible)" }} />
+              <div className="absolute top-0 left-[10%] right-[10%] h-px" style={{ backgroundColor: dark ? "rgba(255,255,255,0.15)" : "var(--lp-border-visible)" }} />
 
               {/* C-suite row */}
               <div className="grid grid-cols-5 gap-3 pt-6">
@@ -155,12 +161,13 @@ export function AgentOrgChart({
                   return (
                     <div key={agent.role} className="flex flex-col items-center">
                       {/* Vertical tick down from horizontal line */}
-                      <div className="w-px h-6 -mt-6 mb-0" style={{ backgroundColor: "var(--lp-border-visible)" }} />
+                      <div className="w-px h-6 -mt-6 mb-0" style={{ backgroundColor: dark ? "rgba(255,255,255,0.15)" : "var(--lp-border-visible)" }} />
                       <OrgNode
                         label={agent.role}
                         sublabel={agent.domain}
                         className={`border ${colors.border} ${colors.bg} w-full`}
                         badgeClassName={colors.text}
+                        dark={dark}
                       />
                     </div>
                   );
@@ -169,7 +176,7 @@ export function AgentOrgChart({
             </div>
           </div>
 
-          <Connector className="mt-2" />
+          <Connector className="mt-2" dark={dark} />
 
           {/* Vendor row */}
           <div className="flex flex-wrap justify-center gap-2 mt-2">
@@ -179,9 +186,9 @@ export function AgentOrgChart({
                 variant="outline"
                 className="text-xs"
                 style={{
-                  borderColor: "var(--lp-border-visible)",
-                  color: "var(--lp-text-body)",
-                  backgroundColor: "var(--lp-bg-primary)",
+                  borderColor: dark ? "rgba(255,255,255,0.15)" : "var(--lp-border-visible)",
+                  color: dark ? "rgba(255,255,255,0.7)" : "var(--lp-text-body)",
+                  backgroundColor: dark ? "rgba(255,255,255,0.05)" : "var(--lp-bg-primary)",
                 }}
                 title={vendor.description}
               >
@@ -196,7 +203,7 @@ export function AgentOrgChart({
               <p
                 key={vendor.name}
                 className="text-[10px] text-center leading-tight"
-                style={{ color: "var(--lp-text-muted)" }}
+                style={{ color: dark ? "rgba(255,255,255,0.4)" : "var(--lp-text-muted)" }}
               >
                 {vendor.description}
               </p>
@@ -209,23 +216,25 @@ export function AgentOrgChart({
           {/* CEO */}
           <OrgNode
             label={t.ceo}
-            className="border border-indigo-500/20 bg-indigo-500/[0.06]"
-            badgeClassName="text-indigo-600"
+            className={`border ${dark ? "border-indigo-400/30 bg-indigo-400/10" : "border-indigo-500/20 bg-indigo-500/[0.06]"}`}
+            badgeClassName={dark ? "text-indigo-300" : "text-indigo-600"}
+            dark={dark}
           />
 
-          <Connector />
+          <Connector dark={dark} />
 
           {/* Integrator */}
           <OrgNode
             label={t.integrator}
-            className="border border-indigo-500/20 bg-indigo-500/[0.06]"
-            badgeClassName="text-indigo-600"
+            className={`border ${dark ? "border-indigo-400/30 bg-indigo-400/10" : "border-indigo-500/20 bg-indigo-500/[0.06]"}`}
+            badgeClassName={dark ? "text-indigo-300" : "text-indigo-600"}
+            dark={dark}
           />
 
-          <Connector />
+          <Connector dark={dark} />
 
           {/* C-suite */}
-          <div className="space-y-2 pl-4 ml-4" style={{ borderLeft: "1px solid var(--lp-border-visible)" }}>
+          <div className="space-y-2 pl-4 ml-4" style={{ borderLeft: dark ? "1px solid rgba(255,255,255,0.15)" : "1px solid var(--lp-border-visible)" }}>
             {t.csuite.map((agent) => {
               const colors = csuiteColors[agent.role] || {
                 bg: "bg-zinc-500/8",
@@ -239,28 +248,29 @@ export function AgentOrgChart({
                   sublabel={agent.domain}
                   className={`border ${colors.border} ${colors.bg}`}
                   badgeClassName={colors.text}
+                  dark={dark}
                 />
               );
             })}
           </div>
 
-          <Connector />
+          <Connector dark={dark} />
 
           {/* Vendors */}
-          <div className="space-y-2 pl-4 ml-4" style={{ borderLeft: "1px solid var(--lp-border-visible)" }}>
+          <div className="space-y-2 pl-4 ml-4" style={{ borderLeft: dark ? "1px solid rgba(255,255,255,0.15)" : "1px solid var(--lp-border-visible)" }}>
             {t.vendors.map((vendor) => (
               <div
                 key={vendor.name}
                 className="rounded-lg px-3 py-2"
                 style={{
-                  border: "1px solid var(--lp-border-visible)",
-                  backgroundColor: "var(--lp-bg-primary)",
+                  border: dark ? "1px solid rgba(255,255,255,0.1)" : "1px solid var(--lp-border-visible)",
+                  backgroundColor: dark ? "rgba(255,255,255,0.05)" : "var(--lp-bg-primary)",
                 }}
               >
-                <span className="text-xs font-mono font-medium" style={{ color: "var(--lp-text-body)" }}>
+                <span className="text-xs font-mono font-medium" style={{ color: dark ? "rgba(255,255,255,0.7)" : "var(--lp-text-body)" }}>
                   {vendor.name}
                 </span>
-                <span className="block text-[11px] mt-0.5" style={{ color: "var(--lp-text-muted)" }}>
+                <span className="block text-[11px] mt-0.5" style={{ color: dark ? "rgba(255,255,255,0.4)" : "var(--lp-text-muted)" }}>
                   {vendor.description}
                 </span>
               </div>

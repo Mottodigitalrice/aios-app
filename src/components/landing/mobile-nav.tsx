@@ -73,7 +73,7 @@ export function MobileNav({ locale = "en" }: MobileNavProps) {
             </Button>
           </Link>
           <Link href="/audit" onClick={() => setOpen(false)}>
-            <Button variant="outline" className="w-full border-[#D1D1D6] text-[#1D1D1F] hover:bg-[#F5F5F7] rounded-full">
+            <Button variant="outline" className="w-full border-[#B8860B]/40 text-[#B8860B] hover:bg-[#B8860B]/10 rounded-full">
               {t.hero.ctaSecondary}
             </Button>
           </Link>
