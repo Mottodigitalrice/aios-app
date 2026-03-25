@@ -6,6 +6,7 @@ import {
   ArrowLeft,
   Mail,
   ArrowRight,
+  CalendarCheck,
 } from "lucide-react";
 import Link from "next/link";
 import { useSignupLocale } from "./signup-locale-context";
@@ -86,6 +87,28 @@ export function SignupSuccess() {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Book a meeting CTA */}
+          <div className="rounded-xl border-2 border-[#B8860B]/30 bg-[#B8860B]/5 p-6 mb-8 text-center">
+            <CalendarCheck className="size-8 text-[#B8860B] mx-auto mb-3" />
+            <h3 className="text-lg font-semibold mb-2">
+              {locale === "ja" ? "Lewisとの面談を予約する" : "Book a Meeting with Lewis"}
+            </h3>
+            <p className="text-sm text-[#6E6E73] mb-4">
+              {locale === "ja"
+                ? "ご都合の良い時間をお選びください。30分の無料相談です。"
+                : "Pick a time that works for you. It's a free 30-minute consultation."}
+            </p>
+            <a
+              href="https://tidycal.com/rice/aios-consult"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg bg-[#B8860B] text-white px-6 py-3 text-sm font-semibold hover:bg-[#9A7209] transition-colors"
+            >
+              <CalendarCheck className="size-4" />
+              {locale === "ja" ? "面談を予約する" : "Book Your Call"}
+            </a>
           </div>
 
           {/* Contact */}

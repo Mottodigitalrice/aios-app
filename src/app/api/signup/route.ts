@@ -73,8 +73,18 @@ export async function POST(req: NextRequest) {
         }).catch(console.error)
       : Promise.resolve();
 
-    // Wait for both (but don't fail if webhooks fail)
-    await Promise.allSettled([webhookPromise, notionPromise]);
+    // Forward to Cloud n8n for confirmation email (fire and forget)
+    const emailPromise = fetchWithTimeout(
+      "https://mottodigitalpro.app.n8n.cloud/webhook/aios-signup-email",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(signup),
+      }
+    ).catch(console.error);
+
+    // Wait for all (but don't fail if webhooks fail)
+    await Promise.allSettled([webhookPromise, notionPromise, emailPromise]);
 
     return NextResponse.json({ success: true, message: "Signup received" });
   } catch (error) {

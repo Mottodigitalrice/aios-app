@@ -259,7 +259,7 @@ export function useAuditForm() {
     }
   }, [currentStep]);
 
-  const submitFinal = useCallback(async () => {
+  const submitFinal = useCallback(async (locale?: "en" | "ja") => {
     setIsLoading(true);
     setError(null);
 
@@ -267,7 +267,7 @@ export function useAuditForm() {
       const response = await fetch("/api/audit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, locale: locale || "ja" }),
       });
 
       if (!response.ok) {

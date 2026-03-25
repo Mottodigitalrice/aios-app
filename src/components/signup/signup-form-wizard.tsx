@@ -227,7 +227,7 @@ function SignupFormWizardInner() {
 
   const handleSubmit = () => {
     setDirection("forward");
-    submitFinal();
+    submitFinal(locale);
   };
 
   const animationClass = animating

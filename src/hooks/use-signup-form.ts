@@ -183,7 +183,7 @@ export function useSignupForm() {
     }
   }, [currentStep]);
 
-  const submitFinal = useCallback(async () => {
+  const submitFinal = useCallback(async (locale?: "en" | "ja") => {
     setIsLoading(true);
     setError(null);
 
@@ -206,6 +206,7 @@ export function useSignupForm() {
           startPreference: formData.startPreference,
           referralSource: formData.referralSource,
           notes: formData.notes || undefined,
+          locale: locale || "ja",
         }),
       });
 

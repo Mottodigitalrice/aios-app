@@ -154,7 +154,7 @@ function AuditFormWizardInner() {
 
   const handleSubmit = () => {
     setDirection("forward");
-    submitFinal();
+    submitFinal(locale);
   };
 
   const animationClass = animating

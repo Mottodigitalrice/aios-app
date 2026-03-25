@@ -336,11 +336,11 @@ export function AuditSuccess({ perspective }: AuditSuccessProps) {
             <h3 className="text-sm font-semibold text-[#6E6E73] mb-3">
               {t.success.bookEmbedTitle}
             </h3>
-            <TidyCalEmbed path="rice/ai" />
+            <TidyCalEmbed path="rice/aios-consult" />
 
             {/* Fallback link */}
             <Link
-              href="https://tidycal.com/rice/ai"
+              href="https://tidycal.com/rice/aios-consult"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 mt-4 text-sm text-[#B8860B] hover:text-[#D4A843] transition-colors"
