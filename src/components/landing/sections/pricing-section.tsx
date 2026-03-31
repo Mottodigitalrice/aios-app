@@ -98,7 +98,7 @@ export default function PricingSection({ t, locale }: SectionProps) {
                 <h3 className={`text-2xl font-bold mb-3 ${headingFont}`} style={{ color: "var(--lp-text-heading)" }}>{tier.title}</h3>
 
                 <div className="flex items-baseline gap-1 mb-1">
-                  <span className={`${highlighted ? "text-5xl" : "text-4xl"} font-bold`} style={{ color: "var(--lp-text-heading)" }}>{tier.price}</span>
+                  <span className={`${highlighted ? "text-3xl sm:text-5xl" : "text-2xl sm:text-4xl"} font-bold`} style={{ color: "var(--lp-text-heading)" }}>{tier.price}</span>
                   <span style={{ color: "var(--lp-text-muted)" }}>{tier.pricePer}</span>
                 </div>
                 <p className="text-sm mb-6" style={{ color: "var(--lp-text-muted)" }}>{tier.commitment}</p>

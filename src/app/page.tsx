@@ -160,7 +160,7 @@ export default function HomePage() {
                 style={{
                   fontSize: "var(--text-h2)",
                   color: "var(--lp-text-heading)",
-                  ...(locale === "ja" ? { wordBreak: "keep-all" as const } : {}),
+                  ...(locale === "ja" ? { overflowWrap: "break-word" as const, wordBreak: "normal" as const } : {}),
                 }}
               >
                 {t.agenticMega.title}{" "}
@@ -179,7 +179,7 @@ export default function HomePage() {
                 style={{
                   fontSize: "var(--text-h2)",
                   color: "var(--lp-text-heading)",
-                  ...(locale === "ja" ? { wordBreak: "keep-all" as const } : {}),
+                  ...(locale === "ja" ? { overflowWrap: "break-word" as const, wordBreak: "normal" as const } : {}),
                 }}
               >
                 {t.agenticMega.whatIsTitle}

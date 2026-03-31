@@ -30,7 +30,7 @@ export default function ValuePropsSection({ t, locale }: SectionProps) {
             style={{
               fontSize: "var(--text-h2)",
               color: "var(--lp-text-heading)",
-              ...(locale === "ja" ? { wordBreak: "keep-all" } : {}),
+              ...(locale === "ja" ? { overflowWrap: "break-word", wordBreak: "normal" } : {}),
             }}
           >
             {t.valueProps.title}{t.valueProps.titleHighlight ? <>{" "}<span className="gradient-text">{t.valueProps.titleHighlight}</span></> : null}

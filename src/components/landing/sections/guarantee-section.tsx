@@ -55,7 +55,7 @@ export default function GuaranteeSection({ t, locale }: SectionProps) {
                     fontSize: "clamp(1.75rem, 4vw, 2.75rem)",
                     color: "var(--lp-text-heading)",
                     lineHeight: 1.25,
-                    ...(locale === "ja" ? { wordBreak: "keep-all" as const, lineHeight: "1.5" } : {}),
+                    ...(locale === "ja" ? { overflowWrap: "break-word", wordBreak: "normal" as const, lineHeight: "1.5" } : {}),
                   }}
                 >
                   {renderText((t.guarantee as { headline: string }).headline)}

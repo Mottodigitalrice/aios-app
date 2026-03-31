@@ -146,7 +146,7 @@ export function FAQSection({ locale = "en" }: FAQSectionProps) {
           <span className="inline-block mb-4 px-3 py-1 rounded-full border border-[#B8860B]/20 text-[#B8860B] bg-[#B8860B]/5 text-xs font-medium">
             {labels.badge}
           </span>
-          <h2 className={`text-3xl sm:text-4xl font-bold tracking-tight ${headingFont}`} style={{ color: "var(--lp-text-heading)", ...(locale === "ja" ? { wordBreak: "keep-all" as const } : {}) }}>
+          <h2 className={`text-3xl sm:text-4xl font-bold tracking-tight ${headingFont}`} style={{ color: "var(--lp-text-heading)", ...(locale === "ja" ? { overflowWrap: "break-word", wordBreak: "normal" as const } : {}) }}>
             {labels.title}
           </h2>
           <p className="mt-3 text-zinc-500 text-sm">{labels.subtitle}</p>

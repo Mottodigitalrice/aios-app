@@ -25,7 +25,7 @@ export default function SolutionSection({ t, locale, hideHeader = false }: Secti
             style={{
               fontSize: "var(--text-h2)",
               color: "var(--lp-text-heading)",
-              ...(locale === "ja" ? { wordBreak: "keep-all" } : {}),
+              ...(locale === "ja" ? { overflowWrap: "break-word", wordBreak: "normal" } : {}),
             }}
           >
             {t.stack.title}{" "}

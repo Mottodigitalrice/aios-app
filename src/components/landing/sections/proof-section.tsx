@@ -23,7 +23,7 @@ export default function ProofSection({ t, locale }: SectionProps) {
             className={`font-bold tracking-tight text-white ${headingFont}`}
             style={{
               fontSize: "var(--text-h2)",
-              ...(locale === "ja" ? { wordBreak: "keep-all" } : {}),
+              ...(locale === "ja" ? { overflowWrap: "break-word", wordBreak: "normal" } : {}),
             }}
           >
             {t.caseStudy.title}{" "}
@@ -40,7 +40,7 @@ export default function ProofSection({ t, locale }: SectionProps) {
         </AnimateInView>
 
         {/* Metrics Grid */}
-        <div className="grid grid-cols-3 gap-4 mb-10">
+        <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-10">
           {[METRICS.activeProjects, METRICS.tasksInProgress, METRICS.pipelineDeals].map((value, i) => {
             const metric = t.caseStudy.metrics[i];
             return (

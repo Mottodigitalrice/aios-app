@@ -169,7 +169,7 @@ export function AgenticArchitecture({ t, locale }: SectionProps) {
 
           {/* Connector lines */}
           <div className="flex justify-center mb-4">
-            <div className="flex items-end gap-16 sm:gap-24">
+            <div className="flex items-end gap-8 sm:gap-24">
               <div className="w-px h-6 bg-gradient-to-b from-emerald-500/30 to-blue-500/30" />
               <div className="w-px h-6 bg-gradient-to-b from-emerald-500/30 to-violet-500/30" />
               <div className="w-px h-6 bg-gradient-to-b from-emerald-500/30 to-amber-500/30" />
@@ -265,7 +265,7 @@ export default function AgenticTerminalSection({ t, locale }: SectionProps) {
             style={{
               fontSize: "var(--text-h2)",
               color: "var(--lp-text-heading)",
-              ...(locale === "ja" ? { wordBreak: "keep-all" } : {}),
+              ...(locale === "ja" ? { overflowWrap: "break-word", wordBreak: "normal" } : {}),
             }}
           >
             {t.agenticTerminal.title}{" "}
@@ -401,7 +401,7 @@ export default function AgenticTerminalSection({ t, locale }: SectionProps) {
 
             {/* Connector lines */}
             <div className="flex justify-center mb-4">
-              <div className="flex items-end gap-16 sm:gap-24">
+              <div className="flex items-end gap-8 sm:gap-24">
                 <div className="w-px h-6 bg-gradient-to-b from-emerald-500/30 to-blue-500/30" />
                 <div className="w-px h-6 bg-gradient-to-b from-emerald-500/30 to-violet-500/30" />
                 <div className="w-px h-6 bg-gradient-to-b from-emerald-500/30 to-amber-500/30" />

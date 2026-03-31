@@ -75,22 +75,22 @@ export default function HeroSection({ t, locale }: SectionProps) {
                 { value: t.hero.socialProof.metric2Value, label: t.hero.socialProof.metric2Label },
                 { value: t.hero.socialProof.metric3Value, label: t.hero.socialProof.metric3Label },
               ].map((metric, i) => (
-                <div key={i} className="flex items-center">
+                <div key={i} className="flex items-center min-w-0">
                   {i > 0 && (
                     <div
-                      className="w-px h-10 mx-5 sm:mx-6"
+                      className="w-px h-10 mx-3 sm:mx-6"
                       style={{ backgroundColor: "var(--lp-border)" }}
                     />
                   )}
-                  <div className="text-center lg:text-left">
+                  <div className="text-center lg:text-left min-w-0">
                     <p
-                      className="text-3xl sm:text-4xl font-bold leading-none font-[family-name:var(--font-dm-sans)]"
+                      className="text-2xl sm:text-4xl font-bold leading-none font-[family-name:var(--font-dm-sans)]"
                       style={{ color: "var(--lp-text-heading)" }}
                     >
                       {metric.value}
                     </p>
                     <p
-                      className="text-sm mt-1.5 font-medium"
+                      className="text-xs sm:text-sm mt-1.5 font-medium"
                       style={{ color: "var(--lp-text-body)" }}
                     >
                       {metric.label}
