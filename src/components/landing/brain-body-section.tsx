@@ -181,7 +181,7 @@ export function BrainBodyDiagram({
  * BrainBodySection — full landing-page section with scroll animations.
  * Brain solo appears first, then the harness side slides in.
  */
-export function BrainBodySection({ locale }: { locale: "en" | "ja" }) {
+export function BrainBodySection({ locale, hideHeader = false }: { locale: "en" | "ja"; hideHeader?: boolean }) {
   const t = content[locale];
   const [sectionRef, isInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
   const [showHarness, setShowHarness] = useState(false);
@@ -205,6 +205,7 @@ export function BrainBodySection({ locale }: { locale: "en" | "ja" }) {
     >
       <div className="mx-auto max-w-4xl px-6" ref={sectionRef}>
         {/* Header */}
+        {!hideHeader && (
         <AnimateInView className="text-center mb-12 sm:mb-16">
           <Badge
             variant="outline"
@@ -222,6 +223,7 @@ export function BrainBodySection({ locale }: { locale: "en" | "ja" }) {
             {t.headingJa}
           </p>
         </AnimateInView>
+        )}
 
         {/* Animated side-by-side */}
         <AnimateInView delay={200}>

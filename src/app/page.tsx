@@ -9,18 +9,22 @@ import { FAQSection } from "@/components/landing/faq-section";
 import { LanguageToggle } from "@/components/landing/language-toggle";
 
 import HeroSection from "@/components/landing/sections/hero-section";
-import ValuePropsSection from "@/components/landing/sections/value-props-section";
 import BeforeAfterSection from "@/components/landing/sections/before-after-section";
+import HowItWorksSection from "@/components/landing/sections/how-it-works-section";
+import ValuePropsSection from "@/components/landing/sections/value-props-section";
 import { BrainBodySection } from "@/components/landing/brain-body-section";
-import AgenticTerminalSection from "@/components/landing/sections/agentic-terminal-section";
+import { AgenticTimeline, AgenticArchitecture } from "@/components/landing/sections/agentic-terminal-section";
 import SolutionSection from "@/components/landing/sections/solution-section";
+import ProofSection from "@/components/landing/sections/proof-section";
 import ProgramSection from "@/components/landing/sections/program-section";
 import MidCtaSection from "@/components/landing/sections/mid-cta-section";
-import ProofSection from "@/components/landing/sections/proof-section";
-import BioSection from "@/components/landing/sections/bio-section";
-import GuaranteeSection from "@/components/landing/sections/guarantee-section";
 import PricingSection from "@/components/landing/sections/pricing-section";
+import GuaranteeSection from "@/components/landing/sections/guarantee-section";
+import BioSection from "@/components/landing/sections/bio-section";
+import LeadMagnetSection from "@/components/landing/sections/lead-magnet-section";
 import CtaSection from "@/components/landing/sections/cta-section";
+import { Badge } from "@/components/ui/badge";
+import { AnimateInView } from "@/components/landing/animate-in-view";
 
 import en from "@/lib/i18n/dictionaries/en";
 import ja from "@/lib/i18n/dictionaries/ja";
@@ -104,64 +108,127 @@ export default function HomePage() {
       </header>
 
       <main id="main-content">
-        {/* ━━ WHAT — The Problem & Outcome ━━━━━━━━━━━━━━━━━ */}
-
-        {/* 1. Hero */}
+        {/* 1. Hero — headline + social proof + dual CTAs */}
         <HeroSection t={t} locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
-        {/* 2. Value Props (replaces PainSection) */}
-        <ValuePropsSection t={t} locale={locale} />
-        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
-
-        {/* 3. Before/After */}
+        {/* 2. Before/After — pain agitation: what changes when your business has a brain */}
         <BeforeAfterSection t={t} locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
-        {/* ━━ HOW — How It Works ━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-
-        {/* 4. Agentic Terminal (year progression: 2024→2025→2026) */}
-        <AgenticTerminalSection t={t} locale={locale} />
+        {/* 3. How It Works — 3-step action plan */}
+        <HowItWorksSection t={t} locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
-        {/* 5. Brain + Body (paradigm shift) */}
-        <BrainBodySection locale={locale} />
-        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
+        {/* 4. Value Props — what you get */}
+        <ValuePropsSection t={t} locale={locale} />
 
-        {/* 6. Solution — Pyramid (the model-agnostic stack you own) */}
-        <SolutionSection t={t} locale={locale} />
-        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
-
-        {/* 7. Program — 6-month roadmap */}
-        <ProgramSection t={t} locale={locale} />
-        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
-
-        {/* 8. Mid CTA — "Save Your Spot" nudge */}
-        <MidCtaSection t={t} locale={locale} />
-        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
-
-        {/* ━━ WHO — Who's Doing It ━━━━━━━━━━━━━━━━━━━━━━━━ */}
-
-        {/* 9. Proof — Lewis's AIOS metrics + org chart */}
+        {/* 5. Proof — Lewis's AIOS metrics + org chart (dark section) */}
         <ProofSection t={t} locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
-        {/* 10. Bio — Company story, vision, ethical AI */}
-        <BioSection t={t} locale={locale} />
+        {/* 6. Program — 6-month roadmap */}
+        <ProgramSection t={t} locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
-        {/* 11. Guarantee */}
-        <GuaranteeSection t={t} locale={locale} />
+        {/* 7. Mid CTA — "Ready to build yours?" */}
+        <MidCtaSection t={t} locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
-        {/* ━━ CLOSE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-
-        {/* 12. Pricing */}
+        {/* 8. Pricing */}
         <PricingSection t={t} locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
-        {/* 13. FAQ */}
+        {/* 9. Guarantee */}
+        <GuaranteeSection t={t} locale={locale} />
+        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
+
+        {/* 10. Agentic AI Mega-Section — deep education for engaged scrollers */}
+        <section
+          style={{ backgroundColor: "var(--lp-bg-primary)", paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}
+        >
+          <div className="mx-auto max-w-5xl px-6">
+            <AnimateInView className="text-center mb-16">
+              <Badge variant="outline" className="mb-4 border-[#B8860B]/20 text-[#B8860B] bg-[#B8860B]/5">
+                {t.agenticMega.badge}
+              </Badge>
+              <h2
+                className={`font-bold tracking-tight ${locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]"}`}
+                style={{
+                  fontSize: "var(--text-h2)",
+                  color: "var(--lp-text-heading)",
+                  ...(locale === "ja" ? { wordBreak: "keep-all" as const } : {}),
+                }}
+              >
+                {t.agenticMega.title}{" "}
+                <span className="gradient-text">{t.agenticMega.titleHighlight}</span>
+              </h2>
+              <p className="mt-4 max-w-2xl mx-auto text-lg" style={{ color: "var(--lp-text-body)" }}>
+                {t.agenticMega.subtitle}
+              </p>
+            </AnimateInView>
+
+            <AgenticTimeline t={t} locale={locale} />
+
+            <AnimateInView className="text-center mt-16 mb-12">
+              <h2
+                className={`font-bold tracking-tight ${locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]"}`}
+                style={{
+                  fontSize: "var(--text-h2)",
+                  color: "var(--lp-text-heading)",
+                  ...(locale === "ja" ? { wordBreak: "keep-all" as const } : {}),
+                }}
+              >
+                {t.agenticMega.whatIsTitle}
+              </h2>
+            </AnimateInView>
+
+            <AnimateInView className="mb-12">
+              <h3
+                className={`text-xl sm:text-2xl font-semibold mb-8 text-center ${locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]"}`}
+                style={{ color: "var(--lp-text-heading)" }}
+              >
+                {t.agenticMega.subSection1Title}
+              </h3>
+            </AnimateInView>
+          </div>
+          <BrainBodySection locale={locale} hideHeader />
+
+          <div className="mx-auto max-w-5xl px-6">
+            <AnimateInView className="mt-16 mb-8">
+              <h3
+                className={`text-xl sm:text-2xl font-semibold mb-8 text-center ${locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]"}`}
+                style={{ color: "var(--lp-text-heading)" }}
+              >
+                {t.agenticMega.subSection2Title}
+              </h3>
+            </AnimateInView>
+
+            <AgenticArchitecture t={t} locale={locale} />
+
+            <AnimateInView className="mt-16 mb-8">
+              <h3
+                className={`text-xl sm:text-2xl font-semibold mb-8 text-center ${locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]"}`}
+                style={{ color: "var(--lp-text-heading)" }}
+              >
+                {t.agenticMega.subSection3Title}
+              </h3>
+            </AnimateInView>
+          </div>
+          <SolutionSection t={t} locale={locale} hideHeader />
+        </section>
+        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
+
+        {/* 11. Bio — Company story */}
+        <BioSection t={t} locale={locale} />
+        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
+
+        {/* 12. FAQ */}
         <FAQSection locale={locale} />
+        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
+
+        {/* 13. Lead Magnet — soft conversion for undecided visitors */}
+        <LeadMagnetSection t={t} locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
         {/* 14. Final CTA */}
@@ -208,12 +275,28 @@ export default function HomePage() {
               </address>
             </div>
           </div>
-          <div className="pt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-xs" style={{ borderTop: "1px solid var(--lp-border)", color: "var(--lp-text-muted)" }}>
-            <span>{t.footer.company.representative}</span>
-            <span className="hidden sm:inline" style={{ color: "var(--lp-border-visible)" }}>|</span>
-            <span>{t.footer.company.location}</span>
-            <span className="hidden sm:inline" style={{ color: "var(--lp-border-visible)" }}>|</span>
-            <span>{t.footer.company.founded}</span>
+          <div className="pt-6" style={{ borderTop: "1px solid var(--lp-border)" }}>
+            <h3 className="text-xs font-semibold mb-3 text-center" style={{ color: "var(--lp-text-heading)" }}>
+              {t.footer.company.heading}
+            </h3>
+            <dl className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-1.5 text-xs max-w-md mx-auto" style={{ color: "var(--lp-text-muted)" }}>
+              <dt className="font-medium" style={{ color: "var(--lp-text-heading)" }}>{t.footer.company.nameLabel}</dt>
+              <dd className="text-right">{t.footer.company.name}</dd>
+              <dt className="font-medium" style={{ color: "var(--lp-text-heading)" }}>{t.footer.company.representativeLabel}</dt>
+              <dd className="text-right">{t.footer.company.representative}</dd>
+              <dt className="font-medium" style={{ color: "var(--lp-text-heading)" }}>{t.footer.company.locationLabel}</dt>
+              <dd className="text-right">{t.footer.company.location}</dd>
+              <dt className="font-medium" style={{ color: "var(--lp-text-heading)" }}>{t.footer.company.foundedLabel}</dt>
+              <dd className="text-right">{t.footer.company.founded}</dd>
+              <dt className="font-medium" style={{ color: "var(--lp-text-heading)" }}>{t.footer.company.businessLabel}</dt>
+              <dd className="text-right">{t.footer.company.business}</dd>
+              <dt className="font-medium" style={{ color: "var(--lp-text-heading)" }}>{t.footer.company.urlLabel}</dt>
+              <dd className="text-right">
+                <a href="https://mottodigital.jp" target="_blank" rel="noopener noreferrer" className="hover:text-[#1D1D1F] transition-colors">
+                  {t.footer.company.url}
+                </a>
+              </dd>
+            </dl>
           </div>
           <div className="mt-4 pt-4 text-center text-xs" style={{ borderTop: "1px solid var(--lp-border)", color: "var(--lp-text-muted)" }}>
             &copy; {new Date().getFullYear()} {t.footer.copyright}

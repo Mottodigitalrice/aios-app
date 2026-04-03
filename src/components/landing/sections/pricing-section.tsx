@@ -71,29 +71,34 @@ export default function PricingSection({ t, locale }: SectionProps) {
           {tiers.map(({ key, icon: Icon, tier, href, highlighted }, i) => (
             <AnimateInView key={key} delay={100 * (i + 1)}>
               <div
-                className={`rounded-xl p-8 sm:p-10 flex flex-col h-full transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_30px_oklch(0.65_0.18_260/15%)] relative ${
-                  highlighted ? "border-2 border-indigo-500/30" : ""
+                className={`rounded-xl p-8 sm:p-10 flex flex-col h-full transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_30px_rgba(184,134,11,0.15)] relative ${
+                  highlighted ? "border-2 border-[#B8860B]/30 lg:scale-[1.03] z-10" : ""
                 }`}
                 style={{
                   backgroundColor: "var(--lp-bg-elevated)",
-                  ...(highlighted ? {} : { border: "1px solid var(--lp-border-visible)" }),
+                  ...(highlighted
+                    ? { background: "linear-gradient(180deg, rgba(184, 134, 11, 0.04) 0%, transparent 100%)" }
+                    : { border: "1px solid var(--lp-border-visible)" }),
                 }}
               >
                 {highlighted && (
-                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-indigo-600 text-white border-0 px-3 py-1">
-                    {t.pricing.recommended}
-                  </Badge>
+                  <div className="absolute -top-5 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                    <Badge className="bg-[#B8860B] text-white border-0 text-xs px-4 py-1.5">
+                      {t.pricing.recommended}
+                    </Badge>
+                    <span className="text-[10px] mt-1 text-[#B8860B]/70 whitespace-nowrap">{t.pricing.recommendedSubtext}</span>
+                  </div>
                 )}
 
                 <div className="flex items-center gap-2 mb-2">
-                  <Icon className="size-4 text-indigo-400" />
-                  <span className="text-xs font-semibold uppercase tracking-wider text-indigo-400">{tier.label}</span>
+                  <Icon className="size-4 text-[#B8860B]" />
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[#B8860B]">{tier.label}</span>
                 </div>
 
                 <h3 className={`text-2xl font-bold mb-3 ${headingFont}`} style={{ color: "var(--lp-text-heading)" }}>{tier.title}</h3>
 
                 <div className="flex items-baseline gap-1 mb-1">
-                  <span className="text-4xl font-bold" style={{ color: "var(--lp-text-heading)" }}>{tier.price}</span>
+                  <span className={`${highlighted ? "text-5xl" : "text-4xl"} font-bold`} style={{ color: "var(--lp-text-heading)" }}>{tier.price}</span>
                   <span style={{ color: "var(--lp-text-muted)" }}>{tier.pricePer}</span>
                 </div>
                 <p className="text-sm mb-6" style={{ color: "var(--lp-text-muted)" }}>{tier.commitment}</p>
@@ -106,7 +111,7 @@ export default function PricingSection({ t, locale }: SectionProps) {
                   <ul className="space-y-1.5">
                     {tier.bestFor.map((item) => (
                       <li key={item} className="flex items-start gap-2 text-xs" style={{ color: "var(--lp-text-body)" }}>
-                        <ArrowRight className="size-3 text-indigo-400 mt-0.5 shrink-0" />
+                        <ArrowRight className="size-3 text-[#B8860B] mt-0.5 shrink-0" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -117,7 +122,7 @@ export default function PricingSection({ t, locale }: SectionProps) {
                 <ul className="space-y-3 mb-6 flex-1">
                   {tier.features.map((item) => (
                     <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "var(--lp-text-heading)" }}>
-                      <Check className="size-4 text-indigo-400 mt-0.5 shrink-0" />
+                      <Check className="size-4 text-[#B8860B] mt-0.5 shrink-0" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -127,10 +132,11 @@ export default function PricingSection({ t, locale }: SectionProps) {
 
                 <Link href={href} className="w-full mt-auto">
                   <Button
+                    variant={highlighted ? "default" : "outline"}
                     className={`w-full rounded-full hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 ${
                       highlighted
-                        ? "bg-[#1D1D1F] hover:bg-[#2D2D2F] text-white"
-                        : "bg-[#1D1D1F] hover:bg-[#2D2D2F] text-white"
+                        ? "bg-[#B8860B] hover:bg-[#A0750A] text-white shadow-[0_4px_16px_rgba(184,134,11,0.3)]"
+                        : "border-[#1D1D1F]/30 text-[#1D1D1F] hover:bg-[#1D1D1F]/10"
                     }`}
                   >
                     {tier.cta}
@@ -159,7 +165,7 @@ export default function PricingSection({ t, locale }: SectionProps) {
                   {Array.from({ length: t.pricing.capacity.company.total }).map((_, i) => (
                     <div
                       key={i}
-                      className={`size-3 rounded-full ${i < t.pricing.capacity.company.filled ? "bg-indigo-500" : "bg-[#E8E8ED]"}`}
+                      className={`size-3 rounded-full ${i < t.pricing.capacity.company.filled ? "bg-[#B8860B]" : "bg-[#E8E8ED]"}`}
                     />
                   ))}
                 </div>
@@ -173,7 +179,7 @@ export default function PricingSection({ t, locale }: SectionProps) {
                   {Array.from({ length: t.pricing.capacity.oneOnOne.total }).map((_, i) => (
                     <div
                       key={i}
-                      className={`size-3 rounded-full ${i < t.pricing.capacity.oneOnOne.filled ? "bg-indigo-500" : "bg-[#E8E8ED]"}`}
+                      className={`size-3 rounded-full ${i < t.pricing.capacity.oneOnOne.filled ? "bg-[#B8860B]" : "bg-[#E8E8ED]"}`}
                     />
                   ))}
                 </div>
@@ -190,7 +196,7 @@ export default function PricingSection({ t, locale }: SectionProps) {
                   {Array.from({ length: t.pricing.capacity.cohortEN.total }).map((_, i) => (
                     <div
                       key={`en-${i}`}
-                      className={`size-3 rounded-full ${i < t.pricing.capacity.cohortEN.filled ? "bg-indigo-500" : "bg-[#E8E8ED]"}`}
+                      className={`size-3 rounded-full ${i < t.pricing.capacity.cohortEN.filled ? "bg-[#B8860B]" : "bg-[#E8E8ED]"}`}
                     />
                   ))}
                 </div>
@@ -202,7 +208,7 @@ export default function PricingSection({ t, locale }: SectionProps) {
                   {Array.from({ length: t.pricing.capacity.cohortJP.total }).map((_, i) => (
                     <div
                       key={`jp-${i}`}
-                      className={`size-3 rounded-full ${i < t.pricing.capacity.cohortJP.filled ? "bg-indigo-500" : "bg-[#E8E8ED]"}`}
+                      className={`size-3 rounded-full ${i < t.pricing.capacity.cohortJP.filled ? "bg-[#B8860B]" : "bg-[#E8E8ED]"}`}
                     />
                   ))}
                 </div>

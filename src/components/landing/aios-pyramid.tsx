@@ -20,6 +20,7 @@ interface PyramidContent {
   plusYourTools: string;
   anyLLM: string;
   toolsMCP: string;
+  compactLayer4Label: string;
 }
 
 const content: Record<"en" | "ja", PyramidContent> = {
@@ -52,6 +53,7 @@ const content: Record<"en" | "ja", PyramidContent> = {
     plusYourTools: "+ your tools",
     anyLLM: "Any LLM",
     toolsMCP: "Tools / MCP",
+    compactLayer4Label: "AI Models — Use any AI model",
   },
   ja: {
     layers: [
@@ -83,6 +85,7 @@ const content: Record<"en" | "ja", PyramidContent> = {
     plusYourTools: "+ あなたのツール",
     anyLLM: "任意のLLM",
     toolsMCP: "ツール / MCP",
+    compactLayer4Label: "AIモデル — 任意のAIモデルを使用",
   },
 };
 
@@ -261,11 +264,11 @@ export function AIOSPyramid({
   }, [isInView, compact]);
 
   return (
-    <div className="mt-12" ref={ref}>
+    <div className={compact ? "" : "mt-12"} ref={ref}>
       <div className="relative max-w-4xl mx-auto px-4">
-        {/* ─── Ownership bracket — left side, desktop only ─── */}
+        {/* ─── Ownership bracket — left side, desktop only (hidden in compact) ─── */}
         <div
-          className="hidden lg:block absolute pointer-events-none"
+          className={`${compact ? "hidden" : "hidden lg:block"} absolute pointer-events-none`}
           style={{
             left: "-28px",
             top: "0",
@@ -313,8 +316,9 @@ export function AIOSPyramid({
             isHovered={hoveredLayer === 3}
             onHover={setHoveredLayer}
             t={t}
+            compact={compact}
           >
-            <ModelContent visible={step >= 4} t={t} />
+            <ModelContent visible={step >= 4} t={t} compact={compact} />
           </PyramidLayer>
 
           <Connector fromColor="rgba(245,158,11,0.6)" toColor="rgba(139,92,246,0.6)" visible={step >= 4} />
@@ -357,9 +361,9 @@ export function AIOSPyramid({
           </PyramidLayer>
         </div>
 
-        {/* ─── Ownership footer (mobile-friendly) ─── */}
+        {/* ─── Ownership footer (mobile-friendly, hidden in compact) ─── */}
         <div
-          className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 lg:hidden"
+          className={`mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 lg:hidden ${compact ? "!hidden" : ""}`}
           style={{
             opacity: step >= 5 ? 1 : 0,
             transform: step >= 5 ? "none" : "translateY(8px)",
@@ -410,6 +414,7 @@ export function AIOSPyramid({
    On mobile (< 640px) all layers are full-width cards.
    ══════════════════════════════════════════════════ */
 const PYRAMID_WIDTHS = ["100%", "82%", "64%", "46%"] as const;
+const PYRAMID_WIDTHS_COMPACT = ["100%", "82%", "64%", "56%"] as const;
 
 function PyramidLayer({
   layerIndex,
@@ -417,6 +422,7 @@ function PyramidLayer({
   isHovered,
   onHover,
   t,
+  compact = false,
   children,
 }: {
   layerIndex: number;
@@ -424,13 +430,20 @@ function PyramidLayer({
   isHovered: boolean;
   onHover: (i: number | null) => void;
   t: PyramidContent;
+  compact?: boolean;
   children: React.ReactNode;
 }) {
   const cfg = layerConfigs[layerIndex];
   const layerContent = t.layers[layerIndex];
   const layerNum = String(layerIndex + 1).padStart(2, "0");
+  const widths = compact ? PYRAMID_WIDTHS_COMPACT : PYRAMID_WIDTHS;
 
   const hoverTransform = isHovered ? "scale(1.012)" : "scale(1)";
+
+  // In compact mode, Layer 4 shows a combined label
+  const displayLabel = (compact && layerIndex === 3)
+    ? t.compactLayer4Label
+    : layerContent.label;
 
   return (
     <div
@@ -449,7 +462,7 @@ function PyramidLayer({
           ${isHovered ? `ring-1 ${cfg.ring} ${cfg.bgHover}` : ""}
         `}
         style={{
-          maxWidth: PYRAMID_WIDTHS[layerIndex],
+          maxWidth: widths[layerIndex],
         }}
         onMouseEnter={() => onHover(layerIndex)}
         onMouseLeave={() => onHover(null)}
@@ -463,14 +476,18 @@ function PyramidLayer({
               </div>
               <div className="min-w-0">
                 <span className={`text-xs font-semibold ${cfg.labelColor} uppercase tracking-wider`}>
-                  {layerContent.label}
+                  {displayLabel}
                 </span>
-                <p className="text-[10px] text-zinc-500 mt-0.5 hidden sm:block truncate">
-                  {layerContent.message}
-                </p>
+                {/* Hide sublabel/message in compact mode for Layer 4 */}
+                {!(compact && layerIndex === 3) && (
+                  <p className="text-[10px] text-zinc-500 mt-0.5 hidden sm:block truncate">
+                    {layerContent.message}
+                  </p>
+                )}
               </div>
             </div>
-            {layerIndex === 3 && (
+            {/* Hide Swappable badge in compact mode */}
+            {layerIndex === 3 && !compact && (
               <span className="text-[10px] font-medium text-amber-600/70 border border-amber-500/20 bg-amber-500/[0.05] rounded-full px-2 py-0.5 shrink-0 ml-2">
                 &#8635; {t.swappable}
               </span>
@@ -566,7 +583,7 @@ function EnvironmentContent({ visible }: { visible: boolean }) {
 }
 
 /* ── Layer 4: AI Models ── */
-function ModelContent({ visible, t }: { visible: boolean; t: PyramidContent }) {
+function ModelContent({ visible, t, compact = false }: { visible: boolean; t: PyramidContent; compact?: boolean }) {
   return (
     <div className="flex items-center justify-center gap-3 sm:gap-4">
       {models.map((model, i) => (
@@ -591,19 +608,22 @@ function ModelContent({ visible, t }: { visible: boolean; t: PyramidContent }) {
           <span className="text-[9px] sm:text-[10px] text-zinc-500 font-medium">{model.name}</span>
         </div>
       ))}
-      <div
-        className="flex flex-col items-center gap-1.5"
-        style={{
-          opacity: visible ? 1 : 0,
-          transform: visible ? "none" : "translateY(6px)",
-          transition: "all 0.4s ease-out 210ms",
-        }}
-      >
-        <div className="size-10 sm:size-12 rounded-xl border border-dashed border-amber-500/15 bg-white/50 flex items-center justify-center">
-          <span className="text-zinc-400 text-base">+</span>
+      {/* Hide "Any LLM" dashed box in compact mode */}
+      {!compact && (
+        <div
+          className="flex flex-col items-center gap-1.5"
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? "none" : "translateY(6px)",
+            transition: "all 0.4s ease-out 210ms",
+          }}
+        >
+          <div className="size-10 sm:size-12 rounded-xl border border-dashed border-amber-500/15 bg-white/50 flex items-center justify-center">
+            <span className="text-zinc-400 text-base">+</span>
+          </div>
+          <span className="text-[9px] sm:text-[10px] text-zinc-400 font-medium">{t.anyLLM}</span>
         </div>
-        <span className="text-[9px] sm:text-[10px] text-zinc-400 font-medium">{t.anyLLM}</span>
-      </div>
+      )}
     </div>
   );
 }

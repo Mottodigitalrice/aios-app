@@ -13,7 +13,7 @@ export default function MidCtaSection({ t, locale }: SectionProps) {
     <AnimateInView
       as="section"
       className="border-t border-[#E8E8ED]"
-      style={{ backgroundColor: "var(--lp-bg-subtle)", paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}
+      style={{ backgroundColor: "#FFFBF0", paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}
     >
       <div className="mx-auto max-w-3xl px-6 text-center">
         <h2

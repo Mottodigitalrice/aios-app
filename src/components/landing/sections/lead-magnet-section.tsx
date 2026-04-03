@@ -12,27 +12,30 @@ export default function LeadMagnetSection({ t, locale }: SectionProps) {
   return (
     <AnimateInView
       as="section"
-      style={{ backgroundColor: "var(--lp-bg-primary)", paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}
+      style={{ backgroundColor: "#F5F5F7", paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}
     >
-      <div className="mx-auto max-w-2xl px-6 text-center">
-        <h2
-          className={`font-bold tracking-tight mb-4 ${headingFont}`}
-          style={{ fontSize: "var(--text-h2)", color: "var(--lp-text-heading)" }}
-        >
-          {t.leadMagnet.title}
-        </h2>
-        <p className="text-lg mb-2" style={{ color: "var(--lp-text-body)" }}>
-          {t.leadMagnet.subtitle}
-        </p>
-        <p className="text-sm mb-8" style={{ color: "var(--lp-text-muted)" }}>
-          {t.leadMagnet.detail}
-        </p>
-        <Link href="/audit">
-          <Button variant="outline" size="lg" className="border-indigo-500/30 text-indigo-300 hover:bg-indigo-500/10 hover:text-indigo-200 gap-2">
-            {t.leadMagnet.cta}
-            <ArrowRight className="size-4" />
-          </Button>
-        </Link>
+      <div className="mx-auto max-w-2xl px-6">
+        <div className="rounded-2xl border border-[#B8860B]/15 bg-white p-8 sm:p-12 text-center">
+          <div className="w-12 h-1 bg-[#B8860B]/30 rounded-full mx-auto mb-4" />
+          <h2
+            className={`font-bold tracking-tight mb-4 ${headingFont}`}
+            style={{ fontSize: "var(--text-h2)", color: "var(--lp-text-heading)" }}
+          >
+            {t.leadMagnet.title}
+          </h2>
+          <p className="text-lg mb-2" style={{ color: "var(--lp-text-body)" }}>
+            {t.leadMagnet.subtitle}
+          </p>
+          <p className="text-sm mb-8" style={{ color: "var(--lp-text-muted)" }}>
+            {t.leadMagnet.detail}
+          </p>
+          <Link href="/audit">
+            <Button size="lg" className="bg-[#B8860B] hover:bg-[#A0750A] text-white gap-2">
+              {t.leadMagnet.cta}
+              <ArrowRight className="size-4" />
+            </Button>
+          </Link>
+        </div>
       </div>
     </AnimateInView>
   );

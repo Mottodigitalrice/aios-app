@@ -25,15 +25,15 @@ export default function GuaranteeSection({ t, locale }: SectionProps) {
     <section
       className="relative border-t border-[#E8E8ED] overflow-hidden"
       style={{
-        backgroundColor: "var(--lp-bg-primary)",
+        backgroundColor: "#F0FDF4",
         paddingTop: "calc(var(--lp-section-gap) * 1.2)",
         paddingBottom: "calc(var(--lp-section-gap) * 1.2)",
       }}
     >
-      <div className="relative mx-auto max-w-4xl px-6">
+      <div className="relative mx-auto max-w-3xl px-6">
         <AnimateInView>
           <div
-            className="rounded-2xl border-2 border-emerald-500/30 p-10 sm:p-16 text-center relative overflow-hidden"
+            className="rounded-2xl border border-emerald-500/20 p-8 sm:p-12 text-center relative overflow-hidden"
             style={{ backgroundColor: "var(--lp-bg-elevated)" }}
           >
             <div className="relative">

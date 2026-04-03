@@ -138,7 +138,7 @@ export default async function Image() {
               fontWeight: 500,
             }}
           >
-            Free AI Audit — aios.mottodigital.jp
+            Agentic AI Audit — aios.mottodigital.jp
           </div>
         </div>
       </div>

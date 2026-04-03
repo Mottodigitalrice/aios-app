@@ -1,16 +1,16 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { Flame, Bot, Link2, Shield, GraduationCap } from "lucide-react";
+import { Flame, Bot, Link2, Shield, Sparkles } from "lucide-react";
 import { AnimateInView } from "@/components/landing/animate-in-view";
 import type { SectionProps } from "./types";
 
 const icons = [
-  <Flame key="flame" className="size-5" style={{ color: "#B8860B" }} />,
+  <Shield key="shield" className="size-5" style={{ color: "#B8860B" }} />,
+  <Sparkles key="sparkles" className="size-5" style={{ color: "#B8860B" }} />,
   <Bot key="bot" className="size-5" style={{ color: "#B8860B" }} />,
   <Link2 key="link" className="size-5" style={{ color: "#B8860B" }} />,
-  <Shield key="shield" className="size-5" style={{ color: "#B8860B" }} />,
-  <GraduationCap key="grad" className="size-5" style={{ color: "#B8860B" }} />,
+  <Flame key="flame" className="size-5" style={{ color: "#B8860B" }} />,
 ];
 
 export default function ValuePropsSection({ t, locale }: SectionProps) {

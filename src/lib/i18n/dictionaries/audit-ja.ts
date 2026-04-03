@@ -419,7 +419,7 @@ const auditDict = {
     copied: "コピーしました",
     shareText:
       "MOTTO Digitalの無料AI活用診断に登録しました。ぜひチェックしてください。",
-    shareEmailSubject: "無料AI活用診断",
+    shareEmailSubject: "エージェンティックAI診断",
     backHome: "ホームに戻る",
   },
 } as const;

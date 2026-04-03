@@ -135,7 +135,7 @@ export function FAQSection({ locale = "en" }: FAQSectionProps) {
   });
 
   return (
-    <section className="border-t border-[#E8E8ED]" style={{ paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}>
+    <section className="border-t border-[#E8E8ED]" style={{ backgroundColor: "#F5F5F7", paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: faqSchema }}
