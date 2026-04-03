@@ -109,8 +109,8 @@ export default function PricingSection({ t, locale }: SectionProps) {
                     {locale === "ja" ? "こんな方に最適" : "Best for"}
                   </p>
                   <ul className="space-y-1.5">
-                    {tier.bestFor.map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-xs" style={{ color: "var(--lp-text-body)" }}>
+                    {tier.bestFor.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-xs" style={{ color: "var(--lp-text-body)" }}>
                         <ArrowRight className="size-3 text-[#B8860B] mt-0.5 shrink-0" />
                         <span>{item}</span>
                       </li>
@@ -120,8 +120,8 @@ export default function PricingSection({ t, locale }: SectionProps) {
 
                 {/* Features */}
                 <ul className="space-y-3 mb-6 flex-1">
-                  {tier.features.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "var(--lp-text-heading)" }}>
+                  {tier.features.map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm" style={{ color: "var(--lp-text-heading)" }}>
                       <Check className="size-4 text-[#B8860B] mt-0.5 shrink-0" />
                       <span>{item}</span>
                     </li>

@@ -23,7 +23,7 @@ export default function ProofSection({ t, locale }: SectionProps) {
             className={`font-bold tracking-tight text-white ${headingFont}`}
             style={{
               fontSize: "var(--text-h2)",
-              ...(locale === "ja" ? { overflowWrap: "break-word", wordBreak: "normal" } : {}),
+              ...(locale === "ja" ? {} : {}),
             }}
           >
             {t.caseStudy.title}{" "}
@@ -44,9 +44,9 @@ export default function ProofSection({ t, locale }: SectionProps) {
           {[METRICS.activeProjects, METRICS.tasksInProgress, METRICS.pipelineDeals].map((value, i) => {
             const metric = t.caseStudy.metrics[i];
             return (
-              <AnimateInView key={metric.label} delay={i * 100}>
+              <AnimateInView key={i} delay={i * 100}>
                 <div
-                  className="rounded-2xl p-5 text-center"
+                  className="rounded-2xl p-3 sm:p-5 text-center"
                   style={{
                     backgroundColor: "rgba(255, 255, 255, 0.05)",
                     border: "1px solid rgba(255, 255, 255, 0.1)",
@@ -55,8 +55,8 @@ export default function ProofSection({ t, locale }: SectionProps) {
                   <div className="text-3xl sm:text-4xl font-bold gradient-text mb-1">
                     <CountUp end={value} />
                   </div>
-                  <div className="text-sm font-medium text-white">{metric.label}</div>
-                  <div className="text-xs mt-1 text-gray-500">{metric.sublabel}</div>
+                  <div className="text-xs sm:text-sm font-medium text-white">{metric.label}</div>
+                  <div className="text-[10px] sm:text-xs mt-1 text-gray-500">{metric.sublabel}</div>
                 </div>
               </AnimateInView>
             );

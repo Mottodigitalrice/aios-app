@@ -9,8 +9,9 @@ import type { SectionProps } from "./types";
 export default function GuaranteeSection({ t, locale }: SectionProps) {
   const headingFont = locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]";
 
-  // Render headline with explicit line breaks for JP
-  const renderText = (text: string) => {
+  // Render headline — BudouX already handles \n → <br />, so just pass through
+  const renderText = (text: unknown): React.ReactNode => {
+    if (typeof text !== "string") return text as React.ReactNode; // Already processed by BudouX
     const parts = text.split("\n");
     if (parts.length === 1) return text;
     return parts.map((part, i) => (
@@ -55,7 +56,7 @@ export default function GuaranteeSection({ t, locale }: SectionProps) {
                     fontSize: "clamp(1.75rem, 4vw, 2.75rem)",
                     color: "var(--lp-text-heading)",
                     lineHeight: 1.25,
-                    ...(locale === "ja" ? { overflowWrap: "break-word", wordBreak: "normal" as const, lineHeight: "1.5" } : {}),
+                    ...(locale === "ja" ? { lineHeight: "1.5" } : {}),
                   }}
                 >
                   {renderText((t.guarantee as { headline: string }).headline)}

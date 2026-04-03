@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { segmentJapanese } from "@/lib/budoux-transform";
 
 // ---------------------------------------------------------------------------
 // FAQ content — EN (reduced to 6 essential questions)
@@ -116,7 +117,12 @@ interface FAQSectionProps {
 export function FAQSection({ locale = "en" }: FAQSectionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const faqs = locale === "ja" ? faqsJA : faqsEN;
+  const rawFaqs = locale === "ja" ? faqsJA : faqsEN;
+  const faqs = useMemo(() => locale === "ja"
+    ? rawFaqs.map(f => ({ question: segmentJapanese(f.question), answer: segmentJapanese(f.answer) }))
+    : rawFaqs.map(f => ({ question: f.question as React.ReactNode, answer: f.answer as React.ReactNode })),
+    [locale, rawFaqs],
+  );
   const labels = sectionLabels[locale];
   const headingFont = locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]";
 
@@ -146,7 +152,7 @@ export function FAQSection({ locale = "en" }: FAQSectionProps) {
           <span className="inline-block mb-4 px-3 py-1 rounded-full border border-[#B8860B]/20 text-[#B8860B] bg-[#B8860B]/5 text-xs font-medium">
             {labels.badge}
           </span>
-          <h2 className={`text-3xl sm:text-4xl font-bold tracking-tight ${headingFont}`} style={{ color: "var(--lp-text-heading)", ...(locale === "ja" ? { overflowWrap: "break-word", wordBreak: "normal" as const } : {}) }}>
+          <h2 className={`font-bold tracking-tight ${headingFont}`} style={{ fontSize: "var(--text-h2)", color: "var(--lp-text-heading)" }}>
             {labels.title}
           </h2>
           <p className="mt-3 text-zinc-500 text-sm">{labels.subtitle}</p>
@@ -159,7 +165,7 @@ export function FAQSection({ locale = "en" }: FAQSectionProps) {
 
             return (
               <div
-                key={faq.question}
+                key={idx}
                 className="rounded-xl border border-[#E8E8ED] bg-white overflow-hidden"
               >
                 <button

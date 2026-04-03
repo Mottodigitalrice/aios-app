@@ -10,8 +10,9 @@ import type { SectionProps } from "./types";
 export default function HeroSection({ t, locale }: SectionProps) {
   const headingFont = locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]";
 
-  // Render title with explicit line breaks for JP
-  const renderTitle = (text: string) => {
+  // Render title — BudouX already handles \n → <br />, so just pass through
+  const renderTitle = (text: unknown): React.ReactNode => {
+    if (typeof text !== "string") return text as React.ReactNode; // Already processed by BudouX
     const parts = text.split("\n");
     if (parts.length === 1) return text;
     return parts.map((part, i) => (

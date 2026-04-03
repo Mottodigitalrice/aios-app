@@ -45,8 +45,8 @@ export default function ProgramSection({ t, locale }: SectionProps) {
                 </div>
               </div>
               <ul className="space-y-3">
-                {t.program.month1.items.map((item: string) => (
-                  <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "var(--lp-text-heading)" }}>
+                {t.program.month1.items.map((item: string, i: number) => (
+                  <li key={i} className="flex items-start gap-3 text-sm" style={{ color: "var(--lp-text-heading)" }}>
                     <Check className="size-4 text-[#B8860B] mt-0.5 shrink-0" />
                     <span>{item}</span>
                   </li>
@@ -67,8 +67,8 @@ export default function ProgramSection({ t, locale }: SectionProps) {
                   </div>
                 </div>
                 <ul className="space-y-3">
-                  {t.program.month2.items.map((item: string) => (
-                    <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "var(--lp-text-heading)" }}>
+                  {t.program.month2.items.map((item: string, i: number) => (
+                    <li key={i} className="flex items-start gap-3 text-sm" style={{ color: "var(--lp-text-heading)" }}>
                       <Check className="size-4 text-[#B8860B] mt-0.5 shrink-0" />
                       <span>{item}</span>
                     </li>
@@ -88,8 +88,8 @@ export default function ProgramSection({ t, locale }: SectionProps) {
                   </div>
                 </div>
                 <ul className="space-y-3">
-                  {t.program.month3.items.map((item: string) => (
-                    <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "var(--lp-text-heading)" }}>
+                  {t.program.month3.items.map((item: string, i: number) => (
+                    <li key={i} className="flex items-start gap-3 text-sm" style={{ color: "var(--lp-text-heading)" }}>
                       <Check className="size-4 text-[#B8860B] mt-0.5 shrink-0" />
                       <span>{item}</span>
                     </li>
@@ -109,8 +109,8 @@ export default function ProgramSection({ t, locale }: SectionProps) {
                   </div>
                 </div>
                 <ul className="space-y-3">
-                  {t.program.month4.items.map((item: string) => (
-                    <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "var(--lp-text-heading)" }}>
+                  {t.program.month4.items.map((item: string, i: number) => (
+                    <li key={i} className="flex items-start gap-3 text-sm" style={{ color: "var(--lp-text-heading)" }}>
                       <Check className="size-4 text-emerald-500 mt-0.5 shrink-0" />
                       <span>{item}</span>
                     </li>

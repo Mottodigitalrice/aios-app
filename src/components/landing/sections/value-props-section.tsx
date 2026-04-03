@@ -30,7 +30,7 @@ export default function ValuePropsSection({ t, locale }: SectionProps) {
             style={{
               fontSize: "var(--text-h2)",
               color: "var(--lp-text-heading)",
-              ...(locale === "ja" ? { overflowWrap: "break-word", wordBreak: "normal" } : {}),
+              ...(locale === "ja" ? {} : {}),
             }}
           >
             {t.valueProps.title}{t.valueProps.titleHighlight ? <>{" "}<span className="gradient-text">{t.valueProps.titleHighlight}</span></> : null}
@@ -74,7 +74,7 @@ export default function ValuePropsSection({ t, locale }: SectionProps) {
         {/* VP2-VP5: 2x2 grid */}
         <div className="grid sm:grid-cols-2 gap-6">
           {t.valueProps.items.slice(1).map((item, i) => (
-            <AnimateInView key={item.title} delay={(i + 1) * 80}>
+            <AnimateInView key={i} delay={(i + 1) * 80}>
               <div
                 className="rounded-2xl p-8 h-full transition-all duration-200 hover:-translate-y-0.5"
                 style={{

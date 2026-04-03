@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Brain, ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { AnimateInView } from "@/components/landing/animate-in-view";
 import { useInView } from "@/hooks/use-in-view";
+import { budouxWrap } from "@/lib/budoux-transform";
 
 const content = {
   en: {
@@ -80,7 +81,7 @@ export function BrainBodyDiagram({
   locale: "en" | "ja";
   compact?: boolean;
 }) {
-  const t = content[locale];
+  const t = useMemo(() => locale === "ja" ? budouxWrap(content[locale]) : content[locale], [locale]) as typeof content["en"];
 
   const soloSize = compact ? "w-36 h-36 sm:w-40 sm:h-40" : "w-40 h-40 sm:w-44 sm:h-44";
   const outerSize = compact ? "w-48 h-48 sm:w-52 sm:h-52" : "w-52 h-52 sm:w-56 sm:h-56";
@@ -182,13 +183,15 @@ export function BrainBodyDiagram({
  * Brain solo appears first, then the harness side slides in.
  */
 export function BrainBodySection({ locale, hideHeader = false }: { locale: "en" | "ja"; hideHeader?: boolean }) {
-  const t = content[locale];
+  const t = useMemo(() => locale === "ja" ? budouxWrap(content[locale]) : content[locale], [locale]) as typeof content["en"];
   const [sectionRef, isInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
+  const [hasAnimated, setHasAnimated] = useState(false);
   const [showHarness, setShowHarness] = useState(false);
   const [showResult, setShowResult] = useState(false);
 
   useEffect(() => {
-    if (isInView) {
+    if (isInView && !hasAnimated) {
+      setHasAnimated(true);
       const harnessTimer = setTimeout(() => setShowHarness(true), 600);
       const resultTimer = setTimeout(() => setShowResult(true), 1200);
       return () => {
@@ -196,7 +199,17 @@ export function BrainBodySection({ locale, hideHeader = false }: { locale: "en" 
         clearTimeout(resultTimer);
       };
     }
-  }, [isInView]);
+  }, [isInView, hasAnimated]);
+
+  // After 3s, force everything visible as fallback (covers screenshot tools, fast scrollers)
+  useEffect(() => {
+    const fallback = setTimeout(() => {
+      setHasAnimated(true);
+      setShowHarness(true);
+      setShowResult(true);
+    }, 3000);
+    return () => clearTimeout(fallback);
+  }, []);
 
   return (
     <section
@@ -214,8 +227,8 @@ export function BrainBodySection({ locale, hideHeader = false }: { locale: "en" 
             {t.badge}
           </Badge>
           <h2
-            className="text-3xl sm:text-4xl font-bold tracking-tight"
-            style={{ color: "var(--lp-text-heading)" }}
+            className={`font-bold tracking-tight ${locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]"}`}
+            style={{ fontSize: "var(--text-h2)", color: "var(--lp-text-heading)" }}
           >
             {t.heading}
           </h2>

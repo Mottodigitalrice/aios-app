@@ -29,7 +29,7 @@ export default function PainSection({ t, locale }: SectionProps) {
             style={{
               fontSize: "var(--text-h2)",
               color: "var(--lp-text-heading)",
-              ...(locale === "ja" ? { overflowWrap: "break-word", wordBreak: "normal" } : {}),
+              ...(locale === "ja" ? {} : {}),
             }}
           >
             {t.problems.title}{" "}
@@ -44,7 +44,7 @@ export default function PainSection({ t, locale }: SectionProps) {
 
         <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {t.problems.items.map((content, i) => (
-            <AnimateInView key={content.title} delay={i * 80}>
+            <AnimateInView key={i} delay={i * 80}>
               <div
                 className="rounded-2xl p-8 sm:p-10 h-full transition-all duration-200 hover:-translate-y-0.5"
                 style={{

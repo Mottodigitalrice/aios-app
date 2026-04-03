@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Mail, Linkedin } from "lucide-react";
@@ -30,6 +30,7 @@ import { AnimateInView } from "@/components/landing/animate-in-view";
 import en from "@/lib/i18n/dictionaries/en";
 import ja from "@/lib/i18n/dictionaries/ja";
 import type { LandingT } from "@/components/landing/sections/types";
+import { budouxWrap } from "@/lib/budoux-transform";
 
 const dictionaries = { en, ja } as const;
 
@@ -43,7 +44,13 @@ function getInitialLocale(): "en" | "ja" {
 
 export default function HomePage() {
   const [locale, setLocale] = useState<"en" | "ja">(getInitialLocale);
-  const t = dictionaries[locale].landing as LandingT;
+  const rawT = dictionaries[locale].landing;
+  // Apply BudouX phrase segmentation to Japanese text so line breaks
+  // occur at natural word boundaries, never mid-word
+  const t = useMemo(
+    () => (locale === "ja" ? budouxWrap(rawT) : rawT) as unknown as LandingT,
+    [locale, rawT],
+  );
 
   useEffect(() => {
     document.documentElement.lang = locale;
@@ -160,7 +167,7 @@ export default function HomePage() {
                 style={{
                   fontSize: "var(--text-h2)",
                   color: "var(--lp-text-heading)",
-                  ...(locale === "ja" ? { overflowWrap: "break-word" as const, wordBreak: "normal" as const } : {}),
+                  ...(locale === "ja" ? {} : {}),
                 }}
               >
                 {t.agenticMega.title}{" "}
@@ -179,7 +186,7 @@ export default function HomePage() {
                 style={{
                   fontSize: "var(--text-h2)",
                   color: "var(--lp-text-heading)",
-                  ...(locale === "ja" ? { overflowWrap: "break-word" as const, wordBreak: "normal" as const } : {}),
+                  ...(locale === "ja" ? {} : {}),
                 }}
               >
                 {t.agenticMega.whatIsTitle}

@@ -263,6 +263,13 @@ export function AIOSPyramid({
     return () => timers.forEach(clearTimeout);
   }, [isInView, compact]);
 
+  // Fallback: force visible after 3s for screenshot tools / fast scrollers
+  useEffect(() => {
+    if (compact) return;
+    const fallback = setTimeout(() => setStep(5), 3000);
+    return () => clearTimeout(fallback);
+  }, [compact]);
+
   return (
     <div className={compact ? "" : "mt-12"} ref={ref}>
       <div className="relative max-w-4xl mx-auto px-4">

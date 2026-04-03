@@ -449,7 +449,7 @@ const en = {
     },
     beforeAfter: {
       title: "What changes when your business",
-      titleHighlight: "utilizes Agentic AI",
+      titleHighlight: "uses Agentic AI",
       withoutLabel: "Without Agentic AI",
       withLabel: "With Agentic AI running your operations",
       without: [

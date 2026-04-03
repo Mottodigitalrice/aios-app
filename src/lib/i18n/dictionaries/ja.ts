@@ -137,7 +137,7 @@ const ja = {
         cohortHeading: "2026年5月コホート",
       },
     },
-    leadMagnet: { title: "エージェンティックAI、準備はできていますか？", subtitle: "御社の業務を評価し、エージェンティックAIが実際にアクションを起こせるポイントを特定します。", detail: "完全無料、義務なし。Lewisが直接レビューし、通話で結果をご説明します。", cta: "無料AI診断を受ける" },
+    leadMagnet: { title: "AI活用の準備はできていますか？", subtitle: "御社の業務を評価し、AIが実際にアクションを起こせるポイントを特定します。", detail: "完全無料、義務なし。Lewisが直接レビューし、通話で結果をご説明します。", cta: "無料AI診断を受ける" },
     signup: { badge: "AIOSプログラム", title: "", titleHighlight: "AIOSをはじめる", subtitle: "AIオペレーティングシステムを構築する準備はできましたか？トラックを選んで、始めましょう。" },
     cta: { title: "席を確保する", titleSecondary: "まずは無料AI診断から", cta: "席を確保する" },
     valueProps: {
@@ -199,12 +199,12 @@ const ja = {
     },
     agenticMega: {
       badge: "新カテゴリー",
-      title: "エージェンティックAIの時代:",
-      titleHighlight: "AIの新しいカテゴリー",
+      title: "エージェンティックAI:",
+      titleHighlight: "AIの新カテゴリー",
       subtitle: "Claude Code、Codex、OpenClawなどのツールが、エージェンティックAIという新カテゴリーを生み出しました。",
       whatIsTitle: "エージェンティックAIとは？",
       subSection1Title: "AIに「体」を与える",
-      subSection2Title: "CLIの中でエージェンティックAIはどう動くか",
+      subSection2Title: "エージェンティックAIの動作原理",
       subSection3Title: "エージェンティックAIの構造",
     },
     beforeAfter: {
@@ -231,7 +231,7 @@ const ja = {
       title: "自社の業務を、すべて",
       titleHighlight: "このシステムで動かしています。",
       subtitle: "デモではありません。これがわたしたちの日常のオペレーティングシステムです。AIOSを使って、ひとりの人間が毎日管理していることをご覧ください。",
-      metrics: [{ value: 26, label: "アクティブプロジェクト", sublabel: "同時進行で管理中" }, { value: 63, label: "進行中タスク", sublabel: "全プロジェクトにわたって" }, { value: 9, label: "商談案件", sublabel: "自動追跡中" }],
+      metrics: [{ value: 26, label: "プロジェクト", sublabel: "同時進行で管理中" }, { value: 63, label: "進行中タスク", sublabel: "全プロジェクト" }, { value: 9, label: "商談案件", sublabel: "自動追跡中" }],
       howItWorksTitle: "実際の運用方法",
       howItWorks: [
         { title: "完全な業務文脈", description: "AIはすべてのプロジェクト、クライアント、締め切り、約束を把握しています。「今週の遅延タスクは？」と聞けば、即座に正確な答えが返ってきます。" },
@@ -296,14 +296,14 @@ const ja = {
     },
     guarantee: {
       title: "オーナーシップ保証",
-      headline: "6ヶ月後にエージェンティックAIを運用できなければ、\nできるまで無償でサポート。",
+      headline: "6ヶ月後にAIを\n運用できなければ、\nできるまで無償サポート。",
       description: "言い訳なし。小さな文字なし。6ヶ月のプログラムを完走してください。AIエージェンティックシステムを自力で運用できない場合、できるようになるまで無償でサポートを続けます。私たちはあなたの能力を増幅します——チームを置き換えることは決してありません。",
       individualNote: "カンパニービルド＆マンツーマン：できるまで無償でサポートを継続します。",
       companyNote: "グループコホート：できるようになるまで次のコホートに無料参加。",
       meetFirst: "まずは面談。それから判断。席を確保しても、Lewisとの面談後にご判断いただけます。",
     },
     shiryo: { buttonText: "資料をダウンロード", dialogTitle: "AIOS概要デック", dialogSubtitle: "AIOSとは何か、どのように機能するか、何が得られるか——完全なウォークスルーです。", viewNow: { label: "今すぐ見る", body: "すぐにブラウザで資料を開けます。メールアドレスは不要です。", cta: "資料を開く" }, getPdf: { label: "PDFをダウンロード", body: "AIOS概要の完全版をPDFファイルでダウンロードできます。", cta: "PDFをダウンロード" } },
-    auditCta: { title: "エージェンティックAI、", titleHighlight: "準備はできていますか？", subtitle: "あなたのビジネスについて教えてください。ルイスが回答を一つひとつ確認します。最も影響の大きいAIの機会を特定し、通話でカスタム診断レポートを一緒に確認します。レポートはそのままあなたのものです——義務は一切ありません。", benefits: ["完全無料、義務なし", "ルイスが直接確認", "通話でのライブウォークスルー", "カスタムレポート——あなたのものに"] },
+    auditCta: { title: "AI活用の準備は", titleHighlight: "できていますか？", subtitle: "あなたのビジネスについて教えてください。ルイスが回答を一つひとつ確認します。最も影響の大きいAIの機会を特定し、通話でカスタム診断レポートを一緒に確認します。レポートはそのままあなたのものです——義務は一切ありません。", benefits: ["完全無料、義務なし", "ルイスが直接確認", "通話でのライブウォークスルー", "カスタムレポート——あなたのものに"] },
     bio: {
       name: "ルイス・ライス（Lewis Rice）",
       title: "MOTTO Digital 代表 · 東京在住",

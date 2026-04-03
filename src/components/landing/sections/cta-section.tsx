@@ -21,7 +21,7 @@ export default function CtaSection({ t, locale }: SectionProps) {
           style={{
             fontSize: "var(--text-h2)",
             color: "var(--lp-text-heading)",
-            ...(locale === "ja" ? { overflowWrap: "break-word", wordBreak: "normal" } : {}),
+            ...(locale === "ja" ? {} : {}),
           }}
         >
           {t.auditCta.title}{" "}

@@ -32,8 +32,8 @@ export default function BeforeAfterSection({ t, locale }: SectionProps) {
                 <span className="text-sm font-semibold text-red-400 uppercase tracking-wider">{t.beforeAfter.withoutLabel}</span>
               </div>
               <ul className="space-y-4">
-                {t.beforeAfter.without.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "var(--lp-text-body)" }}>
+                {t.beforeAfter.without.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3 text-sm" style={{ color: "var(--lp-text-body)" }}>
                     <X className="size-4 text-red-400 mt-0.5 shrink-0" />
                     <span>{item}</span>
                   </li>
@@ -50,8 +50,8 @@ export default function BeforeAfterSection({ t, locale }: SectionProps) {
                 <span className="text-sm font-semibold text-emerald-400 uppercase tracking-wider">{t.beforeAfter.withLabel}</span>
               </div>
               <ul className="space-y-4">
-                {t.beforeAfter.with.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm" style={{ color: "var(--lp-text-heading)" }}>
+                {t.beforeAfter.with.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3 text-sm" style={{ color: "var(--lp-text-heading)" }}>
                     <Check className="size-4 text-emerald-400 mt-0.5 shrink-0" />
                     <span>{item}</span>
                   </li>

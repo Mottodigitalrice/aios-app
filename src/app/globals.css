@@ -158,6 +158,11 @@
   }
   h1, h2, h3, h4, h5, h6, p, li, blockquote {
     overflow-wrap: break-word;
+    line-break: strict;
+    word-break: auto-phrase;
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
   }
   a, button, [role="button"], input[type="submit"], input[type="button"] {
     cursor: pointer;

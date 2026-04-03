@@ -18,8 +18,8 @@ export default function BioSection({ t, locale }: SectionProps) {
         {/* Section header */}
         <AnimateInView className="text-center mb-12">
           <h2
-            className={`text-3xl sm:text-4xl font-bold tracking-tight ${headingFont}`}
-            style={{ color: "var(--lp-text-heading)" }}
+            className={`font-bold tracking-tight ${headingFont}`}
+            style={{ fontSize: "var(--text-h2)", color: "var(--lp-text-heading)" }}
           >
             {t.bio.sectionTitle || "Who\u2019s behind this"}
           </h2>
