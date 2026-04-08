@@ -655,12 +655,22 @@ html {
   to { opacity: 1; transform: translateX(0); }
 }
 
-/* Japanese typography baseline for the audit wizard — phrase-aware wrapping + kinsoku */
-.audit-ja :where(h1, h2, h3, h4, p, li, button, label, span, a) {
-  word-break: keep-all;
-  overflow-wrap: anywhere;
+/* Japanese typography baseline for the audit wizard.
+   JIS X 4051 kinsoku shori + Chrome 119+ native BudouX (auto-phrase).
+   JS-side segmentJapanese() handles older browsers via inline-block spans.
+   NEVER use word-break: keep-all — it causes mobile overflow on CJK text. */
+.audit-ja :where(h1, h2, h3, h4, h5, h6, p, li, blockquote, button, label, span, a) {
+  overflow-wrap: break-word;
   line-break: strict;
+  word-break: auto-phrase;
   font-feature-settings: "palt";
+}
+.audit-ja :where(h1, h2, h3) {
+  text-wrap: balance;
+  line-height: 1.4;
+}
+.audit-ja :where(p, li) {
+  line-height: 1.85;
 }
 
 /* Agent status chip — pulsing gold dot */
