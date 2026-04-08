@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight, Loader2, Sparkles } from "lucide-react";
 import { useAuditLocale } from "../audit-locale-context";
+import { segmentJapanese } from "@/lib/budoux-transform";
 
 interface StepLayoutProps {
   question: string;
@@ -33,13 +34,13 @@ export function StepLayout({
 
   return (
     <div className="w-full max-w-xl mx-auto">
-      <div className="mb-8">
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1D1D1F] mb-2">
-          {question}
+      <div className="mb-10">
+        <h2 className="text-2xl sm:text-[28px] font-semibold tracking-[-0.01em] text-[#1D1D1F] mb-3 leading-[1.35]">
+          {segmentJapanese(question)}
         </h2>
         {description && (
-          <p className="text-[#6E6E73] text-base leading-relaxed">
-            {description}
+          <p className="text-[15px] text-[#6E6E73] leading-[1.75]">
+            {segmentJapanese(description)}
           </p>
         )}
       </div>

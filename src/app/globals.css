@@ -655,6 +655,26 @@ html {
   to { opacity: 1; transform: translateX(0); }
 }
 
+/* Japanese typography baseline for the audit wizard — phrase-aware wrapping + kinsoku */
+.audit-ja :where(h1, h2, h3, h4, p, li, button, label, span, a) {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  line-break: strict;
+  font-feature-settings: "palt";
+}
+
+/* Agent status chip — pulsing gold dot */
+@keyframes agent-dot-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(184, 134, 11, 0.45); }
+  50% { opacity: 0.7; transform: scale(0.9); box-shadow: 0 0 0 4px rgba(184, 134, 11, 0); }
+}
+.agent-dot-pulse { animation: agent-dot-pulse 2s ease-in-out infinite; }
+
+/* Progress bar glow */
+.progress-bar-glow {
+  box-shadow: 0 0 12px rgba(184, 134, 11, 0.4);
+}
+
 /* Respect reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

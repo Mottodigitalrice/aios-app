@@ -29,6 +29,7 @@ import {
   Database,
 } from "lucide-react";
 import Link from "next/link";
+import { segmentJapanese } from "@/lib/budoux-transform";
 
 // ---------------------------------------------------------------------------
 // Sidebar content per step (now locale-driven)
@@ -56,17 +57,22 @@ function AuditSidebar({ step }: { step: number }) {
   return (
     <div className="hidden lg:block w-80 shrink-0">
       <div className="sticky top-28 space-y-6">
-        <div className="rounded-xl border border-[#E8E8ED] bg-[#F5F5F7] p-6">
-          <h3 className="text-sm font-semibold text-[#6E6E73] uppercase tracking-wider mb-4">
-            {sidebarStep.title}
-          </h3>
+        <div className="rounded-xl border border-[#E8E8ED] bg-gradient-to-br from-[#F5F5F7] to-white p-6">
+          <div className="flex items-center gap-2 mb-4">
+            <span className="size-1.5 rounded-full bg-[#B8860B] agent-dot-pulse" aria-hidden />
+            <h3 className="text-[11px] font-semibold text-[#B8860B] uppercase tracking-[0.12em]">
+              Agent Brief · {segmentJapanese(sidebarStep.title)}
+            </h3>
+          </div>
           <div className="space-y-3">
             {sidebarStep.items.map((item, i) => {
               const Icon = stepIcons[i % stepIcons.length];
               return (
                 <div key={i} className="flex items-start gap-3">
                   <Icon className="size-4 text-[#B8860B] mt-0.5 shrink-0" />
-                  <p className="text-sm text-[#6E6E73] leading-relaxed">{item}</p>
+                  <p className="text-sm text-[#6E6E73] leading-relaxed">
+                    {segmentJapanese(item)}
+                  </p>
                 </div>
               );
             })}
@@ -78,7 +84,7 @@ function AuditSidebar({ step }: { step: number }) {
         <div className="flex items-center gap-2 px-2">
           <Shield className="size-4 text-[#1B7D5A]" />
           <p className="text-xs text-[#86868B]">
-            {t.sidebar.trustBadge}
+            {segmentJapanese(t.sidebar.trustBadge)}
           </p>
         </div>
       </div>
@@ -120,6 +126,11 @@ function AuditFormWizardInner() {
       return () => clearTimeout(timer);
     }
   }, [animating]);
+
+  // Scroll to top on step change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentStep]);
 
   // Keyboard support — Escape goes back
   useEffect(() => {
@@ -266,7 +277,10 @@ function AuditFormWizardInner() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-[#1D1D1F]">
+    <div
+      lang={locale}
+      className={`min-h-screen bg-white text-[#1D1D1F] ${locale === "ja" ? "audit-ja" : ""}`}
+    >
       {/* Fixed Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 border-b border-[#E8E8ED] bg-white/80 backdrop-blur-xl">
         <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
@@ -302,12 +316,12 @@ function AuditFormWizardInner() {
                 {t.badge}
               </Badge>
             </div>
-            <h1 className="animate-fade-in-up animation-delay-100 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.1]">
-              {t.title}{" "}
-              <span className="gradient-text">{t.titleHighlight}</span>
+            <h1 className="animate-fade-in-up animation-delay-100 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-[1.15]">
+              {segmentJapanese(t.title)}{" "}
+              <span className="gradient-text">{segmentJapanese(t.titleHighlight)}</span>
             </h1>
-            <p className="animate-fade-in-up animation-delay-200 mt-4 text-lg text-[#6E6E73] max-w-xl mx-auto leading-relaxed">
-              {t.subtitle}
+            <p className="animate-fade-in-up animation-delay-200 mt-5 text-lg text-[#6E6E73] max-w-xl mx-auto leading-[1.7]">
+              {segmentJapanese(t.subtitle)}
             </p>
             <div className="animate-fade-in-up animation-delay-300 mt-6 flex flex-wrap items-center justify-center gap-3">
               {t.chips.map((chip, i) => {
@@ -318,7 +332,7 @@ function AuditFormWizardInner() {
                     className="flex items-center gap-2 rounded-full border border-[#E8E8ED] bg-[#F5F5F7] px-4 py-2 text-sm text-[#6E6E73]"
                   >
                     <Icon className="size-4 text-[#B8860B]" />
-                    <span>{chip}</span>
+                    <span>{segmentJapanese(chip)}</span>
                   </div>
                 );
               })}

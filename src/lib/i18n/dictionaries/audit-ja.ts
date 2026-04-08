@@ -4,71 +4,72 @@ const auditDict = {
     home: "ホーム",
     privacy: "プライバシー",
   },
-  badge: "無料 · 義務なし",
-  title: "無料",
-  titleHighlight: "AI活用診断",
+  badge: "エージェンティックAI診断 · 無料",
+  title: "エージェンティックAI",
+  titleHighlight: "導入診断",
   subtitle:
-    "かんたんな質問に答えるだけで、Lewisが直接AI活用診断レポートを作成します。通話で内容を説明し、レポートは完全無料であなたのものです。",
-  chips: ["カスタムレポート", "ライブ通話", "完全無料"],
+    "チャットボットの先へ。あなたの業務を「任せられる」AIエージェントに置き換える準備度を、Lewisが直接診断します。約10分の入力で、自動化候補・必要な基盤・90日導入ロードマップをレポート化。",
+  chips: ["エージェント適性マップ", "Lewisと直接通話", "90日導入ロードマップ"],
   sidebar: {
     trustBadge: "データは暗号化され、第三者と共有されることはありません。",
     steps: {
       0: {
-        title: "届ける内容",
+        title: "お届けするもの",
         items: [
-          "あなたの会社に合わせたAI活用度レポート",
-          "Lewisとの30分のライブ通話",
-          "すぐに実行できる具体的な提案",
+          "あなた専用のエージェント適性スコア",
+          "自動化候補マップと推奨スタック",
+          "90日導入ロードマップ",
+          "Lewisとの30分ライブ通話",
           "100%無料、義務なし",
         ],
       },
       1: {
-        title: "あなたに合わせた診断",
+        title: "あなた専用のエージェント設計",
         items: [
-          "あなたの視点を選んで、最適な質問を受けましょう",
+          "誰の業務をエージェントに代行させるかを明確にします",
           "Lewisがすべての回答を直接確認します",
-          "あなたのツール、チーム、目標に合わせた診断です",
+          "業種・データ・ツール・予算から逆算した実装可能な構成を提案します",
         ],
       },
       2: {
-        title: "なぜこの質問をするのか",
+        title: "エージェントが動く「現場」",
         items: [
-          "あなたの状況が最適なAI戦略を決めます",
-          "あなたの回答がレポートの提案内容を決めます",
+          "業種・役割・部門の文脈から、自律実行に向く業務を判定します",
+          "あなたの回答が、推奨エージェント構成を決めます",
         ],
       },
       3: {
-        title: "データがAI成功の鍵",
+        title: "データはエージェントの「燃料」",
         items: [
-          "データ管理の状態がAIの可能性を決めます",
-          "この回答から、すぐに改善できるポイントを見つけます",
+          "エージェントは判断と実行のために構造化された情報を必要とします",
+          "今のデータがどこまで agent-ready かをこの回答から診断します",
         ],
       },
       4: {
-        title: "順調です",
+        title: "エージェントの「操作対象」",
         items: [
-          "ツールスタックから連携の機会を見つけます",
-          "使っているツールすべてが自動化のきっかけになります",
+          "ツールスタックは、エージェントが代わりに操作する接続先です",
+          "使っているツールすべてが、自動化の起点になります",
         ],
       },
       5: {
-        title: "大切な情報です",
+        title: "任せたい業務を特定",
         items: [
-          "課題を理解することで、提案の優先順位をつけられます",
-          "それぞれの課題に、具体的な次のステップを用意します",
+          "毎週時間を奪っている繰り返し業務こそ、エージェントの第一候補です",
+          "それぞれの課題に、具体的なエージェント設計案を用意します",
         ],
       },
       6: {
-        title: "準備状況を評価中",
+        title: "自律型AIへの準備度を評価中",
         items: [
-          "AI経験が提案のレベルを決めます",
-          "今のあなたの状態に合わせたレポートを作ります",
+          "「使う」段階から「任せる」段階へ — 今どこにいますか？",
+          "今の準備度に合わせた現実的な導入計画を作ります",
         ],
       },
       7: {
-        title: "もう少しで完了",
+        title: "エージェント設計の最終ヒアリング",
         items: [
-          "48時間以内にカスタム診断レポートを届けます",
+          "48時間以内にカスタム設計図をお届けします",
           "営業なし、義務なし",
           "完全なレポートはずっとあなたのものです",
         ],
@@ -77,25 +78,25 @@ const auditDict = {
   },
   steps: {
     1: {
-      question: "まずはメールアドレスから",
+      question: "レポートの送付先",
       description:
-        "診断レポートの送付に使用します。スパムは送りません。",
+        "診断結果と、あなた専属のエージェント構成案をお送りします。スパムは送りません。",
       emailLabel: "メールアドレス",
       emailPlaceholder: "you@company.com",
       consentLabel: "同意します",
       consentLink: "プライバシーポリシー",
     },
     2: {
-      question: "あなたについて教えてください",
-      perspectiveLabel: "この診断はどの観点で行いますか？",
+      question: "誰のためのエージェントですか？",
+      perspectiveLabel: "このエージェントは誰の業務を代行しますか？",
       perspectiveIndividual: "個人",
       perspectiveIndividualDesc:
         "個人事業主、フリーランス、またはチームのない経営者",
       perspectiveCompany: "会社全体",
-      perspectiveCompanyDesc: "会社全体のためにこの診断を受けたい",
+      perspectiveCompanyDesc: "会社全体を動かすエージェントを設計したい",
       perspectiveDepartment: "部門",
       perspectiveDepartmentDesc:
-        "特定の部門やチームのためにこの診断を受けたい",
+        "特定の部門やチームのためのエージェントを設計したい",
       nameLabel: "お名前は？",
       namePlaceholder: "フルネーム",
       roleLabel: "役職は？",
@@ -109,8 +110,8 @@ const auditDict = {
       ],
     },
     3: {
-      question: "会社について教えてください",
-      questionIndividual: "お仕事について教えてください",
+      question: "エージェントが動く「現場」を教えてください",
+      questionIndividual: "あなたの業務について教えてください",
       questionDepartment: "部門について教えてください",
       companyLabel: "会社名は？",
       companyPlaceholder: "会社名",
@@ -163,10 +164,10 @@ const auditDict = {
       ],
     },
     4: {
-      question: "データの管理状況は？",
+      question: "エージェントが触れるデータの状態",
       questionIndividual: "ワークフローとデータ",
       description:
-        "AI導入の準備状況を把握するための質問です。",
+        "エージェントは判断と実行のために構造化された情報を必要とします。今のデータがどこまで agent-ready かを確認します。",
       typicalDayLabel:
         "一日の仕事の流れを教えてください。普段どんな一日を過ごしていますか？",
       typicalDayPlaceholder:
@@ -181,7 +182,7 @@ const auditDict = {
       confidenceLabel: "データの状態にどの程度自信がありますか？",
       confidenceMin: "データがどこにあるか分からない",
       confidenceMax: "全プロセスが文書化され、データは一元管理されている",
-      dataLocationLabel: "最も重要なデータはどこにありますか？",
+      dataLocationLabel: "エージェントが触れるべき最重要データはどこに？",
       dataLocationOptions: [
         "スプレッドシート",
         "メール",
@@ -214,9 +215,9 @@ const auditDict = {
       ],
     },
     5: {
-      question: "チームが使用しているツールは？",
+      question: "エージェントが操作するツール群",
       questionIndividual: "使用しているツールは？",
-      description: "該当するものをすべて選択してください。",
+      description: "エージェントの「操作対象」になります。該当するものをすべて選択してください。",
       tools: [
         "Slack",
         "Notion",
@@ -234,9 +235,9 @@ const auditDict = {
       ],
     },
     6: {
-      question: "最大の運営課題は？",
-      questionIndividual: "最大の課題は？",
-      description: "該当するものをすべて選択してください。",
+      question: "エージェントに任せたい業務はどれですか？",
+      questionIndividual: "エージェントに任せたい業務は？",
+      description: "毎週時間を奪っている繰り返し業務こそ、エージェントの第一候補です。",
       challenges: [
         "手作業データ入力 / 繰り返し作業",
         "ツール間で情報が分散",
@@ -260,7 +261,7 @@ const auditDict = {
         "整理整頓が難しい",
       ],
       bottlenecksLabel: "業務の最大のボトルネックはどこですか？",
-      bottlenecksDescription: "該当するものをすべて選択してください。",
+      bottlenecksDescription: "エージェントが解決すべき対象を特定します。該当するものをすべて選択してください。",
       bottlenecks: [
         "リード / パイプライン",
         "成約率",
@@ -277,7 +278,7 @@ const auditDict = {
         "チームが繰り返し作業に費やす週間時間は？",
       repetitiveHoursPlaceholder: "例: 15",
       robotTaskLabel:
-        "ロボットに任せたいタスクを一つ挙げるとしたら？",
+        "エージェントに一つだけ任せられるとしたら、どのタスク？",
       robotTaskPlaceholder:
         "例: 請求書のフォーマット作成と未払い催促...",
       onboardingLabel: "新入社員のオンボーディングはどうなっていますか？",
@@ -296,20 +297,20 @@ const auditDict = {
       ],
     },
     7: {
-      question: "AI経験と準備状況",
+      question: "自律型AIへの準備度",
       experienceLabel: "チームのAI経験は？",
       experienceLabelIndividual: "あなたのAI経験は？",
-      experienceOptions: ["なし", "実験中", "定期的に使用", "上級"],
+      experienceOptions: ["なし", "実験中", "定期的に使用", "エージェント運用中"],
       triedBeforeLabel: "AIを試したことはありますか？その結果は？",
       triedBeforePlaceholder: "経験を教えてください（なければ空白でOK）...",
-      visionLabel: "6ヶ月後、AIに期待することは？",
+      visionLabel: "6ヶ月後、エージェントに任せたいことは？",
       visionOptions: [
-        "繰り返し作業の自動化",
-        "既存ツールの連携",
-        "顧客コミュニケーションの改善",
-        "レポート / 分析の生成",
+        "繰り返し作業の自律実行",
+        "既存ツールの連携・操作",
+        "顧客コミュニケーションの代行",
+        "レポート / 分析の自動生成",
         "コスト削減",
-        "AIに関するチームトレーニング",
+        "社内のエージェント活用トレーニング",
         "カスタムAIエージェントの構築",
       ],
       timelineLabel: "どのくらいの時期に進めたいですか？",
@@ -319,7 +320,7 @@ const auditDict = {
         "今四半期",
         "まずは情報収集",
       ],
-      budgetLabel: "AIツール・インフラの月額予算は？",
+      budgetLabel: "エージェント運用の月額予算は？",
       budgetOptions: [
         "まだ決めていない",
         "￥5万未満",
@@ -337,7 +338,7 @@ const auditDict = {
       ],
     },
     8: {
-      question: "あと少しです。ありがとうございます。",
+      question: "エージェント設計の最終ヒアリング",
       sourceLabel: "どこで知りましたか？",
       sourceOptions: [
         "LinkedIn",
@@ -365,62 +366,63 @@ const auditDict = {
     otherPlaceholder: "具体的にお書きください…",
     required: "必須",
     optional: "任意",
-    stepOf: "ステップ {current} / {total}",
+    stepOf: "エージェントブリーフィング {current} / {total}",
   },
   progressBar: {
-    1: { text: "良い調子です", timeLeft: "残り約3分" },
-    2: { text: "順調に進んでいます", timeLeft: "残り約2分" },
-    3: { text: "折り返し地点です", timeLeft: "残り約2分" },
-    4: { text: "もう少しです", timeLeft: "残り約1分" },
-    5: { text: "ほぼ完了です", timeLeft: "残り約1分" },
-    6: { text: "最後のステップです", timeLeft: "1分以内" },
+    1: { text: "現場を把握中…", timeLeft: "残り約3分" },
+    2: { text: "データを確認中…", timeLeft: "残り約2分" },
+    3: { text: "操作対象を確認中…", timeLeft: "残り約2分" },
+    4: { text: "自動化候補を抽出中…", timeLeft: "残り約1分" },
+    5: { text: "設計図を組み立てています…", timeLeft: "残り約1分" },
+    6: { text: "エージェント設計の準備完了", timeLeft: "1分以内" },
   },
   success: {
-    title: "送信完了 — ありがとうございます",
+    title: "エージェント設計図、作成中です",
     subtitle:
-      "Lewisが直接あなたの回答を確認し、カスタム診断レポートを作成します。",
+      "48時間以内に、あなたの業務に最適なエージェント構成と90日導入ロードマップをLewisから直接お送りします。",
     reachOut: "Lewisが48時間以内に連絡します。",
     timelineTitle: "次のステップ",
     timeline: {
       submitted: {
-        title: "送信完了",
+        title: "ブリーフィング受付",
         description:
-          "回答を受け付けました。AI活用診断への一歩を踏み出しました。",
+          "回答を受け付けました。エージェント設計への最初のステップです。",
       },
       review: {
-        title: "Lewisが回答を確認",
+        title: "Lewisが設計図を作成",
         description:
-          "あなたが共有した内容を確認し、あなたに合わせたAI活用診断を準備します。",
-        statusLabel: "進行中",
+          "あなたの業務・データ・ツールから、最適なエージェント構成を設計します。",
+        statusLabel: "作成中",
       },
       call: {
         title: "一緒に確認",
         description:
-          "ビデオ通話で診断レポートを説明し、質問にはすべて答えます。",
+          "ビデオ通話で設計図を説明し、質問にはすべて答えます。",
       },
       report: {
-        title: "レポートはあなたのもの",
+        title: "設計図はあなたのもの",
         description:
-          "通話後、完全な診断レポートはあなたのものです。義務なし、完全無料。",
+          "通話後、完全な設計図と90日ロードマップはあなたのものです。義務なし、完全無料。",
       },
     },
     bookEmbedTitle: "都合の良い時間を選んでください",
     bookFallback: "新しいタブで予約ページを開く",
-    bookCta: "無料診断通話を予約",
+    bookCta: "無料エージェント設計通話を予約",
     bookCtaPersonal: "5月コホートに参加",
     bookSubtext: "30分 · ビデオ通話 · 営業なし",
     bookSubtextPersonal: "少人数グループ · 実践ワークショップ · 無料",
     bookDescription:
-      "都合の良い時間を選んでください。通話までに診断を準備します。",
+      "都合の良い時間を選んでください。通話までにエージェント設計図を準備します。",
     bookDescriptionPersonal:
-      "少人数のプロフェッショナルと一緒に学びましょう。AIを自分のワークフローに活かす方法が身につきます。",
+      "少人数のプロフェッショナルと一緒に学びましょう。AIエージェントを自分のワークフローに活かす方法が身につきます。",
     sharePrompt: "知り合いにもおすすめしませんか？",
     copyLink: "リンクをコピー",
     copied: "コピーしました",
     shareText:
-      "MOTTO Digitalの無料AI活用診断に登録しました。ぜひチェックしてください。",
+      "MOTTO Digitalの無料エージェンティックAI診断に登録しました。ぜひチェックしてください。",
     shareEmailSubject: "エージェンティックAI診断",
     backHome: "ホームに戻る",
+    manifesto: "「AIを学ぶ」段階は終わりました。次は、AIに任せる段階です。",
   },
 } as const;
 

@@ -16,6 +16,7 @@ import {
 import Link from "next/link";
 import { useAuditLocale } from "./audit-locale-context";
 import { TidyCalEmbed } from "./tidycal-embed";
+import { segmentJapanese } from "@/lib/budoux-transform";
 
 // ---------------------------------------------------------------------------
 // Confetti particle component (CSS-only)
@@ -208,7 +209,7 @@ interface AuditSuccessProps {
 }
 
 export function AuditSuccess({ perspective }: AuditSuccessProps) {
-  const { t } = useAuditLocale();
+  const { t, locale } = useAuditLocale();
   const [showConfetti, setShowConfetti] = useState(true);
   const timelineSteps = useTimelineSteps();
   const isPersonal = perspective === "individual";
@@ -219,7 +220,10 @@ export function AuditSuccess({ perspective }: AuditSuccessProps) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white text-[#1D1D1F] relative">
+    <div
+      lang={locale}
+      className={`min-h-screen bg-white text-[#1D1D1F] relative ${locale === "ja" ? "audit-ja" : ""}`}
+    >
       {showConfetti && <ConfettiParticles />}
       <SparkleBackground />
 
@@ -244,17 +248,22 @@ export function AuditSuccess({ perspective }: AuditSuccessProps) {
             <Check className="size-10 text-[#1B7D5A]" />
           </div>
 
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3 animate-fade-in-up animation-delay-100">
-            {t.success.title}
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3 leading-[1.25] animate-fade-in-up animation-delay-100">
+            {segmentJapanese(t.success.title)}
           </h1>
 
-          <p className="text-[#6E6E73] text-lg mb-3 leading-relaxed animate-fade-in-up animation-delay-200">
-            {t.success.subtitle}
+          <p className="text-[#6E6E73] text-lg mb-3 leading-[1.7] animate-fade-in-up animation-delay-200">
+            {segmentJapanese(t.success.subtitle)}
           </p>
 
           {/* Estimated timeline */}
-          <p className="text-sm text-[#B8860B] mb-10 animate-fade-in-up animation-delay-200">
-            {t.success.reachOut}
+          <p className="text-sm text-[#B8860B] mb-6 animate-fade-in-up animation-delay-200">
+            {segmentJapanese(t.success.reachOut)}
+          </p>
+
+          {/* Manifesto line */}
+          <p className="text-[13px] italic text-[#86868B] mb-10 max-w-sm mx-auto animate-fade-in-up animation-delay-300">
+            {segmentJapanese(t.success.manifesto)}
           </p>
 
           {/* Timeline stepper */}
@@ -308,15 +317,15 @@ export function AuditSuccess({ perspective }: AuditSuccessProps) {
                             : "text-[#6E6E73]"
                       }`}
                     >
-                      {step.title}
+                      {segmentJapanese(step.title)}
                       {step.status === "active" && "statusLabel" in step && (
                         <span className="ml-2 text-xs text-[#B8860B] font-normal">
-                          {step.statusLabel}
+                          {segmentJapanese(step.statusLabel as string)}
                         </span>
                       )}
                     </p>
-                    <p className="text-sm text-[#86868B] leading-relaxed mt-0.5">
-                      {step.description}
+                    <p className="text-sm text-[#86868B] leading-[1.7] mt-0.5">
+                      {segmentJapanese(step.description)}
                     </p>
                   </div>
                 </div>
@@ -326,15 +335,17 @@ export function AuditSuccess({ perspective }: AuditSuccessProps) {
 
           {/* Book Meeting CTA */}
           <div className="rounded-xl border border-[#B8860B]/20 bg-[#B8860B]/5 p-6 mb-8 animate-fade-in-up animation-delay-400">
-            <p className="text-[#6E6E73] text-sm mb-4 leading-relaxed">
-              {isPersonal
-                ? t.success.bookDescriptionPersonal
-                : t.success.bookDescription}
+            <p className="text-[#6E6E73] text-sm mb-4 leading-[1.7]">
+              {segmentJapanese(
+                isPersonal
+                  ? t.success.bookDescriptionPersonal
+                  : t.success.bookDescription
+              )}
             </p>
 
             {/* TidyCal Embed */}
             <h3 className="text-sm font-semibold text-[#6E6E73] mb-3">
-              {t.success.bookEmbedTitle}
+              {segmentJapanese(t.success.bookEmbedTitle)}
             </h3>
             <TidyCalEmbed path="rice/aios-consult" />
 
@@ -346,13 +357,15 @@ export function AuditSuccess({ perspective }: AuditSuccessProps) {
               className="inline-flex items-center gap-1.5 mt-4 text-sm text-[#B8860B] hover:text-[#D4A843] transition-colors"
             >
               <CalendarCheck className="size-3.5" />
-              {t.success.bookFallback}
+              {segmentJapanese(t.success.bookFallback)}
             </Link>
 
             <p className="mt-3 text-xs text-[#86868B]">
-              {isPersonal
-                ? t.success.bookSubtextPersonal
-                : t.success.bookSubtext}
+              {segmentJapanese(
+                isPersonal
+                  ? t.success.bookSubtextPersonal
+                  : t.success.bookSubtext
+              )}
             </p>
           </div>
 

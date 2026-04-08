@@ -4,71 +4,72 @@ const auditDict = {
     home: "Home",
     privacy: "Privacy",
   },
-  badge: "Free \u00B7 No Obligation",
-  title: "Get Your Free",
-  titleHighlight: "AI Audit",
+  badge: "Agentic AI Audit \u00B7 Free",
+  title: "Agentic AI",
+  titleHighlight: "Readiness Audit",
   subtitle:
-    "Answer a few quick questions and Lewis will personally put together a custom AI readiness audit \u2014 then walk you through it on a call. The full report is yours to keep, completely free.",
-  chips: ["Custom report", "Live walkthrough call", "Yours to keep, free"],
+    "Beyond chatbots. Find out how ready your business is to hand work over to autonomous AI agents. Lewis personally builds your audit — in ~10 minutes of input you'll get an automation map, the infrastructure you need, and a 90-day deployment roadmap.",
+  chips: ["Agent fit map", "Live call with Lewis", "90-day roadmap"],
   sidebar: {
     trustBadge: "Your data is encrypted and never shared with third parties.",
     steps: {
       0: {
         title: "What you'll get",
         items: [
-          "Custom AI readiness report tailored to your business",
-          "30-min live walkthrough call with Lewis",
-          "Actionable recommendations you can implement immediately",
+          "Your personal agent-readiness score",
+          "Automation candidate map + recommended stack",
+          "90-day deployment roadmap",
+          "30-min live call with Lewis",
           "100% free, no strings attached",
         ],
       },
       1: {
-        title: "Personalized for you",
+        title: "Personalized agent design",
         items: [
-          "Choose your perspective for tailored questions",
+          "We need to know whose work the agent will actually run",
           "Lewis personally reviews every submission",
-          "Tailored to your specific tools, team, and goals",
+          "Tailored to your industry, data, tools, and budget",
         ],
       },
       2: {
-        title: "Why we ask this",
+        title: "Where the agent will operate",
         items: [
-          "Your context determines the right AI strategy",
-          "Your answers shape the specific recommendations in your report",
+          "Your industry, role and department shape which workflows can run autonomously",
+          "Your answers drive the specific agent architecture we recommend",
         ],
       },
       3: {
-        title: "Data drives AI success",
+        title: "Data is the agent's fuel",
         items: [
-          "How you manage data determines your AI ceiling",
-          "This helps Lewis identify your quick wins",
+          "Agents need structured, accessible data to act on",
+          "This tells us how agent-ready your data really is today",
         ],
       },
       4: {
-        title: "Making progress!",
+        title: "What the agent will operate",
         items: [
-          "Your tool stack helps Lewis identify integration opportunities",
-          "Every tool you use becomes a potential automation target",
+          "Your tools become the agent's integration targets",
+          "Every tool you use is a potential automation surface",
         ],
       },
       5: {
-        title: "Great insights!",
+        title: "The work to hand off",
         items: [
-          "Understanding your pain points helps prioritize recommendations",
-          "Each challenge maps to specific, actionable next steps",
+          "The repetitive work eating your week — that's the first thing to delegate",
+          "Every challenge maps to a specific agent design",
         ],
       },
       6: {
-        title: "Assessing readiness",
+        title: "Assessing agentic readiness",
         items: [
-          "Your AI experience shapes the recommendation level",
+          "Moving from 'using AI' to 'delegating to AI' — where are you today?",
           "The report meets you where you are, not where you should be",
         ],
       },
       7: {
-        title: "One click away!",
+        title: "Final briefing for your agent design",
         items: [
-          "Your custom audit report will be ready within 48 hours",
+          "Your custom blueprint arrives within 48 hours",
           "No sales pressure, no obligations",
           "The full report is yours to keep forever",
         ],
@@ -77,26 +78,26 @@ const auditDict = {
   },
   steps: {
     1: {
-      question: "Let\u2019s start with your email",
+      question: "Where should we send the report?",
       description:
-        "We\u2019ll use this to send you the audit report. No spam, ever.",
+        "We'll use this to send your audit and a custom agent blueprint. No spam, ever.",
       emailLabel: "Work email",
       emailPlaceholder: "you@company.com",
       consentLabel: "I agree to the",
       consentLink: "privacy policy",
     },
     2: {
-      question: "A bit about you",
-      perspectiveLabel: "What perspective should this audit take?",
+      question: "Who is this agent for?",
+      perspectiveLabel: "Whose work will this agent run?",
       perspectiveIndividual: "Individual",
       perspectiveIndividualDesc:
-        "I\u2019m a solo practitioner, freelancer, or business owner without a team",
+        "I'm a solo practitioner, freelancer, or business owner without a team",
       perspectiveCompany: "Company",
       perspectiveCompanyDesc:
-        "I\u2019m filling this out for our whole organization",
+        "I want an agent strategy for our whole organization",
       perspectiveDepartment: "Department",
       perspectiveDepartmentDesc:
-        "I\u2019m filling this out for a specific department or team",
+        "I want an agent for a specific department or team",
       nameLabel: "What\u2019s your name?",
       namePlaceholder: "Your full name",
       roleLabel: "What\u2019s your role?",
@@ -110,7 +111,7 @@ const auditDict = {
       ],
     },
     3: {
-      question: "About your company",
+      question: "Where will the agent operate?",
       questionIndividual: "About your work",
       questionDepartment: "About your department",
       companyLabel: "What company are you with?",
@@ -164,10 +165,10 @@ const auditDict = {
       ],
     },
     4: {
-      question: "How is your data organized?",
+      question: "What data will the agent touch?",
       questionIndividual: "Your workflow & data",
       description:
-        "This helps us understand your AI readiness foundation.",
+        "Agents need structured, accessible data to act on. Let's see how agent-ready yours is.",
       typicalDayLabel:
         "Walk me through a typical workday \u2014 what does a normal day look like?",
       typicalDayPlaceholder:
@@ -182,7 +183,7 @@ const auditDict = {
       confidenceLabel: "How confident are you in the state of your data?",
       confidenceMin: "We don\u2019t know where our data lives",
       confidenceMax: "Every process is documented and data is centralized",
-      dataLocationLabel: "Where does your most important data live?",
+      dataLocationLabel: "Where does the agent's most important data live?",
       dataLocationOptions: [
         "Spreadsheets",
         "Email",
@@ -215,10 +216,10 @@ const auditDict = {
       ],
     },
     5: {
-      question: "What tools does your team use?",
+      question: "What tools will the agent operate?",
       questionIndividual: "What tools do you use?",
       description:
-        "Select all that apply \u2014 this helps us understand your current stack.",
+        "These become the agent's integration targets. Select all that apply.",
       tools: [
         "Slack",
         "Notion",
@@ -236,9 +237,10 @@ const auditDict = {
       ],
     },
     6: {
-      question: "What are your biggest operational challenges?",
-      questionIndividual: "What are your biggest challenges?",
-      description: "Select all that apply.",
+      question: "What work do you want the agent to take over?",
+      questionIndividual: "What work do you want to hand off?",
+      description:
+        "The repetitive work eating your week \u2014 that's exactly where an agent starts.",
       challenges: [
         "Manual data entry / repetitive tasks",
         "Information scattered across tools",
@@ -262,7 +264,7 @@ const auditDict = {
         "Hard to stay organized",
       ],
       bottlenecksLabel:
-        "Where are the biggest bottlenecks in your operations?",
+        "Where are the biggest bottlenecks the agent should solve?",
       bottlenecksDescription: "Select all that apply.",
       bottlenecks: [
         "Leads / pipeline",
@@ -280,7 +282,7 @@ const auditDict = {
         "How many hours per week does your team spend on repetitive tasks?",
       repetitiveHoursPlaceholder: "e.g. 15",
       robotTaskLabel:
-        "What\u2019s the single task you wish you could hand off to a robot?",
+        "If you could hand off one task to an agent right now, what would it be?",
       robotTaskPlaceholder:
         "e.g. Formatting invoices and chasing late payments...",
       onboardingLabel: "What does onboarding look like for new employees?",
@@ -299,27 +301,27 @@ const auditDict = {
       ],
     },
     7: {
-      question: "AI experience & readiness",
+      question: "Readiness for autonomous AI",
       experienceLabel: "How much AI experience does your team have?",
       experienceLabelIndividual: "How much AI experience do you have?",
       experienceOptions: [
         "None yet",
         "Experimenting",
         "Using regularly",
-        "Advanced",
+        "Running agents in production",
       ],
       triedBeforeLabel: "Have you tried AI before? What happened?",
       triedBeforePlaceholder:
         "Tell us about your experience (or leave blank if none)...",
-      visionLabel: "What would you want AI to do in 6 months?",
+      visionLabel: "In 6 months, what do you want agents doing for you?",
       visionOptions: [
-        "Automate repetitive tasks",
-        "Connect existing tools",
-        "Improve customer communication",
-        "Generate reports / analytics",
-        "Reduce costs",
-        "Train team on AI",
-        "Build custom AI agents",
+        "Running repetitive tasks autonomously",
+        "Operating and connecting existing tools",
+        "Handling customer communication",
+        "Generating reports / analytics",
+        "Reducing costs",
+        "Training the team on agents",
+        "Building custom AI agents",
       ],
       timelineLabel: "How soon would you move forward?",
       timelineOptions: [
@@ -329,7 +331,7 @@ const auditDict = {
         "Just exploring",
       ],
       budgetLabel:
-        "What\u2019s your approximate monthly budget for AI tools & infrastructure?",
+        "What\u2019s your approximate monthly budget for agents & infrastructure?",
       budgetOptions: [
         "Not sure yet",
         "Under \u00A550,000",
@@ -347,7 +349,7 @@ const auditDict = {
       ],
     },
     8: {
-      question: "Almost done \u2014 just a few logistics",
+      question: "Final briefing for your agent design",
       sourceLabel: "How did you find us?",
       sourceOptions: [
         "LinkedIn",
@@ -375,63 +377,64 @@ const auditDict = {
     otherPlaceholder: "Please specify...",
     required: "Required",
     optional: "Optional",
-    stepOf: "Step {current} of {total}",
+    stepOf: "Agent briefing {current} of {total}",
   },
   progressBar: {
-    1: { text: "Great start!", timeLeft: "~3 min left" },
-    2: { text: "You're doing great!", timeLeft: "~2 min left" },
-    3: { text: "Halfway there!", timeLeft: "~2 min left" },
-    4: { text: "Keep going!", timeLeft: "~1 min left" },
-    5: { text: "Almost there!", timeLeft: "~1 min left" },
-    6: { text: "Last step!", timeLeft: "Less than 1 min" },
+    1: { text: "Mapping the ground...", timeLeft: "~3 min left" },
+    2: { text: "Reading your data...", timeLeft: "~2 min left" },
+    3: { text: "Scanning integration targets...", timeLeft: "~2 min left" },
+    4: { text: "Extracting automation candidates...", timeLeft: "~1 min left" },
+    5: { text: "Assembling your blueprint...", timeLeft: "~1 min left" },
+    6: { text: "Agent design ready", timeLeft: "Less than 1 min" },
   },
   success: {
-    title: "You\u2019re In \u2014 Thank You",
+    title: "Building your agent blueprint",
     subtitle:
-      "Lewis will personally review your answers and put together a custom audit report for your business.",
+      "Within 48 hours Lewis will personally send you your custom agent architecture and a 90-day deployment roadmap.",
     reachOut: "Lewis will reach out within 48 hours.",
     timelineTitle: "What happens next",
     timeline: {
       submitted: {
-        title: "Submission received",
+        title: "Briefing received",
         description:
-          "Your answers are in. Lewis will start reviewing them shortly.",
+          "Your answers are in. The first step of your agent design is done.",
       },
       review: {
-        title: "Lewis reviews your answers",
+        title: "Lewis drafts your blueprint",
         description:
-          "He\u2019ll go through your tools, challenges, and vision to prepare a personalized AI readiness audit.",
+          "He\u2019ll design the right agent architecture from your workflows, data, and tools.",
         statusLabel: "In progress",
       },
       call: {
         title: "Walk-through call",
         description:
-          "Lewis shares the full audit report on a video call, explains every recommendation, and answers your questions.",
+          "Lewis shares the full blueprint on a video call and answers every question.",
       },
       report: {
-        title: "Report is yours to keep",
+        title: "Blueprint is yours to keep",
         description:
-          "After the call, the complete audit report is yours. No obligations, completely free.",
+          "After the call, the complete blueprint and 90-day roadmap are yours. No obligations, completely free.",
       },
     },
     bookEmbedTitle: "Pick a time that works for you",
     bookFallback: "Or open scheduler in new tab",
-    bookCta: "Book Your Free Audit Call",
+    bookCta: "Book Your Free Agent Design Call",
     bookCtaPersonal: "Join the May Cohort",
     bookSubtext: "30 minutes \u00B7 Video call \u00B7 No sales pressure",
     bookSubtextPersonal:
       "Small group \u00B7 Hands-on workshop \u00B7 Free",
     bookDescription:
-      "Go ahead and pick a time that works for you. Lewis will have your audit ready by the call.",
+      "Go ahead and pick a time that works for you. Lewis will have your agent blueprint ready by the call.",
     bookDescriptionPersonal:
-      "Join the next cohort and learn how to apply AI to your personal workflow with a small group of professionals.",
+      "Join the next cohort and learn how to apply agents to your personal workflow with a small group of professionals.",
     sharePrompt: "Know someone who would benefit?",
     copyLink: "Copy link",
     copied: "Copied!",
     shareText:
-      "I just signed up for a free AI readiness audit from MOTTO Digital. Check it out!",
+      "I just signed up for a free Agentic AI audit from MOTTO Digital. Check it out!",
     shareEmailSubject: "Agentic AI Readiness Audit",
     backHome: "Back to Home",
+    manifesto: "The era of learning AI is over. Now we delegate to it.",
   },
 } as const;
 
