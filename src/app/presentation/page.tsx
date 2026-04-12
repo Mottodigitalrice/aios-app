@@ -646,30 +646,30 @@ export default function PresentationPage() {
 
         {/* ===== SLIDE 3: RAKUTEN ===== */}
         <SlideWrapper active={slideIndex === 3} transition="slide" direction={direction}>
-          <section className="h-full flex flex-col px-6 pt-14 pb-4 overflow-y-auto">
-            <div className="max-w-5xl mx-auto grid sm:grid-cols-[1fr_auto] gap-4">
+          <section className="h-full flex flex-col justify-center px-12 pt-14 pb-8 overflow-y-auto">
+            <div className="max-w-5xl mx-auto grid sm:grid-cols-[1fr_auto] gap-8">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#B8860B] mb-1">楽天グループ — 従業員32,000名 <span className="normal-case tracking-normal font-normal text-[#86868B]">Rakuten Group — 32,000 Employees</span></p>
-                <h3 className="text-lg sm:text-xl font-bold text-[#1D1D1F] mb-1 leading-snug">24日かかっていた作業が5日に。財務チームに余裕が生まれた。</h3>
-                <p className="text-xs text-[#86868B] mb-2">From 24 days to 5. A finance team that got their afternoons back.</p>
-                <p className="text-xs text-[#6E6E73] leading-relaxed mb-3">日本最大のECコングロマリットは、開発・運用プロセス全体を再設計した。<br/><span className="text-[#86868B]">Japan&apos;s largest e-commerce conglomerate redesigned their entire process around AI.</span></p>
-                <div className="rounded-lg p-3 mb-3" style={{ background: "linear-gradient(135deg, rgba(184,134,11,0.04), rgba(184,134,11,0.02))", borderLeft: "3px solid #B8860B" }}>
-                  <p className="text-xs text-[#1D1D1F] leading-relaxed">「以前は丸1日かかっていた作業が、今では1時間で完了します。」</p>
-                  <p className="text-[10px] text-[#86868B] mt-0.5 italic">&ldquo;What once took a day, we can now accomplish in an hour.&rdquo;</p>
-                  <p className="text-[10px] text-[#86868B] mt-1">— 加地 雄介氏 / Yusuke Kaji, GM of AI, Rakuten</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#B8860B] mb-2">楽天グループ — 従業員32,000名 <span className="normal-case tracking-normal font-normal text-[#86868B]">Rakuten Group — 32,000 Employees</span></p>
+                <h3 className="text-xl sm:text-2xl font-bold text-[#1D1D1F] mb-2 leading-snug">24日かかっていた作業が5日に。財務チームに余裕が生まれた。</h3>
+                <p className="text-sm text-[#86868B] mb-3">From 24 days to 5. A finance team that got their afternoons back.</p>
+                <p className="text-sm text-[#6E6E73] leading-relaxed mb-4">日本最大のECコングロマリットは、開発・運用プロセス全体を再設計した。<br/><span className="text-[#86868B]">Japan&apos;s largest e-commerce conglomerate redesigned their entire process around AI.</span></p>
+                <div className="rounded-lg p-4 mb-4" style={{ background: "linear-gradient(135deg, rgba(184,134,11,0.04), rgba(184,134,11,0.02))", borderLeft: "3px solid #B8860B" }}>
+                  <p className="text-sm text-[#1D1D1F] leading-relaxed">「以前は丸1日かかっていた作業が、今では1時間で完了します。」</p>
+                  <p className="text-xs text-[#86868B] mt-1 italic">&ldquo;What once took a day, we can now accomplish in an hour.&rdquo;</p>
+                  <p className="text-xs text-[#86868B] mt-1.5">— 加地 雄介氏 / Yusuke Kaji, GM of AI, Rakuten</p>
                 </div>
-                <div className="text-xs space-y-1">
+                <div className="text-sm space-y-2">
                   <div><span className="text-[#B8860B] font-semibold">財務チームの変化:</span> <span className="text-[#6E6E73]">丸1日のスプレッドシート調整がClaudeで自動化。問題を自動検出し、レポートを生成。</span></div>
                   <div><span className="text-[#B8860B] font-semibold">エンジニアリング:</span> <span className="text-[#6E6E73]">リリース24日→5日。24同時セッション。7時間の自律コーディング。</span></div>
                   <div><span className="text-[#B8860B] font-semibold">全部門展開:</span> <span className="text-[#6E6E73]">1週間でProduct・Sales・Marketing・Financeに展開。</span></div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-2 h-fit shrink-0 w-48">
+              <div className="grid grid-cols-2 gap-3 h-fit shrink-0 w-56">
                 {[{ v: "79%", l: "市場投入短縮", le: "Faster to market" },{ v: "97%", l: "エラー削減", le: "Fewer errors" },{ v: "1hr", l: "財務レポート", le: "Was a full day" },{ v: "1wk", l: "部門展開", le: "Deploy to any dept" }].map((m,i) => (
-                  <div key={i} className="rounded-xl p-3 text-center bg-[#F5F5F7] border border-[#E8E8ED]">
-                    <div className="text-lg font-bold gradient-text">{m.v}</div>
-                    <div className="text-[10px] text-[#86868B]">{m.l}</div>
-                    <div className="text-[9px] text-[#86868B]/60">{m.le}</div>
+                  <div key={i} className="rounded-xl p-4 text-center bg-[#F5F5F7] border border-[#E8E8ED]">
+                    <div className="text-2xl font-bold gradient-text">{m.v}</div>
+                    <div className="text-xs text-[#86868B]">{m.l}</div>
+                    <div className="text-[10px] text-[#86868B]/60">{m.le}</div>
                   </div>
                 ))}
               </div>
@@ -679,29 +679,29 @@ export default function PresentationPage() {
 
         {/* ===== SLIDE 4: NRI ===== */}
         <SlideWrapper active={slideIndex === 4} transition="slide" direction={direction}>
-          <section className="h-full flex flex-col px-6 pt-14 pb-4 overflow-y-auto">
-            <div className="max-w-5xl mx-auto grid sm:grid-cols-[1fr_auto] gap-4">
+          <section className="h-full flex flex-col justify-center px-12 pt-14 pb-8 overflow-y-auto">
+            <div className="max-w-5xl mx-auto grid sm:grid-cols-[1fr_auto] gap-8">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#B8860B] mb-1">野村総合研究所 — 従業員6,500名 <span className="normal-case tracking-normal font-normal text-[#86868B]">Nomura Research Institute — 6,500 Employees</span></p>
-                <h3 className="text-lg sm:text-xl font-bold text-[#1D1D1F] mb-1 leading-snug">専門家が数時間かけていた複雑な日本語文書のレビュー時間を半減。</h3>
-                <p className="text-xs text-[#86868B] mb-2">Complex Japanese documents that took experts hours — cut in half.</p>
-                <p className="text-xs text-[#6E6E73] leading-relaxed mb-3">日本最大のITコンサル企業が、実際の日本語ビジネス文書で全AIモデルを評価。1つのモデルが圧倒的に勝ち、同社はそれに賭けた。<br/><span className="text-[#86868B]">Japan&apos;s largest IT consulting firm tested every AI on real Japanese business documents. One model won decisively.</span></p>
-                <div className="rounded-lg p-3 mb-3" style={{ background: "linear-gradient(135deg, rgba(184,134,11,0.04), rgba(184,134,11,0.02))", borderLeft: "3px solid #B8860B" }}>
-                  <p className="text-xs text-[#1D1D1F] leading-relaxed">「生成AIは定型業務を自動化し、既存ワーカーの生産性を高め、24時間365日の顧客対応を実現できる — 日本の労働力不足を直接補完するものだ。」</p>
-                  <p className="text-[10px] text-[#86868B] mt-0.5 italic">&ldquo;Generative AI can automate routine tasks and provide 24/7 capabilities — directly supplementing Japan&apos;s workforce needs.&rdquo;</p>
-                  <p className="text-[10px] text-[#86868B] mt-1">— 稲葉 孝彦氏 / Takahiko Inaba, Head of AI — NRI</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#B8860B] mb-2">野村総合研究所 — 従業員6,500名 <span className="normal-case tracking-normal font-normal text-[#86868B]">Nomura Research Institute — 6,500 Employees</span></p>
+                <h3 className="text-xl sm:text-2xl font-bold text-[#1D1D1F] mb-2 leading-snug">専門家が数時間かけていた複雑な日本語文書のレビュー時間を半減。</h3>
+                <p className="text-sm text-[#86868B] mb-3">Complex Japanese documents that took experts hours — cut in half.</p>
+                <p className="text-sm text-[#6E6E73] leading-relaxed mb-4">日本最大のITコンサル企業が、実際の日本語ビジネス文書で全AIモデルを評価。1つのモデルが圧倒的に勝ち、同社はそれに賭けた。<br/><span className="text-[#86868B]">Japan&apos;s largest IT consulting firm tested every AI on real Japanese business documents. One model won decisively.</span></p>
+                <div className="rounded-lg p-4 mb-4" style={{ background: "linear-gradient(135deg, rgba(184,134,11,0.04), rgba(184,134,11,0.02))", borderLeft: "3px solid #B8860B" }}>
+                  <p className="text-sm text-[#1D1D1F] leading-relaxed">「生成AIは定型業務を自動化し、既存ワーカーの生産性を高め、24時間365日の顧客対応を実現できる — 日本の労働力不足を直接補完するものだ。」</p>
+                  <p className="text-xs text-[#86868B] mt-1 italic">&ldquo;Generative AI can automate routine tasks and provide 24/7 capabilities — directly supplementing Japan&apos;s workforce needs.&rdquo;</p>
+                  <p className="text-xs text-[#86868B] mt-1.5">— 稲葉 孝彦氏 / Takahiko Inaba, Head of AI — NRI</p>
                 </div>
-                <div className="text-xs space-y-1">
+                <div className="text-sm space-y-2">
                   <div><span className="text-[#B8860B] font-semibold">日本語特化テスト:</span> <span className="text-[#6E6E73]">契約書・技術仕様書・規制関連書類など実際の日本語業務文書で独自の評価テストを構築。Claudeが全競合を上回った。</span></div>
                   <div><span className="text-[#B8860B] font-semibold">労働力不足への解決策:</span> <span className="text-[#6E6E73]">人を置き換えるのではなく、一人ひとりにより大きなチームの能力を与える。</span></div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-2 h-fit shrink-0 w-48">
+              <div className="grid grid-cols-2 gap-3 h-fit shrink-0 w-56">
                 {[{ v: "50%", l: "レビュー短縮", le: "Faster review" },{ v: "#1 JP", l: "公認リセラー", le: "JP Reseller #1" },{ v: "独自JP", l: "日本語テスト", le: "Real JP tests" },{ v: "全部門", l: "導入済み", le: "All departments" }].map((m,i) => (
-                  <div key={i} className="rounded-xl p-3 text-center bg-[#F5F5F7] border border-[#E8E8ED]">
-                    <div className="text-lg font-bold gradient-text">{m.v}</div>
-                    <div className="text-[10px] text-[#86868B]">{m.l}</div>
-                    <div className="text-[9px] text-[#86868B]/60">{m.le}</div>
+                  <div key={i} className="rounded-xl p-4 text-center bg-[#F5F5F7] border border-[#E8E8ED]">
+                    <div className="text-2xl font-bold gradient-text">{m.v}</div>
+                    <div className="text-xs text-[#86868B]">{m.l}</div>
+                    <div className="text-[10px] text-[#86868B]/60">{m.le}</div>
                   </div>
                 ))}
               </div>
@@ -711,29 +711,29 @@ export default function PresentationPage() {
 
         {/* ===== SLIDE 5: CLASSMETHOD ===== */}
         <SlideWrapper active={slideIndex === 5} transition="slide" direction={direction}>
-          <section className="h-full flex flex-col px-6 pt-14 pb-4 overflow-y-auto">
-            <div className="max-w-5xl mx-auto grid sm:grid-cols-[1fr_auto] gap-4">
+          <section className="h-full flex flex-col justify-center px-12 pt-14 pb-8 overflow-y-auto">
+            <div className="max-w-5xl mx-auto grid sm:grid-cols-[1fr_auto] gap-8">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#B8860B] mb-1">クラスメソッド — 日本トップのAWSパートナー <span className="normal-case tracking-normal font-normal text-[#86868B]">Classmethod — Japan&apos;s Top AWS Partner</span></p>
-                <h3 className="text-lg sm:text-xl font-bold text-[#1D1D1F] mb-1 leading-snug">24時間の作業が60分で完了。そして全チームの働き方を変えた。</h3>
-                <p className="text-xs text-[#86868B] mb-2">A 24-hour task finished in 60 minutes. Then they changed how every team works.</p>
-                <p className="text-xs text-[#6E6E73] leading-relaxed mb-3">最大10倍の生産性向上、コードレビュー80%短縮、特定管理業務96%削減。確信を得た同社は、他社向け体験センターまで開設した。<br/><span className="text-[#86868B]">Up to 10x productivity gains, 80% faster code reviews, 96% reduction on admin tasks.</span></p>
-                <div className="rounded-lg p-3 mb-3" style={{ background: "linear-gradient(135deg, rgba(184,134,11,0.04), rgba(184,134,11,0.02))", borderLeft: "3px solid #B8860B" }}>
-                  <p className="text-xs text-[#1D1D1F] leading-relaxed">「生成されたコードの品質は、他のプロダクトと比べて明らかに優れていた。24時間かかっていたGoogle Apps Scriptの作業が1時間で完了した。」</p>
-                  <p className="text-[10px] text-[#86868B] mt-0.5 italic">&ldquo;The generated code quality was significantly superior. A 24-hour GAS task completed in 1 hour.&rdquo;</p>
-                  <p className="text-[10px] text-[#86868B] mt-1">— クラスメソッド エンジニアリングチーム / Classmethod Engineering Team</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#B8860B] mb-2">クラスメソッド — 日本トップのAWSパートナー <span className="normal-case tracking-normal font-normal text-[#86868B]">Classmethod — Japan&apos;s Top AWS Partner</span></p>
+                <h3 className="text-xl sm:text-2xl font-bold text-[#1D1D1F] mb-2 leading-snug">24時間の作業が60分で完了。そして全チームの働き方を変えた。</h3>
+                <p className="text-sm text-[#86868B] mb-3">A 24-hour task finished in 60 minutes. Then they changed how every team works.</p>
+                <p className="text-sm text-[#6E6E73] leading-relaxed mb-4">最大10倍の生産性向上、コードレビュー80%短縮、特定管理業務96%削減。確信を得た同社は、他社向け体験センターまで開設した。<br/><span className="text-[#86868B]">Up to 10x productivity gains, 80% faster code reviews, 96% reduction on admin tasks.</span></p>
+                <div className="rounded-lg p-4 mb-4" style={{ background: "linear-gradient(135deg, rgba(184,134,11,0.04), rgba(184,134,11,0.02))", borderLeft: "3px solid #B8860B" }}>
+                  <p className="text-sm text-[#1D1D1F] leading-relaxed">「生成されたコードの品質は、他のプロダクトと比べて明らかに優れていた。24時間かかっていたGoogle Apps Scriptの作業が1時間で完了した。」</p>
+                  <p className="text-xs text-[#86868B] mt-1 italic">&ldquo;The generated code quality was significantly superior. A 24-hour GAS task completed in 1 hour.&rdquo;</p>
+                  <p className="text-xs text-[#86868B] mt-1.5">— クラスメソッド エンジニアリングチーム / Classmethod Engineering Team</p>
                 </div>
-                <div className="text-xs space-y-1">
+                <div className="text-sm space-y-2">
                   <div><span className="text-[#B8860B] font-semibold">数字で見る成果:</span> <span className="text-[#6E6E73]">GAS：24h→1h（96%削減）。月間デプロイ：108→165 PR（50%増）。コードレビュー：80%短縮。</span></div>
                   <div><span className="text-[#B8860B] font-semibold">他社支援:</span> <span className="text-[#6E6E73]">「AIDD Boostチーム」を発足し他社のAI駆動開発を支援。AI体験センターを開設。</span></div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-2 h-fit shrink-0 w-48">
+              <div className="grid grid-cols-2 gap-3 h-fit shrink-0 w-56">
                 {[{ v: "10x", l: "生産性向上", le: "Productivity" },{ v: "96%", l: "管理業務削減", le: "Admin reduction" },{ v: "80%", l: "レビュー短縮", le: "Faster reviews" },{ v: "99%", l: "AI生成率", le: "AI-generated" }].map((m,i) => (
-                  <div key={i} className="rounded-xl p-3 text-center bg-[#F5F5F7] border border-[#E8E8ED]">
-                    <div className="text-lg font-bold gradient-text">{m.v}</div>
-                    <div className="text-[10px] text-[#86868B]">{m.l}</div>
-                    <div className="text-[9px] text-[#86868B]/60">{m.le}</div>
+                  <div key={i} className="rounded-xl p-4 text-center bg-[#F5F5F7] border border-[#E8E8ED]">
+                    <div className="text-2xl font-bold gradient-text">{m.v}</div>
+                    <div className="text-xs text-[#86868B]">{m.l}</div>
+                    <div className="text-[10px] text-[#86868B]/60">{m.le}</div>
                   </div>
                 ))}
               </div>
@@ -743,29 +743,29 @@ export default function PresentationPage() {
 
         {/* ===== SLIDE 6: PANASONIC ===== */}
         <SlideWrapper active={slideIndex === 6} transition="slide" direction={direction}>
-          <section className="h-full flex flex-col px-6 pt-14 pb-4 overflow-y-auto">
-            <div className="max-w-5xl mx-auto grid sm:grid-cols-[1fr_auto] gap-4">
+          <section className="h-full flex flex-col justify-center px-12 pt-14 pb-8 overflow-y-auto">
+            <div className="max-w-5xl mx-auto grid sm:grid-cols-[1fr_auto] gap-8">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#B8860B] mb-1">パナソニックホールディングス — 従業員240,000名 <span className="normal-case tracking-normal font-normal text-[#86868B]">Panasonic Holdings — 240,000 Employees</span></p>
-                <h3 className="text-lg sm:text-xl font-bold text-[#1D1D1F] mb-1 leading-snug">製造業の巨人からAI駆動企業へ — 2030年までに売上の30%を目標に。</h3>
-                <p className="text-xs text-[#86868B] mb-2">From manufacturing giant to AI-powered business — targeting 30% of revenue by 2030.</p>
-                <p className="text-xs text-[#6E6E73] leading-relaxed mb-3">AIを社内利用するだけでなく、10億人の顧客に向けた消費者製品にClaudeを組み込み、4部門に戦略的アセットとして導入。<br/><span className="text-[#86868B]">Built Claude into a consumer product for 1 billion customers and deployed across 4 departments.</span></p>
-                <div className="rounded-lg p-3 mb-3" style={{ background: "linear-gradient(135deg, rgba(184,134,11,0.04), rgba(184,134,11,0.02))", borderLeft: "3px solid #B8860B" }}>
-                  <p className="text-xs text-[#1D1D1F] leading-relaxed">「AI駆動のハードウェア・ソフトウェア・ソリューション事業は、2030年までにパナソニックの総売上の30%に達する。」</p>
-                  <p className="text-[10px] text-[#86868B] mt-0.5 italic">&ldquo;AI-driven businesses will reach 30% of Panasonic&apos;s total revenue by 2030.&rdquo;</p>
-                  <p className="text-[10px] text-[#86868B] mt-1">— Panasonic Go — CES 2025 Keynote</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#B8860B] mb-2">パナソニックホールディングス — 従業員240,000名 <span className="normal-case tracking-normal font-normal text-[#86868B]">Panasonic Holdings — 240,000 Employees</span></p>
+                <h3 className="text-xl sm:text-2xl font-bold text-[#1D1D1F] mb-2 leading-snug">製造業の巨人からAI駆動企業へ — 2030年までに売上の30%を目標に。</h3>
+                <p className="text-sm text-[#86868B] mb-3">From manufacturing giant to AI-powered business — targeting 30% of revenue by 2030.</p>
+                <p className="text-sm text-[#6E6E73] leading-relaxed mb-4">AIを社内利用するだけでなく、10億人の顧客に向けた消費者製品にClaudeを組み込み、4部門に戦略的アセットとして導入。<br/><span className="text-[#86868B]">Built Claude into a consumer product for 1 billion customers and deployed across 4 departments.</span></p>
+                <div className="rounded-lg p-4 mb-4" style={{ background: "linear-gradient(135deg, rgba(184,134,11,0.04), rgba(184,134,11,0.02))", borderLeft: "3px solid #B8860B" }}>
+                  <p className="text-sm text-[#1D1D1F] leading-relaxed">「AI駆動のハードウェア・ソフトウェア・ソリューション事業は、2030年までにパナソニックの総売上の30%に達する。」</p>
+                  <p className="text-xs text-[#86868B] mt-1 italic">&ldquo;AI-driven businesses will reach 30% of Panasonic&apos;s total revenue by 2030.&rdquo;</p>
+                  <p className="text-xs text-[#86868B] mt-1.5">— Panasonic Go — CES 2025 Keynote</p>
                 </div>
-                <div className="text-xs space-y-1">
+                <div className="text-sm space-y-2">
                   <div><span className="text-[#B8860B] font-semibold">消費者プロダクト「Umi」:</span> <span className="text-[#6E6E73]">Claude搭載のウェルネスアプリ。音声チャット、目標設定。Calm、Blue Apronと提携。世界10億人向け。</span></div>
                   <div><span className="text-[#B8860B] font-semibold">社内トランスフォーメーション:</span> <span className="text-[#6E6E73]">24万人にClaudeを「戦略的アセット」として導入。全チームが持つべきケイパビリティ。</span></div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-2 h-fit shrink-0 w-48">
+              <div className="grid grid-cols-2 gap-3 h-fit shrink-0 w-56">
                 {[{ v: "30%", l: "AI売上目標", le: "AI revenue target" },{ v: "10億人", l: "顧客ターゲット", le: "Global customers" },{ v: "4部門", l: "戦略活用", le: "Strategic depts" },{ v: "CES'25", l: "基調講演", le: "CES keynote" }].map((m,i) => (
-                  <div key={i} className="rounded-xl p-3 text-center bg-[#F5F5F7] border border-[#E8E8ED]">
-                    <div className="text-lg font-bold gradient-text">{m.v}</div>
-                    <div className="text-[10px] text-[#86868B]">{m.l}</div>
-                    <div className="text-[9px] text-[#86868B]/60">{m.le}</div>
+                  <div key={i} className="rounded-xl p-4 text-center bg-[#F5F5F7] border border-[#E8E8ED]">
+                    <div className="text-2xl font-bold gradient-text">{m.v}</div>
+                    <div className="text-xs text-[#86868B]">{m.l}</div>
+                    <div className="text-[10px] text-[#86868B]/60">{m.le}</div>
                   </div>
                 ))}
               </div>
@@ -775,28 +775,28 @@ export default function PresentationPage() {
 
         {/* ===== SLIDE 7: READYFOR ===== */}
         <SlideWrapper active={slideIndex === 7} transition="slide" direction={direction}>
-          <section className="h-full flex flex-col px-6 pt-14 pb-4 overflow-y-auto">
-            <div className="max-w-5xl mx-auto grid sm:grid-cols-[1fr_auto] gap-4">
+          <section className="h-full flex flex-col justify-center px-12 pt-14 pb-8 overflow-y-auto">
+            <div className="max-w-5xl mx-auto grid sm:grid-cols-[1fr_auto] gap-8">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#B8860B] mb-1">READYFOR — 日本最大のクラウドファンディング・12名チーム <span className="normal-case tracking-normal font-normal text-[#86868B]">READYFOR — Japan&apos;s Largest Crowdfunding, 12-Person Team</span></p>
-                <h3 className="text-lg sm:text-xl font-bold text-[#1D1D1F] mb-1 leading-snug">12名のチームが3ヶ月間、すべてを計測した。その結果がこれだ。</h3>
-                <p className="text-xs text-[#86868B] mb-2">A 12-person team measured everything for 3 months. Here&apos;s what they found.</p>
-                <p className="text-xs text-[#6E6E73] leading-relaxed mb-3">AIをただ導入してうまくいくことを願ったわけではない。3ヶ月間の厳密な評価を実施し、うまくいかなかった点も含め正直な結果を公開した。<br/><span className="text-[#86868B]">Ran a rigorous 3-month evaluation and published honest results — including what didn&apos;t work.</span></p>
-                <div className="rounded-lg p-3 mb-3" style={{ background: "linear-gradient(135deg, rgba(184,134,11,0.04), rgba(184,134,11,0.02))", borderLeft: "3px solid #B8860B" }}>
-                  <p className="text-xs text-[#1D1D1F] leading-relaxed">「チームの83%が実際に生産性の向上を実感した。しかし同時に、複数の作業を同時並行で管理する場合、時間の短縮が必ずしも負担の軽減につながるわけではないことも学んだ。」</p>
-                  <p className="text-[10px] text-[#86868B] mt-0.5 italic">&ldquo;83% experienced real productivity gains. But time shortcuts don&apos;t equal reduced strain.&rdquo;</p>
-                  <p className="text-[10px] text-[#86868B] mt-1">— READYFOR エンジニアリングチーム / READYFOR Engineering Team</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#B8860B] mb-2">READYFOR — 日本最大のクラウドファンディング・12名チーム <span className="normal-case tracking-normal font-normal text-[#86868B]">READYFOR — Japan&apos;s Largest Crowdfunding, 12-Person Team</span></p>
+                <h3 className="text-xl sm:text-2xl font-bold text-[#1D1D1F] mb-2 leading-snug">12名のチームが3ヶ月間、すべてを計測した。その結果がこれだ。</h3>
+                <p className="text-sm text-[#86868B] mb-3">A 12-person team measured everything for 3 months. Here&apos;s what they found.</p>
+                <p className="text-sm text-[#6E6E73] leading-relaxed mb-4">AIをただ導入してうまくいくことを願ったわけではない。3ヶ月間の厳密な評価を実施し、うまくいかなかった点も含め正直な結果を公開した。<br/><span className="text-[#86868B]">Ran a rigorous 3-month evaluation and published honest results — including what didn&apos;t work.</span></p>
+                <div className="rounded-lg p-4 mb-4" style={{ background: "linear-gradient(135deg, rgba(184,134,11,0.04), rgba(184,134,11,0.02))", borderLeft: "3px solid #B8860B" }}>
+                  <p className="text-sm text-[#1D1D1F] leading-relaxed">「チームの83%が実際に生産性の向上を実感した。しかし同時に、複数の作業を同時並行で管理する場合、時間の短縮が必ずしも負担の軽減につながるわけではないことも学んだ。」</p>
+                  <p className="text-xs text-[#86868B] mt-1 italic">&ldquo;83% experienced real productivity gains. But time shortcuts don&apos;t equal reduced strain.&rdquo;</p>
+                  <p className="text-xs text-[#86868B] mt-1.5">— READYFOR エンジニアリングチーム / READYFOR Engineering Team</p>
                 </div>
-                <div className="text-xs space-y-1">
+                <div className="text-sm space-y-2">
                   <div><span className="text-[#B8860B] font-semibold">正直な成果と課題:</span> <span className="text-[#6E6E73]">83%が生産性向上。66%が毎日1〜2時間節約。一方、満足度は3.8/5、42%が疲労増加を実感。AI活用には丁寧な設計が必要。</span></div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-2 h-fit shrink-0 w-48">
+              <div className="grid grid-cols-2 gap-3 h-fit shrink-0 w-56">
                 {[{ v: "83%", l: "生産性向上", le: "Productivity gains" },{ v: "1-2h", l: "毎日の短縮", le: "Saved daily" },{ v: "67%", l: "毎日利用", le: "Daily adoption" },{ v: "3ヶ月", l: "評価期間", le: "Evaluation period" }].map((m,i) => (
-                  <div key={i} className="rounded-xl p-3 text-center bg-[#F5F5F7] border border-[#E8E8ED]">
-                    <div className="text-lg font-bold gradient-text">{m.v}</div>
-                    <div className="text-[10px] text-[#86868B]">{m.l}</div>
-                    <div className="text-[9px] text-[#86868B]/60">{m.le}</div>
+                  <div key={i} className="rounded-xl p-4 text-center bg-[#F5F5F7] border border-[#E8E8ED]">
+                    <div className="text-2xl font-bold gradient-text">{m.v}</div>
+                    <div className="text-xs text-[#86868B]">{m.l}</div>
+                    <div className="text-[10px] text-[#86868B]/60">{m.le}</div>
                   </div>
                 ))}
               </div>
@@ -806,28 +806,28 @@ export default function PresentationPage() {
 
         {/* ===== SLIDE 8: KNOWLEDGE WORK ===== */}
         <SlideWrapper active={slideIndex === 8} transition="slide" direction={direction}>
-          <section className="h-full flex flex-col px-6 pt-14 pb-4 overflow-y-auto">
-            <div className="max-w-5xl mx-auto grid sm:grid-cols-[1fr_auto] gap-4">
+          <section className="h-full flex flex-col justify-center px-12 pt-14 pb-8 overflow-y-auto">
+            <div className="max-w-5xl mx-auto grid sm:grid-cols-[1fr_auto] gap-8">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#B8860B] mb-1">ナレッジワーク — B2B SaaS、データ基盤1名体制 <span className="normal-case tracking-normal font-normal text-[#86868B]">Knowledge Work — B2B SaaS, 1-Person Data Team</span></p>
-                <h3 className="text-lg sm:text-xl font-bold text-[#1D1D1F] mb-1 leading-snug">たった1人。1ヶ月で448回の本番デプロイ。誤植ではない。</h3>
-                <p className="text-xs text-[#86868B] mb-2">One person. 448 production deployments in a single month. Not a typo.</p>
-                <p className="text-xs text-[#6E6E73] leading-relaxed mb-3">データ基盤エンジニア1名が、7つのAIセッションを同時並行で実行。人間に残された手作業はレビューと承認だけだ。<br/><span className="text-[#86868B]">One engineer, 7 parallel AI sessions. Only remaining manual task: review and approve.</span></p>
-                <div className="rounded-lg p-3 mb-3" style={{ background: "linear-gradient(135deg, rgba(184,134,11,0.04), rgba(184,134,11,0.02))", borderLeft: "3px solid #B8860B" }}>
-                  <p className="text-xs text-[#1D1D1F] leading-relaxed">「人間に残された手作業はPRレビューだけ。計画、実装、検証、デプロイ — それ以外はすべてAIが担う。」</p>
-                  <p className="text-[10px] text-[#86868B] mt-0.5 italic">&ldquo;The human&apos;s only task is PR review. Everything else — planning, implementation, deployment — is AI.&rdquo;</p>
-                  <p className="text-[10px] text-[#86868B] mt-1">— ナレッジワーク エンジニアリング / Knowledge Work Engineering — Claude Code Meetup Japan</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#B8860B] mb-2">ナレッジワーク — B2B SaaS、データ基盤1名体制 <span className="normal-case tracking-normal font-normal text-[#86868B]">Knowledge Work — B2B SaaS, 1-Person Data Team</span></p>
+                <h3 className="text-xl sm:text-2xl font-bold text-[#1D1D1F] mb-2 leading-snug">たった1人。1ヶ月で448回の本番デプロイ。誤植ではない。</h3>
+                <p className="text-sm text-[#86868B] mb-3">One person. 448 production deployments in a single month. Not a typo.</p>
+                <p className="text-sm text-[#6E6E73] leading-relaxed mb-4">データ基盤エンジニア1名が、7つのAIセッションを同時並行で実行。人間に残された手作業はレビューと承認だけだ。<br/><span className="text-[#86868B]">One engineer, 7 parallel AI sessions. Only remaining manual task: review and approve.</span></p>
+                <div className="rounded-lg p-4 mb-4" style={{ background: "linear-gradient(135deg, rgba(184,134,11,0.04), rgba(184,134,11,0.02))", borderLeft: "3px solid #B8860B" }}>
+                  <p className="text-sm text-[#1D1D1F] leading-relaxed">「人間に残された手作業はPRレビューだけ。計画、実装、検証、デプロイ — それ以外はすべてAIが担う。」</p>
+                  <p className="text-xs text-[#86868B] mt-1 italic">&ldquo;The human&apos;s only task is PR review. Everything else — planning, implementation, deployment — is AI.&rdquo;</p>
+                  <p className="text-xs text-[#86868B] mt-1.5">— ナレッジワーク エンジニアリング / Knowledge Work Engineering — Claude Code Meetup Japan</p>
                 </div>
-                <div className="text-xs space-y-1">
+                <div className="text-sm space-y-2">
                   <div><span className="text-[#B8860B] font-semibold">この事例が重要な理由:</span> <span className="text-[#6E6E73]">人を置き換える話ではない。適切なシステムがあれば1人が何を成し遂げられるかという話。448回のデプロイ — 残業はわずか10〜30時間。</span></div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-2 h-fit shrink-0 w-48">
+              <div className="grid grid-cols-2 gap-3 h-fit shrink-0 w-56">
                 {[{ v: "448", l: "月間マージ", le: "Monthly merges" },{ v: "7", l: "並行セッション", le: "Parallel sessions" },{ v: "1人", l: "チーム人数", le: "Team size" },{ v: "10-30h", l: "残業時間", le: "Overtime only" }].map((m,i) => (
-                  <div key={i} className="rounded-xl p-3 text-center bg-[#F5F5F7] border border-[#E8E8ED]">
-                    <div className="text-lg font-bold gradient-text">{m.v}</div>
-                    <div className="text-[10px] text-[#86868B]">{m.l}</div>
-                    <div className="text-[9px] text-[#86868B]/60">{m.le}</div>
+                  <div key={i} className="rounded-xl p-4 text-center bg-[#F5F5F7] border border-[#E8E8ED]">
+                    <div className="text-2xl font-bold gradient-text">{m.v}</div>
+                    <div className="text-xs text-[#86868B]">{m.l}</div>
+                    <div className="text-[10px] text-[#86868B]/60">{m.le}</div>
                   </div>
                 ))}
               </div>
@@ -837,14 +837,14 @@ export default function PresentationPage() {
 
         {/* ===== SLIDE 9: MOTTO DIGITAL ===== */}
         <SlideWrapper active={slideIndex === 9} transition="slide" direction={direction}>
-          <section className="h-full flex flex-col px-6 pt-14 pb-4 overflow-y-auto">
-            <div className="max-w-5xl mx-auto grid sm:grid-cols-[1fr_auto] gap-4">
+          <section className="h-full flex flex-col justify-center px-12 pt-14 pb-8 overflow-y-auto">
+            <div className="max-w-5xl mx-auto grid sm:grid-cols-[1fr_auto] gap-8">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#B8860B] mb-1">MOTTO Digital — AIコンサルティング、1名経営 <span className="normal-case tracking-normal font-normal text-[#86868B]">MOTTO Digital — AI Consulting, 1 Person</span></p>
-                <h3 className="text-lg sm:text-xl font-bold text-[#1D1D1F] mb-1 leading-snug">コンサルタント1名。クライアント5社。24時間365日稼働。追加採用ゼロ。</h3>
-                <p className="text-xs text-[#86868B] mb-2">One consultant. Five clients. 24/7 operations. Zero staff hired.</p>
-                <p className="text-xs text-[#6E6E73] leading-relaxed mb-3">これは私たちのストーリー。MOTTO Digitalは1人で運営するAIコンサルティング会社。このページのすべて？あなたに教える同じ技術で構築した。<br/><span className="text-[#86868B]">Our story. Everything on this page was built with the same technology we teach you.</span></p>
-                <div className="rounded-lg p-3 mb-3" style={{ background: "linear-gradient(135deg, rgba(184,134,11,0.06), rgba(184,134,11,0.02))", border: "1px solid rgba(184,134,11,0.15)" }}>
+                <p className="text-xs font-bold uppercase tracking-widest text-[#B8860B] mb-2">MOTTO Digital — AIコンサルティング、1名経営 <span className="normal-case tracking-normal font-normal text-[#86868B]">MOTTO Digital — AI Consulting, 1 Person</span></p>
+                <h3 className="text-xl sm:text-2xl font-bold text-[#1D1D1F] mb-2 leading-snug">コンサルタント1名。クライアント5社。24時間365日稼働。追加採用ゼロ。</h3>
+                <p className="text-sm text-[#86868B] mb-3">One consultant. Five clients. 24/7 operations. Zero staff hired.</p>
+                <p className="text-sm text-[#6E6E73] leading-relaxed mb-4">これは私たちのストーリー。MOTTO Digitalは1人で運営するAIコンサルティング会社。このページのすべて？あなたに教える同じ技術で構築した。<br/><span className="text-[#86868B]">Our story. Everything on this page was built with the same technology we teach you.</span></p>
+                <div className="rounded-lg p-4 mb-4" style={{ background: "linear-gradient(135deg, rgba(184,134,11,0.06), rgba(184,134,11,0.02))", border: "1px solid rgba(184,134,11,0.15)" }}>
                   <p className="text-[10px] font-bold text-[#B8860B] mb-2">トランスフォーメーション</p>
                   <div className="grid grid-cols-[1fr_auto_1fr] gap-2 text-[11px]">
                     <div>
@@ -860,16 +860,16 @@ export default function PresentationPage() {
                     </div>
                   </div>
                 </div>
-                <div className="text-xs space-y-1">
+                <div className="text-sm space-y-2">
                   <div><span className="text-[#B8860B] font-semibold">AIチームの日常:</span> <span className="text-[#6E6E73]">リード発掘・選別（自動）、デモサイト構築（自動）、経理処理、バイリンガルコンテンツ制作、全プロジェクトのタスク追跡。<strong> 次にこのページに載るのは、あなたの事例かもしれない。</strong></span></div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-2 h-fit shrink-0 w-48">
+              <div className="grid grid-cols-2 gap-3 h-fit shrink-0 w-56">
                 {[{ v: "5社", l: "同時管理", le: "Simultaneous" },{ v: "190h", l: "月間自動化", le: "Monthly automated" },{ v: "8-12x", l: "コスト効率", le: "Cost efficiency" },{ v: "24/7", l: "稼働", le: "Non-stop" }].map((m,i) => (
                   <div key={i} className={`rounded-xl p-3 text-center border ${i === 3 ? "border-[#B8860B]/20 bg-[#B8860B]/5" : "bg-[#F5F5F7] border-[#E8E8ED]"}`}>
-                    <div className="text-lg font-bold gradient-text">{m.v}</div>
-                    <div className="text-[10px] text-[#86868B]">{m.l}</div>
-                    <div className="text-[9px] text-[#86868B]/60">{m.le}</div>
+                    <div className="text-2xl font-bold gradient-text">{m.v}</div>
+                    <div className="text-xs text-[#86868B]">{m.l}</div>
+                    <div className="text-[10px] text-[#86868B]/60">{m.le}</div>
                   </div>
                 ))}
               </div>
