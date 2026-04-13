@@ -190,9 +190,6 @@ function RegisterSection({ t, locale }: { t: typeof en.webinar; locale: Locale }
               {t.registerButtonLabel}
             </Button>
           </a>
-          <p className="mt-4 text-sm" style={{ color: "var(--lp-text-muted)" }}>
-            {t.recordingNote}
-          </p>
         </AnimateInView>
       </div>
     </section>
@@ -428,11 +425,6 @@ export default function WebinarPage() {
               <SessionPicker locale={locale} />
             </AnimateInView>
 
-            <AnimateInView delay={200}>
-              <p className="mt-5 text-sm" style={{ color: "var(--lp-text-muted)" }}>
-                {t.recordingNote}
-              </p>
-            </AnimateInView>
           </div>
         </section>
 

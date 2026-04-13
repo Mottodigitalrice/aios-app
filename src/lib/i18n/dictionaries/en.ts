@@ -966,11 +966,10 @@ const en = {
       "In this free 60-minute webinar, Lewis will help you understand Agentic AI \u2014 the new category of AI that is creating real impact across companies of all sizes and industries. You may have heard of it as Claude Code, Codex, Antigravity, or Open Claw \u2014 for the first time, AI can actually do work. Not just answer questions.",
     eventDate: "Date TBD \u2014 April / May 2026",
     eventTime: "14:00\u201315:00 JST",
-    eventFormat: "Zoom (free)",
+    eventFormat: "Google Meet (free)",
     eventCapacity: "50 seats",
     eventDuration: "60 minutes",
     registerCta: "Register Now \u2014 Free",
-    recordingNote: "A recording will be sent to all registrants within 24 hours.",
     agendaTitle: "What You\u2019ll Learn",
     agendaItems: [
       {
@@ -1033,10 +1032,6 @@ const en = {
       {
         question: "Is this webinar free?",
         answer: "Yes, completely free. No credit card required.",
-      },
-      {
-        question: "Will there be a recording?",
-        answer: "Yes. All registrants receive a recording link within 24 hours of the event.",
       },
       {
         question: "Do I need technical knowledge to attend?",
