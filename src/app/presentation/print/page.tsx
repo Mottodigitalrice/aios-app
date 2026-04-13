@@ -112,9 +112,7 @@ export default function PrintPresentation() {
               { name: "NRI", sub: "6,500名" },
               { name: "Classmethod", sub: "AWS #1" },
               { name: "Panasonic", sub: "240,000名" },
-              { name: "READYFOR", sub: "12名" },
               { name: "ナレッジワーク", sub: "1名" },
-              { name: "MOTTO", sub: "Us" },
             ].map((c) => (
               <div key={c.name} className="px-4 py-2 rounded-xl border border-[#B8860B]/15 bg-[#B8860B]/3 text-center">
                 <p className="text-sm font-semibold text-[#1D1D1F]">{c.name}</p>
@@ -254,38 +252,7 @@ export default function PrintPresentation() {
         </div>
       </Slide>
 
-      {/* SLIDE 7: READYFOR */}
-      <Slide>
-        <div className="flex flex-col px-6 pt-10 pb-4 w-full h-full">
-          <div className="max-w-5xl mx-auto grid grid-cols-[1fr_auto] gap-4 w-full">
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-[#B8860B] mb-1">READYFOR — 日本最大のクラウドファンディング・12名チーム <span className="normal-case tracking-normal font-normal text-[#86868B]">READYFOR — Japan&apos;s Largest Crowdfunding, 12-Person Team</span></p>
-              <h3 className="text-xl font-bold text-[#1D1D1F] mb-1 leading-snug">12名のチームが3ヶ月間、すべてを計測した。その結果がこれだ。</h3>
-              <p className="text-xs text-[#86868B] mb-2">A 12-person team measured everything for 3 months. Here&apos;s what they found.</p>
-              <p className="text-xs text-[#6E6E73] leading-relaxed mb-3">AIをただ導入してうまくいくことを願ったわけではない。3ヶ月間の厳密な評価を実施し、うまくいかなかった点も含め正直な結果を公開した。<br/><span className="text-[#86868B]">Ran a rigorous 3-month evaluation and published honest results — including what didn&apos;t work.</span></p>
-              <div className="rounded-lg p-3 mb-3" style={{ background: "linear-gradient(135deg, rgba(184,134,11,0.04), rgba(184,134,11,0.02))", borderLeft: "3px solid #B8860B" }}>
-                <p className="text-xs text-[#1D1D1F] leading-relaxed">「チームの83%が実際に生産性の向上を実感した。しかし同時に、複数の作業を同時並行で管理する場合、時間の短縮が必ずしも負担の軽減につながるわけではないことも学んだ。」</p>
-                <p className="text-[10px] text-[#86868B] mt-0.5 italic">&ldquo;83% experienced real productivity gains. But time shortcuts don&apos;t equal reduced strain.&rdquo;</p>
-                <p className="text-[10px] text-[#86868B] mt-1">— READYFOR エンジニアリングチーム / READYFOR Engineering Team</p>
-              </div>
-              <div className="text-xs space-y-1">
-                <div><span className="text-[#B8860B] font-semibold">正直な成果と課題:</span> <span className="text-[#6E6E73]">83%が生産性向上。66%が毎日1〜2時間節約。一方、満足度は3.8/5、42%が疲労増加を実感。AI活用には丁寧な設計が必要。</span></div>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-2 h-fit shrink-0 w-48">
-              {[{ v: "83%", l: "生産性向上", le: "Productivity gains" },{ v: "1-2h", l: "毎日の短縮", le: "Saved daily" },{ v: "67%", l: "毎日利用", le: "Daily adoption" },{ v: "3ヶ月", l: "評価期間", le: "Evaluation period" }].map((m,i) => (
-                <div key={i} className="rounded-xl p-3 text-center bg-[#F5F5F7] border border-[#E8E8ED]">
-                  <div className="text-lg font-bold bg-gradient-to-r from-[#B8860B] via-[#D4A843] to-[#B8860B] bg-clip-text text-transparent">{m.v}</div>
-                  <div className="text-[10px] text-[#86868B]">{m.l}</div>
-                  <div className="text-[9px] text-[#86868B]/60">{m.le}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </Slide>
-
-      {/* SLIDE 8: KNOWLEDGE WORK */}
+      {/* SLIDE 7: KNOWLEDGE WORK */}
       <Slide>
         <div className="flex flex-col px-6 pt-10 pb-4 w-full h-full">
           <div className="max-w-5xl mx-auto grid grid-cols-[1fr_auto] gap-4 w-full">
@@ -316,49 +283,7 @@ export default function PrintPresentation() {
         </div>
       </Slide>
 
-      {/* SLIDE 9: MOTTO DIGITAL */}
-      <Slide>
-        <div className="flex flex-col px-6 pt-10 pb-4 w-full h-full">
-          <div className="max-w-5xl mx-auto grid grid-cols-[1fr_auto] gap-4 w-full">
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-[#B8860B] mb-1">MOTTO Digital — AIコンサルティング、1名経営 <span className="normal-case tracking-normal font-normal text-[#86868B]">MOTTO Digital — AI Consulting, 1 Person</span></p>
-              <h3 className="text-xl font-bold text-[#1D1D1F] mb-1 leading-snug">コンサルタント1名。クライアント5社。24時間365日稼働。追加採用ゼロ。</h3>
-              <p className="text-xs text-[#86868B] mb-2">One consultant. Five clients. 24/7 operations. Zero staff hired.</p>
-              <p className="text-xs text-[#6E6E73] leading-relaxed mb-3">これは私たちのストーリー。MOTTO Digitalは1人で運営するAIコンサルティング会社。このページのすべて？あなたに教える同じ技術で構築した。<br/><span className="text-[#86868B]">Our story. Everything on this page was built with the same technology we teach you.</span></p>
-              <div className="rounded-lg p-3 mb-3" style={{ background: "linear-gradient(135deg, rgba(184,134,11,0.06), rgba(184,134,11,0.02))", border: "1px solid rgba(184,134,11,0.15)" }}>
-                <p className="text-[10px] font-bold text-[#B8860B] mb-2">トランスフォーメーション</p>
-                <div className="grid grid-cols-[1fr_auto_1fr] gap-2 text-[11px]">
-                  <div>
-                    <p className="font-bold text-[#86868B] text-[10px] mb-1">2024年 — 導入前 <span className="font-normal">2024 — Before</span></p>
-                    <p className="text-[#6E6E73]">収益源1つ / 最大3社 / 8h/日</p>
-                    <p className="text-[10px] text-[#86868B]">1 revenue stream / max 3 clients / 8h/day</p>
-                  </div>
-                  <div className="self-center text-[#B8860B]">&rarr;</div>
-                  <div>
-                    <p className="font-bold text-[#B8860B] text-[10px] mb-1">2026年 — AIOS導入後 <span className="font-normal">2026 — After AIOS</span></p>
-                    <p className="text-[#6E6E73]">4収益源 / 5社+ / 24/7稼働</p>
-                    <p className="text-[10px] text-[#86868B]">4 revenue streams / 5+ clients / 24/7 ops</p>
-                  </div>
-                </div>
-              </div>
-              <div className="text-xs space-y-1">
-                <div><span className="text-[#B8860B] font-semibold">AIチームの日常:</span> <span className="text-[#6E6E73]">リード発掘・選別（自動）、デモサイト構築（自動）、経理処理、バイリンガルコンテンツ制作、全プロジェクトのタスク追跡。<strong> 次にこのページに載るのは、あなたの事例かもしれない。</strong></span></div>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-2 h-fit shrink-0 w-48">
-              {[{ v: "5社", l: "同時管理", le: "Simultaneous" },{ v: "190h", l: "月間自動化", le: "Monthly automated" },{ v: "8-12x", l: "コスト効率", le: "Cost efficiency" },{ v: "24/7", l: "稼働", le: "Non-stop" }].map((m,i) => (
-                <div key={i} className={`rounded-xl p-3 text-center border ${i === 3 ? "border-[#B8860B]/20 bg-[#B8860B]/5" : "bg-[#F5F5F7] border-[#E8E8ED]"}`}>
-                  <div className="text-lg font-bold bg-gradient-to-r from-[#B8860B] via-[#D4A843] to-[#B8860B] bg-clip-text text-transparent">{m.v}</div>
-                  <div className="text-[10px] text-[#86868B]">{m.l}</div>
-                  <div className="text-[9px] text-[#86868B]/60">{m.le}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </Slide>
-
-      {/* SLIDE 10: AUTOMATION */}
+      {/* SLIDE 8: AUTOMATION */}
       <Slide>
         <div className="flex flex-col items-center w-full px-4 pt-6">
           <div className="inline-flex items-center gap-2 mb-3 px-3 py-1 rounded-full border border-[#B8860B]/20 bg-[#B8860B]/8 text-[#B8860B] text-xs font-medium uppercase tracking-wider">
@@ -820,8 +745,8 @@ export default function PrintPresentation() {
           <div className="mt-6 w-full max-w-4xl grid grid-cols-3 gap-4">
             {[
               { label: "グループ学習", title: "グループコホート", price: "¥20,000", per: "/月", commitment: "6ヶ月 · 次回：2026年5月", features: ["週2回×60分のグループセッション", "Slackで随時質問可能", "専用GitHubリポジトリ", "オーナーシップ保証"], recommended: false },
-              { label: "パーソナルコーチング", title: "マンツーマン", price: "¥50,000", per: "/月", commitment: "6ヶ月 · いつでも開始可能", features: ["週1回の専属セッション", "ビジネスに完全カスタマイズ", "Lewisへの直接Slackアクセス", "オーナーシップ保証"], recommended: true },
-              { label: "チームトレーニング", title: "カンパニービルド", price: "¥200,000", per: "/月", commitment: "6ヶ月 · いつでも開始可能", features: ["最大10名まで参加可能", "御社ニーズに合わせたプログラム", "全24回の伴走型セッション", "オーナーシップ保証"], recommended: false },
+              { label: "パーソナルコーチング", title: "マンツーマン", price: "¥50,000", per: "/月", commitment: "6ヶ月 · いつでも開始可能", features: ["週1回×90分の専属セッション", "月120時間の直接開発・セットアップ", "ビジネスに完全カスタマイズ", "オーナーシップ保証"], recommended: true },
+              { label: "チームトレーニング", title: "カンパニービルド", price: "¥200,000", per: "/月", commitment: "6ヶ月 · いつでも開始可能", features: ["週1回×90分の専属セッション", "月120時間の直接開発・セットアップ", "最大10名までコース参加可能", "オーナーシップ保証"], recommended: false },
             ].map((plan, i) => (
               <div key={i} className={`p-6 rounded-2xl border-2 relative ${plan.recommended ? "border-[#B8860B]/40 bg-[#B8860B]/3 scale-[1.03] z-10" : "border-[#E8E8ED] bg-white"}`}>
                 {plan.recommended && (

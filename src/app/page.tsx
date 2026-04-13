@@ -24,6 +24,8 @@ import BioSection from "@/components/landing/sections/bio-section";
 import LeadMagnetSection from "@/components/landing/sections/lead-magnet-section";
 import ToolBannerSection from "@/components/landing/sections/tool-banner-section";
 import CtaSection from "@/components/landing/sections/cta-section";
+import CaseStudiesSection from "@/components/landing/sections/case-studies-section";
+import AutomationTasksSection from "@/components/landing/sections/automation-tasks-section";
 import { Badge } from "@/components/ui/badge";
 import { AnimateInView } from "@/components/landing/animate-in-view";
 
@@ -91,6 +93,9 @@ export default function HomePage() {
               <Link href="#proof" className="nav-link-hover text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B8860B] rounded-sm" style={{ color: "var(--lp-text-body)" }}>
                 {t.nav.proof}
               </Link>
+              <Link href="#case-studies" className="nav-link-hover text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B8860B] rounded-sm" style={{ color: "var(--lp-text-body)" }}>
+                {locale === "ja" ? "導入事例" : "Case Studies"}
+              </Link>
               <Link href="#program" className="nav-link-hover text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B8860B] rounded-sm" style={{ color: "var(--lp-text-body)" }}>
                 {t.nav.program}
               </Link>
@@ -135,6 +140,14 @@ export default function HomePage() {
 
         {/* 5. Proof — Lewis's AIOS metrics + org chart (dark section) */}
         <ProofSection t={t} locale={locale} />
+        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
+
+        {/* 5a. Case Studies — Japanese companies using this technology */}
+        <CaseStudiesSection t={t} locale={locale} />
+        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
+
+        {/* 5b. Automation Tasks — what you could automate */}
+        <AutomationTasksSection t={t} locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
         {/* 6. Program — 6-month roadmap */}
