@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Mail, Linkedin, Calendar, Clock, Monitor, Users, CheckCircle2 } from "lucide-react";
@@ -178,13 +179,13 @@ function SpeakerSection({ t, locale }: { t: typeof en.webinar; locale: Locale })
         </AnimateInView>
         <AnimateInView>
           <div className="flex flex-col sm:flex-row gap-8 items-center sm:items-start">
-            {/* Avatar placeholder — swap to real photo once image path confirmed */}
-            <div
-              className="flex-shrink-0 size-24 rounded-full flex items-center justify-center text-white text-3xl font-bold"
-              style={{ backgroundColor: "#1D1D1F" }}
-            >
-              LR
-            </div>
+            <Image
+              src="/lewis-rice.jpg"
+              alt="Lewis Rice"
+              width={96}
+              height={96}
+              className="flex-shrink-0 size-24 rounded-full object-cover"
+            />
             <div>
               <h3
                 className={`text-xl font-bold mb-1 ${locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]"}`}
