@@ -202,6 +202,12 @@ html {
   background-clip: text;
 }
 
+/* BudouX wraps text in inline-block spans which break background-clip: text.
+   Force them back to inline so the gradient renders through the text. */
+.gradient-text span {
+  display: inline !important;
+}
+
 /* Glow effect — subtle shadow for light theme */
 .glow {
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);

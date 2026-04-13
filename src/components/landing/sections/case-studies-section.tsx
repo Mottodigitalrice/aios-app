@@ -52,7 +52,7 @@ export default function CaseStudiesSection({ t, locale }: SectionProps) {
 
         {/* Tabs */}
         <Tabs defaultValue="rakuten" className="w-full">
-          <div className="overflow-x-auto -mx-6 px-6 mb-8">
+          <div className="overflow-x-auto -mx-6 px-6 mb-8 flex justify-center">
             <TabsList
               className="inline-flex w-auto gap-1.5 p-1.5 rounded-xl"
               style={{ backgroundColor: "var(--lp-bg-elevated)" }}
@@ -61,14 +61,9 @@ export default function CaseStudiesSection({ t, locale }: SectionProps) {
                 <TabsTrigger
                   key={tab.id}
                   value={tab.id}
-                  className="rounded-lg px-4 py-2.5 text-sm font-semibold whitespace-nowrap transition-all data-[state=active]:bg-[#1D1D1F] data-[state=active]:text-white data-[state=active]:shadow-sm data-[state=inactive]:text-[#86868B] data-[state=inactive]:hover:text-[#1D1D1F]"
-                  style={{ fontFamily: locale === "ja" ? "var(--font-noto-sans-jp, 'Noto Sans JP', system-ui)" : "var(--font-dm-sans, 'DM Sans', system-ui)" }}
+                  className="group rounded-lg px-5 py-3 transition-all data-[state=active]:bg-[#1D1D1F] data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-black/[0.03]"
                 >
-                  {tab.logo && <img src={tab.logo} alt="" className="h-4 w-auto opacity-70 data-[state=active]:opacity-100" />}
-                  {tab.name}
-                  <span className="ml-1.5 text-xs font-normal opacity-60">
-                    {tab.size}
-                  </span>
+                  {tab.logo && <img src={tab.logo} alt={tab.name} className="h-5 w-auto opacity-40 transition-all group-data-[state=active]:opacity-100 group-data-[state=active]:brightness-0 group-data-[state=active]:invert" />}
                 </TabsTrigger>
               ))}
             </TabsList>
