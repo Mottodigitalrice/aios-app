@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Mail, Linkedin, Clock, Monitor, Users, CheckCircle2 } from "lucide-react";
+import { Mail, Linkedin, Clock, Monitor, Users, CheckCircle2, Loader2 } from "lucide-react";
 import { LanguageToggle } from "@/components/landing/language-toggle";
 import { MobileNav } from "@/components/landing/mobile-nav";
 import { AnimateInView } from "@/components/landing/animate-in-view";
@@ -15,13 +15,18 @@ import en from "@/lib/i18n/dictionaries/en";
 import ja from "@/lib/i18n/dictionaries/ja";
 
 // ─── Config ──────────────────────────────────────────────────────────────────
-const TIDYCAL_URL = "https://tidycal.com/rice/aios-webinar";
-
 const SESSIONS = [
-  { dayEn: "Friday",    dayJa: "金曜日",  dateEn: "April 17",  dateJa: "4月17日", timeEn: "2:00 PM JST",  timeJa: "14:00（日本時間）" },
-  { dayEn: "Monday",   dayJa: "月曜日",  dateEn: "April 20",  dateJa: "4月20日", timeEn: "3:00 PM JST",  timeJa: "15:00（日本時間）" },
-  { dayEn: "Wednesday",dayJa: "水曜日",  dateEn: "April 22",  dateJa: "4月22日", timeEn: "8:00 PM JST",  timeJa: "20:00（日本時間）" },
-  { dayEn: "Thursday", dayJa: "木曜日",  dateEn: "April 23",  dateJa: "4月23日", timeEn: "2:00 PM JST",  timeJa: "14:00（日本時間）" },
+  { id: "fri-apr17", dayEn: "Friday",    dayJa: "金曜日",   dateEn: "April 17",  dateJa: "4月17日", timeEn: "2:00 PM JST",  timeJa: "14:00（日本時間）" },
+  { id: "mon-apr20", dayEn: "Monday",   dayJa: "月曜日",   dateEn: "April 20",  dateJa: "4月20日", timeEn: "3:00 PM JST",  timeJa: "15:00（日本時間）" },
+  { id: "wed-apr22", dayEn: "Wednesday",dayJa: "水曜日",   dateEn: "April 22",  dateJa: "4月22日", timeEn: "8:00 PM JST",  timeJa: "20:00（日本時間）" },
+  { id: "thu-apr23", dayEn: "Thursday", dayJa: "木曜日",   dateEn: "April 23",  dateJa: "4月23日", timeEn: "2:00 PM JST",  timeJa: "14:00（日本時間）" },
+];
+
+const REFERRAL_OPTIONS = [
+  { id: "kawamura", labelEn: "Kawamura san", labelJa: "川村さん" },
+  { id: "ishikawa", labelEn: "Ishikawa san", labelJa: "石川さん" },
+  { id: "fuji",     labelEn: "Fuji san",     labelJa: "富士さん" },
+  { id: "other",    labelEn: "Other",         labelJa: "その他" },
 ];
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -33,25 +38,22 @@ function getInitialLocale(): Locale {
   const params = new URLSearchParams(window.location.search);
   const urlLocale = params.get("lang");
   if (urlLocale === "ja" || urlLocale === "en") return urlLocale;
-  return "ja"; // Japanese default
+  return "ja";
 }
 
-// ─── Sub-components ──────────────────────────────────────────────────────────
-
-function SessionPicker({ locale }: { locale: Locale }) {
+// ─── Hero session cards (click → scroll to form + pre-select) ────────────────
+function SessionCards({ locale, onSelect }: { locale: Locale; onSelect: (id: string) => void }) {
   return (
     <div className="mt-8">
       <p className="text-sm font-medium mb-4" style={{ color: "var(--lp-text-muted)" }}>
-        {locale === "ja" ? "参加したい日程を選んでください" : "Choose your session"}
+        {locale === "ja" ? "参加したい日程を選んでください" : "Choose your session to register"}
       </p>
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        {SESSIONS.map((s, i) => (
-          <a
-            key={i}
-            href={TIDYCAL_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex flex-col items-center gap-1 px-3 py-4 rounded-2xl text-center transition-all hover:scale-[1.03]"
+        {SESSIONS.map((s) => (
+          <button
+            key={s.id}
+            onClick={() => onSelect(s.id)}
+            className="group flex flex-col items-center gap-1 px-3 py-4 rounded-2xl text-center transition-all hover:scale-[1.03] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B8860B]"
             style={{
               backgroundColor: "var(--lp-bg-secondary, #F5F5F7)",
               border: "1px solid var(--lp-border)",
@@ -73,14 +75,14 @@ function SessionPicker({ locale }: { locale: Locale }) {
               className="mt-2 text-xs font-semibold px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
               style={{ backgroundColor: "#B8860B", color: "#fff" }}
             >
-              {locale === "ja" ? "登録" : "Register"}
+              {locale === "ja" ? "登録する" : "Register"}
             </span>
-          </a>
+          </button>
         ))}
       </div>
       <div className="flex flex-wrap justify-center gap-4 mt-5">
         {[
-          { icon: <Monitor className="size-3.5" />, label: locale === "ja" ? "Zoomオンライン（無料）" : "Zoom (free)" },
+          { icon: <Monitor className="size-3.5" />, label: locale === "ja" ? "Google Meet（無料）" : "Google Meet (free)" },
           { icon: <Users className="size-3.5" />, label: locale === "ja" ? "定員50名" : "50 seats" },
           { icon: <Clock className="size-3.5" />, label: locale === "ja" ? "60分" : "60 minutes" },
         ].map((d, i) => (
@@ -94,6 +96,273 @@ function SessionPicker({ locale }: { locale: Locale }) {
   );
 }
 
+// ─── Registration form ────────────────────────────────────────────────────────
+function RegistrationForm({ locale, preselectedDate }: { locale: Locale; preselectedDate: string }) {
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    company: "",
+    date: preselectedDate,
+    referralSources: [] as string[],
+    referralOther: "",
+  });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  // Sync preselected date when it changes (from session card clicks)
+  useEffect(() => {
+    if (preselectedDate) setForm((f) => ({ ...f, date: preselectedDate }));
+  }, [preselectedDate]);
+
+  const ja = locale === "ja";
+
+  const labels = {
+    firstName:   ja ? "名" : "First Name",
+    lastName:    ja ? "姓" : "Last Name",
+    email:       ja ? "メールアドレス" : "Email",
+    company:     ja ? "会社名" : "Company Name",
+    date:        ja ? "参加希望日程" : "Which session?",
+    referral:    ja ? "どこでお知りになりましたか？" : "How did you hear about this?",
+    otherLabel:  ja ? "その他（詳しくお聞かせください）" : "Other (please specify)",
+    submit:      ja ? "参加登録する（無料）" : "Register Now — Free",
+    submitting:  ja ? "送信中..." : "Submitting...",
+    required:    ja ? "必須項目を入力してください" : "Please fill in all required fields",
+  };
+
+  function toggleReferral(id: string) {
+    setForm((f) => ({
+      ...f,
+      referralSources: f.referralSources.includes(id)
+        ? f.referralSources.filter((r) => r !== id)
+        : [...f.referralSources, id],
+    }));
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!form.firstName || !form.email || !form.date) {
+      setErrorMsg(labels.required);
+      return;
+    }
+    setErrorMsg("");
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/webinar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-request-id": `${Date.now()}-${Math.random()}` },
+        body: JSON.stringify({ ...form, locale }),
+      });
+      if (!res.ok) throw new Error("Server error");
+      setStatus("success");
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  const inputClass = "w-full px-4 py-3 rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#B8860B] transition-shadow";
+  const inputStyle = {
+    backgroundColor: "#fff",
+    border: "1px solid var(--lp-border)",
+    color: "var(--lp-text-heading)",
+  };
+
+  if (status === "success") {
+    return (
+      <div className="text-center py-12 px-6">
+        <div className="size-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: "#B8860B15" }}>
+          <CheckCircle2 className="size-8" style={{ color: "#B8860B" }} />
+        </div>
+        <h3
+          className={`text-2xl font-bold mb-3 ${ja ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]"}`}
+          style={{ color: "var(--lp-text-heading)" }}
+        >
+          {ja ? "ご登録ありがとうございます！" : "You're registered!"}
+        </h3>
+        <p className="text-base leading-relaxed max-w-sm mx-auto" style={{ color: "var(--lp-text-body)" }}>
+          {ja
+            ? "Lewisより、ミーティングリンクと詳細をご連絡いたします。"
+            : "Lewis will be in touch with your meeting link and session details."}
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
+      {/* Name row */}
+      <div className="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--lp-text-muted)" }}>
+            {labels.firstName} <span style={{ color: "#B8860B" }}>*</span>
+          </label>
+          <input
+            type="text"
+            required
+            value={form.firstName}
+            onChange={(e) => setForm((f) => ({ ...f, firstName: e.target.value }))}
+            className={inputClass}
+            style={inputStyle}
+            placeholder={ja ? "太郎" : "Taro"}
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--lp-text-muted)" }}>
+            {labels.lastName}
+          </label>
+          <input
+            type="text"
+            value={form.lastName}
+            onChange={(e) => setForm((f) => ({ ...f, lastName: e.target.value }))}
+            className={inputClass}
+            style={inputStyle}
+            placeholder={ja ? "山田" : "Yamada"}
+          />
+        </div>
+      </div>
+
+      {/* Email */}
+      <div>
+        <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--lp-text-muted)" }}>
+          {labels.email} <span style={{ color: "#B8860B" }}>*</span>
+        </label>
+        <input
+          type="email"
+          required
+          value={form.email}
+          onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+          className={inputClass}
+          style={inputStyle}
+          placeholder="you@company.com"
+        />
+      </div>
+
+      {/* Company */}
+      <div>
+        <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--lp-text-muted)" }}>
+          {labels.company}
+        </label>
+        <input
+          type="text"
+          value={form.company}
+          onChange={(e) => setForm((f) => ({ ...f, company: e.target.value }))}
+          className={inputClass}
+          style={inputStyle}
+          placeholder={ja ? "株式会社〇〇" : "Company Inc."}
+        />
+      </div>
+
+      {/* Date selection */}
+      <div>
+        <label className="block text-xs font-medium mb-3" style={{ color: "var(--lp-text-muted)" }}>
+          {labels.date} <span style={{ color: "#B8860B" }}>*</span>
+        </label>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          {SESSIONS.map((s) => {
+            const selected = form.date === s.id;
+            return (
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => setForm((f) => ({ ...f, date: s.id }))}
+                className="flex flex-col items-center gap-0.5 px-2 py-3 rounded-xl text-center transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B8860B]"
+                style={{
+                  backgroundColor: selected ? "#B8860B" : "var(--lp-bg-secondary, #F5F5F7)",
+                  border: selected ? "1px solid #B8860B" : "1px solid var(--lp-border)",
+                  color: selected ? "#fff" : "var(--lp-text-heading)",
+                }}
+              >
+                <span className="text-[10px] font-medium opacity-80">
+                  {locale === "ja" ? s.dayJa : s.dayEn}
+                </span>
+                <span className={`text-sm font-bold leading-tight ${ja ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]"}`}>
+                  {locale === "ja" ? s.dateJa : s.dateEn}
+                </span>
+                <span className="text-[10px] opacity-80">
+                  {locale === "ja" ? s.timeJa : s.timeEn}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Referral checkboxes */}
+      <div>
+        <label className="block text-xs font-medium mb-3" style={{ color: "var(--lp-text-muted)" }}>
+          {labels.referral}
+        </label>
+        <div className="flex flex-col gap-2">
+          {REFERRAL_OPTIONS.map((opt) => {
+            const checked = form.referralSources.includes(opt.id);
+            return (
+              <label key={opt.id} className="flex items-center gap-3 cursor-pointer group">
+                <div
+                  className="size-5 rounded flex-shrink-0 flex items-center justify-center transition-colors"
+                  style={{
+                    backgroundColor: checked ? "#B8860B" : "#fff",
+                    border: checked ? "1px solid #B8860B" : "1px solid var(--lp-border)",
+                  }}
+                  onClick={() => toggleReferral(opt.id)}
+                >
+                  {checked && <CheckCircle2 className="size-3 text-white" />}
+                </div>
+                <span
+                  className="text-sm select-none"
+                  style={{ color: "var(--lp-text-body)" }}
+                  onClick={() => toggleReferral(opt.id)}
+                >
+                  {locale === "ja" ? opt.labelJa : opt.labelEn}
+                </span>
+              </label>
+            );
+          })}
+        </div>
+
+        {/* Other free text */}
+        {form.referralSources.includes("other") && (
+          <div className="mt-3">
+            <input
+              type="text"
+              value={form.referralOther}
+              onChange={(e) => setForm((f) => ({ ...f, referralOther: e.target.value }))}
+              className={inputClass}
+              style={inputStyle}
+              placeholder={labels.otherLabel}
+            />
+          </div>
+        )}
+      </div>
+
+      {/* Error */}
+      {(errorMsg || status === "error") && (
+        <p className="text-sm" style={{ color: "#DC2626" }}>
+          {status === "error"
+            ? (ja ? "エラーが発生しました。もう一度お試しください。" : "Something went wrong. Please try again.")
+            : errorMsg}
+        </p>
+      )}
+
+      {/* Submit */}
+      <Button
+        type="submit"
+        size="lg"
+        disabled={status === "loading"}
+        className="w-full rounded-full text-base py-6 font-semibold mt-2 hover:scale-[1.01] transition-transform disabled:opacity-70 disabled:cursor-not-allowed"
+        style={{ backgroundColor: "#B8860B", color: "#fff" }}
+      >
+        {status === "loading" ? (
+          <span className="flex items-center gap-2">
+            <Loader2 className="size-4 animate-spin" />
+            {labels.submitting}
+          </span>
+        ) : labels.submit}
+      </Button>
+    </form>
+  );
+}
+
+// ─── Other sections ───────────────────────────────────────────────────────────
 function AgendaSection({ t, locale }: { t: typeof en.webinar; locale: Locale }) {
   return (
     <section style={{ paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}>
@@ -167,35 +436,6 @@ function ForWhomSection({ t, locale }: { t: typeof en.webinar; locale: Locale })
   );
 }
 
-function RegisterSection({ t, locale }: { t: typeof en.webinar; locale: Locale }) {
-  return (
-    <section style={{ paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}>
-      <div className="mx-auto max-w-xl px-6 text-center">
-        <AnimateInView>
-          <h2
-            className={`text-3xl sm:text-4xl font-bold tracking-tight mb-3 ${locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]"}`}
-            style={{ color: "var(--lp-text-heading)" }}
-          >
-            {t.registerTitle}
-          </h2>
-          <p className="text-base mb-8" style={{ color: "var(--lp-text-muted)" }}>
-            {t.registerSubtitle}
-          </p>
-          <a href={TIDYCAL_URL} target="_blank" rel="noopener noreferrer">
-            <Button
-              size="lg"
-              className="rounded-full text-base px-8 py-6 font-semibold shadow-lg hover:scale-[1.02] transition-transform"
-              style={{ backgroundColor: "#B8860B", color: "#fff" }}
-            >
-              {t.registerButtonLabel}
-            </Button>
-          </a>
-        </AnimateInView>
-      </div>
-    </section>
-  );
-}
-
 function SpeakerSection({ t, locale }: { t: typeof en.webinar; locale: Locale }) {
   return (
     <section style={{ paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)", backgroundColor: "var(--lp-bg-secondary, #F5F5F7)" }}>
@@ -245,7 +485,6 @@ function SpeakerSection({ t, locale }: { t: typeof en.webinar; locale: Locale })
 
 function FaqSection({ t, locale }: { t: typeof en.webinar; locale: Locale }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-
   return (
     <section style={{ paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}>
       <div className="mx-auto max-w-3xl px-6">
@@ -273,10 +512,7 @@ function FaqSection({ t, locale }: { t: typeof en.webinar; locale: Locale }) {
                 </span>
                 <span
                   className="text-lg flex-shrink-0 transition-transform duration-200"
-                  style={{
-                    color: "#B8860B",
-                    transform: openIndex === i ? "rotate(45deg)" : "rotate(0deg)",
-                  }}
+                  style={{ color: "#B8860B", transform: openIndex === i ? "rotate(45deg)" : "rotate(0deg)" }}
                 >
                   +
                 </span>
@@ -294,38 +530,12 @@ function FaqSection({ t, locale }: { t: typeof en.webinar; locale: Locale }) {
   );
 }
 
-function FinalCtaSection({ t, locale }: { t: typeof en.webinar; locale: Locale }) {
-  return (
-    <section style={{ paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)", backgroundColor: "#1D1D1F" }}>
-      <div className="mx-auto max-w-2xl px-6 text-center">
-        <AnimateInView>
-          <h2
-            className={`text-3xl sm:text-4xl font-bold tracking-tight text-white mb-8 ${locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]"}`}
-          >
-            {t.finalCtaTitle}
-          </h2>
-          <a href={TIDYCAL_URL} target="_blank" rel="noopener noreferrer">
-            <Button
-              size="lg"
-              className="rounded-full text-base px-8 py-6 font-semibold hover:scale-[1.02] transition-transform"
-              style={{ backgroundColor: "#B8860B", color: "#fff" }}
-            >
-              {t.finalCtaButton}
-            </Button>
-          </a>
-          <p className="mt-6 text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>
-            {t.finalCtaContact}
-          </p>
-        </AnimateInView>
-      </div>
-    </section>
-  );
-}
-
 // ─── Page ─────────────────────────────────────────────────────────────────────
-
 export default function WebinarPage() {
   const [locale, setLocale] = useState<Locale>(getInitialLocale);
+  const [preselectedDate, setPreselectedDate] = useState("");
+  const formRef = useRef<HTMLDivElement>(null);
+
   const rawT = dictionaries[locale].webinar;
   const t = useMemo(
     () => (locale === "ja" ? budouxWrap(rawT) : rawT) as unknown as typeof en.webinar,
@@ -346,6 +556,11 @@ export default function WebinarPage() {
     }
     window.history.replaceState({}, "", url.toString());
   };
+
+  function handleSessionSelect(id: string) {
+    setPreselectedDate(id);
+    formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 
   return (
     <div className="min-h-screen text-[#1D1D1F]" style={{ backgroundColor: "var(--lp-bg-primary)" }}>
@@ -370,11 +585,13 @@ export default function WebinarPage() {
                 Pricing
               </Link>
               <LanguageToggle locale={locale} onToggle={handleLocaleToggle} />
-              <a href={TIDYCAL_URL} target="_blank" rel="noopener noreferrer">
-                <Button size="sm" className="rounded-full text-sm px-5 py-2" style={{ backgroundColor: "#B8860B", color: "#fff" }}>
-                  {t.registerCta}
-                </Button>
-              </a>
+              <button
+                onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                className="rounded-full text-sm px-5 py-2 font-semibold transition-colors hover:opacity-90"
+                style={{ backgroundColor: "#B8860B", color: "#fff" }}
+              >
+                {t.registerCta}
+              </button>
             </div>
             <div className="flex sm:hidden items-center gap-3">
               <LanguageToggle locale={locale} onToggle={handleLocaleToggle} />
@@ -386,20 +603,13 @@ export default function WebinarPage() {
 
       <main>
         {/* 1. Hero */}
-        <section
-          className="pt-32 pb-20 text-center"
-          style={{ paddingLeft: "1.5rem", paddingRight: "1.5rem" }}
-        >
+        <section className="pt-32 pb-20 text-center px-6">
           <div className="mx-auto max-w-3xl">
             <AnimateInView>
-              <Badge
-                variant="outline"
-                className="mb-6 border-[#B8860B]/20 text-[#B8860B] bg-[#B8860B]/5 font-medium px-4 py-1.5"
-              >
+              <Badge variant="outline" className="mb-6 border-[#B8860B]/20 text-[#B8860B] bg-[#B8860B]/5 font-medium px-4 py-1.5">
                 {t.badge}
               </Badge>
             </AnimateInView>
-
             <AnimateInView delay={60}>
               <h1
                 className={`text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-4 ${locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]"}`}
@@ -414,17 +624,14 @@ export default function WebinarPage() {
                 {t.titleHighlight}
               </p>
             </AnimateInView>
-
             <AnimateInView delay={120}>
               <p className="text-lg leading-relaxed mb-8 max-w-2xl mx-auto" style={{ color: "var(--lp-text-body)" }}>
                 {t.subtitle}
               </p>
             </AnimateInView>
-
             <AnimateInView delay={160}>
-              <SessionPicker locale={locale} />
+              <SessionCards locale={locale} onSelect={handleSessionSelect} />
             </AnimateInView>
-
           </div>
         </section>
 
@@ -435,15 +642,40 @@ export default function WebinarPage() {
 
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
-        {/* 3. Who it's for (dark section) */}
+        {/* 3. Who it's for */}
         <ForWhomSection t={t} locale={locale} />
 
-        {/* 4. Register CTA */}
-        <RegisterSection t={t} locale={locale} />
+        {/* 4. Registration form */}
+        <section
+          id="register"
+          style={{ paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)" }}
+        >
+          <div className="mx-auto max-w-lg px-6" ref={formRef}>
+            <AnimateInView className="text-center mb-8">
+              <h2
+                className={`text-3xl sm:text-4xl font-bold tracking-tight mb-2 ${locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]"}`}
+                style={{ color: "var(--lp-text-heading)" }}
+              >
+                {t.registerTitle}
+              </h2>
+              <p className="text-base" style={{ color: "var(--lp-text-muted)" }}>
+                {t.registerSubtitle}
+              </p>
+            </AnimateInView>
+            <AnimateInView delay={60}>
+              <div
+                className="p-6 sm:p-8 rounded-3xl"
+                style={{ backgroundColor: "#fff", border: "1px solid var(--lp-border)", boxShadow: "0 4px 24px rgba(0,0,0,0.06)" }}
+              >
+                <RegistrationForm locale={locale} preselectedDate={preselectedDate} />
+              </div>
+            </AnimateInView>
+          </div>
+        </section>
 
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
-        {/* 5. Speaker bio */}
+        {/* 5. Speaker */}
         <SpeakerSection t={t} locale={locale} />
 
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
@@ -451,10 +683,28 @@ export default function WebinarPage() {
         {/* 6. FAQ */}
         <FaqSection t={t} locale={locale} />
 
-        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
-
-        {/* 7. Final CTA (dark) */}
-        <FinalCtaSection t={t} locale={locale} />
+        {/* 7. Final CTA */}
+        <section style={{ paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)", backgroundColor: "#1D1D1F" }}>
+          <div className="mx-auto max-w-2xl px-6 text-center">
+            <AnimateInView>
+              <h2
+                className={`text-3xl sm:text-4xl font-bold tracking-tight text-white mb-8 ${locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]"}`}
+              >
+                {t.finalCtaTitle}
+              </h2>
+              <button
+                onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
+                className="rounded-full text-base px-8 py-4 font-semibold hover:scale-[1.02] transition-transform"
+                style={{ backgroundColor: "#B8860B", color: "#fff" }}
+              >
+                {t.finalCtaButton}
+              </button>
+              <p className="mt-6 text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>
+                {t.finalCtaContact}
+              </p>
+            </AnimateInView>
+          </div>
+        </section>
       </main>
 
       {/* Footer */}
@@ -464,7 +714,7 @@ export default function WebinarPage() {
             <Link href="/" className="text-lg font-bold tracking-tight font-[family-name:var(--font-dm-sans)]">
               MOTTO Digital
             </Link>
-            <div className="flex items-center gap-6 text-sm" style={{ color: "var(--lp-text-muted)" }}>
+            <div className="flex flex-wrap items-center gap-6 text-sm" style={{ color: "var(--lp-text-muted)" }}>
               <Link href="/" className="hover:text-[#1D1D1F] transition-colors">Home</Link>
               <Link href="/audit" className="hover:text-[#1D1D1F] transition-colors">Free AI Audit</Link>
               <Link href="/privacy" className="hover:text-[#1D1D1F] transition-colors">Privacy</Link>
