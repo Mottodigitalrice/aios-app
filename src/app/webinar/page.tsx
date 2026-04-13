@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Mail, Linkedin, Calendar, Clock, Monitor, Users, CheckCircle2 } from "lucide-react";
+import { Mail, Linkedin, Clock, Monitor, Users, CheckCircle2 } from "lucide-react";
 import { LanguageToggle } from "@/components/landing/language-toggle";
 import { MobileNav } from "@/components/landing/mobile-nav";
 import { AnimateInView } from "@/components/landing/animate-in-view";
@@ -15,8 +15,14 @@ import en from "@/lib/i18n/dictionaries/en";
 import ja from "@/lib/i18n/dictionaries/ja";
 
 // ─── Config ──────────────────────────────────────────────────────────────────
-// Update these when the date is confirmed. One place to change.
 const TIDYCAL_URL = "https://tidycal.com/rice/aios-webinar";
+
+const SESSIONS = [
+  { dayEn: "Friday",    dayJa: "金曜日",  dateEn: "April 17",  dateJa: "4月17日", timeEn: "2:00 PM JST",  timeJa: "14:00（日本時間）" },
+  { dayEn: "Monday",   dayJa: "月曜日",  dateEn: "April 20",  dateJa: "4月20日", timeEn: "3:00 PM JST",  timeJa: "15:00（日本時間）" },
+  { dayEn: "Wednesday",dayJa: "水曜日",  dateEn: "April 22",  dateJa: "4月22日", timeEn: "8:00 PM JST",  timeJa: "20:00（日本時間）" },
+  { dayEn: "Thursday", dayJa: "木曜日",  dateEn: "April 23",  dateJa: "4月23日", timeEn: "2:00 PM JST",  timeJa: "14:00（日本時間）" },
+];
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type Locale = "en" | "ja";
@@ -32,30 +38,58 @@ function getInitialLocale(): Locale {
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
 
-function EventDetailsRow({ t }: { t: typeof en.webinar }) {
-  const details = [
-    { icon: <Calendar className="size-4" />, label: t.eventDate },
-    { icon: <Clock className="size-4" />, label: t.eventTime },
-    { icon: <Monitor className="size-4" />, label: t.eventFormat },
-    { icon: <Users className="size-4" />, label: t.eventCapacity },
-  ];
-
+function SessionPicker({ locale }: { locale: Locale }) {
   return (
-    <div className="flex flex-wrap justify-center gap-4 mt-6">
-      {details.map((d, i) => (
-        <div
-          key={i}
-          className="flex items-center gap-2 text-sm px-4 py-2 rounded-full"
-          style={{
-            backgroundColor: "var(--lp-bg-secondary, #F5F5F7)",
-            color: "var(--lp-text-body)",
-            border: "1px solid var(--lp-border)",
-          }}
-        >
-          <span style={{ color: "#B8860B" }}>{d.icon}</span>
-          {d.label}
-        </div>
-      ))}
+    <div className="mt-8">
+      <p className="text-sm font-medium mb-4" style={{ color: "var(--lp-text-muted)" }}>
+        {locale === "ja" ? "参加したい日程を選んでください" : "Choose your session"}
+      </p>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {SESSIONS.map((s, i) => (
+          <a
+            key={i}
+            href={TIDYCAL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex flex-col items-center gap-1 px-3 py-4 rounded-2xl text-center transition-all hover:scale-[1.03]"
+            style={{
+              backgroundColor: "var(--lp-bg-secondary, #F5F5F7)",
+              border: "1px solid var(--lp-border)",
+            }}
+          >
+            <span className="text-xs font-medium" style={{ color: "#B8860B" }}>
+              {locale === "ja" ? s.dayJa : s.dayEn}
+            </span>
+            <span
+              className={`text-base font-bold leading-tight ${locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]"}`}
+              style={{ color: "var(--lp-text-heading)" }}
+            >
+              {locale === "ja" ? s.dateJa : s.dateEn}
+            </span>
+            <span className="text-xs" style={{ color: "var(--lp-text-muted)" }}>
+              {locale === "ja" ? s.timeJa : s.timeEn}
+            </span>
+            <span
+              className="mt-2 text-xs font-semibold px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+              style={{ backgroundColor: "#B8860B", color: "#fff" }}
+            >
+              {locale === "ja" ? "登録" : "Register"}
+            </span>
+          </a>
+        ))}
+      </div>
+      <div className="flex flex-wrap justify-center gap-4 mt-5">
+        {[
+          { icon: <Monitor className="size-3.5" />, label: locale === "ja" ? "Zoomオンライン（無料）" : "Zoom (free)" },
+          { icon: <Users className="size-3.5" />, label: locale === "ja" ? "定員50名" : "50 seats" },
+          { icon: <Clock className="size-3.5" />, label: locale === "ja" ? "60分" : "60 minutes" },
+        ].map((d, i) => (
+          <div key={i} className="flex items-center gap-1.5 text-xs" style={{ color: "var(--lp-text-muted)" }}>
+            <span style={{ color: "#B8860B" }}>{d.icon}</span>
+            {d.label}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -391,22 +425,11 @@ export default function WebinarPage() {
             </AnimateInView>
 
             <AnimateInView delay={160}>
-              <EventDetailsRow t={t} />
+              <SessionPicker locale={locale} />
             </AnimateInView>
 
             <AnimateInView delay={200}>
-              <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href={TIDYCAL_URL} target="_blank" rel="noopener noreferrer">
-                  <Button
-                    size="lg"
-                    className="rounded-full text-base px-8 py-6 font-semibold shadow-lg hover:scale-[1.02] transition-transform"
-                    style={{ backgroundColor: "#B8860B", color: "#fff" }}
-                  >
-                    {t.registerButtonLabel}
-                  </Button>
-                </a>
-              </div>
-              <p className="mt-4 text-sm" style={{ color: "var(--lp-text-muted)" }}>
+              <p className="mt-5 text-sm" style={{ color: "var(--lp-text-muted)" }}>
                 {t.recordingNote}
               </p>
             </AnimateInView>
