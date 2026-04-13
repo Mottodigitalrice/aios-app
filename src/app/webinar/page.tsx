@@ -106,17 +106,17 @@ function AgendaSection({ t, locale }: { t: typeof en.webinar; locale: Locale }) 
             {t.agendaTitle}
           </h2>
         </AnimateInView>
-        <div className="grid sm:grid-cols-2 gap-6">
+        <div className="flex flex-col gap-4">
           {t.agendaItems.map((item, i) => (
-            <AnimateInView key={i} delay={i * 80}>
+            <AnimateInView key={i} delay={i * 60}>
               <div
-                className="flex gap-4 p-6 rounded-2xl h-full"
+                className="flex gap-4 p-5 rounded-2xl"
                 style={{ backgroundColor: "var(--lp-bg-secondary, #F5F5F7)", border: "1px solid var(--lp-border)" }}
               >
-                <span className="text-2xl flex-shrink-0 mt-0.5">{item.icon}</span>
+                <span className="text-xl flex-shrink-0 mt-0.5 w-7 text-center">{item.icon}</span>
                 <div>
                   <h3
-                    className={`font-semibold mb-2 ${locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]"}`}
+                    className={`font-semibold mb-1 ${locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]"}`}
                     style={{ color: "var(--lp-text-heading)" }}
                   >
                     {item.title}
