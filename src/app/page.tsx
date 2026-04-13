@@ -268,6 +268,7 @@ export default function HomePage() {
                 <Link href="/audit" className="hover:text-[#1D1D1F] transition-colors">{t.footer.auditLink}</Link>
                 <Link href="/privacy" className="hover:text-[#1D1D1F] transition-colors">{t.footer.privacyLink}</Link>
                 <Link href="/presentation" className="hover:text-[#1D1D1F] transition-colors">{t.footer.presentationLink}</Link>
+                <Link href="/webinar" className="hover:text-[#1D1D1F] transition-colors">{locale === "ja" ? "無料ウェビナー" : "Free Webinar"}</Link>
               </div>
             </div>
             <div>

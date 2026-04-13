@@ -716,6 +716,94 @@ const en = {
       copyright: "MOTTO Digital Inc. All rights reserved.",
     },
   },
+  webinar: {
+    badge: "Free Online Webinar",
+    title: "The AI Operating System",
+    titleHighlight: "How Japanese Companies Are Building AI Teams in 2026",
+    subtitle:
+      "In 60 minutes, learn the framework to move from \u201cdabbling with ChatGPT\u201d to running AI as a core part of your business operations. Live demo included.",
+    eventDate: "Date TBD \u2014 April / May 2026",
+    eventTime: "14:00\u201315:00 JST",
+    eventFormat: "Zoom (free)",
+    eventCapacity: "50 seats",
+    eventDuration: "60 minutes",
+    registerCta: "Register Now \u2014 Free",
+    recordingNote: "A recording will be sent to all registrants within 24 hours.",
+    agendaTitle: "What You\u2019ll Learn",
+    agendaItems: [
+      {
+        icon: "\uD83D\uDD0D",
+        title: "The Paradigm Shift: From AI Tools to AI Teams",
+        description: "Why most companies are using AI wrong \u2014 and what actually works.",
+      },
+      {
+        icon: "\uD83C\uDFE2",
+        title: "Japanese Company Case Studies",
+        description: "Real examples from enterprise to SME \u2014 the common patterns behind successful AI adoption.",
+      },
+      {
+        icon: "\uD83D\uDCBB",
+        title: "Live Demo: AI Agents in Action",
+        description: "Watch Claude Code automate a real executive task in real-time. This is the \u201cwow\u201d moment.",
+      },
+      {
+        icon: "\u2753",
+        title: "Live Q&A",
+        description: "Ask directly how this applies to your business. No pre-screened questions.",
+      },
+    ],
+    forWhomTitle: "Who This Is For",
+    forWhomItems: [
+      {
+        icon: "\uD83D\uDCCA",
+        title: "Executives frustrated with AI ROI",
+        description: "You\u2019ve tried ChatGPT. The results haven\u2019t matched the hype. Learn why \u2014 and what to do instead.",
+      },
+      {
+        icon: "\uD83D\uDE80",
+        title: "Leaders who want to start with AI",
+        description: "Not sure where to begin? This session gives you a clear framework to build an AI system your team actually owns.",
+      },
+      {
+        icon: "\u26A1",
+        title: "Teams stretched by manual work",
+        description: "Facing labor shortages and repetitive processes? AI agents can amplify your team without replacing anyone.",
+      },
+    ],
+    registerTitle: "Reserve Your Seat",
+    registerSubtitle: "50 seats. Register early.",
+    registerButtonLabel: "Register Now (Free) \u2192",
+    speakerTitle: "About the Host",
+    speakerName: "Lewis Rice",
+    speakerRole: "AI Consultant & Founder, MOTTO Digital",
+    speakerBullets: [
+      "10+ years in Japan \u2014 consulting, technology, and AI",
+      "Founder of MOTTO Digital, an AI consulting firm for Japanese SMBs",
+      "Runs his own business on an AI Operating System \u2014 using it live every day",
+    ],
+    faqTitle: "Frequently Asked Questions",
+    faqItems: [
+      {
+        question: "Is this webinar free?",
+        answer: "Yes, completely free. No credit card required.",
+      },
+      {
+        question: "Will there be a recording?",
+        answer: "Yes. All registrants receive a recording link within 24 hours of the event.",
+      },
+      {
+        question: "Do I need technical knowledge to attend?",
+        answer: "No. This webinar is designed for business owners and executives \u2014 not engineers. No technical background required.",
+      },
+      {
+        question: "Will there be a sales pitch?",
+        answer: "No hard sell. After the webinar, we\u2019ll share information about a free AI audit for those interested. That\u2019s it.",
+      },
+    ],
+    finalCtaTitle: "Limited seats. Register before they\u2019re gone.",
+    finalCtaButton: "Register Now \u2014 Free \u2192",
+    finalCtaContact: "Questions? Email rice@mottodigital.jp",
+  },
 } as const;
 
 export default en;
