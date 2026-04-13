@@ -963,7 +963,7 @@ const en = {
     title: "Agentic AI:",
     titleHighlight: "The New Category of AI Creating Real Impact in 2026",
     subtitle:
-      "In this free 60-minute webinar, Lewis will help you understand Agentic AI \u2014 the new category of AI that is creating real impact across companies of all sizes and industries. You may have heard of it as Claude Code, Codex, Antigravity, or OpenAI \u2014 for the first time, AI can actually do work. Not just answer questions.",
+      "In this free 60-minute webinar, Lewis will help you understand Agentic AI \u2014 the new category of AI that is creating real impact across companies of all sizes and industries. You may have heard of it as Claude Code, Codex, Antigravity, or Open Claw \u2014 for the first time, AI can actually do work. Not just answer questions.",
     eventDate: "Date TBD \u2014 April / May 2026",
     eventTime: "14:00\u201315:00 JST",
     eventFormat: "Zoom (free)",
