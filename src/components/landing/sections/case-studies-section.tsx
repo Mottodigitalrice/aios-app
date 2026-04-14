@@ -1,11 +1,13 @@
 "use client";
 
+import { useRef } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { AnimateInView } from "@/components/landing/animate-in-view";
 import type { SectionProps } from "./types";
 
 export default function CaseStudiesSection({ t, locale }: SectionProps) {
+  const topTabsRef = useRef<HTMLDivElement>(null);
   const headingFont =
     locale === "ja"
       ? "font-[family-name:var(--font-shippori-mincho)]"
@@ -52,7 +54,7 @@ export default function CaseStudiesSection({ t, locale }: SectionProps) {
 
         {/* Tabs */}
         <Tabs defaultValue="rakuten" className="w-full">
-          <div className="overflow-x-auto -mx-6 px-6 mb-8 flex justify-center">
+          <div ref={topTabsRef} className="overflow-x-auto -mx-6 px-6 mb-8 flex justify-center">
             <TabsList
               className="inline-flex w-auto gap-1.5 p-1.5 rounded-xl"
               style={{ backgroundColor: "var(--lp-bg-elevated)" }}
@@ -224,6 +226,34 @@ export default function CaseStudiesSection({ t, locale }: SectionProps) {
                   ) : (
                     <span>{tab.source}</span>
                   )}
+                </div>
+
+                {/* Bottom tab switcher — repeat for convenience after scrolling */}
+                <div className="overflow-x-auto -mx-6 px-6 mt-8 flex justify-center">
+                  <TabsList
+                    className="inline-flex w-auto gap-1.5 p-1.5 rounded-xl"
+                    style={{ backgroundColor: "var(--lp-bg-elevated)" }}
+                  >
+                    {cs.tabs.map((otherTab: any) => (
+                      <TabsTrigger
+                        key={otherTab.id}
+                        value={otherTab.id}
+                        onClick={() => {
+                          // Delay scroll so tab content swaps first, then scroll to top tabs
+                          setTimeout(() => {
+                            const el = topTabsRef.current;
+                            if (el) {
+                              const y = el.getBoundingClientRect().top + window.scrollY - 80;
+                              window.scrollTo({ top: y, behavior: "smooth" });
+                            }
+                          }, 50);
+                        }}
+                        className="group rounded-lg px-5 py-3 transition-all data-[state=active]:bg-[#1D1D1F] data-[state=active]:shadow-sm data-[state=inactive]:hover:bg-black/[0.03]"
+                      >
+                        {otherTab.logo && <img src={otherTab.logo} alt={otherTab.name} className="h-5 w-auto opacity-40 transition-all group-data-[state=active]:opacity-100 group-data-[state=active]:brightness-0 group-data-[state=active]:invert" />}
+                      </TabsTrigger>
+                    ))}
+                  </TabsList>
                 </div>
               </AnimateInView>
             </TabsContent>

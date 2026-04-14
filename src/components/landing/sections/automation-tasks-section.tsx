@@ -207,18 +207,18 @@ export default function AutomationTasksSection({ t, locale }: SectionProps) {
           </div>
         </div>
 
-        {/* Mobile: horizontal pills + stacked content */}
+        {/* Mobile: 2-row grid buttons + stacked content */}
         <div className="md:hidden">
-          <div className="overflow-x-auto -mx-6 px-6 mb-6">
+          <div className="mb-6">
             <div
-              className="inline-flex w-auto gap-1.5 p-1.5 rounded-xl"
+              className="grid grid-cols-3 gap-1.5 p-1.5 rounded-xl"
               style={{ backgroundColor: "var(--lp-bg-elevated)" }}
             >
               {at.departments.map((dept: any) => (
                 <button
                   key={dept.id}
                   onClick={() => setActiveId(dept.id)}
-                  className={`rounded-lg px-3.5 py-2 text-xs font-semibold whitespace-nowrap transition-all ${
+                  className={`rounded-lg px-2.5 py-2.5 text-xs font-semibold text-center transition-all ${
                     dept.id === activeId
                       ? "bg-[#1D1D1F] text-white shadow-sm"
                       : "text-[#86868B]"

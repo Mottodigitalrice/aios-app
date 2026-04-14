@@ -9,13 +9,13 @@ import { FAQSection } from "@/components/landing/faq-section";
 import { LanguageToggle } from "@/components/landing/language-toggle";
 
 import HeroSection from "@/components/landing/sections/hero-section";
-import BeforeAfterSection from "@/components/landing/sections/before-after-section";
+
 import HowItWorksSection from "@/components/landing/sections/how-it-works-section";
 import ValuePropsSection from "@/components/landing/sections/value-props-section";
 import { BrainBodySection } from "@/components/landing/brain-body-section";
 import { AgenticTimeline, AgenticArchitecture } from "@/components/landing/sections/agentic-terminal-section";
 import SolutionSection from "@/components/landing/sections/solution-section";
-import ProofSection from "@/components/landing/sections/proof-section";
+
 import ProgramSection from "@/components/landing/sections/program-section";
 import MidCtaSection from "@/components/landing/sections/mid-cta-section";
 import PricingSection from "@/components/landing/sections/pricing-section";
@@ -127,32 +127,24 @@ export default function HomePage() {
         {/* 1.5. Tool Banner — what this is built on */}
         <ToolBannerSection t={t} locale={locale} />
 
-        {/* 2. Before/After — pain agitation: what changes when your business has a brain */}
-        <BeforeAfterSection t={t} locale={locale} />
+        {/* 2. Program — 6-month co-build roadmap */}
+        <ProgramSection t={t} locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
-        {/* 3. How It Works — 3-step action plan */}
-        <HowItWorksSection t={t} locale={locale} />
-        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
-
-        {/* 4. Value Props — what you get */}
-        <ValuePropsSection t={t} locale={locale} />
-
-        {/* 5. Proof — Lewis's AIOS metrics + org chart (dark section) */}
-        <ProofSection t={t} locale={locale} />
-        <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
-
-        {/* 5a. Case Studies — Japanese companies using this technology */}
+        {/* 3. Case Studies — Japanese companies using this technology */}
         <CaseStudiesSection t={t} locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
-        {/* 5b. Automation Tasks — what you could automate */}
+        {/* 4. Automation Tasks — what you could automate */}
         <AutomationTasksSection t={t} locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
 
-        {/* 6. Program — 6-month roadmap */}
-        <ProgramSection t={t} locale={locale} />
+        {/* 5. How It Works — 3-step action plan */}
+        <HowItWorksSection t={t} locale={locale} />
         <div className="h-px bg-gradient-to-r from-transparent via-[#E8E8ED] to-transparent" />
+
+        {/* 6. Value Props — 5 big impacts */}
+        <ValuePropsSection t={t} locale={locale} />
 
         {/* 7. Mid CTA — "Ready to build yours?" */}
         <MidCtaSection t={t} locale={locale} />
