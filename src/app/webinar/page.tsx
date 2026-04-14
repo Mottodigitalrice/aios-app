@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Mail, Linkedin, Clock, Monitor, Users, CheckCircle2, Loader2 } from "lucide-react";
+import { Mail, Linkedin, Clock, Monitor, CheckCircle2, Loader2, Briefcase, Lightbulb, Target } from "lucide-react";
 import { LanguageToggle } from "@/components/landing/language-toggle";
 import { MobileNav } from "@/components/landing/mobile-nav";
 import { AnimateInView } from "@/components/landing/animate-in-view";
@@ -83,7 +83,6 @@ function SessionCards({ locale, onSelect }: { locale: Locale; onSelect: (id: str
       <div className="flex flex-wrap justify-center gap-4 mt-5">
         {[
           { icon: <Monitor className="size-3.5" />, label: locale === "ja" ? "Google Meet（無料）" : "Google Meet (free)" },
-          { icon: <Users className="size-3.5" />, label: locale === "ja" ? "定員50名" : "50 seats" },
           { icon: <Clock className="size-3.5" />, label: locale === "ja" ? "60分" : "60 minutes" },
         ].map((d, i) => (
           <div key={i} className="flex items-center gap-1.5 text-xs" style={{ color: "var(--lp-text-muted)" }}>
@@ -109,6 +108,13 @@ function RegistrationForm({ locale, preselectedDate }: { locale: Locale; presele
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
+  const successRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (status === "success" && successRef.current) {
+      successRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [status]);
 
   // Sync preselected date when it changes (from session card clicks)
   useEffect(() => {
@@ -169,7 +175,7 @@ function RegistrationForm({ locale, preselectedDate }: { locale: Locale; presele
 
   if (status === "success") {
     return (
-      <div className="text-center py-12 px-6">
+      <div ref={successRef} className="text-center py-12 px-6">
         <div className="size-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: "#B8860B15" }}>
           <CheckCircle2 className="size-8" style={{ color: "#B8860B" }} />
         </div>
@@ -382,7 +388,7 @@ function AgendaSection({ t, locale }: { t: typeof en.webinar; locale: Locale }) 
                 className="flex gap-4 p-5 rounded-2xl"
                 style={{ backgroundColor: "var(--lp-bg-secondary, #F5F5F7)", border: "1px solid var(--lp-border)" }}
               >
-                <span className="text-xl flex-shrink-0 mt-0.5 w-7 text-center">{item.icon}</span>
+                <span className="text-sm font-bold flex-shrink-0 mt-0.5 w-7 text-center tabular-nums" style={{ color: "#B8860B" }}>{String(i + 1).padStart(2, "0")}</span>
                 <div>
                   <h3
                     className={`font-semibold mb-1 ${locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]"}`}
@@ -403,6 +409,8 @@ function AgendaSection({ t, locale }: { t: typeof en.webinar; locale: Locale }) 
   );
 }
 
+const FOR_WHOM_ICONS = [Briefcase, Lightbulb, Target];
+
 function ForWhomSection({ t, locale }: { t: typeof en.webinar; locale: Locale }) {
   return (
     <section style={{ paddingTop: "var(--lp-section-gap)", paddingBottom: "var(--lp-section-gap)", backgroundColor: "#1D1D1F" }}>
@@ -415,10 +423,12 @@ function ForWhomSection({ t, locale }: { t: typeof en.webinar; locale: Locale })
           </h2>
         </AnimateInView>
         <div className="grid sm:grid-cols-3 gap-6">
-          {t.forWhomItems.map((item, i) => (
+          {t.forWhomItems.map((item, i) => {
+            const Icon = FOR_WHOM_ICONS[i];
+            return (
             <AnimateInView key={i} delay={i * 80}>
               <div className="flex flex-col gap-3 p-6 rounded-2xl h-full" style={{ backgroundColor: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                <span className="text-3xl">{item.icon}</span>
+                <Icon className="size-6" style={{ color: "#B8860B" }} />
                 <h3
                   className={`font-semibold text-white ${locale === "ja" ? "font-[family-name:var(--font-shippori-mincho)]" : "font-[family-name:var(--font-dm-sans)]"}`}
                 >
@@ -429,7 +439,8 @@ function ForWhomSection({ t, locale }: { t: typeof en.webinar; locale: Locale })
                 </p>
               </div>
             </AnimateInView>
-          ))}
+          );
+          })}
         </div>
       </div>
     </section>
