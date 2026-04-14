@@ -6,7 +6,6 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Mail, Linkedin, Clock, Monitor, CheckCircle2, Loader2, Briefcase, Lightbulb, Target } from "lucide-react";
-import { LanguageToggle } from "@/components/landing/language-toggle";
 import { MobileNav } from "@/components/landing/mobile-nav";
 import { AnimateInView } from "@/components/landing/animate-in-view";
 import { budouxWrap } from "@/lib/budoux-transform";
@@ -32,14 +31,6 @@ const REFERRAL_OPTIONS = [
 // ─── Types ────────────────────────────────────────────────────────────────────
 type Locale = "en" | "ja";
 const dictionaries = { en, ja } as const;
-
-function getInitialLocale(): Locale {
-  if (typeof window === "undefined") return "ja";
-  const params = new URLSearchParams(window.location.search);
-  const urlLocale = params.get("lang");
-  if (urlLocale === "ja" || urlLocale === "en") return urlLocale;
-  return "ja";
-}
 
 // ─── Hero session cards (click → scroll to form + pre-select) ────────────────
 function SessionCards({ locale, onSelect }: { locale: Locale; onSelect: (id: string) => void }) {
@@ -543,30 +534,19 @@ function FaqSection({ t, locale }: { t: typeof en.webinar; locale: Locale }) {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function WebinarPage() {
-  const [locale, setLocale] = useState<Locale>(getInitialLocale);
+  const locale: Locale = "ja";
   const [preselectedDate, setPreselectedDate] = useState("");
   const formRef = useRef<HTMLDivElement>(null);
 
   const rawT = dictionaries[locale].webinar;
   const t = useMemo(
-    () => (locale === "ja" ? budouxWrap(rawT) : rawT) as unknown as typeof en.webinar,
-    [locale, rawT],
+    () => budouxWrap(rawT) as unknown as typeof en.webinar,
+    [rawT],
   );
 
   useEffect(() => {
-    document.documentElement.lang = locale;
-  }, [locale]);
-
-  const handleLocaleToggle = (newLocale: Locale) => {
-    setLocale(newLocale);
-    const url = new URL(window.location.href);
-    if (newLocale === "ja") {
-      url.searchParams.delete("lang");
-    } else {
-      url.searchParams.set("lang", newLocale);
-    }
-    window.history.replaceState({}, "", url.toString());
-  };
+    document.documentElement.lang = "ja";
+  }, []);
 
   function handleSessionSelect(id: string) {
     setPreselectedDate(id);
@@ -586,16 +566,6 @@ export default function WebinarPage() {
               MOTTO Digital
             </Link>
             <div className="hidden sm:flex items-center gap-6">
-              <Link href="/#proof" className="nav-link-hover text-sm transition-colors" style={{ color: "var(--lp-text-body)" }}>
-                Proof
-              </Link>
-              <Link href="/#program" className="nav-link-hover text-sm transition-colors" style={{ color: "var(--lp-text-body)" }}>
-                Program
-              </Link>
-              <Link href="/#pricing" className="nav-link-hover text-sm transition-colors" style={{ color: "var(--lp-text-body)" }}>
-                Pricing
-              </Link>
-              <LanguageToggle locale={locale} onToggle={handleLocaleToggle} />
               <button
                 onClick={() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })}
                 className="rounded-full text-sm px-5 py-2 font-semibold transition-colors hover:opacity-90"
@@ -605,7 +575,6 @@ export default function WebinarPage() {
               </button>
             </div>
             <div className="flex sm:hidden items-center gap-3">
-              <LanguageToggle locale={locale} onToggle={handleLocaleToggle} />
               <MobileNav locale={locale} />
             </div>
           </div>
