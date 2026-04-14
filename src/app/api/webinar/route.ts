@@ -103,7 +103,17 @@ export async function POST(req: NextRequest) {
         }).catch(console.error)
       : Promise.resolve();
 
-    await Promise.allSettled([webhookPromise, notionPromise]);
+    // Forward to Cloud n8n for confirmation email (fire and forget)
+    const emailPromise = fetchWithTimeout(
+      "https://mottodigitalpro.app.n8n.cloud/webhook/webinar-confirmation-email",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }
+    ).catch(console.error);
+
+    await Promise.allSettled([webhookPromise, notionPromise, emailPromise]);
 
     return NextResponse.json({ success: true, message: "Registration submitted" });
   } catch (error) {
