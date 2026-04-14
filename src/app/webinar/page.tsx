@@ -22,9 +22,9 @@ const SESSIONS = [
 ];
 
 const REFERRAL_OPTIONS = [
-  { id: "kawamura", labelEn: "Kawamura san", labelJa: "川村さん" },
+  { id: "kawamura", labelEn: "Kawamura san", labelJa: "河村さん" },
   { id: "ishikawa", labelEn: "Ishikawa san", labelJa: "石川さん" },
-  { id: "fuji",     labelEn: "Fuji san",     labelJa: "富士さん" },
+  { id: "fuji",     labelEn: "Fuji san",     labelJa: "藤井さん" },
   { id: "other",    labelEn: "Other",         labelJa: "その他" },
 ];
 
