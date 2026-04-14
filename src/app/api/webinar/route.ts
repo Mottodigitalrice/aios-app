@@ -113,7 +113,17 @@ export async function POST(req: NextRequest) {
       }
     ).catch(console.error);
 
-    await Promise.allSettled([webhookPromise, notionPromise, emailPromise]);
+    // Schedule reminder emails (24h + 1h before session) via Cloud n8n
+    const reminderPromise = fetchWithTimeout(
+      "https://mottodigitalpro.app.n8n.cloud/webhook/webinar-reminder-sequence",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }
+    ).catch(console.error);
+
+    await Promise.allSettled([webhookPromise, notionPromise, emailPromise, reminderPromise]);
 
     return NextResponse.json({ success: true, message: "Registration submitted" });
   } catch (error) {
