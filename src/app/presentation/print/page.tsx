@@ -78,7 +78,7 @@ export default function PrintPresentation() {
       <Slide>
         <div className="flex flex-col items-center">
           <div className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full border border-[#B8860B]/20 bg-[#B8860B]/8 text-[#B8860B] text-sm">
-            MOTTO Digital — AI Infrastructure
+            Mottodigital — AI Infrastructure
           </div>
           <h1 className="text-7xl font-bold tracking-tight text-center leading-tight">
             The <span className="bg-gradient-to-r from-[#B8860B] via-[#D4A843] to-[#B8860B] bg-clip-text text-transparent">AI Paradigm Shift</span>
@@ -837,7 +837,7 @@ export default function PrintPresentation() {
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-2 text-sm text-[#1D1D1F]">
                 <Layers className="size-4 text-[#B8860B]" />
-                <span className="font-semibold">MOTTO Digital</span>
+                <span className="font-semibold">Mottodigital</span>
                 <span className="text-[#E8E8ED] mx-1">&middot;</span>
                 <span className="text-[#6E6E73]">Lewis Rice</span>
               </div>

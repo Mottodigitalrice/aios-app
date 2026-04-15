@@ -304,13 +304,13 @@ export default function ReportPage({
       <header className="border-b border-zinc-800">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
           <Link
-            href="https://mottodigital.com"
+            href="https://mottodigital.jp"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-zinc-300 transition-colors hover:text-white"
           >
             <Layers className="h-5 w-5 text-indigo-400" />
-            <span className="text-sm font-medium">mottodigital.com</span>
+            <span className="text-sm font-medium">mottodigital.jp</span>
           </Link>
           <Badge
             variant="outline"
@@ -334,7 +334,7 @@ export default function ReportPage({
             <span className="hidden sm:inline">|</span>
             <span>{report.reportDate}</span>
             <span className="hidden sm:inline">|</span>
-            <span>Lewis Rice, MOTTO Digital</span>
+            <span>Lewis Rice, Mottodigital</span>
           </div>
         </div>
 
@@ -695,7 +695,7 @@ export default function ReportPage({
         <footer className="pb-12 text-center">
           <div className="mb-3 flex items-center justify-center gap-2">
             <Layers className="h-5 w-5 text-indigo-400" />
-            <span className="font-semibold text-zinc-300">MOTTO Digital</span>
+            <span className="font-semibold text-zinc-300">Mottodigital</span>
           </div>
           <p className="text-sm text-zinc-500">
             AI Operating System for Business

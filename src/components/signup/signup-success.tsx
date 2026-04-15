@@ -25,7 +25,7 @@ export function SignupSuccess() {
             href="/"
             className="text-lg font-bold tracking-tight"
           >
-            MOTTO Digital
+            Mottodigital
           </Link>
           <div className="flex items-center gap-4">
             <LanguageToggle locale={locale} onToggle={setLocale} />
@@ -147,7 +147,7 @@ export function SignupSuccess() {
             href="/"
             className="text-sm font-semibold text-[#6E6E73]"
           >
-            MOTTO Digital
+            Mottodigital
           </Link>
           <div className="flex items-center gap-6 text-sm text-[#86868B]">
             <Link href="/" className="hover:text-[#6E6E73] transition-colors">

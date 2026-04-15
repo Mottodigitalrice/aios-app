@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "AIOS — Build an AI Team That Actually Works | MOTTO Digital";
+export const alt = "AIOS — Build an AI Team That Actually Works | Mottodigital";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -80,7 +80,7 @@ export default async function Image() {
               </svg>
             </div>
             <span style={{ fontSize: "28px", color: "#a1a1aa", fontWeight: 500 }}>
-              MOTTO Digital
+              Mottodigital
             </span>
           </div>
 

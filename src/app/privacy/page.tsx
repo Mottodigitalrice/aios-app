@@ -7,9 +7,9 @@ import ja from "@/lib/i18n/dictionaries/ja";
 const dictionaries = { en, ja } as const;
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | AIOS — MOTTO Digital",
+  title: "Privacy Policy | AIOS — Mottodigital",
   description:
-    "Privacy policy for AIOS by MOTTO Digital. How we collect, use, and protect your data.",
+    "Privacy policy for AIOS by Mottodigital. How we collect, use, and protect your data.",
 };
 
 export default async function PrivacyPage({
@@ -37,7 +37,7 @@ export default async function PrivacyPage({
             className="flex items-center gap-2 text-lg font-bold tracking-tight"
           >
             <Layers className="size-6 text-indigo-400" />
-            <span>MOTTO Digital</span>
+            <span>Mottodigital</span>
           </Link>
           <Link
             href="/audit"
@@ -140,7 +140,7 @@ export default async function PrivacyPage({
             className="flex items-center gap-2 text-sm font-semibold text-zinc-400"
           >
             <Layers className="size-5 text-indigo-400" />
-            <span>MOTTO Digital</span>
+            <span>Mottodigital</span>
           </Link>
           <div className="flex items-center gap-6 text-sm text-zinc-500">
             <Link

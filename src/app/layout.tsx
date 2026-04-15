@@ -12,7 +12,7 @@ const shipporiMincho = Shippori_Mincho({ subsets: ["latin"], weight: ["400", "50
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://aios.mottodigital.jp"),
-  title: "AIOS — Build an AI Team That Actually Works | MOTTO Digital",
+  title: "AIOS — Build an AI Team That Actually Works | Mottodigital",
   description:
     "Stop being the bottleneck. 6-month AI build program from ¥30,000/month — we build your AI operating system with you and train your team to run it. You own everything.",
   keywords: [
@@ -20,12 +20,12 @@ export const metadata: Metadata = {
     "AI consulting Japan",
     "AI agent development",
     "business automation Tokyo",
-    "MOTTO Digital",
+    "Mottodigital",
     "AIエージェント",
     "業務自動化",
     "AI導入支援",
   ],
-  authors: [{ name: "Lewis Rice", url: "https://mottodigital.com" }],
+  authors: [{ name: "Lewis Rice", url: "https://mottodigital.jp" }],
   alternates: {
     canonical: "https://aios.mottodigital.jp",
   },
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     alternateLocale: "ja_JP",
-    siteName: "MOTTO Digital",
+    siteName: "Mottodigital",
   },
   twitter: {
     card: "summary_large_image",
@@ -65,7 +65,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "ProfessionalService",
-              name: "MOTTO Digital",
+              name: "Mottodigital K.K.",
               description:
                 "Build an AI team that actually works. 6-month hands-on program for Japanese SMBs — we build your AI operating system with you and train your team to run it.",
               url: "https://aios.mottodigital.jp",
@@ -81,7 +81,9 @@ export default function RootLayout({
               },
               address: {
                 "@type": "PostalAddress",
-                addressLocality: "Tokyo",
+                streetAddress: "4F Orix Honmachi Building, 1-4-1 Nishihonmachi",
+                addressLocality: "Osaka",
+                postalCode: "550-0005",
                 addressCountry: "JP",
               },
               knowsLanguage: ["en", "ja"],

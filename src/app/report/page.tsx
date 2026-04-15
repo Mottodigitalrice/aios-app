@@ -13,7 +13,7 @@ export default function ReportIndexPage() {
             <div className="mb-6 flex items-center justify-center gap-2">
               <Layers className="h-6 w-6 text-indigo-400" />
               <span className="text-lg font-semibold text-zinc-200">
-                MOTTO Digital
+                Mottodigital
               </span>
             </div>
 

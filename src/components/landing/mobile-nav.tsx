@@ -35,7 +35,7 @@ export function MobileNav({ locale = "en" }: MobileNavProps) {
         <SheetTitle className="sr-only">{locale === "ja" ? "ナビゲーション" : "Navigation"}</SheetTitle>
         <div className="flex flex-col gap-8 pt-8">
           <Link href="/" className="text-lg font-bold text-[#1D1D1F]" onClick={() => setOpen(false)}>
-            MOTTO Digital
+            Mottodigital
           </Link>
           <nav className="flex flex-col gap-4">
             <Link

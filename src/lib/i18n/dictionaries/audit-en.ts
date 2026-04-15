@@ -431,7 +431,7 @@ const auditDict = {
     copyLink: "Copy link",
     copied: "Copied!",
     shareText:
-      "I just signed up for a free Agentic AI audit from MOTTO Digital. Check it out!",
+      "I just signed up for a free Agentic AI audit from Mottodigital. Check it out!",
     shareEmailSubject: "Agentic AI Readiness Audit",
     backHome: "Back to Home",
     manifesto: "The era of learning AI is over. Now we delegate to it.",

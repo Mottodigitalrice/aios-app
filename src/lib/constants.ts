@@ -1,6 +1,6 @@
 export const APP_NAME = "AIOS";
-export const APP_DESCRIPTION = "AI Operating System for Business — by MOTTO Digital";
-export const APP_AUTHOR = "MOTTO Digital";
+export const APP_DESCRIPTION = "AI Operating System for Business — by Mottodigital";
+export const APP_AUTHOR = "Mottodigital";
 
 // Live metrics — update these when real numbers change.
 // Content spec requires these to be easily updatable, not hardcoded in dictionary strings.

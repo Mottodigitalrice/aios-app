@@ -419,7 +419,7 @@ const auditDict = {
     copyLink: "リンクをコピー",
     copied: "コピーしました",
     shareText:
-      "MOTTO Digitalの無料エージェンティックAI診断に登録しました。ぜひチェックしてください。",
+      "Mottodigitalの無料エージェンティックAI診断に登録しました。ぜひチェックしてください。",
     shareEmailSubject: "エージェンティックAI診断",
     backHome: "ホームに戻る",
     manifesto: "「AIを学ぶ」段階は終わりました。次は、AIに任せる段階です。",

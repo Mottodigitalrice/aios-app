@@ -74,13 +74,13 @@ const PRESENTER_NOTES: Record<number, { timing: string; en: string[]; jp: string
     timing: "~2 min",
     en: [
       "Welcome everyone, thank you for your time today.",
-      "I'm Lewis Rice from MOTTO Digital — we specialize in AI infrastructure for businesses.",
+      "I'm Lewis Rice from Mottodigital — we specialize in AI infrastructure for businesses.",
       "Today we'll talk about why most companies are stuck with AI, and what just changed in 2026.",
       "This presentation is about 15-20 minutes, then open Q&A.",
     ],
     jp: [
       "皆さま、本日はお時間をいただきありがとうございます。",
-      "MOTTO Digitalのルイス・ライスです。企業向けAIインフラを専門としています。",
+      "Mottodigitalのルイス・ライスです。企業向けAIインフラを専門としています。",
       "今日は、なぜ多くの企業がAIで行き詰まっているのか、2026年に何が変わったのかについてお話しします。",
       "プレゼンは約15〜20分、その後Q&Aの時間を設けます。",
     ],
@@ -481,7 +481,7 @@ export default function PresentationPage() {
   return (
     <div
       role="application"
-      aria-label="MOTTO Digital presentation — use arrow keys or click to navigate"
+      aria-label="Mottodigital presentation — use arrow keys or click to navigate"
       className="h-screen overflow-hidden bg-white text-[#1D1D1F] cursor-pointer select-none relative"
       onClick={advance}
       onContextMenu={(e) => { e.preventDefault(); goBack(); }}
@@ -499,7 +499,7 @@ export default function PresentationPage() {
         <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-2.5">
           <div className="flex items-center gap-2 text-sm font-bold tracking-tight text-[#6E6E73]">
             <Layers className="size-4 text-[#B8860B]" />
-            MOTTO Digital
+            Mottodigital
           </div>
           <div className="flex items-center gap-3">
             <a
@@ -541,7 +541,7 @@ export default function PresentationPage() {
             <div className="pres-orbs-extra" />
             <div className="relative z-10 flex flex-col items-center">
               <div className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full border border-[#B8860B]/20 bg-[#B8860B]/8 text-[#B8860B] text-sm">
-                MOTTO Digital — AI Infrastructure
+                Mottodigital — AI Infrastructure
               </div>
               <h1 className="text-5xl sm:text-7xl font-bold tracking-tight text-center leading-tight">
                 AIの<span className="gradient-text">発想の転換</span>
@@ -1718,7 +1718,7 @@ export default function PresentationPage() {
               <div className="mt-8 flex flex-col items-center gap-3">
                 <div className="flex items-center gap-2 text-sm text-[#1D1D1F]">
                   <Layers className="size-4 text-[#B8860B]" />
-                  <span className="font-semibold">MOTTO Digital</span>
+                  <span className="font-semibold">Mottodigital</span>
                   <span className="text-[#E8E8ED] mx-1">&middot;</span>
                   <span className="text-[#6E6E73]">Lewis Rice</span>
                 </div>

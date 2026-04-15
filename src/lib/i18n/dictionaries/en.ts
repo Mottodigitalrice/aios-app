@@ -157,7 +157,7 @@ const en = {
       intro: {
         title: "Introduction",
         content:
-          "MOTTO Digital (\u201Cwe\u201D, \u201Cour\u201D, \u201Cus\u201D) is committed to protecting your privacy. This policy explains how we collect, use, and safeguard information provided through our free AI audit form and related services.",
+          "Mottodigital K.K. (\u201Cwe\u201D, \u201Cour\u201D, \u201Cus\u201D) is committed to protecting your privacy. This policy explains how we collect, use, and safeguard information provided through our free AI audit form and related services.",
       },
       dataCollected: {
         title: "What We Collect",
@@ -169,7 +169,7 @@ const en = {
         items: [
           "To prepare your personalized AI readiness audit report",
           "To schedule and conduct your audit walkthrough call",
-          "To contact you about MOTTO Digital\u2019s services that may be relevant to your business needs",
+          "To contact you about Mottodigital K.K.'s services that may be relevant to your business needs",
           "To improve our audit process and service offerings",
         ],
       },
@@ -515,10 +515,10 @@ const en = {
         { title: "One person. Agency output.", description: "26 active projects, 4 paying clients, 9 pipeline deals, multi-language operations \u2014 all managed by one person with AIOS as the backbone." },
       ],
       testimonial: "Before AIOS, everything lived in my head. If I wasn\u2019t in the weeds, things would fall apart. Now I have an operating system that truly understands my business \u2014 every project, every promise, every process. I could hand this to someone else tomorrow and they\u2019d have full context on day one.",
-      testimonialAuthor: "Lewis Rice \u2014 Founder, MOTTO Digital",
+      testimonialAuthor: "Lewis Rice \u2014 Founder, Mottodigital",
     },
     orgChart: {
-      title: "The agent team running MOTTO Digital",
+      title: "The agent team running Mottodigital",
       ceo: "CEO (Lewis Rice)",
       integrator: "Integrator AI",
       csuite: [
@@ -680,10 +680,10 @@ const en = {
     },
     bio: {
       name: "Lewis Rice",
-      title: "Founder, MOTTO Digital \u00B7 Tokyo, Japan",
+      title: "Founder, Mottodigital \u00B7 Tokyo, Japan",
       sectionTitle: "Who\u2019s behind this",
       bio1: "I don\u2019t just build AI systems for clients \u2014 I run my own company on the same system I\u2019ll build for you. 26 active projects, 63 in-progress tasks, 4 clients, 9 pipeline deals \u2014 all managed through the AIOS I built for myself.",
-      bio2: "I\u2019ve lived in Japan for 18 years. I built MOTTO Digital to help small and medium businesses here harness Agentic AI \u2014 not the way big consulting firms do it (expensive, abstract, disposable), but the way it should be done: hands-on, owned by you, growing with your business.",
+      bio2: "I\u2019ve lived in Japan for 18 years. I built Mottodigital to help small and medium businesses here harness Agentic AI \u2014 not the way big consulting firms do it (expensive, abstract, disposable), but the way it should be done: hands-on, owned by you, growing with your business.",
       bio3: "I believe Agentic AI should amplify people, not replace them. Every system I build is designed to make your team more capable \u2014 not dependent on me, not locked into a platform, not paying rent on someone else\u2019s intelligence. You own the agents, the code, the data. Forever.",
       bio4: "When I\u2019m not building AI systems, I\u2019m raising my family here in Tokyo. This isn\u2019t a side project \u2014 it\u2019s my life\u2019s work. The future of my business depends on making my first clients wildly successful.",
       tags: ["AI Agents", "Infrastructure Design", "No-Code / Low-Code", "Team Training", "Bilingual EN/JP", "18 Years in Japan"],
@@ -942,20 +942,20 @@ const en = {
       contactCta: "Feel free to reach out",
       company: {
         heading: "Company Overview",
-        name: "MOTTO Digital Inc.",
+        name: "Mottodigital K.K.",
         nameLabel: "Company Name",
-        representative: "Lewis Rice",
+        representative: "Lewis Scott Rice",
         representativeLabel: "Representative",
-        location: "Tokyo, Japan",
+        location: "4F Orix Honmachi Building, 1-4-1 Nishihonmachi, Nishi-ku, Osaka 550-0005, Japan",
         locationLabel: "Location",
-        founded: "2024",
+        founded: "2022-03-31",
         foundedLabel: "Founded",
         business: "AI consulting & development for Japanese SMBs",
         businessLabel: "Business",
         url: "mottodigital.jp",
         urlLabel: "URL",
       },
-      copyright: "MOTTO Digital Inc. All rights reserved.",
+      copyright: "Mottodigital K.K. All rights reserved.",
     },
   },
   webinar: {
@@ -1021,10 +1021,10 @@ const en = {
     registerButtonLabel: "Register Now (Free) \u2192",
     speakerTitle: "About the Host",
     speakerName: "Lewis Rice",
-    speakerRole: "AI Consultant & Founder, MOTTO Digital",
+    speakerRole: "AI Consultant & Founder, Mottodigital",
     speakerBullets: [
       "10+ years in Japan \u2014 consulting, technology, and AI",
-      "Founder of MOTTO Digital, an AI consulting firm for Japanese SMBs",
+      "Founder of Mottodigital, an AI consulting firm for Japanese SMBs",
       "Runs his own business on an AI Operating System \u2014 using it live every day",
     ],
     faqTitle: "Frequently Asked Questions",

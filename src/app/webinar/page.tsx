@@ -563,7 +563,7 @@ export default function WebinarPage() {
         >
           <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
             <Link href="/" className="text-lg font-bold tracking-tight font-[family-name:var(--font-dm-sans)]">
-              MOTTO Digital
+              Mottodigital
             </Link>
             <div className="hidden sm:flex items-center gap-6">
               <button
@@ -692,7 +692,7 @@ export default function WebinarPage() {
         <div className="mx-auto max-w-6xl px-6">
           <div className="flex flex-col sm:flex-row gap-6 items-center justify-between">
             <Link href="/" className="text-lg font-bold tracking-tight font-[family-name:var(--font-dm-sans)]">
-              MOTTO Digital
+              Mottodigital
             </Link>
             <div className="flex flex-wrap items-center gap-6 text-sm" style={{ color: "var(--lp-text-muted)" }}>
               <Link href="/" className="hover:text-[#1D1D1F] transition-colors">Home</Link>
@@ -709,7 +709,7 @@ export default function WebinarPage() {
             </div>
           </div>
           <div className="mt-6 text-center text-xs" style={{ color: "var(--lp-text-muted)" }}>
-            &copy; {new Date().getFullYear()} MOTTO Digital Inc. All rights reserved.
+            &copy; {new Date().getFullYear()} Mottodigital K.K. All rights reserved.
           </div>
         </div>
       </footer>

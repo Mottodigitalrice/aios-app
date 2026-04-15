@@ -87,7 +87,7 @@ export default function HomePage() {
         >
           <div className="mx-auto max-w-6xl flex items-center justify-between px-6 py-4">
             <Link href="/" className="text-lg font-bold tracking-tight font-[family-name:var(--font-dm-sans)]">
-              MOTTO Digital
+              Mottodigital
             </Link>
             <div className="hidden sm:flex items-center gap-6">
               <Link href="#proof" className="nav-link-hover text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B8860B] rounded-sm" style={{ color: "var(--lp-text-body)" }}>
@@ -256,7 +256,7 @@ export default function HomePage() {
           <div className="grid sm:grid-cols-3 gap-10 mb-10">
             <div>
               <Link href="/" className="text-lg font-bold tracking-tight mb-3 block font-[family-name:var(--font-dm-sans)]">
-                MOTTO Digital
+                Mottodigital
               </Link>
               <p className="text-sm leading-relaxed" style={{ color: "var(--lp-text-muted)" }}>
                 {t.footer.tagline}

@@ -289,7 +289,7 @@ function AuditFormWizardInner() {
             className="flex items-center gap-2 text-lg font-bold tracking-tight"
           >
             <Layers className="size-6 text-[#B8860B]" />
-            <span>MOTTO Digital</span>
+            <span>Mottodigital</span>
           </Link>
           <div className="flex items-center gap-4">
             <LanguageToggle locale={locale} onToggle={setLocale} />
@@ -370,7 +370,7 @@ function AuditFormWizardInner() {
             className="flex items-center gap-2 text-sm font-semibold text-[#6E6E73]"
           >
             <Layers className="size-5 text-[#B8860B]" />
-            <span>MOTTO Digital</span>
+            <span>Mottodigital</span>
           </Link>
           <div className="flex items-center gap-6 text-sm text-[#86868B]">
             <Link
