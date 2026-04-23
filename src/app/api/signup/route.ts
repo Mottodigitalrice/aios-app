@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { isDuplicateRequest } from "@/lib/dedup";
 
 const WEBHOOK_TIMEOUT_MS = 10_000;
+const AIOS_PROJECT_ID = "1ede0cb5-63d9-8061-8571-df183897d8e2";
+const AIOS_SIGNUPS_DATABASE_ID =
+  process.env.AIOS_SIGNUPS_DATABASE_ID || "34be0cb5-63d9-817d-b5ad-f7bc77418e3e";
 
 function fetchWithTimeout(url: string, options: RequestInit): Promise<Response> {
   return Promise.race([
@@ -10,6 +13,27 @@ function fetchWithTimeout(url: string, options: RequestInit): Promise<Response> 
       setTimeout(() => reject(new Error(`Timeout after ${WEBHOOK_TIMEOUT_MS}ms: ${url}`)), WEBHOOK_TIMEOUT_MS)
     ),
   ]);
+}
+
+function toRichText(content?: string) {
+  if (!content) return [];
+
+  const normalized = String(content).trim();
+  if (!normalized) return [];
+
+  const chunks = normalized.match(/[\s\S]{1,1900}/g) || [normalized];
+  return chunks.map((chunk) => ({
+    type: "text" as const,
+    text: { content: chunk },
+  }));
+}
+
+async function parseJsonSafely(response: Response) {
+  try {
+    return await response.json();
+  } catch {
+    return null;
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -74,7 +98,7 @@ export async function POST(req: NextRequest) {
 
     // Forward to MOTTO API for Notion (fire and forget)
     const mottoApiKey = process.env.MOTTO_API_KEY;
-    const notionPromise = mottoApiKey
+    const taskPromise = mottoApiKey
       ? fetchWithTimeout("https://vps.mottodigital.jp/tasks", {
           method: "POST",
           headers: {
@@ -83,11 +107,94 @@ export async function POST(req: NextRequest) {
           },
           body: JSON.stringify({
             name: `AIOS Signup: ${data.name} (${data.signupType})`,
-            projectId: "1ede0cb5-63d9-8061-8571-df183897d8e2",
+            projectId: AIOS_PROJECT_ID,
             status: "INBOX",
             notes: `Track: ${data.track}\nLanguage: ${data.languageTrack || data.locale || "ja"}\nSignup Type: ${data.signupType}\nName: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company || "N/A"}\nRole: ${data.role || "N/A"}\nGoals: ${data.goals}\nPain Points: ${data.painPoints || "N/A"}\nTeam Size: ${data.teamSize || "N/A"}\nStart Preference: ${data.startPreference}\nReferral: ${data.referralSource}\nNotes: ${data.notes || "N/A"}\n---\nAvailability: ${availabilitySummary}\nPayment: ${paymentSummary}\nComms: ${commsSummary}`,
           }),
-        }).catch(console.error)
+        })
+          .then(async (response) => {
+            if (!response.ok) {
+              throw new Error(`Task creation failed: ${response.status}`);
+            }
+            return await parseJsonSafely(response);
+          })
+          .catch((error) => {
+            console.error(error);
+            return null;
+          })
+      : Promise.resolve();
+
+    const signupRecordPromise = mottoApiKey
+      ? taskPromise.then(async (task) => {
+          const properties: Record<string, unknown> = {
+            Name: {
+              title: [{ type: "text", text: { content: data.name } }],
+            },
+            "Submitted At": {
+              date: { start: new Date(signup.createdAt).toISOString() },
+            },
+            Email: { email: data.email },
+            Track: { select: { name: data.track } },
+            "Signup Type": { select: { name: data.signupType } },
+            Status: { select: { name: signup.status } },
+            Language: {
+              select: { name: data.languageTrack || data.locale || "ja" },
+            },
+            Company: { rich_text: toRichText(data.company || "") },
+            Role: { rich_text: toRichText(data.role || "") },
+            Goals: { rich_text: toRichText(data.goals) },
+            "Pain Points": { rich_text: toRichText(data.painPoints || "") },
+            "Start Preference": {
+              rich_text: toRichText(data.startPreference),
+            },
+            "Referral Source": {
+              rich_text: toRichText(data.referralSource),
+            },
+            Notes: { rich_text: toRichText(data.notes || "") },
+            Availability: { rich_text: toRichText(availabilitySummary) },
+            "LINE Added": { checkbox: Boolean(data.lineAdded) },
+            "Slack Opt-In": { checkbox: data.slackOptIn === true },
+            Source: { select: { name: "website_signup" } },
+          };
+
+          if (typeof data.teamSize === "number") {
+            properties["Team Size"] = { number: data.teamSize };
+          }
+
+          if (data.paymentPlan) {
+            properties["Payment Plan"] = {
+              select: { name: data.paymentPlan },
+            };
+          }
+
+          if (task && typeof task.url === "string") {
+            properties["Task URL"] = { url: task.url };
+          }
+
+          const response = await fetchWithTimeout(
+            "https://vps.mottodigital.jp/proxy/notion/v1/pages",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "X-API-Key": mottoApiKey,
+              },
+              body: JSON.stringify({
+                parent: { database_id: AIOS_SIGNUPS_DATABASE_ID },
+                properties,
+              }),
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error(`Signup DB write failed: ${response.status}`);
+          }
+
+          return await parseJsonSafely(response);
+        }).catch((error) => {
+          console.error(error);
+          return null;
+        })
       : Promise.resolve();
 
     // Forward to Cloud n8n for confirmation email (fire and forget)
@@ -101,7 +208,12 @@ export async function POST(req: NextRequest) {
     ).catch(console.error);
 
     // Wait for all (but don't fail if webhooks fail)
-    await Promise.allSettled([webhookPromise, notionPromise, emailPromise]);
+    await Promise.allSettled([
+      webhookPromise,
+      taskPromise,
+      signupRecordPromise,
+      emailPromise,
+    ]);
 
     return NextResponse.json({ success: true, message: "Signup received" });
   } catch (error) {
