@@ -10,6 +10,7 @@ export const submit = mutation({
     track: v.union(v.literal("cohort"), v.literal("corporate")),
     signupType: v.optional(v.union(v.literal("individual"), v.literal("company"), v.literal("department"))),
     plan: v.optional(v.union(v.literal("monthly"), v.literal("full"))),
+    languageTrack: v.optional(v.union(v.literal("en"), v.literal("ja"))),
     name: v.string(),
     email: v.string(),
     company: v.optional(v.string()),
@@ -21,6 +22,21 @@ export const submit = mutation({
     startPreference: v.string(),
     referralSource: v.string(),
     notes: v.optional(v.string()),
+    availability: v.optional(
+      v.array(
+        v.object({
+          slotId: v.string(),
+          commitment: v.union(
+            v.literal("commit"),
+            v.literal("maybe"),
+            v.literal("no")
+          ),
+        })
+      )
+    ),
+    paymentPlan: v.optional(v.union(v.literal("upfront"), v.literal("monthly"))),
+    lineAdded: v.optional(v.boolean()),
+    slackOptIn: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     return await ctx.db.insert("signups", {

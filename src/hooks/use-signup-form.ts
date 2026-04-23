@@ -7,6 +7,25 @@ import { z } from "zod";
 // Form data types
 // ---------------------------------------------------------------------------
 
+export type AvailabilityCommitment = "commit" | "maybe" | "no";
+
+// Proposed session slots (JST, 1-hour each). Based on Lewis's weekly availability blocks.
+export const AVAILABILITY_SLOTS: { slotId: string; day: string; time: string }[] = [
+  { slotId: "mon-11-12", day: "mon", time: "11:00–12:00" },
+  { slotId: "mon-12-13", day: "mon", time: "12:00–13:00" },
+  { slotId: "mon-13-14", day: "mon", time: "13:00–14:00" },
+  { slotId: "mon-14-15", day: "mon", time: "14:00–15:00" },
+  { slotId: "wed-11-12", day: "wed", time: "11:00–12:00" },
+  { slotId: "wed-12-13", day: "wed", time: "12:00–13:00" },
+  { slotId: "wed-13-14", day: "wed", time: "13:00–14:00" },
+  { slotId: "wed-14-15", day: "wed", time: "14:00–15:00" },
+  { slotId: "wed-20-21", day: "wed", time: "20:00–21:00" },
+  { slotId: "thu-11-12", day: "thu", time: "11:00–12:00" },
+  { slotId: "thu-12-13", day: "thu", time: "12:00–13:00" },
+  { slotId: "thu-13-14", day: "thu", time: "13:00–14:00" },
+  { slotId: "thu-14-15", day: "thu", time: "14:00–15:00" },
+];
+
 export interface SignupFormData {
   // Step 1: Track selection
   track: "cohort" | "oneOnOne" | "company" | "";
@@ -24,6 +43,13 @@ export interface SignupFormData {
   startPreference: string;
   referralSource: string;
   notes: string;
+  // Step 5 (cohort only): Availability — map of slotId -> commitment
+  availability: Record<string, AvailabilityCommitment>;
+  // Step 6 (cohort only): Payment plan
+  paymentPlan: "upfront" | "monthly" | "";
+  // Step 7 (cohort only): Communication
+  lineAdded: boolean;
+  slackOptIn: "" | "yes" | "no";
 }
 
 const INITIAL_DATA: SignupFormData = {
@@ -39,16 +65,28 @@ const INITIAL_DATA: SignupFormData = {
   startPreference: "",
   referralSource: "",
   notes: "",
+  availability: Object.fromEntries(
+    AVAILABILITY_SLOTS.map((s) => [s.slotId, "no" as AvailabilityCommitment])
+  ),
+  paymentPlan: "",
+  lineAdded: false,
+  slackOptIn: "",
 };
 
-const TOTAL_STEPS = 5; // steps 0-4
+const COHORT_TOTAL_STEPS = 8; // steps 0-7 (adds availability, payment, communication)
+const DEFAULT_TOTAL_STEPS = 5; // steps 0-4
+
+function getTotalSteps(signupType: string): number {
+  return signupType === "cohort" ? COHORT_TOTAL_STEPS : DEFAULT_TOTAL_STEPS;
+}
 
 // ---------------------------------------------------------------------------
 // Per-step validation schemas
 // ---------------------------------------------------------------------------
 
-function getStepSchemas(_track: string, _signupType: string): Record<number, z.ZodType> {
-  return {
+function getStepSchemas(_track: string, signupType: string): Record<number, z.ZodType> {
+  const isCohort = signupType === "cohort";
+  const base: Record<number, z.ZodType> = {
     0: z.object({
       signupType: z.enum(["cohort", "individual", "company"], {
         message: "Please select an option",
@@ -69,8 +107,45 @@ function getStepSchemas(_track: string, _signupType: string): Record<number, z.Z
       startPreference: z.string().min(1, "Please select when you'd like to start"),
       referralSource: z.string().min(1, "Please select how you heard about us"),
     }),
-    4: z.object({}), // Review step — no additional validation
   };
+  if (!isCohort) {
+    base[4] = z.object({}); // review for non-cohort
+    return base;
+  }
+  base[4] = z
+    .object({ availability: z.record(z.string(), z.enum(["commit", "maybe", "no"])) })
+    .refine(
+      (data) => {
+        const counts = Object.values(data.availability).reduce(
+          (acc, v) => {
+            acc[v] = (acc[v] || 0) + 1;
+            return acc;
+          },
+          {} as Record<string, number>
+        );
+        return (counts.commit || 0) >= 2 || (counts.maybe || 0) >= 3;
+      },
+      {
+        message:
+          "Please mark at least 2 slots as 'Can commit', or at least 3 as 'Maybe'.",
+        path: ["availability"],
+      }
+    );
+  base[5] = z.object({
+    paymentPlan: z.enum(["upfront", "monthly"], {
+      message: "Please choose a payment option",
+    }),
+  });
+  base[6] = z.object({
+    lineAdded: z.literal(true, {
+      message: "Please add the LINE Official account and confirm to continue",
+    }),
+    slackOptIn: z.enum(["yes", "no"], {
+      message: "Please choose whether to join the cohort Slack channel",
+    }),
+  });
+  base[7] = z.object({}); // review
+  return base;
 }
 
 // ---------------------------------------------------------------------------
@@ -161,6 +236,8 @@ export function useSignupForm() {
     return null;
   }, [currentStep, formData]);
 
+  const totalSteps = getTotalSteps(formData.signupType);
+
   const goToNext = useCallback(() => {
     const validationError = validateCurrentStep();
     if (validationError) {
@@ -168,12 +245,12 @@ export function useSignupForm() {
       return;
     }
 
-    if (currentStep < TOTAL_STEPS - 1) {
+    if (currentStep < totalSteps - 1) {
       setCurrentStep((prev) => prev + 1);
       setError(null);
       setFieldErrors({});
     }
-  }, [currentStep, validateCurrentStep]);
+  }, [currentStep, totalSteps, validateCurrentStep]);
 
   const goToPrev = useCallback(() => {
     if (currentStep > 0) {
@@ -186,6 +263,14 @@ export function useSignupForm() {
   const submitFinal = useCallback(async (locale?: "en" | "ja") => {
     setIsLoading(true);
     setError(null);
+
+    const isCohort = formData.signupType === "cohort";
+    const availabilityArray = isCohort
+      ? Object.entries(formData.availability).map(([slotId, commitment]) => ({
+          slotId,
+          commitment,
+        }))
+      : undefined;
 
     try {
       const response = await fetch("/api/signup", {
@@ -207,6 +292,13 @@ export function useSignupForm() {
           referralSource: formData.referralSource,
           notes: formData.notes || undefined,
           locale: locale || "ja",
+          languageTrack: locale || "ja",
+          availability: availabilityArray,
+          paymentPlan: isCohort && formData.paymentPlan ? formData.paymentPlan : undefined,
+          lineAdded: isCohort ? formData.lineAdded : undefined,
+          slackOptIn: isCohort && formData.slackOptIn
+            ? formData.slackOptIn === "yes"
+            : undefined,
         }),
       });
 
@@ -229,7 +321,7 @@ export function useSignupForm() {
 
   return {
     currentStep,
-    totalSteps: TOTAL_STEPS,
+    totalSteps,
     formData,
     isLoading,
     error,

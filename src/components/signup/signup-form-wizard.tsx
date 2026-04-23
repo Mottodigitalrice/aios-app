@@ -9,7 +9,10 @@ import { Step1Track } from "./steps/step-1-track";
 import { Step2AboutYou } from "./steps/step-2-about-you";
 import { Step3Goals } from "./steps/step-3-goals";
 import { Step4GettingStarted } from "./steps/step-4-getting-started";
-import { Step5Review } from "./steps/step-5-review";
+import { Step5Availability } from "./steps/step-5-availability";
+import { Step6Payment } from "./steps/step-6-payment";
+import { Step7Communication } from "./steps/step-7-communication";
+import { Step8Review } from "./steps/step-8-review";
 import { Badge } from "@/components/ui/badge";
 import {
   ArrowLeft,
@@ -94,6 +97,9 @@ function SignupSidebar({ step }: { step: number }) {
     [Users, TrendingUp],
     [Target, Zap],
     [CheckCircle2, Sparkles, Shield],
+    [CheckCircle2, TrendingUp, Sparkles],
+    [Shield, CheckCircle2, Zap],
+    [Users, Sparkles, CheckCircle2],
     [CheckCircle2, Shield, Sparkles],
   ];
 
@@ -238,70 +244,114 @@ function SignupFormWizardInner() {
 
   const FEATURE_CHIPS_ICONS = [Zap, Shield, Sparkles];
 
+  const isCohort = formData.signupType === "cohort";
+  const reviewStepIndex = isCohort ? 7 : 4;
+
   const renderStep = () => {
-    switch (currentStep) {
-      case 0:
-        return (
-          <Step1Track
-            formData={formData}
-            updateField={updateField}
-            onNext={handleNext}
-            isLoading={isLoading}
-            error={error}
-            fieldErrors={fieldErrors}
-          />
-        );
-      case 1:
-        return (
-          <Step2AboutYou
-            formData={formData}
-            updateField={updateField}
-            validateField={validateField}
-            onNext={handleNext}
-            onBack={handleBack}
-            isLoading={isLoading}
-            error={error}
-            fieldErrors={fieldErrors}
-          />
-        );
-      case 2:
-        return (
-          <Step3Goals
-            formData={formData}
-            updateField={updateField}
-            validateField={validateField}
-            onNext={handleNext}
-            onBack={handleBack}
-            isLoading={isLoading}
-            error={error}
-            fieldErrors={fieldErrors}
-          />
-        );
-      case 3:
-        return (
-          <Step4GettingStarted
-            formData={formData}
-            updateField={updateField}
-            onNext={handleNext}
-            onBack={handleBack}
-            isLoading={isLoading}
-            error={error}
-            fieldErrors={fieldErrors}
-          />
-        );
-      case 4:
-        return (
-          <Step5Review
-            formData={formData}
-            onSubmit={handleSubmit}
-            onBack={handleBack}
-            isLoading={isLoading}
-            error={error}
-          />
-        );
-      default:
-        return null;
+    if (currentStep === 0) {
+      return (
+        <Step1Track
+          formData={formData}
+          updateField={updateField}
+          onNext={handleNext}
+          isLoading={isLoading}
+          error={error}
+          fieldErrors={fieldErrors}
+        />
+      );
     }
+    if (currentStep === 1) {
+      return (
+        <Step2AboutYou
+          formData={formData}
+          updateField={updateField}
+          validateField={validateField}
+          onNext={handleNext}
+          onBack={handleBack}
+          isLoading={isLoading}
+          error={error}
+          fieldErrors={fieldErrors}
+        />
+      );
+    }
+    if (currentStep === 2) {
+      return (
+        <Step3Goals
+          formData={formData}
+          updateField={updateField}
+          validateField={validateField}
+          onNext={handleNext}
+          onBack={handleBack}
+          isLoading={isLoading}
+          error={error}
+          fieldErrors={fieldErrors}
+        />
+      );
+    }
+    if (currentStep === 3) {
+      return (
+        <Step4GettingStarted
+          formData={formData}
+          updateField={updateField}
+          onNext={handleNext}
+          onBack={handleBack}
+          isLoading={isLoading}
+          error={error}
+          fieldErrors={fieldErrors}
+        />
+      );
+    }
+    if (isCohort && currentStep === 4) {
+      return (
+        <Step5Availability
+          formData={formData}
+          updateField={updateField}
+          onNext={handleNext}
+          onBack={handleBack}
+          isLoading={isLoading}
+          error={error}
+          fieldErrors={fieldErrors}
+        />
+      );
+    }
+    if (isCohort && currentStep === 5) {
+      return (
+        <Step6Payment
+          formData={formData}
+          updateField={updateField}
+          onNext={handleNext}
+          onBack={handleBack}
+          isLoading={isLoading}
+          error={error}
+          fieldErrors={fieldErrors}
+        />
+      );
+    }
+    if (isCohort && currentStep === 6) {
+      return (
+        <Step7Communication
+          formData={formData}
+          updateField={updateField}
+          onNext={handleNext}
+          onBack={handleBack}
+          isLoading={isLoading}
+          error={error}
+          fieldErrors={fieldErrors}
+        />
+      );
+    }
+    if (currentStep === reviewStepIndex) {
+      return (
+        <Step8Review
+          formData={formData}
+          onSubmit={handleSubmit}
+          onBack={handleBack}
+          isLoading={isLoading}
+          error={error}
+        />
+      );
+    }
+    return null;
   };
 
   return (

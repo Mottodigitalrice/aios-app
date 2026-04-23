@@ -45,6 +45,23 @@ export async function POST(req: NextRequest) {
       createdAt: Date.now(),
     };
 
+    // Format cohort-specific fields for Notion notes
+    const isCohort = data.signupType === "cohort";
+    const availabilitySummary = isCohort && Array.isArray(data.availability)
+      ? data.availability
+          .filter((a: { commitment: string }) => a.commitment !== "no")
+          .map((a: { slotId: string; commitment: string }) => `${a.slotId} (${a.commitment})`)
+          .join(", ") || "— none marked —"
+      : "N/A";
+    const paymentSummary = isCohort && data.paymentPlan
+      ? data.paymentPlan === "upfront"
+        ? "Upfront ¥100,000"
+        : "Monthly ¥20,000 × 6"
+      : "N/A";
+    const commsSummary = isCohort
+      ? `LINE: ${data.lineAdded ? "added" : "NOT added"} | Slack: ${data.slackOptIn === true ? "opted in" : "declined"}`
+      : "N/A";
+
     // Forward to n8n webhook (fire and forget)
     const webhookPromise = fetchWithTimeout(
       "https://n8n.mottodigital.jp/webhook/aios-signup",
@@ -68,7 +85,7 @@ export async function POST(req: NextRequest) {
             name: `AIOS Signup: ${data.name} (${data.signupType})`,
             projectId: "1ede0cb5-63d9-8061-8571-df183897d8e2",
             status: "INBOX",
-            notes: `Track: ${data.track}\nSignup Type: ${data.signupType}\nName: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company || "N/A"}\nRole: ${data.role || "N/A"}\nGoals: ${data.goals}\nPain Points: ${data.painPoints || "N/A"}\nTeam Size: ${data.teamSize || "N/A"}\nStart Preference: ${data.startPreference}\nReferral: ${data.referralSource}\nNotes: ${data.notes || "N/A"}`,
+            notes: `Track: ${data.track}\nLanguage: ${data.languageTrack || data.locale || "ja"}\nSignup Type: ${data.signupType}\nName: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company || "N/A"}\nRole: ${data.role || "N/A"}\nGoals: ${data.goals}\nPain Points: ${data.painPoints || "N/A"}\nTeam Size: ${data.teamSize || "N/A"}\nStart Preference: ${data.startPreference}\nReferral: ${data.referralSource}\nNotes: ${data.notes || "N/A"}\n---\nAvailability: ${availabilitySummary}\nPayment: ${paymentSummary}\nComms: ${commsSummary}`,
           }),
         }).catch(console.error)
       : Promise.resolve();

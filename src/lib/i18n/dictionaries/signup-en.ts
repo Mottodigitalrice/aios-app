@@ -8,7 +8,7 @@ const signupDict = {
   title: "Sign Up for",
   titleHighlight: "AIOS",
   subtitle:
-    "Ready to build your AI operating system? Choose your track and let\u2019s get started.",
+    "Ready to build your AI operating system? Choose your track and let's get started.",
   chips: ["6-month program", "You own everything", "Ownership Guarantee"],
   common: {
     continue: "Continue",
@@ -20,29 +20,31 @@ const signupDict = {
     stepOf: "Step {current} of {total}",
   },
   progressBar: {
-    1: { text: "Great choice!", timeLeft: "~3 min left" },
-    2: { text: "Almost there!", timeLeft: "~2 min left" },
-    3: { text: "One more step!", timeLeft: "~1 min left" },
-    4: { text: "Just confirm and you\u2019re done!", timeLeft: "< 1 min" },
+    1: { text: "Great choice!", timeLeft: "~5 min left" },
+    2: { text: "Nice — tell us about you", timeLeft: "~4 min left" },
+    3: { text: "Your goals shape the program", timeLeft: "~3 min left" },
+    4: { text: "Almost there!", timeLeft: "~2 min left" },
+    5: { text: "Pick your weekly times", timeLeft: "~2 min left" },
+    6: { text: "Lock in your plan", timeLeft: "~1 min left" },
+    7: { text: "Just confirm and you're done!", timeLeft: "< 1 min" },
   },
   steps: {
     1: {
       question: "How would you like to use AIOS?",
       description:
         "Choose the option that best fits your situation. All include the Ownership Guarantee.",
-      // 3-card options
       cohortLabel: "Group Cohort",
-      cohortPrice: "\u00A520,000/month",
+      cohortPrice: "¥20,000/month",
       cohortDescription:
         "Learn alongside other professionals in a structured 6-month program. 2x weekly group sessions, Slack support, and your own GitHub setup.",
-      cohortBestFor: "Best for collaborative learners exploring AI\u2019s potential",
+      cohortBestFor: "Best for collaborative learners exploring AI's potential",
       individualLabel: "One-on-One",
-      individualPrice: "\u00A550,000/month",
+      individualPrice: "¥50,000/month",
       individualDescription:
         "Dedicated 1-on-1 coaching tailored to your specific business and workflows. Weekly sessions with Lewis.",
       individualBestFor: "Best for CEOs, executives, and solopreneurs",
       companyLabel: "Company Build",
-      companyPrice: "\u00A5200,000/month",
+      companyPrice: "¥200,000/month",
       companyDescription:
         "Custom AI build for your entire company. Up to 10 participants with a tailored program for your needs.",
       companyBestFor: "Best for companies building an internal AI team",
@@ -77,32 +79,79 @@ const signupDict = {
       question: "Getting Started",
       description: "A few final details to help us prepare for your enrollment.",
       startLabel: "When would you like to start?",
-      startOptionsCompany: [
-        "As soon as possible",
-        "Not sure yet",
-      ],
-      startOptionsIndividual: [
-        "As soon as possible",
-        "Not sure yet",
-      ],
-      startOptionsCohort: [
-        "May 2026 cohort",
-        "Just exploring for now",
-      ],
+      startOptionsCompany: ["As soon as possible", "Not sure yet"],
+      startOptionsIndividual: ["As soon as possible", "Not sure yet"],
+      startOptionsCohort: ["May 2026 cohort", "Just exploring for now"],
       sourceLabel: "How did you hear about AIOS?",
       sourceOptions: ["LinkedIn", "Referral", "Search", "Event", "Other"],
       notesLabel: "Anything else we should know?",
-      notesPlaceholder: "Optional \u2014 any questions, context, or special requests...",
+      notesPlaceholder:
+        "Optional — any questions, context, or special requests...",
     },
     5: {
+      question: "Pick your weekly session times",
+      description: "How we pick the weekly session times:",
+      descriptionBullets: [
+        "Times are chosen based on Lewis's availability and what works for the whole cohort",
+        "If one time works for everyone, we run one weekly session",
+        "If not, we run two sessions per week with identical content — attend whichever fits, or both",
+        "All sessions are recorded for catch-up",
+      ],
+      helperNote:
+        "Please answer based on your general May availability. This will likely be the ongoing schedule, but we check in monthly and adjust together. We want to make this work for everyone.",
+      legendCommit: "Can commit weekly",
+      legendMaybe: "Sometimes / backup",
+      legendNo: "Can't make it",
+      dayMon: "Monday",
+      dayWed: "Wednesday",
+      dayThu: "Thursday",
+      timezoneNote: "All times shown in JST (Japan Standard Time).",
+      validationHint:
+        "Mark at least 2 slots as 'Can commit', or at least 3 as 'Sometimes'.",
+    },
+    6: {
+      question: "Confirm your commitment",
+      description:
+        "This is a 6-month program. Please only sign up if you're prepared to commit to the full 6 months — it takes that long to become confident with agentic AI and to build a system you can operate, extend, and maintain on your own. That's the whole point.",
+      refundTitle: "Refund policy",
+      refundBody:
+        "We don't offer refunds as a rule. That said, Lewis is reasonable — if something unexpected happens, reach out and we'll work something out.",
+      paymentTitle: "Payment method",
+      paymentBody:
+        "Bank transfer. You'll receive invoices by email. All payments are made in advance.",
+      planLabel: "Choose your payment plan",
+      upfrontLabel: "Pay upfront — ¥100,000 (before tax)",
+      upfrontSubtitle: "Save ¥20,000. One invoice, one transfer.",
+      upfrontBadge: "Recommended",
+      monthlyLabel: "Pay monthly — ¥20,000/month × 6 (before tax)",
+      monthlySubtitle:
+        "Total ¥120,000. Invoices issued in one batch; paid monthly in advance.",
+    },
+    7: {
+      question: "Staying in touch",
+      description:
+        "Two channels: one for official course comms (LINE), one for community (Slack).",
+      lineTitle: "Add MOTTO Digital on LINE Official (required)",
+      lineBody:
+        "All official course communication happens here: session reminders, schedule changes, important announcements, and resources. Please add our LINE Official account before continuing.",
+      lineQrCaption: "Scan the QR code — or tap the button on mobile.",
+      lineAddButton: "Add on LINE",
+      lineConfirmLabel: "I have added the LINE Official account",
+      slackTitle: "Join the cohort Slack channel (optional)",
+      slackBody:
+        "Separate from official course comms, we're setting up a Slack channel for the cohort — a space to ask each other questions, share wins, and keep learning between sessions. Lewis will be there too. Important course info stays on LINE. Joining is optional.",
+      slackOptInYes: "Yes — send me the invite after signup",
+      slackOptInNo: "No thanks — LINE is enough for me",
+    },
+    8: {
       question: "Review & Submit",
       description:
         "Take a moment to review your details. When everything looks good, hit submit.",
       summaryTitle: "Your Enrollment Details",
       trackLabel: "Track",
-      trackCohort: "Group Cohort (\u00A520,000/mo)",
-      trackIndividual: "One-on-One (\u00A550,000/mo)",
-      trackCompany: "Company Build (\u00A5200,000/mo)",
+      trackCohort: "Group Cohort (¥20,000/mo)",
+      trackIndividual: "One-on-One (¥50,000/mo)",
+      trackCompany: "Company Build (¥200,000/mo)",
       nameLabel: "Name",
       emailLabel: "Email",
       companyLabel: "Company",
@@ -110,37 +159,54 @@ const signupDict = {
       goalsLabel: "Goals",
       startLabel: "Start preference",
       referralLabel: "Heard about us",
+      availabilityLabel: "Committed session slots",
+      availabilityMaybeLabel: "Backup session slots",
+      availabilityNone: "— none marked —",
+      paymentLabel: "Payment plan",
+      paymentUpfront: "Upfront — ¥100,000 (before tax)",
+      paymentMonthly: "Monthly — ¥20,000/mo × 6",
+      communicationLabel: "Communication",
+      lineConfirmed: "LINE Official added",
+      slackYes: "Slack community: yes",
+      slackNo: "Slack community: no",
       guarantee:
-        "Backed by the Ownership Guarantee \u2014 if your team can\u2019t manage AI agents by month 6, we keep going free.",
+        "Backed by the Ownership Guarantee — if you can't manage AI agents by month 6, we keep going free.",
       whatHappensNextTitle: "What happens next",
-      whatHappensNext1: "Lewis reviews your submission within 24 hours",
-      whatHappensNext2: "You'll get a personal email to discuss",
-      whatHappensNext3: "Book a free call — no pressure, no obligation",
+      whatHappensNext1:
+        "Lewis reviews your submission and confirms your spot within 24 hours",
+      whatHappensNext2:
+        "You'll receive your first invoice and a welcome pack by email",
+      whatHappensNext3:
+        "Live sessions start in May — we lock the schedule once all cohort members have signed up",
       guaranteeReinforcement: "Backed by our Ownership Guarantee",
     },
   },
   success: {
     title: "Your Spot Is Saved!",
     subtitle:
-      "You\u2019ll receive an email to schedule a meeting with Lewis. After that meeting, you have 3 days to decide. No pressure.",
+      "You'll receive an email shortly confirming next steps. Live sessions start in May. No pressure — we'll guide you from here.",
     steps: [
       {
-        title: "Schedule your meeting with Lewis",
+        title: "Confirmation email",
         description:
-          "You\u2019ll receive an email with a link to book a time that works for you.",
+          "You'll receive a confirmation with your schedule preferences and payment details.",
       },
       {
-        title: "Meet Lewis and discuss the program",
+        title: "Invoice issued",
         description:
-          "A relaxed conversation about your business, goals, and how AIOS can help. No sales pressure.",
+          "Your first invoice arrives by email — pay via bank transfer in advance of each month.",
       },
       {
-        title: "3 days to decide",
+        title: "May kickoff",
         description:
-          "After the meeting, you have 3 days to decide if it\u2019s right for you. If not, your spot goes to the next person. No hard feelings.",
+          "Once all cohort members are locked in, we finalize weekly session times and send calendar invites.",
       },
     ],
-    contactPrompt: "Questions in the meantime? Reach out anytime:",
+    optionalBookingTitle: "Optional: Book a call with Lewis",
+    optionalBookingBody:
+      "If you have questions you'd like answered before the course starts, feel free to book a time to talk with Lewis — or just drop him an email. Either works.",
+    optionalBookingCta: "Book a time with Lewis",
+    contactPrompt: "Prefer email? Reach out anytime:",
     contactEmail: "rice@mottodigital.jp",
     backHome: "Back to Home",
   },
@@ -148,11 +214,11 @@ const signupDict = {
     trustBadge: "Your data is encrypted and never shared with third parties.",
     steps: {
       0: {
-        title: "What you\u2019re signing up for",
+        title: "What you're signing up for",
         items: [
           "6-month hands-on AI operating system build",
           "10 AI agents in production by month 6",
-          "Full ownership \u2014 everything runs on your infrastructure",
+          "Full ownership — everything runs on your infrastructure",
           "The Ownership Guarantee",
         ],
       },
@@ -174,11 +240,35 @@ const signupDict = {
         title: "Almost there!",
         items: [
           "Lewis personally reviews every enrollment",
-          "You\u2019ll hear back within 24 hours",
+          "You'll hear back within 24 hours",
           "No commitment until you speak with Lewis",
         ],
       },
       4: {
+        title: "Your availability",
+        items: [
+          "We schedule around what works for all members",
+          "Two sessions per week with identical content if needed",
+          "All sessions are recorded",
+        ],
+      },
+      5: {
+        title: "Commitment",
+        items: [
+          "6 months is the minimum for meaningful results",
+          "Save ¥20,000 by paying upfront",
+          "Bank transfer — invoices by email",
+        ],
+      },
+      6: {
+        title: "Two channels, one purpose",
+        items: [
+          "LINE Official: reminders and official comms",
+          "Slack: optional peer community",
+          "You always have Lewis directly",
+        ],
+      },
+      7: {
         title: "Ready to go!",
         items: [
           "Double-check your details before submitting",
