@@ -6,9 +6,9 @@ import { ConvexClientProvider } from "@/components/providers/convex-provider";
 import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const notoSansJP = Noto_Sans_JP({ subsets: ["latin"], weight: ["300", "400", "500", "700"], variable: "--font-noto-sans-jp" });
+const notoSansJP = Noto_Sans_JP({ subsets: ["latin"], weight: ["300", "400", "500", "700"], variable: "--font-noto-sans-jp", preload: false });
 const dmSans = DM_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-dm-sans" });
-const shipporiMincho = Shippori_Mincho({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-shippori-mincho" });
+const shipporiMincho = Shippori_Mincho({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-shippori-mincho", preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://aios.mottodigital.jp"),
