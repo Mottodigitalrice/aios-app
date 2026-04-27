@@ -744,9 +744,9 @@ export default function PrintPresentation() {
 
           <div className="mt-6 w-full max-w-4xl grid grid-cols-3 gap-4">
             {[
-              { label: "グループ学習", title: "グループコホート", price: "¥20,000", per: "/月", commitment: "6ヶ月 · 次回：2026年5月", features: ["週2回×60分のグループセッション", "Slackで随時質問可能", "専用GitHubリポジトリ", "オーナーシップ保証"], recommended: false },
-              { label: "パーソナルコーチング", title: "マンツーマン", price: "¥50,000", per: "/月", commitment: "6ヶ月 · いつでも開始可能", features: ["週1回×90分の専属セッション", "月120時間の直接開発・セットアップ", "ビジネスに完全カスタマイズ", "オーナーシップ保証"], recommended: true },
-              { label: "チームトレーニング", title: "カンパニービルド", price: "¥200,000", per: "/月", commitment: "6ヶ月 · いつでも開始可能", features: ["週1回×90分の専属セッション", "月120時間の直接開発・セットアップ", "最大10名までコース参加可能", "オーナーシップ保証"], recommended: false },
+              { label: "グループ学習", title: "グループコホート", price: "¥20,000", per: "/月（税抜）", commitment: "6ヶ月 · 次回：2026年5月", features: ["週2回×60分のグループセッション", "Slackで随時質問可能", "専用GitHubリポジトリ", "オーナーシップ保証"], recommended: false },
+              { label: "パーソナルコーチング", title: "マンツーマン", price: "¥50,000", per: "/月（税抜）", commitment: "6ヶ月 · いつでも開始可能", features: ["週1回×90分の専属セッション", "月120時間の直接開発・セットアップ", "ビジネスに完全カスタマイズ", "オーナーシップ保証"], recommended: true },
+              { label: "チームトレーニング", title: "カンパニービルド", price: "¥200,000", per: "/月（税抜）", commitment: "6ヶ月 · いつでも開始可能", features: ["週1回×90分の専属セッション", "月120時間の直接開発・セットアップ", "最大10名までコース参加可能", "オーナーシップ保証"], recommended: false },
             ].map((plan, i) => (
               <div key={i} className={`p-6 rounded-2xl border-2 relative ${plan.recommended ? "border-[#B8860B]/40 bg-[#B8860B]/3 scale-[1.03] z-10" : "border-[#E8E8ED] bg-white"}`}>
                 {plan.recommended && (

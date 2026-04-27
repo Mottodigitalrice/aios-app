@@ -215,7 +215,7 @@ const en = {
       subtitle:
         "We help you build infrastructure you own to fully utilize Agentic AI tools like Claude Code, Codex, and OpenAI in your business \u2014 to truly get things done.",
       agenticExplainer: "Agentic AI = AI that takes action, not just gives answers. Own the system. Own the results.",
-      pricingCallout: "Starting from \u00A520,000/month",
+      pricingCallout: "Starting from \u00A520,000/month (excl. tax)",
       cta: "Reserve My Spot",
       ctaTime: "30-second signup \u00B7 Meet Lewis first, then decide",
       ctaSecondary: "Get My Free AI Audit",
@@ -253,7 +253,7 @@ const en = {
         label: "Group Learning",
         title: "Group Cohort",
         price: "\u00A520,000",
-        pricePer: "/month",
+        pricePer: "/month (excl. tax)",
         commitment: "6-month program \u00B7 Next cohort: May 2026",
         features: [
           "2\u00D7 60-minute group sessions per week",
@@ -275,7 +275,7 @@ const en = {
         label: "Personal Coaching",
         title: "One-on-One",
         price: "\u00A550,000",
-        pricePer: "/month",
+        pricePer: "/month (excl. tax)",
         commitment: "6-month program \u00B7 Start anytime",
         features: [
           "Dedicated 90-minute weekly session",
@@ -299,7 +299,7 @@ const en = {
         label: "Team Training",
         title: "Company Build",
         price: "\u00A5200,000",
-        pricePer: "/month",
+        pricePer: "/month (excl. tax)",
         commitment: "6-month program \u00B7 Start anytime",
         features: [
           "Dedicated 90-minute weekly session",
