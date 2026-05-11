@@ -17,6 +17,8 @@ import {
 
 const WEBHOOK_TIMEOUT_MS = 10_000;
 const N8N_WEBHOOK = "https://n8n.mottodigital.jp/webhook/free-audit-v2-intake";
+const MOTTO_API = "https://vps.mottodigital.jp/tasks";
+const AIOS_PROJECT_ID = "1ede0cb5-63d9-8061-8571-df183897d8e2";
 
 function fetchWithTimeout(url: string, options: RequestInit): Promise<Response> {
   return Promise.race([
@@ -102,12 +104,83 @@ export async function POST(req: NextRequest) {
       createdAt: Date.now(),
     };
 
-    // Fire-and-forget n8n webhook (handles Slack + Notion routing downstream)
-    await fetchWithTimeout(N8N_WEBHOOK, {
+    // Fire-and-forget n8n webhook (Slack only — workflow built separately)
+    const webhookPromise = fetchWithTimeout(N8N_WEBHOOK, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     }).catch(console.error);
+
+    // Fire-and-forget MOTTO API task creation (primary Notion write)
+    const mottoApiKey = process.env.MOTTO_API_KEY;
+    const notionPromise = mottoApiKey
+      ? fetchWithTimeout(MOTTO_API, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-API-Key": mottoApiKey,
+          },
+          body: JSON.stringify({
+            name: `AIOS Audit v2 (${data.tier}): ${c.name} — ${c.company}`,
+            projectId: AIOS_PROJECT_ID,
+            status: "INBOX",
+            notes: [
+              `Tier: ${data.tier}`,
+              `Name: ${c.name}`,
+              `Email: ${c.email}`,
+              `Company: ${c.company}`,
+              `Phone: ${c.phone || "—"}`,
+              ``,
+              `Top goal: ${topGoalLabel}`,
+              `All goals (ranked): ${goalsRanked.join(" → ")}`,
+              `Top blockers: ${(data.topGoalBlockers ?? []).join(" / ")}`,
+              ``,
+              `Industry: ${payload.labels.industry}`,
+              `Team size: ${payload.labels.teamSize}`,
+              `Revenue: ${payload.labels.revenue}`,
+              `Role: ${payload.labels.role}`,
+              `Years: ${payload.labels.yearsInBusiness}`,
+              `Location: ${payload.labels.location}`,
+              `Website: ${data.company?.website || "—"}`,
+              ``,
+              `AI experience: ${payload.labels.aiExperience}`,
+              `Tried-but-stuck: ${data.aiTriedDidntStick || "—"} ${
+                (data.aiTriedReasons ?? []).length ? `(${(data.aiTriedReasons ?? []).join(", ")})` : ""
+              }`,
+              ``,
+              `ROI: ${roi.hoursPerWeek.toFixed(1)} hrs/week, ¥${roi.annualSavings.toLocaleString()}/year`,
+              `Top processes: ${roi.topProcesses
+                .map((p) => `${p.processId} (${p.hoursSaved.toFixed(1)}h)`)
+                .join(", ")}`,
+              ``,
+              `Robot task: ${data.robotTask || "—"}`,
+              ``,
+              `Budget: ${payload.labels.budget}`,
+              `Timeline: ${payload.labels.timeline}`,
+              `Decision maker: ${payload.labels.decisionMaker}`,
+              ``,
+              `Tools: ${Object.entries(data.toolStack ?? {})
+                .map(([cat, tools]) => {
+                  const arr = tools as string[];
+                  const named = arr.filter((t) => t !== "__none__" && t !== "__other__");
+                  const isNone = arr.includes("__none__");
+                  const otherText = (data.toolStackCategoryOther ?? {})[cat] || "";
+                  const parts: string[] = [];
+                  if (isNone) parts.push("none");
+                  if (named.length) parts.push(named.join("/"));
+                  if (otherText) parts.push(`Other: ${otherText}`);
+                  return `${cat}: ${parts.join(", ") || "—"}`;
+                })
+                .join(" | ")}`,
+              `Other tools (uncategorized): ${data.toolStackOther || "—"}`,
+              ``,
+              `Locale: ${data.locale}`,
+            ].join("\n"),
+          }),
+        }).catch(console.error)
+      : Promise.resolve();
+
+    await Promise.allSettled([webhookPromise, notionPromise]);
 
     return NextResponse.json({ success: true, message: "Audit submitted" });
   } catch (error) {
