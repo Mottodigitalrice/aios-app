@@ -60,7 +60,7 @@ export interface AuditV2Data {
 }
 
 const INITIAL_DATA: AuditV2Data = {
-  tier: "",
+  tier: "full",
   goalsSelected: [],
   goalsRanked: [],
   topGoalBlockers: [],
@@ -87,11 +87,11 @@ const INITIAL_DATA: AuditV2Data = {
 };
 
 // ---------------------------------------------------------------------------
-// Step plan (Full = all 11 screens, Quick = 7)
+// Step plan (single flow — email first, then the full audit)
 // ---------------------------------------------------------------------------
 
 export type StepId =
-  | "tier"
+  | "email"
   | "goals-select"
   | "goals-rank"
   | "blockers"
@@ -103,8 +103,8 @@ export type StepId =
   | "qualification"
   | "contact";
 
-const FULL_STEPS: StepId[] = [
-  "tier",
+const STEPS: StepId[] = [
+  "email",
   "goals-select",
   "goals-rank",
   "blockers",
@@ -117,21 +117,6 @@ const FULL_STEPS: StepId[] = [
   "contact",
 ];
 
-const QUICK_STEPS: StepId[] = [
-  "tier",
-  "goals-select",
-  "goals-rank",
-  "blockers",
-  "company",
-  "ai",
-  "qualification",
-  "contact",
-];
-
-export function getStepPlan(tier: Tier | ""): StepId[] {
-  return tier === "quick" ? QUICK_STEPS : FULL_STEPS;
-}
-
 // ---------------------------------------------------------------------------
 // Hook
 // ---------------------------------------------------------------------------
@@ -143,7 +128,7 @@ export function useAuditFormV2() {
   const [error, setError] = useState<string | null>(null);
   const [isComplete, setIsComplete] = useState(false);
 
-  const steps = useMemo(() => getStepPlan(data.tier), [data.tier]);
+  const steps = useMemo(() => STEPS, []);
   const currentStep = steps[stepIndex];
   const totalSteps = steps.length;
 
@@ -176,8 +161,9 @@ export function useAuditFormV2() {
   const validateCurrent = useCallback((): string | null => {
     const step = steps[stepIndex];
     switch (step) {
-      case "tier":
-        if (!data.tier) return "Pick Quick or Full to continue.";
+      case "email":
+        if (!data.contact.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.contact.email))
+          return "A valid email is required.";
         return null;
       case "goals-select":
         if (data.goalsSelected.length === 0) return "Pick at least one goal.";
@@ -203,17 +189,11 @@ export function useAuditFormV2() {
       case "robot-task":
         return null; // optional but encouraged
       case "qualification":
-        if (data.tier === "full") {
-          if (!data.qualification.timeline) return "Timeline is required.";
-        } else {
-          if (!data.qualification.timeline) return "Timeline is required.";
-        }
+        if (!data.qualification.timeline) return "Timeline is required.";
         return null;
       case "contact": {
         const c = data.contact;
         if (!c.name) return "Your name is required.";
-        if (!c.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email))
-          return "A valid email is required.";
         if (!c.company) return "Company name is required.";
         return null;
       }

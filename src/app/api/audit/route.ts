@@ -121,11 +121,10 @@ export async function POST(req: NextRequest) {
             "X-API-Key": mottoApiKey,
           },
           body: JSON.stringify({
-            name: `AIOS Audit v2 (${data.tier}): ${c.name} — ${c.company}`,
+            name: `AIOS Audit: ${c.name} — ${c.company}`,
             projectId: AIOS_PROJECT_ID,
             status: "INBOX",
             notes: [
-              `Tier: ${data.tier}`,
               `Name: ${c.name}`,
               `Email: ${c.email}`,
               `Company: ${c.company}`,

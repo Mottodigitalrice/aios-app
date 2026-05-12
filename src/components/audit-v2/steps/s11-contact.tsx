@@ -28,10 +28,7 @@ export function S11Contact({
 }: Props) {
   const { t } = useAuditV2Locale();
   const c = data.contact;
-  const ready =
-    !!c.name &&
-    !!c.company &&
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email);
+  const ready = !!c.name && !!c.company;
 
   return (
     <V2StepLayout
@@ -50,17 +47,6 @@ export function S11Contact({
             value={c.name}
             onChange={(e) => updateContact({ name: e.target.value })}
             autoComplete="name"
-            required
-            className="bg-white border-[#E8E8ED] focus-visible:border-[#B8860B]/50 focus-visible:ring-[#B8860B]/20"
-          />
-        </Field>
-        <Field label={t.contact.email}>
-          <Input
-            type="email"
-            inputMode="email"
-            value={c.email}
-            onChange={(e) => updateContact({ email: e.target.value })}
-            autoComplete="email"
             required
             className="bg-white border-[#E8E8ED] focus-visible:border-[#B8860B]/50 focus-visible:ring-[#B8860B]/20"
           />

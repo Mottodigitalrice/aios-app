@@ -4,11 +4,11 @@ const auditV2Dict = {
     home: "Home",
     privacy: "Privacy",
   },
-  badge: "AI Audit v2 · Free",
+  badge: "AI Audit · Free",
   title: "Tell us your goals.",
   titleHighlight: "We'll show you how AI gets you there.",
   subtitle:
-    "Two free tiers — pick Quick (5 min) or Full (15 min). Lewis personally reviews every submission and replies within 2 business days with a custom AI playbook.",
+    "Free, ~5 minutes. Lewis personally reviews every submission and replies within 2 business days with a custom AI playbook.",
   chips: ["Goal-anchored", "Personally reviewed", "No-sell consult"],
   common: {
     back: "Back",
@@ -19,19 +19,12 @@ const auditV2Dict = {
     selected: "selected",
     stepOf: "Step {current} of {total}",
   },
-  tier: {
-    question: "Which audit do you want?",
-    description: "Both are free. Pick what fits your time today.",
-    quick: {
-      title: "Quick",
-      eyebrow: "5 minutes",
-      blurb: "7 screens. Goals, blockers, role, AI level. Get a goal-anchored direction.",
-    },
-    full: {
-      title: "Full",
-      eyebrow: "15 minutes",
-      blurb: "11 screens. Adds your tool stack, ROI calculator, qualification, and a free-text wish.",
-    },
+  email: {
+    question: "What's your email?",
+    description: "We'll send your audit report here. ~5 minutes to fill out.",
+    label: "Email",
+    placeholder: "you@company.com",
+    hint: "Lewis personally reviews every audit and replies within 2 business days. No spam, ever.",
   },
   goals: {
     select: {
@@ -110,10 +103,9 @@ const auditV2Dict = {
     decisionMaker: "Who decides on this?",
   },
   contact: {
-    question: "Where should Lewis send your audit?",
-    description: "We email it to you within 2 business days. No spam, ever.",
+    question: "Last step — your details.",
+    description: "Lewis personally reviews and replies within 2 business days.",
     name: "Your name",
-    email: "Email",
     company: "Company",
     phone: "Phone (optional)",
   },
@@ -132,9 +124,9 @@ const auditV2Dict = {
   sidebar: {
     trustBadge: "Your data is encrypted and never shared with third parties.",
     steps: {
-      tier: {
-        title: "Pick your depth",
-        items: ["Quick = 5 min, goal-only", "Full = 15 min, adds ROI + qualification"],
+      email: {
+        title: "Start with your email",
+        items: ["~5 min to complete", "Lewis personally reviews every audit"],
       },
       goals: {
         title: "Goal-anchored audit",

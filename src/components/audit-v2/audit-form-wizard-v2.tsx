@@ -17,8 +17,7 @@ import {
   Lightbulb,
   Briefcase,
   MailCheck,
-  Zap,
-  Clock,
+  Mail,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { LanguageToggle } from "@/components/landing/language-toggle";
@@ -26,7 +25,7 @@ import { ProgressBar } from "./shared/v2-progress-bar";
 import { AuditV2LocaleProvider, useAuditV2Locale } from "./audit-v2-locale-context";
 import { useAuditFormV2, type StepId } from "@/hooks/use-audit-form-v2";
 import { segmentJapanese } from "@/lib/budoux-transform";
-import { S1Tier } from "./steps/s1-tier";
+import { S0Email } from "./steps/s0-email";
 import { S2Goals } from "./steps/s2-goals";
 import { S3Rank } from "./steps/s3-rank";
 import { S4Blockers } from "./steps/s4-blockers";
@@ -40,7 +39,7 @@ import { S11Contact } from "./steps/s11-contact";
 import { EmailReviewPopup } from "./email-review-popup";
 
 const STEP_ICONS: Record<StepId, React.ElementType[]> = {
-  tier: [Zap, Clock],
+  email: [Mail, Sparkles],
   "goals-select": [Target, Sparkles],
   "goals-rank": [ListChecks, Sparkles],
   blockers: [ListChecks, Lightbulb],
@@ -157,8 +156,8 @@ function AuditFormWizardV2Inner() {
       error: form.error,
     };
     switch (form.currentStep) {
-      case "tier":
-        return <S1Tier {...sharedProps} />;
+      case "email":
+        return <S0Email {...sharedProps} updateContact={form.updateContact} />;
       case "goals-select":
         return <S2Goals {...sharedProps} />;
       case "goals-rank":
@@ -195,7 +194,7 @@ function AuditFormWizardV2Inner() {
     }
   };
 
-  const isHero = form.currentStep === "tier";
+  const isHero = form.currentStep === "email";
   const featureChipIcons = [Target, Shield, Sparkles];
 
   return (

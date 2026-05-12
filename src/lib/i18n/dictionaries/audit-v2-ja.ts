@@ -6,11 +6,11 @@ const auditV2DictJa: AuditV2Dictionary = {
     home: "ホーム",
     privacy: "プライバシー",
   },
-  badge: "AI監査 v2 · 無料",
+  badge: "AI監査 · 無料",
   title: "あなたの目標を教えてください。",
   titleHighlight: "AIでどう実現するかをお伝えします。",
   subtitle:
-    "無料で2タイプ — クイック(5分)/フル(15分)からお選びください。代表のLewisが直接ご回答を分析し、2営業日以内にあなた専用のAI活用プランをお送りします。",
+    "無料・約5分。代表のLewisが直接ご回答を分析し、2営業日以内にあなた専用のAI活用プランをお送りします。",
   chips: ["目標起点で設計", "Lewisが直接レビュー", "営業ゼロ相談付き"],
   common: {
     back: "戻る",
@@ -21,19 +21,12 @@ const auditV2DictJa: AuditV2Dictionary = {
     selected: "選択中",
     stepOf: "{current} / {total}",
   },
-  tier: {
-    question: "どちらの監査を受けますか?",
-    description: "どちらも無料です。今お持ちの時間に合わせて選んでください。",
-    quick: {
-      title: "クイック監査",
-      eyebrow: "5分",
-      blurb: "7画面。目標・課題・役職・AI習熟度。目標に沿った方向性が分かります。",
-    },
-    full: {
-      title: "フル監査",
-      eyebrow: "15分",
-      blurb: "11画面。ツールスタック、ROI試算、予算、自由記述まで深掘り。",
-    },
+  email: {
+    question: "メールアドレスを教えてください。",
+    description: "監査レポートはこちらのアドレスにお送りします。所要時間は約5分です。",
+    label: "メールアドレス",
+    placeholder: "you@company.com",
+    hint: "Lewisが直接すべての監査をレビューし、2営業日以内にご返信します。スパムは一切ありません。",
   },
   goals: {
     select: {
@@ -112,10 +105,9 @@ const auditV2DictJa: AuditV2Dictionary = {
     decisionMaker: "意思決定者は誰ですか?",
   },
   contact: {
-    question: "監査結果はどちらにお送りすればよろしいですか?",
-    description: "2営業日以内にメールでお送りします。スパムは一切ありません。",
+    question: "最後に、お客様の情報をお聞かせください。",
+    description: "Lewisが直接ご回答をレビューし、2営業日以内にご返信します。",
     name: "お名前",
-    email: "メールアドレス",
     company: "会社名",
     phone: "電話番号 (任意)",
   },
@@ -134,9 +126,9 @@ const auditV2DictJa: AuditV2Dictionary = {
   sidebar: {
     trustBadge: "ご回答内容は暗号化され、第三者には共有されません。",
     steps: {
-      tier: {
-        title: "深さを選択",
-        items: ["クイック = 5分、目標と課題のみ", "フル = 15分、ROI試算と質問付き"],
+      email: {
+        title: "まずはメールアドレスから",
+        items: ["所要時間 約5分", "Lewisが直接すべての監査をレビュー"],
       },
       goals: {
         title: "目標起点の監査",
