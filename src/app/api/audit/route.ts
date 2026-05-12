@@ -14,6 +14,7 @@ import {
   TIMELINE_OPTIONS,
   YEARS_IN_BUSINESS,
 } from "@/lib/audit-v2/constants";
+import { isKnownReferrer, getReferrerDisplayName } from "@/lib/referrers";
 
 const WEBHOOK_TIMEOUT_MS = 10_000;
 const N8N_WEBHOOK = "https://n8n.mottodigital.jp/webhook/free-audit-v2-intake";
@@ -58,6 +59,8 @@ export async function POST(req: NextRequest) {
 
     // Validation — bare-minimum required fields
     const c = data.contact ?? {};
+    const referrerSlug = isKnownReferrer(data.referrer) ? data.referrer : null;
+    const referrerLabel = referrerSlug ? getReferrerDisplayName(referrerSlug) : null;
     const required = { name: c.name, email: c.email, company: c.company, tier: data.tier };
     const missing = Object.entries(required)
       .filter(([, v]) => !v)
@@ -121,10 +124,13 @@ export async function POST(req: NextRequest) {
             "X-API-Key": mottoApiKey,
           },
           body: JSON.stringify({
-            name: `AIOS Audit: ${c.name} — ${c.company}`,
+            name: `${referrerLabel ? `[${referrerLabel}] ` : ""}AIOS Audit: ${c.name} — ${c.company}`,
             projectId: AIOS_PROJECT_ID,
             status: "INBOX",
             notes: [
+              ...(referrerSlug
+                ? [`Referred by: ${referrerSlug} (${referrerLabel})`, ``]
+                : []),
               `Name: ${c.name}`,
               `Email: ${c.email}`,
               `Company: ${c.company}`,

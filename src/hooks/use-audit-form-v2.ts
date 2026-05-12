@@ -56,6 +56,7 @@ export interface AuditV2Data {
     company: string;
     phone: string;
   };
+  referrer?: string;
   locale: "en" | "ja";
 }
 
@@ -83,6 +84,7 @@ const INITIAL_DATA: AuditV2Data = {
   robotTask: "",
   qualification: { budget: "", timeline: "", decisionMaker: "" },
   contact: { name: "", email: "", company: "", phone: "" },
+  referrer: "",
   locale: "ja",
 };
 

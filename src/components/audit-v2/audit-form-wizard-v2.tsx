@@ -24,6 +24,7 @@ import { LanguageToggle } from "@/components/landing/language-toggle";
 import { ProgressBar } from "./shared/v2-progress-bar";
 import { AuditV2LocaleProvider, useAuditV2Locale } from "./audit-v2-locale-context";
 import { useAuditFormV2, type StepId } from "@/hooks/use-audit-form-v2";
+import { useReferrerCapture } from "@/hooks/use-referrer-capture";
 import { segmentJapanese } from "@/lib/budoux-transform";
 import { S0Email } from "./steps/s0-email";
 import { S2Goals } from "./steps/s2-goals";
@@ -123,6 +124,14 @@ function AuditFormWizardV2Inner() {
     form.update({ locale });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [locale]);
+
+  const capturedReferrer = useReferrerCapture();
+  useEffect(() => {
+    if (capturedReferrer && capturedReferrer !== form.data.referrer) {
+      form.update({ referrer: capturedReferrer });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [capturedReferrer]);
 
   const handleNext = () => {
     setDirection("forward");
