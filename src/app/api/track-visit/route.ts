@@ -47,26 +47,36 @@ export async function POST(req: NextRequest) {
   if (apiKey && REFERRAL_EVENTS_PROJECT_ID) {
     const displayName = getReferrerDisplayName(slug);
     const stamp = new Date().toISOString().slice(0, 16).replace("T", " ");
-    fetch(MOTTO_API, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-API-Key": apiKey,
-      },
-      body: JSON.stringify({
-        name: `[VISIT] ${displayName} — ${stamp}`,
-        projectId: REFERRAL_EVENTS_PROJECT_ID,
-        status: "INBOX",
-        notes: [
-          `Event: visit`,
-          `Referrer: ${slug}`,
-          `Locale: ${body.locale || "—"}`,
-          `Path: ${body.path || "—"}`,
-          `UA: ${ua.slice(0, 300)}`,
-          `Timestamp: ${new Date().toISOString()}`,
-        ].join("\n"),
-      }),
-    }).catch((e) => console.error("track-visit notion write failed:", e));
+    const NOTION_TIMEOUT_MS = 5000;
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), NOTION_TIMEOUT_MS);
+    try {
+      await fetch(MOTTO_API, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-API-Key": apiKey,
+        },
+        body: JSON.stringify({
+          name: `[VISIT] ${displayName} — ${stamp}`,
+          projectId: REFERRAL_EVENTS_PROJECT_ID,
+          status: "INBOX",
+          notes: [
+            `Event: visit`,
+            `Referrer: ${slug}`,
+            `Locale: ${body.locale || "—"}`,
+            `Path: ${body.path || "—"}`,
+            `UA: ${ua.slice(0, 300)}`,
+            `Timestamp: ${new Date().toISOString()}`,
+          ].join("\n"),
+        }),
+        signal: controller.signal,
+      });
+    } catch (e) {
+      console.error("track-visit notion write failed:", e);
+    } finally {
+      clearTimeout(timer);
+    }
   }
 
   return new NextResponse(null, { status: 204 });
