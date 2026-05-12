@@ -220,6 +220,7 @@ export default defineSchema({
 
     // Notion-write tracking
     notionTaskId: v.optional(v.string()),
+    notionAuditRowId: v.optional(v.string()),
     notionWriteOk: v.boolean(),
     notionError: v.optional(v.string()),
 

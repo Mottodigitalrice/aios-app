@@ -8,6 +8,13 @@
  * @module
  */
 
+import type * as dist__generated_api from "../dist/_generated/api.js";
+import type * as dist__generated_server from "../dist/_generated/server.js";
+import type * as dist_functions_auditLeads from "../dist/functions/auditLeads.js";
+import type * as dist_functions_auditReports from "../dist/functions/auditReports.js";
+import type * as dist_functions_auditSubmissionsV2 from "../dist/functions/auditSubmissionsV2.js";
+import type * as dist_functions_signups from "../dist/functions/signups.js";
+import type * as dist_functions_users from "../dist/functions/users.js";
 import type * as functions_auditLeads from "../functions/auditLeads.js";
 import type * as functions_auditReports from "../functions/auditReports.js";
 import type * as functions_auditSubmissionsV2 from "../functions/auditSubmissionsV2.js";
@@ -21,6 +28,13 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  "dist/_generated/api": typeof dist__generated_api;
+  "dist/_generated/server": typeof dist__generated_server;
+  "dist/functions/auditLeads": typeof dist_functions_auditLeads;
+  "dist/functions/auditReports": typeof dist_functions_auditReports;
+  "dist/functions/auditSubmissionsV2": typeof dist_functions_auditSubmissionsV2;
+  "dist/functions/signups": typeof dist_functions_signups;
+  "dist/functions/users": typeof dist_functions_users;
   "functions/auditLeads": typeof functions_auditLeads;
   "functions/auditReports": typeof functions_auditReports;
   "functions/auditSubmissionsV2": typeof functions_auditSubmissionsV2;

@@ -67,6 +67,7 @@ export const updateNotionWriteResult = mutation({
   args: {
     id: v.id("auditSubmissionsV2"),
     notionTaskId: v.optional(v.string()),
+    notionAuditRowId: v.optional(v.string()),
     notionWriteOk: v.boolean(),
     notionError: v.optional(v.string()),
   },

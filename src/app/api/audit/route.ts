@@ -17,7 +17,11 @@ import {
   YEARS_IN_BUSINESS,
 } from "@/lib/audit-v2/constants";
 import { isKnownReferrer, getReferrerDisplayName } from "@/lib/referrers";
-import { appendNotesToTask } from "@/lib/motto-api";
+import {
+  appendNotesToTask,
+  buildAuditRowProperties,
+  createAuditSubmissionRow,
+} from "@/lib/motto-api";
 
 const WEBHOOK_TIMEOUT_MS = 10_000;
 const N8N_WEBHOOK = "https://n8n.mottodigital.jp/webhook/free-audit-v2-intake";
@@ -247,52 +251,114 @@ export async function POST(req: NextRequest) {
 
     // MOTTO API task creation + page-body append (Layer 1 fix)
     const mottoApiKey = process.env.MOTTO_API_KEY;
+    const auditDbId = process.env.AUDIT_SUBMISSIONS_DB_ID;
     const notionPromise = (async () => {
       if (!mottoApiKey) return;
-      let taskId: string | undefined;
-      let notionWriteOk = false;
-      let notionError: string | undefined;
-      try {
-        const res = await fetchWithTimeout(MOTTO_API, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-API-Key": mottoApiKey,
-          },
-          body: JSON.stringify({
-            name: `${referrerLabel ? `[${referrerLabel}] ` : ""}AIOS Audit: ${c.name} — ${c.company}`,
-            projectId: AIOS_PROJECT_ID,
-            status: "INBOX",
-            notes: notesText,
-          }),
-        });
-        if (!res.ok) {
-          notionError = `POST /tasks HTTP ${res.status}`;
-        } else {
-          const json = (await res.json().catch(() => ({}))) as {
-            id?: string;
-            url?: string;
-          };
-          taskId = json.id;
-          if (!taskId) {
-            notionError = "POST /tasks response missing id";
-          } else {
-            const append = await appendNotesToTask(taskId, notesText, mottoApiKey);
-            notionWriteOk = append.ok;
-            if (!append.ok) notionError = append.error;
-          }
+
+      // Inbox-task write (existing behaviour) — produces taskId we cross-link
+      // back into the structured row.
+      const inboxWrite = (async (): Promise<{
+        taskId?: string;
+        ok: boolean;
+        error?: string;
+      }> => {
+        try {
+          const res = await fetchWithTimeout(MOTTO_API, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-API-Key": mottoApiKey,
+            },
+            body: JSON.stringify({
+              name: `${referrerLabel ? `[${referrerLabel}] ` : ""}AIOS Audit: ${c.name} — ${c.company}`,
+              projectId: AIOS_PROJECT_ID,
+              status: "INBOX",
+              notes: notesText,
+            }),
+          });
+          if (!res.ok) return { ok: false, error: `POST /tasks HTTP ${res.status}` };
+          const json = (await res.json().catch(() => ({}))) as { id?: string };
+          const taskId = json.id;
+          if (!taskId) return { ok: false, error: "POST /tasks response missing id" };
+          const append = await appendNotesToTask(taskId, notesText, mottoApiKey);
+          if (!append.ok) return { taskId, ok: false, error: append.error };
+          return { taskId, ok: true };
+        } catch (e) {
+          return { ok: false, error: e instanceof Error ? e.message : String(e) };
         }
-      } catch (e) {
-        notionError = e instanceof Error ? e.message : String(e);
-      }
+      })();
+
+      // Structured-row write into the dedicated Audit Submissions DB. Skips
+      // cleanly if the env var is unset so deployment can ship before the DB
+      // is created.
+      const rowWrite = (async (): Promise<{
+        rowId?: string;
+        ok: boolean;
+        error?: string;
+        skipped?: boolean;
+      }> => {
+        if (!auditDbId) return { ok: false, skipped: true };
+        const properties = buildAuditRowProperties({
+          contact: {
+            name: String(c.name),
+            email: String(c.email),
+            company: String(c.company),
+            phone: c.phone ? String(c.phone) : undefined,
+          },
+          website: data.company?.website,
+          referrerSlug,
+          locale: data.locale,
+          tier: String(data.tier),
+          labels: {
+            industry: labels.industry,
+            teamSize: labels.teamSize,
+            revenue: labels.revenue,
+            role: labels.role,
+            yearsInBusiness: labels.yearsInBusiness,
+            location: labels.location,
+            aiExperience: labels.aiExperience,
+            topGoal: labels.topGoal,
+            goalsRanked: labels.goalsRanked,
+            topGoalBlockers: labels.topGoalBlockers,
+            budget: labels.budget,
+            timeline: labels.timeline,
+            decisionMaker: labels.decisionMaker,
+          },
+          roi: {
+            hoursPerWeek: roi.hoursPerWeek,
+            annualSavings: roi.annualSavings,
+          },
+          robotTask: data.robotTask,
+          submittedAt: Date.now(),
+          convexId: String(convexId),
+        });
+        const result = await createAuditSubmissionRow({
+          databaseId: auditDbId,
+          apiKey: mottoApiKey,
+          properties,
+        });
+        return { rowId: result.id, ok: result.ok, error: result.error };
+      })();
+
+      const [inboxRes, rowRes] = await Promise.all([inboxWrite, rowWrite]);
+
+      // Combine error reporting — surface either failure on the Convex row.
+      const errors: string[] = [];
+      if (!inboxRes.ok && inboxRes.error) errors.push(`inbox: ${inboxRes.error}`);
+      if (!rowRes.ok && !rowRes.skipped && rowRes.error)
+        errors.push(`row: ${rowRes.error}`);
+      const notionError = errors.length ? errors.join(" | ") : undefined;
+      const notionWriteOk = inboxRes.ok && (rowRes.ok || rowRes.skipped === true);
+
       if (notionError) console.error("[audit] Notion write:", notionError);
-      // Record the Notion outcome on the Convex row (best-effort)
+
       try {
         await getConvex().mutation(
           api.functions.auditSubmissionsV2.updateNotionWriteResult,
           {
             id: convexId as never,
-            notionTaskId: taskId,
+            notionTaskId: inboxRes.taskId,
+            notionAuditRowId: rowRes.rowId,
             notionWriteOk,
             notionError,
           }
