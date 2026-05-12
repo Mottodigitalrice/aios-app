@@ -156,4 +156,76 @@ export default defineSchema({
     imageUrl: v.optional(v.string()),
     createdAt: v.optional(v.number()),
   }).index("by_clerk_id", ["clerkId"]),
+
+  // Canonical store for v2 audit submissions. Notion is a derived best-effort
+  // artifact — if the Notion write drops fields again, this table still has
+  // the full structured payload and we can re-derive the task body.
+  auditSubmissionsV2: defineTable({
+    // Top-level contact
+    email: v.string(),
+    name: v.string(),
+    company: v.string(),
+    phone: v.optional(v.string()),
+    locale: v.optional(v.string()),
+    tier: v.string(),
+    referrer: v.optional(v.string()),
+
+    // Goals
+    goalsSelected: v.array(v.string()),
+    goalsRanked: v.array(v.string()),
+    topGoalBlockers: v.array(v.string()),
+
+    // Company demographics (renamed from `company` to avoid collision with
+    // the top-level company-name string)
+    companyMeta: v.object({
+      industry: v.optional(v.string()),
+      teamSize: v.optional(v.string()),
+      revenue: v.optional(v.string()),
+      role: v.optional(v.string()),
+      yearsInBusiness: v.optional(v.string()),
+      location: v.optional(v.string()),
+      website: v.optional(v.string()),
+    }),
+
+    // AI experience
+    aiExperience: v.optional(v.string()),
+    aiTriedDidntStick: v.optional(v.string()),
+    aiTriedReasons: v.array(v.string()),
+
+    // Process grid + robot task
+    processGrid: v.any(),
+    robotTask: v.string(),
+
+    // Qualification
+    qualification: v.object({
+      budget: v.optional(v.string()),
+      timeline: v.optional(v.string()),
+      decisionMaker: v.optional(v.string()),
+    }),
+
+    // Tool stack
+    toolStack: v.any(),
+    toolStackCategoryOther: v.any(),
+    toolStackOther: v.string(),
+
+    // Computed
+    computed: v.object({
+      hoursPerWeek: v.number(),
+      annualSavings: v.number(),
+      topProcesses: v.any(),
+    }),
+
+    // Defence in depth — store the entire raw payload so nothing can be lost
+    rawPayload: v.any(),
+
+    // Notion-write tracking
+    notionTaskId: v.optional(v.string()),
+    notionWriteOk: v.boolean(),
+    notionError: v.optional(v.string()),
+
+    submittedAt: v.number(),
+  })
+    .index("by_email", ["email"])
+    .index("by_referrer", ["referrer"])
+    .index("by_submittedAt", ["submittedAt"]),
 });

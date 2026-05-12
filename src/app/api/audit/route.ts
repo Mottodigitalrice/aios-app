@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { ConvexHttpClient } from "convex/browser";
+import { api } from "../../../../convex/_generated/api";
 import { isDuplicateRequest } from "@/lib/dedup";
 import { computeRoi } from "@/lib/audit-v2/roi-calculator";
 import { GOAL_BY_ID } from "@/lib/audit-v2/goals";
@@ -15,11 +17,22 @@ import {
   YEARS_IN_BUSINESS,
 } from "@/lib/audit-v2/constants";
 import { isKnownReferrer, getReferrerDisplayName } from "@/lib/referrers";
+import { appendNotesToTask } from "@/lib/motto-api";
 
 const WEBHOOK_TIMEOUT_MS = 10_000;
 const N8N_WEBHOOK = "https://n8n.mottodigital.jp/webhook/free-audit-v2-intake";
 const MOTTO_API = "https://vps.mottodigital.jp/tasks";
 const AIOS_PROJECT_ID = "1ede0cb5-63d9-8061-8571-df183897d8e2";
+
+let _convex: ConvexHttpClient | null = null;
+function getConvex(): ConvexHttpClient {
+  if (!_convex) {
+    const url = process.env.NEXT_PUBLIC_CONVEX_URL;
+    if (!url) throw new Error("NEXT_PUBLIC_CONVEX_URL not configured");
+    _convex = new ConvexHttpClient(url);
+  }
+  return _convex;
+}
 
 function fetchWithTimeout(url: string, options: RequestInit): Promise<Response> {
   return Promise.race([
@@ -81,6 +94,22 @@ export async function POST(req: NextRequest) {
     );
     const topGoalLabel = goalsRanked[0] || "—";
 
+    const labels = {
+      goalsRanked,
+      topGoal: topGoalLabel,
+      topGoalBlockers: data.topGoalBlockers ?? [],
+      industry: lookupLabel(INDUSTRIES, data.company?.industry),
+      teamSize: lookupLabel(TEAM_SIZES, data.company?.teamSize),
+      revenue: lookupLabel(REVENUE_BANDS, data.company?.revenue),
+      role: lookupLabel(ROLES, data.company?.role),
+      yearsInBusiness: lookupLabel(YEARS_IN_BUSINESS, data.company?.yearsInBusiness),
+      location: lookupLabel(LOCATIONS, data.company?.location),
+      aiExperience: lookupLabel(AI_EXPERIENCE, data.aiExperience),
+      budget: lookupLabel(BUDGET_OPTIONS, data.qualification?.budget),
+      timeline: lookupLabel(TIMELINE_OPTIONS, data.qualification?.timeline),
+      decisionMaker: lookupLabel(DECISION_MAKER_OPTIONS, data.qualification?.decisionMaker),
+    };
+
     const payload = {
       ...data,
       computed: {
@@ -88,24 +117,126 @@ export async function POST(req: NextRequest) {
         annualSavings: roi.annualSavings,
         topProcesses: roi.topProcesses,
       },
-      labels: {
-        goalsRanked,
-        topGoal: topGoalLabel,
-        topGoalBlockers: data.topGoalBlockers ?? [],
-        industry: lookupLabel(INDUSTRIES, data.company?.industry),
-        teamSize: lookupLabel(TEAM_SIZES, data.company?.teamSize),
-        revenue: lookupLabel(REVENUE_BANDS, data.company?.revenue),
-        role: lookupLabel(ROLES, data.company?.role),
-        yearsInBusiness: lookupLabel(YEARS_IN_BUSINESS, data.company?.yearsInBusiness),
-        location: lookupLabel(LOCATIONS, data.company?.location),
-        aiExperience: lookupLabel(AI_EXPERIENCE, data.aiExperience),
-        budget: lookupLabel(BUDGET_OPTIONS, data.qualification?.budget),
-        timeline: lookupLabel(TIMELINE_OPTIONS, data.qualification?.timeline),
-        decisionMaker: lookupLabel(DECISION_MAKER_OPTIONS, data.qualification?.decisionMaker),
-      },
+      labels,
       status: "pending",
       createdAt: Date.now(),
     };
+
+    // Build notes text once — used for both Notion body and audit trail
+    const notesText = [
+      ...(referrerSlug
+        ? [`Referred by: ${referrerSlug} (${referrerLabel})`, ``]
+        : []),
+      `Name: ${c.name}`,
+      `Email: ${c.email}`,
+      `Company: ${c.company}`,
+      `Phone: ${c.phone || "—"}`,
+      ``,
+      `Top goal: ${topGoalLabel}`,
+      `All goals (ranked): ${goalsRanked.join(" → ")}`,
+      `Top blockers: ${(data.topGoalBlockers ?? []).join(" / ")}`,
+      ``,
+      `Industry: ${labels.industry}`,
+      `Team size: ${labels.teamSize}`,
+      `Revenue: ${labels.revenue}`,
+      `Role: ${labels.role}`,
+      `Years: ${labels.yearsInBusiness}`,
+      `Location: ${labels.location}`,
+      `Website: ${data.company?.website || "—"}`,
+      ``,
+      `AI experience: ${labels.aiExperience}`,
+      `Tried-but-stuck: ${data.aiTriedDidntStick || "—"} ${
+        (data.aiTriedReasons ?? []).length ? `(${(data.aiTriedReasons ?? []).join(", ")})` : ""
+      }`,
+      ``,
+      `ROI: ${roi.hoursPerWeek.toFixed(1)} hrs/week, ¥${roi.annualSavings.toLocaleString()}/year`,
+      `Top processes: ${roi.topProcesses
+        .map((p) => `${p.processId} (${p.hoursSaved.toFixed(1)}h)`)
+        .join(", ")}`,
+      ``,
+      `Robot task: ${data.robotTask || "—"}`,
+      ``,
+      `Budget: ${labels.budget}`,
+      `Timeline: ${labels.timeline}`,
+      `Decision maker: ${labels.decisionMaker}`,
+      ``,
+      `Tools: ${Object.entries(data.toolStack ?? {})
+        .map(([cat, tools]) => {
+          const arr = tools as string[];
+          const named = arr.filter((t) => t !== "__none__" && t !== "__other__");
+          const isNone = arr.includes("__none__");
+          const otherText = (data.toolStackCategoryOther ?? {})[cat] || "";
+          const parts: string[] = [];
+          if (isNone) parts.push("none");
+          if (named.length) parts.push(named.join("/"));
+          if (otherText) parts.push(`Other: ${otherText}`);
+          return `${cat}: ${parts.join(", ") || "—"}`;
+        })
+        .join(" | ")}`,
+      `Other tools (uncategorized): ${data.toolStackOther || "—"}`,
+      ``,
+      `Locale: ${data.locale}`,
+    ].join("\n");
+
+    // -------------------------------------------------------------------------
+    // Layer 2 — Convex is the canonical store. Insert FIRST and synchronously.
+    // If this throws, return 500 so the user can retry (their data isn't gone).
+    // -------------------------------------------------------------------------
+    let convexId: string;
+    try {
+      convexId = await getConvex().mutation(
+        api.functions.auditSubmissionsV2.insertSubmission,
+        {
+          email: String(c.email),
+          name: String(c.name),
+          company: String(c.company),
+          phone: c.phone ? String(c.phone) : undefined,
+          locale: data.locale ? String(data.locale) : undefined,
+          tier: String(data.tier),
+          referrer: referrerSlug ?? undefined,
+          goalsSelected: data.goalsSelected ?? [],
+          goalsRanked: data.goalsRanked ?? [],
+          topGoalBlockers: data.topGoalBlockers ?? [],
+          companyMeta: {
+            industry: data.company?.industry,
+            teamSize: data.company?.teamSize,
+            revenue: data.company?.revenue,
+            role: data.company?.role,
+            yearsInBusiness: data.company?.yearsInBusiness,
+            location: data.company?.location,
+            website: data.company?.website,
+          },
+          aiExperience: data.aiExperience ? String(data.aiExperience) : undefined,
+          aiTriedDidntStick: data.aiTriedDidntStick
+            ? String(data.aiTriedDidntStick)
+            : undefined,
+          aiTriedReasons: data.aiTriedReasons ?? [],
+          processGrid: data.processGrid ?? {},
+          robotTask: data.robotTask ? String(data.robotTask) : "",
+          qualification: {
+            budget: data.qualification?.budget,
+            timeline: data.qualification?.timeline,
+            decisionMaker: data.qualification?.decisionMaker,
+          },
+          toolStack: data.toolStack ?? {},
+          toolStackCategoryOther: data.toolStackCategoryOther ?? {},
+          toolStackOther: data.toolStackOther ? String(data.toolStackOther) : "",
+          computed: {
+            hoursPerWeek: roi.hoursPerWeek,
+            annualSavings: roi.annualSavings,
+            topProcesses: roi.topProcesses,
+          },
+          rawPayload: data,
+          submittedAt: Date.now(),
+        }
+      );
+    } catch (e) {
+      console.error("[audit] Convex insert failed:", e);
+      return NextResponse.json(
+        { error: "Could not save submission. Please try again." },
+        { status: 500 }
+      );
+    }
 
     // Fire-and-forget n8n webhook (Slack only — workflow built separately)
     const webhookPromise = fetchWithTimeout(N8N_WEBHOOK, {
@@ -114,10 +245,15 @@ export async function POST(req: NextRequest) {
       body: JSON.stringify(payload),
     }).catch(console.error);
 
-    // Fire-and-forget MOTTO API task creation (primary Notion write)
+    // MOTTO API task creation + page-body append (Layer 1 fix)
     const mottoApiKey = process.env.MOTTO_API_KEY;
-    const notionPromise = mottoApiKey
-      ? fetchWithTimeout(MOTTO_API, {
+    const notionPromise = (async () => {
+      if (!mottoApiKey) return;
+      let taskId: string | undefined;
+      let notionWriteOk = false;
+      let notionError: string | undefined;
+      try {
+        const res = await fetchWithTimeout(MOTTO_API, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -127,63 +263,44 @@ export async function POST(req: NextRequest) {
             name: `${referrerLabel ? `[${referrerLabel}] ` : ""}AIOS Audit: ${c.name} — ${c.company}`,
             projectId: AIOS_PROJECT_ID,
             status: "INBOX",
-            notes: [
-              ...(referrerSlug
-                ? [`Referred by: ${referrerSlug} (${referrerLabel})`, ``]
-                : []),
-              `Name: ${c.name}`,
-              `Email: ${c.email}`,
-              `Company: ${c.company}`,
-              `Phone: ${c.phone || "—"}`,
-              ``,
-              `Top goal: ${topGoalLabel}`,
-              `All goals (ranked): ${goalsRanked.join(" → ")}`,
-              `Top blockers: ${(data.topGoalBlockers ?? []).join(" / ")}`,
-              ``,
-              `Industry: ${payload.labels.industry}`,
-              `Team size: ${payload.labels.teamSize}`,
-              `Revenue: ${payload.labels.revenue}`,
-              `Role: ${payload.labels.role}`,
-              `Years: ${payload.labels.yearsInBusiness}`,
-              `Location: ${payload.labels.location}`,
-              `Website: ${data.company?.website || "—"}`,
-              ``,
-              `AI experience: ${payload.labels.aiExperience}`,
-              `Tried-but-stuck: ${data.aiTriedDidntStick || "—"} ${
-                (data.aiTriedReasons ?? []).length ? `(${(data.aiTriedReasons ?? []).join(", ")})` : ""
-              }`,
-              ``,
-              `ROI: ${roi.hoursPerWeek.toFixed(1)} hrs/week, ¥${roi.annualSavings.toLocaleString()}/year`,
-              `Top processes: ${roi.topProcesses
-                .map((p) => `${p.processId} (${p.hoursSaved.toFixed(1)}h)`)
-                .join(", ")}`,
-              ``,
-              `Robot task: ${data.robotTask || "—"}`,
-              ``,
-              `Budget: ${payload.labels.budget}`,
-              `Timeline: ${payload.labels.timeline}`,
-              `Decision maker: ${payload.labels.decisionMaker}`,
-              ``,
-              `Tools: ${Object.entries(data.toolStack ?? {})
-                .map(([cat, tools]) => {
-                  const arr = tools as string[];
-                  const named = arr.filter((t) => t !== "__none__" && t !== "__other__");
-                  const isNone = arr.includes("__none__");
-                  const otherText = (data.toolStackCategoryOther ?? {})[cat] || "";
-                  const parts: string[] = [];
-                  if (isNone) parts.push("none");
-                  if (named.length) parts.push(named.join("/"));
-                  if (otherText) parts.push(`Other: ${otherText}`);
-                  return `${cat}: ${parts.join(", ") || "—"}`;
-                })
-                .join(" | ")}`,
-              `Other tools (uncategorized): ${data.toolStackOther || "—"}`,
-              ``,
-              `Locale: ${data.locale}`,
-            ].join("\n"),
+            notes: notesText,
           }),
-        }).catch(console.error)
-      : Promise.resolve();
+        });
+        if (!res.ok) {
+          notionError = `POST /tasks HTTP ${res.status}`;
+        } else {
+          const json = (await res.json().catch(() => ({}))) as {
+            id?: string;
+            url?: string;
+          };
+          taskId = json.id;
+          if (!taskId) {
+            notionError = "POST /tasks response missing id";
+          } else {
+            const append = await appendNotesToTask(taskId, notesText, mottoApiKey);
+            notionWriteOk = append.ok;
+            if (!append.ok) notionError = append.error;
+          }
+        }
+      } catch (e) {
+        notionError = e instanceof Error ? e.message : String(e);
+      }
+      if (notionError) console.error("[audit] Notion write:", notionError);
+      // Record the Notion outcome on the Convex row (best-effort)
+      try {
+        await getConvex().mutation(
+          api.functions.auditSubmissionsV2.updateNotionWriteResult,
+          {
+            id: convexId as never,
+            notionTaskId: taskId,
+            notionWriteOk,
+            notionError,
+          }
+        );
+      } catch (e) {
+        console.error("[audit] Convex update post-Notion failed:", e);
+      }
+    })();
 
     await Promise.allSettled([webhookPromise, notionPromise]);
 
