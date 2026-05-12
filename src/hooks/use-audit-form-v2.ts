@@ -261,7 +261,7 @@ export function useAuditFormV2() {
       setError(null);
       try {
         const payload = { ...data, locale };
-        const res = await fetch("/api/audit-v2", {
+        const res = await fetch("/api/audit", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

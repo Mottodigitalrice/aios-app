@@ -1,7 +1,7 @@
 "use client";
 
-import { AuditFormWizard } from "@/components/audit/audit-form-wizard";
+import { AuditFormWizardV2 } from "@/components/audit-v2/audit-form-wizard-v2";
 
-export default function AuditPage() {
-  return <AuditFormWizard />;
+export default function AuditV2Page() {
+  return <AuditFormWizardV2 />;
 }
