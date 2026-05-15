@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isDuplicateRequest } from "@/lib/dedup";
+import { appendNotesToTask } from "@/lib/motto-api";
 
 const WEBHOOK_TIMEOUT_MS = 10_000;
 
@@ -67,8 +68,51 @@ export async function POST(req: NextRequest) {
       }
     ).catch(console.error);
 
-    // Forward to MOTTO API for Notion task creation (fire and forget)
+    // Forward to MOTTO API for Notion task creation
+    //
+    // Page-body append patch: MOTTO API silently drops `notes` on POST /tasks
+    // (see 2026-05-12 work-log). Capture the task id and PATCH the body via
+    // the Notion proxy so the legacy audit data lands on the page. Same
+    // pattern as the signup/webinar/audit fixes.
     const mottoApiKey = process.env.MOTTO_API_KEY;
+    const notesText = [
+      `Name: ${data.name}`,
+      `Email: ${data.email}`,
+      `Perspective: ${data.perspective}`,
+      `Role: ${data.role || "N/A"}`,
+      `Company: ${data.company || "N/A"}`,
+      `Industry: ${data.industry || "N/A"}`,
+      `Employees: ${data.employees || "N/A"}`,
+      `Revenue Range: ${data.revenueRange || "N/A"}`,
+      `Team Composition: ${data.teamComposition || "N/A"}`,
+      `Department Name: ${data.departmentName || "N/A"}`,
+      `Department Size: ${data.departmentSize || "N/A"}`,
+      `Department Function: ${data.departmentFunction || "N/A"}`,
+      `Typical Day: ${data.typicalDay || "N/A"}`,
+      `Data Maturity: ${data.dataMaturity || "N/A"}`,
+      `Data Confidence: ${data.dataConfidence ?? "N/A"}`,
+      `Data Location: ${dataLocation || "N/A"}`,
+      `Data Restructuring Openness: ${data.dataRestructuringOpenness || "N/A"}`,
+      `Process Documentation: ${data.processDocumentation || "N/A"}`,
+      `Tool Autonomy: ${data.toolAutonomy || "N/A"}`,
+      `Tools: ${tools || "N/A"}`,
+      `Challenges: ${challenge || "N/A"}${data.challengeOther ? ` (Other: ${data.challengeOther})` : ""}`,
+      `Bottlenecks: ${bottlenecks || "N/A"}`,
+      `Repetitive Hours/Week: ${data.repetitiveHoursPerWeek || "N/A"}`,
+      `Robot Task: ${data.robotTask || "N/A"}`,
+      `Onboarding Process: ${data.onboardingProcess || "N/A"}`,
+      `Cross-Dept Dependency: ${data.crossDeptDependency || "N/A"}`,
+      `AI Experience: ${data.aiExperience || "N/A"}`,
+      `6-Month Vision: ${sixMonthVision || "N/A"}${data.sixMonthVisionOther ? ` (Other: ${data.sixMonthVisionOther})` : ""}`,
+      `AI Budget: ${data.aiBudget || "N/A"}`,
+      `AI Tried Before: ${data.aiTriedBefore || "N/A"}`,
+      `AI Timeline: ${data.aiTimeline || "N/A"}`,
+      `Decision Maker: ${data.decisionMaker || "N/A"}`,
+      `Source: ${data.source || "N/A"}`,
+      `Preferred Time: ${data.preferredTime || "N/A"}`,
+      `Website: ${data.website || "N/A"}`,
+    ].join("\n");
+
     const notionPromise = mottoApiKey
       ? fetchWithTimeout("https://vps.mottodigital.jp/tasks", {
           method: "POST",
@@ -80,45 +124,23 @@ export async function POST(req: NextRequest) {
             name: `AIOS Audit: ${data.name} (${data.perspective})`,
             projectId: "1ede0cb5-63d9-8061-8571-df183897d8e2",
             status: "INBOX",
-            notes: [
-              `Name: ${data.name}`,
-              `Email: ${data.email}`,
-              `Perspective: ${data.perspective}`,
-              `Role: ${data.role || "N/A"}`,
-              `Company: ${data.company || "N/A"}`,
-              `Industry: ${data.industry || "N/A"}`,
-              `Employees: ${data.employees || "N/A"}`,
-              `Revenue Range: ${data.revenueRange || "N/A"}`,
-              `Team Composition: ${data.teamComposition || "N/A"}`,
-              `Department Name: ${data.departmentName || "N/A"}`,
-              `Department Size: ${data.departmentSize || "N/A"}`,
-              `Department Function: ${data.departmentFunction || "N/A"}`,
-              `Typical Day: ${data.typicalDay || "N/A"}`,
-              `Data Maturity: ${data.dataMaturity || "N/A"}`,
-              `Data Confidence: ${data.dataConfidence ?? "N/A"}`,
-              `Data Location: ${dataLocation || "N/A"}`,
-              `Data Restructuring Openness: ${data.dataRestructuringOpenness || "N/A"}`,
-              `Process Documentation: ${data.processDocumentation || "N/A"}`,
-              `Tool Autonomy: ${data.toolAutonomy || "N/A"}`,
-              `Tools: ${tools || "N/A"}`,
-              `Challenges: ${challenge || "N/A"}${data.challengeOther ? ` (Other: ${data.challengeOther})` : ""}`,
-              `Bottlenecks: ${bottlenecks || "N/A"}`,
-              `Repetitive Hours/Week: ${data.repetitiveHoursPerWeek || "N/A"}`,
-              `Robot Task: ${data.robotTask || "N/A"}`,
-              `Onboarding Process: ${data.onboardingProcess || "N/A"}`,
-              `Cross-Dept Dependency: ${data.crossDeptDependency || "N/A"}`,
-              `AI Experience: ${data.aiExperience || "N/A"}`,
-              `6-Month Vision: ${sixMonthVision || "N/A"}${data.sixMonthVisionOther ? ` (Other: ${data.sixMonthVisionOther})` : ""}`,
-              `AI Budget: ${data.aiBudget || "N/A"}`,
-              `AI Tried Before: ${data.aiTriedBefore || "N/A"}`,
-              `AI Timeline: ${data.aiTimeline || "N/A"}`,
-              `Decision Maker: ${data.decisionMaker || "N/A"}`,
-              `Source: ${data.source || "N/A"}`,
-              `Preferred Time: ${data.preferredTime || "N/A"}`,
-              `Website: ${data.website || "N/A"}`,
-            ].join("\n"),
+            notes: notesText,
           }),
-        }).catch(console.error)
+        })
+          .then(async (response) => {
+            if (!response.ok) {
+              throw new Error(`Legacy audit task creation failed: ${response.status}`);
+            }
+            const json = (await response.json().catch(() => ({}))) as { id?: string };
+            if (json.id) {
+              const append = await appendNotesToTask(json.id, notesText, mottoApiKey);
+              if (!append.ok) {
+                console.error("audit-legacy notes append failed:", append.error);
+              }
+            }
+            return json;
+          })
+          .catch(console.error)
       : Promise.resolve();
 
     // Wait for both (but don't fail if webhooks fail)
