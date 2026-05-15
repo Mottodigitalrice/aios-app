@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isDuplicateRequest } from "@/lib/dedup";
+import { appendNotesToTask } from "@/lib/motto-api";
 
 const WEBHOOK_TIMEOUT_MS = 10_000;
 const AIOS_PROJECT_ID = "1ede0cb5-63d9-8061-8571-df183897d8e2";
@@ -97,7 +98,32 @@ export async function POST(req: NextRequest) {
     ).catch(console.error);
 
     // Forward to MOTTO API for Notion (fire and forget)
+    //
+    // The MOTTO API server silently drops the `notes` field on POST /tasks (see
+    // 2026-05-12 work-log P0 fix). Same pattern as the audit route: create the
+    // task, capture its id, then PATCH the page body via the Notion proxy
+    // (appendNotesToTask) so the form data actually lands on the page.
     const mottoApiKey = process.env.MOTTO_API_KEY;
+    const notesText = [
+      `Track: ${data.track}`,
+      `Language: ${data.languageTrack || data.locale || "ja"}`,
+      `Signup Type: ${data.signupType}`,
+      `Name: ${data.name}`,
+      `Email: ${data.email}`,
+      `Company: ${data.company || "N/A"}`,
+      `Role: ${data.role || "N/A"}`,
+      `Goals: ${data.goals}`,
+      `Pain Points: ${data.painPoints || "N/A"}`,
+      `Team Size: ${data.teamSize || "N/A"}`,
+      `Start Preference: ${data.startPreference}`,
+      `Referral: ${data.referralSource}`,
+      `Notes: ${data.notes || "N/A"}`,
+      `---`,
+      `Availability: ${availabilitySummary}`,
+      `Payment: ${paymentSummary}`,
+      `Comms: ${commsSummary}`,
+    ].join("\n");
+
     const taskPromise = mottoApiKey
       ? fetchWithTimeout("https://vps.mottodigital.jp/tasks", {
           method: "POST",
@@ -109,14 +135,23 @@ export async function POST(req: NextRequest) {
             name: `AIOS Signup: ${data.name} (${data.signupType})`,
             projectId: AIOS_PROJECT_ID,
             status: "INBOX",
-            notes: `Track: ${data.track}\nLanguage: ${data.languageTrack || data.locale || "ja"}\nSignup Type: ${data.signupType}\nName: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company || "N/A"}\nRole: ${data.role || "N/A"}\nGoals: ${data.goals}\nPain Points: ${data.painPoints || "N/A"}\nTeam Size: ${data.teamSize || "N/A"}\nStart Preference: ${data.startPreference}\nReferral: ${data.referralSource}\nNotes: ${data.notes || "N/A"}\n---\nAvailability: ${availabilitySummary}\nPayment: ${paymentSummary}\nComms: ${commsSummary}`,
+            notes: notesText,
           }),
         })
           .then(async (response) => {
             if (!response.ok) {
               throw new Error(`Task creation failed: ${response.status}`);
             }
-            return await parseJsonSafely(response);
+            const task = await parseJsonSafely(response);
+            // Page-body append patch — the `notes:` field above is dropped
+            // server-side; this guarantees the data lands on the Notion page.
+            if (task && typeof task.id === "string") {
+              const append = await appendNotesToTask(task.id, notesText, mottoApiKey);
+              if (!append.ok) {
+                console.error("signup notes append failed:", append.error);
+              }
+            }
+            return task;
           })
           .catch((error) => {
             console.error(error);
