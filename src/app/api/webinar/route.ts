@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isDuplicateRequest } from "@/lib/dedup";
+import { appendNotesToTask } from "@/lib/motto-api";
 
 const WEBHOOK_TIMEOUT_MS = 10_000;
 
@@ -78,7 +79,22 @@ export async function POST(req: NextRequest) {
     ).catch(console.error);
 
     // Create MOTTO API task (lands in same Audit Leads project, tagged as Webinar)
+    //
+    // Page-body append patch: the MOTTO API server silently drops the `notes`
+    // field on POST /tasks (see 2026-05-12 work-log P0 fix). Capture the task
+    // id and PATCH the same text as paragraph blocks via the Notion proxy so
+    // the registrant details actually land on the Notion page body.
     const mottoApiKey = process.env.MOTTO_API_KEY;
+    const notesText = [
+      `Source: Webinar Registration`,
+      `Name: ${fullName}`,
+      `Email: ${data.email}`,
+      `Company: ${data.company || "N/A"}`,
+      `Session: ${data.date}`,
+      `How they heard: ${referral}`,
+      `Locale: ${data.locale || "ja"}`,
+    ].join("\n");
+
     const notionPromise = mottoApiKey
       ? fetchWithTimeout("https://vps.mottodigital.jp/tasks", {
           method: "POST",
@@ -90,17 +106,23 @@ export async function POST(req: NextRequest) {
             name: `AIOS Webinar: ${fullName} — ${data.date}`,
             projectId: "1ede0cb5-63d9-8061-8571-df183897d8e2",
             status: "INBOX",
-            notes: [
-              `Source: Webinar Registration`,
-              `Name: ${fullName}`,
-              `Email: ${data.email}`,
-              `Company: ${data.company || "N/A"}`,
-              `Session: ${data.date}`,
-              `How they heard: ${referral}`,
-              `Locale: ${data.locale || "ja"}`,
-            ].join("\n"),
+            notes: notesText,
           }),
-        }).catch(console.error)
+        })
+          .then(async (response) => {
+            if (!response.ok) {
+              throw new Error(`Webinar task creation failed: ${response.status}`);
+            }
+            const json = (await response.json().catch(() => ({}))) as { id?: string };
+            if (json.id) {
+              const append = await appendNotesToTask(json.id, notesText, mottoApiKey);
+              if (!append.ok) {
+                console.error("webinar notes append failed:", append.error);
+              }
+            }
+            return json;
+          })
+          .catch(console.error)
       : Promise.resolve();
 
     // Forward to Cloud n8n for confirmation email (fire and forget)
