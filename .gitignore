@@ -58,3 +58,10 @@ next-env.d.ts
 !.claude/settings.json
 .env*.local
 convex/dist/
+
+# Playwright e2e
+/test-results/
+/playwright-report/
+/playwright/.cache/
+e2e/.env.local
+!e2e/.env.local.example
