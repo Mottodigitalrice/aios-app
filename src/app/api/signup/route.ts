@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isDuplicateRequest } from "@/lib/dedup";
-import { appendNotesToTask } from "@/lib/motto-api";
+import {
+  appendNotesToTask,
+  AIOS_PROJECT_ID,
+  MOTTO_API_TASKS_URL,
+  NOTION_PROXY_BASE,
+} from "@/lib/motto-api";
 
 const WEBHOOK_TIMEOUT_MS = 10_000;
-const AIOS_PROJECT_ID = "1ede0cb5-63d9-8061-8571-df183897d8e2";
 const AIOS_SIGNUPS_DATABASE_ID =
   process.env.AIOS_SIGNUPS_DATABASE_ID || "34be0cb5-63d9-817d-b5ad-f7bc77418e3e";
 
@@ -125,7 +129,7 @@ export async function POST(req: NextRequest) {
     ].join("\n");
 
     const taskPromise = mottoApiKey
-      ? fetchWithTimeout("https://vps.mottodigital.jp/tasks", {
+      ? fetchWithTimeout(MOTTO_API_TASKS_URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -207,7 +211,7 @@ export async function POST(req: NextRequest) {
           }
 
           const response = await fetchWithTimeout(
-            "https://vps.mottodigital.jp/proxy/notion/v1/pages",
+            `${NOTION_PROXY_BASE}/pages`,
             {
               method: "POST",
               headers: {

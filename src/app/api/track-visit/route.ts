@@ -4,10 +4,9 @@ import {
   getReferrerDisplayName,
   REFERRAL_EVENTS_PROJECT_ID,
 } from "@/lib/referrers";
-import { appendNotesToTask } from "@/lib/motto-api";
+import { appendNotesToTask, MOTTO_API_TASKS_URL } from "@/lib/motto-api";
 
 const BOT_UA = /bot|crawl|spider|preview|facebook|linkedinbot|googlebot|bingbot|slurp|duckduckbot/i;
-const MOTTO_API = "https://vps.mottodigital.jp/tasks";
 
 export async function POST(req: NextRequest) {
   let body: { referrer?: string; locale?: string; path?: string } = {};
@@ -60,7 +59,7 @@ export async function POST(req: NextRequest) {
       `Timestamp: ${new Date().toISOString()}`,
     ].join("\n");
     try {
-      const res = await fetch(MOTTO_API, {
+      const res = await fetch(MOTTO_API_TASKS_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

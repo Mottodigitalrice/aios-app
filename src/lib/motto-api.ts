@@ -5,7 +5,18 @@
 // the call site by appending the notes string as page-body paragraph blocks via
 // the same proxy used everywhere else.
 
-const NOTION_PROXY_BASE = "https://vps.mottodigital.jp/proxy/notion/v1";
+// Shared MOTTO endpoint constants. Routes import these instead of redeclaring
+// the URLs locally — keeps drift in one place if the endpoint ever moves.
+export const MOTTO_API_BASE = "https://vps.mottodigital.jp";
+export const MOTTO_API_TASKS_URL = `${MOTTO_API_BASE}/tasks`;
+export const NOTION_PROXY_BASE = `${MOTTO_API_BASE}/proxy/notion/v1`;
+
+// Canonical Notion project id for the "AIO — AI Operating System" project.
+// Used by all submission routes (audit, signup, webinar, audit-legacy) for the
+// `projectId` field on POST /tasks. Lives here so a project re-keying only
+// touches one constant instead of every route.
+export const AIOS_PROJECT_ID = "1ede0cb5-63d9-8061-8571-df183897d8e2";
+
 const APPEND_TIMEOUT_MS = 5_000;
 const NOTION_RICH_TEXT_LIMIT = 1_900; // Notion hard limit is 2000; leave headroom
 

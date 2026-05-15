@@ -21,12 +21,12 @@ import {
   appendNotesToTask,
   buildAuditRowProperties,
   createAuditSubmissionRow,
+  MOTTO_API_TASKS_URL,
+  AIOS_PROJECT_ID,
 } from "@/lib/motto-api";
 
 const WEBHOOK_TIMEOUT_MS = 10_000;
 const N8N_WEBHOOK = "https://n8n.mottodigital.jp/webhook/free-audit-v2-intake";
-const MOTTO_API = "https://vps.mottodigital.jp/tasks";
-const AIOS_PROJECT_ID = "1ede0cb5-63d9-8061-8571-df183897d8e2";
 
 let _convex: ConvexHttpClient | null = null;
 function getConvex(): ConvexHttpClient {
@@ -263,7 +263,7 @@ export async function POST(req: NextRequest) {
         error?: string;
       }> => {
         try {
-          const res = await fetchWithTimeout(MOTTO_API, {
+          const res = await fetchWithTimeout(MOTTO_API_TASKS_URL, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

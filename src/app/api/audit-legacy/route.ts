@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isDuplicateRequest } from "@/lib/dedup";
-import { appendNotesToTask } from "@/lib/motto-api";
+import {
+  appendNotesToTask,
+  AIOS_PROJECT_ID,
+  MOTTO_API_TASKS_URL,
+} from "@/lib/motto-api";
 
 const WEBHOOK_TIMEOUT_MS = 10_000;
 
@@ -114,7 +118,7 @@ export async function POST(req: NextRequest) {
     ].join("\n");
 
     const notionPromise = mottoApiKey
-      ? fetchWithTimeout("https://vps.mottodigital.jp/tasks", {
+      ? fetchWithTimeout(MOTTO_API_TASKS_URL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -122,7 +126,7 @@ export async function POST(req: NextRequest) {
           },
           body: JSON.stringify({
             name: `AIOS Audit: ${data.name} (${data.perspective})`,
-            projectId: "1ede0cb5-63d9-8061-8571-df183897d8e2",
+            projectId: AIOS_PROJECT_ID,
             status: "INBOX",
             notes: notesText,
           }),
