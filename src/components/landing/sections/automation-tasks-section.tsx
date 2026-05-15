@@ -28,12 +28,20 @@ export default function AutomationTasksSection({ t, locale }: SectionProps) {
       ? "font-[family-name:var(--font-shippori-mincho)]"
       : "font-[family-name:var(--font-dm-sans)]";
 
+  // Hooks must run before any early return — see react-hooks/rules-of-hooks.
+  // The previous order (`if (!at) return null` ahead of `useState`) was a
+  // latent bug: if `t.automationTasks` ever briefly becomes undefined across
+  // renders, React tears the hook order down. The dictionary always provides
+  // automationTasks today, but the contract was fragile.
   const at = (t as any).automationTasks;
+  const firstId: string =
+    (at?.departments?.[0]?.id as string | undefined) || "marketing";
+  const [activeId, setActiveId] = useState<string>(firstId);
+
   if (!at) return null;
 
   const frontDepts = at.departments.filter((d: any) => d.group === "front");
   const backDepts = at.departments.filter((d: any) => d.group === "back");
-  const [activeId, setActiveId] = useState(at.departments[0]?.id || "marketing");
   const activeDept = at.departments.find((d: any) => d.id === activeId) || at.departments[0];
   const ActiveIcon = ICON_MAP[activeDept?.icon] || Activity;
 
