@@ -68,13 +68,12 @@ const SLIDES = [
   { name: "pricing", steps: 2, transition: "slide" as const },          // 19: heading, 3 tiers
   { name: "guarantee", steps: 1, transition: "scale" as const },        // 20: full guarantee
   { name: "secDivider", steps: 1, transition: "slide" as const },       // 21: security section divider
-  { name: "secTiers", steps: 1, transition: "slide" as const },         // 22: 3-tier AI comparison
-  { name: "secThreats", steps: 1, transition: "slide" as const },       // 23: 5-threats grid
-  { name: "secTier1", steps: 1, transition: "slide" as const },         // 24: tier-1 diagram (Mermaid)
-  { name: "secTier2", steps: 1, transition: "slide" as const },         // 25: tier-2 diagram (Mermaid)
-  { name: "secTier3", steps: 1, transition: "slide" as const },         // 26: tier-3 diagram (Mermaid)
-  { name: "secPassthrough", steps: 1, transition: "scale" as const },   // 27: pass-through callout
-  { name: "closing", steps: 1, transition: "scale" as const },          // 28: full closing
+  { name: "secThreats", steps: 1, transition: "slide" as const },       // 22: 5-threats grid
+  { name: "secTier1", steps: 1, transition: "slide" as const },         // 23: tier-1 diagram (Mermaid)
+  { name: "secTier2", steps: 1, transition: "slide" as const },         // 24: tier-2 diagram (Mermaid)
+  { name: "secTier3", steps: 1, transition: "slide" as const },         // 25: tier-3 diagram (Mermaid)
+  { name: "secPassthrough", steps: 1, transition: "scale" as const },   // 26: pass-through callout
+  { name: "closing", steps: 1, transition: "scale" as const },          // 27: full closing
 ];
 
 const TOTAL_GLOBAL_STEPS = SLIDES.reduce((sum, s) => sum + s.steps, 0);
@@ -368,8 +367,8 @@ const PRESENTER_NOTES: Record<number, { timing: string; en: string[]; jp: string
     jp: [
       "3つのプランからお選びいただけます。",
       "グループコホート：月2万円——週2回×60分、仲間と一緒に学ぶ。",
-      "マンツーマン：月5万円——週1回×90分の専属セッション＋月120時間の直接開発。",
-      "カンパニービルド：月20万円——週1回×90分の専属セッション、月120時間の開発、最大10名参加可能。",
+      "マンツーマン：月5万円——週1回×90分の専属セッション＋月12時間の直接開発。",
+      "カンパニービルド：月20万円——週1回×90分の専属セッション、月12時間の開発、最大10名参加可能。",
       "すべてのプランにオーナーシップ保証付き。",
     ],
   },
@@ -390,31 +389,14 @@ const PRESENTER_NOTES: Record<number, { timing: string; en: string[]; jp: string
     timing: "~30s",
     en: [
       "Now — security. Before any of this becomes real for your business, you need to know the posture.",
-      "Three short sections: which AI tiers exist, what the actual threats are in 2025–26, and how we respond.",
+      "Three short sections: the 3-tier security model (organized by where each control lives), the actual threats in 2025–26, and the diagram-level response for each tier.",
     ],
     jp: [
       "ここからセキュリティの話に入ります。",
-      "AIの3つの層、2025–26年の実際の脅威、そして対応 — 3つに分けてお話しします。",
+      "セキュリティ3層モデル（どこに置くかで整理）、2025–26年の実際の脅威、各層の構成図 — 3つに分けてお話しします。",
     ],
   },
   22: {
-    timing: "~2 min",
-    en: [
-      "Three AI tiers, side by side.",
-      "Tier 1 — free / third-party. Whatever you paste in becomes training material. No DPA available. Cross-border transfer territory.",
-      "Tier 2 — paid business plans. SOC 2, ISO 27001, DPA available, ZDR option. The same trust model running under Drive, Teams, Slack, Salesforce.",
-      "Tier 3 — on-prem open source. Llama 3, Qwen, Gemma running on a Japan-based VPS. Data never leaves your infrastructure.",
-      "AIOS lets you mix tiers based on data sensitivity. You are never locked into one.",
-    ],
-    jp: [
-      "AIには3つの層があります。",
-      "層1 — 無料・第三者経由。入力したものは学習に使われ、契約（DPA）も結べません。",
-      "層2 — 有料ビジネスプラン。SOC 2 / ISO 27001 / DPA / ZDR。Drive、Teams、Slack、Salesforceと同じ信頼モデル。",
-      "層3 — 自社サーバー上のオープンソースAI。データは一歩も外に出ません。",
-      "AIOSは機密度で3層を使い分けられます。1社1モデルに縛られません。",
-    ],
-  },
-  23: {
     timing: "~3 min",
     en: [
       "Five concrete threats every AI deployment faces in 2025–26.",
@@ -435,68 +417,74 @@ const PRESENTER_NOTES: Record<number, { timing: string; en: string[]; jp: string
       "5つすべてに、具体的な対応があります。",
     ],
   },
-  24: {
+  23: {
     timing: "~2 min",
     en: [
-      "Response Tier 1 — Base. Included with every AIOS deployment.",
-      "PCs talk to a Japan-based Sakura VPS (ISMAP-registered) over TLS.",
-      "Inside the VPS: UFW + fail2ban, Cloudflare DDoS / WAF front, auto-patch, SSH-key only, encrypted backups to Wasabi Japan.",
-      "Web-service hygiene any company should already have — done properly, every time.",
-      "¥1,500–3,000 per month. Vendor cost pass-through. MOTTO takes no margin on infrastructure.",
-      "Suited to small businesses running web forms or public-facing data only.",
+      "Tier 1 — foundation, built into the VPS itself. Suited to websites collecting basic info (names, emails, addresses). All of this installs in a single Claude Code prompt.",
+      "PCs talk to the VPS over TLS (Let's Encrypt + Caddy, auto-renewing).",
+      "Inside the VPS: UFW, fail2ban, unattended-upgrades (auto-patch), SSH-key only, CSP, honeypot + timing-trap CAPTCHA. Plus the policy layer: APPI consent log + processing-contract template ready to sign.",
+      "VPS itself: Hostinger entry-level at ¥1,000/month, or Sakura VPS (ISMAP-registered, recommended) at ¥1,500–3,000/month. Same Tier 1 stack runs on either.",
+      "Cost is VPS pass-through. MOTTO takes no margin on infrastructure.",
+      "Principle: if we hand the VPS over tomorrow, all of Tier 1 is still on it. No accounts to cancel, no third parties to manage.",
+      "Suited to small businesses with web forms and public-facing data only.",
     ],
     jp: [
-      "対応1 — 標準セキュリティ。全導入に含まれます。",
-      "PCはTLSで国内のさくらVPS（ISMAP登録）に接続。",
-      "VPS内：UFW + fail2ban、Cloudflare前段（DDoS / WAF）、自動パッチ、SSH鍵認証のみ、Wasabi Japanへの暗号化バックアップ。",
-      "Webサービスとして当然守るべき基本を、確実に。",
-      "月額¥1,500–3,000。VPS実費パススルー、マージン無し。",
+      "層1 — 基礎、VPS本体に組み込み。Webサイト + 基本情報（名前・メール・住所など）の収集に最適。Claude Code のワンプロンプトで全部入ります。",
+      "PCはTLS（Let's Encrypt + Caddy、自動更新）でVPSに接続。",
+      "VPS内：UFW、fail2ban、unattended-upgrades（自動パッチ）、SSH鍵認証のみ、CSP、ハニーポット + タイミングトラップCAPTCHA。さらにポリシー層：APPI同意ログ + 委託契約書テンプレート。",
+      "VPS本体：エントリーは Hostinger ¥1,000/月、または さくらVPS（ISMAP登録、推奨）¥1,500–3,000/月。どちらでも同じ層1スタックが動きます。",
+      "費用はVPS実費パススルー。インフラに対するマージンは取りません。",
+      "原則：VPSを引き渡しても、層1はそのまま残ります。解約するアカウントも、付き合うベンダーも増えません。",
       "Webフォームと公開情報のみの小規模ビジネスに最適。",
     ],
   },
-  25: {
-    timing: "~2 min",
+  24: {
+    timing: "~2.5 min",
     en: [
-      "Response Tier 2 — Business. Hardware keys required for everyone who touches business data.",
-      "Adds YubiKey 5C NFC (FIDO2 / WebAuthn) for SSH + admin login. Phishing-resistant.",
-      "Tailscale admin-only VPN — no exposed admin ports.",
-      "Bitwarden team-shared password vault inside the VPS.",
-      "¥1,500–3,000 monthly + ¥7,500 one-time per key. Three users ≈ ¥22,500 one-time.",
-      "For SMEs running a CRM, sales data, or order management on the server.",
+      "Tier 2 — strengthens the foundation. Suited to running apps, automations, and CRM data. Separate accounts and devices that sit alongside the VPS and multiply Tier 1's security.",
+      "Cloudflare account: one signup gives you DDoS protection, the WAF in front of the VPS, AND Turnstile CAPTCHA — a stronger bot-check than the honeypot. The honeypot stays on in the background as defence in depth.",
+      "Tailscale admin-only VPN: admin pages are no longer visible on the public internet. You have to be on our private mesh to even see them.",
+      "Bitwarden team-shared vault: encrypted password manager so the team stops emailing passwords.",
+      "Wasabi Japan: encrypted backup copy in a separate Japanese data centre. ~¥1,000 per TB per month.",
+      "YubiKey 5C NFC — explicitly OPTIONAL. ¥7,500 one-time per key. FIDO2 / WebAuthn for phishing-resistant login. Strongly recommended once more than one or two people touch business data, but not required to be in Tier 2.",
+      "Most services (Cloudflare, Tailscale, Bitwarden) run on free tiers. Real cost = Wasabi + optional YubiKeys.",
+      "For SMEs running CRM, sales data, or order management.",
     ],
     jp: [
-      "対応2 — ビジネス。業務データに触る人にはハードウェアキー必須。",
-      "YubiKey 5C NFC（FIDO2 / WebAuthn）追加 — SSH + 管理ログインで使用。フィッシング耐性あり。",
-      "Tailscale管理者専用VPN — 公開ポート無し。",
-      "Bitwarden共有金庫をVPS内に。",
-      "月額¥1,500–3,000 + ¥7,500/鍵一括。3名で¥22,500一括。",
-      "CRM・営業データ・受発注などの業務情報を扱う中小企業向け。",
+      "層2 — 基礎を強化。アプリ・自動化・CRMを動かす段階に最適。VPSの横に並ぶ別アカウント・別サービスが、層1のセキュリティを掛け算します。",
+      "Cloudflareアカウント1つで、DDoS防御・VPS前段のWAF・Turnstile CAPTCHAが同時に手に入ります。Turnstileはハニーポットより強力なボット対策。ハニーポットは多層防御として裏で動かし続けます。",
+      "Tailscale 管理者専用VPN：管理画面はもう公開インターネット上に存在しません。我々のプライベートネットワーク内からしか見えない構成。",
+      "Bitwarden 共有金庫：暗号化済みパスワード管理。社内でパスワードをメールで送る運用が止まります。",
+      "Wasabi Japan：別の国内データセンターに暗号化バックアップを保管。約¥1,000/TB/月。",
+      "YubiKey 5C NFC — 明確に「任意」。一括¥7,500/鍵。FIDO2 / WebAuthn でフィッシング耐性ログイン。業務データに触る人が複数いる場合は強く推奨しますが、層2の必須条件ではありません。",
+      "Cloudflare・Tailscale・Bitwarden は無料プランで運用可能。実費は Wasabi + 任意の YubiKey が中心。",
+      "CRM・営業データ・受発注などを扱う中小企業向け。",
     ],
   },
-  26: {
+  25: {
     timing: "~3 min",
     en: [
-      "Response Tier 3 — Sensitive. The posture you need before letting an AI run real work on real customer data.",
-      "On-prem open-source AI inside the VPS: Llama 3 / Qwen / Gemma. Local inference, no API calls leaving Japan.",
-      "PromptGuard 2 + NeMo Guardrails — dual-LLM injection defence.",
-      "Vault with per-agent service accounts and quarterly key rotation. MCP allowlist.",
+      "Tier 3 — approaching enterprise-grade. Layered on top of Tier 1 + Tier 2, not a replacement. This is what you reach for when the workload touches customer PII, financial, healthcare, or public-sector data — not a requirement for AI use generally.",
+      "On-prem open-source AI inside the VPS: Llama 3 / Qwen / Gemma. Local inference, no prompts or data leaving Japan.",
+      "PromptGuard 2 + NeMo Guardrails — dual-LLM injection defence + scope-enforcement.",
+      "Per-agent service accounts. MCP allowlist — agents can only call APIs explicitly on the list.",
+      "Vault with quarterly key rotation.",
       "NTT おまかせサイバーみまもり — 24/7 SOC monitoring, fully audited.",
       "Audit log stream — every agent action recorded.",
       "¥30,000–50,000 per month + initial setup. Independent security audit available from ¥500,000.",
-      "For customer PII, financial, healthcare, public-sector procurement.",
     ],
     jp: [
-      "対応3 — 高機密。AIに本物の業務を任せる前提の構えです。",
-      "オープンソースAIをVPS内で稼働：Llama 3 / Qwen / Gemma。ローカル推論、日本国外へのAPI呼び出しなし。",
-      "PromptGuard 2 + NeMo Guardrails — dual-LLM injection防御。",
-      "Vault + エージェント別サービスアカウント + 四半期ローテーション。MCP allowlist。",
-      "NTT おまかせサイバーみまもり — 24/7 SOC監視。",
+      "層3 — エンタープライズ・グレードに近づく。層1 + 層2 の上に重ねます（置き換えではありません）。顧客PII・財務・医療・公共調達など、企業基準に近い要件のワークロードを扱うときに到達する層 — AI利用全般の必須条件ではありません。",
+      "オープンソースAIをVPS内で稼働：Llama 3 / Qwen / Gemma。ローカル推論、プロンプトもデータも日本国外に出ません。",
+      "PromptGuard 2 + NeMo Guardrails — dual-LLM injection防御 + スコープ強制。",
+      "エージェント別サービスアカウント。MCP allowlist — リストにあるAPIしか呼び出せません。",
+      "Vault + 四半期キーローテーション。",
+      "NTT おまかせサイバーみまもり — 24/7 SOC監視、監査済み。",
       "監査ログストリーム — 全エージェント操作を記録。",
       "月額¥30,000–50,000 + 初期セットアップ。独立セキュリティ監査は¥500,000〜。",
-      "顧客PII、財務、医療、公共調達向け。",
     ],
   },
-  27: {
+  26: {
     timing: "~30s",
     en: [
       "One closing principle for the security section.",
@@ -509,7 +497,7 @@ const PRESENTER_NOTES: Record<number, { timing: string; en: string[]; jp: string
       "セキュリティは「商品」ではなく、構え。必要な分だけ、透明に。",
     ],
   },
-  28: {
+  27: {
     timing: "~1 min",
     en: [
       "The question isn't 'should we use AI' — everyone knows the answer.",
@@ -612,9 +600,9 @@ export default function PresentationPage() {
   const { slideIndex, localStep } = getSlideAndStep(globalStep);
   const currentNotes = PRESENTER_NOTES[slideIndex];
 
-  // ── Mermaid client-side render (only for security diagram slides 24/25/26) ──
+  // ── Mermaid client-side render (only for security diagram slides 23/24/25) ──
   useEffect(() => {
-    if (slideIndex < 24 || slideIndex > 26) return;
+    if (slideIndex < 23 || slideIndex > 25) return;
     let cancelled = false;
     (async () => {
       try {
@@ -1752,7 +1740,7 @@ export default function PresentationPage() {
                     price: "¥50,000",
                     per: "/月（税抜）",
                     commitment: "6ヶ月 · いつでも開始可能",
-                    features: ["週1回×90分の専属セッション", "月120時間の直接開発・セットアップ", "あなたのビジネスに完全カスタマイズ", "オーナーシップ保証"],
+                    features: ["週1回×90分の専属セッション", "月12時間の直接開発・セットアップ", "あなたのビジネスに完全カスタマイズ", "オーナーシップ保証"],
                     cta: "今すぐ席を確保する",
                     recommended: true,
                     border: "border-[#B8860B]/40",
@@ -1764,7 +1752,7 @@ export default function PresentationPage() {
                     price: "¥200,000",
                     per: "/月（税抜）",
                     commitment: "6ヶ月 · いつでも開始可能",
-                    features: ["週1回×90分の専属セッション", "月120時間の直接開発・セットアップ", "最大10名までコース参加可能", "オーナーシップ保証"],
+                    features: ["週1回×90分の専属セッション", "月12時間の直接開発・セットアップ", "最大10名までコース参加可能", "オーナーシップ保証"],
                     cta: "チームの席を確保する",
                     recommended: false,
                     border: "border-[#E8E8ED]",
@@ -1852,71 +1840,8 @@ export default function PresentationPage() {
           </section>
         </SlideWrapper>
 
-        {/* ===== SLIDE 22: AI TIER COMPARISON ===== */}
+        {/* ===== SLIDE 22: THREATS GRID ===== */}
         <SlideWrapper active={slideIndex === 22} transition="slide" direction={direction}>
-          <section className="h-full flex flex-col items-center justify-center px-8 overflow-y-auto">
-            <div className="flex flex-col items-center w-full max-w-6xl">
-              <div className="shrink-0 pb-3 text-center">
-                <div className="inline-flex items-center gap-2 mb-3 px-3 py-1 rounded-full border border-[#B8860B]/20 bg-[#B8860B]/8 text-[#B8860B] text-xs font-medium uppercase tracking-wider">
-                  AIの3層 / Three AI tiers
-                </div>
-                <h2 className="text-2xl sm:text-4xl font-bold text-center">
-                  機密度で<span className="gradient-text">選べる</span>
-                </h2>
-                <p className="text-sm text-[#86868B] mt-1.5 text-center">
-                  Choose by data sensitivity — never locked into one model
-                </p>
-              </div>
-
-              <div className="mt-3 w-full grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {/* Tier 1 - Pink */}
-                <div className="rounded-xl p-5 border border-rose-200/70 bg-rose-50/70 flex flex-col min-h-[52vh]">
-                  <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#B8860B] text-white text-[10px] font-bold uppercase tracking-wider self-start mb-3">層 1 · Tier 1</span>
-                  <p className="text-base font-bold text-[#1D1D1F] leading-tight">無料・第三者経由のAI</p>
-                  <p className="text-[10px] text-[#86868B] italic mt-0.5 mb-3">Free or third-party providers</p>
-                  <p className="text-[11px] text-[#6E6E73] leading-relaxed mb-3">無料版ChatGPT・Gemini・Claude、LINEの「ChatGPT風」、ブラウザ拡張機能 など。</p>
-                  <p className="text-sm font-bold text-[#1D1D1F] leading-snug mb-1.5">入力したものは、<br/>AIの教材になる。</p>
-                  <p className="text-[10px] text-[#86868B] italic leading-snug mb-3">Inputs become training material — may be reviewed by humans you'll never meet.</p>
-                  <div className="mt-auto pt-3 border-t border-rose-200/70">
-                    <p className="text-[9px] font-bold uppercase tracking-widest text-[#B8860B] mb-1">技術的事実 · Facts</p>
-                    <p className="text-[10px] text-[#1D1D1F]/80 leading-relaxed">入力は学習に使われる ・ 越境移転（APPI第28条）・ DPA締結不可</p>
-                  </div>
-                </div>
-
-                {/* Tier 2 - Blue */}
-                <div className="rounded-xl p-5 border border-blue-200/70 bg-blue-50/70 flex flex-col min-h-[52vh]">
-                  <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#B8860B] text-white text-[10px] font-bold uppercase tracking-wider self-start mb-3">層 2 · Tier 2</span>
-                  <p className="text-base font-bold text-[#1D1D1F] leading-tight">有料ビジネスプラン</p>
-                  <p className="text-[10px] text-[#86868B] italic mt-0.5 mb-3">Paid business plans</p>
-                  <p className="text-[11px] text-[#6E6E73] leading-relaxed mb-3">Claude Team / Enterprise、ChatGPT Team / Enterprise、Gemini for Google Workspace。Drive・Teams・Slack・Salesforce と同じ信頼モデル。</p>
-                  <p className="text-sm font-bold text-[#1D1D1F] leading-snug mb-1.5">学習に使われない。<br/>契約で守られる。</p>
-                  <p className="text-[10px] text-[#86868B] italic leading-snug mb-3">Not used to train models. Protected by a business contract.</p>
-                  <div className="mt-auto pt-3 border-t border-blue-200/70">
-                    <p className="text-[9px] font-bold uppercase tracking-widest text-[#B8860B] mb-1">第三者認証 · 契約</p>
-                    <p className="text-[10px] text-[#1D1D1F]/80 leading-relaxed">SOC 2 Type II ・ ISO 27001 / 42001 ・ DPA可 ・ ZDR ・ OpenAI 日本リージョン 2025-10〜</p>
-                  </div>
-                </div>
-
-                {/* Tier 3 - Green */}
-                <div className="rounded-xl p-5 border border-emerald-200/70 bg-emerald-50/70 flex flex-col min-h-[52vh]">
-                  <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#B8860B] text-white text-[10px] font-bold uppercase tracking-wider self-start mb-3">層 3 · Tier 3</span>
-                  <p className="text-base font-bold text-[#1D1D1F] leading-tight">自社サーバー上のオープンソースAI</p>
-                  <p className="text-[10px] text-[#86868B] italic mt-0.5 mb-3">Open-source AI on your own server</p>
-                  <p className="text-[11px] text-[#6E6E73] leading-relaxed mb-3">Llama 3（Meta）、DeepSeek、Qwen（Alibaba）、Gemma（Google）、GPT-OSS。国内VPSや社内GPUで動作。</p>
-                  <p className="text-sm font-bold text-[#1D1D1F] leading-snug mb-1.5">データは一歩も外に出ない。<br/>すべて国内管轄で完結。</p>
-                  <p className="text-[10px] text-[#86868B] italic leading-snug mb-3">Data never leaves your infrastructure. Japanese jurisdiction throughout.</p>
-                  <div className="mt-auto pt-3 border-t border-emerald-200/70">
-                    <p className="text-[9px] font-bold uppercase tracking-widest text-[#B8860B] mb-1">技術構成 · Setup</p>
-                    <p className="text-[10px] text-[#1D1D1F]/80 leading-relaxed">自社サーバー上で推論 ・ 監査ログ社内保管 ・ さくらVPS等（ISMAP登録）</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </SlideWrapper>
-
-        {/* ===== SLIDE 23: THREATS GRID ===== */}
-        <SlideWrapper active={slideIndex === 23} transition="slide" direction={direction}>
           <section className="h-full flex flex-col items-center justify-center px-8 overflow-y-auto">
             <div className="flex flex-col w-full max-w-6xl">
               <div className="shrink-0 pb-3">
@@ -1968,58 +1893,131 @@ export default function PresentationPage() {
           </section>
         </SlideWrapper>
 
-        {/* ===== SLIDE 24: RESPONSE TIER 1 — BASE (Mermaid) ===== */}
-        <SlideWrapper active={slideIndex === 24} transition="slide" direction={direction}>
+        {/* ===== SLIDE 23: RESPONSE TIER 1 — BASE (Mermaid) ===== */}
+        <SlideWrapper active={slideIndex === 23} transition="slide" direction={direction}>
           <section className="h-full flex flex-col items-center justify-center px-8 overflow-y-auto"
             style={{ background: "linear-gradient(180deg, #FBF6E7 0%, #FFFFFF 100%)" }}>
             <div className="flex flex-col w-full max-w-6xl">
-              <div className="flex items-baseline gap-3 mb-3 flex-wrap">
+              <div className="flex items-baseline gap-3 mb-2 flex-wrap">
                 <span className="inline-block px-3 py-0.5 rounded-full bg-[#B8860B] text-white text-[10px] font-bold uppercase tracking-wider whitespace-nowrap">対応 1 · Tier 1 · Base</span>
                 <div>
-                  <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F] leading-tight">標準セキュリティ — 全導入に含む</h2>
-                  <p className="text-xs text-[#86868B] italic">Base security — included with every AIOS deployment</p>
+                  <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F] leading-tight">TIER 1 セキュリティ — 標準（全導入に含む）</h2>
                 </div>
               </div>
+              <p className="text-[11px] text-[#6E6E73] mb-3 leading-snug">お客様が選ぶ ・ 私たちが導入支援 ・ 各社と直接契約 ・ アップセルなし</p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-[1.15fr_1fr] gap-6 mt-2">
+                <div className="rounded-xl border border-[#E8E8ED] bg-white/70 p-4 min-h-[40vh] flex items-center justify-center">
+                  <div className="mermaid w-full" data-mermaid-slide="23">{`flowchart LR
+  subgraph Users["クライアント PCs"]
+    P1["PC 01"]:::pc
+    P2["PC 02"]:::pc
+    P3["PC 03"]:::pc
+  end
+  Users -- "TLS · Let's Encrypt + Caddy" --> VPS
+  subgraph VPS["VPS · 国内（Hostinger / さくら）"]
+    Install["🪄 Claude Code<br/>ワンプロンプト導入"]:::install
+    UFW["UFW + fail2ban"]:::layer
+    Patch["自動パッチ<br/>unattended-upgrades"]:::layer
+    SSH["SSH鍵認証のみ"]:::layer
+    CSP["CSP"]:::layer
+    Hon["ハニーポット<br/>+ タイミングトラップ"]:::layer
+    Compl["APPI同意ログ<br/>+ 委託契約書"]:::layer
+  end
+  classDef pc fill:#F5F5F7,stroke:#1D1D1F,color:#1D1D1F
+  classDef layer fill:#FBF6E7,stroke:#B8860B,color:#1D1D1F
+  classDef install fill:#FFFFFF,stroke:#B8860B,stroke-dasharray:4 3,color:#B8860B`}</div>
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  <div>
+                    <p className="text-lg sm:text-xl font-bold text-[#1D1D1F] leading-snug">Claude Code のワンプロンプトで、<br/>VPS本体に焼き込み。</p>
+                    <p className="text-xs text-[#86868B] italic leading-snug mt-1">All of Tier 1 installs into the VPS via a single Claude Code prompt. No extra accounts, no separate vendors.</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-[#B8860B] mb-1">含まれるもの · Inside the box</p>
+                    <p className="text-[11px] text-[#1D1D1F]/80 leading-relaxed">UFW ・ fail2ban ・ 自動パッチ ・ SSH鍵認証のみ ・ TLS（Let's Encrypt + Caddy）・ CSP ・ ハニーポット / タイミングトラップ ・ APPI同意ログ ・ 委託契約書テンプレート</p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3 pt-3 border-t border-[#E8E8ED]">
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-[#86868B] mb-1">VPS月額 · Monthly</p>
+                      <p className="text-xl font-bold text-[#B8860B] leading-tight">¥1,000–3,000</p>
+                      <p className="text-[10px] text-[#86868B] italic mt-0.5">Hostinger ¥1,000〜 / さくらVPS ¥1,500〜（ISMAP, 推奨）</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-[#86868B] mb-1">適用 · Suited to</p>
+                      <p className="text-xs text-[#1D1D1F] leading-snug">Webサイト + 基本情報の収集<br/><span className="text-[10px] text-[#86868B]">(名前・メール・住所など)</span></p>
+                      <p className="text-[10px] text-[#86868B] italic mt-0.5">VPS実費パススルー · pass-through, no markup</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </SlideWrapper>
+
+        {/* ===== SLIDE 24: RESPONSE TIER 2 — BUSINESS (Mermaid) ===== */}
+        <SlideWrapper active={slideIndex === 24} transition="slide" direction={direction}>
+          <section className="h-full flex flex-col items-center justify-center px-8 overflow-y-auto"
+            style={{ background: "linear-gradient(180deg, #E6F0FF 0%, #FFFFFF 100%)" }}>
+            <div className="flex flex-col w-full max-w-6xl">
+              <div className="flex items-baseline gap-3 mb-2 flex-wrap">
+                <span className="inline-block px-3 py-0.5 rounded-full bg-[#B8860B] text-white text-[10px] font-bold uppercase tracking-wider whitespace-nowrap">対応 2 · Tier 2 · Business</span>
+                <div>
+                  <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F] leading-tight">TIER 2 セキュリティ — アドオン</h2>
+                </div>
+              </div>
+              <p className="text-[11px] text-[#6E6E73] mb-3 leading-snug">お客様が選ぶ ・ 私たちが導入支援 ・ 各社と直接契約 ・ アップセルなし</p>
 
               <div className="grid grid-cols-1 sm:grid-cols-[1.15fr_1fr] gap-6 mt-2">
                 <div className="rounded-xl border border-[#E8E8ED] bg-white/70 p-4 min-h-[40vh] flex items-center justify-center">
                   <div className="mermaid w-full" data-mermaid-slide="24">{`flowchart LR
   subgraph Users["クライアント PCs"]
     P1["PC 01"]:::pc
+    YK1["🔑 YubiKey<br/>（任意 / optional）"]:::optional
     P2["PC 02"]:::pc
-    P3["PC 03"]:::pc
+    YK2["🔑 YubiKey<br/>（任意 / optional）"]:::optional
+    P1 -.- YK1
+    P2 -.- YK2
   end
-  Users -- "TLS · 暗号化" --> VPS
-  subgraph VPS["Sakura VPS · 国内 · ISMAP"]
-    UFW["UFW + fail2ban"]:::layer
-    CF["Cloudflare 前段<br/>DDoS · WAF"]:::layer
-    Patch["自動パッチ"]:::layer
-    SSH["SSH鍵認証のみ"]:::layer
-    BK["暗号化バックアップ<br/>→ Wasabi Japan"]:::layer
+  CF["☁️ Cloudflare<br/>DDoS · WAF · Turnstile"]:::accent
+  Admin["🔒 Tailscale<br/>管理者専用VPN"]:::accent
+  Vault["🔐 Bitwarden<br/>共有金庫"]:::accent
+  Backup["💾 Wasabi Japan<br/>暗号化バックアップ"]:::accent
+  Users -- "TLS" --> CF
+  CF --> VPS
+  Admin -. "公開ポート無し" .-> VPS
+  subgraph VPS["VPS · さくらVPS（推奨, ISMAP）"]
+    Base["層1の基本層<br/>UFW · fail2ban · TLS · 自動パッチ"]:::layer
   end
+  VPS -- "暗号化転送" --> Backup
+  Vault -. "チームで共有" .-> Users
   classDef pc fill:#F5F5F7,stroke:#1D1D1F,color:#1D1D1F
-  classDef layer fill:#FBF6E7,stroke:#B8860B,color:#1D1D1F`}</div>
+  classDef layer fill:#E6F0FF,stroke:#2563eb,color:#1D1D1F
+  classDef accent fill:#FBF6E7,stroke:#B8860B,color:#1D1D1F
+  classDef optional fill:#FFFFFF,stroke:#B8860B,stroke-dasharray:4 3,color:#B8860B`}</div>
                 </div>
 
                 <div className="flex flex-col gap-3">
                   <div>
-                    <p className="text-lg sm:text-xl font-bold text-[#1D1D1F] leading-snug">Webサービスとして当然守るべき基本を、確実に。</p>
-                    <p className="text-xs text-[#86868B] italic leading-snug mt-1">The web-service hygiene any company should already have — done properly, every deployment.</p>
+                    <p className="text-lg sm:text-xl font-bold text-[#1D1D1F] leading-snug">アプリ・自動化・CRMを<br/>動かす段階の守り。</p>
+                    <p className="text-xs text-[#86868B] italic leading-snug mt-1">For when you start running apps, automations, and CRM data. Each control is its own account or device — no lock-in, easy to add or remove.</p>
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-[#B8860B] mb-1">含まれるもの · What's included</p>
-                    <p className="text-[11px] text-[#1D1D1F]/80 leading-relaxed">SSH-key only · UFW · fail2ban · auto-patch · Wasabi Japan encrypted backup · Cloudflare DDoS / WAF · TLS / CSP / CAPTCHA · APPI 同意ログ · 委託契約書テンプレート</p>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-[#B8860B] mb-1">追加されるもの · Add-on services</p>
+                    <p className="text-[11px] text-[#1D1D1F]/80 leading-relaxed"><strong className="text-[#B8860B] font-bold">Cloudflare</strong>（DDoS / WAF + Turnstile CAPTCHA）・ <strong className="text-[#B8860B] font-bold">Tailscale</strong> 管理者専用VPN ・ <strong className="text-[#B8860B] font-bold">Bitwarden</strong> 共有金庫 ・ <strong className="text-[#B8860B] font-bold">Wasabi Japan</strong> 暗号化バックアップ</p>
+                    <p className="text-[10px] text-[#1D1D1F]/70 leading-relaxed mt-1.5"><span className="italic text-[#B8860B]">任意 / Optional:</span> <strong className="font-bold">YubiKey 5C NFC</strong>（FIDO2 / WebAuthn）+ 鍵紛失時のリカバリ手順</p>
                   </div>
                   <div className="grid grid-cols-2 gap-3 pt-3 border-t border-[#E8E8ED]">
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-widest text-[#86868B] mb-1">月額 · Monthly</p>
-                      <p className="text-xl font-bold text-[#B8860B] leading-tight">¥1,500–3,000</p>
-                      <p className="text-[10px] text-[#86868B] italic mt-0.5">VPS実費パススルー · pass-through, no markup</p>
+                      <p className="text-base font-bold text-[#B8860B] leading-tight">¥1,500–3,000 / 月<br/><span className="text-[10px] font-normal text-[#1D1D1F]/70">+ Wasabi ~¥1,000/TB</span></p>
+                      <p className="text-[10px] text-[#86868B] italic mt-0.5">Cloudflare / Tailscale / Bitwarden は無料プランで対応可</p>
                     </div>
                     <div>
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-[#86868B] mb-1">適用 · Suited to</p>
-                      <p className="text-xs text-[#1D1D1F] leading-snug">小規模 — Webフォームと公開情報のみ</p>
-                      <p className="text-[10px] text-[#86868B] italic mt-0.5">Small businesses · web forms only</p>
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-[#86868B] mb-1">一括（任意）· One-time (optional)</p>
+                      <p className="text-xs text-[#1D1D1F] leading-snug">YubiKey ¥7,500/鍵<br/>3名 ≈ ¥22,500</p>
+                      <p className="text-[10px] text-[#86868B] italic mt-0.5">アプリ・自動化・CRMを動かす段階向け</p>
                     </div>
                   </div>
                 </div>
@@ -2028,86 +2026,22 @@ export default function PresentationPage() {
           </section>
         </SlideWrapper>
 
-        {/* ===== SLIDE 25: RESPONSE TIER 2 — BUSINESS (Mermaid) ===== */}
+        {/* ===== SLIDE 25: RESPONSE TIER 3 — SENSITIVE (Mermaid) ===== */}
         <SlideWrapper active={slideIndex === 25} transition="slide" direction={direction}>
-          <section className="h-full flex flex-col items-center justify-center px-8 overflow-y-auto"
-            style={{ background: "linear-gradient(180deg, #E6F0FF 0%, #FFFFFF 100%)" }}>
-            <div className="flex flex-col w-full max-w-6xl">
-              <div className="flex items-baseline gap-3 mb-3 flex-wrap">
-                <span className="inline-block px-3 py-0.5 rounded-full bg-[#B8860B] text-white text-[10px] font-bold uppercase tracking-wider whitespace-nowrap">対応 2 · Tier 2 · Business</span>
-                <div>
-                  <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F] leading-tight">ビジネス — ハードウェアキー必須</h2>
-                  <p className="text-xs text-[#86868B] italic">Business security — hardware keys for everyone who touches business data</p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-[1.15fr_1fr] gap-6 mt-2">
-                <div className="rounded-xl border border-[#E8E8ED] bg-white/70 p-4 min-h-[40vh] flex items-center justify-center">
-                  <div className="mermaid w-full" data-mermaid-slide="25">{`flowchart LR
-  subgraph Users["クライアント PCs"]
-    P1["PC 01"]:::pc
-    YK1["🔑 YubiKey<br/>FIDO2"]:::accent
-    P2["PC 02"]:::pc
-    YK2["🔑 YubiKey<br/>FIDO2"]:::accent
-    P1 --- YK1
-    P2 --- YK2
-  end
-  Admin["管理 VPN<br/>Tailscale"]:::accent
-  Users -- "TLS" --> VPS
-  Admin -. "公開ポート無し" .-> VPS
-  subgraph VPS["Sakura VPS · 国内 · ISMAP"]
-    Base["基本層<br/>UFW · fail2ban · TLS · バックアップ"]:::layer
-    Vault["🔐 Bitwarden 共有金庫"]:::accent
-    TS["Tailscale 管理者専用VPN"]:::accent
-  end
-  classDef pc fill:#F5F5F7,stroke:#1D1D1F,color:#1D1D1F
-  classDef layer fill:#E6F0FF,stroke:#2563eb,color:#1D1D1F
-  classDef accent fill:#FBF6E7,stroke:#B8860B,color:#1D1D1F`}</div>
-                </div>
-
-                <div className="flex flex-col gap-3">
-                  <div>
-                    <p className="text-lg sm:text-xl font-bold text-[#1D1D1F] leading-snug">業務データに触る人が増えたら、<br/>鍵で守る。</p>
-                    <p className="text-xs text-[#86868B] italic leading-snug mt-1">When more people touch business data, you stop relying on passwords and start using physical keys.</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-[#B8860B] mb-1">追加されるもの · What's added</p>
-                    <p className="text-[11px] text-[#1D1D1F]/80 leading-relaxed"><strong className="text-[#B8860B] font-bold">YubiKey 5C NFC</strong> for SSH + admin login · Tailscale admin-only VPN (no exposed admin ports) · Bitwarden team-shared vault · key-loss recovery procedure</p>
-                    <p className="text-[10px] text-[#1D1D1F]/70 leading-relaxed mt-1">FIDO2 / WebAuthn ・ Tailscale ACL ・ 鍵紛失時のリカバリ手順</p>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3 pt-3 border-t border-[#E8E8ED]">
-                    <div>
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-[#86868B] mb-1">費用 · Cost</p>
-                      <p className="text-base font-bold text-[#B8860B] leading-tight">¥1,500–3,000 / 月<br/>＋ ¥7,500 / 鍵 一括</p>
-                      <p className="text-[10px] text-[#1D1D1F]/70 mt-0.5">3名 ≈ ¥22,500 一括</p>
-                    </div>
-                    <div>
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-[#86868B] mb-1">適用 · Suited to</p>
-                      <p className="text-xs text-[#1D1D1F] leading-snug">CRM・営業データ・受発注など業務情報を扱う中小企業</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        </SlideWrapper>
-
-        {/* ===== SLIDE 26: RESPONSE TIER 3 — SENSITIVE (Mermaid) ===== */}
-        <SlideWrapper active={slideIndex === 26} transition="slide" direction={direction}>
           <section className="h-full flex flex-col items-center justify-center px-8 overflow-y-auto"
             style={{ background: "linear-gradient(180deg, #E6F2EF 0%, #FFFFFF 100%)" }}>
             <div className="flex flex-col w-full max-w-6xl">
-              <div className="flex items-baseline gap-3 mb-3 flex-wrap">
+              <div className="flex items-baseline gap-3 mb-2 flex-wrap">
                 <span className="inline-block px-3 py-0.5 rounded-full bg-[#B8860B] text-white text-[10px] font-bold uppercase tracking-wider whitespace-nowrap">対応 3 · Tier 3 · Sensitive</span>
                 <div>
-                  <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F] leading-tight">高機密 — AIに業務を任せる前提の構え</h2>
-                  <p className="text-xs text-[#86868B] italic">Sensitive / enterprise — built for the moment AI starts running real work</p>
+                  <h2 className="text-xl sm:text-2xl font-bold text-[#1D1D1F] leading-tight">TIER 3 セキュリティ — 高機密</h2>
                 </div>
               </div>
+              <p className="text-[11px] text-[#6E6E73] mb-3 leading-snug">お客様が選ぶ ・ 私たちが導入支援 ・ 各社と直接契約 ・ アップセルなし</p>
 
               <div className="grid grid-cols-1 sm:grid-cols-[1.15fr_1fr] gap-6 mt-2">
                 <div className="rounded-xl border border-[#E8E8ED] bg-white/70 p-4 min-h-[42vh] flex items-center justify-center">
-                  <div className="mermaid w-full" data-mermaid-slide="26">{`flowchart LR
+                  <div className="mermaid w-full" data-mermaid-slide="25">{`flowchart LR
   subgraph Users["クライアント PCs"]
     P1["PC 01<br/>🔑 YubiKey"]:::pc
     P2["PC 02<br/>🔑 YubiKey"]:::pc
@@ -2115,8 +2049,8 @@ export default function PresentationPage() {
   NTT["24/7 監視<br/>NTT おまかせ<br/>サイバーみまもり"]:::accent
   Users -- "TLS" --> VPS
   NTT -. "監査ログ受信" .-> VPS
-  subgraph VPS["Sakura VPS · 国内 · ISMAP"]
-    Base["基本層 + Tailscale + Bitwarden Vault"]:::layer
+  subgraph VPS["さくらVPS · 国内 · ISMAP"]
+    Base["層1 + 層2（Cloudflare · Tailscale · Bitwarden · Wasabi）"]:::layer
     subgraph AIBlock["On-prem AI"]
       AI["Llama 3 / Qwen / Gemma<br/>local inference"]:::accent
     end
@@ -2132,8 +2066,8 @@ export default function PresentationPage() {
 
                 <div className="flex flex-col gap-3">
                   <div>
-                    <p className="text-lg sm:text-xl font-bold text-[#1D1D1F] leading-snug">AIに業務を任せる前提の構え。</p>
-                    <p className="text-xs text-[#86868B] italic leading-snug mt-1">The posture you need before letting an AI run real work on real customer data.</p>
+                    <p className="text-lg sm:text-xl font-bold text-[#1D1D1F] leading-snug">企業基準に近づく、<br/>包括的なセキュリティ姿勢。</p>
+                    <p className="text-xs text-[#86868B] italic leading-snug mt-1">A comprehensive security posture for workloads that approach enterprise-grade requirements.</p>
                   </div>
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-widest text-[#B8860B] mb-1">追加されるもの · What's added</p>
@@ -2157,8 +2091,8 @@ export default function PresentationPage() {
           </section>
         </SlideWrapper>
 
-        {/* ===== SLIDE 27: PASS-THROUGH CALLOUT ===== */}
-        <SlideWrapper active={slideIndex === 27} transition="scale" direction={direction}>
+        {/* ===== SLIDE 26: PASS-THROUGH CALLOUT ===== */}
+        <SlideWrapper active={slideIndex === 26} transition="scale" direction={direction}>
           <section className="h-full flex flex-col items-center justify-center px-8">
             <div className="flex flex-col items-center max-w-3xl text-center">
               <Lock className="size-12 text-[#B8860B] mb-6 opacity-80" />
@@ -2178,8 +2112,8 @@ export default function PresentationPage() {
           </section>
         </SlideWrapper>
 
-        {/* ===== SLIDE 28: CLOSING ===== */}
-        <SlideWrapper active={slideIndex === 28} transition="scale" direction={direction}>
+        {/* ===== SLIDE 27: CLOSING ===== */}
+        <SlideWrapper active={slideIndex === 27} transition="scale" direction={direction}>
           <section className="h-full flex flex-col items-center justify-center px-8">
             <div className="flex flex-col items-center max-w-4xl w-full">
               <h2 className="text-3xl sm:text-4xl font-bold text-center leading-relaxed max-w-3xl">
