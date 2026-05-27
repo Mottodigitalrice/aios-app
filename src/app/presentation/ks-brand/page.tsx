@@ -42,6 +42,10 @@ import Image from "next/image";
 
 import { AIOSPyramid } from "@/components/landing/aios-pyramid";
 import { BrainBodyDiagram } from "@/components/landing/brain-body-section";
+import { SlideWrapper } from "@/components/presentation/SlideWrapper";
+import { FadeIn } from "@/components/presentation/FadeIn";
+import { CycleNode } from "@/components/presentation/CycleNode";
+import { LoopStep } from "@/components/presentation/LoopStep";
 
 // ── Slide definitions ──
 // Each slide has a name and number of internal sub-steps
@@ -2270,119 +2274,10 @@ export default function PresentationPage() {
   );
 }
 
-/* ============ Slide Wrapper with Transitions ============ */
-
-function SlideWrapper({
-  active,
-  children,
-  transition,
-  direction,
-}: {
-  active: boolean;
-  children: React.ReactNode;
-  transition: "scale" | "slide" | "stagger";
-  direction: "forward" | "backward";
-}) {
-  const [shouldRender, setShouldRender] = useState(active);
-  const [animClass, setAnimClass] = useState("");
-  const prevActive = useRef(active);
-
-  // Ensure shouldRender stays true while active
-  if (active && !shouldRender) {
-    setShouldRender(true);
-  }
-
-  useEffect(() => {
-    if (active && !prevActive.current) {
-      // Enter animation
-      requestAnimationFrame(() => {
-        if (transition === "scale") {
-          setAnimClass("pres-enter-scale");
-        } else if (transition === "stagger") {
-          setAnimClass("pres-enter-stagger");
-        } else {
-          setAnimClass(direction === "forward" ? "pres-enter-right" : "pres-enter-left");
-        }
-      });
-    } else if (!active && prevActive.current) {
-      // Exit animation — use rAF to avoid synchronous setState in effect
-      requestAnimationFrame(() => {
-        if (transition === "scale") {
-          setAnimClass("pres-exit-scale");
-        } else {
-          setAnimClass(direction === "forward" ? "pres-exit-right" : "pres-exit-left");
-        }
-      });
-      const timer = setTimeout(() => {
-        setShouldRender(false);
-        setAnimClass("");
-      }, 450);
-      prevActive.current = active;
-      return () => clearTimeout(timer);
-    }
-    prevActive.current = active;
-  }, [active, transition, direction]);
-
-  if (!shouldRender && !active) return null;
-
-  return (
-    <div
-      className={`absolute inset-0 bg-white ${active ? "pointer-events-auto z-10" : "pointer-events-none z-0"} ${animClass}`}
-    >
-      {children}
-    </div>
-  );
-}
-
-/* ============ Fade In Wrapper ============ */
-
-function FadeIn({ show, children }: { show: boolean; children: React.ReactNode }) {
-  return (
-    <div
-      className={`transition-all duration-500 ease-out ${
-        show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 h-0 overflow-hidden"
-      }`}
-    >
-      {children}
-    </div>
-  );
-}
-
-/* ============ Helper Components ============ */
-
-function CycleNode({
-  icon, label, sublabel, highlight, num,
-}: {
-  icon: React.ReactNode; label: string; sublabel: string; highlight?: boolean; num?: string;
-}) {
-  return (
-    <div className={`p-2 sm:p-3 rounded-xl border text-center w-[72px] sm:w-[120px] relative ${
-      highlight ? "border-red-200 bg-red-50 shadow-lg shadow-red-100" : "border-[#E8E8ED] bg-[#F5F5F7]"
-    }`}>
-      {num && (
-        <div className={`absolute -top-2 -right-2 size-5 rounded-full text-[10px] font-bold flex items-center justify-center ${
-          highlight ? "bg-red-500 text-white" : "bg-[#E8E8ED] text-[#6E6E73]"
-        }`}>{num}</div>
-      )}
-      <div className={`flex justify-center mb-1 ${highlight ? "text-red-600" : "text-[#6E6E73]"}`}>{icon}</div>
-      <p className={`font-semibold text-[10px] sm:text-xs leading-tight ${highlight ? "text-red-600" : ""}`}>{label}</p>
-      <p className="text-[9px] sm:text-[10px] text-[#86868B] mt-0.5">{sublabel}</p>
-    </div>
-  );
-}
-
-function LoopStep({
-  icon, label, sublabel, highlight,
-}: {
-  icon: React.ReactNode; label: string; sublabel: string; highlight?: boolean;
-}) {
-  return (
-    <div className={`flex flex-col items-center p-3 rounded-xl border min-w-[70px] sm:min-w-[85px] ${
-      highlight ? "border-[#B8860B]/20 bg-[#B8860B]/5" : "border-[#E8E8ED] bg-[#F5F5F7]"
-    }`}>
-      <div className={highlight ? "text-[#B8860B]" : "text-[#6E6E73]"}>{icon}</div>
-      <p className={`text-xs font-semibold mt-1 ${highlight ? "text-[#B8860B]" : ""}`}>{label}</p>
-      <p className="text-[10px] text-[#86868B]">{sublabel}</p>
-    </div>
-  );
-}
+/* Shared deck components — moved to @/components/presentation
+ *   - SlideWrapper, FadeIn, CycleNode, LoopStep
+ * Shared deck hooks — moved to @/components/presentation
+ *   - useMermaidSlide (rendering)
+ *   - useDeckNavigation (keyboard/mouse/touch)
+ * Presenter notes panel — moved to @/components/presentation/PresenterNotes
+ */
