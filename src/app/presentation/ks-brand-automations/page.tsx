@@ -3,14 +3,27 @@
 /**
  * KS BRAND — IG Automation Menu Deck
  *
+ * Wave 8 restructure (2026-05-27): 14 → 9 slides per Lewis feedback.
+ *
+ * v4 slide order (9 slides):
+ *   1. title-v4               (new — minimal title slide)
+ *   2. spec-3-engagement-persona  (Spec 3 extended — opener automation)
+ *   3. spec-1-comment-to-dm   (Spec 1 modified — 2hr human-wait window)
+ *   4. spec-4-brand-rag-dm    (Spec 4 unchanged structure, copy-refreshed)
+ *   5. spec-2-giveaway-flow   (Spec 2 modified — 2 examples)
+ *   6. spec-5a-sns-coach      (NEW from Spec 5 split — annual deep-dive)
+ *   7. spec-5b-weekly-report  (NEW from Spec 5 split — weekly Monday report)
+ *   8. spec-9-hashtag-tracker (Spec 9 narrowed — industry hashtag only)
+ *   9. disclaimer             (new — closer)
+ *
  * Bilingual JA/EN (default JA per CMO recommendation).
- * Wave 3 Batch B+C — slides populated, Mermaid mounted, presenter notes wired.
+ * Copy is CMO-locked (cmo-locked: 2026-05-27-wave8) — JA and EN strings are pasted
+ * verbatim from the Wave 8 Phase A copy file:
+ *   projects/waiting/ks-brand-aios-prospect/working-files/2026-05-27-wave8-slide-copy.md
  *
- * Slide order — 3 intro → 10 automation (CMO order: 6 → 1 → 5 → 8 → 7 → 4 → 2 → 9 → 3 → 10) → 1 closing.
- * Stable spec IDs reference projects/waiting/ks-brand-aios-prospect/context/2026-05-27-automation-shortlist.md.
- *
- * Copy is CMO-locked (2026-05-27) — JA and EN strings are pasted verbatim from
- * projects/waiting/ks-brand-aios-prospect/working-files/2026-05-27-slide-copy*.md.
+ * Archived v3 slides (intro 1-3, Spec 6, Spec 7, Spec 8, Spec 10, closing) are preserved at
+ *   projects/waiting/ks-brand-aios-prospect/working-files/archive/2026-05-27-wave8-archived-slides/
+ * with restore instructions in the archive README.
  */
 
 import { Suspense, useState } from "react";
@@ -35,365 +48,159 @@ type SlideDef = {
   bullets?: Bilingual[];
   callout?: Bilingual;
   mermaid?: string;
-  badge?: Bilingual; // e.g. "AUTOMATION 01 — SPEC 6"
+  badge?: Bilingual;
   transition?: "scale" | "slide" | "stagger";
   /**
    * Wave 5 polish (CPO Wave 4 deferral): some flowcharts are wider than the
    * default 1fr_1.1fr column allowance handles cleanly. When true, the
    * automation slide renders with a bullets-narrow / diagram-wide grid
    * (1fr_1.8fr) so the diagram has room to breathe at projector distance
-   * and on the exported PDF. Applied to Spec 2 (7-node giveaway LR flow).
+   * and on the exported PDF. Applied to Spec 2 (7-node giveaway LR flow)
+   * and to Spec 3 v4 (longer engagement → score → DM → nurture chain).
    */
   wideMermaid?: boolean;
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// SLIDES — 14 slides, all CMO-locked copy, pasted verbatim
+// SLIDES — 9 slides v4 (Wave 8 restructure)
+// Copy locked: cmo-locked: 2026-05-27-wave8
 // ─────────────────────────────────────────────────────────────────────────────
 
 const SLIDES: SlideDef[] = [
-  // ── Intro 1 of 3 ──
+  // ─────────────────────────────────────────────────────────────────────────
+  // SLIDE 1 — Title (NEW)
+  // ─────────────────────────────────────────────────────────────────────────
   {
-    id: "intro-1-hook",
+    id: "title-v4",
     variant: "intro",
     transition: "scale",
-    badge: { ja: "INTRO 01", en: "INTRO 01" },
+    badge: { ja: "MOTTO × KS BRAND", en: "MOTTO × KS BRAND" },
     title: {
-      ja: "2025年は「自動化の量」。2026年は「自動化の知性」。",
-      en: "Volume was 2025. Intelligence is 2026.",
-    },
-    subtitle: {
-      ja: "既存ツールはメッセージを届けられる。でも誰に、何を、どう返すかは見えない。",
-      en: "Existing tools can send messages. They cannot tell you who deserves which one.",
-    },
-    bullets: [
-      {
-        ja: "ManyChat・lgram・iステップは「返信量」を自動化する。フォロワーの本質は見えない。",
-        en: "ManyChat, lgram, iステップ automate reply volume. They cannot see who the follower actually is.",
-      },
-      {
-        ja: "Modash・HypeAuditorは「集計データ」を出す。「このフォロワー5万人のうち誰が本物の購買層か」は答えられない。",
-        en: "Modash and HypeAuditor output aggregate data. Neither can answer: which 500 of your 50,000 are real buyers?",
-      },
-      {
-        ja: "日本語AIは「翻訳レベル」のまま。ブランドのトーンで、JPネイティブで、フォロワー一人ひとりに合わせた返信は、まだどのツールも作れていない。",
-        en: "Japanese AI output remains translation-grade. No tool yet delivers brand-voice, JP-native, per-follower replies at scale.",
-      },
-    ],
-    callout: {
-      ja: "ツールを持っている。インテリジェンスはまだ持っていない。",
-      en: "You have the tools. You don't yet have the intelligence.",
-    },
-  },
-
-  // ── Intro 2 of 3 ──
-  {
-    id: "intro-2-context",
-    variant: "intro",
-    transition: "slide",
-    badge: { ja: "INTRO 02", en: "INTRO 02" },
-    title: {
-      ja: "スクレイピングは使わない。それが差別化になる。",
-      en: "No scraping. That's the competitive edge.",
-    },
-    subtitle: {
-      ja: "Meta公式APIとAPPI準拠を出発点にすることで、次のToS施行後も生き続けるシステムになる。",
-      en: "Built on official Meta APIs and APPI compliance — designed to survive the next enforcement wave.",
-    },
-    bullets: [
-      {
-        ja: "このデッキの10自動化はすべてMeta Graph API（Business Discovery含む）を基盤にしている。アカウント停止リスクはゼロ。",
-        en: "All 10 automations run on Meta's official Graph API, including Business Discovery. Zero account-ban risk.",
-      },
-      {
-        ja: "日本のAPPI（個人情報保護法）では、公開投稿であっても分析目的での利用には開示が必要。各ビルドにはAPPI開示コピーが、後付けではなく仕組みの一部として最初から含まれる。",
-        en: "Japan's APPI requires purpose disclosure even for public post data. Every build in this deck ships with a compliant JP disclosure copy template — built in from day one, not bolted on later.",
-      },
-      {
-        ja: "スクレイピングツールを使う競合は「今は動いている」が、次のAPI施行波で止まる。このシステムは止まらない。",
-        en: "Competitors using scrapers are running today. They stop at the next enforcement wave. This system keeps running.",
-      },
-    ],
-    callout: {
-      ja: "ルールの中で建てる。だからこそ、長く使える。",
-      en: "Built within the rules — which is exactly why it lasts.",
-    },
-  },
-
-  // ── Intro 3 of 3 ──
-  {
-    id: "intro-3-menu-overview",
-    variant: "intro",
-    transition: "slide",
-    badge: { ja: "INTRO 03", en: "INTRO 03" },
-    title: {
-      ja: "2026年のAIが埋める、3つの空白。",
-      en: "Three gaps no SaaS tool has filled. Until now.",
-    },
-    subtitle: {
-      ja: "この10選は、市場に存在しないものを建てるための選定だ。",
-      en: "The 10 automations in this deck are built around what the market hasn't shipped yet.",
-    },
-    bullets: [
-      {
-        ja: "フォロワー個人のペルソナ分析 — 「50,000人のフォロワーのうち、誰が本物の購買層か？」これに答えられるツールは、今の市場に存在しない。",
-        en: "Per-follower persona analysis — \"Which 500 of my 50,000 followers are real buyers?\" No tool in the market answers this question today.",
-      },
-      {
-        ja: "JPネイティブAIトーン + 日英バイリンガル自動ルーティング — 翻訳レベルの多言語対応ではない。KS BRANDの声で、日本語ネイティブで、相手に応じてカジュアルと丁寧語を切り替える返信。",
-        en: "JP-native AI tone + bilingual flow routing — Not translation-grade multilingual. KS BRAND's actual voice, in fluent Japanese, switching between casual and formal depending on who's asking.",
-      },
-      {
-        ja: "APPIコンプライアンスを「信頼資産」として設計 — 開示コピーから同意フロー、データ保持ポリシーまで、法的準拠をビルドの一部として出荷する。競合ツールが後から慌てて対応する部分を、最初から完成させる。",
-        en: "APPI compliance as a buyer-trust asset — Disclosure copy, consent flow, and data retention policy shipped as part of the build. What competitors scramble to patch later, we ship complete on day one.",
-      },
-    ],
-    callout: {
-      ja: "次の10スライドが、この3つの空白を埋める答えだ。",
-      en: "The next 10 slides are the specific answer to each of these three gaps.",
+      ja: "Claude Code + VPS で実現する Instagram 自動化 — 事例と可能性",
+      en: "Instagram Automation with Claude Code + VPS — Examples and What's Possible",
     },
   },
 
   // ─────────────────────────────────────────────────────────────────────────
-  // AUTOMATION 01 — Spec 6 — JP-text-in-image generator
+  // SLIDE 2 — Engagement-triggered persona system (Spec 3 v4 — extended)
   // ─────────────────────────────────────────────────────────────────────────
   {
-    id: "spec-6-jp-text-in-image",
+    id: "spec-3-engagement-persona",
     variant: "automation",
     transition: "slide",
-    badge: { ja: "自動化 01 ・ SPEC 6", en: "AUTOMATION 01 ・ SPEC 6" },
+    wideMermaid: true,
+    badge: { ja: "自動化 01 ・ SPEC 3 v4", en: "AUTOMATION 01 ・ SPEC 3 v4" },
     title: {
-      ja: "日本語テキスト、正確に。",
-      en: "Japanese Text. Rendered Right.",
+      ja: "エンゲージした人を、見えるようにする。",
+      en: "Make Your Engagers Visible.",
     },
     subtitle: {
-      ja: "漢字も平仮名も、AIが正確に描画したグリッドカードを30秒で生成します。",
-      en: "Brief the system in plain language — get a grid card with accurate kanji and hiragana in 30 seconds.",
+      ja: "コメント・いいね・DMを起点に、自動でペルソナを生成し、優良見込み客にアプローチする。",
+      en: "Every like, comment, or DM triggers analysis — persona built, client likelihood scored, high-potential prospects reached automatically.",
     },
     bullets: [
-      { ja: "Claudeがレイアウト指示を作成する", en: "Claude writes the layout brief from your prompt" },
-      { ja: "Ideogram APIが画像を生成する", en: "Ideogram renders the image with accurate JP typography" },
-      { ja: "AIが文字の正確さを検証して完成", en: "Vision AI verifies every character before it reaches you" },
+      {
+        ja: "エンゲージした人の直近20投稿をClaudeが読み、興味・ライフスタイル・購買シグナルを分析してペルソナカードを自動生成する",
+        en: "For each person who engages, Claude reads their last 20 public posts — outputs a persona card: interests, lifestyle signals, buying likelihood",
+      },
+      {
+        ja: "購買可能性スコアが高い人を自動で特定し、ブランドの声でDMを送信する",
+        en: "High-likelihood prospects are identified and auto-DM'd in KS BRAND's voice",
+      },
+      {
+        ja: "DMへの反応に応じてナーチャリングフローが続く。手動対応は関心が確認されてから",
+        en: "Nurture flow continues based on reply — manual follow-up only once genuine interest is confirmed",
+      },
     ],
     callout: {
-      ja: "ついに、漢字も平仮名も正確に描けるAI画像ツールです。グリッドカードに載せたい文章を入力するだけで、30秒後には完成画像が届きます。Photoshopも、デザイナーへの往復依頼も不要です。",
-      en: "Finally — an AI image tool that renders kanji and hiragana correctly. Type what you want the grid card to say, get a polished image 30 seconds later — no Photoshop, no designer back-and-forth.",
+      ja: "「このエンゲージャーの中に、誰が本物の購買層か」という問いに、初めてデータで答えられる。",
+      en: "For the first time, \"which of my engagers are real buyers?\" has a data-backed answer — not a gut call.",
     },
-    // Spec 6 simplified per Wave 2 flag — decision diamond labels trimmed for readability.
+    // v4 Spec 3 — engagement-triggered, extended chain (engagement → 20-post read →
+    // persona card → score → auto-DM → nurture flow → manual on confirmed interest).
+    // Designed wider than v3 (wideMermaid) to give the 8-node LR chain room to breathe.
     mermaid: `flowchart LR
-  A["ブリーフ"]:::start --> B["Claude<br/>レイアウト作成"]:::ai
-  B --> C["Ideogram<br/>画像生成"]:::render
-  C --> D["Claude Vision<br/>JP文字検証"]:::ai
-  D --> E{"OK?"}:::gate
-  E -- "yes" --> F["完成"]:::done
-  E -- "no" --> B
+  A["いいね・コメント<br/>DM・シェア"]:::start --> B["エンゲージャー<br/>捕捉"]:::infra
+  B --> C["Claude<br/>直近20投稿を読む"]:::ai
+  C --> D["ペルソナカード<br/>生成"]:::ai
+  D --> E["購買可能性<br/>スコアリング"]:::ai
+  E --> F{"高スコア?"}:::gate
+  F -- "yes" --> G["ブランド声で<br/>自動DM送信"]:::ai
+  F -- "no" --> H["DB蓄積のみ"]:::infra
+  G --> I["返信あり?"]:::gate
+  I -- "yes" --> J["ナーチャリング<br/>フロー継続"]:::done
+  I -- "no" --> K["停止"]:::infra
   classDef start fill:#F5F5F7,stroke:#1D1D1F,color:#1D1D1F
   classDef ai fill:#FBF6E7,stroke:#B8860B,color:#1D1D1F
-  classDef render fill:#FFFFFF,stroke:#B8860B,stroke-dasharray:4 3,color:#B8860B
+  classDef infra fill:#FFFFFF,stroke:#B8860B,stroke-dasharray:4 3,color:#B8860B
   classDef gate fill:#FFFFFF,stroke:#B8860B,color:#B8860B
-  classDef done fill:#E6F0FF,stroke:#2563eb,color:#1D1D1F`,
+  classDef done fill:#E6F2EF,stroke:#10b981,color:#1D1D1F`,
   },
 
   // ─────────────────────────────────────────────────────────────────────────
-  // AUTOMATION 02 — Spec 1 — Comment-to-DM keyword responder
+  // SLIDE 3 — Auto-DM commenters with 2hr human wait (Spec 1 v4)
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: "spec-1-comment-to-dm",
     variant: "automation",
     transition: "slide",
-    badge: { ja: "自動化 02 ・ SPEC 1", en: "AUTOMATION 02 ・ SPEC 1" },
+    badge: { ja: "自動化 02 ・ SPEC 1 v4", en: "AUTOMATION 02 ・ SPEC 1 v4" },
     title: {
-      ja: "コメントが、DMになる。即座に。",
-      en: "Comment In. DM Out. Instantly.",
+      ja: "コメントに、2時間以内に返す。",
+      en: "Every Comment Gets a Reply. Within 2 Hours.",
     },
     subtitle: {
-      ja: "キーワードコメントを検知して、Claudeが書いたブランドらしい日本語DMを数秒で自動送信します。",
-      en: "A follower comments a keyword — they receive an on-brand DM in fluent Japanese within seconds, automatically.",
+      ja: "人が返信しなければ、AIが投稿・コメント・ブランドを読んで返す。テンプレートではない。",
+      en: "If no human reply comes in time, AI reads the post, the comment, and the brand — then writes one. Not a template.",
     },
     bullets: [
       {
-        ja: "投稿・リール・ストーリー・ライブを横断してリアルタイム検知",
-        en: "Keyword detected on post, Reel, Story, or Live in real time",
+        ja: "任意のコメントを検知 → 設定時間（例: 2時間）、人が返信するのを待つ",
+        en: "Any comment detected → system waits a set window (e.g. 2 hours) for a human reply",
       },
       {
-        ja: "Claudeがブランドボイスで日本語DM文を生成",
-        en: "Claude writes a brand-voice reply in fluent Japanese",
+        ja: "時間内に返信がなければ、ClaudeがそのコメントとKS BRANDの投稿・商品情報を読んで返信文を生成する",
+        en: "If no reply arrives, Claude reads the comment alongside the post context and brand knowledge — writes a relevant, on-brand reply",
       },
       {
-        ja: "公開返信とDMを数秒で自動送信",
-        en: "Public reply and DM sent simultaneously within seconds",
+        ja: "返信済みコメントはスキップ。二重返信はない",
+        en: "Already-replied comments are skipped automatically — no double replies",
       },
     ],
     callout: {
-      ja: "フォロワーがキーワードをコメントすると、数秒以内にブランドらしい自然な日本語DMが届きます。テンプレートの硬さも、取りこぼしも、もうありません。",
-      en: "When a follower comments a keyword on your post, they get a friendly, on-brand DM in fluent Japanese within seconds — no template-stiff replies, no missed inquiries.",
+      ja: "キーワードに限らない。どんなコメントも取りこぼさない。",
+      en: "No keyword required. No comment left unanswered.",
     },
+    // v4 Spec 1 — any comment, 2hr human-wait window, AI fallback. Drops keyword-trigger framing.
     mermaid: `flowchart LR
-  A["IG コメント<br/>Webhook"]:::start --> B["キーワード<br/>+ 言語判定"]:::ai
-  B --> C["Claude<br/>返信生成 JP/EN"]:::ai
-  C --> D["Redis<br/>レート制限"]:::infra
-  D --> E["Graph API<br/>公開返信 + DM"]:::render
-  E --> F["Postgres<br/>dm_log"]:::done
+  A["任意のコメント<br/>Webhook"]:::start --> B["人の返信を<br/>2時間待機"]:::infra
+  B --> C{"人が返信?"}:::gate
+  C -- "yes" --> D["スキップ<br/>二重返信防止"]:::done
+  C -- "no" --> E["Claude<br/>投稿 + コメント読込"]:::ai
+  E --> F["ブランド知識<br/>参照"]:::ai
+  F --> G["返信生成<br/>+ 送信"]:::done
   classDef start fill:#F5F5F7,stroke:#1D1D1F,color:#1D1D1F
   classDef ai fill:#FBF6E7,stroke:#B8860B,color:#1D1D1F
   classDef infra fill:#FFFFFF,stroke:#B8860B,stroke-dasharray:4 3,color:#B8860B
-  classDef render fill:#E6F0FF,stroke:#2563eb,color:#1D1D1F
+  classDef gate fill:#FFFFFF,stroke:#B8860B,color:#B8860B
   classDef done fill:#E6F2EF,stroke:#10b981,color:#1D1D1F`,
   },
 
   // ─────────────────────────────────────────────────────────────────────────
-  // AUTOMATION 03 — Spec 5 — AI content scheduler
-  // ─────────────────────────────────────────────────────────────────────────
-  {
-    id: "spec-5-content-scheduler",
-    variant: "automation",
-    transition: "slide",
-    badge: { ja: "自動化 03 ・ SPEC 5", en: "AUTOMATION 03 ・ SPEC 5" },
-    title: {
-      ja: "月曜の朝、下書きが届く。",
-      en: "Monday Morning. Drafts Ready.",
-    },
-    subtitle: {
-      ja: "過去12か月の投稿データからKS BRANDの「勝ちパターン」を学習し、1週間分のキャプション候補を自動生成します。",
-      en: "The system learns your top-performing posts, identifies your winning patterns, and drafts a week of captions — waiting for your approval each Monday.",
-    },
-    bullets: [
-      {
-        ja: "直近12か月の投稿パフォーマンスを分析する",
-        en: "12 months of post data analyzed for engagement patterns",
-      },
-      {
-        ja: "Claudeが勝ちキャプション3案を生成する",
-        en: "Claude drafts 3 caption options per slot in your brand voice",
-      },
-      {
-        ja: "ダッシュボードで承認・編集・投稿",
-        en: "Approve, edit, or reject each draft — nothing posts without your tap",
-      },
-    ],
-    callout: {
-      ja: "毎週月曜の朝、1週間分の投稿下書きが承認待ちになっています。4時間書く代わりに、10分で編集が完了します。",
-      en: "Every Monday morning, a week's worth of post drafts in your winning voice are waiting for your approval — you spend 10 minutes editing instead of 4 hours writing.",
-    },
-    mermaid: `flowchart LR
-  A["Cron 月曜 09:00"]:::start --> B["Postgres<br/>過去12か月投稿"]:::infra
-  B --> C["Claude<br/>勝ちパターン分析"]:::ai
-  C --> D["Claude<br/>キャプション3案生成"]:::ai
-  D --> E["ダッシュボード<br/>承認・編集・却下"]:::render
-  E --> F["Graph API<br/>予約投稿"]:::done
-  classDef start fill:#F5F5F7,stroke:#1D1D1F,color:#1D1D1F
-  classDef ai fill:#FBF6E7,stroke:#B8860B,color:#1D1D1F
-  classDef infra fill:#FFFFFF,stroke:#B8860B,stroke-dasharray:4 3,color:#B8860B
-  classDef render fill:#E6F0FF,stroke:#2563eb,color:#1D1D1F
-  classDef done fill:#E6F2EF,stroke:#10b981,color:#1D1D1F`,
-  },
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // AUTOMATION 04 — Spec 8 — Reels video pipeline
-  // ─────────────────────────────────────────────────────────────────────────
-  {
-    id: "spec-8-reels-pipeline",
-    variant: "automation",
-    transition: "slide",
-    badge: { ja: "自動化 04 ・ SPEC 8", en: "AUTOMATION 04 ・ SPEC 8" },
-    title: {
-      ja: "写真1枚から、Reelsへ。",
-      en: "One Photo. One Reel. Ready to Post.",
-    },
-    subtitle: {
-      ja: "商品写真と一行のタグラインから、日本語テロップ入りの10秒Reelsを数分で生成します。",
-      en: "Give the system a product photo and a tagline — get a 10-second Reel with Japanese text overlay, ready to post in minutes.",
-    },
-    bullets: [
-      {
-        ja: "Claudeが10秒のショットスクリプトを作成する",
-        en: "Claude writes a 10-second shot script from your brief",
-      },
-      {
-        ja: "Runway APIが動画クリップを生成する",
-        en: "Runway generates the video clip",
-      },
-      {
-        ja: "FFmpegで日本語テロップを合成してReels投稿",
-        en: "FFmpeg burns in Japanese subtitles — published to Reels via Graph API",
-      },
-    ],
-    callout: {
-      ja: "商品写真1枚から、日本語テキスト入りの10秒Reelsが数分で完成します。編集に1週間かけずに、Reelsカレンダーを絶やさず続けられます。",
-      en: "Turn one product photo into a 10-second Reel with Japanese text overlay, ready to post in minutes — the right tool for keeping your Reels calendar full without burning your week on editing.",
-    },
-    mermaid: `flowchart LR
-  A["商品写真<br/>+ タグライン"]:::start --> B["Claude<br/>10秒スクリプト"]:::ai
-  B --> C["Runway<br/>gen4_turbo"]:::render
-  C --> D["FFmpeg<br/>JP テロップ合成"]:::infra
-  D --> E["Graph API<br/>Reels 投稿"]:::done
-  classDef start fill:#F5F5F7,stroke:#1D1D1F,color:#1D1D1F
-  classDef ai fill:#FBF6E7,stroke:#B8860B,color:#1D1D1F
-  classDef render fill:#FFFFFF,stroke:#B8860B,stroke-dasharray:4 3,color:#B8860B
-  classDef infra fill:#E6F0FF,stroke:#2563eb,color:#1D1D1F
-  classDef done fill:#E6F2EF,stroke:#10b981,color:#1D1D1F`,
-  },
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // AUTOMATION 05 — Spec 7 — Brand-LoRA photorealistic image generator
-  // ─────────────────────────────────────────────────────────────────────────
-  {
-    id: "spec-7-brand-lora",
-    variant: "automation",
-    transition: "slide",
-    badge: { ja: "自動化 05 ・ SPEC 7", en: "AUTOMATION 05 ・ SPEC 7" },
-    title: {
-      ja: "KS BRANDの目線で、生成する。",
-      en: "Campaign Images. Your Brand's Eye.",
-    },
-    subtitle: {
-      ja: "厳選した20枚の商品写真でAIをトレーニングし、KS BRANDの世界観と一致したキャンペーンビジュアルを生成します。",
-      en: "Train an AI model on 20 of your best product photos — then generate campaign visuals with consistent palette, lighting, and styling in seconds.",
-    },
-    bullets: [
-      {
-        ja: "厳選した20枚でKS LoRAをトレーニング",
-        en: "KS BRAND LoRA trained on 20 curated product images",
-      },
-      {
-        ja: "Claudeがキャンペーンのビジュアルブリーフを作成",
-        en: "Claude writes the visual brief from your campaign concept",
-      },
-      {
-        ja: "4バリアントを生成してAIがブランド適合度をランキング",
-        en: "4 variants generated — AI ranks by brand-fit, you choose",
-      },
-    ],
-    callout: {
-      ja: "最高の商品写真20枚でAIをトレーニングすると、それ以降は「これはKS BRANDだ」と一目でわかるキャンペーンビジュアルを、数秒で生成できます。パレット、ライティング、スタイリング、すべて一貫しています。",
-      en: "Train an AI model on 20 of your best product photos, and from then on generate campaign visuals that look unmistakably like KS BRAND — consistent palette, consistent lighting, consistent styling, generated in seconds.",
-    },
-    mermaid: `flowchart LR
-  A["キャンペーン概念"]:::start --> B["Claude<br/>ブリーフ作成"]:::ai
-  B --> C["FLUX + KS LoRA<br/>4バリアント生成"]:::render
-  C --> D["Claude Vision<br/>ブランド適合度評価"]:::ai
-  D --> E["ダッシュボード<br/>4案から選ぶ"]:::done
-  classDef start fill:#F5F5F7,stroke:#1D1D1F,color:#1D1D1F
-  classDef ai fill:#FBF6E7,stroke:#B8860B,color:#1D1D1F
-  classDef render fill:#FFFFFF,stroke:#B8860B,stroke-dasharray:4 3,color:#B8860B
-  classDef done fill:#E6F2EF,stroke:#10b981,color:#1D1D1F`,
-  },
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // AUTOMATION 06 — Spec 4 — Brand-RAG AI DM replier
+  // SLIDE 4 — Brand-voice DM replier (Spec 4 — unchanged structure, copy-refreshed)
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: "spec-4-brand-rag-dm",
     variant: "automation",
     transition: "slide",
-    badge: { ja: "自動化 06 ・ SPEC 4", en: "AUTOMATION 06 ・ SPEC 4" },
+    badge: { ja: "自動化 03 ・ SPEC 4", en: "AUTOMATION 03 ・ SPEC 4" },
     title: {
       ja: "DM応答、ブランドの声で。",
       en: "DM Replies. Brand Voice. Every Time.",
     },
     subtitle: {
-      ja: "商品カタログとブランドガイドで学習したAIが、相手に合わせた日本語でDMに返信します。",
-      en: "An AI trained on your catalog, your style guide, and your past Q&A — answers DMs in the right Japanese register for whoever is asking.",
+      ja: "商品カタログとブランドガイドで学習したシステムが、相手に合わせたトーンでDMに返信する。",
+      en: "A system trained on your catalog, your style guide, and your past Q&A — answers DMs in the right register for whoever is asking.",
     },
     bullets: [
       {
@@ -401,8 +208,8 @@ const SLIDES: SlideDef[] = [
         en: "Catalog, style guide, and 200+ historical Q&A pairs indexed",
       },
       {
-        ja: "フォロワー属性で敬語/タメ口を自動切替する",
-        en: "Persona tier auto-routes: casual JP for consumers, keigo for wholesale",
+        ja: "エンゲージャーのペルソナデータを参照して敬語/カジュアルを自動切替する",
+        en: "Persona data from Slide 2 auto-routes tone: casual for consumers, keigo for wholesale",
       },
       {
         ja: "24時間以内にブランドの声でDM返信を送信",
@@ -410,14 +217,17 @@ const SLIDES: SlideDef[] = [
       },
     ],
     callout: {
-      ja: "DMはブランドの声で返信されます。サイズを聞いてきた20代にはカジュアルな日本語で、リードタイムを確認してきた卸先バイヤーには丁寧な敬語で。カタログは、すでにシステムが完全に把握しています。",
-      en: "Your DMs get answered in your brand's voice — casual Japanese for a 20-something asking about sizing, proper keigo for a wholesale buyer asking about lead times — and the system already knows your catalog cold.",
+      ja: "DMはブランドの声で返信される。サイズを聞いてきた20代にはカジュアルに、卸先バイヤーには敬語で。カタログは、すでにシステムが完全に把握している。",
+      en: "DMs answered in your brand's voice — casual for a 20-something asking about sizing, formal keigo for a wholesale buyer on lead times. The system already knows your catalog cold.",
     },
+    // v4 Spec 4 — same structure as v3 (incoming DM → catalog/FAQ RAG → brand-voice reply
+    // → persona-aware tone routing → rate-limited send). Updated to reference Slide 2's
+    // persona engine instead of v3's Spec 3.
     mermaid: `flowchart LR
   A["着信DM<br/>Webhook"]:::start --> B["会話状態<br/>取得"]:::infra
   B --> C["pgvector RAG<br/>カタログ + FAQ"]:::ai
   C --> D["Claude<br/>ブランド声で返信"]:::ai
-  D --> E["ペルソナ層で<br/>敬語/タメ口調整"]:::ai
+  D --> E["ペルソナ層で<br/>敬語/カジュアル調整"]:::ai
   E --> F["レート制限<br/>+ 送信"]:::done
   classDef start fill:#F5F5F7,stroke:#1D1D1F,color:#1D1D1F
   classDef ai fill:#FBF6E7,stroke:#B8860B,color:#1D1D1F
@@ -426,47 +236,101 @@ const SLIDES: SlideDef[] = [
   },
 
   // ─────────────────────────────────────────────────────────────────────────
-  // AUTOMATION 07 — Spec 2 — Engagement-triggered giveaway flow
+  // SLIDE 5 — Comment-trigger campaigns: 2 examples (Spec 2 v4)
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: "spec-2-giveaway-flow",
     variant: "automation",
     transition: "slide",
     wideMermaid: true,
-    badge: { ja: "自動化 07 ・ SPEC 2", en: "AUTOMATION 07 ・ SPEC 2" },
+    badge: { ja: "自動化 04 ・ SPEC 2 v4", en: "AUTOMATION 04 ・ SPEC 2 v4" },
     title: {
-      ja: "キャンペーン応募、全自動で。",
-      en: "Giveaway on Autopilot. APPI-Ready.",
+      ja: "コメントが、アクションになる。",
+      en: "Comment Triggers Action.",
     },
     subtitle: {
-      ja: "コメント応募から当選通知・クーポン配布まで、APPI開示コピー付きで全工程を自動化します。",
-      en: "Comment entry, persona tagging, winner draw, coupon delivery — fully automated, with APPI disclosure copy shipped as part of the build.",
+      ja: "特定のコメントを起点に、自動でDMを送る。プレゼントも、無料資料も、当選通知も。",
+      en: "A specific comment triggers an automatic DM — free guides, draw entries, winner notifications. All without manual steps.",
     },
     bullets: [
       {
-        ja: "コメント応募を受付・重複除外・DM確認送信",
-        en: "Comment entries captured, deduplicated, confirmed by DM",
+        ja: "例1 — 無料ガイド配布: 「ガイド」とコメントした人に、ガイドのダウンロードリンクを即DM",
+        en: "Example 1 — Free guide: Comment \"ガイド\" → system instantly DMs the download link",
       },
       {
-        ja: "ペルソナエンジンが応募者全員にタグを付ける",
-        en: "Persona engine tags every entrant while the campaign runs",
+        ja: "例2 — プレゼント応募: 「応募」とコメントした人を受付・重複除外 → 抽選でランダム5名を選出 → 当選DM配信",
+        en: "Example 2 — Draw: Comment \"応募\" → entries captured and deduplicated → 5 random winners selected → winner DMs sent automatically",
       },
       {
-        ja: "自動抽選・当選DM・クーポンコード配信",
-        en: "Automated draw, winner DM, coupon delivery — no manual steps",
+        ja: "キャンペーンごとにトリガーワードと送信文をカスタマイズできる",
+        en: "Trigger word and DM message are customizable per campaign — no code changes needed",
       },
     ],
     callout: {
-      ja: "眠っている間も、全応募者にペルソナタグが付きます。公正な抽選でクーポンを配布し、APPIに完全準拠。開示コピーはすでに用意されています。",
-      en: "Run a giveaway that tags every entrant by persona while you sleep, picks winners fairly, and hands out coupons — fully legal under APPI, with the disclosure copy already written for you.",
+      ja: "何百件の応募でも、手作業はゼロ。",
+      en: "Hundreds of entries. Zero manual steps.",
     },
+    // v4 Spec 2 — drops "Pick a Winner" framing. Shows TWO parallel example flows
+    // (free-guide instant-DM + draw-style entry-capture-and-select) both branching from
+    // the same comment-detection trigger. Demonstrates the underlying mechanism is one
+    // pipeline, two campaign shapes.
     mermaid: `flowchart LR
-  A["応募コメント<br/>Webhook"]:::start --> B["検証 + 重複除外"]:::infra
-  B --> C["DM確認送信"]:::ai
-  C --> D["ペルソナエンジン<br/>(Spec 3)"]:::ai
-  D --> E["Postgres<br/>entries"]:::infra
-  E --> F["予約抽選 Cron"]:::infra
-  F --> G["当選DM<br/>+ クーポン配信"]:::done
+  A["コメント検知<br/>Webhook"]:::start --> B{"トリガーワード"}:::gate
+  B -- "「ガイド」" --> C1["即時DM送信<br/>ガイドリンク"]:::done
+  B -- "「応募」" --> C2["応募受付<br/>+ 重複除外"]:::infra
+  C2 --> D2["Postgres<br/>entries"]:::infra
+  D2 --> E2["ランダム抽選<br/>5名選出"]:::ai
+  E2 --> F2["当選DM配信"]:::done
+  classDef start fill:#F5F5F7,stroke:#1D1D1F,color:#1D1D1F
+  classDef ai fill:#FBF6E7,stroke:#B8860B,color:#1D1D1F
+  classDef infra fill:#FFFFFF,stroke:#B8860B,stroke-dasharray:4 3,color:#B8860B
+  classDef gate fill:#FFFFFF,stroke:#B8860B,color:#B8860B
+  classDef done fill:#E6F2EF,stroke:#10b981,color:#1D1D1F`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // SLIDE 6 — On-demand SNS deep-dive coach (Spec 5a — NEW from Spec 5 split)
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: "spec-5a-sns-coach",
+    variant: "automation",
+    transition: "slide",
+    badge: { ja: "自動化 05 ・ SPEC 5a", en: "AUTOMATION 05 ・ SPEC 5a" },
+    title: {
+      ja: "1年分の投稿を、一気に読む。",
+      en: "Read a Year of Posts. In One Session.",
+    },
+    subtitle: {
+      ja: "過去12か月のKS BRAND投稿を分析し、何が効いていて何が効いていないかをまとめたロードマップを出力する。",
+      en: "Analyze 12 months of KS BRAND posts at once — output a strategy document showing what drove engagement and what didn't.",
+    },
+    bullets: [
+      {
+        ja: "KS BRANDの直近12か月の全投稿とエンゲージメントデータを読み込み、上位・下位パフォーマーを特定する",
+        en: "Reads all KS BRAND posts from the past 12 months — identifies top and bottom performers by engagement",
+      },
+      {
+        ja: "勝ちパターンを抽出する：キャプションの書き方・投稿時間・フォーマット・テーマ",
+        en: "Extracts winning patterns: caption structure, posting time, format, topic clusters",
+      },
+      {
+        ja: "次の四半期の投稿戦略ロードマップとして出力する。Kishi-sanが走らせたいときに実行できる",
+        en: "Outputs a strategic roadmap document — run it on demand whenever Kishi-san wants a fresh read",
+      },
+    ],
+    callout: {
+      ja: "感覚でやっていたことが、データになる。",
+      en: "What you've been doing by feel — now has evidence behind it.",
+    },
+    // v4 Spec 5a (NEW from split) — on-demand annual deep-dive. Pulls 12 months of posts
+    // and engagement data → Claude pattern-analysis → strategic roadmap document. The
+    // output doc becomes the baseline that Slide 7 (Spec 5b) references for weekly deltas.
+    mermaid: `flowchart LR
+  A["オンデマンド<br/>実行"]:::start --> B["過去12か月<br/>全投稿読込"]:::infra
+  B --> C["エンゲージメント<br/>データ集計"]:::infra
+  C --> D["Claude<br/>勝ちパターン抽出"]:::ai
+  D --> E["上位・下位<br/>パフォーマー特定"]:::ai
+  E --> F["四半期ロードマップ<br/>文書出力"]:::done
   classDef start fill:#F5F5F7,stroke:#1D1D1F,color:#1D1D1F
   classDef ai fill:#FBF6E7,stroke:#B8860B,color:#1D1D1F
   classDef infra fill:#FFFFFF,stroke:#B8860B,stroke-dasharray:4 3,color:#B8860B
@@ -474,47 +338,99 @@ const SLIDES: SlideDef[] = [
   },
 
   // ─────────────────────────────────────────────────────────────────────────
-  // AUTOMATION 08 — Spec 9 — Hashtag tracker + social listening
+  // SLIDE 7 — Weekly Monday market report (Spec 5b — NEW from Spec 5 split)
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: "spec-5b-weekly-report",
+    variant: "automation",
+    transition: "slide",
+    badge: { ja: "自動化 06 ・ SPEC 5b", en: "AUTOMATION 06 ・ SPEC 5b" },
+    title: {
+      ja: "毎週月曜、先週のデータが届く。",
+      en: "Every Monday. Last Week's Data. Waiting for You.",
+    },
+    subtitle: {
+      ja: "先月のパフォーマンスをSlide 6の年次ベースラインと照合し、今週やるべきことを3点に絞って届ける。",
+      en: "Last month's performance measured against the annual baseline — three tactical recommendations, every Monday morning.",
+    },
+    bullets: [
+      {
+        ja: "先月の投稿パフォーマンスを自動集計し、エンゲージメントの増減を可視化する",
+        en: "Last month's post performance auto-aggregated — engagement up/down made visible",
+      },
+      {
+        ja: "Slide 6の年次ベースラインと照合して、外れ値と傾向の変化を検出する",
+        en: "Cross-referenced against the Slide 6 annual baseline to surface outliers and trend shifts",
+      },
+      {
+        ja: "Claudeが今週の投稿戦略に関するアクション提案を3点で出力する。毎週月曜に届く",
+        en: "Claude outputs 3 tactical action points for this week's strategy — delivered every Monday",
+      },
+    ],
+    callout: {
+      ja: "データは蓄積するだけでは意味がない。毎週、判断材料に変わって届く。",
+      en: "Data that accumulates without surfacing is useless. This one surfaces it, every week.",
+    },
+    // v4 Spec 5b (NEW from split) — weekly Monday report. Cron-triggered each Monday →
+    // pulls last month's data → cross-references Slide 6 baseline → Claude generates
+    // 3 tactical action points. Paired with Slide 6 (5a) — without the baseline, this
+    // is just a number dump; with it, deltas mean something.
+    mermaid: `flowchart LR
+  A["Cron 月曜 09:00"]:::start --> B["先月の投稿<br/>パフォーマンス集計"]:::infra
+  B --> C["Slide 6 年次<br/>ベースライン参照"]:::infra
+  C --> D["Claude<br/>外れ値・傾向検出"]:::ai
+  D --> E["今週のアクション<br/>3点生成"]:::ai
+  E --> F["月曜朝<br/>レポート配信"]:::done
+  classDef start fill:#F5F5F7,stroke:#1D1D1F,color:#1D1D1F
+  classDef ai fill:#FBF6E7,stroke:#B8860B,color:#1D1D1F
+  classDef infra fill:#FFFFFF,stroke:#B8860B,stroke-dasharray:4 3,color:#B8860B
+  classDef done fill:#E6F2EF,stroke:#10b981,color:#1D1D1F`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // SLIDE 8 — Industry hashtag tracker (Spec 9 v4 — narrowed)
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: "spec-9-hashtag-tracker",
     variant: "automation",
     transition: "slide",
-    badge: { ja: "自動化 08 ・ SPEC 9", en: "AUTOMATION 08 ・ SPEC 9" },
+    badge: { ja: "自動化 07 ・ SPEC 9 v4", en: "AUTOMATION 07 ・ SPEC 9 v4" },
     title: {
-      ja: "毎週月曜、市場レポートが届く。",
-      en: "Monday Market Report. In Japanese.",
+      ja: "業界ハッシュタグ、毎週スキャン。",
+      en: "Industry Hashtags. Scanned Every Week.",
     },
     subtitle: {
-      ja: "ハッシュタグトレンドとKS BRANDへの言及をリアルタイムで追跡し、毎週日本語サマリーで届けます。",
-      en: "Real-time hashtag tracking and brand-mention listening, delivered as a weekly Japanese digest.",
+      ja: "追跡する業界を決めると、毎週その業界で最も使われているハッシュタグを自動でレポートする。",
+      en: "Choose the industry to track — get a weekly report of the most-used hashtags in that space, automatically.",
     },
     bullets: [
       {
-        ja: "Graph APIで最大30タグを毎時スキャンする",
-        en: "Up to 30 hashtags scanned hourly via Graph API",
+        ja: "業界を1つ指定する。そのカテゴリで最もよく使われているハッシュタグを毎週スキャンする",
+        en: "Pick one industry. The system scans the most-used hashtags in that category every week",
       },
       {
-        ja: "KS BRANDへの言及を1日4回モニタリング",
-        en: "Brand mentions tracked 4x daily, sentiment analyzed",
+        ja: "投稿数・エンゲージメント率の増減を追跡し、伸びているタグと落ちているタグを識別する",
+        en: "Post volume and engagement trends tracked week-over-week — rising and falling tags identified",
       },
       {
-        ja: "Claudeが毎週日本語でトレンドサマリーを作成",
-        en: "Claude writes a weekly Japanese digest: rising, falling, sentiment",
+        ja: "Claudeが毎週日本語サマリーで届ける。今週使うべきタグ、避けるべきタグが明確になる",
+        en: "Claude writes a weekly digest — which tags to use this week, which to avoid",
       },
     ],
     callout: {
-      ja: "毎週月曜、1ページの日本語レポートが届きます。今あなたの分野で最も伸びている3つのハッシュタグ、下落している3つ、そして今週KS BRANDがどんなトーンで語られているか。",
-      en: "Every Monday, a one-page Japanese report lands in your inbox — the three hashtags rising fastest in your space right now, the three falling, and a sentiment read on how people are talking about KS BRAND this week.",
+      ja: "ハッシュタグを感覚で選ぶのをやめる。",
+      en: "Stop guessing which hashtags to use.",
     },
-    // Spec 9 simplified per Wave 2 flag — parallel branches consolidated into single combined feed for visual clarity.
+    // v4 Spec 9 — narrowed. v3 had parallel hashtag-scan + brand-mention branches; v4
+    // drops the brand-mention branch entirely. Industry-only tracking, weekly cron,
+    // rising/falling identification, Claude weekly digest. Phase-2 LLM-presence footnote
+    // removed per Lewis (was already descoped).
     mermaid: `flowchart LR
-  A["毎時 Cron"]:::start --> B["Graph API<br/>ハッシュタグ検索"]:::infra
-  C["4回/日 Cron"]:::start --> D["ブランドメンション<br/>スキャン"]:::infra
-  B --> E["Postgres<br/>hashtag_metrics"]:::infra
-  D --> E
-  E --> F["Claude<br/>トレンド + 感情分析"]:::ai
-  F --> G["ダッシュボード<br/>週次日本語レポート"]:::done
+  A["週次 Cron"]:::start --> B["業界カテゴリ<br/>指定"]:::infra
+  B --> C["業界ハッシュタグ<br/>スキャン"]:::infra
+  C --> D["週次トレンド<br/>集計"]:::infra
+  D --> E["Claude<br/>伸びる・落ちるタグ識別"]:::ai
+  E --> F["週次サマリー<br/>+ 推奨タグセット"]:::done
   classDef start fill:#F5F5F7,stroke:#1D1D1F,color:#1D1D1F
   classDef ai fill:#FBF6E7,stroke:#B8860B,color:#1D1D1F
   classDef infra fill:#FFFFFF,stroke:#B8860B,stroke-dasharray:4 3,color:#B8860B
@@ -522,127 +438,34 @@ const SLIDES: SlideDef[] = [
   },
 
   // ─────────────────────────────────────────────────────────────────────────
-  // AUTOMATION 09 — Spec 3 — Per-follower persona dossier engine
+  // SLIDE 9 — Disclaimer (NEW closer)
   // ─────────────────────────────────────────────────────────────────────────
   {
-    id: "spec-3-persona-dossier",
-    variant: "automation",
-    transition: "slide",
-    badge: { ja: "自動化 09 ・ SPEC 3", en: "AUTOMATION 09 ・ SPEC 3" },
-    title: {
-      ja: "5万人の顔が、見えてくる。",
-      en: "Know Your Followers. Actually Know Them.",
-    },
-    subtitle: {
-      ja: "フォロワーの公開情報をClaudeが分析し、購買傾向・関心・エンゲージメント層のペルソナカードを自動生成します。",
-      en: "Claude analyzes each follower's public content and produces a persona profile — so \"which of my 50,000 followers are likely premium buyers?\" has a data-backed answer.",
-    },
-    bullets: [
-      {
-        ja: "Graph APIでフォロワーの公開データをサンプリング",
-        en: "Follower public data sampled via Graph API (Business/Creator accounts)",
-      },
-      {
-        ja: "Claude Opusがマルチモーダルでペルソナを生成する",
-        en: "Claude Opus analyzes posts and captions, outputs a structured persona card",
-      },
-      {
-        ja: "ダッシュボードで検索・フィルタ・閲覧が可能",
-        en: "Browse, filter, and search persona profiles from one dashboard",
-      },
-    ],
-    callout: {
-      ja: "すべてのフォロワーにペルソナプロフィールが付くダッシュボードです。「5万人のフォロワーのうち、プレミアム購買層はどの500人か？」という問いに、感覚ではなく証拠で答えられます。",
-      en: "A dashboard where every follower has a persona profile — you can finally answer 'which 500 of my 50,000 followers are likely premium buyers?' with evidence, not gut feel.",
-    },
-    mermaid: `flowchart LR
-  A["手動 or<br/>週次 Cron"]:::start --> B["フォロワー<br/>サンプリング"]:::infra
-  B --> C["Graph API<br/>Business Discovery"]:::infra
-  C --> D["Claude Opus<br/>マルチモーダル分析"]:::ai
-  D --> E["Postgres<br/>follower_dossiers"]:::infra
-  E --> F["ダッシュボード<br/>ペルソナ閲覧"]:::done
-  classDef start fill:#F5F5F7,stroke:#1D1D1F,color:#1D1D1F
-  classDef ai fill:#FBF6E7,stroke:#B8860B,color:#1D1D1F
-  classDef infra fill:#FFFFFF,stroke:#B8860B,stroke-dasharray:4 3,color:#B8860B
-  classDef done fill:#E6F2EF,stroke:#10b981,color:#1D1D1F`,
-  },
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // AUTOMATION 10 — Spec 10 — IG ↔ LINE cross-channel identity bridge
-  // ─────────────────────────────────────────────────────────────────────────
-  {
-    id: "spec-10-line-bridge",
-    variant: "automation",
-    transition: "slide",
-    badge: { ja: "自動化 10 ・ SPEC 10", en: "AUTOMATION 10 ・ SPEC 10" },
-    title: {
-      ja: "田中さんは、1人のお客様。",
-      en: "Tanaka-san Is One Customer. Everywhere.",
-    },
-    subtitle: {
-      ja: "IG・LINE・メール・ECを横断して、同一顧客を1つのレコードに統合します。",
-      en: "One customer record across Instagram, LINE, email, and e-commerce — every touchpoint unified, every channel connected.",
-    },
-    bullets: [
-      {
-        ja: "IG・LINE・メール・ECのイベントをリアルタイム連携",
-        en: "IG, LINE, email, and e-commerce webhooks wired to one identity resolver",
-      },
-      {
-        ja: "同一顧客を確率スコアで自動照合する",
-        en: "Deterministic and AI-assisted fuzzy matching links records across channels",
-      },
-      {
-        ja: "統合プロフィールをダッシュボードで一覧できる",
-        en: "One unified profile per customer — all touchpoints visible in one place",
-      },
-    ],
-    callout: {
-      ja: "田中さんがInstagramでDMを送ってきたとき、彼女がLINE友達でもあり、過去2回購入していて、昨春メールリストに登録していたこともわかります。1人のお客様が、すべてのチャネルで1つのレコードになっています。",
-      en: "When Tanaka-san DMs you on Instagram, you can see she's also your LINE friend, has bought from you twice, and signed up for your email list last spring — one customer, one record, across every channel.",
-    },
-    mermaid: `flowchart LR
-  A["IG Webhook"]:::start --> D["ID リゾルバー"]:::ai
-  B["LINE Webhook"]:::start --> D
-  C["メール / EC<br/>Webhook"]:::start --> D
-  D --> E["Postgres<br/>identities + edges"]:::infra
-  E --> F["統合プロフィール<br/>ダッシュボード"]:::done
-  E --> G["下流: ペルソナ・<br/>RAG・キャンペーン"]:::done
-  classDef start fill:#F5F5F7,stroke:#1D1D1F,color:#1D1D1F
-  classDef ai fill:#FBF6E7,stroke:#B8860B,color:#1D1D1F
-  classDef infra fill:#FFFFFF,stroke:#B8860B,stroke-dasharray:4 3,color:#B8860B
-  classDef done fill:#E6F2EF,stroke:#10b981,color:#1D1D1F`,
-  },
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // CLOSING (14)
-  // ─────────────────────────────────────────────────────────────────────────
-  {
-    id: "closing",
+    id: "disclaimer",
     variant: "closing",
     transition: "scale",
-    badge: { ja: "CLOSING", en: "CLOSING" },
+    badge: { ja: "DISCLAIMER", en: "DISCLAIMER" },
     title: {
-      ja: "これが今、実装可能です。",
-      en: "These are buildable today.",
-    },
-    subtitle: {
-      ja: "10点すべて、同じスタック（Claude Code + VPS + オープンソース）で動く。1点から始められる。",
-      en: "All 10 run on the same stack. Pick one to start.",
+      ja: "正直に、一点だけ。",
+      en: "One Honest Note.",
     },
     bullets: [
       {
-        ja: "このデッキに載っているのはコンセプトではない。すべて、今日から設計を始められる、実在するビルドだ。",
-        en: "Nothing in this deck is a concept. Every item is a real build — designable starting today.",
+        ja: "このデッキの内容はすべて技術的に実現可能だ。ただし、実際のコスト・ROI・チューニング期間は、建てる前には確定できない。",
+        en: "Everything in this deck is technically buildable. Actual cost, ROI, and tuning time cannot be confirmed before we build.",
       },
       {
-        ja: "1点選んで、1週間のPOCから始める。それがMOTTOの進め方だ。",
-        en: "Pick one. Start with a one-week proof of concept. That is how MOTTO builds.",
+        ja: "オープンソースツールと低コストモデルの組み合わせで、費用は現実的な範囲に収まる。しかし結果の保証はない。",
+        en: "Open-source tooling and low-cost models keep the economics viable. That does not mean results are guaranteed.",
+      },
+      {
+        ja: "どれか1点を選び、小さく始め、実測値を出す。それが唯一の正しい順番だ。",
+        en: "Pick one. Start small. Get real numbers. That is the only honest sequence.",
       },
     ],
     callout: {
-      ja: "メニューは揃っている。選ぶのはKishi-sanだ。",
-      en: "The menu is complete. The choice is Kishi-san's.",
+      ja: "可能性を見せるのが、このデッキの役割だ。数字は、実験から出てくる。",
+      en: "This deck shows what's possible. The numbers come from the experiment.",
     },
   },
 ];
@@ -651,234 +474,143 @@ const TOTAL_STEPS = SLIDES.length;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Presenter notes (one per slide, in slide order)
+// Copy locked: cmo-locked: 2026-05-27-wave8
 // ─────────────────────────────────────────────────────────────────────────────
 
 type SlidePresenterNote = { timing: string; ja: string[]; en: string[] };
 
 const PRESENTER_NOTES: SlidePresenterNote[] = [
-  // 0 — Intro 1
+  // 0 — Title (Slide 1)
   {
-    timing: "60-90s",
+    timing: "30s",
     ja: [
-      "ここで既存ツールを否定しているわけではない。ManyChatもlgramも、やるべき仕事はきちんとやっている。",
-      "2026年にKishi-sanが問うているのは別の質問だ。「誰が来ているのか」「その人は何を求めているのか」「どう話しかけるべきか」——それはどのツールも答えていない。",
-      "このスライドはその問いを立てるためのスライドで、批判するためのスライドではない。",
-      "次のスライドから、その問いに対して何が建てられるかを見せていく。",
+      "このデッキは提案書ではない。「今、実際に建てられるもの」を並べたメニューだ。9点の自動化を見ていただき、最も関心のあるものから試す。それだけのドキュメントだ。数字のコミットも、完成保証もない。ただし、技術的な実現可能性はすべて検証済みの話をしている。見積もりが必要なものは、関心を持ったあとに一緒に出せる。トーンは静かに、直接的に。",
     ],
     en: [
-      "This slide is not a tool takedown. ManyChat, lgram, iステップ — they all do their job.",
-      "But by 2026, the question Kishi-san is asking is different: who is actually showing up, what do they care about, and how should we talk to them?",
-      "No existing tool answers that. This slide establishes the question. The rest of the deck answers it.",
-      "The gap is intelligence plus Japanese-native voice — at scale.",
+      "This is not a proposal. It is a menu — nine things that are buildable today with the current stack. Pick what's interesting, start there. No cost commitments here. No completion guarantees. What you will see is technically verified. If something catches Kishi-san's eye, we scope it together after. Keep the tone calm and direct — this is a document that speaks for itself.",
     ],
   },
-  // 1 — Intro 2
+  // 1 — Spec 3 v4 (Slide 2)
   {
-    timing: "60-90s",
+    timing: "90-120s",
     ja: [
-      "Kishi-sanはライン対話の中で自分から「ToSを破るのは長期戦略にならない」と言った。このスライドはその判断を裏付けるためにある。",
-      "スクレイピングを使う競合他社は確かに存在するし、短期的には動く。でもKS BRANDの本番アカウントでそのリスクを取る理由はない。",
-      "API制約をスライドで「できないこと」として謝罪するのではなく、「それが信頼の基盤になる」と前向きに提示する。",
-      "APPIのくだりも同じで、開示コピーを法的な重荷ではなく、競合ツールが対応していない優位性として提示する。",
+      "フォロワーリスト全体を分析することはできない。Instagramの仕様上、フォロワーのユーザー名リストには、自分のアカウントでもアクセスできない。これは2018年から変わっていない事実だ。",
+      "だからこの自動化は「エンゲージ」を起点にする。いいね・コメント・DM・シェアのいずれかが発生した瞬間に、その人をシステムが捕捉する。その後、公開されている直近20投稿をClaudeが読み、ペルソナカードを生成する。関心領域・ライフスタイル傾向・購買シグナルの3軸で評価する。年齢・性別は方向性の推定に留まる。",
+      "スコアが閾値を超えた人には、KS BRANDの声で書かれたDMが自動で送られる。返信があれば、それを起点にナーチャリングフローが動く。返信がなければ、そこで止まる。仮に1,000人がエンゲージして50人にDMが届き、そのうち10人が返信すれば——Kishi-sanの手は一切動いていない。",
     ],
     en: [
-      "Kishi-san said it on LINE himself — breaking ToS is not a long-term strategy. This slide backs that instinct with substance.",
-      "Yes, scrapers exist. Yes, they currently work. But there is no good reason to run that risk on KS BRAND's real account.",
-      "Never present the API constraints as an apology for what we cannot do. Present them as the design decision that makes the system trustworthy.",
-      "APPI disclosure template is not a legal tax. It is a feature no other tool in the market ships as standard.",
+      "The follower list is not accessible — not even for your own account. That has been true since 2018 and has not changed. Any system claiming to analyze \"all 50,000 followers\" is either scraping (ban risk) or fabricating.",
+      "This automation solves the same underlying question through a different, legal door: engagement as the trigger. The moment someone likes, comments, DMs, or shares, they enter the pipeline. Claude reads their last 20 public posts and outputs a persona card — interests, lifestyle signals, buying likelihood. Age and gender are directional estimates, not precise data. The honest framing: interests are reliable; income and intent are signals, not facts.",
+      "High-likelihood prospects receive an auto-DM in KS BRAND's voice. If they reply, the nurture flow continues. If they don't, the sequence stops. Kishi-san's manual attention enters only once genuine interest is confirmed — every step before that runs without human input.",
     ],
   },
-  // 2 — Intro 3
-  {
-    timing: "60-90s",
-    ja: [
-      "このスライドは「引き」のスライドだ。Kishi-sanに「次を見たい」と思わせる役割を持つ。",
-      "3つの白地を具体的に名前で出すことで、次の10スライドが「ランダムなツールリスト」ではなく「この3つの問いへの答え」として見えるようになる。",
-      "ペルソナ分析はKishi-san自ら提起した問いなので1番目に持ってきている。JPネイティブは2番目。APPIはコンプライアンスが差別化になるという2枚目の引き継ぎとして意図的に最後。",
-    ],
-    en: [
-      "This is a pull slide. Its job is to make Kishi-san want the next 10.",
-      "By naming the three gaps explicitly, the following automation slides read as specific answers to real questions — not a random tool inventory.",
-      "Ordering is intentional. Per-follower persona is first because Kishi-san raised it himself. JP-native tone is second — the practical output. APPI compliance is third — a deliberate echo of Slide 2.",
-      "By the time Kishi-san sees the first automation slide, he should be feeling pulled, not pushed.",
-    ],
-  },
-  // 3 — Spec 6
-  {
-    timing: "60s",
-    ja: [
-      "日本語ブランドにとって、AI画像生成ツールの最大の課題は文字だった。漢字や平仮名が誤字だらけになる経験は誰でもしているはず。",
-      "このシステムは3段階で問題を解決する。Claudeがレイアウト指示を生成 → Ideogram 3.0が描画 → Claudeが文字の正確さを判定。不合格なら自動再生成。",
-      "結果として、文字品質が保証されたグリッドカードが30秒から1分で完成する。SNS投稿の頻度を上げながら、視覚品質を落とさない。",
-    ],
-    en: [
-      "Japanese text rendering has been the silent failure mode of AI image tools. Every JP brand operator knows this burn.",
-      "This system eliminates it in three steps. Claude writes an Ideogram-ready layout instruction. Ideogram renders. Claude returns as a vision reviewer.",
-      "Result: a grid card with verified Japanese typography in under a minute. For a brand that publishes multiple grid assets per week, this is the highest-frequency time return in the menu.",
-    ],
-  },
-  // 4 — Spec 1
-  {
-    timing: "60s",
-    ja: [
-      "これは「反応する」自動化。フォロワーがコメントを書くという行動を起点に、すべてが動く。",
-      "Spec 4（DM返信）やSpec 5（コンテンツスケジューラー）との違いを明確に。Spec 1はコメントという公開サーフェスでの反応。",
-      "ClaudeでKS BRANDの投稿コーパスで学習しているので、毎回ブランドの声に合った文章が生成される。投稿・リール・ストーリー・ライブの全サーフェスに対応。",
-      "「DMを見落とした」という機会損失がゼロになる。",
-    ],
-    en: [
-      "This is reactive automation on the comment surface. A follower's comment is the trigger.",
-      "Distinction from Spec 4 and Spec 5 is load-bearing: Spec 1 handles keyword-triggered comments — reactive, public. Three different moments, three different roles.",
-      "Most market tools send a template. Followers notice. This system uses Claude per-trigger, drawn from KS BRAND's voice. Coverage spans every Instagram surface.",
-      "No missed inquiry.",
-    ],
-  },
-  // 5 — Spec 5
-  {
-    timing: "60-90s",
-    ja: [
-      "これは「先回りする」自動化。Spec 1やSpec 4が「フォロワーの行動に反応する」のに対して、Spec 5は「投稿する前に動く」プロアクティブな自動化。",
-      "KS BRANDの直近12か月の投稿とエンゲージメントデータを読み込み、エンゲージメント上位20%の言語パターンを抽出。",
-      "Kishi-sanが翌週のトピックを入力するだけで、キャプション候補を3案ずつ生成。承認・編集・リジェクトはタップひとつ。承認されたものだけ自動投稿。",
-      "大切な点：このシステムはKS BRAND自身の言葉から学ぶ。他のブランドのデータは使わない。",
-    ],
-    en: [
-      "This is proactive automation on the feed surface. Where Spec 1 and Spec 4 react, Spec 5 works before anything happens.",
-      "The system reads KS BRAND's 12-month post history, identifies the top 20% by engagement-per-follower, and extracts the linguistic patterns that drove those results.",
-      "Three caption drafts per slot. Approve, edit, or reject — only approved drafts publish.",
-      "Critical point: learns exclusively from KS BRAND's own data. Time math: 4 hours weekly → 10 minutes reviewing.",
-    ],
-  },
-  // 6 — Spec 8
-  {
-    timing: "60s",
-    ja: [
-      "Reelsは今、Instagramのリーチで最も効果的なフォーマット。問題は制作コスト。撮影・編集・テロップ追加・書き出しを週に複数本は現実的でない。",
-      "Kishi-sanが入力するのは商品写真とタグラインだけ。Claudeが10秒スクリプト → Runway Gen-4 Turboが映像生成 → FFmpegが日本語テロップを自動合成 → Graph API経由でReels投稿。",
-      "目指しているのはReelsカレンダーを絶やさないこと。大型キャンペーンのヒロー動画を代替するものではない。",
-      "動画はすべてダッシュボードでプレビューしてから投稿。自動投稿はしない。",
-    ],
-    en: [
-      "Reels drive more organic reach than any other format on Instagram. The problem is production cost.",
-      "Kishi-san provides a product photo and a tagline. Claude writes a Runway-ready motion script. Runway generates. FFmpeg burns in JP subtitles. Graph API publishes.",
-      "Honest positioning: right tool for keeping the Reels calendar full at consistent cadence. Not a replacement for a videographer on a hero campaign.",
-      "Every clip previews in the dashboard before posting. Nothing goes live without Kishi's approval.",
-    ],
-  },
-  // 7 — Spec 7
-  {
-    timing: "60-90s",
-    ja: [
-      "LoRAは特定のビジュアルスタイルをAIに「覚えさせる」ファインチューニング。KS BRANDの商品写真20枚を素材にすると、ライティングのクセ、パレットの傾向、スタイリングの美意識を学ぶ。",
-      "ClaudeがKS BRANDのスタイルガイドを参照しながら指示文を作り、FLUX APIが4パターン生成。Claude Opusがスタイルガイドと照合してランキング。",
-      "1点正直に：このシステムの品質は、20枚の写真の品質に依存する。ウィーク1は一緒にその20枚を選ぶところから始める。",
-      "LoRAは四半期ごとに更新して精度を保つ。",
-    ],
-    en: [
-      "LoRA is a fine-tuning technique. When KS BRAND's top 20 product photos become the training set, the model learns the brand's lighting, palette, and styling at a deep level.",
-      "Claude writes a FLUX-ready brief. FLUX generates four variants. Claude Opus ranks them by brand-fit.",
-      "One honest note: quality is directly tied to the quality of the 20 training images. Week 1 is a joint curation session.",
-      "LoRA refreshes quarterly to maintain accuracy as the brand's visual language evolves.",
-    ],
-  },
-  // 8 — Spec 4
-  {
-    timing: "60-90s",
-    ja: [
-      "Spec 1との違いを明確に。Spec 1はコメントというパブリックサーフェスでキーワードに反応。Spec 4はDMというプライベートサーフェスで、会話全体を読んで答える。同じDMだが役割が違う。",
-      "Spec 4のAIはKS BRANDの商品カタログ・スタイルガイド・過去Q&A 200件以上をベクトルDBに格納。DMが届くとベクトル検索で関連情報を引き、Claudeが返信を生成。",
-      "もうひとつの特徴がトーン自動切替。Spec 3のペルソナデータを参照して、一般消費者にはカジュアル、卸先バイヤーには敬語を自動切替。既存SaaSにはない機能。",
-    ],
-    en: [
-      "Distinction from Spec 1 is load-bearing. Spec 1 is reactive on the comment surface. Spec 4 is reactive on the DM surface — open conversation, brand-knowledge-driven.",
-      "Trained on full product catalog, brand style guide, and 200+ historical customer Q&A pairs — all indexed in a vector database. Claude draws on indexed, KS-specific information — it does not guess.",
-      "Tone-routing is the second differentiator. Reads the follower's persona tier from Spec 3 and routes accordingly. One system, two registers, no manual switching.",
-    ],
-  },
-  // 9 — Spec 2
-  {
-    timing: "60-90s",
-    ja: [
-      "キャンペーン応募の運営は規模が大きくなると手に負えなくなる。応募受付・重複除外・抽選・連絡・クーポン配布。数百件以上で限界。",
-      "このシステムはその全工程を自動化。応募コメントをリアルタイム検知 → Redisで重複除外 → Claude生成のDM確認 → n8nスケジューラで抽選 → 当選者にクーポンDM。",
-      "Spec 3のペルソナエンジンが組み合わさる。応募者全員にペルソナタグ。「今回反応したのはどんな顧客層か」がわかり、次のキャンペーン設計のインプットになる。",
-      "APPI対応は後付けではなくビルドに含まれる。開示コピー、プライバシーページ、DM確認文フッター——すべて納品物の一部。",
-    ],
-    en: [
-      "Running a giveaway manually at scale is genuinely hard. At hundreds of entries, operational weight grows fast.",
-      "Full pipeline automated. Entries captured via Graph API webhook, deduplicated via Redis, confirmed by Claude-written DM. Draw runs on Postgres-backed scheduler in n8n. Winners receive coupon DM.",
-      "Spec 3 persona engine runs in parallel: every entrant tagged. When campaign closes, Kishi-san sees which segments responded — informs next campaign's targeting.",
-      "APPI compliance is a deliverable, not a to-do.",
-    ],
-  },
-  // 10 — Spec 9
-  {
-    timing: "60-90s",
-    ja: [
-      "ハッシュタグ戦略を「感覚」か「データ」かで結果が変わる。このシステムは後者を、外部SaaSなしで実現。",
-      "Graph APIのハッシュタグ検索エンドポイントで最大30個を毎時計測。KS BRANDへのメンションは1日4回スキャン。すべてPostgresに蓄積し、Claudeが週次サマリーを日本語生成。",
-      "サマリーは3点に絞る。今週最も伸びたハッシュタグ上位3つ、下落した3つ、KS BRANDへのメンションの感情トーン。",
-      "1点の制約を透明に：Graph API仕様上、同時トラッキングできるユニークハッシュタグは7日間で30個まで。Phase 2の補足：AIアシスタント回答内でのブランド言及追跡はPhase 2対応。",
-    ],
-    en: [
-      "Hashtag strategy run on instinct vs strategy run on data produce different results. This delivers the data layer, without a paid SaaS license.",
-      "Up to 30 hashtags tracked hourly. Brand mentions scanned four times daily. All data in Postgres. Each Monday, Claude writes a Japanese digest.",
-      "The digest is intentionally narrow: three rising, three falling, one sentiment read. Not a data dump — a decision-ready summary.",
-      "One constraint: 30 unique hashtags per 7-day window per access token. Phase 2 note: AI-assistant response tracking held for Phase 2.",
-    ],
-  },
-  // 11 — Spec 3
+  // 2 — Spec 1 v4 (Slide 3)
   {
     timing: "90s",
     ja: [
-      "これがKishi-sanの最初のリクエスト。「フォロワーが誰なのかを知りたい」。このシステムはその答え。",
-      "Graph APIのBusiness Discovery APIで、ビジネス/クリエイターアカウントのフォロワーの公開プロフィール・投稿・キャプションを取得。個人アカウントは取得不可（API仕様上の制約）。カバレッジは20〜40%と見込まれる。期待値を正しく設定。",
-      "取得データはClaude Opusでペルソナ生成。「年齢帯・性別推定・関心クラスター・購買シグナル・プレミアム購買層確率」など。",
-      "ダッシュボードで閲覧・フィルタ。「プレミアム購買層確率が高い上位500人」がタップひとつ。APPI開示コピー、プライバシーページはビルド納品物。",
+      "v3までのSpec 1はキーワードトリガーだった。Kishi-sanのフィードバックを受け、v4では「任意のコメント」すべてが対象になった。これは一見シンプルな変更だが、実際の運用では大きい。「DM」「詳細」など特定のワードを書かないフォロワーも、コメントをした以上は関心を持っている。そこを取りこぼすかどうかが、エンゲージメント率に直接響く。",
+      "重要な設計は「人を優先する」待機ウィンドウだ。2時間、Kishi-sanかスタッフが手動で返信できる。返信があれば、AIは動かない。返信がなかった場合だけ、AIがコメント・投稿・KS BRANDの知識ベースを参照して返信文を生成する。テンプレートを送るのではなく、その投稿のコンテキストを読んで書く。だから返信がブランドに馴染む。",
+      "Slide 4（DM返信）との違い: こちらはパブリックコメントへの返信。Slide 4はプライベートDMへの返信。担う場所が違う。",
     ],
     en: [
-      "This was Kishi-san's original ask. \"I want to know who my followers are.\" This system answers it.",
-      "Business Discovery endpoint pulls public profile data from Business/Creator accounts. Personal accounts not accessible — hard platform constraint. Expected coverage 20–40%.",
-      "Data goes to Claude Opus for multimodal analysis. Output is structured: age band, gender inference, interests, buying signals, engagement tier, premium buyer likelihood.",
-      "\"Show me top 500 by premium buyer likelihood\" is a single filter operation. APPI compliance is a build deliverable.",
+      "The v3 version required a keyword trigger. Lewis's feedback for v4: any comment at all. This looks like a small change. In practice it is not — plenty of followers comment with genuine interest without ever writing \"DM me\" or \"how to order.\" A keyword-only system misses them. This catches them.",
+      "The critical design is the human-priority window. Kishi-san or a team member gets first right of reply — set at 2 hours, adjustable. If they respond, the automation never fires. Only when the window closes with no reply does Claude step in. It reads the specific comment, the post it appeared on, and KS BRAND's knowledge base — and writes a reply that fits that context. Not a template. Not the same message for every comment.",
+      "The distinction from Slide 4 (DM replier): this slide handles the public comment surface. Slide 4 handles open private DM conversations. Same brand voice, different surfaces.",
     ],
   },
-  // 12 — Spec 10
+  // 3 — Spec 4 (Slide 4)
   {
-    timing: "60-90s",
+    timing: "90-120s",
     ja: [
-      "これはデッキの締めくくり直前のスライドであり、前の9つの自動化すべてが接続される基盤。それぞれの自動化はスタンドアローンで価値があるが、Spec 10が加わるとIG・LINE・メール・ECの顧客データが1つのレコードに統合される。",
-      "各チャネルのWebhookが届くたびにIDリゾルバーが「この人は誰か」を判定。メールアドレスや電話番号など確定的な一致は即統合。IG IDとLINE表示名のように曖昧な一致は、Claudeが確率スコアを算出。",
-      "LINE APIのコストは送信量依存。月間送信件数でライト/スタンダードが決まる。詳細はプロポーザルフェーズで。メニューデッキでは固定費用は示さない。",
-      "異なるチャネルの情報を内部で統合することはAPPI上問題なし。ただし開示は必要。テンプレートはビルド納品物に含まれる。",
+      "Slide 3との違いを明確にする。Slide 3はパブリックサーフェスのコメントへの返信だ。このSlide 4は、プライベートサーフェスのDMへの返信——しかも会話全体を読んで答える。同じDMチャネルでも、Slide 2で送る「ペルソナスコアが高い人への起点DM」とも役割が違う。Slide 4が担うのは「すでに届いている、返信が必要なDM」だ。",
+      "このシステムはKS BRANDの商品カタログ・スタイルガイド・過去の顧客Q&A 200件以上をベクトルDBに格納している。DMが届くと、関連情報をベクトル検索で引き出し、Claudeがその情報を使って返信を生成する。推測ではなく、KS固有の情報に基づいた回答だ。",
+      "トーン自動切替がもうひとつの特徴だ。Slide 2のペルソナデータを参照して、消費者にはカジュアルな語調、卸先バイヤーには敬語を使い分ける。手動でトーンを変える必要はない。",
     ],
     en: [
-      "This is the closing automation — and the one that connects everything before it. Each of the nine previous slides can stand alone.",
-      "Identity resolver works on every webhook event. Deterministic matches merge immediately. Fuzzy matches go through Claude confidence-scoring.",
-      "LINE API cost varies by outbound push volume. Right plan depends on actual LINE usage. That conversation belongs in the proposal phase. No fixed number in this deck.",
-      "APPI note: internal cross-channel linking is permitted with disclosure. Privacy notice template is included.",
+      "The distinction between slides matters here. Slide 3 handles public comments — any comment, human-first window, then AI steps in. This slide handles private DMs — open conversations, brand-knowledge-driven. And Slide 2's nurture flow handles the outbound DMs we initiate to high-likelihood prospects. Three DM-adjacent automations, three different roles: public reply, prospect outreach, inbound conversation management.",
+      "Slide 4's AI is trained on KS BRAND's full product catalog, brand style guide, and over 200 historical customer Q&A pairs — all indexed in a vector database. When a DM arrives, the system retrieves relevant context and passes it to Claude to generate the reply. It draws on KS-specific information — not a generic response.",
+      "Tone routing is the second differentiator. The system reads the sender's persona tier from the Slide 2 engine and routes accordingly: casual Japanese for a consumer asking about sizing, keigo for a wholesale partner on lead times. One system, two registers, automatic.",
     ],
   },
-  // 13 — Closing
+  // 4 — Spec 2 v4 (Slide 5)
+  {
+    timing: "90s",
+    ja: [
+      "v3の「Pick a Winner」というフレーミングは、抽選機能の一面しか見せていなかった。v4では2つの具体例を並べることで、「コメントトリガー」の汎用性が伝わるようになった。",
+      "例1（無料ガイド）は、情報発信型コンテンツと組み合わせる使い方だ。KS BRANDがスタイリングガイドやシーズンルックブックをPDFで持っているなら、「コメントで受け取れる」仕組みがフォロワーとのエンゲージメントポイントになる。応募のハードルが低い分、データが取れる母数が増える。",
+      "例2（抽選）は、キャンペーン運営の自動化だ。応募コメントのリアルタイム受付・重複除外・ランダム抽選・当選DM配信まで、人が介在せずに完結する。規模が大きくなっても手は動かない。",
+      "2つの例は異なるように見えるが、仕組みは同じだ。コメントを検知 → DMを送る、という1本のフロー。トリガーワードと送信内容を変えるだけで、別のキャンペーンになる。",
+    ],
+    en: [
+      "The v3 \"Pick a Winner\" framing showed only one dimension — the draw. Two concrete examples side-by-side shows what the mechanism actually is: a comment-triggered DM system that can be pointed at any campaign objective.",
+      "Example 1 (free guide) pairs well with content-led strategies. If KS BRAND has a styling guide or seasonal lookbook as a PDF, \"comment to receive it\" is a low-friction engagement hook. The barrier is low, so the response volume is higher, and every responder now has a persona card being built from Slide 2's engine.",
+      "Example 2 (draw) handles campaign operations. Entry capture, duplicate removal, random draw, winner DMs — the full pipeline runs without human intervention. At 50 entries or 500, the manual effort is the same: zero.",
+      "The underlying mechanism is identical. Comment detected → DM sent. The trigger word and message body change per campaign. No new build required for each new campaign type.",
+    ],
+  },
+  // 5 — Spec 5a (Slide 6)
+  {
+    timing: "90s",
+    ja: [
+      "このスライドはSlide 7（週次レポート）と対になっている。この2枚は別々に読まず、一続きの話として見てほしい。",
+      "Slide 6は「戦略レイヤー」だ。年に数回、あるいは大きな方針変更が必要だと感じたタイミングで走らせる。12か月分の投稿データを一気に処理し、KS BRANDの「勝ちパターン」を文書化する。出力は四半期ロードマップの形にする——どんなテーマで、どんなフォーマットで、何曜日に投稿すると反応が取れるか。Kishi-sanが今まで感覚でやってきたことに、初めてデータの裏付けがつく。",
+      "このドキュメントはSlide 7の週次レポートが参照する「ベースライン」にもなる。年次分析を先にやることで、週次の変化が「ベースラインからの乖離」として読めるようになる。この順番が重要だ。",
+    ],
+    en: [
+      "This slide and Slide 7 (weekly market report) are paired. Read them together as one story — they are two layers of the same system.",
+      "Slide 6 is the strategic layer. Run it a few times a year, or whenever a shift in direction feels necessary. The system processes 12 months of post and engagement data in one pass and produces a written roadmap: what topics, what formats, what posting cadence drove results for KS BRAND. The patterns Kishi-san has been running on instinct get documented with data.",
+      "This document also becomes the baseline that Slide 7's weekly reports reference. Without this annual read, the weekly report has nothing to compare against. With it, every Monday's delta measurement has context: \"we are up against our annual pattern\" or \"this week is an outlier.\" Running Slide 6 first is what makes Slide 7 meaningful.",
+    ],
+  },
+  // 6 — Spec 5b (Slide 7)
+  {
+    timing: "90s",
+    ja: [
+      "Slide 6が戦略レイヤーなら、このSlide 7はオペレーションレイヤーだ。年に数回の深いダイブと、毎週の軽い確認——この2つが組み合わさることで、KS BRANDのSNS運用に初めて「測定と改善のループ」が入る。",
+      "毎週月曜の朝、先月分の集計が自動で完了し、Slide 6で作った年次ベースラインと照合される。上がっているもの、下がっているもの、外れ値になった投稿がClaudeによってピックアップされる。そして「今週やるべきこと」を3点に絞った提案が届く。Kishi-sanが毎朝データを見に行く必要はない。週に1回、月曜に届くものを読むだけでいい。",
+      "重要なのは、このシステムが「感想を出す」のではなく「年次ベースラインとの比較」という構造を持っていることだ。比較がなければ、数字は意味を持たない。",
+    ],
+    en: [
+      "If Slide 6 is the strategic layer, Slide 7 is the operational layer. A few deep dives per year plus a light weekly check-in — together, they put a genuine measurement and improvement loop into KS BRAND's content operation for the first time.",
+      "Every Monday morning, last month's performance is auto-aggregated and cross-referenced against the annual baseline built in Slide 6. What went up, what went down, which posts were outliers — Claude surfaces all of it, plus three action points for the current week. Kishi-san does not need to log in to a dashboard every day. Monday morning, one read, actionable direction.",
+      "The structural difference that matters: this system does not output \"observations.\" It outputs deltas — changes measured against a known baseline. Without Slide 6's annual read as the reference point, a weekly report is just a number dump. With it, the numbers mean something.",
+    ],
+  },
+  // 7 — Spec 9 v4 (Slide 8)
+  {
+    timing: "90s",
+    ja: [
+      "ハッシュタグ選定は、多くのブランドが「前回使ったものをそのまま流用する」か「なんとなく人気そうなものを選ぶ」かになっている。どちらも戦略ではない。",
+      "このシステムは特定の業界カテゴリ（例: 日本のファッション、サステナブルアパレル、ストリートスタイルなど）をターゲットとして設定し、毎週そのカテゴリで実際に使われているハッシュタグのデータを集める。前週比で伸びているタグと落ちているタグを識別し、Claudeが週次のサマリーを書く。",
+      "出力はシンプルに3点に絞る: 今週伸びているタグ上位3つ、下落傾向にある注意タグ、今週の投稿に使うべき推奨タグセット。Kishi-sanが投稿を作るときに、そのままコピーして使えるレベルで具体的にする。",
+      "1点の制約を正直に伝える: トラッキングできる業界は1度に1カテゴリ。スコープを絞ることで、データの密度が上がる。",
+    ],
+    en: [
+      "Most brands pick hashtags the same way: reuse last time's list, or choose whatever looks popular. Neither is a strategy.",
+      "This system targets a specific industry category — Japanese fashion, sustainable apparel, streetwear, whatever fits KS BRAND's positioning — and collects weekly data on the hashtags actually being used within it. Week-over-week movement is tracked: rising tags get flagged, falling tags get flagged. Claude writes the summary.",
+      "Output format is narrow by design: top 3 rising tags this week, top 3 in decline, a recommended tag set to drop into this week's posts. Specific enough to use without editing.",
+      "One honest constraint: tracking is focused on one industry category at a time. That is intentional — broader scope means thinner data per tag. Narrower scope means better signal. If KS BRAND's positioning spans two distinct categories, that is a conversation for the scoping phase.",
+    ],
+  },
+  // 8 — Disclaimer (Slide 9)
   {
     timing: "60s",
     ja: [
-      "このスライドはCTAではない。デッキ全体の着地点として「あとはKishi-sanが動くタイミングで」というメッセージを静かに置く。",
-      "明示的な「ご連絡ください」は書かない——LINEでの返信はLewisが別途送る。デッキの役割はメニューを完全に提示することであり、次のステップを迫ることではない。",
-      "対面・通話でプレゼンする機会があれば、「どれが一番気になりましたか？」と一言添えると自然に次の会話につながる。",
-      "急かさない、でも止まらない。それがこのデッキのトーン。",
+      "このスライドはデッキの締めに置く。内容は謝罪でも免責事項でもない。Kishi-sanに対して正直でいることが、長期の信頼に直結するという判断だ。",
+      "3点の事実を淡々と伝える。技術的な実現可能性はある。コストとROIは建てる前に確定できない。小さく始めることが正しい。",
+      "プレゼンのトーンとして、「なので少しだけ試しませんか」という方向には誘導しない。それは言わなくても伝わる。このスライドの役割は、デッキ全体が「夢を売っている」ように見えないようにすることだ。技術的に誠実なプレゼンテーションは、最後がこういう着地をする。",
+      "Kishi-sanはビジネスパーソンだ。保証のない話を聞かされると反射的に距離を置く。先に「保証はない、でも試す価値はある」と言い切ることで、むしろ信頼が上がる。",
     ],
     en: [
-      "This is not a CTA slide. It is the quiet landing point of the whole deck — \"when you're ready, the menu is here.\"",
-      "No explicit \"contact us.\" Lewis will send the LINE follow-up separately. The deck's job is to present the menu completely.",
-      "If presented live, a single spoken line — \"which of these caught your eye?\" — opens the next conversation naturally without pressure.",
-      "The tone throughout: direct, no hedging, no urgency. The menu is complete. The next move is Kishi-san's.",
+      "This slide closes the deck. It is not an apology. It is not legal cover. It is the honest positioning that makes everything before it trustworthy.",
+      "Three facts, stated plainly. Technical feasibility is real — nothing in this deck is speculative technology. Cost and ROI cannot be locked before the build — that is true of any custom software. Starting small is the right sequence — not because the full vision is uncertain, but because real numbers only come from real experiments.",
+      "The presenter should not pitch this slide. Do not turn it into \"so let's start with a small pilot.\" That conclusion is Kishi-san's to reach. This slide's job is to ensure the deck does not read as a sales document with a technology veneer. Direct, technically honest presentations close this way. The final word belongs to the work — not to a closing hook.",
     ],
   },
 ];
 
 // Wave 4 polish (CPO sign-off): anonymized notes shown unless the URL carries
-// `?presenter=1`. Live route at /presentation/ks-brand-automations now defaults
+// `?presenter=1`. Live route at /presentation/ks-brand-automations defaults
 // to empty notes so accidental screen-shares cannot leak the internal script.
 // Real notes still available to Lewis via /presentation/ks-brand-automations?presenter=1
 const EMPTY_NOTES: SlidePresenterNote[] = SLIDES.map(() => ({
@@ -1130,8 +862,10 @@ function KsBrandAutomationsDeckInner() {
 
   const slideIndex = globalStep;
 
-  // Mount Mermaid for all automation slides (3..12 inclusive)
-  useMermaidSlide(slideIndex, 3, 12);
+  // Mount Mermaid for all automation slides.
+  // v4 (9 slides): slide 0 = title (intro, no mermaid), slides 1..7 = automation (mermaid),
+  // slide 8 = disclaimer (closing, no mermaid). Mermaid range = indices 1..7 inclusive.
+  useMermaidSlide(slideIndex, 1, 7);
 
   const currentNote = notesSource[slideIndex];
 
