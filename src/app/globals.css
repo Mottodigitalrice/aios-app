@@ -161,8 +161,12 @@
     line-break: strict;
     word-break: auto-phrase;
   }
+  /* text-wrap: pretty (not balance) — `balance` char-breaks katakana loanwords
+     (e.g. スクレイ|ピング) when chasing line-length parity. `pretty` keeps the
+     ragged-but-correct layout per JIS X 4051 kinsoku.
+     Documented trap in .claude/skills/japanese-typography Section 0. */
   h1, h2, h3 {
-    text-wrap: balance;
+    text-wrap: pretty;
   }
   a, button, [role="button"], input[type="submit"], input[type="button"] {
     cursor: pointer;

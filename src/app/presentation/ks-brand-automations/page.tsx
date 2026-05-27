@@ -13,13 +13,15 @@
  * projects/waiting/ks-brand-aios-prospect/working-files/2026-05-27-slide-copy*.md.
  */
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Layers } from "lucide-react";
 
 import { SlideWrapper } from "@/components/presentation/SlideWrapper";
 import { PresenterNotes } from "@/components/presentation/PresenterNotes";
 import { useDeckNavigation } from "@/components/presentation/useDeckNavigation";
 import { useMermaidSlide } from "@/components/presentation/useMermaidSlide";
+import { segmentJapanese } from "@/lib/budoux-transform";
 
 type Lang = "ja" | "en";
 
@@ -35,6 +37,14 @@ type SlideDef = {
   mermaid?: string;
   badge?: Bilingual; // e.g. "AUTOMATION 01 — SPEC 6"
   transition?: "scale" | "slide" | "stagger";
+  /**
+   * Wave 5 polish (CPO Wave 4 deferral): some flowcharts are wider than the
+   * default 1fr_1.1fr column allowance handles cleanly. When true, the
+   * automation slide renders with a bullets-narrow / diagram-wide grid
+   * (1fr_1.8fr) so the diagram has room to breathe at projector distance
+   * and on the exported PDF. Applied to Spec 2 (7-node giveaway LR flow).
+   */
+  wideMermaid?: boolean;
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -422,6 +432,7 @@ const SLIDES: SlideDef[] = [
     id: "spec-2-giveaway-flow",
     variant: "automation",
     transition: "slide",
+    wideMermaid: true,
     badge: { ja: "自動化 07 ・ SPEC 2", en: "AUTOMATION 07 ・ SPEC 2" },
     title: {
       ja: "キャンペーン応募、全自動で。",
@@ -866,6 +877,16 @@ const PRESENTER_NOTES: SlidePresenterNote[] = [
   },
 ];
 
+// Wave 4 polish (CPO sign-off): anonymized notes shown unless the URL carries
+// `?presenter=1`. Live route at /presentation/ks-brand-automations now defaults
+// to empty notes so accidental screen-shares cannot leak the internal script.
+// Real notes still available to Lewis via /presentation/ks-brand-automations?presenter=1
+const EMPTY_NOTES: SlidePresenterNote[] = SLIDES.map(() => ({
+  timing: "",
+  ja: [],
+  en: [],
+}));
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Render helpers
 // ─────────────────────────────────────────────────────────────────────────────
@@ -906,7 +927,10 @@ function renderIntroSlide(slide: SlideDef, lang: Lang) {
           className="mt-5 text-3xl sm:text-4xl font-bold text-[#1D1D1F] leading-tight"
           style={{ fontFamily: '"Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif' }}
         >
-          {slide.title[lang]}
+          {/* Wave 4 polish: BudouX phrase-aware wrap on intro titles
+              for mobile kinsoku (Slide 1 hook etc.). segmentJapanese
+              no-ops on non-JP strings so EN toggle stays unchanged. */}
+          {segmentJapanese(slide.title[lang])}
         </h1>
         {slide.subtitle && (
           <p className="mt-4 text-base sm:text-lg text-[#6E6E73] leading-relaxed">
@@ -962,7 +986,13 @@ function renderAutomationSlide(slide: SlideDef, lang: Lang, slideIndex: number) 
           </p>
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-[1fr_1.1fr] gap-6 mt-5">
+        <div
+          className={`grid grid-cols-1 gap-6 mt-5 ${
+            slide.wideMermaid
+              ? "sm:grid-cols-[0.9fr_1.8fr]"
+              : "sm:grid-cols-[1fr_1.1fr]"
+          }`}
+        >
           {/* Left column: bullets */}
           <div className="flex flex-col gap-3">
             {slide.bullets && (
@@ -1078,9 +1108,16 @@ function renderSlide(slide: SlideDef, lang: Lang, slideIndex: number) {
 // Page
 // ─────────────────────────────────────────────────────────────────────────────
 
-export default function KsBrandAutomationsDeck() {
+function KsBrandAutomationsDeckInner() {
   // Default JA per CMO recommendation
   const [lang, setLang] = useState<Lang>("ja");
+
+  // Wave 4 polish (CPO sign-off): presenter notes gated behind ?presenter=1.
+  // Without the query string, the N key opens an empty notes panel — no leak.
+  // With ?presenter=1, Lewis gets the real internal speaker script.
+  const searchParams = useSearchParams();
+  const isPresenter = searchParams?.get("presenter") === "1";
+  const notesSource = isPresenter ? PRESENTER_NOTES : EMPTY_NOTES;
 
   const {
     globalStep,
@@ -1096,7 +1133,7 @@ export default function KsBrandAutomationsDeck() {
   // Mount Mermaid for all automation slides (3..12 inclusive)
   useMermaidSlide(slideIndex, 3, 12);
 
-  const currentNote = PRESENTER_NOTES[slideIndex];
+  const currentNote = notesSource[slideIndex];
 
   return (
     <div
@@ -1172,5 +1209,16 @@ export default function KsBrandAutomationsDeck() {
         }
       />
     </div>
+  );
+}
+
+// Suspense wrapper required by Next.js 15+ because useSearchParams triggers
+// client-side rendering bailout. Fallback is a blank white screen — the deck
+// hydrates in <100ms so the user never sees it.
+export default function KsBrandAutomationsDeck() {
+  return (
+    <Suspense fallback={<div className="h-screen bg-white" />}>
+      <KsBrandAutomationsDeckInner />
+    </Suspense>
   );
 }

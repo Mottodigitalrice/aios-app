@@ -31,7 +31,11 @@ export function useMermaidSlide(
             primaryTextColor: "#1D1D1F",
             lineColor: "#B8860B",
             fontFamily: '"Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", serif',
-            fontSize: "14px",
+            // Wave 4 polish (CPO sign-off): bumped from 14px → 17px so Mermaid
+            // node labels read cleanly at projector-room distance and on the PDF
+            // page. Slide 13 (Spec 10) is the visual benchmark; this brings
+            // slides 4-12 to parity.
+            fontSize: "17px",
           },
           flowchart: { useMaxWidth: true, htmlLabels: true, curve: "basis" },
           securityLevel: "loose",
