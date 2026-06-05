@@ -81,12 +81,12 @@ const SLIDES: SlideDef[] = [
     transition: "scale",
     badge: { ja: "MOTTO × KS BRAND", en: "MOTTO × KS BRAND" },
     title: {
-      ja: "Official LINE でできること — n8n × Claude Code 連携の可能性",
-      en: "What's Possible with Official LINE — n8n × Claude Code",
+      ja: "Official LINE でできること",
+      en: "What's Possible with Official LINE",
     },
     subtitle: {
-      ja: "これは提案書ではない。公式LINEを、データベース・n8n・Claude Codeとつないだとき、何ができるか。その可能性のメニュー。",
-      en: "This is not a proposal. It's a menu — what becomes possible when your Official LINE is wired to a database, n8n, and Claude Code.",
+      ja: "公式LINEを、データベース・n8n・Claude Codeとつないだとき、何ができるか。これは提案書ではない。その可能性のメニュー。",
+      en: "What becomes possible when your Official LINE is wired to a database, n8n, and Claude Code. This is not a proposal — a menu of what's possible.",
     },
   },
 
@@ -123,13 +123,13 @@ const SLIDES: SlideDef[] = [
       },
     ],
     callout: {
-      ja: "誰が、いつ、何回。LINEの会員データが、自社のデータベースに残る。ここから先が始まる。",
-      en: "Who, when, how often — your LINE member data lives in your own database. Everything else starts here.",
+      ja: "誰が、いつ、何回。LINEの会員データが、自社のデータベースに残る。すべての土台は、ここにある。",
+      en: "Who, when, how often — your LINE member data lives in your own database. The whole foundation sits right here.",
     },
     mermaid: `flowchart LR
   A["LINEイベント<br/>Webhook受信"]:::start --> B["署名検証<br/>HMAC-SHA256"]:::infra
   B --> C{"イベント分岐"}:::gate
-  C -- "メッセージ・友だち追加" --> D["プロフィール取得<br/>LINE API"]:::ai
+  C -- "メッセージ・友だち追加" --> D["プロフィール取得<br/>LINE API"]:::infra
   C -- "ブロック" --> E["退会フラグ<br/>unfollowedAt"]:::infra
   D --> F["line_users<br/>upsert"]:::infra
   F --> G["line_messages<br/>line_events 記録"]:::infra
@@ -225,8 +225,8 @@ const SLIDES: SlideDef[] = [
       },
     ],
     callout: {
-      ja: "応答エンジンは TOKYO RENTAL・MEMBER SEARCH の2デモで稼働中。あとは、KS BRANDの声を教えるだけ。",
-      en: "The reply engine already runs in two live demos — all that's left is teaching it KS BRAND's voice.",
+      ja: "この応答エンジンは、すでにデモとして動いている。あとは、KS BRANDの声を教えていく。",
+      en: "This reply engine already runs as a working demo — from here, we teach it KS BRAND's voice.",
     },
     mermaid: `flowchart LR
   A["メッセージ受信"]:::start --> B["AIエージェント"]:::ai
@@ -314,8 +314,8 @@ const SLIDES: SlideDef[] = [
     },
     bullets: [
       {
-        ja: "すでに動いているもの。会話検索・Flexカルーセル・AI応答は、TOKYO RENTAL と MEMBER SEARCH の2デモで稼働中。",
-        en: "What already runs — conversational search, Flex carousels, AI replies — is live in two demos: TOKYO RENTAL and MEMBER SEARCH.",
+        ja: "すでに動いているもの。会話検索・Flexカルーセル・AI応答は、MEMBER SEARCH デモで動いている。",
+        en: "What already runs — conversational search, Flex carousels, AI replies — is live in the MEMBER SEARCH demo.",
       },
       {
         ja: "これから組むもの。セグメント配信やリッチメニューは、データ基盤の上に、まだ載せていないだけ。",
@@ -327,7 +327,7 @@ const SLIDES: SlideDef[] = [
       },
     ],
     callout: {
-      ja: "可能性を見せるのが、このデッキの役割。何を作るかは、月曜に。",
+      ja: "可能性を見せるのが、このデッキの役割だ。何を作るかは、月曜に。",
       en: "This deck's job is to show what's possible. What we build, we decide Monday.",
     },
   },
