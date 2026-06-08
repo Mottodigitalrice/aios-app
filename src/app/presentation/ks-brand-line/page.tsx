@@ -12,13 +12,15 @@
  * We hear what Kishi-san wants at the Mon 2026-06-08 16:00 JST scoping meeting,
  * then quote.
  *
- * 6 slides (bilingual JA/EN, default JA):
- *   0. title        (intro — menu, not proposal)
- *   1. cap-database (automation — connect LINE to a DB)        BUILT · DATA LAYER
- *   2. cap-flex     (automation — rich Flex carousels)         LIVE DEMO
- *   3. cap-ai-reply (automation — AI replies in brand voice)   LIVE DEMO
- *   4. cap-push     (automation — segmented push/broadcast)    READY TO BUILD
- *   5. closing      (honest note + bridge to Monday)
+ * 8 slides (bilingual JA/EN, default JA):
+ *   0. title             (intro — menu, not proposal)
+ *   1. cap-database      (automation — connect LINE to a DB)        BUILT · DATA LAYER
+ *   2. cap-flex          (automation — rich Flex carousels)         LIVE DEMO
+ *   3. cap-ai-reply      (automation — AI replies in brand voice)   LIVE DEMO
+ *   4. cap-push          (automation — segmented push/broadcast)    READY TO BUILD
+ *   5. example-secretary (automation — LINE AI Sales Secretary)     BUILT · LIVE
+ *   6. example-fraud     (automation — AI lead screening/fraud)     BUILT
+ *   7. closing           (honest note + bridge to Monday)
  *
  * Honesty mechanism: the `badge` field carries a 3-level status marker per slide
  * (LIVE DEMO / BUILT / READY TO BUILD). Slide 4 callout + closing reinforce that
@@ -297,7 +299,109 @@ const SLIDES: SlideDef[] = [
   },
 
   // ─────────────────────────────────────────────────────────────────────────
-  // SLIDE 5 — Closing (honest note + bridge to Monday)
+  // SLIDE 5 — LINE AI Sales Secretary (BUILT · LIVE)
+  // Real running agent — anonymised professional-services firm
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: "example-secretary",
+    variant: "automation",
+    transition: "slide",
+    wideMermaid: true,
+    badge: { ja: "実装済み ・ 稼働中", en: "BUILT ・ LIVE" },
+    title: {
+      ja: "24時間、問い合わせを受け、判断を完了させる。",
+      en: "Handle enquiries around the clock. Complete decisions, not pitches.",
+    },
+    subtitle: {
+      ja: "ある士業・専門サービス企業向けに構築した LINE AI営業秘書。営業時間外の問い合わせを受け付け、日英二言語で自動応答し、予約まで完結させる。",
+      en: "A LINE AI Sales Secretary built for a Japanese professional-services firm — receives after-hours enquiries, responds bilingually in JP and EN, and completes bookings end-to-end.",
+    },
+    bullets: [
+      {
+        ja: "LINE経由の問い合わせを24時間受信。n8nが署名を検証し、AIエージェント（LLM）が日英二言語で応答を生成する。",
+        en: "Enquiries arrive via LINE around the clock. n8n verifies the signature; the AI agent (LLM) generates a bilingual response in JP and EN.",
+      },
+      {
+        ja: "Supabase RAGの知識ベースとCRM顧客データを参照し、その場で回答を完結させる。「検討します」で終わらせない応答設計。",
+        en: "Draws from a Supabase RAG knowledge base and CRM customer data to resolve the enquiry on the spot — a reply design built to complete decisions, not defer them.",
+      },
+      {
+        ja: "Googleカレンダーと連携し、予約を自動確定。信頼度が低い場合は人へエスカレーション。6週間で実ユーザーによるテスト稼働を開始。",
+        en: "Books directly into Google Calendar and confirms automatically. Low-confidence cases escalate to a human. Reached test operation with real users in 6 weeks.",
+      },
+    ],
+    callout: {
+      ja: "ある士業・専門サービス企業向けに実際に構築・稼働中のエージェントです。現在は実ユーザーによるテスト稼働フェーズ。80%以上の意思決定完了率を目標に設計しています（目標値）。",
+      en: "A real, running agent built for an anonymised Japanese professional-services firm. Currently in test operation with real users — designed to a target decision-completion rate of 80%+.",
+    },
+    mermaid: `flowchart LR
+  A["LINE受信<br/>メッセージ着信"]:::start --> B["n8n受信<br/>署名検証"]:::infra
+  B --> C["AIエージェント<br/>（LLM・日英二言語）"]:::ai
+  D1["Supabase RAG<br/>知識ベース"]:::infra -.-> C
+  D2["CRM<br/>顧客データ"]:::infra -.-> C
+  C --> E["Google カレンダー<br/>予約処理"]:::infra
+  C --> F{"信頼度低<br/>→ 人へ"}:::gate
+  E --> G["自動応答・予約確定<br/>→ LINE返信"]:::done
+  classDef start fill:#F5F5F7,stroke:#1D1D1F,color:#1D1D1F
+  classDef ai fill:#FBF6E7,stroke:#B8860B,color:#1D1D1F
+  classDef infra fill:#FFFFFF,stroke:#B8860B,stroke-dasharray:4 3,color:#B8860B
+  classDef gate fill:#FFFFFF,stroke:#B8860B,color:#B8860B
+  classDef done fill:#E6F2EF,stroke:#10b981,color:#1D1D1F`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // SLIDE 6 — Fraud (AI Lead Screening & Fraud Detection) (BUILT)
+  // 147-node workflow — anonymised professional-services firm
+  // ─────────────────────────────────────────────────────────────────────────
+  {
+    id: "example-fraud",
+    variant: "automation",
+    transition: "slide",
+    wideMermaid: true,
+    badge: { ja: "実装済み", en: "BUILT" },
+    title: {
+      ja: "受信した瞬間に、審査が始まる。",
+      en: "Screening starts the moment a lead arrives.",
+    },
+    subtitle: {
+      ja: "LINEから届いたリードを、AIが自動で審査・分類・処理する。147ノードのワークフローとして構築済み。",
+      en: "An AI agent screens, classifies, and processes every inbound lead from LINE — built as a 147-node workflow.",
+    },
+    bullets: [
+      {
+        ja: "公的記録・SNS・過去履歴を自動照合し、リスクスコアを算出。高リスクは担当者にアラートを上げる。",
+        en: "Auto cross-checks public records, SNS, and history to generate a risk score — high-risk leads are flagged for human review.",
+      },
+      {
+        ja: "適格リードはCRMへ自動登録・分類し、フォローアップシーケンスを起動する。",
+        en: "Qualified leads are logged and categorised in the CRM automatically, triggering a follow-up sequence.",
+      },
+      {
+        ja: "適格と判断されたリードへの請求書生成・自動送信まで、一貫して自動で処理する。",
+        en: "Invoice generation and delivery to qualified leads is handled end-to-end without manual steps.",
+      },
+    ],
+    callout: {
+      ja: "※ ある士業・専門サービス企業向けに147ノードのワークフローとして構築済み。バックエンドの最終調整を進行中のため、エンドユーザーへの本番稼働ではなく「実装済み」の段階です。",
+      en: "Note — built as a real 147-node workflow for a Japanese professional-services firm. Backend finalisation is in progress; this is a BUILT system, not yet live in production for end users.",
+    },
+    mermaid: `flowchart LR
+  A["LINE / Messenger<br/>受信"]:::start --> B["n8n<br/>（147ノード）"]:::infra
+  B --> C["AI 審査・<br/>適格判定（LLM）"]:::ai
+  C --> D{"振り分け<br/>3分岐"}:::gate
+  D -- "高リスク" --> E["不正スコア算出<br/>アラート（担当者へ）"]:::done
+  D -- "適格" --> F["CRM 更新<br/>フォローアップ起動"]:::ai
+  D -- "請求対象" --> G["請求書生成<br/>自動送信・完了"]:::done
+  H["公的記録・SNS<br/>履歴 照合"]:::infra -.-> E
+  classDef start fill:#F5F5F7,stroke:#1D1D1F,color:#1D1D1F
+  classDef ai fill:#FBF6E7,stroke:#B8860B,color:#1D1D1F
+  classDef infra fill:#FFFFFF,stroke:#B8860B,stroke-dasharray:4 3,color:#B8860B
+  classDef gate fill:#FFFFFF,stroke:#B8860B,color:#B8860B
+  classDef done fill:#E6F2EF,stroke:#10b981,color:#1D1D1F`,
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // SLIDE 7 — Closing (honest note + bridge to Monday)
   // ─────────────────────────────────────────────────────────────────────────
   {
     id: "closing",
@@ -393,7 +497,49 @@ const PRESENTER_NOTES: SlidePresenterNote[] = [
       "Be honest here. The delivery itself isn't built yet. But the data layer (line_users / line_events) already exists. So say plainly: this is what we'd build together next. Push/Multicast/Broadcast are LINE's standard features. Not overclaiming here is what makes the whole deck trustworthy.",
     ],
   },
-  // 5 — closing
+  // 5 — example-secretary (LINE AI Sales Secretary)
+  {
+    timing: "60-75s",
+    ja: [
+      "このスライドは、私たちが実際に構築・稼働させているエージェントの例です。",
+      "クライアントは士業・専門サービス系の企業様で、守秘義務の関係で社名は出していません。",
+      "このエージェントの役割は、LINEに届く問い合わせを24時間受け取り、AIが日英二言語で応答し、そのまま予約まで完結させることです。",
+      "フローをご覧ください。LINEからメッセージが届くと、n8nがまず署名を検証します。次にAIエージェントが知識ベースとCRMデータを参照しながら応答を生成し、必要であればGoogleカレンダーに予約を入れます。",
+      "AIの信頼度が低い場合は、自動的にスタッフへエスカレーションします。無理に回答させません。",
+      "現在は実ユーザーによるテスト稼働フェーズで、構築から6週間でこの状態に至っています。",
+      "ROIや成約率などの数字はまだ出していません。ここで見ていただきたいのは、実際に動くものを私たちが作れるという事実です。",
+    ],
+    en: [
+      "This slide shows a real agent we have built and are running — not a mockup.",
+      "The client is a professional-services firm in Japan. We are keeping them anonymous under confidentiality.",
+      "The agent's job: receive LINE enquiries 24 hours a day, respond bilingually in Japanese and English, and complete a booking — all without a human in the loop.",
+      "Walking through the flow: a LINE message arrives, n8n verifies the signature, the AI agent pulls from a Supabase RAG knowledge base and CRM data to generate a response, then books into Google Calendar if needed.",
+      "If the AI's confidence is low, it escalates to a human automatically. We do not let it guess.",
+      "It is currently in test operation with real users — we reached this point six weeks after starting the build.",
+      "We are not quoting ROI or conversion figures here because we do not have measured results to cite yet. What we want to show is that we can actually build this — and have.",
+    ],
+  },
+  // 6 — example-fraud (Fraud / lead screening)
+  {
+    timing: "60-75s",
+    ja: [
+      "このスライドは、MOTTOが実際に構築したワークフローです。",
+      "LINEでリードが届いた瞬間、n8nが147ノードのワークフローを起動します。",
+      "AIエージェント（LLMベース）がリードを審査し、3つのルートに振り分けます。",
+      "高リスクは公的記録・SNS・過去履歴と照合してスコアを算出し、担当者にアラート。適格リードはCRMへ自動登録してフォローアップを起動。請求対象は請求書を生成して自動送信します。",
+      "バッジは「実装済み」です。147ノードのワークフローは完成しています。バックエンドの最終調整を進行中のため、エンドユーザーへの本番稼働はこれからです。",
+      "数値の誇張はしていません。リードあたりのデューデリジェンス時間が短縮されることは確認されていますが、具体的な削減率はまだ計測中です。",
+    ],
+    en: [
+      "This slide shows a system MOTTO has actually built — not a concept.",
+      "The moment a lead arrives via LINE, n8n fires a 147-node workflow.",
+      "An AI agent (LLM-based — Claude or GPT class) screens the lead and routes it one of three ways.",
+      "High-risk: cross-referenced against public records, SNS, and history, scored, and flagged for a human. Qualified: logged in the CRM and a follow-up sequence is started. Invoice-ready: invoice generated and sent automatically.",
+      "The badge says BUILT. The 147-node workflow exists. The backend finalisation is still in progress — we are not claiming this is live in production for end users.",
+      "No metrics have been invented. The only claim: per-lead due-diligence time is substantially reduced — that is qualitative and honest.",
+    ],
+  },
+  // 7 — closing
   {
     timing: "45s",
     ja: [
@@ -656,9 +802,9 @@ function KsBrandLineDeckInner() {
   const slideIndex = globalStep;
 
   // Mount Mermaid for all capability slides.
-  // 6 slides: slide 0 = title (intro, no mermaid), slides 1..4 = capability (mermaid),
-  // slide 5 = closing (no mermaid). Mermaid range = indices 1..4 inclusive.
-  useMermaidSlide(slideIndex, 1, 4);
+  // 8 slides: slide 0 = title (intro, no mermaid), slides 1..6 = capability (mermaid),
+  // slide 7 = closing (no mermaid). Mermaid range = indices 1..6 inclusive.
+  useMermaidSlide(slideIndex, 1, 6);
 
   const currentNote = notesSource[slideIndex];
 
