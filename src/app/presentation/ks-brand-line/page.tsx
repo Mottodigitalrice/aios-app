@@ -12,18 +12,17 @@
  * We hear what Kishi-san wants at the Mon 2026-06-08 16:00 JST scoping meeting,
  * then quote.
  *
- * 8 slides (bilingual JA/EN, default JA):
+ * 7 slides (bilingual JA/EN, default JA):
  *   0. title             (intro — menu, not proposal)
  *   1. cap-database      (automation — connect LINE to a DB)        BUILT · DATA LAYER
  *   2. cap-flex          (automation — rich Flex carousels)         LIVE DEMO
  *   3. cap-ai-reply      (automation — AI replies in brand voice)   LIVE DEMO
  *   4. cap-push          (automation — segmented push/broadcast)    READY TO BUILD
  *   5. example-secretary (automation — LINE AI Sales Secretary)     BUILT · LIVE
- *   6. example-fraud     (automation — AI lead screening/fraud)     BUILT
- *   7. closing           (honest note + bridge to Monday)
+ *   6. example-fraud     (automation — AI lead screening/fraud)     BUILT  (last slide)
  *
  * Honesty mechanism: the `badge` field carries a 3-level status marker per slide
- * (LIVE DEMO / BUILT / READY TO BUILD). Slide 4 callout + closing reinforce that
+ * (LIVE DEMO / BUILT / READY TO BUILD). Slide 4 callout reinforces that
  * push/broadcast is grounded but not-yet-shipped — the deck must not overclaim.
  *
  * Copy is locked from the Wave 1 copy file:
@@ -399,42 +398,6 @@ const SLIDES: SlideDef[] = [
   classDef gate fill:#FFFFFF,stroke:#B8860B,color:#B8860B
   classDef done fill:#E6F2EF,stroke:#10b981,color:#1D1D1F`,
   },
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // SLIDE 7 — Closing (honest note + bridge to Monday)
-  // ─────────────────────────────────────────────────────────────────────────
-  {
-    id: "closing",
-    variant: "closing",
-    transition: "scale",
-    badge: { ja: "MOTTO × KS BRAND", en: "MOTTO × KS BRAND" },
-    title: {
-      ja: "正直に、一点だけ。",
-      en: "One Honest Note.",
-    },
-    subtitle: {
-      ja: "このデッキは、提案書ではない。公式LINEで何ができるか。その可能性のメニュー。",
-      en: "This deck is not a proposal. It's a menu of what's possible with Official LINE.",
-    },
-    bullets: [
-      {
-        ja: "すでに動いているもの。会話検索・Flexカルーセル・AI応答は、MEMBER SEARCH デモで動いている。",
-        en: "What already runs — conversational search, Flex carousels, AI replies — is live in the MEMBER SEARCH demo.",
-      },
-      {
-        ja: "これから組むもの。セグメント配信やリッチメニューは、データ基盤の上に、まだ載せていないだけ。",
-        en: "What we'd build next — segmented delivery and rich menus — just isn't layered onto the data foundation yet.",
-      },
-      {
-        ja: "どれが要るか、何から始めるか。それを決めるのは、月曜の打ち合わせ。",
-        en: "Which you need, where to start — that's the conversation for Monday's meeting.",
-      },
-    ],
-    callout: {
-      ja: "可能性を見せるのが、このデッキの役割だ。何を作るかは、月曜に。",
-      en: "This deck's job is to show what's possible. What we build, we decide Monday.",
-    },
-  },
 ];
 
 const TOTAL_STEPS = SLIDES.length;
@@ -537,16 +500,6 @@ const PRESENTER_NOTES: SlidePresenterNote[] = [
       "High-risk: cross-referenced against public records, SNS, and history, scored, and flagged for a human. Qualified: logged in the CRM and a follow-up sequence is started. Invoice-ready: invoice generated and sent automatically.",
       "The badge says BUILT. The 147-node workflow exists. The backend finalisation is still in progress — we are not claiming this is live in production for end users.",
       "No metrics have been invented. The only claim: per-lead due-diligence time is substantially reduced — that is qualitative and honest.",
-    ],
-  },
-  // 7 — closing
-  {
-    timing: "45s",
-    ja: [
-      "締めは正直に一点だけ。動いているもの（検索・カルーセル・AI応答）と、これから組むもの（配信・リッチメニュー）を分けて見せた。何が要るか、何から始めるかは、月曜に決める。価格やCTAは出さない。『可能性を見せるのが役割』と言って終える。",
-    ],
-    en: [
-      "Close with one honest note. We separated what runs (search, carousel, AI reply) from what we'd build (delivery, rich menus). What's needed and where to start — decided Monday. No price, no CTA. End on: the deck's job is to show what's possible.",
     ],
   },
 ];
@@ -802,8 +755,8 @@ function KsBrandLineDeckInner() {
   const slideIndex = globalStep;
 
   // Mount Mermaid for all capability slides.
-  // 8 slides: slide 0 = title (intro, no mermaid), slides 1..6 = capability (mermaid),
-  // slide 7 = closing (no mermaid). Mermaid range = indices 1..6 inclusive.
+  // 7 slides: slide 0 = title, slides 1..6 = capability + examples (mermaid).
+  // No closing slide. Mermaid range = indices 1..6 inclusive.
   useMermaidSlide(slideIndex, 1, 6);
 
   const currentNote = notesSource[slideIndex];
