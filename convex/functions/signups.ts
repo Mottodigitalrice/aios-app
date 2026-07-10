@@ -37,13 +37,16 @@ export const submit = mutation({
 // List all signups (for dashboard)
 // ---------------------------------------------------------------------------
 
+// SECURITY: disabled 2026-07-10 — this query took no args and had no auth
+// check, so it was publicly callable over the Convex API and returned every
+// signup's PII (name/email/company) to anyone with the deployment URL.
+// Re-enable once Clerk auth is wired into Convex (add convex/auth.config.ts
+// + a ctx.auth.getUserIdentity() check here — src/middleware.ts alone does
+// NOT cover this, Convex functions bypass Next.js middleware entirely).
+// Until then, view signups via the Convex dashboard (dashboard.convex.dev).
 export const list = query({
-  handler: async (ctx) => {
-    return await ctx.db
-      .query("signups")
-      .withIndex("by_created")
-      .order("desc")
-      .collect();
+  handler: async (_ctx) => {
+    throw new Error("Disabled pending auth — see comment above list().");
   },
 });
 
@@ -51,10 +54,11 @@ export const list = query({
 // Get signup by ID
 // ---------------------------------------------------------------------------
 
+// SECURITY: disabled 2026-07-10 — see list() above.
 export const getById = query({
   args: { id: v.id("signups") },
-  handler: async (ctx, args) => {
-    return await ctx.db.get(args.id);
+  handler: async (_ctx, _args) => {
+    throw new Error("Disabled pending auth — see comment above list().");
   },
 });
 
@@ -62,6 +66,7 @@ export const getById = query({
 // Update signup status
 // ---------------------------------------------------------------------------
 
+// SECURITY: disabled 2026-07-10 — see list() above.
 export const updateStatus = mutation({
   args: {
     id: v.id("signups"),
@@ -72,11 +77,8 @@ export const updateStatus = mutation({
       v.literal("enrolled")
     ),
   },
-  handler: async (ctx, args) => {
-    await ctx.db.patch(args.id, {
-      status: args.status,
-      updatedAt: Date.now(),
-    });
+  handler: async (_ctx, _args) => {
+    throw new Error("Disabled pending auth — see comment above list().");
   },
 });
 

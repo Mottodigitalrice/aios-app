@@ -156,25 +156,30 @@ export const submit = mutation({
 });
 
 // Get all leads (for dashboard)
+// SECURITY: disabled 2026-07-10 — this query took no args and had no auth
+// check, so it was publicly callable over the Convex API and returned every
+// lead's PII (name/email/company) to anyone with the deployment URL.
+// Re-enable once Clerk auth is wired into Convex (add convex/auth.config.ts
+// + a ctx.auth.getUserIdentity() check here — src/middleware.ts alone does
+// NOT cover this, Convex functions bypass Next.js middleware entirely).
+// Until then, view leads via the Convex dashboard (dashboard.convex.dev).
 export const list = query({
-  handler: async (ctx) => {
-    return await ctx.db
-      .query("auditLeads")
-      .withIndex("by_created")
-      .order("desc")
-      .collect();
+  handler: async (_ctx) => {
+    throw new Error("Disabled pending auth — see comment above list().");
   },
 });
 
 // Get lead by ID
+// SECURITY: disabled 2026-07-10 — see list() above.
 export const getById = query({
   args: { id: v.id("auditLeads") },
-  handler: async (ctx, args) => {
-    return await ctx.db.get(args.id);
+  handler: async (_ctx, _args) => {
+    throw new Error("Disabled pending auth — see comment above list().");
   },
 });
 
 // Update lead status
+// SECURITY: disabled 2026-07-10 — see list() above.
 export const updateStatus = mutation({
   args: {
     id: v.id("auditLeads"),
@@ -187,28 +192,16 @@ export const updateStatus = mutation({
       v.literal("archived")
     ),
   },
-  handler: async (ctx, args) => {
-    await ctx.db.patch(args.id, { status: args.status });
+  handler: async (_ctx, _args) => {
+    throw new Error("Disabled pending auth — see comment above list().");
   },
 });
 
 // Get lead counts by status (for dashboard stats)
+// SECURITY: disabled 2026-07-10 — see list() above.
 export const stats = query({
-  handler: async (ctx) => {
-    const all = await ctx.db.query("auditLeads").collect();
-    const counts: Record<string, number> = {
-      partial: 0,
-      new: 0,
-      reviewed: 0,
-      scheduled: 0,
-      completed: 0,
-      archived: 0,
-      total: all.length,
-    };
-    for (const lead of all) {
-      counts[lead.status] = (counts[lead.status] || 0) + 1;
-    }
-    return counts;
+  handler: async (_ctx) => {
+    throw new Error("Disabled pending auth — see comment above list().");
   },
 });
 
