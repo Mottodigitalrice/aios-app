@@ -77,16 +77,19 @@ export const updateNotionWriteResult = mutation({
   },
 });
 
+// SECURITY: disabled 2026-07-10 — this query took only an optional limit arg and
+// had no auth check, so it was publicly callable over the Convex API and
+// returned every submission's PII (name/email/company/phone) to anyone with the
+// deployment URL.
+// Re-enable once Clerk auth is wired into Convex (add convex/auth.config.ts
+// + a ctx.auth.getUserIdentity() check here — src/middleware.ts alone does
+// NOT cover this, Convex functions bypass Next.js middleware entirely).
+// Until then, view submissions via the Convex dashboard (dashboard.convex.dev).
 export const list = query({
   args: {
     limit: v.optional(v.number()),
   },
-  handler: async (ctx, args) => {
-    const limit = args.limit ?? 100;
-    return await ctx.db
-      .query("auditSubmissionsV2")
-      .withIndex("by_submittedAt")
-      .order("desc")
-      .take(limit);
+  handler: async (_ctx, _args) => {
+    throw new Error("Disabled pending auth — see comment above list().");
   },
 });
