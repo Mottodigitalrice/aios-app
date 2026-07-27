@@ -349,28 +349,6 @@ const SLIDES: SlideDef[] = [
   classDef gate fill:#FFFFFF,stroke:#B8860B,color:#B8860B
   classDef done fill:#E6F2EF,stroke:#10b981,color:#1D1D1F`,
   },
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // SLIDE 6 — Closing (honest CTA: migrate or new-build)
-  // ─────────────────────────────────────────────────────────────────────────
-  {
-    id: "closing",
-    variant: "closing",
-    transition: "scale",
-    badge: { ja: "MOTTO × KS BRAND", en: "MOTTO × KS BRAND" },
-    title: {
-      ja: "まずは、現状の lautashi から。",
-      en: "Let's Start with the lautashi You Have Today.",
-    },
-    subtitle: {
-      ja: "ここに並べたのは、すべて Shopify を前提とした構想です。実現したいものから、一緒に決めていけます。",
-      en: "Everything here is a concept premised on Shopify. We can start from whichever one you most want to make real.",
-    },
-    callout: {
-      ja: "Shopifyへの移行、あるいは新規構築から、一緒に。",
-      en: "From a migration to Shopify — or a fresh build — let's do it together.",
-    },
-  },
 ];
 
 const TOTAL_STEPS = SLIDES.length;
@@ -467,20 +445,6 @@ const PRESENTER_NOTES: SlidePresenterNote[] = [
       "Also a concept. No overclaiming — frame it as the possibility of designing the after-purchase loop as part of the brand.",
     ],
   },
-  // 6 — Closing
-  {
-    timing: "45s",
-    ja: [
-      "締めは正直なCTAで。『まずは現状の lautashi から』と置く。今あるものを否定しない。",
-      "ここで改めて言い切る。並べた5つはすべて Shopify を前提とした構想だ。だから次の一歩は、Shopifyへの移行、あるいは新規構築のどちらから始めるか——そこから一緒に決める。",
-      "押し売りにしない。実現したいものから順に、一緒に決めていける、という姿勢で閉じる。",
-    ],
-    en: [
-      "Close on an honest CTA. Lead with 'let's start with the lautashi you have today' — don't dismiss what's already there.",
-      "Restate it clearly: all five are concepts premised on Shopify. So the next step is choosing where to begin — a migration to Shopify, or a fresh build — and we decide that together.",
-      "No hard sell. Close on the posture of starting from whichever one matters most, together.",
-    ],
-  },
 ];
 
 // Anonymized notes shown unless the URL carries `?presenter=1`. The live route
@@ -536,6 +500,9 @@ function renderIntroSlide(slide: SlideDef, lang: Lang) {
               segmentJapanese no-ops on non-JP strings so EN toggle stays unchanged. */}
           {segmentJapanese(slide.title[lang])}
         </h1>
+        {lang === "ja" && (
+          <p className="mt-2 text-base sm:text-lg text-[#86868B] font-medium tracking-wide">{slide.title.en}</p>
+        )}
         {slide.subtitle && (
           <p className="mt-4 text-base sm:text-lg text-[#6E6E73] leading-relaxed">
             {slide.subtitle[lang]}
@@ -584,6 +551,9 @@ function renderAutomationSlide(slide: SlideDef, lang: Lang, slideIndex: number) 
         >
           {slide.title[lang]}
         </h2>
+        {lang === "ja" && (
+          <p className="mt-1.5 text-xs sm:text-sm text-[#86868B] font-medium tracking-wide">{slide.title.en}</p>
+        )}
         {slide.subtitle && (
           <p className="mt-2 text-sm sm:text-base text-[#6E6E73] leading-relaxed max-w-4xl">
             {slide.subtitle[lang]}

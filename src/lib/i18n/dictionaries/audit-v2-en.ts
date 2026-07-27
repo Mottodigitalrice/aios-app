@@ -5,11 +5,11 @@ const auditV2Dict = {
     privacy: "Privacy",
   },
   badge: "AI Audit · Free",
-  title: "Tell us your goals.",
-  titleHighlight: "We'll show you how AI gets you there.",
+  title: "Find out if — and how —",
+  titleHighlight: "Agentic AI can help your business.",
   subtitle:
-    "Free, ~5 minutes. Lewis personally reviews every submission and replies within 2 business days with a custom AI playbook.",
-  chips: ["Goal-anchored", "Personally reviewed", "No-sell consult"],
+    "A real assessment, not a quiz. ~5 minutes. Lewis personally reviews every submission and sends a personalized report within 2 business days — then walks you through it on a free 30-minute call. No pitch attached.",
+  chips: ["Personalized report", "Free 30-min walkthrough", "No pitch — ever"],
   common: {
     back: "Back",
     continue: "Continue",
@@ -20,11 +20,11 @@ const auditV2Dict = {
     stepOf: "Step {current} of {total}",
   },
   email: {
-    question: "What's your email?",
-    description: "We'll send your audit report here. ~5 minutes to fill out.",
+    question: "Where should we send your report?",
+    description: "We'll send your personalized report here once Lewis has reviewed it.",
     label: "Email",
     placeholder: "you@company.com",
-    hint: "Lewis personally reviews every audit and replies within 2 business days. No spam, ever.",
+    hint: "Lewis personally reviews every submission and replies within 2 business days. No spam, ever.",
   },
   goals: {
     select: {
@@ -112,12 +112,12 @@ const auditV2Dict = {
   popup: {
     title: "Thank you, {name}.",
     body:
-      "Lewis (Mottodigital's CEO) will personally analyze your responses and send a custom AI playbook within **2 business days**.",
+      "Lewis (Mottodigital's CEO) will personally analyze your responses and send a personalized report within **2 business days**.",
     bodyConsult:
-      "Next, book a **free consult** to walk through your report together.",
+      "Next, book your **free 30-minute walkthrough** — we'll go through your report together.",
     promise:
-      "Our promise: We will not sell to you on the call. We just walk through your report and answer questions.",
-    cta: "Book a free consult",
+      "Our promise: no pitch. We won't sell to you on the call — we won't even tell you how we can help unless you ask. We just walk through where you stand.",
+    cta: "Book my free 30-min walkthrough",
     maybeLater: "Maybe later — I'll book from the email",
     close: "Close",
   },
@@ -125,8 +125,8 @@ const auditV2Dict = {
     trustBadge: "Your data is encrypted and never shared with third parties.",
     steps: {
       email: {
-        title: "Start with your email",
-        items: ["~5 min to complete", "Lewis personally reviews every audit"],
+        title: "Where to send your report",
+        items: ["Lewis reviews every submission personally", "Reply within 2 business days — no spam"],
       },
       goals: {
         title: "Goal-anchored audit",

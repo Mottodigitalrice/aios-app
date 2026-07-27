@@ -342,28 +342,6 @@ const SLIDES: SlideDef[] = [
   classDef gate fill:#FFFFFF,stroke:#B8860B,color:#B8860B
   classDef done fill:#E6F2EF,stroke:#10b981,color:#1D1D1F`,
   },
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // SLIDE 6 — Closing — restate the thesis
-  // ─────────────────────────────────────────────────────────────────────────
-  {
-    id: "closing",
-    variant: "closing",
-    transition: "scale",
-    badge: { ja: "MOTTO × KS BRAND", en: "MOTTO × KS BRAND" },
-    title: {
-      ja: "あなたのAI秘書を、一緒に。",
-      en: "Let's Build Your AI Secretary, Together.",
-    },
-    subtitle: {
-      ja: "魔法ではなく、組み合わせ。だから、確実につくれる。",
-      en: "Not magic, but a combination — which is exactly why it can be built reliably.",
-    },
-    callout: {
-      ja: "機能はClaude Codeが。自律はn8nが。窓口はLINEが。あなたのAI秘書を、一緒に。",
-      en: "Functions from Claude Code. Autonomy from n8n. The front desk from LINE. Let's build your AI secretary, together.",
-    },
-  },
 ];
 
 const TOTAL_STEPS = SLIDES.length;
@@ -459,16 +437,6 @@ const PRESENTER_NOTES: SlidePresenterNote[] = [
       "Only now do we turn to KS BRAND — and frame it honestly: this is a concept, not yet built. But the foundation is the same architecture proven in slides 2–4. For KS BRAND: 24-hour enquiry handling, booking and stock checks, and an n8n scheduled cron that delivers an autonomous report to LINE each morning. The report branch in the diagram (n8n → autonomous report → LINE) is the clearest example of 'autonomy.' Close by handing it over: let's decide what it does together on Monday. Not overclaiming is what builds trust.",
     ],
   },
-  // 6 — closing
-  {
-    timing: "30s",
-    ja: [
-      "閉じは主張をもう一度。機能はClaude Codeが、自律はn8nが、窓口はLINEが。これがAI秘書というOS。そして「あなたのAI秘書を、一緒に」——一緒に作るパートナーだと伝えて終わる。間を置いて、月曜の打ち合わせへ自然につなぐ。",
-    ],
-    en: [
-      "Close by restating the thesis. Functions from Claude Code, autonomy from n8n, the front desk from LINE — that's the AI-secretary OS. Then: let's build yours, together — end as the partner who builds it with them. Pause, then hand off naturally into Monday's meeting.",
-    ],
-  },
 ];
 
 // Anonymized notes shown unless the URL carries `?presenter=1`. The live route
@@ -524,6 +492,9 @@ function renderIntroSlide(slide: SlideDef, lang: Lang) {
               segmentJapanese no-ops on non-JP strings so EN toggle stays unchanged. */}
           {segmentJapanese(slide.title[lang])}
         </h1>
+        {lang === "ja" && (
+          <p className="mt-2 text-base sm:text-lg text-[#86868B] font-medium tracking-wide">{slide.title.en}</p>
+        )}
         {slide.subtitle && (
           <p className="mt-4 text-base sm:text-lg text-[#6E6E73] leading-relaxed">
             {slide.subtitle[lang]}
@@ -572,6 +543,9 @@ function renderAutomationSlide(slide: SlideDef, lang: Lang, slideIndex: number) 
         >
           {slide.title[lang]}
         </h2>
+        {lang === "ja" && (
+          <p className="mt-1.5 text-xs sm:text-sm text-[#86868B] font-medium tracking-wide">{slide.title.en}</p>
+        )}
         {slide.subtitle && (
           <p className="mt-2 text-sm sm:text-base text-[#6E6E73] leading-relaxed max-w-4xl">
             {slide.subtitle[lang]}

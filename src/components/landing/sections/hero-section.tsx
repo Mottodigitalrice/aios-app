@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, ShieldCheck } from "lucide-react";
-import { AIOSPyramid } from "@/components/landing/aios-pyramid";
 import type { SectionProps } from "./types";
 
 export default function HeroSection({ t, locale }: SectionProps) {
@@ -115,11 +114,6 @@ export default function HeroSection({ t, locale }: SectionProps) {
                   <ArrowRight className="size-4" aria-hidden="true" />
                 </Button>
               </Link>
-              <Link href="/audit" className="w-full sm:w-auto">
-                <Button size="lg" aria-label={t.hero.ctaSecondary} className="bg-[#B8860B] hover:bg-[#A0750A] hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 text-white gap-2 rounded-full px-8 py-3.5 w-full sm:w-auto">
-                  {t.hero.ctaSecondary}
-                </Button>
-              </Link>
             </div>
             <p className="animate-fade-in-up animation-delay-300 mt-2 text-xs text-center lg:text-left" style={{ color: "var(--lp-text-muted)" }}>
               {t.hero.ctaTime}
@@ -132,11 +126,6 @@ export default function HeroSection({ t, locale }: SectionProps) {
                 {t.hero.guaranteeHint}
               </p>
             </div>
-          </div>
-
-          {/* Right: Hero visual — AIOS Pyramid (compact) */}
-          <div className="animate-fade-in-up animation-delay-300 self-center">
-            <AIOSPyramid locale={locale} compact />
           </div>
         </div>
       </div>

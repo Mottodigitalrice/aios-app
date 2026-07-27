@@ -16,9 +16,10 @@ interface Props {
   onBack: () => void;
   isLoading: boolean;
   error: string | null;
+  isFirst?: boolean;
 }
 
-export function S2Goals({ data, update, onNext, onBack, isLoading, error }: Props) {
+export function S2Goals({ data, update, onNext, onBack, isLoading, error, isFirst }: Props) {
   const { t, locale } = useAuditV2Locale();
 
   const toggle = (id: GoalId) => {
@@ -34,6 +35,7 @@ export function S2Goals({ data, update, onNext, onBack, isLoading, error }: Prop
       description={t.goals.select.description}
       onNext={onNext}
       onBack={onBack}
+      isFirst={isFirst}
       isLoading={isLoading}
       canContinue={data.goalsSelected.length > 0}
       error={error}

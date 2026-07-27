@@ -337,28 +337,6 @@ const SLIDES: SlideDef[] = [
   classDef gate fill:#FFFFFF,stroke:#B8860B,color:#B8860B
   classDef done fill:#E6F2EF,stroke:#10b981,color:#1D1D1F`,
   },
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // SLIDE 6 — Closing (closing)
-  // ─────────────────────────────────────────────────────────────────────────
-  {
-    id: "close",
-    variant: "closing",
-    transition: "scale",
-    badge: { ja: "MOTTO × KS BRAND", en: "MOTTO × KS BRAND" },
-    title: {
-      ja: "今のAIは、ここまで作れる。次は、KS BRANDの商品で。",
-      en: "This is how far AI can go today. Next — with KS BRAND's products.",
-    },
-    subtitle: {
-      ja: "掲載画像は各ツールの出力例。実制作ではKS BRANDの商品でMOTTOが生成します。",
-      en: "The images shown are illustrative outputs from external tools. In the real build, MOTTO generates with KS BRAND's own products.",
-    },
-    callout: {
-      ja: "作る。直す。量産する。あとは、KS BRANDの商品で。",
-      en: "Generate. Edit. Scale. The only thing left — KS BRAND's products.",
-    },
-  },
 ];
 
 const TOTAL_STEPS = SLIDES.length;
@@ -455,18 +433,6 @@ const PRESENTER_NOTES: SlidePresenterNote[] = [
       "The badge says READY TO BUILD. This production flow is what we'd build together next. The quality shown is real third-party output, but the flow itself isn't built yet — not overclaiming here is what earns trust.",
     ],
   },
-  // 6 — close
-  {
-    timing: "30s",
-    ja: [
-      "締め。今のAIは、ここまで作れます。次は、KS BRANDの商品で。",
-      "もう一度はっきりと——掲載画像は各ツールの出力例で、MOTTOの制作物ではありません。実制作ではKS BRANDの商品でMOTTOが生成します。そこからご一緒できれば。",
-    ],
-    en: [
-      "Close: this is how far AI can go today. Next — with KS BRAND's products.",
-      "Once more, plainly: the images shown are external tools' outputs, not MOTTO's work. In the real build, MOTTO generates with KS BRAND's own products. We'd love to start there.",
-    ],
-  },
 ];
 
 // Anonymized notes shown unless the URL carries `?presenter=1`.
@@ -520,6 +486,9 @@ function renderIntroSlide(slide: SlideDef, lang: Lang) {
               segmentJapanese no-ops on non-JP strings so EN toggle stays unchanged. */}
           {segmentJapanese(slide.title[lang])}
         </h1>
+        {lang === "ja" && (
+          <p className="mt-2 text-base sm:text-lg text-[#86868B] font-medium tracking-wide">{slide.title.en}</p>
+        )}
         {slide.subtitle && (
           <p className="mt-4 text-base sm:text-lg text-[#6E6E73] leading-relaxed">
             {slide.subtitle[lang]}
@@ -568,6 +537,9 @@ function renderGallerySlide(slide: SlideDef, lang: Lang) {
         >
           {slide.title[lang]}
         </h2>
+        {lang === "ja" && (
+          <p className="mt-1.5 text-xs sm:text-sm text-[#86868B] font-medium tracking-wide">{slide.title.en}</p>
+        )}
         {slide.subtitle && (
           <p className="mt-2 text-sm sm:text-base text-[#6E6E73] leading-relaxed max-w-4xl">
             {slide.subtitle[lang]}
@@ -622,6 +594,9 @@ function renderAutomationSlide(slide: SlideDef, lang: Lang, slideIndex: number) 
         >
           {slide.title[lang]}
         </h2>
+        {lang === "ja" && (
+          <p className="mt-1.5 text-xs sm:text-sm text-[#86868B] font-medium tracking-wide">{slide.title.en}</p>
+        )}
         {slide.subtitle && (
           <p className="mt-2 text-sm sm:text-base text-[#6E6E73] leading-relaxed max-w-4xl">
             {slide.subtitle[lang]}

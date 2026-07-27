@@ -11,11 +11,12 @@ interface Props {
   data: AuditV2Data;
   updateContact: (patch: Partial<AuditV2Data["contact"]>) => void;
   onNext: () => void;
+  onBack: () => void;
   isLoading: boolean;
   error: string | null;
 }
 
-export function S0Email({ data, updateContact, onNext, isLoading, error }: Props) {
+export function S0Email({ data, updateContact, onNext, onBack, isLoading, error }: Props) {
   const { t } = useAuditV2Locale();
   const email = data.contact.email;
   const ready = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -25,7 +26,7 @@ export function S0Email({ data, updateContact, onNext, isLoading, error }: Props
       question={t.email.question}
       description={t.email.description}
       onNext={onNext}
-      isFirst
+      onBack={onBack}
       isLoading={isLoading}
       canContinue={ready}
       error={error}

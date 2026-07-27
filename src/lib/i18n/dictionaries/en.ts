@@ -350,11 +350,17 @@ const en = {
         cohortHeading: "May 2026 Cohort",
       },
     },
+    heroAssessment: {
+      eyebrow: "Free AI Assessment",
+      question: "Which goal matters most to your business right now?",
+      promise: "Find out if \u2014 and how \u2014 Agentic AI can help. No pitch.",
+      footnote: "~5 min \u00b7 Personalized report \u00b7 Free 30-min walkthrough",
+    },
     leadMagnet: {
-      title: "Is your business ready for Agentic AI?",
-      subtitle: "We\u2019ll assess your operations, identify where AI agents can take real action \u2014 not just chat \u2014 and show you exactly what\u2019s possible for your business.",
-      detail: "Completely free, no obligation. Lewis personally reviews every audit and walks you through the results on a call.",
-      cta: "Get my free Agentic AI audit",
+      title: "Find out if \u2014 and how \u2014 Agentic AI can help your business.",
+      subtitle: "A real assessment, not a quiz. Answer a few focused questions and we\u2019ll build you a personalized report on exactly where you stand and where AI can move the needle \u2014 specific to your business, not a generic score.",
+      detail: "Then we walk you through it on a free 30-minute call. We won\u2019t pitch you \u2014 we won\u2019t even tell you how we can help unless you ask.",
+      cta: "Start my free assessment",
     },
     signup: {
       badge: "AIOS Program",

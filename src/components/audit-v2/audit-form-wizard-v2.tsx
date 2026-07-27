@@ -25,6 +25,7 @@ import { ProgressBar } from "./shared/v2-progress-bar";
 import { AuditV2LocaleProvider, useAuditV2Locale } from "./audit-v2-locale-context";
 import { useAuditFormV2, type StepId } from "@/hooks/use-audit-form-v2";
 import { useReferrerCapture } from "@/hooks/use-referrer-capture";
+import { GOAL_BY_ID, type GoalId } from "@/lib/audit-v2/goals";
 import { segmentJapanese } from "@/lib/budoux-transform";
 import { S0Email } from "./steps/s0-email";
 import { S2Goals } from "./steps/s2-goals";
@@ -133,6 +134,19 @@ function AuditFormWizardV2Inner() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [capturedReferrer]);
 
+  // Pre-select the goal clicked in the homepage hero (?goal=…) so the visitor
+  // lands inside the assessment already in motion — no cold-start friction.
+  const goalApplied = useRef(false);
+  useEffect(() => {
+    if (goalApplied.current) return;
+    goalApplied.current = true;
+    const goal = new URLSearchParams(window.location.search).get("goal") as GoalId | null;
+    if (goal && GOAL_BY_ID[goal]) {
+      form.update({ goalsSelected: [goal], goalsRanked: [goal] });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleNext = () => {
     setDirection("forward");
     setAnimating(true);
@@ -163,6 +177,7 @@ function AuditFormWizardV2Inner() {
       onBack: handleBack,
       isLoading: form.isLoading,
       error: form.error,
+      isFirst: form.isFirst,
     };
     switch (form.currentStep) {
       case "email":
@@ -203,7 +218,7 @@ function AuditFormWizardV2Inner() {
     }
   };
 
-  const isHero = form.currentStep === "email";
+  const isHero = form.currentStep === "goals-select";
   const featureChipIcons = [Target, Shield, Sparkles];
 
   return (

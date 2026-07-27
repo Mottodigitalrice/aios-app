@@ -89,7 +89,7 @@ const INITIAL_DATA: AuditV2Data = {
 };
 
 // ---------------------------------------------------------------------------
-// Step plan (single flow — email first, then the full audit)
+// Step plan (assessment first — email captured mid-flow, after the visitor is invested)
 // ---------------------------------------------------------------------------
 
 export type StepId =
@@ -106,10 +106,10 @@ export type StepId =
   | "contact";
 
 const STEPS: StepId[] = [
-  "email",
   "goals-select",
   "goals-rank",
   "blockers",
+  "email",
   "company",
   "tools",
   "ai",
